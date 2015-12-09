@@ -6,59 +6,35 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>Mongodb-启动 | 知识记录</title>
+    <title>MongoDB-3.0.3用户认证 | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="Mac下安装PHP的mongodb扩展
-XAMPP/bin
-sudo pecl install mongo
-
-php.ini添加
-extension=mongo.so
-
-
-启动
-创建/data/db目录sudo mkdir -p /data/db
-设置/data/db目录权限sudo chown -R 你的系统登录用户名 /data
-终端执行mongod
-输入mongo便可连结到默认的数据库">
+    <meta name="description" content="在Mongodb3.0.3中创建User进行权限验证
+启动mongodb，切换db为admin
+use admin
+db.system.version.find()
+db.system.version.update({&amp;quot;_id&amp;quot;: &amp;quot;authSchema&amp;quot;}, {&amp;quot;$set&amp;quot;: {&amp;quot;currentVersion&amp;quot;: 3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mongodb-启动">
-<meta property="og:url" content="http://im.yonglang.co/2015/12/09/Mongodb-启动/index.html">
+<meta property="og:title" content="MongoDB-3.0.3用户认证">
+<meta property="og:url" content="http://im.yonglang.co/2015/12/09/MongoDB-3-0-3用户认证/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Mac下安装PHP的mongodb扩展
-XAMPP/bin
-sudo pecl install mongo
-
-php.ini添加
-extension=mongo.so
-
-
-启动
-创建/data/db目录sudo mkdir -p /data/db
-设置/data/db目录权限sudo chown -R 你的系统登录用户名 /data
-终端执行mongod
-输入mongo便可连结到默认的数据库">
-<meta property="og:updated_time" content="2015-12-09T15:31:09.000Z">
+<meta property="og:description" content="在Mongodb3.0.3中创建User进行权限验证
+启动mongodb，切换db为admin
+use admin
+db.system.version.find()
+db.system.version.update({&amp;quot;_id&amp;quot;: &amp;quot;authSchema&amp;quot;}, {&amp;quot;$set&amp;quot;: {&amp;quot;currentVersion&amp;quot;: 3">
+<meta property="og:updated_time" content="2015-12-09T15:36:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mongodb-启动">
-<meta name="twitter:description" content="Mac下安装PHP的mongodb扩展
-XAMPP/bin
-sudo pecl install mongo
-
-php.ini添加
-extension=mongo.so
-
-
-启动
-创建/data/db目录sudo mkdir -p /data/db
-设置/data/db目录权限sudo chown -R 你的系统登录用户名 /data
-终端执行mongod
-输入mongo便可连结到默认的数据库">
+<meta name="twitter:title" content="MongoDB-3.0.3用户认证">
+<meta name="twitter:description" content="在Mongodb3.0.3中创建User进行权限验证
+启动mongodb，切换db为admin
+use admin
+db.system.version.find()
+db.system.version.update({&amp;quot;_id&amp;quot;: &amp;quot;authSchema&amp;quot;}, {&amp;quot;$set&amp;quot;: {&amp;quot;currentVersion&amp;quot;: 3">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -121,14 +97,14 @@ extension=mongo.so
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/09/Mongodb-启动/" title="Mongodb-启动" itemprop="url">Mongodb-启动</a>
+      <a href="/2015/12/09/MongoDB-3-0-3用户认证/" title="MongoDB-3.0.3用户认证" itemprop="url">MongoDB-3.0.3用户认证</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T15:26:15.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    <time datetime="2015-12-09T15:32:12.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
     
   </p>
 </header>
@@ -137,23 +113,30 @@ extension=mongo.so
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><span class="toc-number">1.</span> <span class="toc-text">Mac下安装PHP的mongodb扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u542F_u52A8"><span class="toc-number">2.</span> <span class="toc-text">启动</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5728Mongodb3-0-3_u4E2D_u521B_u5EFAUser_u8FDB_u884C_u6743_u9650_u9A8C_u8BC1"><span class="toc-number">1.</span> <span class="toc-text">在Mongodb3.0.3中创建User进行权限验证</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><a href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55" class="headerlink" title="Mac下安装PHP的mongodb扩展"></a>Mac下安装PHP的mongodb扩展</h2><ul>
-<li><p><code>XAMPP/bin</code></p>
-<pre><code>sudo pecl install mongo
+		<h2 id="u5728Mongodb3-0-3_u4E2D_u521B_u5EFAUser_u8FDB_u884C_u6743_u9650_u9A8C_u8BC1"><a href="#u5728Mongodb3-0-3_u4E2D_u521B_u5EFAUser_u8FDB_u884C_u6743_u9650_u9A8C_u8BC1" class="headerlink" title="在Mongodb3.0.3中创建User进行权限验证"></a>在Mongodb3.0.3中创建User进行权限验证</h2><ul>
+<li><p>启动mongodb，切换db为admin</p>
+<pre><code>use admin
+db.system.version.find()
+db.system.version.update({&quot;_id&quot;: &quot;authSchema&quot;}, {&quot;$set&quot;: {&quot;currentVersion&quot;: 3}})
 </code></pre></li>
-<li><p><code>php.ini</code>添加</p>
-<pre><code>extension=mongo.so
+<li><p>为数据库创建用户，这里使用的mydb数据库</p>
+<pre><code>use mydb
+db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;123456&quot;, roles: [{role: &quot;dbOwner&quot;, db: &quot;mydb&quot;}]})
 </code></pre></li>
-</ul>
-<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><ul>
-<li>创建<code>/data/db</code>目录<code>sudo mkdir -p /data/db</code></li>
-<li>设置<code>/data/db</code>目录权限<code>sudo chown -R 你的系统登录用户名 /data</code></li>
-<li>终端执行<code>mongod</code></li>
-<li>输入<code>mongo</code>便可连结到默认的数据库</li>
+<li><p>在mongodb.conf中添加authorization: enabled</p>
+<pre><code>security:
+  authorization: enabled
+</code></pre></li>
+<li>完毕！重启mongodb验证。</li>
+<li>参考:<ol>
+<li><a href="http://docs.mongodb.org/manual/reference/configuration-options/" target="_blank" rel="external">配置文件操作</a></li>
+<li><a href="http://docs.mongodb.org/manual/reference/built-in-roles/" target="_blank" rel="external">权限</a></li>
+</ol>
+</li>
 </ul>
   
 	</div>
@@ -172,7 +155,7 @@ extension=mongo.so
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2015/12/09/Mongodb-启动/" data-title="Mongodb-启动 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2015/12/09/MongoDB-3-0-3用户认证/" data-title="MongoDB-3.0.3用户认证 | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -186,18 +169,18 @@ extension=mongo.so
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/09/MongoDB-3-0-3用户认证/" title="MongoDB-3.0.3用户认证">
+ <a href="/2015/12/09/Mongodb-部署复制集/" title="Mongodb-部署复制集">
   <strong>上一篇：</strong><br/>
   <span>
-  MongoDB-3.0.3用户认证</span>
+  Mongodb-部署复制集</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/12/09/MySQL-修改数据库和表的编码/"  title="MySQL-修改数据库和表的编码">
+<a href="/2015/12/09/Mongodb-启动/"  title="Mongodb-启动">
  <strong>下一篇：</strong><br/> 
- <span>MySQL-修改数据库和表的编码
+ <span>Mongodb-启动
 </span>
 </a>
 </div>
@@ -206,7 +189,7 @@ extension=mongo.so
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/09/Mongodb-启动/" data-title="Mongodb-启动" data-url="http://im.yonglang.co/2015/12/09/Mongodb-启动/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/09/MongoDB-3-0-3用户认证/" data-title="MongoDB-3.0.3用户认证" data-url="http://im.yonglang.co/2015/12/09/MongoDB-3-0-3用户认证/"></div>
 </section>
 
 
@@ -216,7 +199,7 @@ extension=mongo.so
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><span class="toc-number">1.</span> <span class="toc-text">Mac下安装PHP的mongodb扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u542F_u52A8"><span class="toc-number">2.</span> <span class="toc-text">启动</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5728Mongodb3-0-3_u4E2D_u521B_u5EFAUser_u8FDB_u884C_u6743_u9650_u9A8C_u8BC1"><span class="toc-number">1.</span> <span class="toc-text">在Mongodb3.0.3中创建User进行权限验证</span></a></li></ol>
  
   </div>
 

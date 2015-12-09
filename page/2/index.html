@@ -1,12 +1,12 @@
 
-  <!DOCTYPE HTML>
+ <!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>归档: 2015 | 知识记录</title>
+    <title>知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
@@ -16,7 +16,7 @@
     <meta name="description" content="Tigase安装、部署、插件编写及其它">
 <meta property="og:type" content="website">
 <meta property="og:title" content="知识记录">
-<meta property="og:url" content="http://im.yonglang.co/archives/2015/index.html">
+<meta property="og:url" content="http://im.yonglang.co/page/2/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Tigase安装、部署、插件编写及其它">
 <meta name="twitter:card" content="summary">
@@ -37,9 +37,9 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 
-    <body>
-      <header>
-        
+  <body>
+    <header>
+      
 <div>
 		
 			<div id="imglogo">
@@ -76,96 +76,202 @@
 			</nav>			
 </div>
 <a href="https://github.com/m2lan"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
-      </header>
-      <div id="container">
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/Mongodb-启动/" title="Mongodb-启动" itemprop="url">Mongodb-启动</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:26:15.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
         
+        <h2 id="Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><a href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55" class="headerlink" title="Mac下安装PHP的mongodb扩展"></a>Mac下安装PHP的mongodb扩展</h2><ul>
+<li><p><code>XAMPP/bin</code></p>
+<pre><code>sudo pecl install mongo
+</code></pre></li>
+<li><p><code>php.ini</code>添加</p>
+<pre><code>extension=mongo.so
+</code></pre></li>
+</ul>
+<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><ul>
+<li>创建<code>/data/db</code>目录<code>sudo mkdir -p /data/db</code></li>
+<li>设置<code>/data/db</code>目录权限<code>sudo chown -R 你的系统登录用户名 /data</code></li>
+<li>终端执行<code>mongod</code></li>
+<li>输入<code>mongo</code>便可连结到默认的数据库</li>
+</ul>
 
-<div class="archive-title" >
-  <h2 class="archive-icon">2015</h2>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
   
-  <div class="archiveslist archive-float clearfix">
-   <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a><span class="archive-list-count">7</span></li></ul>
- </div>
-  
+  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  </div>
+
 </div>
-<div id="main" class="archive-part clearfix">
-  <div id="archive-page">
 
-  <section class="post" itemscope itemprop="blogPost">
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/Mongodb-启动/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Mongodb-启动/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/MySQL-修改数据库和表的编码/" title="MySQL-修改数据库和表的编码" itemprop="url">MySQL-修改数据库和表的编码</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:23:13.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li><p>查看数据库编码 </p>
+<pre><code>show variables like &apos;char%&apos;;
+</code></pre></li>
+<li><p>修改表编码 </p>
+<pre><code>ALTER TABLE &apos;table&apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
+</code></pre></li>
+<li><p>修改表字段编码 </p>
+<pre><code>ALTER TABLE &apos;test&apos; CHANGE &apos;name&apos; &apos;name&apos; VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
+</code></pre></li>
+<li><p>查看表编码 </p>
+<pre><code>show create table mytable
+</code></pre></li>
+<li><p>修改mysql默认编码</p>
+<pre><code>[mysqld]和[client]后添加character_set_server=utf8
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
   
-    <a href="/2015/12/09/Docker-详细操作/" title="Docker-详细操作" itemprop="url">
-  
+  <span></span> <a href="/tags/MySQL/">MySQL</a>
+  </div>
 
-    <time datetime="2015-12-09T15:48:47.000Z" itemprop="datePublished">2015-12-09</time>
-
-
-    <h1 itemprop="name">Docker-详细操作</h1>
-
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2015/12/09/Docker-Hub使用/" title="Docker-Hub使用" itemprop="url">
-  
-
-    <time datetime="2015-12-09T15:45:26.000Z" itemprop="datePublished">2015-12-09</time>
+</div>
 
 
-    <h1 itemprop="name">Docker-Hub使用</h1>
-
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2015/12/09/Docker-install注意事项/" title="Docker-install注意事项" itemprop="url">
-  
-
-    <time datetime="2015-12-09T15:41:55.000Z" itemprop="datePublished">2015-12-09</time>
 
 
-    <h1 itemprop="name">Docker-install注意事项</h1>
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/MySQL-修改数据库和表的编码/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/MySQL-修改数据库和表的编码/" data-count-type="comments">&nbsp;</a>
+	
+</div>
 
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2015/12/09/Mongodb-部署复制集/" title="Mongodb-部署复制集" itemprop="url">
-  
-
-    <time datetime="2015-12-09T15:37:09.000Z" itemprop="datePublished">2015-12-09</time>
+</footer>
 
 
-    <h1 itemprop="name">Mongodb-部署复制集</h1>
-
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2015/12/09/MongoDB-3-0-3用户认证/" title="MongoDB-3.0.3用户认证" itemprop="url">
-  
-
-    <time datetime="2015-12-09T15:32:12.000Z" itemprop="datePublished">2015-12-09</time>
+    </article>
 
 
-    <h1 itemprop="name">MongoDB-3.0.3用户认证</h1>
-
-  </a>
-</section>
 
 
-  <nav id="page-nav" class="clearfix archive-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2015/page/2/">2</a><a class="extend next" rel="next" href="/archives/2015/page/2/">Next<span></span></a>
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/Docker/" style="font-size: 20px;">Docker</a> <a href="/tags/Mongodb/" style="font-size: 20px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a>
+    </div>
   </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://golearns.org/" target="_blank" title="go语言搭建的个人博客">golearns</a>
+            
+          </li>
+        
+    </ul>
 </div>
 
-      </div>
-      <footer><div id="footer" >
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
 	
 	<div class="line">
 		<span></span>
@@ -221,7 +327,7 @@
 
   _st('install','b2cFpoExgUMZu3--zQzE','2.0.0');
 </script></footer>
-      <script src="/js/jquery-2.0.3.min.js"></script>
+    <script src="/js/jquery-2.0.3.min.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
@@ -341,5 +447,5 @@ $(document).ready(function(){
 
 <!-- Tiny_search End -->
 
-    </body>
-   </html>
+  </body>
+ </html>

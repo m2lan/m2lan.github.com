@@ -6,59 +6,53 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>Mongodb-启动 | 知识记录</title>
+    <title>Mongodb-部署复制集 | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="Mac下安装PHP的mongodb扩展
-XAMPP/bin
-sudo pecl install mongo
+    <meta name="description" content="部署3个节点组成的复制集
+3台IP为
+192.168.0.139 主机名：mongoname1
+192.168.0.140 主机名：mongoname2
+192.168.0.141 主机名：mongoname3
 
-php.ini添加
-extension=mongo.so
 
-
-启动
-创建/data/db目录sudo mkdir -p /data/db
-设置/data/db目录权限sudo chown -R 你的系统登录用户名 /data
-终端执行mongod
-输入mongo便可连结到默认的数据库">
+修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
+启动mongodb
+在其中一个节点上执行rs.initiate(),用来初始化复制集
+rs.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mongodb-启动">
-<meta property="og:url" content="http://im.yonglang.co/2015/12/09/Mongodb-启动/index.html">
+<meta property="og:title" content="Mongodb-部署复制集">
+<meta property="og:url" content="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Mac下安装PHP的mongodb扩展
-XAMPP/bin
-sudo pecl install mongo
+<meta property="og:description" content="部署3个节点组成的复制集
+3台IP为
+192.168.0.139 主机名：mongoname1
+192.168.0.140 主机名：mongoname2
+192.168.0.141 主机名：mongoname3
 
-php.ini添加
-extension=mongo.so
 
-
-启动
-创建/data/db目录sudo mkdir -p /data/db
-设置/data/db目录权限sudo chown -R 你的系统登录用户名 /data
-终端执行mongod
-输入mongo便可连结到默认的数据库">
-<meta property="og:updated_time" content="2015-12-09T15:31:09.000Z">
+修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
+启动mongodb
+在其中一个节点上执行rs.initiate(),用来初始化复制集
+rs.">
+<meta property="og:updated_time" content="2015-12-09T15:41:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mongodb-启动">
-<meta name="twitter:description" content="Mac下安装PHP的mongodb扩展
-XAMPP/bin
-sudo pecl install mongo
+<meta name="twitter:title" content="Mongodb-部署复制集">
+<meta name="twitter:description" content="部署3个节点组成的复制集
+3台IP为
+192.168.0.139 主机名：mongoname1
+192.168.0.140 主机名：mongoname2
+192.168.0.141 主机名：mongoname3
 
-php.ini添加
-extension=mongo.so
 
-
-启动
-创建/data/db目录sudo mkdir -p /data/db
-设置/data/db目录权限sudo chown -R 你的系统登录用户名 /data
-终端执行mongod
-输入mongo便可连结到默认的数据库">
+修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
+启动mongodb
+在其中一个节点上执行rs.initiate(),用来初始化复制集
+rs.">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -121,14 +115,14 @@ extension=mongo.so
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/09/Mongodb-启动/" title="Mongodb-启动" itemprop="url">Mongodb-启动</a>
+      <a href="/2015/12/09/Mongodb-部署复制集/" title="Mongodb-部署复制集" itemprop="url">Mongodb-部署复制集</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T15:26:15.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    <time datetime="2015-12-09T15:37:09.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
     
   </p>
 </header>
@@ -137,23 +131,39 @@ extension=mongo.so
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><span class="toc-number">1.</span> <span class="toc-text">Mac下安装PHP的mongodb扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u542F_u52A8"><span class="toc-number">2.</span> <span class="toc-text">启动</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><a href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55" class="headerlink" title="Mac下安装PHP的mongodb扩展"></a>Mac下安装PHP的mongodb扩展</h2><ul>
-<li><p><code>XAMPP/bin</code></p>
-<pre><code>sudo pecl install mongo
-</code></pre></li>
-<li><p><code>php.ini</code>添加</p>
-<pre><code>extension=mongo.so
-</code></pre></li>
+		<h2 id="u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><a href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6" class="headerlink" title="部署3个节点组成的复制集"></a>部署3个节点组成的复制集</h2><ul>
+<li>3台IP为<ul>
+<li>192.168.0.139 主机名：mongoname1</li>
+<li>192.168.0.140 主机名：mongoname2</li>
+<li>192.168.0.141 主机名：mongoname3</li>
 </ul>
-<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><ul>
-<li>创建<code>/data/db</code>目录<code>sudo mkdir -p /data/db</code></li>
-<li>设置<code>/data/db</code>目录权限<code>sudo chown -R 你的系统登录用户名 /data</code></li>
-<li>终端执行<code>mongod</code></li>
-<li>输入<code>mongo</code>便可连结到默认的数据库</li>
+</li>
+<li>修改<code>/etc/mongodb.conf</code>，添加<code>replSet = rs0</code>(3个节点保持一致)</li>
+<li>启动<code>mongodb</code></li>
+<li><p>在其中一个节点上执行<code>rs.initiate()</code>,用来初始化复制集</p>
+<pre><code>rs.initiate(&quot;mongoname1&quot;)
+</code></pre></li>
+<li><p>查看当前配置信息</p>
+<pre><code>rs.conf()
+</code></pre></li>
+<li><p>将其他节点加入复制集</p>
+<pre><code>rs.add(&quot;mongoname2&quot;);
+rs.add(&quot;mongoname3&quot;);
+</code></pre></li>
+<li><p>查看配置</p>
+<pre><code>rs.conf()
+</code></pre></li>
+<li><p>查看复制集状态</p>
+<pre><code>rs.status()
+</code></pre></li>
+<li><p>如果在多个节点上执行了rs.initate(),可以做以下操作后重启mongodb</p>
+<pre><code>use local
+db.dropDatabase()
+</code></pre></li>
 </ul>
   
 	</div>
@@ -172,7 +182,7 @@ extension=mongo.so
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2015/12/09/Mongodb-启动/" data-title="Mongodb-启动 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集 | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -186,18 +196,18 @@ extension=mongo.so
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/09/MongoDB-3-0-3用户认证/" title="MongoDB-3.0.3用户认证">
+ <a href="/2015/12/09/Docker-install注意事项/" title="Docker-install注意事项">
   <strong>上一篇：</strong><br/>
   <span>
-  MongoDB-3.0.3用户认证</span>
+  Docker-install注意事项</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/12/09/MySQL-修改数据库和表的编码/"  title="MySQL-修改数据库和表的编码">
+<a href="/2015/12/09/MongoDB-3-0-3用户认证/"  title="MongoDB-3.0.3用户认证">
  <strong>下一篇：</strong><br/> 
- <span>MySQL-修改数据库和表的编码
+ <span>MongoDB-3.0.3用户认证
 </span>
 </a>
 </div>
@@ -206,7 +216,7 @@ extension=mongo.so
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/09/Mongodb-启动/" data-title="Mongodb-启动" data-url="http://im.yonglang.co/2015/12/09/Mongodb-启动/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集" data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/"></div>
 </section>
 
 
@@ -216,7 +226,7 @@ extension=mongo.so
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><span class="toc-number">1.</span> <span class="toc-text">Mac下安装PHP的mongodb扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u542F_u52A8"><span class="toc-number">2.</span> <span class="toc-text">启动</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
  
   </div>
 

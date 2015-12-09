@@ -6,59 +6,38 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>Mongodb-启动 | 知识记录</title>
+    <title>Docker-Hub使用 | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="Mac下安装PHP的mongodb扩展
-XAMPP/bin
-sudo pecl install mongo
-
-php.ini添加
-extension=mongo.so
-
-
-启动
-创建/data/db目录sudo mkdir -p /data/db
-设置/data/db目录权限sudo chown -R 你的系统登录用户名 /data
-终端执行mongod
-输入mongo便可连结到默认的数据库">
+    <meta name="description" content="开始使用Docker HubDocker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub
+展示如何创建一个账户。
+Docker Hub和docker及其组件一起工作。Docker Hub会帮助你和你的同事协作，并获取功能最全的docker。要做到这一点，它提供的服务有：
+Docker镜像主机
+用户认证
+自动镜">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mongodb-启动">
-<meta property="og:url" content="http://im.yonglang.co/2015/12/09/Mongodb-启动/index.html">
+<meta property="og:title" content="Docker-Hub使用">
+<meta property="og:url" content="http://im.yonglang.co/2015/12/09/Docker-Hub使用/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Mac下安装PHP的mongodb扩展
-XAMPP/bin
-sudo pecl install mongo
-
-php.ini添加
-extension=mongo.so
-
-
-启动
-创建/data/db目录sudo mkdir -p /data/db
-设置/data/db目录权限sudo chown -R 你的系统登录用户名 /data
-终端执行mongod
-输入mongo便可连结到默认的数据库">
-<meta property="og:updated_time" content="2015-12-09T15:31:09.000Z">
+<meta property="og:description" content="开始使用Docker HubDocker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub
+展示如何创建一个账户。
+Docker Hub和docker及其组件一起工作。Docker Hub会帮助你和你的同事协作，并获取功能最全的docker。要做到这一点，它提供的服务有：
+Docker镜像主机
+用户认证
+自动镜">
+<meta property="og:updated_time" content="2015-12-09T15:48:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mongodb-启动">
-<meta name="twitter:description" content="Mac下安装PHP的mongodb扩展
-XAMPP/bin
-sudo pecl install mongo
-
-php.ini添加
-extension=mongo.so
-
-
-启动
-创建/data/db目录sudo mkdir -p /data/db
-设置/data/db目录权限sudo chown -R 你的系统登录用户名 /data
-终端执行mongod
-输入mongo便可连结到默认的数据库">
+<meta name="twitter:title" content="Docker-Hub使用">
+<meta name="twitter:description" content="开始使用Docker HubDocker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub
+展示如何创建一个账户。
+Docker Hub和docker及其组件一起工作。Docker Hub会帮助你和你的同事协作，并获取功能最全的docker。要做到这一点，它提供的服务有：
+Docker镜像主机
+用户认证
+自动镜">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -121,14 +100,14 @@ extension=mongo.so
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/09/Mongodb-启动/" title="Mongodb-启动" itemprop="url">Mongodb-启动</a>
+      <a href="/2015/12/09/Docker-Hub使用/" title="Docker-Hub使用" itemprop="url">Docker-Hub使用</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T15:26:15.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    <time datetime="2015-12-09T15:45:26.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
     
   </p>
 </header>
@@ -137,23 +116,39 @@ extension=mongo.so
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><span class="toc-number">1.</span> <span class="toc-text">Mac下安装PHP的mongodb扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u542F_u52A8"><span class="toc-number">2.</span> <span class="toc-text">启动</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5F00_u59CB_u4F7F_u7528Docker_Hub"><span class="toc-number">1.</span> <span class="toc-text">开始使用Docker Hub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub"><span class="toc-number">1.1.</span> <span class="toc-text">Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u521B_u5EFADocker_Hub_u8D26_u6237"><span class="toc-number">2.</span> <span class="toc-text">创建Docker Hub账户</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><a href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55" class="headerlink" title="Mac下安装PHP的mongodb扩展"></a>Mac下安装PHP的mongodb扩展</h2><ul>
-<li><p><code>XAMPP/bin</code></p>
-<pre><code>sudo pecl install mongo
-</code></pre></li>
-<li><p><code>php.ini</code>添加</p>
-<pre><code>extension=mongo.so
+		<h2 id="u5F00_u59CB_u4F7F_u7528Docker_Hub"><a href="#u5F00_u59CB_u4F7F_u7528Docker_Hub" class="headerlink" title="开始使用Docker Hub"></a>开始使用Docker Hub</h2><h3 id="Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub"><a href="#Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub" class="headerlink" title="Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub"></a>Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub</h3><ul>
+<li>展示如何创建一个账户。</li>
+<li>Docker Hub和docker及其组件一起工作。Docker Hub会帮助你和你的同事协作，并获取功能最全的docker。要做到这一点，它提供的服务有：<ul>
+<li>Docker镜像主机</li>
+<li>用户认证</li>
+<li>自动镜像构建和工作流程工具，如构建触发器和webhook</li>
+<li>整合了GitHub和BitBucket</li>
+</ul>
+</li>
+<li>为了使用Docker Hub,首先需要注册创建一个账户。别担心，创建一个账户很简单并且是免费的。</li>
+</ul>
+<h2 id="u521B_u5EFADocker_Hub_u8D26_u6237"><a href="#u521B_u5EFADocker_Hub_u8D26_u6237" class="headerlink" title="创建Docker Hub账户"></a>创建Docker Hub账户</h2><ul>
+<li><p>这里有两种访问可以创建和注册一个Docker Hub账户：</p>
+<ul>
+<li>通过网站创建<br>  *填写注册表单,选择您的用户名和密码并指定您的电子邮箱。你也可以报名参加docker邮件列表，会有很多关于docker的信息。<ul>
+<li>一旦你填写表格，查看你的电子邮件，欢迎信息，确认来激活您的账户。</li>
+<li>在完成确认过程之后，您可以使用web控制台登陆</li>
+</ul>
+</li>
+<li><p>通过命令行创建</p>
+<ul>
+<li><p>你可以创建一个Docker Hub账号通过命令行<code>docker login</code>命令</p>
+<pre><code>$ sudo docker login
 </code></pre></li>
 </ul>
-<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><ul>
-<li>创建<code>/data/db</code>目录<code>sudo mkdir -p /data/db</code></li>
-<li>设置<code>/data/db</code>目录权限<code>sudo chown -R 你的系统登录用户名 /data</code></li>
-<li>终端执行<code>mongod</code></li>
-<li>输入<code>mongo</code>便可连结到默认的数据库</li>
+</li>
+</ul>
+</li>
+<li>你的Docker账户现在已经激活，你可以使用了。</li>
 </ul>
   
 	</div>
@@ -163,7 +158,7 @@ extension=mongo.so
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  <span></span> <a href="/tags/Docker/">Docker</a>
   </div>
 
 </div>
@@ -172,7 +167,7 @@ extension=mongo.so
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2015/12/09/Mongodb-启动/" data-title="Mongodb-启动 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2015/12/09/Docker-Hub使用/" data-title="Docker-Hub使用 | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -186,18 +181,18 @@ extension=mongo.so
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/09/MongoDB-3-0-3用户认证/" title="MongoDB-3.0.3用户认证">
+ <a href="/2015/12/09/Docker-详细操作/" title="Docker-详细操作">
   <strong>上一篇：</strong><br/>
   <span>
-  MongoDB-3.0.3用户认证</span>
+  Docker-详细操作</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/12/09/MySQL-修改数据库和表的编码/"  title="MySQL-修改数据库和表的编码">
+<a href="/2015/12/09/Docker-install注意事项/"  title="Docker-install注意事项">
  <strong>下一篇：</strong><br/> 
- <span>MySQL-修改数据库和表的编码
+ <span>Docker-install注意事项
 </span>
 </a>
 </div>
@@ -206,7 +201,7 @@ extension=mongo.so
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/09/Mongodb-启动/" data-title="Mongodb-启动" data-url="http://im.yonglang.co/2015/12/09/Mongodb-启动/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/09/Docker-Hub使用/" data-title="Docker-Hub使用" data-url="http://im.yonglang.co/2015/12/09/Docker-Hub使用/"></div>
 </section>
 
 
@@ -216,7 +211,7 @@ extension=mongo.so
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><span class="toc-number">1.</span> <span class="toc-text">Mac下安装PHP的mongodb扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u542F_u52A8"><span class="toc-number">2.</span> <span class="toc-text">启动</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5F00_u59CB_u4F7F_u7528Docker_Hub"><span class="toc-number">1.</span> <span class="toc-text">开始使用Docker Hub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub"><span class="toc-number">1.1.</span> <span class="toc-text">Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u521B_u5EFADocker_Hub_u8D26_u6237"><span class="toc-number">2.</span> <span class="toc-text">创建Docker Hub账户</span></a></li></ol>
  
   </div>
 
