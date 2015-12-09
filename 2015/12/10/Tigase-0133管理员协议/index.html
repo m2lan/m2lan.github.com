@@ -6,44 +6,29 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>MySQL-修改数据库和表的编码 | 知识记录</title>
+    <title>Tigase-0133管理员协议 | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="查看数据库编码 
-show variables like &amp;apos;char%&amp;apos;;
-
-修改表编码 
-ALTER TABLE &amp;apos;table&amp;apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
-
-修改表字段编码 
-ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos;">
+    <meta name="description" content="将src/main/groovy/tigase/admin拷贝到scripts/下,XEP-0133协议由groovy完成。
+管理员向服务端发送添加用户的请求，发送至sess-man
+&amp;lt;iq id=&amp;quot;EURERE234234234EEWEWEW&amp;quot; to=&amp;quot;sess-man@192.168.0.50&amp;quot; type=&amp;quot;set&amp;quot;&amp;gt;&amp;l">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL-修改数据库和表的编码">
-<meta property="og:url" content="http://im.yonglang.co/2015/12/09/MySQL-修改数据库和表的编码/index.html">
+<meta property="og:title" content="Tigase-0133管理员协议">
+<meta property="og:url" content="http://im.yonglang.co/2015/12/10/Tigase-0133管理员协议/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="查看数据库编码 
-show variables like &amp;apos;char%&amp;apos;;
-
-修改表编码 
-ALTER TABLE &amp;apos;table&amp;apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
-
-修改表字段编码 
-ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos;">
-<meta property="og:updated_time" content="2015-12-09T15:31:20.000Z">
+<meta property="og:description" content="将src/main/groovy/tigase/admin拷贝到scripts/下,XEP-0133协议由groovy完成。
+管理员向服务端发送添加用户的请求，发送至sess-man
+&amp;lt;iq id=&amp;quot;EURERE234234234EEWEWEW&amp;quot; to=&amp;quot;sess-man@192.168.0.50&amp;quot; type=&amp;quot;set&amp;quot;&amp;gt;&amp;l">
+<meta property="og:updated_time" content="2015-12-09T16:12:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL-修改数据库和表的编码">
-<meta name="twitter:description" content="查看数据库编码 
-show variables like &amp;apos;char%&amp;apos;;
-
-修改表编码 
-ALTER TABLE &amp;apos;table&amp;apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
-
-修改表字段编码 
-ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos;">
+<meta name="twitter:title" content="Tigase-0133管理员协议">
+<meta name="twitter:description" content="将src/main/groovy/tigase/admin拷贝到scripts/下,XEP-0133协议由groovy完成。
+管理员向服务端发送添加用户的请求，发送至sess-man
+&amp;lt;iq id=&amp;quot;EURERE234234234EEWEWEW&amp;quot; to=&amp;quot;sess-man@192.168.0.50&amp;quot; type=&amp;quot;set&amp;quot;&amp;gt;&amp;l">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -106,14 +91,14 @@ ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos;">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/09/MySQL-修改数据库和表的编码/" title="MySQL-修改数据库和表的编码" itemprop="url">MySQL-修改数据库和表的编码</a>
+      <a href="/2015/12/10/Tigase-0133管理员协议/" title="Tigase-0133管理员协议" itemprop="url">Tigase-0133管理员协议</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T15:23:13.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    <time datetime="2015-12-09T16:11:25.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
     
   </p>
 </header>
@@ -127,21 +112,14 @@ ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos;">
 		</div>
 		
 		<ul>
-<li><p>查看数据库编码 </p>
-<pre><code>show variables like &apos;char%&apos;;
+<li>将<code>src/main/groovy/tigase/admin</code>拷贝到<code>scripts/</code>下,<code>XEP-0133</code>协议由<code>groovy</code>完成。</li>
+<li><p>管理员向服务端发送添加用户的请求，发送至<code>sess-man</code></p>
+<pre><code>&lt;iq id=&quot;EURERE234234234EEWEWEW&quot; to=&quot;sess-man@192.168.0.50&quot; type=&quot;set&quot;&gt;&lt;command xmlns=&quot;http://jabber.org/protocol/commands&quot; node=&quot;http://jabber.org/protocol/admin#add-user&quot;&gt;&lt;/command&gt;&lt;/iq&gt;
 </code></pre></li>
-<li><p>修改表编码 </p>
-<pre><code>ALTER TABLE &apos;table&apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
+<li><p>接收服务端返回后，提交添加用户数据</p>
+<pre><code>&lt;iq from=&quot;admin@192.168.0.50/smack&quot; id=&quot;KJKJKJWEW121312312&quot; to=&quot;sess-man@192.168.0.50&quot; type=&quot;set&quot; xml:lang=&quot;en&quot;&gt;&lt;command xmlns=&quot;http://jabber.org/protocol/commands&quot; node=&quot;http://jabber.org/protocol/admin#add-user&quot; sessionid=&quot;&quot;&gt;&lt;x xmlns=&quot;jabber:x:data&quot; type=&quot;submit&quot;&gt;&lt;field type=&quot;hidden&quot; var=&quot;FORM_TYPE&quot;&gt;&lt;value&gt;http://jabber.org/protocol/admin&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;accountjid&quot;&gt;&lt;value&gt;test@192.168.0.50&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;password&quot;&gt;&lt;value&gt;123456&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;password-verify&quot;&gt;&lt;value&gt;12345&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;email&quot;&gt;&lt;value&gt;ttt&lt;/value&gt;&lt;/field&gt;&lt;/x&gt;&lt;/command&gt;&lt;/iq&gt;
 </code></pre></li>
-<li><p>修改表字段编码 </p>
-<pre><code>ALTER TABLE &apos;test&apos; CHANGE &apos;name&apos; &apos;name&apos; VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
-</code></pre></li>
-<li><p>查看表编码 </p>
-<pre><code>show create table mytable
-</code></pre></li>
-<li><p>修改mysql默认编码</p>
-<pre><code>[mysqld]和[client]后添加character_set_server=utf8
-</code></pre></li>
+<li><a href="http://xmpp.org/extensions/xep-0133.html" target="_blank" rel="external">XMPP-0133协议</a></li>
 </ul>
   
 	</div>
@@ -151,7 +129,7 @@ ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos;">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/MySQL/">MySQL</a>
+  <span></span> <a href="/tags/XMPP-Tigase/">XMPP Tigase</a>
   </div>
 
 </div>
@@ -160,7 +138,7 @@ ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos;">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2015/12/09/MySQL-修改数据库和表的编码/" data-title="MySQL-修改数据库和表的编码 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2015/12/10/Tigase-0133管理员协议/" data-title="Tigase-0133管理员协议 | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -174,19 +152,27 @@ ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos;">
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/09/Mongodb-启动/" title="Mongodb-启动">
+ <a href="/2015/12/10/Tigase-MUC配置/" title="Tigase-MUC配置">
   <strong>上一篇：</strong><br/>
   <span>
-  Mongodb-启动</span>
+  Tigase-MUC配置</span>
 </a>
 </div>
 
+
+<div class="next">
+<a href="/2015/12/10/Tigase-配置/"  title="Tigase-配置">
+ <strong>下一篇：</strong><br/> 
+ <span>Tigase-配置
+</span>
+</a>
+</div>
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/09/MySQL-修改数据库和表的编码/" data-title="MySQL-修改数据库和表的编码" data-url="http://im.yonglang.co/2015/12/09/MySQL-修改数据库和表的编码/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/10/Tigase-0133管理员协议/" data-title="Tigase-0133管理员协议" data-url="http://im.yonglang.co/2015/12/10/Tigase-0133管理员协议/"></div>
 </section>
 
 
