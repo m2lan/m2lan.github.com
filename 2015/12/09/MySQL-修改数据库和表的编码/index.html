@@ -15,29 +15,35 @@
     
     <meta name="description" content="查看数据库编码 
 show variables like &amp;apos;char%&amp;apos;;
+
 修改表编码 
 ALTER TABLE &amp;apos;table&amp;apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
+
 修改表字段编码 
-ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos; &amp;a">
+ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL-修改数据库和表的编码">
 <meta property="og:url" content="http://im.yonglang.co/2015/12/09/MySQL-修改数据库和表的编码/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="查看数据库编码 
 show variables like &amp;apos;char%&amp;apos;;
+
 修改表编码 
 ALTER TABLE &amp;apos;table&amp;apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
+
 修改表字段编码 
-ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos; &amp;a">
-<meta property="og:updated_time" content="2015-12-09T15:24:28.000Z">
+ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos;">
+<meta property="og:updated_time" content="2015-12-09T15:28:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL-修改数据库和表的编码">
 <meta name="twitter:description" content="查看数据库编码 
 show variables like &amp;apos;char%&amp;apos;;
+
 修改表编码 
 ALTER TABLE &amp;apos;table&amp;apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
+
 修改表字段编码 
-ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos; &amp;a">
+ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos;">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -120,17 +126,24 @@ ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos; &amp;a">
 		
 		</div>
 		
-		<p>查看数据库编码 </p>
+		<ul>
+<li><p>查看数据库编码 </p>
 <pre><code>show variables like &apos;char%&apos;;
-</code></pre><p>修改表编码 </p>
+</code></pre></li>
+<li><p>修改表编码 </p>
 <pre><code>ALTER TABLE &apos;table&apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
-</code></pre><p>修改表字段编码 </p>
+</code></pre></li>
+<li><p>修改表字段编码 </p>
 <pre><code>ALTER TABLE &apos;test&apos; CHANGE &apos;name&apos; &apos;name&apos; VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
-</code></pre><p>查看表编码 </p>
+</code></pre></li>
+<li><p>查看表编码 </p>
 <pre><code>show create table mytable
-</code></pre><p>修改mysql默认编码</p>
+</code></pre></li>
+<li><p>修改mysql默认编码</p>
 <pre><code>[mysqld]和[client]后添加character_set_server=utf8
-</code></pre>  
+</code></pre></li>
+</ul>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -160,6 +173,14 @@ ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos; &amp;a">
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/12/09/Mongodb-启动/" title="Mongodb-启动">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Mongodb-启动</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/12/08/hello-world/"  title="Hello World">
@@ -197,7 +218,7 @@ ALTER TABLE &amp;apos;test&amp;apos; CHANGE &amp;apos;name&amp;apos; &amp;a">
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a>
+       <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a>
     </div>
   </div>
 
