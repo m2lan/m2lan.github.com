@@ -6,53 +6,32 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>Mongodb-部署复制集 | 知识记录</title>
+    <title>Git-抓取分支 | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
+    <meta name="description" content="现在，你的小伙伴要在dev分支上开发，就必须创建远程origin的dev分支到本地，于是他用这个命令创建本地dev分支：$ git checkout -b dev origin/dev
+现在，他就可以在dev上继续修改，然后，时不时地把dev分支push到远程：
+$ git commit -m &amp;quot;add /usr/bin/env&amp;quot;
+   [dev 291bea8] add /u">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mongodb-部署复制集">
-<meta property="og:url" content="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/index.html">
+<meta property="og:title" content="Git-抓取分支">
+<meta property="og:url" content="http://im.yonglang.co/2015/12/10/Git-抓取分支/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
-<meta property="og:updated_time" content="2015-12-09T16:41:05.000Z">
+<meta property="og:description" content="现在，你的小伙伴要在dev分支上开发，就必须创建远程origin的dev分支到本地，于是他用这个命令创建本地dev分支：$ git checkout -b dev origin/dev
+现在，他就可以在dev上继续修改，然后，时不时地把dev分支push到远程：
+$ git commit -m &amp;quot;add /usr/bin/env&amp;quot;
+   [dev 291bea8] add /u">
+<meta property="og:updated_time" content="2015-12-09T17:38:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mongodb-部署复制集">
-<meta name="twitter:description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
+<meta name="twitter:title" content="Git-抓取分支">
+<meta name="twitter:description" content="现在，你的小伙伴要在dev分支上开发，就必须创建远程origin的dev分支到本地，于是他用这个命令创建本地dev分支：$ git checkout -b dev origin/dev
+现在，他就可以在dev上继续修改，然后，时不时地把dev分支push到远程：
+$ git commit -m &amp;quot;add /usr/bin/env&amp;quot;
+   [dev 291bea8] add /u">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -115,14 +94,14 @@ rs.">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/09/Mongodb-部署复制集/" title="Mongodb-部署复制集" itemprop="url">Mongodb-部署复制集</a>
+      <a href="/2015/12/10/Git-抓取分支/" title="Git-抓取分支" itemprop="url">Git-抓取分支</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T15:37:09.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    <time datetime="2015-12-09T17:31:11.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
     
   </p>
 </header>
@@ -131,39 +110,84 @@ rs.">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h2 id="u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><a href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6" class="headerlink" title="部署3个节点组成的复制集"></a>部署3个节点组成的复制集</h2><ul>
-<li>3台IP为<ul>
-<li>192.168.0.139 主机名：mongoname1</li>
-<li>192.168.0.140 主机名：mongoname2</li>
-<li>192.168.0.141 主机名：mongoname3</li>
+		<ul>
+<li>现在，你的小伙伴要在<code>dev</code>分支上开发，就必须创建远程<code>origin</code>的<code>dev</code>分支到本地，于是他用这个命令创建本地<code>dev</code>分支：<code>$ git checkout -b dev origin/dev</code></li>
+<li><p>现在，他就可以在<code>dev</code>上继续修改，然后，时不时地把<code>dev</code>分支<code>push</code>到远程：</p>
+<pre><code>$ git commit -m &quot;add /usr/bin/env&quot;
+   [dev 291bea8] add /usr/bin/env
+   1 file changed, 1 insertion(+)
+$ git push origin dev
+   Counting objects: 5, done.
+   Delta compression using up to 4 threads.
+   Compressing objects: 100% (2/2), done.
+   Writing objects: 100% (3/3), 349 bytes, done.
+   Total 3 (delta 0), reused 0 (delta 0)
+   To git@github.com:michaelliao/learngit.git
+   fc38031..291bea8  dev -&gt; dev
+</code></pre></li>
+<li><p>你的小伙伴已经向<code>origin/dev</code>分支推送了他的提交，而碰巧你也对同样的文件作了修改，并试图推送：</p>
+<pre><code>$ git add hello.py
+$ git commit -m &quot;add coding: utf-8&quot;
+  [dev bd6ae48] add coding: utf-8
+   1 file changed, 1 insertion(+)
+  $ git push origin dev
+  To git@github.com:michaelliao/learngit.git
+   ! [rejected]        dev -&gt; dev (non-fast-forward)
+  error: failed to push some refs to &apos;git@github.com:michaelliao/learngit.git&apos;
+  hint: Updates were rejected because the tip of your current branch is behind
+  hint: its remote counterpart. Merge the remote changes (e.g. &apos;git pull&apos;)
+  hint: before pushing again.
+  hint: See the &apos;Note about fast-forwards&apos; in &apos;git push --help&apos; for details.
+</code></pre></li>
+<li><p>推送失败，因为你的小伙伴的最新提交和你试图推送的提交有冲突，解决办法也很简单，<code>Git</code>已经提示我们，先用<code>git pull</code>把最新的提交从<code>origin/dev</code>抓下来，然后，在本地合并，解决冲突，再推送：</p>
+<pre><code>$ git pull
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 3 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From github.com:michaelliao/learngit
+fc38031..291bea8  dev        -&gt; origin/dev
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details
+    git pull &lt;remote&gt; &lt;branch&gt;
+If you wish to set tracking information for this branch you can do so with:
+    git branch --set-upstream dev origin/&lt;branch&gt;
+</code></pre></li>
+<li><p><code>git pull</code>也失败了，原因是没有指定本地<code>dev</code>分支与远程<code>origin/dev</code>分支的链接，根据提示，设置<code>dev</code>和<code>origin/dev</code>的链接：</p>
+<pre><code>$ git branch --set-upstream dev origin/dev
+Branch dev set up to track remote branch dev from origin.
+</code></pre></li>
+<li><p>再pull：</p>
+<pre><code>$ git pull
+Auto-merging hello.py
+CONFLICT (content): Merge conflict in hello.py
+Automatic merge failed; fix conflicts and then commit the result.
+</code></pre></li>
+<li><p>这回<code>git pull</code>成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，提交，再<code>push</code>：</p>
+<pre><code>$ git commit -m &quot;merge &amp; fix hello.py&quot;
+[dev adca45d] merge &amp; fix hello.py
+$ git push origin dev
+Counting objects: 10, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (6/6), 747 bytes, done.
+Total 6 (delta 0), reused 0 (delta 0)
+To git@github.com:michaelliao/learngit.git
+291bea8..adca45d  dev -&gt; dev
+</code></pre></li>
+<li>因此，多人协作的工作模式通常是这样：<ul>
+<li>首先，可以试图用<code>git push origin branch-name</code>推送自己的修改；</li>
+<li>如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并；</li>
+<li>如果合并有冲突，则解决冲突，并在本地提交；</li>
+<li>没有冲突或者解决掉冲突后，再用<code>git push origin branch-name</code>推送就能成功！</li>
+<li>如果<code>git pull</code>提示<code>“no tracking information”</code>，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream branch-name origin/branch-name</code>。</li>
 </ul>
 </li>
-<li>修改<code>/etc/mongodb.conf</code>，添加<code>replSet = rs0</code>(3个节点保持一致)</li>
-<li>启动<code>mongodb</code></li>
-<li><p>在其中一个节点上执行<code>rs.initiate()</code>,用来初始化复制集</p>
-<pre><code>rs.initiate(&quot;mongoname1&quot;)
-</code></pre></li>
-<li><p>查看当前配置信息</p>
-<pre><code>rs.conf()
-</code></pre></li>
-<li><p>将其他节点加入复制集</p>
-<pre><code>rs.add(&quot;mongoname2&quot;);
-rs.add(&quot;mongoname3&quot;);
-</code></pre></li>
-<li><p>查看配置</p>
-<pre><code>rs.conf()
-</code></pre></li>
-<li><p>查看复制集状态</p>
-<pre><code>rs.status()
-</code></pre></li>
-<li><p>如果在多个节点上执行了rs.initate(),可以做以下操作后重启mongodb</p>
-<pre><code>use local
-db.dropDatabase()
-</code></pre></li>
 </ul>
   
 	</div>
@@ -172,13 +196,13 @@ db.dropDatabase()
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
+  <a class="article-category-link" href="/categories/Git/">Git</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  <span></span> <a href="/tags/Git/">Git</a>
   </div>
 
 </div>
@@ -187,7 +211,7 @@ db.dropDatabase()
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2015/12/10/Git-抓取分支/" data-title="Git-抓取分支 | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -201,18 +225,18 @@ db.dropDatabase()
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/09/Docker-install注意事项/" title="Docker-install注意事项">
+ <a href="/2015/12/10/Git-ssh连接/" title="Git-ssh连接">
   <strong>上一篇：</strong><br/>
   <span>
-  Docker-install注意事项</span>
+  Git-ssh连接</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/12/09/MongoDB-3-0-3用户认证/"  title="MongoDB-3.0.3用户认证">
+<a href="/2015/12/10/Git-cherry-pick使用/"  title="Git-cherry-pick使用">
  <strong>下一篇：</strong><br/> 
- <span>MongoDB-3.0.3用户认证
+ <span>Git-cherry-pick使用
 </span>
 </a>
 </div>
@@ -221,7 +245,7 @@ db.dropDatabase()
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集" data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/10/Git-抓取分支/" data-title="Git-抓取分支" data-url="http://im.yonglang.co/2015/12/10/Git-抓取分支/"></div>
 </section>
 
 
@@ -231,7 +255,7 @@ db.dropDatabase()
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
+ 
  
   </div>
 

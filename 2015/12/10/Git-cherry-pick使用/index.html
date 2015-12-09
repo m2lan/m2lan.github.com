@@ -6,53 +6,29 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>Mongodb-部署复制集 | 知识记录</title>
+    <title>Git-cherry-pick使用 | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
+    <meta name="description" content="git cherry-pick用于把另一个本地分支的commit修改应用到当前分支。
+在本地 master 分支上做了一个commit( 38361a68138140827b31b72f8bbfd88b3705d77a ),如何把它放到 本地 old_cc 分支上？
+办法之一： 使用 cherry-pick. 根据git 文档： Apply the changes introduced by so">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mongodb-部署复制集">
-<meta property="og:url" content="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/index.html">
+<meta property="og:title" content="Git-cherry-pick使用">
+<meta property="og:url" content="http://im.yonglang.co/2015/12/10/Git-cherry-pick使用/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
-<meta property="og:updated_time" content="2015-12-09T16:41:05.000Z">
+<meta property="og:description" content="git cherry-pick用于把另一个本地分支的commit修改应用到当前分支。
+在本地 master 分支上做了一个commit( 38361a68138140827b31b72f8bbfd88b3705d77a ),如何把它放到 本地 old_cc 分支上？
+办法之一： 使用 cherry-pick. 根据git 文档： Apply the changes introduced by so">
+<meta property="og:updated_time" content="2015-12-09T17:30:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mongodb-部署复制集">
-<meta name="twitter:description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
+<meta name="twitter:title" content="Git-cherry-pick使用">
+<meta name="twitter:description" content="git cherry-pick用于把另一个本地分支的commit修改应用到当前分支。
+在本地 master 分支上做了一个commit( 38361a68138140827b31b72f8bbfd88b3705d77a ),如何把它放到 本地 old_cc 分支上？
+办法之一： 使用 cherry-pick. 根据git 文档： Apply the changes introduced by so">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -115,14 +91,14 @@ rs.">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/09/Mongodb-部署复制集/" title="Mongodb-部署复制集" itemprop="url">Mongodb-部署复制集</a>
+      <a href="/2015/12/10/Git-cherry-pick使用/" title="Git-cherry-pick使用" itemprop="url">Git-cherry-pick使用</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T15:37:09.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    <time datetime="2015-12-09T17:29:15.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
     
   </p>
 </header>
@@ -131,38 +107,19 @@ rs.">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h2 id="u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><a href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6" class="headerlink" title="部署3个节点组成的复制集"></a>部署3个节点组成的复制集</h2><ul>
-<li>3台IP为<ul>
-<li>192.168.0.139 主机名：mongoname1</li>
-<li>192.168.0.140 主机名：mongoname2</li>
-<li>192.168.0.141 主机名：mongoname3</li>
-</ul>
-</li>
-<li>修改<code>/etc/mongodb.conf</code>，添加<code>replSet = rs0</code>(3个节点保持一致)</li>
-<li>启动<code>mongodb</code></li>
-<li><p>在其中一个节点上执行<code>rs.initiate()</code>,用来初始化复制集</p>
-<pre><code>rs.initiate(&quot;mongoname1&quot;)
-</code></pre></li>
-<li><p>查看当前配置信息</p>
-<pre><code>rs.conf()
-</code></pre></li>
-<li><p>将其他节点加入复制集</p>
-<pre><code>rs.add(&quot;mongoname2&quot;);
-rs.add(&quot;mongoname3&quot;);
-</code></pre></li>
-<li><p>查看配置</p>
-<pre><code>rs.conf()
-</code></pre></li>
-<li><p>查看复制集状态</p>
-<pre><code>rs.status()
-</code></pre></li>
-<li><p>如果在多个节点上执行了rs.initate(),可以做以下操作后重启mongodb</p>
-<pre><code>use local
-db.dropDatabase()
+		<ul>
+<li><code>git cherry-pick</code>用于把另一个本地分支的<code>commit</code>修改应用到当前分支。</li>
+<li>在本地 <code>master</code> 分支上做了一个<code>commit( 38361a68138140827b31b72f8bbfd88b3705d77a )</code>,如何把它放到 本地 <code>old_cc</code> 分支上？</li>
+<li>办法之一： 使用 <code>cherry-pick</code>. 根据git 文档： <code>Apply the changes introduced by some existing commits</code></li>
+<li>就是对已经存在的<code>commit</code>进行<code>apply</code>(可以理解为再次提交)</li>
+<li>简单用法：<code>git cherry-pick &lt;commit id&gt;</code></li>
+<li><p>例如：</p>
+<pre><code>$ git checkout old_cc
+$ git cherry-pick 38361a68
 </code></pre></li>
 </ul>
   
@@ -172,13 +129,13 @@ db.dropDatabase()
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
+  <a class="article-category-link" href="/categories/Git/">Git</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  <span></span> <a href="/tags/Git/">Git</a>
   </div>
 
 </div>
@@ -187,7 +144,7 @@ db.dropDatabase()
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2015/12/10/Git-cherry-pick使用/" data-title="Git-cherry-pick使用 | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -201,18 +158,18 @@ db.dropDatabase()
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/09/Docker-install注意事项/" title="Docker-install注意事项">
+ <a href="/2015/12/10/Git-抓取分支/" title="Git-抓取分支">
   <strong>上一篇：</strong><br/>
   <span>
-  Docker-install注意事项</span>
+  Git-抓取分支</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/12/09/MongoDB-3-0-3用户认证/"  title="MongoDB-3.0.3用户认证">
+<a href="/2015/12/10/Maven-聚合和继承/"  title="Maven-聚合和继承">
  <strong>下一篇：</strong><br/> 
- <span>MongoDB-3.0.3用户认证
+ <span>Maven-聚合和继承
 </span>
 </a>
 </div>
@@ -221,7 +178,7 @@ db.dropDatabase()
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集" data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/10/Git-cherry-pick使用/" data-title="Git-cherry-pick使用" data-url="http://im.yonglang.co/2015/12/10/Git-cherry-pick使用/"></div>
 </section>
 
 
@@ -231,7 +188,7 @@ db.dropDatabase()
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
+ 
  
   </div>
 

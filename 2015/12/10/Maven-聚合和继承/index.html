@@ -6,53 +6,32 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>Mongodb-部署复制集 | 知识记录</title>
+    <title>Maven-聚合和继承 | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
+    <meta name="description" content="聚合
+如果一个项目依赖数十个模块，那么要一个一个编译起来是非常浪费时间的，所以就需要把所需模块聚合在一起，一起编译。
+比如当前有User有两个模块：1.user-dao, 2.user-service，在eclipse中创建一个create a simple project(skip archetype selection),
+填入：Group Id, Artifact Id(这里为user-pa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mongodb-部署复制集">
-<meta property="og:url" content="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/index.html">
+<meta property="og:title" content="Maven-聚合和继承">
+<meta property="og:url" content="http://im.yonglang.co/2015/12/10/Maven-聚合和继承/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
-<meta property="og:updated_time" content="2015-12-09T16:41:05.000Z">
+<meta property="og:description" content="聚合
+如果一个项目依赖数十个模块，那么要一个一个编译起来是非常浪费时间的，所以就需要把所需模块聚合在一起，一起编译。
+比如当前有User有两个模块：1.user-dao, 2.user-service，在eclipse中创建一个create a simple project(skip archetype selection),
+填入：Group Id, Artifact Id(这里为user-pa">
+<meta property="og:updated_time" content="2015-12-09T17:26:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mongodb-部署复制集">
-<meta name="twitter:description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
+<meta name="twitter:title" content="Maven-聚合和继承">
+<meta name="twitter:description" content="聚合
+如果一个项目依赖数十个模块，那么要一个一个编译起来是非常浪费时间的，所以就需要把所需模块聚合在一起，一起编译。
+比如当前有User有两个模块：1.user-dao, 2.user-service，在eclipse中创建一个create a simple project(skip archetype selection),
+填入：Group Id, Artifact Id(这里为user-pa">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -115,14 +94,14 @@ rs.">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/09/Mongodb-部署复制集/" title="Mongodb-部署复制集" itemprop="url">Mongodb-部署复制集</a>
+      <a href="/2015/12/10/Maven-聚合和继承/" title="Maven-聚合和继承" itemprop="url">Maven-聚合和继承</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T15:37:09.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    <time datetime="2015-12-09T17:23:02.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
     
   </p>
 </header>
@@ -131,39 +110,116 @@ rs.">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u805A_u5408"><span class="toc-number">1.</span> <span class="toc-text">聚合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7EE7_u627F"><span class="toc-number">2.</span> <span class="toc-text">继承</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><a href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6" class="headerlink" title="部署3个节点组成的复制集"></a>部署3个节点组成的复制集</h2><ul>
-<li>3台IP为<ul>
-<li>192.168.0.139 主机名：mongoname1</li>
-<li>192.168.0.140 主机名：mongoname2</li>
-<li>192.168.0.141 主机名：mongoname3</li>
-</ul>
-</li>
-<li>修改<code>/etc/mongodb.conf</code>，添加<code>replSet = rs0</code>(3个节点保持一致)</li>
-<li>启动<code>mongodb</code></li>
-<li><p>在其中一个节点上执行<code>rs.initiate()</code>,用来初始化复制集</p>
-<pre><code>rs.initiate(&quot;mongoname1&quot;)
+		<h2 id="u805A_u5408"><a href="#u805A_u5408" class="headerlink" title="聚合"></a>聚合</h2><ul>
+<li>如果一个项目依赖数十个模块，那么要一个一个编译起来是非常浪费时间的，所以就需要把所需模块聚合在一起，一起编译。</li>
+<li>比如当前有User有两个模块：1.user-dao, 2.user-service，在eclipse中创建一个<code>create a simple project(skip archetype selection)</code>,</li>
+<li>填入：Group Id, Artifact Id(这里为user-parent), Version, Packaging(这里选择pom),然后创建。</li>
+<li><p>在<code>user-parent/pom.xml</code>中添加如下代码：</p>
+<pre><code>&lt;modules&gt;
+  &lt;module&gt;../user-dao&lt;/module&gt;
+  &lt;module&gt;../user-service&lt;/module&gt;
+&lt;/modules&gt;
 </code></pre></li>
-<li><p>查看当前配置信息</p>
-<pre><code>rs.conf()
+<li>接下来就可以直接在<code>user-parent/pom.xml</code>编译了。<h2 id="u7EE7_u627F"><a href="#u7EE7_u627F" class="headerlink" title="继承"></a>继承</h2></li>
+<li>将<code>pom.xml</code>中相同的配置也放入<code>user-parent/pom.xml</code>中</li>
+<li>依赖包管理，将所需的依赖包放入<code>user-parent/pom.xml</code>中进行统一管理</li>
+<li><p><code>user-parent/pom.xml</code>的整体代码如下：</p>
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.m2.user&lt;/groupId&gt;
+    &lt;artifactId&gt;user-parent&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;pom&lt;/packaging&gt;
+
+    &lt;modules&gt;
+        &lt;module&gt;../user-dao&lt;/module&gt;
+        &lt;module&gt;../user-service&lt;/module&gt;
+    &lt;/modules&gt;
+
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;junit&lt;/groupId&gt;
+                &lt;artifactId&gt;junit&lt;/artifactId&gt;
+                &lt;version&gt;4.10&lt;/version&gt;
+                &lt;scope&gt;test&lt;/scope&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;log4j&lt;/groupId&gt;
+                &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+                &lt;version&gt;1.2.16&lt;/version&gt;
+            &lt;/dependency&gt;
+
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+&lt;/project&gt;
 </code></pre></li>
-<li><p>将其他节点加入复制集</p>
-<pre><code>rs.add(&quot;mongoname2&quot;);
-rs.add(&quot;mongoname3&quot;);
+<li><p><code>user-dao/pom.xml</code>如下：</p>
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;com.m2.user&lt;/groupId&gt;
+        &lt;artifactId&gt;user-parent&lt;/artifactId&gt;
+        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+        &lt;relativePath&gt;../user-parent/pom.xml&lt;/relativePath&gt;
+    &lt;/parent&gt;
+    &lt;artifactId&gt;user-dao&lt;/artifactId&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+
+    &lt;name&gt;user-dao&lt;/name&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;log4j&lt;/groupId&gt;
+            &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
 </code></pre></li>
-<li><p>查看配置</p>
-<pre><code>rs.conf()
+<li><p><code>user-service/pom.xml</code>如下:</p>
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;com.m2.user&lt;/groupId&gt;
+        &lt;artifactId&gt;user-parent&lt;/artifactId&gt;
+        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+        &lt;relativePath&gt;../user-parent/pom.xml&lt;/relativePath&gt;
+    &lt;/parent&gt;
+    &lt;artifactId&gt;user-service&lt;/artifactId&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+
+    &lt;name&gt;user-service&lt;/name&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;log4j&lt;/groupId&gt;
+            &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
 </code></pre></li>
-<li><p>查看复制集状态</p>
-<pre><code>rs.status()
-</code></pre></li>
-<li><p>如果在多个节点上执行了rs.initate(),可以做以下操作后重启mongodb</p>
-<pre><code>use local
-db.dropDatabase()
-</code></pre></li>
+<li>这样就可以对包进行统一管理、代码重复的问题。</li>
 </ul>
   
 	</div>
@@ -172,13 +228,13 @@ db.dropDatabase()
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
+  <a class="article-category-link" href="/categories/Maven/">Maven</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  <span></span> <a href="/tags/Maven/">Maven</a>
   </div>
 
 </div>
@@ -187,7 +243,7 @@ db.dropDatabase()
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2015/12/10/Maven-聚合和继承/" data-title="Maven-聚合和继承 | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -201,18 +257,18 @@ db.dropDatabase()
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/09/Docker-install注意事项/" title="Docker-install注意事项">
+ <a href="/2015/12/10/Git-cherry-pick使用/" title="Git-cherry-pick使用">
   <strong>上一篇：</strong><br/>
   <span>
-  Docker-install注意事项</span>
+  Git-cherry-pick使用</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/12/09/MongoDB-3-0-3用户认证/"  title="MongoDB-3.0.3用户认证">
+<a href="/2015/12/10/SpringMVC-学习02/"  title="SpringMVC-学习02">
  <strong>下一篇：</strong><br/> 
- <span>MongoDB-3.0.3用户认证
+ <span>SpringMVC-学习02
 </span>
 </a>
 </div>
@@ -221,7 +277,7 @@ db.dropDatabase()
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集" data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/10/Maven-聚合和继承/" data-title="Maven-聚合和继承" data-url="http://im.yonglang.co/2015/12/10/Maven-聚合和继承/"></div>
 </section>
 
 
@@ -231,7 +287,7 @@ db.dropDatabase()
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u805A_u5408"><span class="toc-number">1.</span> <span class="toc-text">聚合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7EE7_u627F"><span class="toc-number">2.</span> <span class="toc-text">继承</span></a></li></ol>
  
   </div>
 

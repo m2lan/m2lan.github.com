@@ -6,53 +6,35 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>Mongodb-部署复制集 | 知识记录</title>
+    <title>SpringMVC-学习01 | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
+    <meta name="description" content="下载springframework
+新建web项目，拷贝spring-framework-4.1.2.RELEASE/libs下面所有的*.RELEASE.jar到lib目录下。
+配置web.xml
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;web-app version=&amp;quot;3.1&amp;quot;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mongodb-部署复制集">
-<meta property="og:url" content="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/index.html">
+<meta property="og:title" content="SpringMVC-学习01">
+<meta property="og:url" content="http://im.yonglang.co/2015/12/10/SpringMVC-学习01/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
-<meta property="og:updated_time" content="2015-12-09T16:41:05.000Z">
+<meta property="og:description" content="下载springframework
+新建web项目，拷贝spring-framework-4.1.2.RELEASE/libs下面所有的*.RELEASE.jar到lib目录下。
+配置web.xml
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;web-app version=&amp;quot;3.1&amp;quot;">
+<meta property="og:updated_time" content="2015-12-09T17:21:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mongodb-部署复制集">
-<meta name="twitter:description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
-
-
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
+<meta name="twitter:title" content="SpringMVC-学习01">
+<meta name="twitter:description" content="下载springframework
+新建web项目，拷贝spring-framework-4.1.2.RELEASE/libs下面所有的*.RELEASE.jar到lib目录下。
+配置web.xml
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;web-app version=&amp;quot;3.1&amp;quot;">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -115,14 +97,14 @@ rs.">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/09/Mongodb-部署复制集/" title="Mongodb-部署复制集" itemprop="url">Mongodb-部署复制集</a>
+      <a href="/2015/12/10/SpringMVC-学习01/" title="SpringMVC-学习01" itemprop="url">SpringMVC-学习01</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T15:37:09.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    <time datetime="2015-12-09T17:19:19.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
     
   </p>
 </header>
@@ -131,38 +113,64 @@ rs.">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h2 id="u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><a href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6" class="headerlink" title="部署3个节点组成的复制集"></a>部署3个节点组成的复制集</h2><ul>
-<li>3台IP为<ul>
-<li>192.168.0.139 主机名：mongoname1</li>
-<li>192.168.0.140 主机名：mongoname2</li>
-<li>192.168.0.141 主机名：mongoname3</li>
-</ul>
-</li>
-<li>修改<code>/etc/mongodb.conf</code>，添加<code>replSet = rs0</code>(3个节点保持一致)</li>
-<li>启动<code>mongodb</code></li>
-<li><p>在其中一个节点上执行<code>rs.initiate()</code>,用来初始化复制集</p>
-<pre><code>rs.initiate(&quot;mongoname1&quot;)
+		<ul>
+<li>下载<a href="http://maven.springframework.org/release/org/springframework/spring/" target="_blank" rel="external">springframework</a></li>
+<li>新建web项目，拷贝<code>spring-framework-4.1.2.RELEASE/libs</code>下面所有的<code>*.RELEASE.jar</code>到<code>lib</code>目录下。</li>
+<li><p>配置<code>web.xml</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app version=&quot;3.1&quot; xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet &lt;/servlet-class&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt; // 启动就加载
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt; // 监听所有的请求
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
 </code></pre></li>
-<li><p>查看当前配置信息</p>
-<pre><code>rs.conf()
+<li><p>在<code>/WEB-INF</code>下新建<code>hello-servlet.xml</code>(hello取决于web.xml中servlet-name的配置),配置如下</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd&quot;&gt;
+
+    &lt;!-- 这两项启动annotation配置 --&gt;
+    &lt;context:component-scan base-package=&quot;com.demo.controller&quot;/&gt;
+    &lt;mvc:annotation-driven/&gt;
+
+    &lt;!-- 配置视图文件的路径和后缀 --&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+&lt;/beans&gt;
 </code></pre></li>
-<li><p>将其他节点加入复制集</p>
-<pre><code>rs.add(&quot;mongoname2&quot;);
-rs.add(&quot;mongoname3&quot;);
-</code></pre></li>
-<li><p>查看配置</p>
-<pre><code>rs.conf()
-</code></pre></li>
-<li><p>查看复制集状态</p>
-<pre><code>rs.status()
-</code></pre></li>
-<li><p>如果在多个节点上执行了rs.initate(),可以做以下操作后重启mongodb</p>
-<pre><code>use local
-db.dropDatabase()
+<li><p>新建一个<code>controller</code>文件，<code>package=hello-servlet.xml</code>的<code>base-package</code></p>
+<pre><code>package com.demo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class HelloController {
+
+    @RequestMapping(&quot;/&quot;)
+    // 当访问http://localhost:8080/APP/时就会进入该方法，方法映射到hello视图
+    public String hello() {
+        return &quot;hello&quot;;
+    }
+}
 </code></pre></li>
 </ul>
   
@@ -172,13 +180,13 @@ db.dropDatabase()
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
+  <a class="article-category-link" href="/categories/Spring-MVC/">Spring-MVC</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  <span></span> <a href="/tags/Spring-MVC/">Spring-MVC</a>
   </div>
 
 </div>
@@ -187,7 +195,7 @@ db.dropDatabase()
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2015/12/10/SpringMVC-学习01/" data-title="SpringMVC-学习01 | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -201,18 +209,18 @@ db.dropDatabase()
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/09/Docker-install注意事项/" title="Docker-install注意事项">
+ <a href="/2015/12/10/SpringMVC-学习02/" title="SpringMVC-学习02">
   <strong>上一篇：</strong><br/>
   <span>
-  Docker-install注意事项</span>
+  SpringMVC-学习02</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/12/09/MongoDB-3-0-3用户认证/"  title="MongoDB-3.0.3用户认证">
+<a href="/2015/12/10/Mac-配置vim/"  title="Mac-配置vim">
  <strong>下一篇：</strong><br/> 
- <span>MongoDB-3.0.3用户认证
+ <span>Mac-配置vim
 </span>
 </a>
 </div>
@@ -221,7 +229,7 @@ db.dropDatabase()
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集" data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/10/SpringMVC-学习01/" data-title="SpringMVC-学习01" data-url="http://im.yonglang.co/2015/12/10/SpringMVC-学习01/"></div>
 </section>
 
 
@@ -231,7 +239,7 @@ db.dropDatabase()
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
+ 
  
   </div>
 

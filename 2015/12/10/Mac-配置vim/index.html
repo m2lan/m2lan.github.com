@@ -6,53 +6,47 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>Mongodb-部署复制集 | 知识记录</title>
+    <title>Mac-配置vim | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
+    <meta name="description" content="下载配色方案molokai
+在当前用户根目录下的~/.vim创建colors目录，将下载的配色方案中的molokai.vim移动到~/.vim/colors中
+在当前用户根目录下新建.vimrc，添加colorscheme molokai
+vimrc可以把/usr/share/vim/vimrc拷贝过来
 
 
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
+更多的配置如下
+&amp;quot; Configuration file for vim
+set">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mongodb-部署复制集">
-<meta property="og:url" content="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/index.html">
+<meta property="og:title" content="Mac-配置vim">
+<meta property="og:url" content="http://im.yonglang.co/2015/12/10/Mac-配置vim/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
+<meta property="og:description" content="下载配色方案molokai
+在当前用户根目录下的~/.vim创建colors目录，将下载的配色方案中的molokai.vim移动到~/.vim/colors中
+在当前用户根目录下新建.vimrc，添加colorscheme molokai
+vimrc可以把/usr/share/vim/vimrc拷贝过来
 
 
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
-<meta property="og:updated_time" content="2015-12-09T16:41:05.000Z">
+更多的配置如下
+&amp;quot; Configuration file for vim
+set">
+<meta property="og:updated_time" content="2015-12-09T17:18:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mongodb-部署复制集">
-<meta name="twitter:description" content="部署3个节点组成的复制集
-3台IP为
-192.168.0.139 主机名：mongoname1
-192.168.0.140 主机名：mongoname2
-192.168.0.141 主机名：mongoname3
+<meta name="twitter:title" content="Mac-配置vim">
+<meta name="twitter:description" content="下载配色方案molokai
+在当前用户根目录下的~/.vim创建colors目录，将下载的配色方案中的molokai.vim移动到~/.vim/colors中
+在当前用户根目录下新建.vimrc，添加colorscheme molokai
+vimrc可以把/usr/share/vim/vimrc拷贝过来
 
 
-修改/etc/mongodb.conf，添加replSet = rs0(3个节点保持一致)
-启动mongodb
-在其中一个节点上执行rs.initiate(),用来初始化复制集
-rs.">
+更多的配置如下
+&amp;quot; Configuration file for vim
+set">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -115,14 +109,14 @@ rs.">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/09/Mongodb-部署复制集/" title="Mongodb-部署复制集" itemprop="url">Mongodb-部署复制集</a>
+      <a href="/2015/12/10/Mac-配置vim/" title="Mac-配置vim" itemprop="url">Mac-配置vim</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T15:37:09.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    <time datetime="2015-12-09T17:17:00.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
     
   </p>
 </header>
@@ -131,38 +125,116 @@ rs.">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h2 id="u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><a href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6" class="headerlink" title="部署3个节点组成的复制集"></a>部署3个节点组成的复制集</h2><ul>
-<li>3台IP为<ul>
-<li>192.168.0.139 主机名：mongoname1</li>
-<li>192.168.0.140 主机名：mongoname2</li>
-<li>192.168.0.141 主机名：mongoname3</li>
+		<ul>
+<li>下载配色方案<a href="https://github.com/tomasr/molokai" target="_blank" rel="external">molokai</a></li>
+<li>在当前用户根目录下的<code>~/.vim</code>创建<code>colors</code>目录，将下载的配色方案中的<code>molokai.vim</code>移动到<code>~/.vim/colors</code>中</li>
+<li>在当前用户根目录下新建<code>.vimrc</code>，添加<code>colorscheme molokai</code><ul>
+<li><code>vimrc</code>可以把<code>/usr/share/vim/vimrc</code>拷贝过来</li>
 </ul>
 </li>
-<li>修改<code>/etc/mongodb.conf</code>，添加<code>replSet = rs0</code>(3个节点保持一致)</li>
-<li>启动<code>mongodb</code></li>
-<li><p>在其中一个节点上执行<code>rs.initiate()</code>,用来初始化复制集</p>
-<pre><code>rs.initiate(&quot;mongoname1&quot;)
-</code></pre></li>
-<li><p>查看当前配置信息</p>
-<pre><code>rs.conf()
-</code></pre></li>
-<li><p>将其他节点加入复制集</p>
-<pre><code>rs.add(&quot;mongoname2&quot;);
-rs.add(&quot;mongoname3&quot;);
-</code></pre></li>
-<li><p>查看配置</p>
-<pre><code>rs.conf()
-</code></pre></li>
-<li><p>查看复制集状态</p>
-<pre><code>rs.status()
-</code></pre></li>
-<li><p>如果在多个节点上执行了rs.initate(),可以做以下操作后重启mongodb</p>
-<pre><code>use local
-db.dropDatabase()
+<li><p>更多的配置如下</p>
+<pre><code>&quot; Configuration file for vim
+set modelines=0 &quot; CVE-2007-2438
+
+&quot; Normally we use vim-extensions. If you want true vi-compatibility
+&quot; remove change the following statements
+set nocompatible &quot; Use Vim defaults instead of 100% vi compatibility
+set backspace=2 &quot; more powerful backspacing
+
+&quot; Don&apos;t write backup file if vim is being called by &quot;crontab -e&quot;
+au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
+&quot; Don&apos;t write backup file if vim is being called by &quot;chpass&quot;
+au BufWrite /private/etc/pw.* set nowritebackup nobackup
+
+&quot; 语法高亮
+syntax on
+
+autocmd InsertLeave * se nocul
+autocmd InsertEnter * se cul
+&quot; 用浅色高亮当前行
+
+set smartindent
+&quot; 智能对齐
+
+set autoindent
+&quot; 自动对齐
+
+set confirm
+&quot; 在处理未保存或只读文件的时候，弹出确认
+
+set tabstop=4
+&quot; Tab键的宽度
+
+set softtabstop=4
+set shiftwidth=4
+&quot;  统一缩进为4
+
+set noexpandtab
+&quot; 不要用空格代替制表符
+
+set number
+&quot; 显示行号
+
+set number
+&quot; 显示行号
+
+set hlsearch
+set incsearch
+&quot; 搜索逐字符高亮
+
+set gdefault
+&quot; 行内替换
+
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
+&quot; 编码设置
+
+colorscheme molokai
+&quot; 设置颜色主题
+
+set guifont=Menlo:h16:cANSI
+&quot; 设置字体
+
+set langmenu=zn_CN.UTF-8
+set helplang=cn
+&quot; 语言设置
+
+set cmdheight=2
+&quot; 命令行（在状态行）的高度，默认为1,这里是2
+
+set ruler
+&quot; 在编辑过程中，在右下角显示光标位置的状态行
+
+set laststatus=2
+&quot; 总是显示状态行
+
+set showcmd
+&quot; 在状态行显示目前所执行的命令，未完成的指令片段亦会显示出来
+
+set scrolloff=3
+&quot; 光标移动到buffer的顶部和底部时保持3行距离
+
+set showmatch
+&quot; 高亮显示对应的括号
+
+set matchtime=5
+&quot; 对应括号高亮的时间（单位是十分之一秒）
+
+set autowrite
+&quot; 在切换buffer时自动保存当前文件
+
+set wildmenu
+&quot; 增强模式中的命令行自动完成操作
+
+set linespace=2
+&quot; 字符间插入的像素行数目
+
+set whichwrap=b,s,&lt;,&gt;,[,]
+&quot; 开启Normal或Visual模式下Backspace键，空格键，左方向键，右方向键，Insert或replace模式下左方向键，右方向键跳行的功能。
 </code></pre></li>
 </ul>
   
@@ -172,13 +244,13 @@ db.dropDatabase()
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
+  <a class="article-category-link" href="/categories/Mac/">Mac</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  <span></span> <a href="/tags/Mac/">Mac</a>
   </div>
 
 </div>
@@ -187,7 +259,7 @@ db.dropDatabase()
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2015/12/10/Mac-配置vim/" data-title="Mac-配置vim | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -201,18 +273,18 @@ db.dropDatabase()
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/09/Docker-install注意事项/" title="Docker-install注意事项">
+ <a href="/2015/12/10/SpringMVC-学习01/" title="SpringMVC-学习01">
   <strong>上一篇：</strong><br/>
   <span>
-  Docker-install注意事项</span>
+  SpringMVC-学习01</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/12/09/MongoDB-3-0-3用户认证/"  title="MongoDB-3.0.3用户认证">
+<a href="/2015/12/10/Tigase-操作/"  title="Tigase-操作">
  <strong>下一篇：</strong><br/> 
- <span>MongoDB-3.0.3用户认证
+ <span>Tigase-操作
 </span>
 </a>
 </div>
@@ -221,7 +293,7 @@ db.dropDatabase()
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/09/Mongodb-部署复制集/" data-title="Mongodb-部署复制集" data-url="http://im.yonglang.co/2015/12/09/Mongodb-部署复制集/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/10/Mac-配置vim/" data-title="Mac-配置vim" data-url="http://im.yonglang.co/2015/12/10/Mac-配置vim/"></div>
 </section>
 
 
@@ -231,7 +303,7 @@ db.dropDatabase()
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><span class="toc-number">1.</span> <span class="toc-text">部署3个节点组成的复制集</span></a></li></ol>
+ 
  
   </div>
 
