@@ -564,10 +564,151 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
 
 
 
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/Mongodb-启动/" title="Mongodb-启动" itemprop="url">Mongodb-启动</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:26:15.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><a href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55" class="headerlink" title="Mac下安装PHP的mongodb扩展"></a>Mac下安装PHP的mongodb扩展</h2><ul>
+<li><p><code>XAMPP/bin</code></p>
+<pre><code>sudo pecl install mongo
+</code></pre></li>
+<li><p><code>php.ini</code>添加</p>
+<pre><code>extension=mongo.so
+</code></pre></li>
+</ul>
+<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><ul>
+<li>创建<code>/data/db</code>目录<code>sudo mkdir -p /data/db</code></li>
+<li>设置<code>/data/db</code>目录权限<code>sudo chown -R 你的系统登录用户名 /data</code></li>
+<li>终端执行<code>mongod</code></li>
+<li>输入<code>mongo</code>便可连结到默认的数据库</li>
+</ul>
 
-  <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
-  </nav>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/Mongodb-启动/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Mongodb-启动/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/MySQL-修改数据库和表的编码/" title="MySQL-修改数据库和表的编码" itemprop="url">MySQL-修改数据库和表的编码</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:23:13.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li><p>查看数据库编码 </p>
+<pre><code>show variables like &apos;char%&apos;;
+</code></pre></li>
+<li><p>修改表编码 </p>
+<pre><code>ALTER TABLE &apos;table&apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
+</code></pre></li>
+<li><p>修改表字段编码 </p>
+<pre><code>ALTER TABLE &apos;test&apos; CHANGE &apos;name&apos; &apos;name&apos; VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
+</code></pre></li>
+<li><p>查看表编码 </p>
+<pre><code>show create table mytable
+</code></pre></li>
+<li><p>修改mysql默认编码</p>
+<pre><code>[mysqld]和[client]后添加character_set_server=utf8
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/MySQL/">MySQL</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/MySQL-修改数据库和表的编码/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/MySQL-修改数据库和表的编码/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
 
 </div>
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
