@@ -13,43 +13,37 @@
     
 
     
-    <meta name="description" content="zookeeper
-安装
-wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+    <meta name="description" content="zookeeper安装wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
 tar xvf zookeeper-3.4.8.tar.gz
 cd zookeeper-3.4.8
 cd conf
 cp zoo_sample.cfg zoo.cfg
 
 // zoo.cfg配置
-tickTime=20">
+tickTime=2000">
 <meta property="og:type" content="article">
 <meta property="og:title" content="zookeeper">
 <meta property="og:url" content="http://im.yonglang.co/2016/02/25/zookeeper/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="zookeeper
-安装
-wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+<meta property="og:description" content="zookeeper安装wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
 tar xvf zookeeper-3.4.8.tar.gz
 cd zookeeper-3.4.8
 cd conf
 cp zoo_sample.cfg zoo.cfg
 
 // zoo.cfg配置
-tickTime=20">
-<meta property="og:updated_time" content="2016-02-25T15:03:59.000Z">
+tickTime=2000">
+<meta property="og:updated_time" content="2016-02-25T15:09:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper">
-<meta name="twitter:description" content="zookeeper
-安装
-wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+<meta name="twitter:description" content="zookeeper安装wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
 tar xvf zookeeper-3.4.8.tar.gz
 cd zookeeper-3.4.8
 cd conf
 cp zoo_sample.cfg zoo.cfg
 
 // zoo.cfg配置
-tickTime=20">
+tickTime=2000">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -128,13 +122,11 @@ tickTime=20">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#zookeeper"><span class="toc-number">1.</span> <span class="toc-text">zookeeper</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#zookeeper"><span class="toc-number">1.</span> <span class="toc-text">zookeeper</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#zoo-cfg_u914D_u7F6E_u53C2_u6570"><span class="toc-number">1.2.</span> <span class="toc-text">zoo.cfg配置参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u542F_u52A8"><span class="toc-number">1.3.</span> <span class="toc-text">启动</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h1><ul>
-<li><p>安装</p>
-<pre><code>wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+		<h1 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h1><h2 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h2><pre><code>wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
 tar xvf zookeeper-3.4.8.tar.gz
 cd zookeeper-3.4.8
 cd conf
@@ -148,9 +140,7 @@ dataDir=/tmp/zookeeper
 clientPort=2181
 autopurge.purgeInterval=1
 server.1=localhost:2888:3888
-</code></pre></li>
-<li><p>zoo.cfg配置参数</p>
-<ul>
+</code></pre><h2 id="zoo-cfg_u914D_u7F6E_u53C2_u6570"><a href="#zoo-cfg_u914D_u7F6E_u53C2_u6570" class="headerlink" title="zoo.cfg配置参数"></a>zoo.cfg配置参数</h2><ul>
 <li>tickTime<blockquote>
 <p>zookeeper服务器之间或客户端与服务器之间维持心跳的时间间隔，每隔tickTime时间就会发一个心跳包</p>
 </blockquote>
@@ -179,31 +169,29 @@ server.3=192.168.1.214:2889:3889
 <p>server.A=B：C：D：<br>A是一个数字,表示这个是第几号服务器,B是这个服务器的ip地址<br>C第一个端口用来集群成员的信息交换,表示的是这个服务器与集群中的Leader服务器交换信息的端口<br>D是在leader挂掉时专门用来进行选举leader所用</p>
 </blockquote>
 </li>
-</ul>
-</li>
 <li>集群模式下需要在<code>dataDir</code>目录下创建<code>myid</code>文件，文件内容为<code>A</code>的值</li>
-<li>启动<code>bin/zkServer.sh start</code></li>
-<li>查看状态<code>bin/zkServer.sh status</code></li>
-<li><p>192.168.1.212状态</p>
-<pre><code>[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+</ul>
+<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><pre><code>bin/zkServer.sh start
+</code></pre><p>##查看状态</p>
+<pre><code>bin/zkServer.sh status
+-- 192.168.1.212状态 --
+[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
 ZooKeeper JMX enabled by default
 Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
 Mode: follower
-</code></pre></li>
-<li><p>192.168.1.213状态</p>
-<pre><code>[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+
+--192.168.1.213状态 --
+[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
 ZooKeeper JMX enabled by default
 Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
 Mode: leader
-</code></pre></li>
-<li><p>192.168.1.214状态</p>
-<pre><code>[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+
+-- 192.168.1.214状态 --
+[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
 ZooKeeper JMX enabled by default
 Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
 Mode: follower
-</code></pre></li>
-</ul>
-  
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -261,7 +249,7 @@ Mode: follower
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#zookeeper"><span class="toc-number">1.</span> <span class="toc-text">zookeeper</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#zookeeper"><span class="toc-number">1.</span> <span class="toc-text">zookeeper</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#zoo-cfg_u914D_u7F6E_u53C2_u6570"><span class="toc-number">1.2.</span> <span class="toc-text">zoo.cfg配置参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u542F_u52A8"><span class="toc-number">1.3.</span> <span class="toc-text">启动</span></a></li></ol></li></ol>
  
   </div>
 
