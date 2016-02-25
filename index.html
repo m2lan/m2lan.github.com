@@ -86,6 +86,364 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/02/25/zookeeper/" title="zookeeper" itemprop="url">zookeeper</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T15:03:14.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h1><ul>
+<li><p>安装</p>
+<pre><code>wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+tar xvf zookeeper-3.4.8.tar.gz
+cd zookeeper-3.4.8
+cd conf
+cp zoo_sample.cfg zoo.cfg
+
+// zoo.cfg配置
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/tmp/zookeeper
+clientPort=2181
+autopurge.purgeInterval=1
+server.1=localhost:2888:3888
+</code></pre></li>
+<li><p>zoo.cfg配置参数</p>
+<ul>
+<li>tickTime<blockquote>
+<p>zookeeper服务器之间或客户端与服务器之间维持心跳的时间间隔，每隔tickTime时间就会发一个心跳包</p>
+</blockquote>
+</li>
+<li>initLimit<blockquote>
+<p>配置zookeeper接受客户端初始化连接最长多少个心跳间隔时间,initLimit * tickTime = 20s,超过20s zookeeper服务器还没收到客户端返回信息，表示客户端连接失败</p>
+</blockquote>
+</li>
+<li>syncLimit<blockquote>
+<p>配置项标识Leader与Follower之间发送消息,请求和应答时长,最长不能超过多少个tickTime的时间长度,总的时间长度就是5*2000=10秒；</p>
+</blockquote>
+</li>
+<li>dataDir<blockquote>
+<p>Zookeeper保存数据的目录</p>
+</blockquote>
+</li>
+<li>clientPort<blockquote>
+<p>客户端连接zookeeper服务器的端口</p>
+</blockquote>
+</li>
+<li><p>server</p>
+<pre><code>server.1=192.168.1.212:2887:3887
+server.2=192.168.1.213:2888:3888
+server.3=192.168.1.214:2889:3889
+</code></pre><blockquote>
+<p>server.A=B：C：D：<br>A是一个数字,表示这个是第几号服务器,B是这个服务器的ip地址<br>C第一个端口用来集群成员的信息交换,表示的是这个服务器与集群中的Leader服务器交换信息的端口<br>D是在leader挂掉时专门用来进行选举leader所用</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>集群模式下需要在<code>dataDir</code>目录下创建<code>myid</code>文件，文件内容为<code>A</code>的值</li>
+<li>启动<code>bin/zkServer.sh start</code></li>
+<li>查看状态<code>bin/zkServer.sh status</code></li>
+<li><p>192.168.1.212状态</p>
+<pre><code>[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Mode: follower
+</code></pre></li>
+<li><p>192.168.1.213状态</p>
+<pre><code>[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Mode: leader
+</code></pre></li>
+<li><p>192.168.1.214状态</p>
+<pre><code>[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Mode: follower
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Apache/">Apache</a>►<a class="article-category-link" href="/categories/Apache/Zookeeper/">Zookeeper</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Apache/">Apache</a><a href="/tags/Zookeeper/">Zookeeper</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/25/zookeeper/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/zookeeper/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/25/kafka/" title="kafka" itemprop="url">kafka</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T15:01:53.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h1><blockquote>
+<p>kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。<br>通过zookeeper实现集群<br>kafka集群由多个kafka实例组成，每个实例称为broker</p>
+</blockquote>
+<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><pre><code>wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
+tar xzf kafka_2.11-0.9.0.0.tgz
+export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
+cd kafka_2.11-0.9.0.0
+</code></pre><h2 id="u542F_u52A8zookeeper"><a href="#u542F_u52A8zookeeper" class="headerlink" title="启动zookeeper"></a>启动zookeeper</h2><pre><code>bin/zookeeper-server-start.sh config/zookeeper.properties
+</code></pre><h2 id="u542F_u52A8kafka"><a href="#u542F_u52A8kafka" class="headerlink" title="启动kafka"></a>启动kafka</h2><pre><code>bin/kafka-server-start.sh config/server.properties
+</code></pre><h2 id="u521B_u5EFA_u4E00_u4E2Atopic"><a href="#u521B_u5EFA_u4E00_u4E2Atopic" class="headerlink" title="创建一个topic"></a>创建一个topic</h2><ul>
+<li><p>创建一个单分区、单副本的<code>test</code>话题</p>
+<pre><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+</code></pre></li>
+<li><p>获取<code>topic</code>列表</p>
+<pre><code>bin/kafka-topics.sh --list --zookeeper localhost:2181
+</code></pre></li>
+<li>当发布到一个不存在的<code>topics</code>时，可以配置自动创建而不是手动创建<h2 id="u53D1_u9001_u6D88_u606F"><a href="#u53D1_u9001_u6D88_u606F" class="headerlink" title="发送消息"></a>发送消息</h2></li>
+<li><p>运行生产者客户端，然后发送一些消息</p>
+<pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+</code></pre><h2 id="u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005"><a href="#u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005" class="headerlink" title="启动一个消费者"></a>启动一个消费者</h2></li>
+<li><p>运行消费者客户端，接收消息</p>
+<pre><code>bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
+</code></pre><h2 id="u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4"><a href="#u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4" class="headerlink" title="设置多个brokers集群"></a>设置多个brokers集群</h2></li>
+<li><p>为每个brokers创建一个配置文件</p>
+<pre><code>cp config/server.properties config/server-1.properties
+cp config/server.properties config/server-2.properties
+</code></pre></li>
+<li><p>配置文件内容</p>
+<ul>
+<li><p><code>config/server-1.properties</code></p>
+<pre><code>broker.id=1
+port=9093
+log.dir=/tmp/kafka-logs-1
+</code></pre></li>
+<li><p><code>config/server-2.properties</code></p>
+<pre><code>broker.id=2
+port=9094
+log.dir=/tmp/kafka-logs-2
+</code></pre><blockquote>
+<p><code>broker.id</code>是集群节点唯一名称</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>启动两个新节点</p>
+<pre><code>bin/kafka-server-start.sh config/server-1.properties &amp;
+bin/kafka-server-start.sh config/server-2.properties &amp;
+</code></pre></li>
+<li><p>创建有3个副本的新<code>topics</code></p>
+<pre><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-topic
+</code></pre></li>
+<li><p>在集群环境，查看<code>broker</code>都做了什么</p>
+<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
+
+Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
+    Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0,1
+</code></pre><blockquote>
+<p><code>leader</code>负责节点所有读取和写入指定分区<br><code>replicas</code>复制此分区节点列表日志<br><code>isr</code>集中同步副本</p>
+</blockquote>
+</li>
+<li><p>查看单复制集下的<code>topics</code></p>
+<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
+
+Topic:test    PartitionCount:1 ReplicationFactor:1 Configs:
+    Topic: test    Partition: 0 Leader: 0 Replicas: 0 Isr: 0
+</code></pre></li>
+<li><p>给集群中的<code>topics</code>发送一些消息</p>
+<pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-topic
+</code></pre></li>
+<li><p>接收消息</p>
+<pre><code>bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic my-topic
+</code></pre></li>
+<li><p>测试容错性，杀掉<code>server-1.properties</code></p>
+<pre><code>ps aux|grep server-1.properties
+kill -9 PID
+</code></pre></li>
+<li><p>查看</p>
+<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
+
+Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
+    Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0
+</code></pre></li>
+</ul>
+<h2 id="u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E"><a href="#u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E" class="headerlink" title="使用kafka连接导入/导出数据"></a>使用kafka连接导入/导出数据</h2><ul>
+<li><p>使用<code>kafka</code>的<code>connect</code>工具导入/导出数据</p>
+<ul>
+<li><p>首先需要建立一些数据来测试</p>
+<pre><code>echo -e &quot;foo\nbar&quot; &gt; test.txt
+
+bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
+</code></pre></li>
+<li><p>使用之前启动默认的本地集群配置并创建两个连接，第一个是源连接器，它从输入文本读取消息，并各自产生的一个输出文件中的一行。</p>
+<ul>
+<li>连接器开始读取<code>test.txt</code>产生一个<code>topics</code>为<code>connect-test</code></li>
+<li>接收端连接器应该开始从<code>topic</code>读取消息<code>connect-test</code>,并写入到<code>test.sink.txt</code></li>
+<li><p>查看<code>topics</code>列表</p>
+<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-topics.sh --list --zookeeper localhost:2181
+__consumer_offsets
+connect-test
+my-topic
+test
+test2
+</code></pre></li>
+<li><p>启动一个消费者控制台查看<code>topic</code>为<code>connect-test</code>的数据</p>
+<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
+{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;foo&quot;}
+{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;bar&quot;}
+</code></pre></li>
+<li><p>重新打开一个终端，给<code>test.txt</code>中追加数据，再看消费者控制台的数据</p>
+<pre><code>echo &quot;Hello world&quot; &gt;&gt; test.txt
+</code></pre></li>
+<li><p>消费者控制台数据为</p>
+<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
+{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;foo&quot;}
+{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;bar&quot;}
+{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;Hello world&quot;}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><ul>
+<li><p>生产者API</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
+    &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;
+    &lt;version&gt;0.9.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>  参考: <a href="http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html" target="_blank" rel="external">生产者doc</a></p>
+</li>
+<li><p>消费者API</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
+    &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;
+    &lt;version&gt;0.9.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>  参考: <a href="http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html" target="_blank" rel="external">消费者doc</a></p>
+</li>
+</ul>
+<h2 id="error"><a href="#error" class="headerlink" title="error"></a>error</h2><ul>
+<li><code>org.apache.kafka.common.errors.TimeoutException: Batch Expired</code>修改<code>config/server.properties</code>文件的<code>advertised.host.name=IP地址</code></li>
+</ul>
+<h2 id="server-properties_u914D_u7F6E_u9879"><a href="#server-properties_u914D_u7F6E_u9879" class="headerlink" title="server.properties配置项"></a>server.properties配置项</h2><pre><code>broker.id=0
+listeners=PLAINTEXT://:9092
+advertised.host.name=192.168.1.211
+num.network.threads=3
+
+num.io.threads=8
+socket.send.buffer.bytes=102400
+socket.receive.buffer.bytes=102400
+socket.request.max.bytes=104857600
+log.dirs=/tmp/kafka-logs
+num.partitions=1
+num.recovery.threads.per.data.dir=1
+log.retention.hours=168
+log.segment.bytes=1073741824
+log.retention.check.interval.ms=300000
+log.cleaner.enable=false
+zookeeper.connect=localhost:2181
+zookeeper.connection.timeout.ms=6000
+auto.create.topics.enable=true
+default.replication.factor=3
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Apache/">Apache</a>►<a class="article-category-link" href="/categories/Apache/Kafka/">Kafka</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Apache/">Apache</a><a href="/tags/Kafka/">Kafka</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/25/kafka/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/kafka/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/12/10/Shell-redirect/" title="Shell-redirect" itemprop="url">Shell-redirect</a>
   </h1>
   <p class="article-author">By
@@ -1907,409 +2265,6 @@ return sortArray;
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" title="Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略" itemprop="url">Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T17:39:28.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="u7248_u672C_u56DE_u9000"><a href="#u7248_u672C_u56DE_u9000" class="headerlink" title="版本回退"></a>版本回退</h2><ul>
-<li><p>如果信息显示过多的话,可以使用<code>git log --pretty=oneline</code></p>
-<pre><code>dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
-9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
-2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.txt
-</code></pre></li>
-<li>如果想回退到上个版本,可以使用<code>git reset --hard HEAD^</code>,如果想回退前2个版本<code>git reset --hard HEAD^^</code>,多个版本添加多个^。如果回退前100个版本,可以使用<code>git reset --hard HEAD~100</code></li>
-<li><p>如果想回退到最新版本<code>git reset –hard</code>版本号,查看最新版本版本号<code>git reflog</code></p>
-<pre><code>9bdf0e5 HEAD@{0}: reset: moving to HEAD~2
-5b95f49 HEAD@{1}: commit: a.txt
-28cb7d2 HEAD@{2}: commit: a.txt
-9bdf0e5 HEAD@{3}: reset: moving to HEAD^
-dfffd94 HEAD@{4}: commit: update a.txt
-9bdf0e5 HEAD@{5}: commit: update a.txt
-2a474cb HEAD@{6}: commit (initial): add a.txt
-</code></pre></li>
-<li>执行<code>git reset --hard 9bdf0e5</code><h2 id="u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6"><a href="#u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6" class="headerlink" title="撤销修改和删除文件"></a>撤销修改和删除文件</h2><h3 id="u64A4_u9500_u4FEE_u6539"><a href="#u64A4_u9500_u4FEE_u6539" class="headerlink" title="撤销修改"></a>撤销修改</h3></li>
-<li>在我未提交之前，我发现添加的内容有误，所以我得马上恢复以前的版本，现在我可以有如下几种方法可以做修改：<ul>
-<li>第一：如果我知道要删掉那些内容的话，直接手动更改去掉那些需要的文件，然后add添加到暂存区，最后commit掉。</li>
-<li>第二：我可以按以前的方法直接恢复到上一个版本。使用 <code>git reset –hard HEAD^</code></li>
-</ul>
-</li>
-<li><p>但是现在我不想使用上面的2种方法，我想直接想使用撤销命令该如何操作呢？首先在做撤销之前，我们可以先用<code>git status</code>查看下当前的状态。如下所示：</p>
-<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git status
-# On branch master
-# Changes not staged for commit:
-#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
-#
-#    modified:   a.txt
-#
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre></li>
-<li><p>可以发现，Git会告诉你，<code>git checkout -- file</code> 可以丢弃工作区的修改，如下命令：<code>git checkout -- a.txt</code>,如下所示：</p>
-<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git checkout -- a.txt
-AndytekiMacBook-Air:demo1 yonglang$ 
-AndytekiMacBook-Air:demo1 yonglang$
-AndytekiMacBook-Air:demo1 yonglang$
-AndytekiMacBook-Air:demo1 yonglang$ cat a.txt
-aaaaaaaaaaaaaaa
-bbbbbbbbbbbbbbb
-ccccccccccccccc
-ddddddddddddddd
-</code></pre></li>
-<li><p>命令<code>git checkout -- a.txt</code>意思就是，把a.txt文件在工作区做的修改全部撤销，这里有2种情况，如下：</p>
-<pre><code>- readme.txt自动修改后，还没有放到暂存区，使用 撤销修改就回到和版本库一模一样的状态。
-- 另外一种是readme.txt已经放入暂存区了，接着又作了修改，撤销修改就回到添加暂存区后的状态。
-</code></pre></li>
-<li><p>对于第二种情况，我想我们继续做demo来看下，假如现在我对于<code>readme.txt</code>添加一行 内容为<code>6666666666666</code>，我<code>git add</code>增加到暂存区后，接着添加内容<code>7777777</code>，我想通过撤销命令让其回到暂存区后的状态。如下所示：</p>
-<pre><code>AndytekiMacBook-Air:demo1 yonglang$ vim a.txt
-AndytekiMacBook-Air:demo1 yonglang$ cat a.txt 
-aaaaaaaaaaaaaaa
-bbbbbbbbbbbbbbb
-ccccccccccccccc
-ddddddddddddddd
-eeeeeeeeeeeeeee
-AndytekiMacBook-Air:demo1 yonglang$ git add a.txt 
-AndytekiMacBook-Air:demo1 yonglang$ vim a.txt 
-AndytekiMacBook-Air:demo1 yonglang$ 
-AndytekiMacBook-Air:demo1 yonglang$ cat a.txt 
-aaaaaaaaaaaaaaa
-bbbbbbbbbbbbbbb
-ccccccccccccccc
-ddddddddddddddd
-eeeeeeeeeeeeeee
-fffffffffffffff
-AndytekiMacBook-Air:demo1 yonglang$ git checkout -- a.txt 
-AndytekiMacBook-Air:demo1 yonglang$ cat a.txt 
-aaaaaaaaaaaaaaa
-bbbbbbbbbbbbbbb
-ccccccccccccccc
-ddddddddddddddd
-eeeeeeeeeeeeeee
-</code></pre><h3 id="u5220_u9664_u6587_u4EF6"><a href="#u5220_u9664_u6587_u4EF6" class="headerlink" title="删除文件"></a>删除文件</h3></li>
-<li><p>假如我现在版本库目录添加一个文件<code>c.txt</code>,然后提交。如下：</p>
-<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git add c.txt
-AndytekiMacBook-Air:demo1 yonglang$ git commit -m &apos;添加c.txt&apos;
-[master 2cd7d93] 添加c.txt
-1 file changed, 0 insertions(+), 0 deletions(-)
-create mode 100644 c.txt
-AndytekiMacBook-Air:demo1 yonglang$ rm c.txt
-AndytekiMacBook-Air:demo1 yonglang$ git status
-# On branch master
-# Changes not staged for commit:
-#   (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)
-#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working         directory)
-#
-#    deleted:    c.txt
-#
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre></li>
-<li><p>如上：一般情况下，可以直接在文件目录中把文件删了，或者使用如上<code>rm</code>命令：<code>rm c.txt</code>，如果我想彻底从版本库中删掉了此文件的话，可以再执行<code>commit</code>命令 提交掉，现在目录是这样的，</p>
-<pre><code> AndytekiMacBook-Air:demo1 yonglang$ ls -la
-total 16
-drwxr-xr-x   5 yonglang  staff  170 11  5 18:14 .
-drwxr-xr-x   3 yonglang  staff  102 11  5 17:40 ..
-drwxr-xr-x  13 yonglang  staff  442 11  5 18:14 .git
--rw-r--r--   1 yonglang  staff   80 11  5 18:09 a.txt
--rw-r--r--   1 yonglang  staff    6 11  5 17:56 b.txt
-</code></pre></li>
-<li><p>只要没有<code>commit</code>之前，如果我想在版本库中恢复此文件如何操作呢？可以使用如下命令 <code>git checkout -- c.txt</code>，如下所示：</p>
-<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git checkout -- c.txt
-AndytekiMacBook-Air:demo1 yonglang$ ls -la
-total 16
-drwxr-xr-x   6 yonglang  staff  204 11  5 18:18 .
-drwxr-xr-x   3 yonglang  staff  102 11  5 17:40 ..
-drwxr-xr-x  13 yonglang  staff  442 11  5 18:18 .git
--rw-r--r--   1 yonglang  staff   80 11  5 18:09 a.txt
--rw-r--r--   1 yonglang  staff    6 11  5 17:56 b.txt
--rw-r--r--   1 yonglang  staff    0 11  5 18:18 c.txt
-</code></pre><h2 id="u8FDC_u7A0B_u4ED3_u5E93"><a href="#u8FDC_u7A0B_u4ED3_u5E93" class="headerlink" title="远程仓库"></a>远程仓库</h2></li>
-<li>在<code>github</code>上创建一个<code>git</code>库，本地执行<code>git remote add origin http://xxxx.git</code></li>
-<li>将本地代码推动到远程仓库的master分支<code>git push -u origin master</code>，加<code>-u</code>首次会和远程<code>master</code>分支关联，后面再使用就不用加了。</li>
-<li>创建本地分支<code>git checkout -b dev == git branch dev,git checkout dev</code>,并切换到<code>dev</code>分支,这时添加文件<code>p.txt</code>后<code>git add p.txt,git commit -m &#39;add p.txt in dev&#39;</code>,切换到<code>master</code>分支再看，发现没有<code>p.txt</code></li>
-<li>合并<code>dev</code>分支到<code>master</code>分支,<code>git checkout master</code>切换到<code>master</code>分支后执行<code>git merge dev</code></li>
-<li>删除分支<code>git branch -d dev</code></li>
-<li>查看分支<code>git branch</code></li>
-<li>创建分支<code>git branch name</code></li>
-<li>切换分支<code>git checkout name</code></li>
-<li>创建+切换分支<code>git checkout –b name</code></li>
-<li>合并某分支到当前分支<code>git merge name</code><h2 id="u5206_u652F_u7BA1_u7406_u7B56_u7565"><a href="#u5206_u652F_u7BA1_u7406_u7B56_u7565" class="headerlink" title="分支管理策略"></a>分支管理策略</h2></li>
-<li><p>通常合并分支时，<code>git</code>一般使用<code>Fast forward</code>模式，在这种模式下，删除分支后，会丢掉分支信息，现在我们来使用带参数<code>–no-ff</code>来禁用<code>Fast forward</code>模式。首先我们来做<code>demo</code>演示下:</p>
-<ul>
-<li>创建一个<code>dev</code>分支。</li>
-<li>修改<code>readme.txt</code>内容。</li>
-<li>添加到暂存区。</li>
-<li>切换回主分支<code>(master)</code>。</li>
-<li>合并<code>dev</code>分支，使用命令<code>git merge –no-ff -m “注释” dev</code></li>
-<li><p>查看历史记录</p>
-<pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout -b dev
-Switched to a new branch &apos;dev&apos;
-AndytekiMacBook-Air:git-test yonglang$ vim a.txt 
-AndytekiMacBook-Air:git-test yonglang$ git add a.txt 
-AndytekiMacBook-Air:git-test yonglang$ git commit -m &apos;dev分支添加&apos;
-[dev 3cfba59] dev分支添加
-1 file changed, 1 insertion(+)
-AndytekiMacBook-Air:git-test yonglang$ git checkout master
-Switched to branch &apos;master&apos;
-AndytekiMacBook-Air:git-test yonglang$ git merge --no-ff -m &apos;merge with no-ff&apos; dev
-Merge made by the &apos;recursive&apos; strategy.
-a.txt | 1 +
-1 file changed, 1 insertion(+)
-AndytekiMacBook-Air:git-test yonglang$ git branch -d dev
-Deleted branch dev (was 3cfba59).
-AndytekiMacBook-Air:git-test yonglang$ git branch
-* master
-AndytekiMacBook-Air:git-test yonglang$ git log --graph --pretty=oneline --abbrev-commit
-*   98a6342 merge with no-ff
-|\  
-| * 3cfba59 dev分支添加
-|/  
-* 4c3acaa dev分支添加
-*   913ac13 fix conflicts
-|\  
-| * 5138b0d 在test分支下添加hello world3
-* | 5a63888 在master分支上添加hello world4
-|/  
-* 1beff04 dev分支添加hello world2
-* 33a4fad add a.txt
-</code></pre></li>
-<li>我们会发现被删除的分支信息还存在。</li>
-<li>分支策略：首先master主分支应该是非常稳定的，也就是用来发布新版本，一般情况下不允许在上面干活，干活一般情况下在新建的dev分支上干活，干完后，比如上要发布，或者说dev分支代码稳定后可以合并到主分支master上来。<h2 id="bug_u5206_u652F"><a href="#bug_u5206_u652F" class="headerlink" title="bug分支"></a>bug分支</h2></li>
-</ul>
-</li>
-<li>在开发中，会经常碰到<code>bug</code>问题，那么有了<code>bug</code>就需要修复，在<code>Git</code>中，分支是很强大的，每个<code>bug</code>都可以通过一个临时分支来修复，修复完成后，合并分支，然后将临时的分支删除掉。</li>
-<li><p>比如我在开发中接到一个<code>404bug</code>时候，我们可以创建一个<code>404分支</code>来修复它，但是，当前的<code>dev分支</code>上的工作还没有提交。比如如下：</p>
-<pre><code>AndytekiMacBook-Air:git-test yonglang$ git status
-# On branch dev
-# Changes not staged for commit:
-#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
-#
-#    modified:   a.txt
-#
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre></li>
-<li><p>并不是我不想提交，而是工作进行到一半时候，我们还无法提交，比如我这个分支<code>bug</code>要2天完成，但是我<code>404bug</code>需要5个小时内完成。怎么办呢？还好，<code>Git</code>还提供了一个<code>stash</code>功能，可以把当前工作现场 ”隐藏起来”，等以后恢复现场后继续工作。如下：</p>
-<pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash
-Saved working directory and index state WIP on dev: f4d6d93 merge
-HEAD is now at f4d6d93 merge
-AndytekiMacBook-Air:git-test yonglang$ 
-AndytekiMacBook-Air:git-test yonglang$ 
-AndytekiMacBook-Air:git-test yonglang$ 
-AndytekiMacBook-Air:git-test yonglang$ git status
-# On branch dev
-nothing to commit, working directory clean
-</code></pre></li>
-<li><p>所以现在我可以通过创建<code>404分支</code>来修复<code>bug</code>了。首先我们要确定在那个分支上修复<code>bug</code>，比如我现在是在主分支<code>master</code>上来修复的，现在我要在<code>master</code>分支上创建一个临时分支，演示如下：</p>
-<pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout master
-Switched to branch &apos;master&apos;
-AndytekiMacBook-Air:git-test yonglang$ git checkout -b 404
-Switched to a new branch &apos;404&apos;
-AndytekiMacBook-Air:git-test yonglang$ vim a.txt 
-AndytekiMacBook-Air:git-test yonglang$ cat a.txt 
-hello world
-hello world2
-hello world4
-hello world3
-hello world4
-hello world5
-hello world9
-hello world6
-hello world404
-AndytekiMacBook-Air:git-test yonglang$ git add a.txt 
-AndytekiMacBook-Air:git-test yonglang$ git commit -m &apos;add 404&apos;
-[404 d1d5dac] add 404
-1 file changed, 1 insertion(+)
-</code></pre></li>
-<li><p>修复完成后，切换到<code>master</code>分支上，并完成合并，最后删除<code>404</code>分支。演示如下：</p>
-<pre><code> AndytekiMacBook-Air:git-test yonglang$ git checkout master
-Switched to branch &apos;master&apos;
-AndytekiMacBook-Air:git-test yonglang$ git merge --no-ff -m &apos;merge 404&apos; 404
-Merge made by the &apos;recursive&apos; strategy.
-a.txt | 1 +
-1 file changed, 1 insertion(+)
-AndytekiMacBook-Air:git-test yonglang$ cat a.txt 
-hello world
-hello world2
-hello world4
-hello world3
-hello world4
-hello world5
-hello world9
-hello world6
-hello world404
-AndytekiMacBook-Air:git-test yonglang$ git branch -d 404
-Deleted branch 404 (was d1d5dac).
-</code></pre></li>
-<li><p>现在，我们回到<code>dev分支</code>上干活了。</p>
-<pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout dev
-Switched to branch &apos;dev&apos;
-AndytekiMacBook-Air:git-test yonglang$ git status
-# On branch dev
-nothing to commit, working directory clean
-</code></pre></li>
-<li><p>工作区是干净的，那么我们工作现场去哪里呢？我们可以使用命令<code>git stash list</code>来查看下。如下：</p>
-<pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash list
-stash@{0}: WIP on dev: f4d6d93 merge
-</code></pre></li>
-<li><p>工作现场还在，<code>Git</code>把<code>stash</code>内容存在某个地方了，但是需要恢复一下，可以使用如下2个方法：</p>
-<ul>
-<li><code>git stash apply</code>恢复，恢复后，<code>stash</code>内容并不删除，你需要使用命令<code>git stash drop</code>来删除。</li>
-<li><p>另一种方式是使用<code>git stash pop</code>,恢复的同时把<code>stash</code>内容也删除了。</p>
-<pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash apply
-# On branch dev
-# Changes not staged for commit:
-#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
-#
-#    modified:   a.txt
-#
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-AndytekiMacBook-Air:git-test yonglang$ cat a.txt 
-hello world
-hello world2
-hello world4
-hello world3
-hello world4
-hello world5
-hello world9
-hello world6
-hello world7
-AndytekiMacBook-Air:git-test yonglang$ git stash list
-stash@{0}: WIP on dev: f4d6d93 merge
-AndytekiMacBook-Air:git-test yonglang$ git stash drop
-Dropped refs/stash@{0} (8f8712bf68de241eca322f99e00a00219accc089)
-AndytekiMacBook-Air:git-test yonglang$ git stash list
-AndytekiMacBook-Air:git-test yonglang$
-</code></pre><h2 id="u66F4_u6539_u8FDC_u7A0B_u4ED3_u5E93_u5730_u5740"><a href="#u66F4_u6539_u8FDC_u7A0B_u4ED3_u5E93_u5730_u5740" class="headerlink" title="更改远程仓库地址"></a>更改远程仓库地址</h2><pre><code>git remote set-url origin remote_git_address
-</code></pre><h2 id="u67E5_u770B_u6587_u4EF6_u6BCF_u4E00_u884C_u7684_u4F5C_u8005_u662Fwho"><a href="#u67E5_u770B_u6587_u4EF6_u6BCF_u4E00_u884C_u7684_u4F5C_u8005_u662Fwho" class="headerlink" title="查看文件每一行的作者是who"></a>查看文件每一行的作者是who</h2><pre><code>git blame [file_name]
-</code></pre><h2 id="u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4"><a href="#u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4" class="headerlink" title="检查丢失的提交"></a>检查丢失的提交</h2></li>
-</ul>
-</li>
-<li><code>git fsck --lost-found</code>这里你可以看到一个丢失的提交。你可以通过<code>git show [commit_hash]</code>查看提交的更改或者通过运行<code>git merge[commit_hash]</code>命令进行恢复。</li>
-<li><code>gitfsck</code>跟<code>reflog</code>命令相比有一个优点。假设你删除了一个远程分支，然后<code>clone</code>了这个库。用<code>fsck</code>命令你可以找到并且恢复这个删除的远程分支。</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Git/">Git</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Git/">Git</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Git-ssh连接/" title="Git-ssh连接" itemprop="url">Git-ssh连接</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T17:38:26.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ul>
-<li><code>git ssh</code>连接，运行<code>ssh-keygen</code>一路回车，在当前用户目录<code>~/.ssh/</code>生成两个文件<code>id_rsa</code>和<code>id_rsa.pub</code>，将<code>id_rsa.pub</code>内容添加到<code>git</code>服务器。</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Git/">Git</a>►<a class="article-category-link" href="/categories/Git/ssh/">ssh</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Git/">Git</a><a href="/tags/ssh/">ssh</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Git-ssh连接/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Git-ssh连接/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -2328,11 +2283,19 @@ AndytekiMacBook-Air:git-test yonglang$
 		<ul>
 		
 		  
+			<li><a href="/categories/Apache/" title="Apache">Apache<sup>2</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/Docker/" title="Docker">Docker<sup>3</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Git/" title="Git">Git<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Apache/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
 		  
 		
 		  
@@ -2376,6 +2339,10 @@ AndytekiMacBook-Air:git-test yonglang$
 		  
 		
 		  
+			<li><a href="/categories/Apache/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/Git/ssh/" title="ssh">ssh<sup>1</sup></a></li>
 		  
 		
@@ -2387,7 +2354,7 @@ AndytekiMacBook-Air:git-test yonglang$
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Git/" style="font-size: 16px;">Git</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 14px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Objective-c/" style="font-size: 18px;">Objective-c</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 12px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 16px;">Tigase</a> <a href="/tags/XMPP/" style="font-size: 16px;">XMPP</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+       <a href="/tags/Apache/" style="font-size: 12px;">Apache</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Git/" style="font-size: 16px;">Git</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 14px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Objective-c/" style="font-size: 18px;">Objective-c</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 12px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 16px;">Tigase</a> <a href="/tags/XMPP/" style="font-size: 16px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
     </div>
   </div>
 
@@ -2456,7 +2423,7 @@ AndytekiMacBook-Air:git-test yonglang$
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
 		
 		<a href="/about" target="_blank" title="M2">M2</a>
 		
