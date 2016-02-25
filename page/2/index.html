@@ -1,0 +1,2886 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
+  <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
+  
+    <title>知识记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="M2">
+    
+
+    
+    <meta name="description" content="Tigase安装、部署、插件编写及其它">
+<meta property="og:type" content="website">
+<meta property="og:title" content="知识记录">
+<meta property="og:url" content="http://im.yonglang.co/page/2/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="Tigase安装、部署、插件编写及其它">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="知识记录">
+<meta name="twitter:description" content="Tigase安装、部署、插件编写及其它">
+<meta name="twitter:creator" content="@763960267">
+
+    
+    <link rel="alternative" href="/atom.xml" title="知识记录" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="知识记录" title="知识记录"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="知识记录">知识记录</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章列表</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					<!--
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" st-default-search-input />
+						<input type="hidden" name="q" value="site:im.yonglang.co" class="st-default-search-input">
+					</form>
+					-->
+					<input type="text" class="st-default-search-input">
+					</li>
+				</ul>
+			</nav>			
+</div>
+<a href="https://github.com/m2lan"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Shell-case/" title="Shell-case" itemprop="url">Shell-case</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:16:58.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>#!/bin/bash
+#case
+
+NAME=&quot;john&quot;
+
+case ${NAME} in
+    &quot;john&quot; )
+        echo &quot;hahahha --- john&quot;
+        ;;
+    &quot;johnx&quot; )
+        echo &quot;huhuhuhu ---- johnx&quot;
+        ;;
+esac
+
+echo &quot;请输入1-3&quot;
+read INPUT
+case $INPUT in
+    1 )
+        echo &quot;你输入了1&quot;;;
+    2 )
+        echo &quot;你输入了2&quot;;;
+    3 )
+        echo &quot;你输入了3&quot;;;
+    * ) # 当以上条件不匹配，则会进入到这里
+        echo &quot;你的输出超出了范围&quot;;;
+esac
+
+option=&quot;${1}&quot;
+case $option in
+    -f ) FILE=&quot;${2}&quot;
+        echo &quot;file name is $FILE&quot;;;
+    -d ) DIR=&quot;${2}&quot;
+        echo &quot;dir name is $DIR&quot;;;
+    * )
+        echo &quot;`basename ${0}`: usage: [-f file] | [-d directory]&quot;
+        exit 1;; # 脚本运行的返回值 exit 0 表示成功， exit 1 表示失败
+esac
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Shell/">Shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Shell-case/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-case/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Shell-包含文件/" title="Shell-包含文件" itemprop="url">Shell-包含文件</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:16:28.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code># shell 中包含外部脚本，可以使用
+# 1. . filename
+# 2. source filename
+# 现在新建一个脚本test.sh，内容如下
+
+USERNAME=&quot;john&quot;
+PASSWORD=&quot;123456&quot;
+
+# 再新建一个include.sh，内容如下
+
+#!/bin/bash
+
+. ./test.sh
+
+echo $USERNAME  # 输出john
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Shell/">Shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Shell-包含文件/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-包含文件/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Shell-算术运算符-字符串操作/" title="Shell-算术运算符+字符串操作" itemprop="url">Shell-算术运算符+字符串操作</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:15:16.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>#!/bin/bash
+#算术运算符
+
+A=10
+B=$(($A+20))
+echo ${B}
+
+echo $((10+10))
+
+# 表达式和运算符之间要存在空格,不能写成2+2
+num=`expr 2 + 2`
+echo $num
+
+echo $((10/10))
+echo `expr 10 / 10`
+echo $((10*10))
+
+# 乘法*号前面添加反斜杠才能进行运算
+echo `expr 10 \* 10`
+</code></pre><p>==========</p>
+<pre><code>#!/bin/bash
+#string
+
+STRING=&quot;hello world&quot;
+SUBSTRING=&quot;wqpeowqpeowq xxxworldxxxx world&quot;
+STRING2=&quot;QQQQQ WWWWWW BBBBBB EEEEEE&quot;
+
+#字符串替换
+echo ${STRING[@]/world/world!}
+
+#字符串替换所有
+echo ${SUBSTRING[@]//world/world!}
+
+#字符串截取 ${STRING:n} 从第N个位置到结尾
+echo ${STRING:2}
+
+#字符串截取 ${STRING:POS:LEN} 从从第POS位置开始截取LEN长度的字符
+echo ${STRING:2:5}
+
+#删除字符串中的字符，和空替换 
+echo ${STRING2[@]// WWWWWW}
+
+#将字符串开头的字符替换
+echo ${STRING2[@]/#QQQQQ/MMMMM}
+
+#将字符串结尾的字符替换
+echo ${STRING2[@]/%EEEEEE/PPPPP}
+
+#将字符串提出为shell命令
+echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Shell/">Shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Shell-算术运算符-字符串操作/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-算术运算符-字符串操作/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Shell-变量/" title="Shell-变量" itemprop="url">Shell-变量</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:11:37.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>#!/bin/bash
+
+# 变量 if---else---fi
+# 变量赋值不能有空格
+# USERNAME = &quot;zhangsan&quot; error
+# 使用定义过的变量 前面加上美元符$
+USERNAME=&quot;zhangsan&quot;
+
+# 重新定义变量
+# USERNAME=&quot;hahhahaha&quot;
+# 
+# 变量可以定义为只读的 如下：
+# 
+# URL=&quot;http://www.baidu.com&quot;
+# readonly URL
+# URL=&quot;http://www.google.com.hk&quot; --- error 
+# echo $URL
+# 
+# 删除变量 使用unset，不能删除只读变量
+# unset USERNAME
+# echo ${USERNAME} --- 输出为空
+# 
+if [ $USERNAME == &quot;zhangsan&quot; ]; then
+    echo &quot;ok $USERNAME&quot;
+    echo ${USERNAME}  # 返回变量值，更可观
+    echo $USERNAME    # 返回变量值
+else
+    echo &quot;buok&quot;
+fi
+
+# 特殊变量
+# $ 表示当前shell的进程ID，即PID
+# 
+echo $$
+echo $?
+</code></pre><table>
+<thead>
+<tr>
+<th>变量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$0</td>
+<td>当前脚本文件名</td>
+</tr>
+<tr>
+<td>$n</td>
+<td>传递给脚本或者函数的参数，n表示一个数字，如：第一个参数$1,第二个参数$2</td>
+</tr>
+<tr>
+<td>$#</td>
+<td>传递给脚本的参数个数</td>
+</tr>
+<tr>
+<td>$*</td>
+<td>传递给脚本或者函数的所有参数</td>
+</tr>
+<tr>
+<td>$@</td>
+<td>传递给脚本或者函数的所有参数</td>
+</tr>
+<tr>
+<td>$?</td>
+<td>上个命令的退出状态，或函数的返回值</td>
+</tr>
+<tr>
+<td>$$</td>
+<td>当前shell的进程ID，即PID</td>
+</tr>
+</tbody>
+</table>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Shell/">Shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Shell-变量/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-变量/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Shell-helloworld/" title="Shell-helloworld" itemprop="url">Shell-helloworld</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:11:03.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>#!/bin/bash
+# &quot;#!&quot;是一个约定的标记，用来告诉系统这个脚本需要使用什么解释器来执行，使用哪一种shell
+# 
+echo &quot;hello world!&quot;;
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Shell/">Shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Shell-helloworld/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-helloworld/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/OC-检测视图退出/" title="OC-检测视图退出" itemprop="url">OC-检测视图退出</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:10:15.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+       // back button was pressed.  We know this is true because self is no longer
+       // in the navigation stack.  
+    }
+    [super viewWillDisappear:animated];
+}
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Objective-c/">Objective-c</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Objective-c/">Objective-c</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/OC-检测视图退出/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/OC-检测视图退出/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/OC-UIButton中设置image大小/" title="OC-UIButton中设置image大小" itemprop="url">OC-UIButton中设置image大小</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:08:49.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>#import &lt;UIKit/UIKit.h&gt;
+
+@interface UIImage (Category)
+
+- (UIImage*)transformWidth:(CGFloat)width
+                    height:(CGFloat)height;
+
+@end
+
+
+#import &quot;UIImage+Category.h&quot;
+
+@implementation UIImage (Category)
+
+- (UIImage*)transformWidth:(CGFloat)width
+               height:(CGFloat)height {
+
+    CGFloat destW = width;
+    CGFloat destH = height;
+    CGFloat sourceW = width;
+    CGFloat sourceH = height;
+
+    CGImageRef imageRef = self.CGImage;
+    CGContextRef bitmap = CGBitmapContextCreate(NULL,
+                                               destW,
+                                               destH,
+                                               CGImageGetBitsPerComponent(imageRef),
+                                               4*destW,
+                                               CGImageGetColorSpace(imageRef),
+                                               (kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst));
+
+    CGContextDrawImage(bitmap, CGRectMake(0, 0, sourceW, sourceH), imageRef);
+
+    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
+    UIImage *resultImage = [UIImage imageWithCGImage:ref];
+    CGContextRelease(bitmap);
+    CGImageRelease(ref);
+
+    return resultImage;
+}
+
+@end
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Objective-c/">Objective-c</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Objective-c/">Objective-c</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/OC-UIButton中设置image大小/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/OC-UIButton中设置image大小/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/IOS-创建文件目录/" title="IOS-创建文件目录" itemprop="url">IOS-创建文件目录</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:07:32.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>//
+//  ViewController.m
+//  chat-view
+//
+//  Created by yonglang on 14/12/4.
+//  Copyright (c) 2014年 yonglang. All rights reserved.
+//
+
+#import &quot;ViewController.h&quot;
+
+static NSString *homeDir = nil;
+
+@interface ViewController ()
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    NSLog(@&quot;audioDir: %@&quot;, [self createFileDirectory]);
+}
+
+- (NSString *)createFileDirectory {
+    if (!homeDir) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        homeDir = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;1321312321/home&quot;]];
+
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if (![fileManager fileExistsAtPath:homeDir]) {
+            [fileManager createDirectoryAtPath:homeDir withIntermediateDirectories:YES attributes:nil error:nil];
+        }
+    }
+    return homeDir;
+}
+
+@end
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Objective-c/">Objective-c</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Objective-c/">Objective-c</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/IOS-创建文件目录/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/IOS-创建文件目录/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/OC-数组对象排序/" title="OC-数组对象排序" itemprop="url">OC-数组对象排序</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:06:15.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="Comparator_u6392_u5E8F"><a href="#Comparator_u6392_u5E8F" class="headerlink" title="Comparator排序"></a>Comparator排序</h2><pre><code>NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+
+    HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1];
+    HLMessage *msg2 = [[NSClassFromString([obj2 messageClassName]) alloc]initWithManagedObject:obj2];
+
+    NSComparisonResult result = [[msg1 timestamp] compare:[msg2 timestamp]];
+
+    switch(result) {
+        case NSOrderedAscending:
+            return NSOrderedAscending;
+        case NSOrderedDescending:
+            return NSOrderedDescending;
+        case NSOrderedSame:
+            return NSOrderedSame;
+        default:
+            return NSOrderedSame;
+    }
+}];
+return arr;
+</code></pre><h2 id="SortDescriptor_u6392_u5E8F"><a href="#SortDescriptor_u6392_u5E8F" class="headerlink" title="SortDescriptor排序"></a>SortDescriptor排序</h2><pre><code>NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@&quot;timestamp&quot; ascending:YES];
+NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+NSArray *sortArray = [array sortedArrayUsingDescriptors:sortDescriptors];
+
+return sortArray;
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Objective-c/">Objective-c</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Objective-c/">Objective-c</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/OC-数组对象排序/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/OC-数组对象排序/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/IOS-点击按钮触发UIRefreshControl/" title="IOS-点击按钮触发UIRefreshControl" itemprop="url">IOS-点击按钮触发UIRefreshControl</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:05:15.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>//
+//  ViewController.m
+//  chat-view
+//
+//  Created by yonglang on 14/12/4.
+//  Copyright (c) 2014年 yonglang. All rights reserved.
+//
+
+#import &quot;ViewController.h&quot;
+
+@interface ViewController ()
+
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@&quot;刷新&quot; style:UIBarButtonItemStyleDone target:self action:@selector(refreshButton: )];
+
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.tintColor = [UIColor blueColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(controlEventValueChanged:)
+                  forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)controlEventValueChanged:(id)sender {
+    if (self.refreshControl.refreshing) {
+        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@&quot;刷新中&quot;];
+
+        [self performSelector:@selector(refreshData) withObject:nil afterDelay:0.5];
+    }
+}
+
+- (void)refreshButton: (id)sender {
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1.0];
+    self.tableView.contentOffset = CGPointMake(0.0, -200.0);
+    [UIView commitAnimations];
+
+    [self.refreshControl beginRefreshing];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@&quot;刷新中&quot;];
+
+    [self performSelector:@selector(refreshData) withObject:nil afterDelay:2.0];
+}
+
+- (void)refreshData {
+    [self.refreshControl endRefreshing];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@&quot;下拉刷新&quot;];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *str = @&quot;MyCell&quot;;
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
+
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
+    }
+
+    cell.textLabel.text = @&quot;sdfsdfds&quot;;
+    cell.imageView.image = [UIImage imageNamed:@&quot;w.jpg&quot;];
+    cell.detailTextLabel.text = @&quot;23432432&quot;;
+
+    return cell;
+}
+
+@end
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Objective-c/">Objective-c</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Objective-c/">Objective-c</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/IOS-点击按钮触发UIRefreshControl/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/IOS-点击按钮触发UIRefreshControl/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/UITabBarController使用/" title="UITabBarController使用" itemprop="url">UITabBarController使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:02:13.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>//
+//  ViewController.m
+//  ceshi
+//
+//  Created by yonglang on 14/11/6.
+//  Copyright (c) 2014年 yonglang. All rights reserved.
+//  图片资源 https://github.com/m2lan/Resource
+//
+
+#import &quot;ViewController.h&quot;
+#import &quot;OneViewController.h&quot;
+#import &quot;TwoViewController.h&quot;
+#import &quot;ThreeViewController.h&quot;
+
+@interface MainController () {
+    UITabBarController *_tabC;
+}
+
+@end
+
+@implementation MainController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    _tabC = [[UITabBarController alloc] init];
+    [_tabC.tabBar setBackgroundColor:[UIColor clearColor]];
+    [_tabC.view setFrame:self.view.frame];
+    [self.view addSubview:_tabC.view];
+
+    OneViewController *one = [[OneViewController alloc] init];
+    TwoViewController *two = [[TwoViewController alloc] init];
+    ThreeViewController *three = [[ThreeViewController alloc] init];
+    _tabC.viewControllers = @[one, two, three ];
+
+    [_tabC.tabBar setBackgroundColor:[UIColor whiteColor]];
+    NSArray *ar = _tabC.viewControllers;
+    NSMutableArray *arD = [NSMutableArray new];
+    [ar enumerateObjectsUsingBlock:^(UIViewController *viewController, NSUInteger idx, BOOL *stop)
+    {
+        UITabBarItem *item = nil;
+        switch (idx)
+        {
+           case 0:
+           {
+               item = [[UITabBarItem alloc] initWithTitle:@&quot;消息&quot; image:[[UIImage imageNamed:@&quot;tab_recent_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@&quot;tab_recent_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+               break;
+           }
+           case 1:
+           {
+               item = [[UITabBarItem alloc] initWithTitle:@&quot;联系人&quot; image:nil tag:1];
+               [item setImage:[[UIImage imageNamed:@&quot;tab_buddy_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+               [item setSelectedImage:[[UIImage imageNamed:@&quot;tab_buddy_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+               break;
+           }
+           case 2:
+           {
+               item = [[UITabBarItem alloc]initWithTitle:@&quot;动态&quot; image:nil tag:1];
+               [item setImage:[[UIImage imageNamed:@&quot;tab_qworld_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+               [item setSelectedImage:[[UIImage imageNamed:@&quot;tab_qworld_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+               break;
+           }
+        }
+        viewController.tabBarItem = item;
+        [arD addObject:viewController];
+    }];
+    _tabC.viewControllers = arD;
+
+    [[UITabBarItem appearance] setTitleTextAttributes:
+    [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:96/255.f green:164/255.f blue:222/255.f alpha:1], UITextAttributeTextColor, nil]
+                                       forState:UIControlStateSelected];
+
+    [_tabC setSelectedIndex:1];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Objective-c/">Objective-c</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Objective-c/">Objective-c</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/UITabBarController使用/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/UITabBarController使用/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/redis优化/" title="redis优化" itemprop="url">redis优化</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:00:33.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="redis_u4F18_u5316"><a href="#redis_u4F18_u5316" class="headerlink" title="redis优化"></a>redis优化</h2><ul>
+<li>在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。</li>
+<li>客户端请求服务器一次就发送一个报文 -&gt; 等待服务端的返回 -&gt; 关闭连接</li>
+<li>如果是100个请求、1000个请求，那就得请求100次、1000次</li>
+<li>所以使用多个请求的时候使用管道来操作(<code>如果管道打包的命令太多占用的内存也会越大，适量</code>)</li>
+<li><p>以下是使用3种方式进行的测试(<code>循环写入1000次</code>)：</p>
+<pre><code>public static void main(String[] args) {
+
+    long start = System.currentTimeMillis();
+    for (int i = 0; i &lt; 1000; i++) {
+        template.opsForHash().put(&quot;user1&quot;, &quot;status&quot; + i, &quot;value&quot; + i);
+    }
+    System.out.println(System.currentTimeMillis() - start);
+
+    start = System.currentTimeMillis();
+    final byte[] rawKey = rawKey(&quot;user2&quot;);
+    template.execute(new RedisCallback&lt;Object&gt;() {
+
+        @Override
+        public Object doInRedis(RedisConnection connection)
+                throws DataAccessException {
+            for (int i = 0; i &lt; 1000; i++) {
+                final byte[] rawHashKey = rawHashKey(&quot;status&quot; + i);
+                final byte[] rawHashValue = rawHashValue(&quot;value&quot; + i);
+
+                connection.hSet(rawKey, rawHashKey, rawHashValue);
+            }
+            return null;
+        }
+    });
+    System.out.println(System.currentTimeMillis() - start);
+
+    start = System.currentTimeMillis();
+    final byte[] rawKey2 = rawKey(&quot;user3&quot;);
+    template.execute(new RedisCallback&lt;Object&gt;() {
+
+        @Override
+        public Object doInRedis(RedisConnection connection)
+                throws DataAccessException {
+            connection.openPipeline();
+            for (int i = 0; i &lt; 1000; i++) {
+                final byte[] rawHashKey = rawHashKey(&quot;status&quot; + i);
+                final byte[] rawHashValue = rawHashValue(&quot;value&quot; + i);
+
+                connection.hSet(rawKey2, rawHashKey, rawHashValue);
+            }
+            return connection.closePipeline();
+        }
+    });
+    System.out.println(System.currentTimeMillis() - start);
+}
+</code></pre></li>
+<li><p>请求结果</p>
+<pre><code>20:54:51.653 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection
+20:54:51.693 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection
+42283
+20:54:51.695 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection
+20:55:33.922 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection
+42228
+20:55:33.923 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection
+20:55:34.058 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection
+136
+</code></pre></li>
+<li>可以看出在使用管道打包发送请求所用的时间不到1s。而发送1000次请求所用的时间达到了42s。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Redis/">Redis</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Redis/">Redis</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/redis优化/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/redis优化/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" title="Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略" itemprop="url">Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T17:39:28.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="u7248_u672C_u56DE_u9000"><a href="#u7248_u672C_u56DE_u9000" class="headerlink" title="版本回退"></a>版本回退</h2><ul>
+<li><p>如果信息显示过多的话,可以使用<code>git log --pretty=oneline</code></p>
+<pre><code>dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
+9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
+2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.txt
+</code></pre></li>
+<li>如果想回退到上个版本,可以使用<code>git reset --hard HEAD^</code>,如果想回退前2个版本<code>git reset --hard HEAD^^</code>,多个版本添加多个^。如果回退前100个版本,可以使用<code>git reset --hard HEAD~100</code></li>
+<li><p>如果想回退到最新版本<code>git reset –hard</code>版本号,查看最新版本版本号<code>git reflog</code></p>
+<pre><code>9bdf0e5 HEAD@{0}: reset: moving to HEAD~2
+5b95f49 HEAD@{1}: commit: a.txt
+28cb7d2 HEAD@{2}: commit: a.txt
+9bdf0e5 HEAD@{3}: reset: moving to HEAD^
+dfffd94 HEAD@{4}: commit: update a.txt
+9bdf0e5 HEAD@{5}: commit: update a.txt
+2a474cb HEAD@{6}: commit (initial): add a.txt
+</code></pre></li>
+<li>执行<code>git reset --hard 9bdf0e5</code><h2 id="u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6"><a href="#u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6" class="headerlink" title="撤销修改和删除文件"></a>撤销修改和删除文件</h2><h3 id="u64A4_u9500_u4FEE_u6539"><a href="#u64A4_u9500_u4FEE_u6539" class="headerlink" title="撤销修改"></a>撤销修改</h3></li>
+<li>在我未提交之前，我发现添加的内容有误，所以我得马上恢复以前的版本，现在我可以有如下几种方法可以做修改：<ul>
+<li>第一：如果我知道要删掉那些内容的话，直接手动更改去掉那些需要的文件，然后add添加到暂存区，最后commit掉。</li>
+<li>第二：我可以按以前的方法直接恢复到上一个版本。使用 <code>git reset –hard HEAD^</code></li>
+</ul>
+</li>
+<li><p>但是现在我不想使用上面的2种方法，我想直接想使用撤销命令该如何操作呢？首先在做撤销之前，我们可以先用<code>git status</code>查看下当前的状态。如下所示：</p>
+<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#    modified:   a.txt
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre></li>
+<li><p>可以发现，Git会告诉你，<code>git checkout -- file</code> 可以丢弃工作区的修改，如下命令：<code>git checkout -- a.txt</code>,如下所示：</p>
+<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git checkout -- a.txt
+AndytekiMacBook-Air:demo1 yonglang$ 
+AndytekiMacBook-Air:demo1 yonglang$
+AndytekiMacBook-Air:demo1 yonglang$
+AndytekiMacBook-Air:demo1 yonglang$ cat a.txt
+aaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbb
+ccccccccccccccc
+ddddddddddddddd
+</code></pre></li>
+<li><p>命令<code>git checkout -- a.txt</code>意思就是，把a.txt文件在工作区做的修改全部撤销，这里有2种情况，如下：</p>
+<pre><code>- readme.txt自动修改后，还没有放到暂存区，使用 撤销修改就回到和版本库一模一样的状态。
+- 另外一种是readme.txt已经放入暂存区了，接着又作了修改，撤销修改就回到添加暂存区后的状态。
+</code></pre></li>
+<li><p>对于第二种情况，我想我们继续做demo来看下，假如现在我对于<code>readme.txt</code>添加一行 内容为<code>6666666666666</code>，我<code>git add</code>增加到暂存区后，接着添加内容<code>7777777</code>，我想通过撤销命令让其回到暂存区后的状态。如下所示：</p>
+<pre><code>AndytekiMacBook-Air:demo1 yonglang$ vim a.txt
+AndytekiMacBook-Air:demo1 yonglang$ cat a.txt 
+aaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbb
+ccccccccccccccc
+ddddddddddddddd
+eeeeeeeeeeeeeee
+AndytekiMacBook-Air:demo1 yonglang$ git add a.txt 
+AndytekiMacBook-Air:demo1 yonglang$ vim a.txt 
+AndytekiMacBook-Air:demo1 yonglang$ 
+AndytekiMacBook-Air:demo1 yonglang$ cat a.txt 
+aaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbb
+ccccccccccccccc
+ddddddddddddddd
+eeeeeeeeeeeeeee
+fffffffffffffff
+AndytekiMacBook-Air:demo1 yonglang$ git checkout -- a.txt 
+AndytekiMacBook-Air:demo1 yonglang$ cat a.txt 
+aaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbb
+ccccccccccccccc
+ddddddddddddddd
+eeeeeeeeeeeeeee
+</code></pre><h3 id="u5220_u9664_u6587_u4EF6"><a href="#u5220_u9664_u6587_u4EF6" class="headerlink" title="删除文件"></a>删除文件</h3></li>
+<li><p>假如我现在版本库目录添加一个文件<code>c.txt</code>,然后提交。如下：</p>
+<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git add c.txt
+AndytekiMacBook-Air:demo1 yonglang$ git commit -m &apos;添加c.txt&apos;
+[master 2cd7d93] 添加c.txt
+1 file changed, 0 insertions(+), 0 deletions(-)
+create mode 100644 c.txt
+AndytekiMacBook-Air:demo1 yonglang$ rm c.txt
+AndytekiMacBook-Air:demo1 yonglang$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working         directory)
+#
+#    deleted:    c.txt
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre></li>
+<li><p>如上：一般情况下，可以直接在文件目录中把文件删了，或者使用如上<code>rm</code>命令：<code>rm c.txt</code>，如果我想彻底从版本库中删掉了此文件的话，可以再执行<code>commit</code>命令 提交掉，现在目录是这样的，</p>
+<pre><code> AndytekiMacBook-Air:demo1 yonglang$ ls -la
+total 16
+drwxr-xr-x   5 yonglang  staff  170 11  5 18:14 .
+drwxr-xr-x   3 yonglang  staff  102 11  5 17:40 ..
+drwxr-xr-x  13 yonglang  staff  442 11  5 18:14 .git
+-rw-r--r--   1 yonglang  staff   80 11  5 18:09 a.txt
+-rw-r--r--   1 yonglang  staff    6 11  5 17:56 b.txt
+</code></pre></li>
+<li><p>只要没有<code>commit</code>之前，如果我想在版本库中恢复此文件如何操作呢？可以使用如下命令 <code>git checkout -- c.txt</code>，如下所示：</p>
+<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git checkout -- c.txt
+AndytekiMacBook-Air:demo1 yonglang$ ls -la
+total 16
+drwxr-xr-x   6 yonglang  staff  204 11  5 18:18 .
+drwxr-xr-x   3 yonglang  staff  102 11  5 17:40 ..
+drwxr-xr-x  13 yonglang  staff  442 11  5 18:18 .git
+-rw-r--r--   1 yonglang  staff   80 11  5 18:09 a.txt
+-rw-r--r--   1 yonglang  staff    6 11  5 17:56 b.txt
+-rw-r--r--   1 yonglang  staff    0 11  5 18:18 c.txt
+</code></pre><h2 id="u8FDC_u7A0B_u4ED3_u5E93"><a href="#u8FDC_u7A0B_u4ED3_u5E93" class="headerlink" title="远程仓库"></a>远程仓库</h2></li>
+<li>在<code>github</code>上创建一个<code>git</code>库，本地执行<code>git remote add origin http://xxxx.git</code></li>
+<li>将本地代码推动到远程仓库的master分支<code>git push -u origin master</code>，加<code>-u</code>首次会和远程<code>master</code>分支关联，后面再使用就不用加了。</li>
+<li>创建本地分支<code>git checkout -b dev == git branch dev,git checkout dev</code>,并切换到<code>dev</code>分支,这时添加文件<code>p.txt</code>后<code>git add p.txt,git commit -m &#39;add p.txt in dev&#39;</code>,切换到<code>master</code>分支再看，发现没有<code>p.txt</code></li>
+<li>合并<code>dev</code>分支到<code>master</code>分支,<code>git checkout master</code>切换到<code>master</code>分支后执行<code>git merge dev</code></li>
+<li>删除分支<code>git branch -d dev</code></li>
+<li>查看分支<code>git branch</code></li>
+<li>创建分支<code>git branch name</code></li>
+<li>切换分支<code>git checkout name</code></li>
+<li>创建+切换分支<code>git checkout –b name</code></li>
+<li>合并某分支到当前分支<code>git merge name</code><h2 id="u5206_u652F_u7BA1_u7406_u7B56_u7565"><a href="#u5206_u652F_u7BA1_u7406_u7B56_u7565" class="headerlink" title="分支管理策略"></a>分支管理策略</h2></li>
+<li><p>通常合并分支时，<code>git</code>一般使用<code>Fast forward</code>模式，在这种模式下，删除分支后，会丢掉分支信息，现在我们来使用带参数<code>–no-ff</code>来禁用<code>Fast forward</code>模式。首先我们来做<code>demo</code>演示下:</p>
+<ul>
+<li>创建一个<code>dev</code>分支。</li>
+<li>修改<code>readme.txt</code>内容。</li>
+<li>添加到暂存区。</li>
+<li>切换回主分支<code>(master)</code>。</li>
+<li>合并<code>dev</code>分支，使用命令<code>git merge –no-ff -m “注释” dev</code></li>
+<li><p>查看历史记录</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout -b dev
+Switched to a new branch &apos;dev&apos;
+AndytekiMacBook-Air:git-test yonglang$ vim a.txt 
+AndytekiMacBook-Air:git-test yonglang$ git add a.txt 
+AndytekiMacBook-Air:git-test yonglang$ git commit -m &apos;dev分支添加&apos;
+[dev 3cfba59] dev分支添加
+1 file changed, 1 insertion(+)
+AndytekiMacBook-Air:git-test yonglang$ git checkout master
+Switched to branch &apos;master&apos;
+AndytekiMacBook-Air:git-test yonglang$ git merge --no-ff -m &apos;merge with no-ff&apos; dev
+Merge made by the &apos;recursive&apos; strategy.
+a.txt | 1 +
+1 file changed, 1 insertion(+)
+AndytekiMacBook-Air:git-test yonglang$ git branch -d dev
+Deleted branch dev (was 3cfba59).
+AndytekiMacBook-Air:git-test yonglang$ git branch
+* master
+AndytekiMacBook-Air:git-test yonglang$ git log --graph --pretty=oneline --abbrev-commit
+*   98a6342 merge with no-ff
+|\  
+| * 3cfba59 dev分支添加
+|/  
+* 4c3acaa dev分支添加
+*   913ac13 fix conflicts
+|\  
+| * 5138b0d 在test分支下添加hello world3
+* | 5a63888 在master分支上添加hello world4
+|/  
+* 1beff04 dev分支添加hello world2
+* 33a4fad add a.txt
+</code></pre></li>
+<li>我们会发现被删除的分支信息还存在。</li>
+<li>分支策略：首先master主分支应该是非常稳定的，也就是用来发布新版本，一般情况下不允许在上面干活，干活一般情况下在新建的dev分支上干活，干完后，比如上要发布，或者说dev分支代码稳定后可以合并到主分支master上来。<h2 id="bug_u5206_u652F"><a href="#bug_u5206_u652F" class="headerlink" title="bug分支"></a>bug分支</h2></li>
+</ul>
+</li>
+<li>在开发中，会经常碰到<code>bug</code>问题，那么有了<code>bug</code>就需要修复，在<code>Git</code>中，分支是很强大的，每个<code>bug</code>都可以通过一个临时分支来修复，修复完成后，合并分支，然后将临时的分支删除掉。</li>
+<li><p>比如我在开发中接到一个<code>404bug</code>时候，我们可以创建一个<code>404分支</code>来修复它，但是，当前的<code>dev分支</code>上的工作还没有提交。比如如下：</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git status
+# On branch dev
+# Changes not staged for commit:
+#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#    modified:   a.txt
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre></li>
+<li><p>并不是我不想提交，而是工作进行到一半时候，我们还无法提交，比如我这个分支<code>bug</code>要2天完成，但是我<code>404bug</code>需要5个小时内完成。怎么办呢？还好，<code>Git</code>还提供了一个<code>stash</code>功能，可以把当前工作现场 ”隐藏起来”，等以后恢复现场后继续工作。如下：</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash
+Saved working directory and index state WIP on dev: f4d6d93 merge
+HEAD is now at f4d6d93 merge
+AndytekiMacBook-Air:git-test yonglang$ 
+AndytekiMacBook-Air:git-test yonglang$ 
+AndytekiMacBook-Air:git-test yonglang$ 
+AndytekiMacBook-Air:git-test yonglang$ git status
+# On branch dev
+nothing to commit, working directory clean
+</code></pre></li>
+<li><p>所以现在我可以通过创建<code>404分支</code>来修复<code>bug</code>了。首先我们要确定在那个分支上修复<code>bug</code>，比如我现在是在主分支<code>master</code>上来修复的，现在我要在<code>master</code>分支上创建一个临时分支，演示如下：</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout master
+Switched to branch &apos;master&apos;
+AndytekiMacBook-Air:git-test yonglang$ git checkout -b 404
+Switched to a new branch &apos;404&apos;
+AndytekiMacBook-Air:git-test yonglang$ vim a.txt 
+AndytekiMacBook-Air:git-test yonglang$ cat a.txt 
+hello world
+hello world2
+hello world4
+hello world3
+hello world4
+hello world5
+hello world9
+hello world6
+hello world404
+AndytekiMacBook-Air:git-test yonglang$ git add a.txt 
+AndytekiMacBook-Air:git-test yonglang$ git commit -m &apos;add 404&apos;
+[404 d1d5dac] add 404
+1 file changed, 1 insertion(+)
+</code></pre></li>
+<li><p>修复完成后，切换到<code>master</code>分支上，并完成合并，最后删除<code>404</code>分支。演示如下：</p>
+<pre><code> AndytekiMacBook-Air:git-test yonglang$ git checkout master
+Switched to branch &apos;master&apos;
+AndytekiMacBook-Air:git-test yonglang$ git merge --no-ff -m &apos;merge 404&apos; 404
+Merge made by the &apos;recursive&apos; strategy.
+a.txt | 1 +
+1 file changed, 1 insertion(+)
+AndytekiMacBook-Air:git-test yonglang$ cat a.txt 
+hello world
+hello world2
+hello world4
+hello world3
+hello world4
+hello world5
+hello world9
+hello world6
+hello world404
+AndytekiMacBook-Air:git-test yonglang$ git branch -d 404
+Deleted branch 404 (was d1d5dac).
+</code></pre></li>
+<li><p>现在，我们回到<code>dev分支</code>上干活了。</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout dev
+Switched to branch &apos;dev&apos;
+AndytekiMacBook-Air:git-test yonglang$ git status
+# On branch dev
+nothing to commit, working directory clean
+</code></pre></li>
+<li><p>工作区是干净的，那么我们工作现场去哪里呢？我们可以使用命令<code>git stash list</code>来查看下。如下：</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash list
+stash@{0}: WIP on dev: f4d6d93 merge
+</code></pre></li>
+<li><p>工作现场还在，<code>Git</code>把<code>stash</code>内容存在某个地方了，但是需要恢复一下，可以使用如下2个方法：</p>
+<ul>
+<li><code>git stash apply</code>恢复，恢复后，<code>stash</code>内容并不删除，你需要使用命令<code>git stash drop</code>来删除。</li>
+<li><p>另一种方式是使用<code>git stash pop</code>,恢复的同时把<code>stash</code>内容也删除了。</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash apply
+# On branch dev
+# Changes not staged for commit:
+#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#    modified:   a.txt
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+AndytekiMacBook-Air:git-test yonglang$ cat a.txt 
+hello world
+hello world2
+hello world4
+hello world3
+hello world4
+hello world5
+hello world9
+hello world6
+hello world7
+AndytekiMacBook-Air:git-test yonglang$ git stash list
+stash@{0}: WIP on dev: f4d6d93 merge
+AndytekiMacBook-Air:git-test yonglang$ git stash drop
+Dropped refs/stash@{0} (8f8712bf68de241eca322f99e00a00219accc089)
+AndytekiMacBook-Air:git-test yonglang$ git stash list
+AndytekiMacBook-Air:git-test yonglang$
+</code></pre><h2 id="u66F4_u6539_u8FDC_u7A0B_u4ED3_u5E93_u5730_u5740"><a href="#u66F4_u6539_u8FDC_u7A0B_u4ED3_u5E93_u5730_u5740" class="headerlink" title="更改远程仓库地址"></a>更改远程仓库地址</h2><pre><code>git remote set-url origin remote_git_address
+</code></pre><h2 id="u67E5_u770B_u6587_u4EF6_u6BCF_u4E00_u884C_u7684_u4F5C_u8005_u662Fwho"><a href="#u67E5_u770B_u6587_u4EF6_u6BCF_u4E00_u884C_u7684_u4F5C_u8005_u662Fwho" class="headerlink" title="查看文件每一行的作者是who"></a>查看文件每一行的作者是who</h2><pre><code>git blame [file_name]
+</code></pre><h2 id="u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4"><a href="#u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4" class="headerlink" title="检查丢失的提交"></a>检查丢失的提交</h2></li>
+</ul>
+</li>
+<li><code>git fsck --lost-found</code>这里你可以看到一个丢失的提交。你可以通过<code>git show [commit_hash]</code>查看提交的更改或者通过运行<code>git merge[commit_hash]</code>命令进行恢复。</li>
+<li><code>gitfsck</code>跟<code>reflog</code>命令相比有一个优点。假设你删除了一个远程分支，然后<code>clone</code>了这个库。用<code>fsck</code>命令你可以找到并且恢复这个删除的远程分支。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Git/">Git</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Git/">Git</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Git-ssh连接/" title="Git-ssh连接" itemprop="url">Git-ssh连接</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T17:38:26.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li><code>git ssh</code>连接，运行<code>ssh-keygen</code>一路回车，在当前用户目录<code>~/.ssh/</code>生成两个文件<code>id_rsa</code>和<code>id_rsa.pub</code>，将<code>id_rsa.pub</code>内容添加到<code>git</code>服务器。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Git/">Git</a>►<a class="article-category-link" href="/categories/Git/ssh/">ssh</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Git/">Git</a><a href="/tags/ssh/">ssh</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Git-ssh连接/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Git-ssh连接/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Git-抓取分支/" title="Git-抓取分支" itemprop="url">Git-抓取分支</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T17:31:11.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li>现在，你的小伙伴要在<code>dev</code>分支上开发，就必须创建远程<code>origin</code>的<code>dev</code>分支到本地，于是他用这个命令创建本地<code>dev</code>分支：<code>$ git checkout -b dev origin/dev</code></li>
+<li><p>现在，他就可以在<code>dev</code>上继续修改，然后，时不时地把<code>dev</code>分支<code>push</code>到远程：</p>
+<pre><code>$ git commit -m &quot;add /usr/bin/env&quot;
+   [dev 291bea8] add /usr/bin/env
+   1 file changed, 1 insertion(+)
+$ git push origin dev
+   Counting objects: 5, done.
+   Delta compression using up to 4 threads.
+   Compressing objects: 100% (2/2), done.
+   Writing objects: 100% (3/3), 349 bytes, done.
+   Total 3 (delta 0), reused 0 (delta 0)
+   To git@github.com:michaelliao/learngit.git
+   fc38031..291bea8  dev -&gt; dev
+</code></pre></li>
+<li><p>你的小伙伴已经向<code>origin/dev</code>分支推送了他的提交，而碰巧你也对同样的文件作了修改，并试图推送：</p>
+<pre><code>$ git add hello.py
+$ git commit -m &quot;add coding: utf-8&quot;
+  [dev bd6ae48] add coding: utf-8
+   1 file changed, 1 insertion(+)
+  $ git push origin dev
+  To git@github.com:michaelliao/learngit.git
+   ! [rejected]        dev -&gt; dev (non-fast-forward)
+  error: failed to push some refs to &apos;git@github.com:michaelliao/learngit.git&apos;
+  hint: Updates were rejected because the tip of your current branch is behind
+  hint: its remote counterpart. Merge the remote changes (e.g. &apos;git pull&apos;)
+  hint: before pushing again.
+  hint: See the &apos;Note about fast-forwards&apos; in &apos;git push --help&apos; for details.
+</code></pre></li>
+<li><p>推送失败，因为你的小伙伴的最新提交和你试图推送的提交有冲突，解决办法也很简单，<code>Git</code>已经提示我们，先用<code>git pull</code>把最新的提交从<code>origin/dev</code>抓下来，然后，在本地合并，解决冲突，再推送：</p>
+<pre><code>$ git pull
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 3 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From github.com:michaelliao/learngit
+fc38031..291bea8  dev        -&gt; origin/dev
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details
+    git pull &lt;remote&gt; &lt;branch&gt;
+If you wish to set tracking information for this branch you can do so with:
+    git branch --set-upstream dev origin/&lt;branch&gt;
+</code></pre></li>
+<li><p><code>git pull</code>也失败了，原因是没有指定本地<code>dev</code>分支与远程<code>origin/dev</code>分支的链接，根据提示，设置<code>dev</code>和<code>origin/dev</code>的链接：</p>
+<pre><code>$ git branch --set-upstream dev origin/dev
+Branch dev set up to track remote branch dev from origin.
+</code></pre></li>
+<li><p>再pull：</p>
+<pre><code>$ git pull
+Auto-merging hello.py
+CONFLICT (content): Merge conflict in hello.py
+Automatic merge failed; fix conflicts and then commit the result.
+</code></pre></li>
+<li><p>这回<code>git pull</code>成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，提交，再<code>push</code>：</p>
+<pre><code>$ git commit -m &quot;merge &amp; fix hello.py&quot;
+[dev adca45d] merge &amp; fix hello.py
+$ git push origin dev
+Counting objects: 10, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (6/6), 747 bytes, done.
+Total 6 (delta 0), reused 0 (delta 0)
+To git@github.com:michaelliao/learngit.git
+291bea8..adca45d  dev -&gt; dev
+</code></pre></li>
+<li>因此，多人协作的工作模式通常是这样：<ul>
+<li>首先，可以试图用<code>git push origin branch-name</code>推送自己的修改；</li>
+<li>如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并；</li>
+<li>如果合并有冲突，则解决冲突，并在本地提交；</li>
+<li>没有冲突或者解决掉冲突后，再用<code>git push origin branch-name</code>推送就能成功！</li>
+<li>如果<code>git pull</code>提示<code>“no tracking information”</code>，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream branch-name origin/branch-name</code>。</li>
+</ul>
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Git/">Git</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Git/">Git</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Git-抓取分支/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Git-抓取分支/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Git-cherry-pick使用/" title="Git-cherry-pick使用" itemprop="url">Git-cherry-pick使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T17:29:15.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li><code>git cherry-pick</code>用于把另一个本地分支的<code>commit</code>修改应用到当前分支。</li>
+<li>在本地 <code>master</code> 分支上做了一个<code>commit( 38361a68138140827b31b72f8bbfd88b3705d77a )</code>,如何把它放到 本地 <code>old_cc</code> 分支上？</li>
+<li>办法之一： 使用 <code>cherry-pick</code>. 根据git 文档： <code>Apply the changes introduced by some existing commits</code></li>
+<li>就是对已经存在的<code>commit</code>进行<code>apply</code>(可以理解为再次提交)</li>
+<li>简单用法：<code>git cherry-pick &lt;commit id&gt;</code></li>
+<li><p>例如：</p>
+<pre><code>$ git checkout old_cc
+$ git cherry-pick 38361a68
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Git/">Git</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Git/">Git</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Git-cherry-pick使用/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Git-cherry-pick使用/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Maven-聚合和继承/" title="Maven-聚合和继承" itemprop="url">Maven-聚合和继承</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T17:23:02.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="u805A_u5408"><a href="#u805A_u5408" class="headerlink" title="聚合"></a>聚合</h2><ul>
+<li>如果一个项目依赖数十个模块，那么要一个一个编译起来是非常浪费时间的，所以就需要把所需模块聚合在一起，一起编译。</li>
+<li>比如当前有User有两个模块：1.user-dao, 2.user-service，在eclipse中创建一个<code>create a simple project(skip archetype selection)</code>,</li>
+<li>填入：Group Id, Artifact Id(这里为user-parent), Version, Packaging(这里选择pom),然后创建。</li>
+<li><p>在<code>user-parent/pom.xml</code>中添加如下代码：</p>
+<pre><code>&lt;modules&gt;
+  &lt;module&gt;../user-dao&lt;/module&gt;
+  &lt;module&gt;../user-service&lt;/module&gt;
+&lt;/modules&gt;
+</code></pre></li>
+<li>接下来就可以直接在<code>user-parent/pom.xml</code>编译了。<h2 id="u7EE7_u627F"><a href="#u7EE7_u627F" class="headerlink" title="继承"></a>继承</h2></li>
+<li>将<code>pom.xml</code>中相同的配置也放入<code>user-parent/pom.xml</code>中</li>
+<li>依赖包管理，将所需的依赖包放入<code>user-parent/pom.xml</code>中进行统一管理</li>
+<li><p><code>user-parent/pom.xml</code>的整体代码如下：</p>
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.m2.user&lt;/groupId&gt;
+    &lt;artifactId&gt;user-parent&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;pom&lt;/packaging&gt;
+
+    &lt;modules&gt;
+        &lt;module&gt;../user-dao&lt;/module&gt;
+        &lt;module&gt;../user-service&lt;/module&gt;
+    &lt;/modules&gt;
+
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;junit&lt;/groupId&gt;
+                &lt;artifactId&gt;junit&lt;/artifactId&gt;
+                &lt;version&gt;4.10&lt;/version&gt;
+                &lt;scope&gt;test&lt;/scope&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;log4j&lt;/groupId&gt;
+                &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+                &lt;version&gt;1.2.16&lt;/version&gt;
+            &lt;/dependency&gt;
+
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+&lt;/project&gt;
+</code></pre></li>
+<li><p><code>user-dao/pom.xml</code>如下：</p>
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;com.m2.user&lt;/groupId&gt;
+        &lt;artifactId&gt;user-parent&lt;/artifactId&gt;
+        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+        &lt;relativePath&gt;../user-parent/pom.xml&lt;/relativePath&gt;
+    &lt;/parent&gt;
+    &lt;artifactId&gt;user-dao&lt;/artifactId&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+
+    &lt;name&gt;user-dao&lt;/name&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;log4j&lt;/groupId&gt;
+            &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre></li>
+<li><p><code>user-service/pom.xml</code>如下:</p>
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;com.m2.user&lt;/groupId&gt;
+        &lt;artifactId&gt;user-parent&lt;/artifactId&gt;
+        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+        &lt;relativePath&gt;../user-parent/pom.xml&lt;/relativePath&gt;
+    &lt;/parent&gt;
+    &lt;artifactId&gt;user-service&lt;/artifactId&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+
+    &lt;name&gt;user-service&lt;/name&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;log4j&lt;/groupId&gt;
+            &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre></li>
+<li>这样就可以对包进行统一管理、代码重复的问题。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Maven/">Maven</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Maven/">Maven</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Maven-聚合和继承/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Maven-聚合和继承/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/SpringMVC-学习02/" title="SpringMVC-学习02" itemprop="url">SpringMVC-学习02</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T17:21:56.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="u4F20_u503C_u548C_u63A5_u53D7_u4F20_u503C"><a href="#u4F20_u503C_u548C_u63A5_u53D7_u4F20_u503C" class="headerlink" title="传值和接受传值"></a>传值和接受传值</h2><pre><code>package com.demo.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class HelloController {
+
+@RequestMapping(&quot;/&quot;)
+public String hello() {
+    return &quot;hello&quot;;
+}
+
+/**
+ * @param username
+ * @requestParam 表示参数username为必须
+ * request http://localhost:8080/demo?username=aaa
+ * @return
+ */
+@RequestMapping(&quot;/say&quot;)
+public String say(@RequestParam(&quot;username&quot;) String username) {
+    System.out.println(username);
+    return &quot;say&quot;;
+}
+
+/**
+ * @param username
+ * username参数可传可不传，不传就为null
+ * @return
+ */
+@RequestMapping(&quot;/say1&quot;)
+public String say1(String username) { 
+    System.out.println(username);
+    return &quot;say&quot;;
+}
+
+/**
+ * @param username
+ * @param context
+ * 传值给视图 01: 使用map方式
+ * 视图使用${username}
+ * @return
+ */
+@RequestMapping(&quot;/say2&quot;)
+public String say2(String username, Map&lt;String, Object&gt; context) {
+    context.put(&quot;username&quot;, username);
+    return &quot;say2&quot;;
+}
+
+/**
+ * @param username
+ * @param context
+ * 传值给视图 02: 使用model方式
+ * 视图使用${username}
+ * @return
+ */
+@RequestMapping(&quot;/say3&quot;)
+public String say3(String username, Model model) {
+
+//        01
+//        model.addAttribute(&quot;username&quot;, username);
+
+//        02
+//        Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
+//        map.put(&quot;username&quot;, username);
+//        model.addAllAttributes(map);
+
+//        03(key为参数的类型，username是String类型，则视图${string})
+//        model.addAttribute(username);
+        return &quot;say2&quot;;
+    }
+}
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Spring-MVC/">Spring-MVC</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Spring-MVC/">Spring-MVC</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/SpringMVC-学习02/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/SpringMVC-学习02/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/SpringMVC-学习01/" title="SpringMVC-学习01" itemprop="url">SpringMVC-学习01</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T17:19:19.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li>下载<a href="http://maven.springframework.org/release/org/springframework/spring/" target="_blank" rel="external">springframework</a></li>
+<li>新建web项目，拷贝<code>spring-framework-4.1.2.RELEASE/libs</code>下面所有的<code>*.RELEASE.jar</code>到<code>lib</code>目录下。</li>
+<li><p>配置<code>web.xml</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app version=&quot;3.1&quot; xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet &lt;/servlet-class&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt; // 启动就加载
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt; // 监听所有的请求
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre></li>
+<li><p>在<code>/WEB-INF</code>下新建<code>hello-servlet.xml</code>(hello取决于web.xml中servlet-name的配置),配置如下</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd&quot;&gt;
+
+    &lt;!-- 这两项启动annotation配置 --&gt;
+    &lt;context:component-scan base-package=&quot;com.demo.controller&quot;/&gt;
+    &lt;mvc:annotation-driven/&gt;
+
+    &lt;!-- 配置视图文件的路径和后缀 --&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+&lt;/beans&gt;
+</code></pre></li>
+<li><p>新建一个<code>controller</code>文件，<code>package=hello-servlet.xml</code>的<code>base-package</code></p>
+<pre><code>package com.demo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class HelloController {
+
+    @RequestMapping(&quot;/&quot;)
+    // 当访问http://localhost:8080/APP/时就会进入该方法，方法映射到hello视图
+    public String hello() {
+        return &quot;hello&quot;;
+    }
+}
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Spring-MVC/">Spring-MVC</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Spring-MVC/">Spring-MVC</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/SpringMVC-学习01/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/SpringMVC-学习01/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Mac-配置vim/" title="Mac-配置vim" itemprop="url">Mac-配置vim</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T17:17:00.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li>下载配色方案<a href="https://github.com/tomasr/molokai" target="_blank" rel="external">molokai</a></li>
+<li>在当前用户根目录下的<code>~/.vim</code>创建<code>colors</code>目录，将下载的配色方案中的<code>molokai.vim</code>移动到<code>~/.vim/colors</code>中</li>
+<li>在当前用户根目录下新建<code>.vimrc</code>，添加<code>colorscheme molokai</code><ul>
+<li><code>vimrc</code>可以把<code>/usr/share/vim/vimrc</code>拷贝过来</li>
+</ul>
+</li>
+<li><p>更多的配置如下</p>
+<pre><code>&quot; Configuration file for vim
+set modelines=0 &quot; CVE-2007-2438
+
+&quot; Normally we use vim-extensions. If you want true vi-compatibility
+&quot; remove change the following statements
+set nocompatible &quot; Use Vim defaults instead of 100% vi compatibility
+set backspace=2 &quot; more powerful backspacing
+
+&quot; Don&apos;t write backup file if vim is being called by &quot;crontab -e&quot;
+au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
+&quot; Don&apos;t write backup file if vim is being called by &quot;chpass&quot;
+au BufWrite /private/etc/pw.* set nowritebackup nobackup
+
+&quot; 语法高亮
+syntax on
+
+autocmd InsertLeave * se nocul
+autocmd InsertEnter * se cul
+&quot; 用浅色高亮当前行
+
+set smartindent
+&quot; 智能对齐
+
+set autoindent
+&quot; 自动对齐
+
+set confirm
+&quot; 在处理未保存或只读文件的时候，弹出确认
+
+set tabstop=4
+&quot; Tab键的宽度
+
+set softtabstop=4
+set shiftwidth=4
+&quot;  统一缩进为4
+
+set noexpandtab
+&quot; 不要用空格代替制表符
+
+set number
+&quot; 显示行号
+
+set number
+&quot; 显示行号
+
+set hlsearch
+set incsearch
+&quot; 搜索逐字符高亮
+
+set gdefault
+&quot; 行内替换
+
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
+&quot; 编码设置
+
+colorscheme molokai
+&quot; 设置颜色主题
+
+set guifont=Menlo:h16:cANSI
+&quot; 设置字体
+
+set langmenu=zn_CN.UTF-8
+set helplang=cn
+&quot; 语言设置
+
+set cmdheight=2
+&quot; 命令行（在状态行）的高度，默认为1,这里是2
+
+set ruler
+&quot; 在编辑过程中，在右下角显示光标位置的状态行
+
+set laststatus=2
+&quot; 总是显示状态行
+
+set showcmd
+&quot; 在状态行显示目前所执行的命令，未完成的指令片段亦会显示出来
+
+set scrolloff=3
+&quot; 光标移动到buffer的顶部和底部时保持3行距离
+
+set showmatch
+&quot; 高亮显示对应的括号
+
+set matchtime=5
+&quot; 对应括号高亮的时间（单位是十分之一秒）
+
+set autowrite
+&quot; 在切换buffer时自动保存当前文件
+
+set wildmenu
+&quot; 增强模式中的命令行自动完成操作
+
+set linespace=2
+&quot; 字符间插入的像素行数目
+
+set whichwrap=b,s,&lt;,&gt;,[,]
+&quot; 开启Normal或Visual模式下Backspace键，空格键，左方向键，右方向键，Insert或replace模式下左方向键，右方向键跳行的功能。
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Mac/">Mac</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Mac/">Mac</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Mac-配置vim/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Mac-配置vim/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Apache/" title="Apache">Apache<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/" title="Centos7">Centos7<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Docker/" title="Docker">Docker<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Groovy/" title="Groovy">Groovy<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Keepalived/Haproxy/" title="Haproxy">Haproxy<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/JDK/" title="JDK">JDK<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Apache/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mac/" title="Mac">Mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mongodb/" title="Mongodb">Mongodb<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/MySQL/" title="MySQL">MySQL<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/MySQL/PHP/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Objective-c/" title="Objective-c">Objective-c<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/MySQL/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Shell/" title="Shell">Shell<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Spring-MVC/" title="Spring-MVC">Spring-MVC<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XMPP/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/Tsung/" title="Tsung">Tsung<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XMPP/" title="XMPP">XMPP<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Apache/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/ssh/" title="ssh">ssh<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Groovy/" style="font-size: 10px;">Groovy</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://golearns.org/" target="_blank" title="go语言搭建的个人博客">golearns</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 记录知识 分享知识 <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/u/1877167031" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/m2lan" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/763960267" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/100006504108865" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:763960267@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="M2">M2</a>
+		
+		
+		</p>
+</div>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','b2cFpoExgUMZu3--zQzE','2.0.0');
+</script></footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"m2langithub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>
