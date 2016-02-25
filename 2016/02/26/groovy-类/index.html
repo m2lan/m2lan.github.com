@@ -6,32 +6,59 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>groovy-安装eclipse插件 | 知识记录</title>
+    <title>groovy-类 | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="Groovy-安装eclipse插件
-进入Groovy官网工具页面eclipse，拷贝Release update site
-打开eclipse -&amp;gt; help -&amp;gt; Install New Software添加，把上面拷贝的地址粘贴在url上
-选择Groovy-Eclipse一直next直到完成。">
+    <meta name="description" content="Groovy-类
+类的定义
+class TestMVC {
+
+    def name
+    def age
+
+    def say() {
+        println &amp;apos;say&amp;apos;
+    }
+
+    String toString() {
+        &amp;quot;TestClass [name=${name} + ,age=${age} + ]&amp;quot;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="groovy-安装eclipse插件">
-<meta property="og:url" content="http://im.yonglang.co/2016/02/26/groovy-安装eclipse插件/index.html">
+<meta property="og:title" content="groovy-类">
+<meta property="og:url" content="http://im.yonglang.co/2016/02/26/groovy-类/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Groovy-安装eclipse插件
-进入Groovy官网工具页面eclipse，拷贝Release update site
-打开eclipse -&amp;gt; help -&amp;gt; Install New Software添加，把上面拷贝的地址粘贴在url上
-选择Groovy-Eclipse一直next直到完成。">
-<meta property="og:updated_time" content="2016-02-25T17:02:50.000Z">
+<meta property="og:description" content="Groovy-类
+类的定义
+class TestMVC {
+
+    def name
+    def age
+
+    def say() {
+        println &amp;apos;say&amp;apos;
+    }
+
+    String toString() {
+        &amp;quot;TestClass [name=${name} + ,age=${age} + ]&amp;quot;">
+<meta property="og:updated_time" content="2016-02-25T17:11:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="groovy-安装eclipse插件">
-<meta name="twitter:description" content="Groovy-安装eclipse插件
-进入Groovy官网工具页面eclipse，拷贝Release update site
-打开eclipse -&amp;gt; help -&amp;gt; Install New Software添加，把上面拷贝的地址粘贴在url上
-选择Groovy-Eclipse一直next直到完成。">
+<meta name="twitter:title" content="groovy-类">
+<meta name="twitter:description" content="Groovy-类
+类的定义
+class TestMVC {
+
+    def name
+    def age
+
+    def say() {
+        println &amp;apos;say&amp;apos;
+    }
+
+    String toString() {
+        &amp;quot;TestClass [name=${name} + ,age=${age} + ]&amp;quot;">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -94,14 +121,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/02/26/groovy-安装eclipse插件/" title="groovy-安装eclipse插件" itemprop="url">groovy-安装eclipse插件</a>
+      <a href="/2016/02/26/groovy-类/" title="groovy-类" itemprop="url">groovy-类</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2016-02-25T17:01:20.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
+    <time datetime="2016-02-25T17:10:35.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
     
   </p>
 </header>
@@ -110,14 +137,94 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6"><span class="toc-number">1.</span> <span class="toc-text">Groovy-安装eclipse插件</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u7C7B"><span class="toc-number">1.</span> <span class="toc-text">Groovy-类</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6"><a href="#Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6" class="headerlink" title="Groovy-安装eclipse插件"></a>Groovy-安装eclipse插件</h1><ul>
-<li>进入Groovy官网工具页面<a href="http://docs.groovy-lang.org/latest/html/documentation/tools-groovyeclipse.html#Groovy-EclipsecompilerpluginforMaven-Groovy-Eclipseconfiguratorform2Eclipse" target="_blank" rel="external">eclipse</a>，拷贝<em>Release update site</em></li>
-<li>打开<code>eclipse -&gt; help -&gt; Install New Software</code>添加，把上面拷贝的地址粘贴在url上</li>
-<li>选择<code>Groovy-Eclipse</code>一直next直到完成。</li>
+		<h1 id="Groovy-_u7C7B"><a href="#Groovy-_u7C7B" class="headerlink" title="Groovy-类"></a>Groovy-类</h1><ul>
+<li><p>类的定义</p>
+<pre><code>class TestMVC {
+
+    def name
+    def age
+
+    def say() {
+        println &apos;say&apos;
+    }
+
+    String toString() {
+        &quot;TestClass [name=${name} + ,age=${age} + ]&quot;
+    }
+}
+def testClass = new TestMVC(name: &apos;zhangsan&apos;, age: 20)
+testClass.say()
+println testClass
+println testClass.name
+</code></pre></li>
+<li><p>类的继承</p>
+<pre><code>package com.test
+
+class Person {
+    def name
+
+    def say() {
+        println &apos;person&apos;
+    }
+}
+
+class Student extends Person {
+    def say() {
+        println this.name + &apos; student&apos;
+    }
+}
+
+def stu = new Student(name: &apos;zhangsan&apos;)
+stu.say()
+</code></pre></li>
+<li><p>抽象类</p>
+<pre><code>package com.test
+
+abstract class Person2 {
+
+    def abstract say()
+
+    String say1() {
+        &apos;person2 say1&apos;
+    }
+}
+
+class Student2 extends Person2 {
+
+    def say() {
+        &apos;student2 say&apos;
+    }
+}
+
+Person2 stu2 = new Student2()
+println stu2.say()
+println stu2.say1()
+</code></pre></li>
+<li><p>接口和静态方法</p>
+<pre><code>package com.test
+
+interface Persons {
+    def say()
+}
+
+class PersonsImpl implements Persons {
+    def say() {
+        println &apos;haha&apos;
+    }
+
+    def static test() {
+        println &apos;test&apos;
+    }
+}
+
+Persons persons = new PersonsImpl()
+persons.say()
+PersonsImpl.test()
+</code></pre></li>
 </ul>
   
 	</div>
@@ -141,7 +248,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2016/02/26/groovy-安装eclipse插件/" data-title="groovy-安装eclipse插件 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2016/02/26/groovy-类/" data-title="groovy-类 | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -154,19 +261,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/02/26/groovy-循环/" title="groovy-循环">
-  <strong>上一篇：</strong><br/>
-  <span>
-  groovy-循环</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/02/26/groovy-字符串操作/"  title="groovy-字符串操作">
+<a href="/2016/02/26/groovy-闭包/"  title="groovy-闭包">
  <strong>下一篇：</strong><br/> 
- <span>groovy-字符串操作
+ <span>groovy-闭包
 </span>
 </a>
 </div>
@@ -175,7 +274,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/02/26/groovy-安装eclipse插件/" data-title="groovy-安装eclipse插件" data-url="http://im.yonglang.co/2016/02/26/groovy-安装eclipse插件/"></div>
+	<div class="ds-thread" data-thread-key="2016/02/26/groovy-类/" data-title="groovy-类" data-url="http://im.yonglang.co/2016/02/26/groovy-类/"></div>
 </section>
 
 
@@ -185,7 +284,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6"><span class="toc-number">1.</span> <span class="toc-text">Groovy-安装eclipse插件</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u7C7B"><span class="toc-number">1.</span> <span class="toc-text">Groovy-类</span></a></li></ol>
  
   </div>
 

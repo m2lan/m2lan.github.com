@@ -86,6 +86,488 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/02/26/groovy-类/" title="groovy-类" itemprop="url">groovy-类</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T17:10:35.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Groovy-_u7C7B"><a href="#Groovy-_u7C7B" class="headerlink" title="Groovy-类"></a>Groovy-类</h1><ul>
+<li><p>类的定义</p>
+<pre><code>class TestMVC {
+
+    def name
+    def age
+
+    def say() {
+        println &apos;say&apos;
+    }
+
+    String toString() {
+        &quot;TestClass [name=${name} + ,age=${age} + ]&quot;
+    }
+}
+def testClass = new TestMVC(name: &apos;zhangsan&apos;, age: 20)
+testClass.say()
+println testClass
+println testClass.name
+</code></pre></li>
+<li><p>类的继承</p>
+<pre><code>package com.test
+
+class Person {
+    def name
+
+    def say() {
+        println &apos;person&apos;
+    }
+}
+
+class Student extends Person {
+    def say() {
+        println this.name + &apos; student&apos;
+    }
+}
+
+def stu = new Student(name: &apos;zhangsan&apos;)
+stu.say()
+</code></pre></li>
+<li><p>抽象类</p>
+<pre><code>package com.test
+
+abstract class Person2 {
+
+    def abstract say()
+
+    String say1() {
+        &apos;person2 say1&apos;
+    }
+}
+
+class Student2 extends Person2 {
+
+    def say() {
+        &apos;student2 say&apos;
+    }
+}
+
+Person2 stu2 = new Student2()
+println stu2.say()
+println stu2.say1()
+</code></pre></li>
+<li><p>接口和静态方法</p>
+<pre><code>package com.test
+
+interface Persons {
+    def say()
+}
+
+class PersonsImpl implements Persons {
+    def say() {
+        println &apos;haha&apos;
+    }
+
+    def static test() {
+        println &apos;test&apos;
+    }
+}
+
+Persons persons = new PersonsImpl()
+persons.say()
+PersonsImpl.test()
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Groovy/">Groovy</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Groovy/">Groovy</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/26/groovy-类/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/26/groovy-类/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/26/groovy-闭包/" title="groovy-闭包" itemprop="url">groovy-闭包</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T17:07:21.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Groovy-_u95ED_u5305"><a href="#Groovy-_u95ED_u5305" class="headerlink" title="Groovy-闭包"></a>Groovy-闭包</h1><ul>
+<li><p>it 是闭包的单个隐式参数</p>
+<pre><code>def test = {
+    println it
+}
+test(&apos;hello world&apos;)
+</code></pre></li>
+<li><p>使用默认值</p>
+<pre><code>def test1 = {
+    println name
+}(name=&apos;test1&apos;)
+test1
+
+def test2 = {
+        println it
+}
+test2.call(&apos;test2&apos;)
+</code></pre></li>
+<li><p>闭包使用显示参数</p>
+<pre><code>def test3 = {name, age -&gt;
+    println &quot;name=${name}, age=${age}&quot;
+}
+test3(&apos;zhangsan&apos;, 20)
+</code></pre></li>
+<li><p>闭包支持默认参数</p>
+<pre><code>def test4 = {name, age=20 -&gt;
+    println &quot;name=${name}, age=${age}&quot;
+}
+test4(&apos;wangwu&apos;)
+</code></pre></li>
+<li><p>闭包的作用域</p>
+<pre><code>def name = &apos;zhangsan&apos;
+def bMethod(Closure closure) {
+    // 此处name是bMethod的局部变量，对外部闭包访问无效
+    name = &apos;wangwu&apos;
+    closure()
+}
+
+def aClosure = {
+    println name
+}
+bMethod(aClosure)
+</code></pre></li>
+<li><p>闭包返回值, return可以省略，闭包把最后一行做为返回值</p>
+<pre><code>def cClosure = {c -&gt;
+    //    return c + &apos; world&apos;
+    c + &apos; world&apos;
+}
+println cClosure(&apos;hello&apos;)
+</code></pre></li>
+<li><p>闭包遍历list</p>
+<pre><code>def list = [&apos;aaa&apos;, &apos;1234&apos;, &apos;ccc&apos;]
+list.each {s -&gt;
+    println s
+}
+</code></pre></li>
+<li><p>any方法接收一个闭包，根据指定的条件判断list是否满足，有一个元素满足就返回true</p>
+<pre><code>println list.any {
+    it.length() &gt; 3
+}
+</code></pre></li>
+<li><p>any方法接收一个闭包，根据指定的条件判断list是否满足，所有元素满足就返回true</p>
+<pre><code>println list.every {
+    it.length() &gt; 3
+}        
+</code></pre></li>
+<li><p>collect(Closure arg2)用闭包将元素处理后返回列表</p>
+<pre><code>println list.collect {
+    it + &apos;--&apos; + it
+}
+</code></pre></li>
+<li><p>查找满足条件的第一个元素</p>
+<pre><code>println list.find {
+    it.length() &lt; 4
+}
+</code></pre></li>
+<li><p>查找满足条件的所有元素</p>
+<pre><code>println list.findAll {
+    it.length() &lt; 4
+}
+</code></pre></li>
+<li><p>查找满足条件的第一个元素的索引</p>
+<pre><code>println list.findIndexOf {
+    it.length() &lt; 4
+}
+</code></pre></li>
+<li><p>反向遍历</p>
+<pre><code>list.reverseEach {
+    println it
+}
+</code></pre></li>
+<li><p>计算阶乘</p>
+<pre><code>def num = [1, 2, 3, 4, 5]
+// 1 * 2 * 3 * 4 * 5
+println num.inject {first, second -&gt;
+    first * second
+}
+
+// 2 * 1 * 2 * 3 * 4 * 5
+println num.inject(2, {first, second -&gt;
+    first * second
+}
+</code></pre></li>
+<li><p>collect(collection arg1, Closure arg2)用闭包将元素处理后放入list2中</p>
+<pre><code>def list2 = []
+list.collect(list2, {
+    it + &apos;---&apos; + it
+})
+println list2
+</code></pre></li>
+<li><p>遍历map</p>
+<pre><code>def map2 = [&apos;name&apos;: &apos;zhangsan&apos;, &apos;age&apos;: 20, &apos;address&apos;: &apos;shenzhen&apos;]
+map2.each {m -&gt;
+    println m.key + &apos;:&apos; + m.value
+}
+</code></pre></li>
+<li><p>查找key=name, find所使用闭包</p>
+<pre><code>find = map2.find {
+    it.key == &apos;name&apos;
+}
+println find.getValue()
+</code></pre></li>
+<li><p>使用键值</p>
+<pre><code>map2.each {k, v -&gt;
+    println k + &apos;:&apos; + v
+}
+</code></pre></li>
+<li><p>Range遍历</p>
+<pre><code>(1..&lt;10).each {i -&gt;
+    print i+&apos;-&apos;
+}
+</code></pre></li>
+<li><p>遍历GString</p>
+<pre><code>&apos;helloworld&apos;.each {s -&gt;
+    print s+&apos;-&apos;
+}
+</code></pre></li>
+<li><p>闭包嵌套</p>
+<pre><code>def closure1 = {aa -&gt;
+    println aa
+
+    def closure2 = {bb -&gt;
+        println bb
+    }
+}
+closure1(&apos;xx&apos;)(&apos;yy&apos;)
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Groovy/">Groovy</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Groovy/">Groovy</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/26/groovy-闭包/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/26/groovy-闭包/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/26/groovy-循环/" title="groovy-循环" itemprop="url">groovy-循环</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T17:03:59.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Groovy-_u5FAA_u73AF"><a href="#Groovy-_u5FAA_u73AF" class="headerlink" title="Groovy-循环"></a>Groovy-循环</h1><ul>
+<li><p>if、while、for、switch、println</p>
+<pre><code>package com.test
+
+import java.lang.invoke.SwitchPoint;
+
+def i = 0
+while (i &lt;= 5) {
+    println &quot;i = ${i}&quot;
+    i++
+}
+
+for (j = 0; j &lt;= 5; j++) {
+    println j
+}
+
+for (j in [0, 1, 2, 3, 4, 5]) {
+    println j
+}
+
+for (j in 0..3) {
+    println j
+}
+
+def map = [1: &apos;hello&apos;, 2: &apos;world&apos;]
+
+// if判断，如果map为空则返回null， 否则输出map的值
+// 比如：def map = []则返回null
+if (map) {
+    println map
+} else {
+    println null
+}
+
+switch (2) {
+    case 1: 
+        println 1
+        break
+    case 2: 
+        println 2
+        break
+    default: println &apos;default&apos;
+}
+
+switch (123) {
+    case 1: println 1
+    case &apos;10&apos;: println 10
+    case 1..5: println &apos;1..5&apos; // 这里表示在1-5范围内则输出
+    case Integer: println &apos;int&apos;   // 数值类型为Integer则输出
+    case [1, 2]: println &apos;xx&apos; // 这里表示只要包涵其中一个值，会输出xx
+    case {it % 3 == 0}: println &apos;9 % 3 == 0&apos; // 这里是一个闭包，被3整除
+    case ~&apos;[0-9]{3}&apos;: println &apos;qqqq&apos; // 正则表达式，输入的数字在0-9之间，并且有3位
+    default: println &apos;default&apos;
+}
+
+// 按照输入内容原样输出
+println &apos;&apos;&apos;
+    hahah
+        hahahah
+            hahahaha
+&apos;&apos;&apos;
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Groovy/">Groovy</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Groovy/">Groovy</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/26/groovy-循环/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/26/groovy-循环/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/02/26/groovy-安装eclipse插件/" title="groovy-安装eclipse插件" itemprop="url">groovy-安装eclipse插件</a>
   </h1>
   <p class="article-author">By
@@ -134,6 +616,258 @@
 	
 	  	<span></span>
 		<a href="/2016/02/26/groovy-安装eclipse插件/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/26/groovy-安装eclipse插件/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/26/groovy-字符串操作/" title="groovy-字符串操作" itemprop="url">groovy-字符串操作</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T16:58:52.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Groovy-_u5B57_u7B26_u4E32_u64CD_u4F5C"><a href="#Groovy-_u5B57_u7B26_u4E32_u64CD_u4F5C" class="headerlink" title="Groovy-字符串操作"></a>Groovy-字符串操作</h1><ul>
+<li><p>下标操作字符串</p>
+<pre><code>def str = &apos;hello world!!!&apos;
+println str[2]
+println str[0..3]
+println str[0..&lt;3]
+println str[2, 5, 8]
+</code></pre></li>
+<li><p>获取字符串长度</p>
+<pre><code>println str.length()
+println str.size()
+</code></pre></li>
+<li><p>字符串比较, 相等返回0、小于返回-1、大于返回1</p>
+<pre><code>println &apos;hello&apos; &lt;=&gt; &apos;hello&apos;
+println &apos;hello&apos; &lt;=&gt; &apos;Hello&apos;
+println &apos;hello&apos; &lt;=&gt; &apos;hello hello&apos;
+println &apos;hello&apos;.compareTo(&apos;Hello&apos;)
+</code></pre></li>
+<li><p>字符串连接</p>
+<pre><code>println &apos;hello&apos; + &apos; &apos; + &apos;world&apos;
+println &apos;hello&apos;.concat(&apos; world&apos;)
+println &apos;hello&apos;.leftShift(&apos; world&apos;)
+println &apos;hello&apos; &lt;&lt; &apos; world&apos;
+</code></pre></li>
+<li><p>字符串N倍输出</p>
+<pre><code>println &apos;hello&apos; * 5
+</code></pre></li>
+<li><p>字符串截取</p>
+<pre><code>println &apos;hello world&apos; - &apos; world&apos;
+println &apos;hello world&apos;.minus(&apos; world&apos;)
+println &apos;hello&apos;.substring(1)
+println &apos;hello&apos;.substring(2, 5)
+</code></pre></li>
+<li><p>忽略大小写比较</p>
+<pre><code>println &apos;hello&apos;.compareToIgnoreCase(&apos;Hello&apos;)
+println &apos;hello&apos;.equalsIgnoreCase(&apos;Hello&apos;)
+</code></pre></li>
+<li><p>字符串结尾是否llo</p>
+<p>  println ‘hello’.endsWith(‘llo’)</p>
+</li>
+<li><p>字符串所在索引位置</p>
+<pre><code>println &apos;hello&apos;.indexOf(&apos;ll&apos;)
+</code></pre></li>
+<li><p>字符串所在索引位置，指定位置开始查找，前面如果出现则忽略</p>
+<pre><code>println &apos;hello world&apos;.indexOf(&apos;o&apos;, 5)
+</code></pre></li>
+<li><p>字符串填充，如果指定长度大于字符串长度则像左右两边填充空格，否则直接显示字符串。可以指定只向左边或者只向右边填充，也可以指定填充内容、默认为空格</p>
+<pre><code>println &apos;[&apos; + &apos;hello&apos;.center(11) + &apos;]&apos;
+println &apos;[&apos; + &apos;hello&apos;.center(2) + &apos;]&apos;
+println &apos;[&apos; + &apos;hello&apos;.center(11, &apos;*&apos;) + &apos;]&apos;
+println &apos;[&apos; + &apos;hello&apos;.padLeft(11) + &apos;]&apos;
+println &apos;[&apos; + &apos;hello&apos;.padRight(11) + &apos;]&apos;
+println &apos;[&apos; + &apos;hello&apos;.padRight(11, &apos;*&apos;) + &apos;]&apos;
+</code></pre></li>
+<li><p>查找指定字符串出现的次数</p>
+<pre><code>println &apos;hello world&apos;.count(&apos;l&apos;)
+</code></pre></li>
+<li><p>是否包含指定字符</p>
+<pre><code>println &apos;hello&apos;.contains(&apos;ll&apos;)
+</code></pre></li>
+<li><p>将字符串最后一个字符向后移动一位</p>
+<pre><code>println &apos;hello&apos;.next()
+</code></pre></li>
+<li><p>将字符串最后一个字符向前移动一位</p>
+<pre><code>println &apos;hello&apos;.previous()
+</code></pre></li>
+<li><p>字符串替换，将小写字符串全部替换为大写</p>
+<pre><code>println &apos;hello&apos;.replaceAll(&apos;[a-z]&apos;) {
+    it.toUpperCase()
+｝
+</code></pre></li>
+<li><p>字符串反转</p>
+<pre><code>println &apos;hello&apos;.reverse()
+</code></pre></li>
+<li><p>字符串转toDouble、toInteger、toLong</p>
+<pre><code>println &apos;111&apos;.toDouble()
+</code></pre></li>
+<li><p>字符串转为ArrayList</p>
+<pre><code>println &apos;hello&apos;.toList()
+</code></pre></li>
+<li><p>字符串分词，返回ArrayList。按照空格分词, 也可以指定字符分词</p>
+<pre><code>println &apos;hello world&apos;.tokenize()
+println &apos;hello*world&apos;.tokenize(&apos;*&apos;)
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Groovy/">Groovy</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Groovy/">Groovy</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/26/groovy-字符串操作/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/26/groovy-字符串操作/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/26/groovy-正则表达式/" title="groovy-正则表达式" itemprop="url">groovy-正则表达式</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T16:54:24.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Groovy-_u6B63_u5219_u8868_u8FBE_u5F0F"><a href="#Groovy-_u6B63_u5219_u8868_u8FBE_u5F0F" class="headerlink" title="Groovy-正则表达式"></a>Groovy-正则表达式</h1><h2 id="u5143_u5B57_u7B26"><a href="#u5143_u5B57_u7B26" class="headerlink" title="元字符"></a>元字符</h2><ul>
+<li>.匹配任意单个字符 如：’hello’=~’hel.o’</li>
+<li>^匹配行的开始部分 如：’hello’=~’^he’</li>
+<li>$匹配行的结束部分 如：’hello’=~’llo$’</li>
+<li><em>表示</em>号前面字符或正则表达式出现0次或多次 如’hello’=~’l*’</li>
+<li>+表示+号前面字符或正则表达式出现0次或多次 如’hello’=~’l+’</li>
+<li>?表示?号前面字符或正则表达式出现0次或多次 如’hello’=~’l?’</li>
+<li>[]匹配[]中字符集任一字符 如：’hello999’=~’[a-z0-9]*9’</li>
+<li>{}限定次数，{1}表示限定一次、{1, 3}表示最少一次，最多3次 如’hello999’=~’hel{2}o9{1,3}’</li>
+<li>\转义符 如’$’==~’\$’</li>
+<li>|选择符 如’hello’=~’h(a|b|c|d|e)llo’</li>
+<li>()将封装的表达式组合起来 如’hello’=~’he(ll)o’</li>
+</ul>
+<h2 id="u8F85_u52A9_u7B26_u53F7"><a href="#u8F85_u52A9_u7B26_u53F7" class="headerlink" title="辅助符号"></a>辅助符号</h2><ul>
+<li>\d数字，等价于[0-9] 如’11223’=~’\d’</li>
+<li>\D非数字，等价于[^0-9] 如’sfsf&amp;((s’=~’\D’</li>
+<li>\wWord字符，等价于[a-zA-Z0-9] 如’wres11’=~’\w’</li>
+<li>\W非Word字符，等价于[^a-zA-Z0-9] 如’wres11<em>*</em>‘=~’\W’</li>
+<li>\s空白字符，等价于[\t\n\f\r\v] 如’   ‘=~’\s’</li>
+<li><p>\S非空白字符，等价于[^\t\n\f\r\v] 如’aaa’=~’\S’</p>
+<pre><code>assert &apos;hello&apos;=~&apos;he&apos;
+assert &apos;hello&apos;==~&apos;hello&apos;
+assert &apos;hello&apos;=~&apos;l+&apos;
+assert &apos;hello&apos;=~&apos;l?&apos;
+assert &apos;hello999&apos;=~&apos;[a-z0-9]*9&apos;
+assert &apos;hello999&apos;=~&apos;hel{2}o9{1,3}&apos;
+assert &apos;$&apos;==~&apos;\\$&apos;
+assert &apos;hello&apos;=~&apos;h(a|b|c|d|e)llo&apos;
+assert &apos;hello&apos;=~&apos;he(ll)o&apos;
+assert &apos;11223&apos;=~&apos;\\d&apos;
+assert &apos;sfsf&amp;((s&apos;=~&apos;\\D&apos;
+assert &apos;wres11&apos;=~&apos;\\w&apos;
+assert &apos;wres11***&apos;=~&apos;\\W&apos;
+assert &apos;   &apos;=~&apos;\\s&apos;
+assert &apos;aaa&apos;=~&apos;\\S&apos;
+
+def datePattern = &apos;([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})&apos;
+def date = &apos;2015-06-28&apos;
+def matcher = date=~datePattern
+matcher.matches()
+println matcher[0]
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Groovy/">Groovy</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Groovy/">Groovy</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/26/groovy-正则表达式/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/26/groovy-正则表达式/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -1879,493 +2613,6 @@ EOF
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-for-while/" title="Shell-for-while" itemprop="url">Shell-for-while</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:19:59.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-# for 
-
-arr=(111 2222 3333 4444 5555)
-num=5
-count=5
-
-# for--in--
-for m in ${arr[@]}; do
-    echo $m
-done
-
-echo &quot;------------------------------------------&quot;
-
-for n in $( ls /usr/local ); do
-    echo $n
-done
-
-echo &quot;------------------------------------------&quot;
-
-# while
-while [[ $num -gt 0 ]]; do
-    echo &quot;num: ${num}&quot;
-    num=$(($num - 1))
-done
-
-num=5
-
-echo &quot;------------------------------------------&quot;
-# while --- continue
-while [[ $num -gt 0 ]]; do
-    num=$(($num - 1))
-    if [[ $num -eq 3 ]]; then
-        continue
-    fi
-    echo &quot;num: ${num}&quot;
-done
-
-echo &quot;------------------------------------------&quot;
-# while --- break
-while [[ $count -gt 0 ]]; do
-    count=$(($count - 1))
-    if [[ $count -eq 3 ]]; then
-        break;
-    fi
-    echo &quot;count: ${count}&quot;
-done
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-for-while/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-for-while/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-ifelse/" title="Shell-ifelse" itemprop="url">Shell-ifelse</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:19:16.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-#if--else
-
-NAME=&quot;john&quot;
-
-# 注意if条件两边的空格
-if [ ${NAME} == &quot;john&quot; ]; then
-    echo &quot;hahhahahha&quot;
-else
-    echo &quot;huhuhuhuhu&quot;
-fi
-
-if [ ${NAME} == &quot;john&quot; ]; then
-    echo &quot;hahhahahha&quot;
-elif [ ${NAME} == &quot;johnx&quot; ]; then
-    echo &quot;huhuhuhuhu&quot;
-else
-    echo &quot;xxxxxxxxxx&quot;
-fi
-
-# 数值类型比较
-# $a -lt $b    $a &lt; $b
-# $a -gt $b    $a &gt; $b
-# $a -le $b    $a &lt;= $b
-# $a -ge $b    $a &gt;= $b
-# $a -eq $b    $a is equal to $b
-# $a -ne $b    $a is not equal to $b
-
-# 字符串类型比较
-# &quot;$a&quot; = &quot;$b&quot;     $a 和 $b 相等
-# &quot;$a&quot; == &quot;$b&quot;    $a 和 $b 相等
-# &quot;$a&quot; != &quot;$b&quot;    $a 和 $b 不相等
-# -z &quot;$a&quot;         $a 是空的
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-ifelse/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-ifelse/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-数组/" title="Shell-数组" itemprop="url">Shell-数组</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:18:38.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-# 数组 不支持多维数组
-# 通过index访问数组元素 arr[1]
-
-arr=(
-    xxxx
-    yyyy
-    wwww
-    &quot;hello world&quot;
-)
-
-# 使用下标定义
-arr1[0]=aaaa
-arr1[1]=bbb
-arr1[2]=cccc
-arr1[5]=dddd
-
-# 获取arr1所有值
-echo ${arr1[@]}
-
-# 获取arr1数组中值
-echo ${arr1[0]}
-echo ${arr1[1]}
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-数组/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-数组/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-函数/" title="Shell-函数" itemprop="url">Shell-函数</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:18:03.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-# function --
-# 函数返回值只能是整数，用来表示函数执行是否成功，0表示执行成功，其他表示失败
-# 如果返回非整数，则error
-# 函数名前面的function可加可不加
-# 函数可以使用return，return的返回值可以通过$?来接收
-# 
-# 也可以对函数进行删除，使用unset，后面加上.f
-# 如要删除function1函数：unset .f function1
-# 
-
-# 无参函数
-function function1 {
-    echo function1.
-}
-
-# 带参函数
-function function2 {
-    echo $1
-}
-
-# 多个参数
-function function3 {
-    echo $1 --- $2
-}
-
-function4() {
-    echo &quot;function4&quot;
-
-    return $((10 + 20))
-}
-
-# 函数嵌套调用
-function5() {
-    echo &quot;function5&quot;
-
-    function1
-}
-
-# 函数调用
-function1
-
-# 外部参数传入
-function2 $1
-function3 &quot;hello &quot; &quot;world!&quot;
-function4
-
-# 用来接收function4的返回值
-echo $?
-
-function5
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-函数/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-函数/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-转义替换/" title="Shell-转义替换" itemprop="url">Shell-转义替换</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:17:29.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-# 转义替换
-# -e 对转义字符进行替换
-
-echo -e &quot;hello world \n hahahah&quot;
-
-# 将命令执行的结果保存到变量中
-DATE=`date`
-echo $DATE
-
-# ${var:-message} 如果var为空或已被删除，则返回message，不会改变var的值
-# ${var:=message} 如果var为空或已被删除，则返回message，并将var的值设置为message
-# ${var:?message} 如果var为空或已被删除，则把message做为错误消息输出，脚本停止运行
-# ${var:+message} 如果var已被定义，则返回message，不会改变var的值
-
-echo ${var:-&quot;a---hahahahha&quot;}
-echo ${var:=&quot;b---hahhahaha&quot;}
-echo ${var}
-
-unset var
-echo ${var:?&quot;c---hahahahha&quot;} # 程序运行此处将停止
-
-echo ${var:+&quot;d---hahahhaha&quot;}
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-转义替换/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-转义替换/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -2400,7 +2647,7 @@ echo ${var:+&quot;d---hahahhaha&quot;}
 		  
 		
 		  
-			<li><a href="/categories/Groovy/" title="Groovy">Groovy<sup>1</sup></a></li>
+			<li><a href="/categories/Groovy/" title="Groovy">Groovy<sup>6</sup></a></li>
 		  
 		
 		  
@@ -2499,7 +2746,7 @@ echo ${var:+&quot;d---hahahhaha&quot;}
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Groovy/" style="font-size: 10px;">Groovy</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Groovy/" style="font-size: 16.67px;">Groovy</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
     </div>
   </div>
 

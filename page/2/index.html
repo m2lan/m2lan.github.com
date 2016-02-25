@@ -86,6 +86,493 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/12/10/Shell-for-while/" title="Shell-for-while" itemprop="url">Shell-for-while</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:19:59.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>#!/bin/bash
+# for 
+
+arr=(111 2222 3333 4444 5555)
+num=5
+count=5
+
+# for--in--
+for m in ${arr[@]}; do
+    echo $m
+done
+
+echo &quot;------------------------------------------&quot;
+
+for n in $( ls /usr/local ); do
+    echo $n
+done
+
+echo &quot;------------------------------------------&quot;
+
+# while
+while [[ $num -gt 0 ]]; do
+    echo &quot;num: ${num}&quot;
+    num=$(($num - 1))
+done
+
+num=5
+
+echo &quot;------------------------------------------&quot;
+# while --- continue
+while [[ $num -gt 0 ]]; do
+    num=$(($num - 1))
+    if [[ $num -eq 3 ]]; then
+        continue
+    fi
+    echo &quot;num: ${num}&quot;
+done
+
+echo &quot;------------------------------------------&quot;
+# while --- break
+while [[ $count -gt 0 ]]; do
+    count=$(($count - 1))
+    if [[ $count -eq 3 ]]; then
+        break;
+    fi
+    echo &quot;count: ${count}&quot;
+done
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Shell/">Shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Shell-for-while/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-for-while/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Shell-ifelse/" title="Shell-ifelse" itemprop="url">Shell-ifelse</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:19:16.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>#!/bin/bash
+#if--else
+
+NAME=&quot;john&quot;
+
+# 注意if条件两边的空格
+if [ ${NAME} == &quot;john&quot; ]; then
+    echo &quot;hahhahahha&quot;
+else
+    echo &quot;huhuhuhuhu&quot;
+fi
+
+if [ ${NAME} == &quot;john&quot; ]; then
+    echo &quot;hahhahahha&quot;
+elif [ ${NAME} == &quot;johnx&quot; ]; then
+    echo &quot;huhuhuhuhu&quot;
+else
+    echo &quot;xxxxxxxxxx&quot;
+fi
+
+# 数值类型比较
+# $a -lt $b    $a &lt; $b
+# $a -gt $b    $a &gt; $b
+# $a -le $b    $a &lt;= $b
+# $a -ge $b    $a &gt;= $b
+# $a -eq $b    $a is equal to $b
+# $a -ne $b    $a is not equal to $b
+
+# 字符串类型比较
+# &quot;$a&quot; = &quot;$b&quot;     $a 和 $b 相等
+# &quot;$a&quot; == &quot;$b&quot;    $a 和 $b 相等
+# &quot;$a&quot; != &quot;$b&quot;    $a 和 $b 不相等
+# -z &quot;$a&quot;         $a 是空的
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Shell/">Shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Shell-ifelse/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-ifelse/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Shell-数组/" title="Shell-数组" itemprop="url">Shell-数组</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:18:38.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>#!/bin/bash
+# 数组 不支持多维数组
+# 通过index访问数组元素 arr[1]
+
+arr=(
+    xxxx
+    yyyy
+    wwww
+    &quot;hello world&quot;
+)
+
+# 使用下标定义
+arr1[0]=aaaa
+arr1[1]=bbb
+arr1[2]=cccc
+arr1[5]=dddd
+
+# 获取arr1所有值
+echo ${arr1[@]}
+
+# 获取arr1数组中值
+echo ${arr1[0]}
+echo ${arr1[1]}
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Shell/">Shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Shell-数组/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-数组/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Shell-函数/" title="Shell-函数" itemprop="url">Shell-函数</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:18:03.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>#!/bin/bash
+# function --
+# 函数返回值只能是整数，用来表示函数执行是否成功，0表示执行成功，其他表示失败
+# 如果返回非整数，则error
+# 函数名前面的function可加可不加
+# 函数可以使用return，return的返回值可以通过$?来接收
+# 
+# 也可以对函数进行删除，使用unset，后面加上.f
+# 如要删除function1函数：unset .f function1
+# 
+
+# 无参函数
+function function1 {
+    echo function1.
+}
+
+# 带参函数
+function function2 {
+    echo $1
+}
+
+# 多个参数
+function function3 {
+    echo $1 --- $2
+}
+
+function4() {
+    echo &quot;function4&quot;
+
+    return $((10 + 20))
+}
+
+# 函数嵌套调用
+function5() {
+    echo &quot;function5&quot;
+
+    function1
+}
+
+# 函数调用
+function1
+
+# 外部参数传入
+function2 $1
+function3 &quot;hello &quot; &quot;world!&quot;
+function4
+
+# 用来接收function4的返回值
+echo $?
+
+function5
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Shell/">Shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Shell-函数/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-函数/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Shell-转义替换/" title="Shell-转义替换" itemprop="url">Shell-转义替换</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T18:17:29.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>#!/bin/bash
+# 转义替换
+# -e 对转义字符进行替换
+
+echo -e &quot;hello world \n hahahah&quot;
+
+# 将命令执行的结果保存到变量中
+DATE=`date`
+echo $DATE
+
+# ${var:-message} 如果var为空或已被删除，则返回message，不会改变var的值
+# ${var:=message} 如果var为空或已被删除，则返回message，并将var的值设置为message
+# ${var:?message} 如果var为空或已被删除，则把message做为错误消息输出，脚本停止运行
+# ${var:+message} 如果var已被定义，则返回message，不会改变var的值
+
+echo ${var:-&quot;a---hahahahha&quot;}
+echo ${var:=&quot;b---hahhahaha&quot;}
+echo ${var}
+
+unset var
+echo ${var:?&quot;c---hahahahha&quot;} # 程序运行此处将停止
+
+echo ${var:+&quot;d---hahahhaha&quot;}
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Shell/">Shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Shell-转义替换/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-转义替换/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/12/10/Shell-case/" title="Shell-case" itemprop="url">Shell-case</a>
   </h1>
   <p class="article-author">By
@@ -1876,675 +2363,6 @@ To git@github.com:michaelliao/learngit.git
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Git-cherry-pick使用/" title="Git-cherry-pick使用" itemprop="url">Git-cherry-pick使用</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T17:29:15.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ul>
-<li><code>git cherry-pick</code>用于把另一个本地分支的<code>commit</code>修改应用到当前分支。</li>
-<li>在本地 <code>master</code> 分支上做了一个<code>commit( 38361a68138140827b31b72f8bbfd88b3705d77a )</code>,如何把它放到 本地 <code>old_cc</code> 分支上？</li>
-<li>办法之一： 使用 <code>cherry-pick</code>. 根据git 文档： <code>Apply the changes introduced by some existing commits</code></li>
-<li>就是对已经存在的<code>commit</code>进行<code>apply</code>(可以理解为再次提交)</li>
-<li>简单用法：<code>git cherry-pick &lt;commit id&gt;</code></li>
-<li><p>例如：</p>
-<pre><code>$ git checkout old_cc
-$ git cherry-pick 38361a68
-</code></pre></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Git/">Git</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Git/">Git</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Git-cherry-pick使用/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Git-cherry-pick使用/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Maven-聚合和继承/" title="Maven-聚合和继承" itemprop="url">Maven-聚合和继承</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T17:23:02.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="u805A_u5408"><a href="#u805A_u5408" class="headerlink" title="聚合"></a>聚合</h2><ul>
-<li>如果一个项目依赖数十个模块，那么要一个一个编译起来是非常浪费时间的，所以就需要把所需模块聚合在一起，一起编译。</li>
-<li>比如当前有User有两个模块：1.user-dao, 2.user-service，在eclipse中创建一个<code>create a simple project(skip archetype selection)</code>,</li>
-<li>填入：Group Id, Artifact Id(这里为user-parent), Version, Packaging(这里选择pom),然后创建。</li>
-<li><p>在<code>user-parent/pom.xml</code>中添加如下代码：</p>
-<pre><code>&lt;modules&gt;
-  &lt;module&gt;../user-dao&lt;/module&gt;
-  &lt;module&gt;../user-service&lt;/module&gt;
-&lt;/modules&gt;
-</code></pre></li>
-<li>接下来就可以直接在<code>user-parent/pom.xml</code>编译了。<h2 id="u7EE7_u627F"><a href="#u7EE7_u627F" class="headerlink" title="继承"></a>继承</h2></li>
-<li>将<code>pom.xml</code>中相同的配置也放入<code>user-parent/pom.xml</code>中</li>
-<li>依赖包管理，将所需的依赖包放入<code>user-parent/pom.xml</code>中进行统一管理</li>
-<li><p><code>user-parent/pom.xml</code>的整体代码如下：</p>
-<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;groupId&gt;com.m2.user&lt;/groupId&gt;
-    &lt;artifactId&gt;user-parent&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;packaging&gt;pom&lt;/packaging&gt;
-
-    &lt;modules&gt;
-        &lt;module&gt;../user-dao&lt;/module&gt;
-        &lt;module&gt;../user-service&lt;/module&gt;
-    &lt;/modules&gt;
-
-    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
-
-    &lt;properties&gt;
-        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-    &lt;/properties&gt;
-
-    &lt;dependencyManagement&gt;
-        &lt;dependencies&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;junit&lt;/groupId&gt;
-                &lt;artifactId&gt;junit&lt;/artifactId&gt;
-                &lt;version&gt;4.10&lt;/version&gt;
-                &lt;scope&gt;test&lt;/scope&gt;
-            &lt;/dependency&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;log4j&lt;/groupId&gt;
-                &lt;artifactId&gt;log4j&lt;/artifactId&gt;
-                &lt;version&gt;1.2.16&lt;/version&gt;
-            &lt;/dependency&gt;
-
-        &lt;/dependencies&gt;
-    &lt;/dependencyManagement&gt;
-&lt;/project&gt;
-</code></pre></li>
-<li><p><code>user-dao/pom.xml</code>如下：</p>
-<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;parent&gt;
-        &lt;groupId&gt;com.m2.user&lt;/groupId&gt;
-        &lt;artifactId&gt;user-parent&lt;/artifactId&gt;
-        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-        &lt;relativePath&gt;../user-parent/pom.xml&lt;/relativePath&gt;
-    &lt;/parent&gt;
-    &lt;artifactId&gt;user-dao&lt;/artifactId&gt;
-    &lt;packaging&gt;jar&lt;/packaging&gt;
-
-    &lt;name&gt;user-dao&lt;/name&gt;
-
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;junit&lt;/groupId&gt;
-            &lt;artifactId&gt;junit&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;log4j&lt;/groupId&gt;
-            &lt;artifactId&gt;log4j&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/project&gt;
-</code></pre></li>
-<li><p><code>user-service/pom.xml</code>如下:</p>
-<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;parent&gt;
-        &lt;groupId&gt;com.m2.user&lt;/groupId&gt;
-        &lt;artifactId&gt;user-parent&lt;/artifactId&gt;
-        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-        &lt;relativePath&gt;../user-parent/pom.xml&lt;/relativePath&gt;
-    &lt;/parent&gt;
-    &lt;artifactId&gt;user-service&lt;/artifactId&gt;
-    &lt;packaging&gt;jar&lt;/packaging&gt;
-
-    &lt;name&gt;user-service&lt;/name&gt;
-
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;junit&lt;/groupId&gt;
-            &lt;artifactId&gt;junit&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;log4j&lt;/groupId&gt;
-            &lt;artifactId&gt;log4j&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/project&gt;
-</code></pre></li>
-<li>这样就可以对包进行统一管理、代码重复的问题。</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Maven/">Maven</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Maven/">Maven</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Maven-聚合和继承/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Maven-聚合和继承/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/SpringMVC-学习02/" title="SpringMVC-学习02" itemprop="url">SpringMVC-学习02</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T17:21:56.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="u4F20_u503C_u548C_u63A5_u53D7_u4F20_u503C"><a href="#u4F20_u503C_u548C_u63A5_u53D7_u4F20_u503C" class="headerlink" title="传值和接受传值"></a>传值和接受传值</h2><pre><code>package com.demo.controller;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-@Controller
-public class HelloController {
-
-@RequestMapping(&quot;/&quot;)
-public String hello() {
-    return &quot;hello&quot;;
-}
-
-/**
- * @param username
- * @requestParam 表示参数username为必须
- * request http://localhost:8080/demo?username=aaa
- * @return
- */
-@RequestMapping(&quot;/say&quot;)
-public String say(@RequestParam(&quot;username&quot;) String username) {
-    System.out.println(username);
-    return &quot;say&quot;;
-}
-
-/**
- * @param username
- * username参数可传可不传，不传就为null
- * @return
- */
-@RequestMapping(&quot;/say1&quot;)
-public String say1(String username) { 
-    System.out.println(username);
-    return &quot;say&quot;;
-}
-
-/**
- * @param username
- * @param context
- * 传值给视图 01: 使用map方式
- * 视图使用${username}
- * @return
- */
-@RequestMapping(&quot;/say2&quot;)
-public String say2(String username, Map&lt;String, Object&gt; context) {
-    context.put(&quot;username&quot;, username);
-    return &quot;say2&quot;;
-}
-
-/**
- * @param username
- * @param context
- * 传值给视图 02: 使用model方式
- * 视图使用${username}
- * @return
- */
-@RequestMapping(&quot;/say3&quot;)
-public String say3(String username, Model model) {
-
-//        01
-//        model.addAttribute(&quot;username&quot;, username);
-
-//        02
-//        Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
-//        map.put(&quot;username&quot;, username);
-//        model.addAllAttributes(map);
-
-//        03(key为参数的类型，username是String类型，则视图${string})
-//        model.addAttribute(username);
-        return &quot;say2&quot;;
-    }
-}
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Spring-MVC/">Spring-MVC</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Spring-MVC/">Spring-MVC</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/SpringMVC-学习02/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/SpringMVC-学习02/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/SpringMVC-学习01/" title="SpringMVC-学习01" itemprop="url">SpringMVC-学习01</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T17:19:19.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ul>
-<li>下载<a href="http://maven.springframework.org/release/org/springframework/spring/" target="_blank" rel="external">springframework</a></li>
-<li>新建web项目，拷贝<code>spring-framework-4.1.2.RELEASE/libs</code>下面所有的<code>*.RELEASE.jar</code>到<code>lib</code>目录下。</li>
-<li><p>配置<code>web.xml</code></p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;web-app version=&quot;3.1&quot; xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;&gt;
-    &lt;servlet&gt;
-        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet &lt;/servlet-class&gt;
-        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt; // 启动就加载
-    &lt;/servlet&gt;
-    &lt;servlet-mapping&gt;
-        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-        &lt;url-pattern&gt;/&lt;/url-pattern&gt; // 监听所有的请求
-    &lt;/servlet-mapping&gt;
-&lt;/web-app&gt;
-</code></pre></li>
-<li><p>在<code>/WEB-INF</code>下新建<code>hello-servlet.xml</code>(hello取决于web.xml中servlet-name的配置),配置如下</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
-    xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd&quot;&gt;
-
-    &lt;!-- 这两项启动annotation配置 --&gt;
-    &lt;context:component-scan base-package=&quot;com.demo.controller&quot;/&gt;
-    &lt;mvc:annotation-driven/&gt;
-
-    &lt;!-- 配置视图文件的路径和后缀 --&gt;
-    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
-        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;
-        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-
-&lt;/beans&gt;
-</code></pre></li>
-<li><p>新建一个<code>controller</code>文件，<code>package=hello-servlet.xml</code>的<code>base-package</code></p>
-<pre><code>package com.demo.controller;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-@Controller
-public class HelloController {
-
-    @RequestMapping(&quot;/&quot;)
-    // 当访问http://localhost:8080/APP/时就会进入该方法，方法映射到hello视图
-    public String hello() {
-        return &quot;hello&quot;;
-    }
-}
-</code></pre></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Spring-MVC/">Spring-MVC</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Spring-MVC/">Spring-MVC</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/SpringMVC-学习01/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/SpringMVC-学习01/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Mac-配置vim/" title="Mac-配置vim" itemprop="url">Mac-配置vim</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T17:17:00.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ul>
-<li>下载配色方案<a href="https://github.com/tomasr/molokai" target="_blank" rel="external">molokai</a></li>
-<li>在当前用户根目录下的<code>~/.vim</code>创建<code>colors</code>目录，将下载的配色方案中的<code>molokai.vim</code>移动到<code>~/.vim/colors</code>中</li>
-<li>在当前用户根目录下新建<code>.vimrc</code>，添加<code>colorscheme molokai</code><ul>
-<li><code>vimrc</code>可以把<code>/usr/share/vim/vimrc</code>拷贝过来</li>
-</ul>
-</li>
-<li><p>更多的配置如下</p>
-<pre><code>&quot; Configuration file for vim
-set modelines=0 &quot; CVE-2007-2438
-
-&quot; Normally we use vim-extensions. If you want true vi-compatibility
-&quot; remove change the following statements
-set nocompatible &quot; Use Vim defaults instead of 100% vi compatibility
-set backspace=2 &quot; more powerful backspacing
-
-&quot; Don&apos;t write backup file if vim is being called by &quot;crontab -e&quot;
-au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
-&quot; Don&apos;t write backup file if vim is being called by &quot;chpass&quot;
-au BufWrite /private/etc/pw.* set nowritebackup nobackup
-
-&quot; 语法高亮
-syntax on
-
-autocmd InsertLeave * se nocul
-autocmd InsertEnter * se cul
-&quot; 用浅色高亮当前行
-
-set smartindent
-&quot; 智能对齐
-
-set autoindent
-&quot; 自动对齐
-
-set confirm
-&quot; 在处理未保存或只读文件的时候，弹出确认
-
-set tabstop=4
-&quot; Tab键的宽度
-
-set softtabstop=4
-set shiftwidth=4
-&quot;  统一缩进为4
-
-set noexpandtab
-&quot; 不要用空格代替制表符
-
-set number
-&quot; 显示行号
-
-set number
-&quot; 显示行号
-
-set hlsearch
-set incsearch
-&quot; 搜索逐字符高亮
-
-set gdefault
-&quot; 行内替换
-
-set encoding=utf-8
-set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
-&quot; 编码设置
-
-colorscheme molokai
-&quot; 设置颜色主题
-
-set guifont=Menlo:h16:cANSI
-&quot; 设置字体
-
-set langmenu=zn_CN.UTF-8
-set helplang=cn
-&quot; 语言设置
-
-set cmdheight=2
-&quot; 命令行（在状态行）的高度，默认为1,这里是2
-
-set ruler
-&quot; 在编辑过程中，在右下角显示光标位置的状态行
-
-set laststatus=2
-&quot; 总是显示状态行
-
-set showcmd
-&quot; 在状态行显示目前所执行的命令，未完成的指令片段亦会显示出来
-
-set scrolloff=3
-&quot; 光标移动到buffer的顶部和底部时保持3行距离
-
-set showmatch
-&quot; 高亮显示对应的括号
-
-set matchtime=5
-&quot; 对应括号高亮的时间（单位是十分之一秒）
-
-set autowrite
-&quot; 在切换buffer时自动保存当前文件
-
-set wildmenu
-&quot; 增强模式中的命令行自动完成操作
-
-set linespace=2
-&quot; 字符间插入的像素行数目
-
-set whichwrap=b,s,&lt;,&gt;,[,]
-&quot; 开启Normal或Visual模式下Backspace键，空格键，左方向键，右方向键，Insert或replace模式下左方向键，右方向键跳行的功能。
-</code></pre></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Mac/">Mac</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Mac/">Mac</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Mac-配置vim/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Mac-配置vim/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -2579,7 +2397,7 @@ set whichwrap=b,s,&lt;,&gt;,[,]
 		  
 		
 		  
-			<li><a href="/categories/Groovy/" title="Groovy">Groovy<sup>1</sup></a></li>
+			<li><a href="/categories/Groovy/" title="Groovy">Groovy<sup>6</sup></a></li>
 		  
 		
 		  
@@ -2678,7 +2496,7 @@ set whichwrap=b,s,&lt;,&gt;,[,]
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Groovy/" style="font-size: 10px;">Groovy</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Groovy/" style="font-size: 16.67px;">Groovy</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
     </div>
   </div>
 

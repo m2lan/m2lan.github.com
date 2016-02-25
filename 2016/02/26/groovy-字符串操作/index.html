@@ -6,32 +6,59 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>groovy-安装eclipse插件 | 知识记录</title>
+    <title>groovy-字符串操作 | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="Groovy-安装eclipse插件
-进入Groovy官网工具页面eclipse，拷贝Release update site
-打开eclipse -&amp;gt; help -&amp;gt; Install New Software添加，把上面拷贝的地址粘贴在url上
-选择Groovy-Eclipse一直next直到完成。">
+    <meta name="description" content="Groovy-字符串操作
+下标操作字符串
+def str = &amp;apos;hello world!!!&amp;apos;
+println str[2]
+println str[0..3]
+println str[0..&amp;lt;3]
+println str[2, 5, 8]
+
+获取字符串长度
+println str.length()
+println str.size()
+
+字符串比较, 相等返回0、小于返">
 <meta property="og:type" content="article">
-<meta property="og:title" content="groovy-安装eclipse插件">
-<meta property="og:url" content="http://im.yonglang.co/2016/02/26/groovy-安装eclipse插件/index.html">
+<meta property="og:title" content="groovy-字符串操作">
+<meta property="og:url" content="http://im.yonglang.co/2016/02/26/groovy-字符串操作/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Groovy-安装eclipse插件
-进入Groovy官网工具页面eclipse，拷贝Release update site
-打开eclipse -&amp;gt; help -&amp;gt; Install New Software添加，把上面拷贝的地址粘贴在url上
-选择Groovy-Eclipse一直next直到完成。">
-<meta property="og:updated_time" content="2016-02-25T17:02:50.000Z">
+<meta property="og:description" content="Groovy-字符串操作
+下标操作字符串
+def str = &amp;apos;hello world!!!&amp;apos;
+println str[2]
+println str[0..3]
+println str[0..&amp;lt;3]
+println str[2, 5, 8]
+
+获取字符串长度
+println str.length()
+println str.size()
+
+字符串比较, 相等返回0、小于返">
+<meta property="og:updated_time" content="2016-02-25T17:00:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="groovy-安装eclipse插件">
-<meta name="twitter:description" content="Groovy-安装eclipse插件
-进入Groovy官网工具页面eclipse，拷贝Release update site
-打开eclipse -&amp;gt; help -&amp;gt; Install New Software添加，把上面拷贝的地址粘贴在url上
-选择Groovy-Eclipse一直next直到完成。">
+<meta name="twitter:title" content="groovy-字符串操作">
+<meta name="twitter:description" content="Groovy-字符串操作
+下标操作字符串
+def str = &amp;apos;hello world!!!&amp;apos;
+println str[2]
+println str[0..3]
+println str[0..&amp;lt;3]
+println str[2, 5, 8]
+
+获取字符串长度
+println str.length()
+println str.size()
+
+字符串比较, 相等返回0、小于返">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -94,14 +121,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/02/26/groovy-安装eclipse插件/" title="groovy-安装eclipse插件" itemprop="url">groovy-安装eclipse插件</a>
+      <a href="/2016/02/26/groovy-字符串操作/" title="groovy-字符串操作" itemprop="url">groovy-字符串操作</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2016-02-25T17:01:20.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
+    <time datetime="2016-02-25T16:58:52.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
     
   </p>
 </header>
@@ -110,14 +137,94 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6"><span class="toc-number">1.</span> <span class="toc-text">Groovy-安装eclipse插件</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u5B57_u7B26_u4E32_u64CD_u4F5C"><span class="toc-number">1.</span> <span class="toc-text">Groovy-字符串操作</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6"><a href="#Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6" class="headerlink" title="Groovy-安装eclipse插件"></a>Groovy-安装eclipse插件</h1><ul>
-<li>进入Groovy官网工具页面<a href="http://docs.groovy-lang.org/latest/html/documentation/tools-groovyeclipse.html#Groovy-EclipsecompilerpluginforMaven-Groovy-Eclipseconfiguratorform2Eclipse" target="_blank" rel="external">eclipse</a>，拷贝<em>Release update site</em></li>
-<li>打开<code>eclipse -&gt; help -&gt; Install New Software</code>添加，把上面拷贝的地址粘贴在url上</li>
-<li>选择<code>Groovy-Eclipse</code>一直next直到完成。</li>
+		<h1 id="Groovy-_u5B57_u7B26_u4E32_u64CD_u4F5C"><a href="#Groovy-_u5B57_u7B26_u4E32_u64CD_u4F5C" class="headerlink" title="Groovy-字符串操作"></a>Groovy-字符串操作</h1><ul>
+<li><p>下标操作字符串</p>
+<pre><code>def str = &apos;hello world!!!&apos;
+println str[2]
+println str[0..3]
+println str[0..&lt;3]
+println str[2, 5, 8]
+</code></pre></li>
+<li><p>获取字符串长度</p>
+<pre><code>println str.length()
+println str.size()
+</code></pre></li>
+<li><p>字符串比较, 相等返回0、小于返回-1、大于返回1</p>
+<pre><code>println &apos;hello&apos; &lt;=&gt; &apos;hello&apos;
+println &apos;hello&apos; &lt;=&gt; &apos;Hello&apos;
+println &apos;hello&apos; &lt;=&gt; &apos;hello hello&apos;
+println &apos;hello&apos;.compareTo(&apos;Hello&apos;)
+</code></pre></li>
+<li><p>字符串连接</p>
+<pre><code>println &apos;hello&apos; + &apos; &apos; + &apos;world&apos;
+println &apos;hello&apos;.concat(&apos; world&apos;)
+println &apos;hello&apos;.leftShift(&apos; world&apos;)
+println &apos;hello&apos; &lt;&lt; &apos; world&apos;
+</code></pre></li>
+<li><p>字符串N倍输出</p>
+<pre><code>println &apos;hello&apos; * 5
+</code></pre></li>
+<li><p>字符串截取</p>
+<pre><code>println &apos;hello world&apos; - &apos; world&apos;
+println &apos;hello world&apos;.minus(&apos; world&apos;)
+println &apos;hello&apos;.substring(1)
+println &apos;hello&apos;.substring(2, 5)
+</code></pre></li>
+<li><p>忽略大小写比较</p>
+<pre><code>println &apos;hello&apos;.compareToIgnoreCase(&apos;Hello&apos;)
+println &apos;hello&apos;.equalsIgnoreCase(&apos;Hello&apos;)
+</code></pre></li>
+<li><p>字符串结尾是否llo</p>
+<p>  println ‘hello’.endsWith(‘llo’)</p>
+</li>
+<li><p>字符串所在索引位置</p>
+<pre><code>println &apos;hello&apos;.indexOf(&apos;ll&apos;)
+</code></pre></li>
+<li><p>字符串所在索引位置，指定位置开始查找，前面如果出现则忽略</p>
+<pre><code>println &apos;hello world&apos;.indexOf(&apos;o&apos;, 5)
+</code></pre></li>
+<li><p>字符串填充，如果指定长度大于字符串长度则像左右两边填充空格，否则直接显示字符串。可以指定只向左边或者只向右边填充，也可以指定填充内容、默认为空格</p>
+<pre><code>println &apos;[&apos; + &apos;hello&apos;.center(11) + &apos;]&apos;
+println &apos;[&apos; + &apos;hello&apos;.center(2) + &apos;]&apos;
+println &apos;[&apos; + &apos;hello&apos;.center(11, &apos;*&apos;) + &apos;]&apos;
+println &apos;[&apos; + &apos;hello&apos;.padLeft(11) + &apos;]&apos;
+println &apos;[&apos; + &apos;hello&apos;.padRight(11) + &apos;]&apos;
+println &apos;[&apos; + &apos;hello&apos;.padRight(11, &apos;*&apos;) + &apos;]&apos;
+</code></pre></li>
+<li><p>查找指定字符串出现的次数</p>
+<pre><code>println &apos;hello world&apos;.count(&apos;l&apos;)
+</code></pre></li>
+<li><p>是否包含指定字符</p>
+<pre><code>println &apos;hello&apos;.contains(&apos;ll&apos;)
+</code></pre></li>
+<li><p>将字符串最后一个字符向后移动一位</p>
+<pre><code>println &apos;hello&apos;.next()
+</code></pre></li>
+<li><p>将字符串最后一个字符向前移动一位</p>
+<pre><code>println &apos;hello&apos;.previous()
+</code></pre></li>
+<li><p>字符串替换，将小写字符串全部替换为大写</p>
+<pre><code>println &apos;hello&apos;.replaceAll(&apos;[a-z]&apos;) {
+    it.toUpperCase()
+｝
+</code></pre></li>
+<li><p>字符串反转</p>
+<pre><code>println &apos;hello&apos;.reverse()
+</code></pre></li>
+<li><p>字符串转toDouble、toInteger、toLong</p>
+<pre><code>println &apos;111&apos;.toDouble()
+</code></pre></li>
+<li><p>字符串转为ArrayList</p>
+<pre><code>println &apos;hello&apos;.toList()
+</code></pre></li>
+<li><p>字符串分词，返回ArrayList。按照空格分词, 也可以指定字符分词</p>
+<pre><code>println &apos;hello world&apos;.tokenize()
+println &apos;hello*world&apos;.tokenize(&apos;*&apos;)
+</code></pre></li>
 </ul>
   
 	</div>
@@ -141,7 +248,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2016/02/26/groovy-安装eclipse插件/" data-title="groovy-安装eclipse插件 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2016/02/26/groovy-字符串操作/" data-title="groovy-字符串操作 | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -155,18 +262,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/02/26/groovy-循环/" title="groovy-循环">
+ <a href="/2016/02/26/groovy-安装eclipse插件/" title="groovy-安装eclipse插件">
   <strong>上一篇：</strong><br/>
   <span>
-  groovy-循环</span>
+  groovy-安装eclipse插件</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/02/26/groovy-字符串操作/"  title="groovy-字符串操作">
+<a href="/2016/02/26/groovy-正则表达式/"  title="groovy-正则表达式">
  <strong>下一篇：</strong><br/> 
- <span>groovy-字符串操作
+ <span>groovy-正则表达式
 </span>
 </a>
 </div>
@@ -175,7 +282,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/02/26/groovy-安装eclipse插件/" data-title="groovy-安装eclipse插件" data-url="http://im.yonglang.co/2016/02/26/groovy-安装eclipse插件/"></div>
+	<div class="ds-thread" data-thread-key="2016/02/26/groovy-字符串操作/" data-title="groovy-字符串操作" data-url="http://im.yonglang.co/2016/02/26/groovy-字符串操作/"></div>
 </section>
 
 
@@ -185,7 +292,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6"><span class="toc-number">1.</span> <span class="toc-text">Groovy-安装eclipse插件</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u5B57_u7B26_u4E32_u64CD_u4F5C"><span class="toc-number">1.</span> <span class="toc-text">Groovy-字符串操作</span></a></li></ol>
  
   </div>
 

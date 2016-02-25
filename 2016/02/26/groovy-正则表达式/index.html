@@ -6,32 +6,41 @@
   <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
   <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
   
-    <title>groovy-安装eclipse插件 | 知识记录</title>
+    <title>groovy-正则表达式 | 知识记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M2">
     
 
     
-    <meta name="description" content="Groovy-安装eclipse插件
-进入Groovy官网工具页面eclipse，拷贝Release update site
-打开eclipse -&amp;gt; help -&amp;gt; Install New Software添加，把上面拷贝的地址粘贴在url上
-选择Groovy-Eclipse一直next直到完成。">
+    <meta name="description" content="Groovy-正则表达式元字符
+.匹配任意单个字符 如：’hello’=~’hel.o’
+^匹配行的开始部分 如：’hello’=~’^he’
+$匹配行的结束部分 如：’hello’=~’llo$’
+表示号前面字符或正则表达式出现0次或多次 如’hello’=~’l*’
++表示+号前面字符或正则表达式出现0次或多次 如’hello’=~’l+’
+?表示?号前面字符或正则表达式出现0次或多次 如’h">
 <meta property="og:type" content="article">
-<meta property="og:title" content="groovy-安装eclipse插件">
-<meta property="og:url" content="http://im.yonglang.co/2016/02/26/groovy-安装eclipse插件/index.html">
+<meta property="og:title" content="groovy-正则表达式">
+<meta property="og:url" content="http://im.yonglang.co/2016/02/26/groovy-正则表达式/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Groovy-安装eclipse插件
-进入Groovy官网工具页面eclipse，拷贝Release update site
-打开eclipse -&amp;gt; help -&amp;gt; Install New Software添加，把上面拷贝的地址粘贴在url上
-选择Groovy-Eclipse一直next直到完成。">
-<meta property="og:updated_time" content="2016-02-25T17:02:50.000Z">
+<meta property="og:description" content="Groovy-正则表达式元字符
+.匹配任意单个字符 如：’hello’=~’hel.o’
+^匹配行的开始部分 如：’hello’=~’^he’
+$匹配行的结束部分 如：’hello’=~’llo$’
+表示号前面字符或正则表达式出现0次或多次 如’hello’=~’l*’
++表示+号前面字符或正则表达式出现0次或多次 如’hello’=~’l+’
+?表示?号前面字符或正则表达式出现0次或多次 如’h">
+<meta property="og:updated_time" content="2016-02-25T16:56:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="groovy-安装eclipse插件">
-<meta name="twitter:description" content="Groovy-安装eclipse插件
-进入Groovy官网工具页面eclipse，拷贝Release update site
-打开eclipse -&amp;gt; help -&amp;gt; Install New Software添加，把上面拷贝的地址粘贴在url上
-选择Groovy-Eclipse一直next直到完成。">
+<meta name="twitter:title" content="groovy-正则表达式">
+<meta name="twitter:description" content="Groovy-正则表达式元字符
+.匹配任意单个字符 如：’hello’=~’hel.o’
+^匹配行的开始部分 如：’hello’=~’^he’
+$匹配行的结束部分 如：’hello’=~’llo$’
+表示号前面字符或正则表达式出现0次或多次 如’hello’=~’l*’
++表示+号前面字符或正则表达式出现0次或多次 如’hello’=~’l+’
+?表示?号前面字符或正则表达式出现0次或多次 如’h">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -94,14 +103,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/02/26/groovy-安装eclipse插件/" title="groovy-安装eclipse插件" itemprop="url">groovy-安装eclipse插件</a>
+      <a href="/2016/02/26/groovy-正则表达式/" title="groovy-正则表达式" itemprop="url">groovy-正则表达式</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2016-02-25T17:01:20.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
+    <time datetime="2016-02-25T16:54:24.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
     
   </p>
 </header>
@@ -110,14 +119,52 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6"><span class="toc-number">1.</span> <span class="toc-text">Groovy-安装eclipse插件</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u6B63_u5219_u8868_u8FBE_u5F0F"><span class="toc-number">1.</span> <span class="toc-text">Groovy-正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5143_u5B57_u7B26"><span class="toc-number">1.1.</span> <span class="toc-text">元字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8F85_u52A9_u7B26_u53F7"><span class="toc-number">1.2.</span> <span class="toc-text">辅助符号</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6"><a href="#Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6" class="headerlink" title="Groovy-安装eclipse插件"></a>Groovy-安装eclipse插件</h1><ul>
-<li>进入Groovy官网工具页面<a href="http://docs.groovy-lang.org/latest/html/documentation/tools-groovyeclipse.html#Groovy-EclipsecompilerpluginforMaven-Groovy-Eclipseconfiguratorform2Eclipse" target="_blank" rel="external">eclipse</a>，拷贝<em>Release update site</em></li>
-<li>打开<code>eclipse -&gt; help -&gt; Install New Software</code>添加，把上面拷贝的地址粘贴在url上</li>
-<li>选择<code>Groovy-Eclipse</code>一直next直到完成。</li>
+		<h1 id="Groovy-_u6B63_u5219_u8868_u8FBE_u5F0F"><a href="#Groovy-_u6B63_u5219_u8868_u8FBE_u5F0F" class="headerlink" title="Groovy-正则表达式"></a>Groovy-正则表达式</h1><h2 id="u5143_u5B57_u7B26"><a href="#u5143_u5B57_u7B26" class="headerlink" title="元字符"></a>元字符</h2><ul>
+<li>.匹配任意单个字符 如：’hello’=~’hel.o’</li>
+<li>^匹配行的开始部分 如：’hello’=~’^he’</li>
+<li>$匹配行的结束部分 如：’hello’=~’llo$’</li>
+<li><em>表示</em>号前面字符或正则表达式出现0次或多次 如’hello’=~’l*’</li>
+<li>+表示+号前面字符或正则表达式出现0次或多次 如’hello’=~’l+’</li>
+<li>?表示?号前面字符或正则表达式出现0次或多次 如’hello’=~’l?’</li>
+<li>[]匹配[]中字符集任一字符 如：’hello999’=~’[a-z0-9]*9’</li>
+<li>{}限定次数，{1}表示限定一次、{1, 3}表示最少一次，最多3次 如’hello999’=~’hel{2}o9{1,3}’</li>
+<li>\转义符 如’$’==~’\$’</li>
+<li>|选择符 如’hello’=~’h(a|b|c|d|e)llo’</li>
+<li>()将封装的表达式组合起来 如’hello’=~’he(ll)o’</li>
+</ul>
+<h2 id="u8F85_u52A9_u7B26_u53F7"><a href="#u8F85_u52A9_u7B26_u53F7" class="headerlink" title="辅助符号"></a>辅助符号</h2><ul>
+<li>\d数字，等价于[0-9] 如’11223’=~’\d’</li>
+<li>\D非数字，等价于[^0-9] 如’sfsf&amp;((s’=~’\D’</li>
+<li>\wWord字符，等价于[a-zA-Z0-9] 如’wres11’=~’\w’</li>
+<li>\W非Word字符，等价于[^a-zA-Z0-9] 如’wres11<em>*</em>‘=~’\W’</li>
+<li>\s空白字符，等价于[\t\n\f\r\v] 如’   ‘=~’\s’</li>
+<li><p>\S非空白字符，等价于[^\t\n\f\r\v] 如’aaa’=~’\S’</p>
+<pre><code>assert &apos;hello&apos;=~&apos;he&apos;
+assert &apos;hello&apos;==~&apos;hello&apos;
+assert &apos;hello&apos;=~&apos;l+&apos;
+assert &apos;hello&apos;=~&apos;l?&apos;
+assert &apos;hello999&apos;=~&apos;[a-z0-9]*9&apos;
+assert &apos;hello999&apos;=~&apos;hel{2}o9{1,3}&apos;
+assert &apos;$&apos;==~&apos;\\$&apos;
+assert &apos;hello&apos;=~&apos;h(a|b|c|d|e)llo&apos;
+assert &apos;hello&apos;=~&apos;he(ll)o&apos;
+assert &apos;11223&apos;=~&apos;\\d&apos;
+assert &apos;sfsf&amp;((s&apos;=~&apos;\\D&apos;
+assert &apos;wres11&apos;=~&apos;\\w&apos;
+assert &apos;wres11***&apos;=~&apos;\\W&apos;
+assert &apos;   &apos;=~&apos;\\s&apos;
+assert &apos;aaa&apos;=~&apos;\\S&apos;
+
+def datePattern = &apos;([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})&apos;
+def date = &apos;2015-06-28&apos;
+def matcher = date=~datePattern
+matcher.matches()
+println matcher[0]
+</code></pre></li>
 </ul>
   
 	</div>
@@ -141,7 +188,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://im.yonglang.co/2016/02/26/groovy-安装eclipse插件/" data-title="groovy-安装eclipse插件 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  <div data-url="http://im.yonglang.co/2016/02/26/groovy-正则表达式/" data-title="groovy-正则表达式 | 知识记录" data-tsina="1877167031" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -155,18 +202,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/02/26/groovy-循环/" title="groovy-循环">
+ <a href="/2016/02/26/groovy-字符串操作/" title="groovy-字符串操作">
   <strong>上一篇：</strong><br/>
   <span>
-  groovy-循环</span>
+  groovy-字符串操作</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/02/26/groovy-字符串操作/"  title="groovy-字符串操作">
+<a href="/2016/02/26/centos-安装tsung压力测试工具/"  title="centos-安装tsung压力测试工具">
  <strong>下一篇：</strong><br/> 
- <span>groovy-字符串操作
+ <span>centos-安装tsung压力测试工具
 </span>
 </a>
 </div>
@@ -175,7 +222,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/02/26/groovy-安装eclipse插件/" data-title="groovy-安装eclipse插件" data-url="http://im.yonglang.co/2016/02/26/groovy-安装eclipse插件/"></div>
+	<div class="ds-thread" data-thread-key="2016/02/26/groovy-正则表达式/" data-title="groovy-正则表达式" data-url="http://im.yonglang.co/2016/02/26/groovy-正则表达式/"></div>
 </section>
 
 
@@ -185,7 +232,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u5B89_u88C5eclipse_u63D2_u4EF6"><span class="toc-number">1.</span> <span class="toc-text">Groovy-安装eclipse插件</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Groovy-_u6B63_u5219_u8868_u8FBE_u5F0F"><span class="toc-number">1.</span> <span class="toc-text">Groovy-正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5143_u5B57_u7B26"><span class="toc-number">1.1.</span> <span class="toc-text">元字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8F85_u52A9_u7B26_u53F7"><span class="toc-number">1.2.</span> <span class="toc-text">辅助符号</span></a></li></ol></li></ol>
  
   </div>
 
