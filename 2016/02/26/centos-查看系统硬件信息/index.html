@@ -1,0 +1,713 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
+  <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
+  
+    <title>centos-查看系统硬件信息 | 知识记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="M2">
+    
+
+    
+    <meta name="description" content="Centos 查看系统硬件信息
+查看CPU型号
+cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+
+2  Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz
+
+查看物理CPU个数
+cat /proc/cpuinfo | grep physical | uniq -c
+
+1 physical id    : 0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos-查看系统硬件信息">
+<meta property="og:url" content="http://im.yonglang.co/2016/02/26/centos-查看系统硬件信息/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="Centos 查看系统硬件信息
+查看CPU型号
+cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+
+2  Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz
+
+查看物理CPU个数
+cat /proc/cpuinfo | grep physical | uniq -c
+
+1 physical id    : 0">
+<meta property="og:updated_time" content="2016-02-25T16:39:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos-查看系统硬件信息">
+<meta name="twitter:description" content="Centos 查看系统硬件信息
+查看CPU型号
+cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+
+2  Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz
+
+查看物理CPU个数
+cat /proc/cpuinfo | grep physical | uniq -c
+
+1 physical id    : 0">
+<meta name="twitter:creator" content="@763960267">
+
+    
+    <link rel="alternative" href="/atom.xml" title="知识记录" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="知识记录" title="知识记录"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="知识记录">知识记录</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章列表</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					<!--
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" st-default-search-input />
+						<input type="hidden" name="q" value="site:im.yonglang.co" class="st-default-search-input">
+					</form>
+					-->
+					<input type="text" class="st-default-search-input">
+					</li>
+				</ul>
+			</nav>			
+</div>
+<a href="https://github.com/m2lan"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/26/centos-查看系统硬件信息/" title="centos-查看系统硬件信息" itemprop="url">centos-查看系统硬件信息</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T16:13:44.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Centos__u67E5_u770B_u7CFB_u7EDF_u786C_u4EF6_u4FE1_u606F"><span class="toc-number">1.</span> <span class="toc-text">Centos 查看系统硬件信息</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="Centos__u67E5_u770B_u7CFB_u7EDF_u786C_u4EF6_u4FE1_u606F"><a href="#Centos__u67E5_u770B_u7CFB_u7EDF_u786C_u4EF6_u4FE1_u606F" class="headerlink" title="Centos 查看系统硬件信息"></a>Centos 查看系统硬件信息</h1><ul>
+<li><p>查看CPU型号</p>
+<pre><code>cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+
+2  Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz
+</code></pre></li>
+<li><p>查看物理CPU个数</p>
+<pre><code>cat /proc/cpuinfo | grep physical | uniq -c
+
+1 physical id    : 0
+1 address sizes    : 46 bits physical, 48 bits virtual
+1 physical id    : 2
+1 address sizes    : 46 bits physical, 48 bits virtual
+</code></pre></li>
+<li><p>查看CPU运行模式：32位或64位</p>
+<pre><code>getconf LONG_BIT
+
+64
+</code></pre></li>
+<li><p>查看CPU是否支持64位系统，如果大于0，则支持64位运算</p>
+<pre><code>cat /proc/cpuinfo | grep flags | grep &apos; lm &apos; | wc -l 
+
+2
+</code></pre></li>
+<li><p>查看内存信息</p>
+<pre><code>cat /proc/meminfo 
+
+MemTotal:        1922784 kB
+MemFree:          184468 kB
+Buffers:          198704 kB
+Cached:           630012 kB
+SwapCached:            0 kB
+Active:           997440 kB
+Inactive:         585112 kB
+Active(anon):     753856 kB
+Inactive(anon):      160 kB
+Active(file):     243584 kB
+Inactive(file):   584952 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:                28 kB
+Writeback:             0 kB
+AnonPages:        753960 kB
+Mapped:            30072 kB
+Shmem:               180 kB
+Slab:             124932 kB
+SReclaimable:     102336 kB
+SUnreclaim:        22596 kB
+KernelStack:        3528 kB
+PageTables:         5292 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:      961392 kB
+Committed_AS:    1604768 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:       11064 kB
+VmallocChunk:   34359725180 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:    688128 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:        6144 kB
+DirectMap2M:     2095104 kB
+</code></pre></li>
+<li><p>查看当前系统内核信息</p>
+<pre><code>uname -a
+
+Linux iZ2326o1rm2Z 2.6.32-431.23.3.el6.x86_64 #1 SMP Thu Jul 31 17:20:51 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
+</code></pre></li>
+<li><p>查看当前操作系统内核信息</p>
+<pre><code>cat /etc/issue | grep linux
+</code></pre></li>
+<li><p>查看服务器型号</p>
+<pre><code>dmidecode | grep &quot;Product Name&quot;
+
+Product Name: HVM domU
+</code></pre></li>
+<li><p>查看当前打开的服务</p>
+<pre><code>chkconfig --list
+</code></pre></li>
+<li><p>查看当前打开的端口</p>
+<pre><code>netstat -an
+</code></pre></li>
+<li><p>查看磁盘信息</p>
+<pre><code>fdisk -l
+df -h
+</code></pre></li>
+<li><p>进程监控命令，实时显示系统进程的资源占用情况</p>
+<pre><code>top
+</code></pre></li>
+<li><p>系统监控命令，重点侧重于虚拟内存，也可以监控CPU、进程、内存分页以及IO的状态信息</p>
+<pre><code>vmstat
+</code></pre></li>
+<li><p>列举系统中被打开的文件</p>
+<pre><code>lsof -i：36000，显示使用36000端口的进程 
+lsof -u root，显示以root运行的程序 
+lsof -c php-fpm，显示php-fpm进程打开的文件 
+lsof php.ini，显示打开php.ini的进程。
+</code></pre></li>
+<li><p>查看Linux系统日志</p>
+<pre><code>系统级别的日志文件存放路径为/var/log
+常用的系统日志为/var/log/messages
+</code></pre></li>
+<li><p>查找文件系统大文件</p>
+<pre><code>可以首先通过df命令查看磁盘分区使用情况，比如df -m；
+然后：
+通过du命令查看具体文件夹的大小，比如du -sh ./*，du -h --max-depth=1|head -10；
+使用ls命令列出文件以及大小，比如ls -lSh；
+另外，也可以通过find命令直接查看特定目录下的文件大小，比如find / -type f -size +10M -exec ls -lrt {} \;
+</code></pre></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Centos7/">Centos7</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Centos7/">Centos7</a><a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://im.yonglang.co/2016/02/26/centos-查看系统硬件信息/" data-title="centos-查看系统硬件信息 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/02/26/centos-安装nginx/" title="centos-安装nginx">
+  <strong>上一篇：</strong><br/>
+  <span>
+  centos-安装nginx</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/02/26/centos-查看端口使用情况/"  title="centos-查看端口使用情况">
+ <strong>下一篇：</strong><br/> 
+ <span>centos-查看端口使用情况
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/02/26/centos-查看系统硬件信息/" data-title="centos-查看系统硬件信息" data-url="http://im.yonglang.co/2016/02/26/centos-查看系统硬件信息/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Centos__u67E5_u770B_u7CFB_u7EDF_u786C_u4EF6_u4FE1_u606F"><span class="toc-number">1.</span> <span class="toc-text">Centos 查看系统硬件信息</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Apache/" title="Apache">Apache<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos/" title="Centos">Centos<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/" title="Centos7">Centos7<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Docker/" title="Docker">Docker<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Keepalived/Haproxy/" title="Haproxy">Haproxy<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/JDK/" title="JDK">JDK<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Apache/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mac/" title="Mac">Mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mongodb/" title="Mongodb">Mongodb<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/MySQL/" title="MySQL">MySQL<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/MySQL/PHP/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Objective-c/" title="Objective-c">Objective-c<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/MySQL/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Shell/" title="Shell">Shell<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Spring-MVC/" title="Spring-MVC">Spring-MVC<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XMPP/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/Tsung/" title="Tsung">Tsung<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XMPP/" title="XMPP">XMPP<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Apache/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/ssh/" title="ssh">ssh<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://golearns.org/" target="_blank" title="go语言搭建的个人博客">golearns</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 记录知识 分享知识 <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/u/1877167031" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/m2lan" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/763960267" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/100006504108865" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:763960267@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="M2">M2</a>
+		
+		
+		</p>
+</div>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','b2cFpoExgUMZu3--zQzE','2.0.0');
+</script></footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"m2langithub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
