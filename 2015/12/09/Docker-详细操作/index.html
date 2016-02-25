@@ -1,0 +1,670 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
+  <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
+  
+    <title>Docker-详细操作 | 知识记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="M2">
+    
+
+    
+    <meta name="description" content="获取镜像docker pull ubuntu:14.04
+相当于docker pull registry.hub.docker.com/ubuntu:14.04
+可以从国内镜像网站下载docker pull dl.dockerpool.com:5000/ubuntu:14.04
+列出本地已有的镜像docker images
+创建镜像，利用Dockerfile来创建镜像,新建一个目录和一个Docke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker-详细操作">
+<meta property="og:url" content="http://im.yonglang.co/2015/12/09/Docker-详细操作/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="获取镜像docker pull ubuntu:14.04
+相当于docker pull registry.hub.docker.com/ubuntu:14.04
+可以从国内镜像网站下载docker pull dl.dockerpool.com:5000/ubuntu:14.04
+列出本地已有的镜像docker images
+创建镜像，利用Dockerfile来创建镜像,新建一个目录和一个Docke">
+<meta property="og:updated_time" content="2016-02-25T16:41:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker-详细操作">
+<meta name="twitter:description" content="获取镜像docker pull ubuntu:14.04
+相当于docker pull registry.hub.docker.com/ubuntu:14.04
+可以从国内镜像网站下载docker pull dl.dockerpool.com:5000/ubuntu:14.04
+列出本地已有的镜像docker images
+创建镜像，利用Dockerfile来创建镜像,新建一个目录和一个Docke">
+<meta name="twitter:creator" content="@763960267">
+
+    
+    <link rel="alternative" href="/atom.xml" title="知识记录" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="知识记录" title="知识记录"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="知识记录">知识记录</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章列表</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					<!--
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" st-default-search-input />
+						<input type="hidden" name="q" value="site:im.yonglang.co" class="st-default-search-input">
+					</form>
+					-->
+					<input type="text" class="st-default-search-input">
+					</li>
+				</ul>
+			</nav>			
+</div>
+<a href="https://github.com/m2lan"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/Docker-详细操作/" title="Docker-详细操作" itemprop="url">Docker-详细操作</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:48:47.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u83B7_u53D6_u955C_u50CF"><span class="toc-number">1.</span> <span class="toc-text">获取镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF"><span class="toc-number">2.</span> <span class="toc-text">列出本地已有的镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u521B_u5EFA_u955C_u50CF_uFF0C_u5229_u7528Dockerfile_u6765_u521B_u5EFA_u955C_u50CF_2C_u65B0_u5EFA_u4E00_u4E2A_u76EE_u5F55_u548C_u4E00_u4E2ADockerfile"><span class="toc-number">3.</span> <span class="toc-text">创建镜像，利用Dockerfile来创建镜像,新建一个目录和一个Dockerfile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5BFC_u51FA_u548C_u5BFC_u5165_u5BB9_u5668"><span class="toc-number">4.</span> <span class="toc-text">导出和导入容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5BFC_u51FA_u5BB9_u5668"><span class="toc-number">4.1.</span> <span class="toc-text">导出容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5BFC_u5165_u5BB9_u5668_u5FEB_u7167"><span class="toc-number">4.2.</span> <span class="toc-text">导入容器快照</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5220_u9664_u955C_u50CF"><span class="toc-number">5.</span> <span class="toc-text">删除镜像</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u83B7_u53D6_u955C_u50CF"><a href="#u83B7_u53D6_u955C_u50CF" class="headerlink" title="获取镜像"></a>获取镜像</h2><pre><code>docker pull ubuntu:14.04
+相当于docker pull registry.hub.docker.com/ubuntu:14.04
+可以从国内镜像网站下载docker pull dl.dockerpool.com:5000/ubuntu:14.04
+</code></pre><h2 id="u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF"><a href="#u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF" class="headerlink" title="列出本地已有的镜像"></a>列出本地已有的镜像</h2><pre><code>docker images
+</code></pre><h2 id="u521B_u5EFA_u955C_u50CF_uFF0C_u5229_u7528Dockerfile_u6765_u521B_u5EFA_u955C_u50CF_2C_u65B0_u5EFA_u4E00_u4E2A_u76EE_u5F55_u548C_u4E00_u4E2ADockerfile"><a href="#u521B_u5EFA_u955C_u50CF_uFF0C_u5229_u7528Dockerfile_u6765_u521B_u5EFA_u955C_u50CF_2C_u65B0_u5EFA_u4E00_u4E2A_u76EE_u5F55_u548C_u4E00_u4E2ADockerfile" class="headerlink" title="创建镜像，利用Dockerfile来创建镜像,新建一个目录和一个Dockerfile"></a>创建镜像，利用Dockerfile来创建镜像,新建一个目录和一个Dockerfile</h2><pre><code>$ mkdir sinatra
+$ cd sinatra
+$ touch Dockerfile
+</code></pre><ul>
+<li><p>Dockerfile 基本的语法是</p>
+<ul>
+<li><p>编写完成Dockerfile后可以使用docker build来生成镜像</p>
+<pre><code>docker build -t=&quot;ouruser/sinatra:v2&quot; .
+</code></pre></li>
+<li>使用<code>#</code>来注释</li>
+<li><code>FROM</code>指令告诉<code>Docker</code>使用哪个镜像作为基础</li>
+<li>接着是维护者的信息</li>
+<li><code>RUN</code>开头的指令会在创建中运行，比如安装一个软件包，在这里使用<code>apt-get</code>来安装了一些软件</li>
+<li>其中<code>-t</code>标记来添加<code>tag</code>，指定新的镜像的用户信息。 “.” 是<code>Dockerfile</code>所在的路径（当前目录），也可以替换为一个具体的<code>Dockerfile</code>的路径。</li>
+<li><code>docker run -t -i ouruser/sinatra:v2 /bin/bash</code>运行</li>
+<li><p><code>Dockerfile</code>文件内容</p>
+<pre><code># This is a comment
+  FROM ubuntu:14.04
+  MAINTAINER Docker Newbee &lt;newbee@docker.com&gt;
+  RUN apt-get -qq update
+  RUN apt-get -qqy install ruby ruby-dev
+  RUN gem install sinatra
+</code></pre></li>
+</ul>
+</li>
+<li><p>如果要导出镜像到本地文件，可以使用<code>docker save</code>命令。</p>
+<pre><code>docker save -o ubuntu_14.04.tar ubuntu:14.04
+</code></pre></li>
+<li><p>载入镜像,可以使用<code>docker load</code>从导出的本地文件中再导入到本地镜像库，例如</p>
+<pre><code>docker load --input ubuntu_14.04.tar
+或
+docker load &lt; ubuntu_14.04.tar
+</code></pre></li>
+<li><p>输出<code>hello world</code></p>
+<pre><code>docker run ubuntu:14.04 /bin/echo &apos;hello world&apos;
+</code></pre></li>
+<li><p>启动一个<code>bash</code>终端，允许用户进行交互</p>
+<pre><code>docker run -t -i ubuntu:14.04 /bin/bash
+</code></pre></li>
+<li><p>让<code>Docker</code>容器在后台以守护状态形式运行，可以通过通过<code>-d</code>参数来实现</p>
+<pre><code>docker run -d ubuntu:14.04 /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;
+</code></pre><ul>
+<li><code>docker ps</code>返回容器信息，包括<code>NAMES</code></li>
+<li><p>获取容器的输出信息，可以通过<code>docker logs</code>命令</p>
+<pre><code>docker logs NAMES
+</code></pre></li>
+</ul>
+</li>
+<li>获取终止状态的容器<code>docker ps -a</code>,终止状态的容器可以通过<code>docker start</code>命令来重新启动，<code>docker restart</code>命令会将一个运行态的容器终止，然后再重新启动。<code>docker restart NAMES</code>。</li>
+<li><p>在使用<code>-d</code>参数时，容器启动后会进入后台。 某些时候需要进入容器进行操作，有很多种方法，包括使用<code>docker attach</code>命令或<code>nsenter</code>工具等。</p>
+<ul>
+<li>如果出现<code>2014/11/10 17:46:08 You cannot attach to a stopped container, start it first</code>,执行<code>docker start berserk_fermat</code></li>
+<li><p>attach</p>
+<pre><code>docker run -idt ubuntu:14.04
+[root@MyCloudServer ~]# docker run -idt ubuntu:12.04
+e13112150bd52dbb12d7fbbe0e24e786ba86e97a2e337db654d0ec144d6b88f4
+[root@MyCloudServer ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                     PORTS               NAMES
+e13112150bd5        ubuntu:12.04        &quot;/bin/bash&quot;            15 seconds ago      Up 14 seconds                                  berserk_fermat
+005c6adf29a4        ubuntu:12.04        &quot;/bin/echo &apos;hello wo   3 minutes ago       Exited (0) 3 minutes ago                       lonely_leakey
+f4d208e3e8e6        ubuntu:12.04        &quot;/bin/bash&quot;            37 minutes ago      Up 4 minutes                                   jovial_rosalind
+[root@MyCloudServer ~]# docker attach berserk_fermat
+root@e13112150bd5:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  selinux  srv  sys  tmp  usr  var
+root@e13112150bd5:/# pwd
+/
+root@e13112150bd5:/# exit
+exit
+</code></pre><h2 id="u5BFC_u51FA_u548C_u5BFC_u5165_u5BB9_u5668"><a href="#u5BFC_u51FA_u548C_u5BFC_u5165_u5BB9_u5668" class="headerlink" title="导出和导入容器"></a>导出和导入容器</h2><h3 id="u5BFC_u51FA_u5BB9_u5668"><a href="#u5BFC_u51FA_u5BB9_u5668" class="headerlink" title="导出容器"></a>导出容器</h3></li>
+</ul>
+</li>
+<li><p>如果要导出本地某个容器，可以使用<code>docker export</code>命令.</p>
+<pre><code>[root@MyCloudServer ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                      PORTS               NAMES
+e13112150bd5        ubuntu:12.04        &quot;/bin/bash&quot;            13 minutes ago      Exited (0) 11 minutes ago                       berserk_fermat
+005c6adf29a4        ubuntu:12.04        &quot;/bin/echo &apos;hello wo   17 minutes ago      Exited (0) 16 minutes ago                       lonely_leakey
+f4d208e3e8e6        ubuntu:12.04        &quot;/bin/bash&quot;            50 minutes ago      Up 17 minutes                                   jovial_rosalind
+[root@MyCloudServer ~]# docker export e13112150bd5&gt;ubuntu.tar
+</code></pre><h3 id="u5BFC_u5165_u5BB9_u5668_u5FEB_u7167"><a href="#u5BFC_u5165_u5BB9_u5668_u5FEB_u7167" class="headerlink" title="导入容器快照"></a>导入容器快照</h3></li>
+<li><p>可以使用<code>docker import</code>从容器快照文件中再导入为镜像，例如</p>
+<pre><code>$ cat ubuntu.tar | sudo docker import - test/buntu:v1.0
+$ sudo docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED              VIRTUAL SIZE
+test/ubuntu         v1.0                9d37a6082e97        About a minute ago   171.3 MB
+</code></pre><h2 id="u5220_u9664_u955C_u50CF"><a href="#u5220_u9664_u955C_u50CF" class="headerlink" title="删除镜像"></a>删除镜像</h2></li>
+<li><code>docker ps -a</code>列出所有依赖<code>Image</code>的<code>container</code></li>
+<li><code>docker rm (CONTAINER ID前4位)</code>执行删除容器操作</li>
+<li><code>docker images</code>列出所有镜像</li>
+<li><code>docker rmi (image id前4位)</code></li>
+<li>如果要删除一个运行中的容器，可以添加<code>-f</code>参数。<code>Docker</code>会发送<code>SIGKILL</code>信号给容器。</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Docker/">Docker</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Docker/">Docker</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://im.yonglang.co/2015/12/09/Docker-详细操作/" data-title="Docker-详细操作 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/12/10/Tigase-配置/" title="Tigase-配置">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Tigase-配置</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/12/09/Docker-Hub使用/"  title="Docker-Hub使用">
+ <strong>下一篇：</strong><br/> 
+ <span>Docker-Hub使用
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/12/09/Docker-详细操作/" data-title="Docker-详细操作" data-url="http://im.yonglang.co/2015/12/09/Docker-详细操作/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u83B7_u53D6_u955C_u50CF"><span class="toc-number">1.</span> <span class="toc-text">获取镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF"><span class="toc-number">2.</span> <span class="toc-text">列出本地已有的镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u521B_u5EFA_u955C_u50CF_uFF0C_u5229_u7528Dockerfile_u6765_u521B_u5EFA_u955C_u50CF_2C_u65B0_u5EFA_u4E00_u4E2A_u76EE_u5F55_u548C_u4E00_u4E2ADockerfile"><span class="toc-number">3.</span> <span class="toc-text">创建镜像，利用Dockerfile来创建镜像,新建一个目录和一个Dockerfile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5BFC_u51FA_u548C_u5BFC_u5165_u5BB9_u5668"><span class="toc-number">4.</span> <span class="toc-text">导出和导入容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5BFC_u51FA_u5BB9_u5668"><span class="toc-number">4.1.</span> <span class="toc-text">导出容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5BFC_u5165_u5BB9_u5668_u5FEB_u7167"><span class="toc-number">4.2.</span> <span class="toc-text">导入容器快照</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5220_u9664_u955C_u50CF"><span class="toc-number">5.</span> <span class="toc-text">删除镜像</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Apache/" title="Apache">Apache<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/" title="Centos7">Centos7<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Docker/" title="Docker">Docker<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>4</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Linux/Keepalived/Haproxy/" title="Haproxy">Haproxy<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/JDK/" title="JDK">JDK<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Apache/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mac/" title="Mac">Mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mongodb/" title="Mongodb">Mongodb<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/MySQL/" title="MySQL">MySQL<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/MySQL/PHP/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Objective-c/" title="Objective-c">Objective-c<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/MySQL/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Shell/" title="Shell">Shell<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Spring-MVC/" title="Spring-MVC">Spring-MVC<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XMPP/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/Centos7/Tsung/" title="Tsung">Tsung<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/XMPP/" title="XMPP">XMPP<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Apache/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/ssh/" title="ssh">ssh<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://golearns.org/" target="_blank" title="go语言搭建的个人博客">golearns</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 记录知识 分享知识 <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/u/1877167031" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/m2lan" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/763960267" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/100006504108865" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:763960267@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="M2">M2</a>
+		
+		
+		</p>
+</div>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','b2cFpoExgUMZu3--zQzE','2.0.0');
+</script></footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"m2langithub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
