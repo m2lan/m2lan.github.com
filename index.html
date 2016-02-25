@@ -86,6 +86,79 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/02/25/Linux-设备文件名/" title="Linux-设备文件名" itemprop="url">Linux-设备文件名</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T15:34:08.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D"><a href="#u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D" class="headerlink" title="各硬件设备在Linux中的文件名"></a>各硬件设备在Linux中的文件名</h1><pre><code>名称|目录
+-----|------
+IDE硬盘|/dev/hd[a-d]
+SCSI/SATA/USB硬盘|/dev/sd[a-p]
+U盘|/dev/sd[a-p]
+软驱|/dev/fd[0-1]
+打印机    |25针:/dev/Ip[0-2],USB:/dev/usb/Ip[0-15]
+鼠标|USB:/dev/usb/mouse[0-15],PS2:/dev/psaux
+当前CD ROM/DVD ROM|/dev/cdrom
+当前鼠标|/dev/mouse
+磁带机    |IDE:/dev/ht0,SCSI:/dev/st0
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/25/Linux-设备文件名/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/Linux-设备文件名/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/02/25/zookeeper/" title="zookeeper" itemprop="url">zookeeper</a>
   </h1>
   <p class="article-author">By
@@ -2132,133 +2205,6 @@ return sortArray;
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/redis优化/" title="redis优化" itemprop="url">redis优化</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:00:33.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="redis_u4F18_u5316"><a href="#redis_u4F18_u5316" class="headerlink" title="redis优化"></a>redis优化</h2><ul>
-<li>在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。</li>
-<li>客户端请求服务器一次就发送一个报文 -&gt; 等待服务端的返回 -&gt; 关闭连接</li>
-<li>如果是100个请求、1000个请求，那就得请求100次、1000次</li>
-<li>所以使用多个请求的时候使用管道来操作(<code>如果管道打包的命令太多占用的内存也会越大，适量</code>)</li>
-<li><p>以下是使用3种方式进行的测试(<code>循环写入1000次</code>)：</p>
-<pre><code>public static void main(String[] args) {
-
-    long start = System.currentTimeMillis();
-    for (int i = 0; i &lt; 1000; i++) {
-        template.opsForHash().put(&quot;user1&quot;, &quot;status&quot; + i, &quot;value&quot; + i);
-    }
-    System.out.println(System.currentTimeMillis() - start);
-
-    start = System.currentTimeMillis();
-    final byte[] rawKey = rawKey(&quot;user2&quot;);
-    template.execute(new RedisCallback&lt;Object&gt;() {
-
-        @Override
-        public Object doInRedis(RedisConnection connection)
-                throws DataAccessException {
-            for (int i = 0; i &lt; 1000; i++) {
-                final byte[] rawHashKey = rawHashKey(&quot;status&quot; + i);
-                final byte[] rawHashValue = rawHashValue(&quot;value&quot; + i);
-
-                connection.hSet(rawKey, rawHashKey, rawHashValue);
-            }
-            return null;
-        }
-    });
-    System.out.println(System.currentTimeMillis() - start);
-
-    start = System.currentTimeMillis();
-    final byte[] rawKey2 = rawKey(&quot;user3&quot;);
-    template.execute(new RedisCallback&lt;Object&gt;() {
-
-        @Override
-        public Object doInRedis(RedisConnection connection)
-                throws DataAccessException {
-            connection.openPipeline();
-            for (int i = 0; i &lt; 1000; i++) {
-                final byte[] rawHashKey = rawHashKey(&quot;status&quot; + i);
-                final byte[] rawHashValue = rawHashValue(&quot;value&quot; + i);
-
-                connection.hSet(rawKey2, rawHashKey, rawHashValue);
-            }
-            return connection.closePipeline();
-        }
-    });
-    System.out.println(System.currentTimeMillis() - start);
-}
-</code></pre></li>
-<li><p>请求结果</p>
-<pre><code>20:54:51.653 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection
-20:54:51.693 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection
-42283
-20:54:51.695 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection
-20:55:33.922 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection
-42228
-20:55:33.923 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection
-20:55:34.058 [main] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection
-136
-</code></pre></li>
-<li>可以看出在使用管道打包发送请求所用的时间不到1s。而发送1000次请求所用的时间达到了42s。</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Redis/">Redis</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Redis/">Redis</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/redis优化/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/redis优化/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -2290,6 +2236,10 @@ return sortArray;
 		
 		  
 			<li><a href="/categories/Apache/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		  
 		
 		  
@@ -2348,7 +2298,7 @@ return sortArray;
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Apache/" style="font-size: 12px;">Apache</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Git/" style="font-size: 16px;">Git</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 14px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Objective-c/" style="font-size: 18px;">Objective-c</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 12px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 16px;">Tigase</a> <a href="/tags/XMPP/" style="font-size: 16px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+       <a href="/tags/Apache/" style="font-size: 12px;">Apache</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Git/" style="font-size: 16px;">Git</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 14px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Objective-c/" style="font-size: 18px;">Objective-c</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 12px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 16px;">Tigase</a> <a href="/tags/XMPP/" style="font-size: 16px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
     </div>
   </div>
 
