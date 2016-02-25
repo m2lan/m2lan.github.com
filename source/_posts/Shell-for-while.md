@@ -1,7 +1,9 @@
 title: Shell-for-while
 date: 2015-12-10 02:19:59
-categories: Shell
-tags: Shell
+categories: 
+- Shell
+tags: 
+- Shell
 ---
 
 	#!/bin/bash

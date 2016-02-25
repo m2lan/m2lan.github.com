@@ -1,7 +1,9 @@
 title: OC-UIButton中设置image大小
 date: 2015-12-10 02:08:49
-categories: Objective-c
-tags: Objective-c
+categories: 
+- Objective-c
+tags: 
+- Objective-c
 ---
 
 	#import <UIKit/UIKit.h>

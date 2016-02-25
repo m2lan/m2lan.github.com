@@ -1,7 +1,9 @@
 title: Mac-配置vim
 date: 2015-12-10 01:17:00
-categories: Mac
-tags: Mac
+categories: 
+- Mac
+tags: 
+- Mac
 ---
 * 下载配色方案[molokai](https://github.com/tomasr/molokai)
 * 在当前用户根目录下的`~/.vim`创建`colors`目录，将下载的配色方案中的`molokai.vim`移动到`~/.vim/colors`中

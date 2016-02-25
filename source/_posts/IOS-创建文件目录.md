@@ -1,7 +1,9 @@
 title: IOS-创建文件目录
 date: 2015-12-10 02:07:32
-categories: Objective-c
-tags: Objective-c
+categories: 
+- Objective-c
+tags: 
+- Objective-c
 ---
 	//
 	//  ViewController.m

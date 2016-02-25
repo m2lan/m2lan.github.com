@@ -1,7 +1,9 @@
 title: Mongodb-启动
 date: 2015-12-09 23:26:15
-categories: Mongodb
-tags: Mongodb
+categories: 
+- Mongodb
+tags: 
+- Mongodb
 ---
 ## Mac下安装PHP的mongodb扩展
 

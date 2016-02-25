@@ -1,7 +1,9 @@
 title: redis优化
 date: 2015-12-10 02:00:33
-categories: Redis
-tags: Redis
+categories: 
+- Redis
+tags: 
+- Redis
 ---
 ## redis优化
 * 在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。

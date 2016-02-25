@@ -1,7 +1,9 @@
 title: Shell-helloworld
 date: 2015-12-10 02:11:03
-categories: Shell
-tags: Shell
+categories: 
+- Shell
+tags: 
+- Shell
 ---
 
 	#!/bin/bash

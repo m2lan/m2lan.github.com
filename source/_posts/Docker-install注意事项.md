@@ -1,7 +1,9 @@
 title: Docker-install注意事项
 date: 2015-12-09 23:41:55
-categories: Docker
-tags: Docker
+categories: 
+- Docker
+tags: 
+- Docker
 ---
 * 当安装一个不存在的package时`yum -y install docker-io`,使用
 

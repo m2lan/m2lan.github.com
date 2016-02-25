@@ -1,7 +1,9 @@
 title: Shell-算术运算符+字符串操作
 date: 2015-12-10 02:15:16
-categories: Shell
-tags: Shell
+categories: 
+- Shell
+tags: 
+- Shell
 ---
 
 	#!/bin/bash

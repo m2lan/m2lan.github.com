@@ -1,7 +1,9 @@
 title: Docker-Hub使用
 date: 2015-12-09 23:45:26
-categories: Docker
-tags: Docker
+categories: 
+- Docker
+tags: 
+- Docker
 ---
 ## 开始使用Docker Hub
 ### Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub

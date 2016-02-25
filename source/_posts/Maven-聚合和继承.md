@@ -1,7 +1,9 @@
 title: Maven-聚合和继承
 date: 2015-12-10 01:23:02
-categories: Maven
-tags: Maven
+categories: 
+- Maven
+tags: 
+- Maven
 ---
 ## 聚合
 * 如果一个项目依赖数十个模块，那么要一个一个编译起来是非常浪费时间的，所以就需要把所需模块聚合在一起，一起编译。

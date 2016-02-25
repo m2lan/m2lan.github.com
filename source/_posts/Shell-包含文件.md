@@ -1,7 +1,9 @@
 title: Shell-包含文件
 date: 2015-12-10 02:16:28
-categories: Shell
-tags: Shell
+categories: 
+- Shell
+tags: 
+- Shell
 ---
 
 	# shell 中包含外部脚本，可以使用

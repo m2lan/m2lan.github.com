@@ -1,7 +1,9 @@
 title: SpringMVC-学习02
 date: 2015-12-10 01:21:56
-categories: Spring-MVC
-tags: Spring-MVC
+categories: 
+- Spring-MVC
+tags: 
+- Spring-MVC
 ---
 ## 传值和接受传值
 

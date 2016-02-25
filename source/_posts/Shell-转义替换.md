@@ -1,7 +1,9 @@
 title: Shell-转义替换
 date: 2015-12-10 02:17:29
-categories: Shell
-tags: Shell
+categories: 
+- Shell
+tags: 
+- Shell
 ---
 
 	#!/bin/bash

@@ -1,7 +1,9 @@
 title: MongoDB-3.0.3用户认证
 date: 2015-12-09 23:32:12
-categories: Mongodb
-tags: Mongodb
+categories: 
+- Mongodb
+tags: 
+- Mongodb
 ---
 ## 在Mongodb3.0.3中创建User进行权限验证
 

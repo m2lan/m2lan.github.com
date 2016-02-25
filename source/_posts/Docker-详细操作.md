@@ -1,7 +1,9 @@
 title: Docker-详细操作
 date: 2015-12-09 23:48:47
-categories: Docker
-tags: Docker
+categories: 
+- Docker
+tags: 
+- Docker
 ---
 ## 获取镜像
 

@@ -1,7 +1,9 @@
 title: OC-检测视图退出
 date: 2015-12-10 02:10:15
-categories: Objective-c
-tags: Objective-c
+categories: 
+- Objective-c
+tags: 
+- Objective-c
 ---
 
 	-(void) viewWillDisappear:(BOOL)animated {

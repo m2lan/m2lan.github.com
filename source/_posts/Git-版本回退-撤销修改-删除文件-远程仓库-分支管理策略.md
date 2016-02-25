@@ -1,7 +1,9 @@
 title: Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略
 date: 2015-12-10 01:39:28
-categories: Git
-tags: Git
+categories: 
+- Git
+tags: 
+- Git
 ---
 ## 版本回退
 * 如果信息显示过多的话,可以使用`git log --pretty=oneline`

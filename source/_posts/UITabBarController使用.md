@@ -1,7 +1,9 @@
 title: UITabBarController使用
 date: 2015-12-10 02:02:13
-categories: Objective-c
-tags: Objective-c
+categories: 
+- Objective-c
+tags: 
+- Objective-c
 ---
 
 	//

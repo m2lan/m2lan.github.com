@@ -1,7 +1,11 @@
 title: kafka
 date: 2016-02-25 23:01:53
-categories: [Apache, Kafka]
-tags: [Apache, Kafka]
+categories: 
+- Apache
+- Kafka
+tags: 
+- Apache
+- Kafka
 ---
 # kafka
 > kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。

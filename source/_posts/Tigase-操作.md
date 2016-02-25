@@ -1,7 +1,11 @@
 title: Tigase-操作
 date: 2015-12-10 00:14:17
-categories: [XMPP,Tigase]
-tags: [XMPP,Tigase]
+categories: 
+- XMPP
+- Tigase
+tags: 
+- XMPP
+- Tigase
 ---
 ### Tigase操作
 ____

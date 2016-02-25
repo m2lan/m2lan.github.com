@@ -1,7 +1,9 @@
 title: OC-数组对象排序
 date: 2015-12-10 02:06:15
-categories: Objective-c
-tags: Objective-c
+categories: 
+- Objective-c
+tags: 
+- Objective-c
 ---
 ## Comparator排序
 

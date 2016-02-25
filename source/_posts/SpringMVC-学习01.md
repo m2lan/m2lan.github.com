@@ -1,7 +1,9 @@
 title: SpringMVC-学习01
 date: 2015-12-10 01:19:19
-categories: Spring-MVC
-tags: Spring-MVC
+categories: 
+- Spring-MVC
+tags: 
+- Spring-MVC
 ---
 * 下载[springframework](http://maven.springframework.org/release/org/springframework/spring/)
 * 新建web项目，拷贝`spring-framework-4.1.2.RELEASE/libs`下面所有的`*.RELEASE.jar`到`lib`目录下。

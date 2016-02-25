@@ -1,7 +1,9 @@
 title: Shell-数组
 date: 2015-12-10 02:18:38
-categories: Shell
-tags: Shell
+categories: 
+- Shell
+tags: 
+- Shell
 ---
 
 	#!/bin/bash

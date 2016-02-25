@@ -1,7 +1,11 @@
 title: zookeeper
 date: 2016-02-25 23:03:14
-categories: [Apache, Zookeeper]
-tags: [Apache, Zookeeper]
+categories: 
+- Apache
+- Zookeeper
+tags: 
+- Apache
+- Zookeeper
 ---
 # zookeeper
 ## 安装

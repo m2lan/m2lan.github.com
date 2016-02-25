@@ -1,7 +1,9 @@
 title: MySQL-修改数据库和表的编码
 date: 2015-12-09 23:23:13
-categories: MySQL
-tags: MySQL
+categories: 
+- MySQL
+tags: 
+- MySQL
 ---
 * 查看数据库编码 
 

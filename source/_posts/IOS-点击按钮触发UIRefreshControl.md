@@ -1,7 +1,9 @@
 title: IOS-点击按钮触发UIRefreshControl
 date: 2015-12-10 02:05:15
-categories: Objective-c
-tags: Objective-c
+categories: 
+- Objective-c
+tags: 
+- Objective-c
 ---
 
 	//

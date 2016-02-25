@@ -1,7 +1,11 @@
 title: Tigase-MUC配置
 date: 2015-12-10 00:13:31
-categories: [XMPP,Tigase]
-tags: [XMPP,Tigase]
+categories: 
+- XMPP
+- Tigase
+tags: 
+- XMPP
+- Tigase
 ---
 
 	muc#roomconfig_anonymity(匿名房间的级别)

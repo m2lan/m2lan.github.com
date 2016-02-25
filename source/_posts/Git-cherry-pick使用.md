@@ -1,7 +1,9 @@
 title: Git-cherry-pick使用
 date: 2015-12-10 01:29:15
-categories: Git
-tags: Git
+categories: 
+- Git
+tags: 
+- Git
 ---
 * `git cherry-pick`用于把另一个本地分支的`commit`修改应用到当前分支。
 * 在本地 `master` 分支上做了一个`commit( 38361a68138140827b31b72f8bbfd88b3705d77a )`,如何把它放到 本地 `old_cc` 分支上？

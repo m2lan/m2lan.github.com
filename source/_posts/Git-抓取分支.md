@@ -1,7 +1,9 @@
 title: Git-抓取分支
 date: 2015-12-10 01:31:11
-categories: Git
-tags: Git
+categories: 
+- Git
+tags: 
+- Git
 ---
 * 现在，你的小伙伴要在`dev`分支上开发，就必须创建远程`origin`的`dev`分支到本地，于是他用这个命令创建本地`dev`分支：`$ git checkout -b dev origin/dev`
 * 现在，他就可以在`dev`上继续修改，然后，时不时地把`dev`分支`push`到远程：

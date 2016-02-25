@@ -1,7 +1,9 @@
 title: Shell-变量
 date: 2015-12-10 02:11:37
-categories: Shell
-tags: Shell
+categories: 
+- Shell
+tags: 
+- Shell
 ---
 
 	#!/bin/bash

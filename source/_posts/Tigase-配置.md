@@ -1,7 +1,11 @@
 title: Tigase-配置
 date: 2015-12-10 00:09:25
-categories: [XMPP,Tigase]
-tags: [XMPP,Tigase]
+categories: 
+- XMPP
+- Tigase
+tags: 
+- XMPP
+- Tigase
 ---
 # 创建默认的配置文件,包含在配置组件包括：会话管理器，客户端 - 服务器连接管理器和服务器到服务器的连接管理器。
 

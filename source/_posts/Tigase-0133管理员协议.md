@@ -1,7 +1,11 @@
 title: Tigase-0133管理员协议
 date: 2015-12-10 00:11:25
-categories: [XMPP,Tigase]
-tags: [XMPP,Tigase]
+categories: 
+- XMPP
+- Tigase
+tags: 
+- XMPP
+- Tigase
 ---
 * 将`src/main/groovy/tigase/admin`拷贝到`scripts/`下,`XEP-0133`协议由`groovy`完成。
 * 管理员向服务端发送添加用户的请求，发送至`sess-man`

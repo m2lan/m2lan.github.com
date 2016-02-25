@@ -1,7 +1,9 @@
 title: Mongodb-部署复制集
 date: 2015-12-09 23:37:09
-categories: Mongodb
-tags: Mongodb
+categories: 
+- Mongodb
+tags: 
+- Mongodb
 ---
 ## 部署3个节点组成的复制集
 * 3台IP为
