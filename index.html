@@ -341,8 +341,7 @@ source /usr/local/coreseek/etc/example.sql
 </code></pre></li>
 <li><p>插入一条数据并检索</p>
 <pre><code>mysql -uroot -p123456 test
-insert into documents(group_id, group_id2, date_added, title, content)
- values(3,9,now(),&apos;zhangsan&apos;, &apos;zhangsan is a student&apos;);
+insert into documents(group_id, group_id2, date_added, title, content) values(3,9,now(),&apos;zhangsan&apos;, &apos;zhangsan is a student&apos;);
 </code></pre></li>
 <li>查询关键字<code>zhangsan</code><blockquote>
 <p>检索结果为0，因为每次新增数据都需要重新添加索引</p>
