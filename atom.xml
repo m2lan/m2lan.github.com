@@ -1,0 +1,2329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>知识记录</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://im.yonglang.co/"/>
+  <updated>2016-07-15T02:27:33.000Z</updated>
+  <id>http://im.yonglang.co/</id>
+  
+  <author>
+    <name>M2</name>
+    <email>763960267@qq.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Elasticasearch安装和使用</title>
+    <link href="http://im.yonglang.co/2016/07/15/Elasticasearch%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
+    <id>http://im.yonglang.co/2016/07/15/Elasticasearch安装和使用/</id>
+    <published>2016-07-15T02:00:43.000Z</published>
+    <updated>2016-07-15T02:27:33.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Elasticasearch_u5B89_u88C5_u548C_u4F7F_u7528&quot;&gt;&lt;a href=&quot;#Elasticasearch_u5B89_u88C5_u548C_u4F7F_u7528&quot; class=&quot;headerlink&quot; title=&quot;Elasticasearch安装和使用&quot;&gt;&lt;/a&gt;Elasticasearch安装和使用&lt;/h1&gt;&lt;h2 id=&quot;install&quot;&gt;&lt;a href=&quot;#install&quot; class=&quot;headerlink&quot; title=&quot;install&quot;&gt;&lt;/a&gt;install&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/2.2.0/elasticsearch-2.2.0.zip&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;download&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;unzip elasticsearch-2.2.0.zip&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;config&quot;&gt;&lt;a href=&quot;#config&quot; class=&quot;headerlink&quot; title=&quot;config&quot;&gt;&lt;/a&gt;config&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;vim config/elasticsearch.yml
+
+path.data: app_data
+path.logs: app_logs
+network.host: 0.0.0.0
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;install_Marvel_agent_plugin&quot;&gt;&lt;a href=&quot;#install_Marvel_agent_plugin&quot; class=&quot;headerlink&quot; title=&quot;install Marvel agent plugin&quot;&gt;&lt;/a&gt;install Marvel agent plugin&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;bin/plugin install licens
+bin/plugin install marvel-agent
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;    
+&lt;h2 id=&quot;cluster&quot;&gt;&lt;a href=&quot;#cluster&quot; class=&quot;headerlink&quot; title=&quot;cluster&quot;&gt;&lt;/a&gt;cluster&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;cluster.name: booksearch
+path.data: app_data
+path.logs: app_logs
+network.host: 0.0.0.0
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;start_elasticsearch&quot;&gt;&lt;a href=&quot;#start_elasticsearch&quot; class=&quot;headerlink&quot; title=&quot;start elasticsearch&quot;&gt;&lt;/a&gt;start elasticsearch&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;bin/elasticsearch
+
+||
+
+ES_HEAP_SIZE=256m; bin/elasticsearch
+
+|| 守护进程模式运行
+
+bin/elasticsearch -d
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;install_kibana&quot;&gt;&lt;a href=&quot;#install_kibana&quot; class=&quot;headerlink&quot; title=&quot;install kibana&quot;&gt;&lt;/a&gt;install kibana&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget https://download.elastic.co/kibana/kibana/kibana-4.4.1-linux-x64.tar.gz
+tar xzvf kibana-4.4.1-linux-x64.tar.gz
+cd kibana-4.4.1-linux-x64
+bin/kibana plugin --install elasticsearch/marvel/latest
+
+# 修改配置文件
+vim config/kibana.yml
+elasticsearch.url: &amp;quot;http://localhost:9200&amp;quot;
+
+# 启动
+bin/kibana
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u5173_u95ED_u76D1_u63A7&quot;&gt;&lt;a href=&quot;#u5173_u95ED_u76D1_u63A7&quot; class=&quot;headerlink&quot; title=&quot;关闭监控&quot;&gt;&lt;/a&gt;关闭监控&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;vim config/elasticsearch.yml
+marvel.agent.enabled: false
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;create_an_index&quot;&gt;&lt;a href=&quot;#create_an_index&quot; class=&quot;headerlink&quot; title=&quot;create an index&quot;&gt;&lt;/a&gt;create an index&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;创建一个名为customer的索引&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XPUT localhost:9200/customer?pretty
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;显示所有的索引信息 &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl localhost:9200/_cat/indices?v
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;添加一个文档&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XPUT &amp;apos;localhost:9200/customer/external/1?pretty&amp;apos; -d &amp;apos;{&amp;quot;name&amp;quot;: &amp;quot;John Doe&amp;quot;}&amp;apos;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;获取&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XGET localhost:9200/customer/external/1?pretty
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;删除一个索引&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XDELETE localhost:9200/customer?pretty
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;更新文档&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XPOST localhost:9200/customer/external/1/_update?pretty -d &amp;apos;{&amp;quot;doc&amp;quot;: {&amp;quot;name&amp;quot;: &amp;quot;Jane doe&amp;quot;}}&amp;apos;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u8BE6_u7EC6_u7684_u6587_u6863_u64CD_u4F5C&quot;&gt;&lt;a href=&quot;#u8BE6_u7EC6_u7684_u6587_u6863_u64CD_u4F5C&quot; class=&quot;headerlink&quot; title=&quot;详细的文档操作&quot;&gt;&lt;/a&gt;详细的文档操作&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;创建索引&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XPUT localhost:9200/website?pretty
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;添加文档&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XPUT localhost:9200/website/blog/123 -d &amp;apos;{&amp;quot;title&amp;quot;: &amp;quot;my first blog entry&amp;quot;, &amp;quot;text&amp;quot;: &amp;quot;just trying this out...&amp;quot;, &amp;quot;date&amp;quot;: &amp;quot;2014/01/01&amp;quot;}&amp;apos;
+curl -XPOST localhost:9200/website/blog/ -d &amp;apos;{&amp;quot;title&amp;quot;: &amp;quot;my second blog entry&amp;quot;, &amp;quot;text&amp;quot;: &amp;quot;still trying this out...&amp;quot;, &amp;quot;date&amp;quot;: &amp;quot;2014/01/01&amp;quot;}&amp;apos;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;获取文档&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XGET localhost:9200/website/blog/123?pretty
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;返回文档的一部分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;返回文档的title、text字段&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XGET localhost:9200/website/blog/123?_source=title,text
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;只返回_source字段&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XGET localhost:9200/website/blog/123/_source
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;检查文档是否存在&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XHEAD localhost:9200/website/blog/124 -i
+
+HTTP/1.1 404 Not Found
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 0
+
+||
+
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;更新文档&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XPUT localhost:9200/website/blog/123 -d &amp;apos;{&amp;quot;title&amp;quot;: &amp;quot;hello world&amp;quot;, &amp;quot;text&amp;quot;: &amp;quot;hahahhahahaha&amp;quot;, &amp;quot;date&amp;quot;: &amp;quot;2015/01/01&amp;quot;}&amp;apos;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;删除文档&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XDELETE localhost:9200/website/blog/123
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u5B89_u88C5head_uFF0C_u7528_u6765_u67E5_u770B_u96C6_u7FA4_u4FE1_u606F&quot;&gt;&lt;a href=&quot;#u5B89_u88C5head_uFF0C_u7528_u6765_u67E5_u770B_u96C6_u7FA4_u4FE1_u606F&quot; class=&quot;headerlink&quot; title=&quot;安装head，用来查看集群信息&quot;&gt;&lt;/a&gt;安装head，用来查看集群信息&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;bin/plugin install mobz/elasticsearch-head
+
+url: http://192.168.1.219:9200/_plugin/head/
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u5F00_u542F_u52A8_u6001_u811A_u672C&quot;&gt;&lt;a href=&quot;#u5F00_u542F_u52A8_u6001_u811A_u672C&quot; class=&quot;headerlink&quot; title=&quot;开启动态脚本&quot;&gt;&lt;/a&gt;开启动态脚本&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;修改配置文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vim config/elasticsearch.yml
+
+cluster.name: booksearch
+path.data: app_logs
+path.logs: app_logs
+network.host: 0.0.0.0
+script.inline: true
+script.indexed: true
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;执行脚本修改&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -XPOST &amp;apos;localhost:9200/customer/external/1/_update?pretty&amp;apos; -d &amp;apos;
+{
+  &amp;quot;script&amp;quot; : &amp;quot;ctx._source.age += 5&amp;quot;
+}&amp;apos;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u81EA_u52A8_u521B_u5EFA_u7D22_u5F15&quot;&gt;&lt;a href=&quot;#u81EA_u52A8_u521B_u5EFA_u7D22_u5F15&quot; class=&quot;headerlink&quot; title=&quot;自动创建索引&quot;&gt;&lt;/a&gt;自动创建索引&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;action.auto_create_index: .marvel-*
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u52A0_u8F7D_u6570_u636E&quot;&gt;&lt;a href=&quot;#u52A0_u8F7D_u6570_u636E&quot; class=&quot;headerlink&quot; title=&quot;加载数据&quot;&gt;&lt;/a&gt;加载数据&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget https://www.elastic.co/guide/en/kibana/3.0/snippets/shakespeare.json
+wget https://github.com/bly2k/files/blob/master/accounts.zip?raw=true
+wget https://download.elastic.co/demos/kibana/gettingstarted/logs.jsonl.gz
+
+unzip accounts.zip
+gunzip logs.jsonl.gz
+
+curl -XPUT http://localhost:9200/shakespeare -d &amp;apos;
+{
+ &amp;quot;mappings&amp;quot; : {
+  &amp;quot;_default_&amp;quot; : {
+   &amp;quot;properties&amp;quot; : {
+    &amp;quot;speaker&amp;quot; : {&amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;, &amp;quot;index&amp;quot; : &amp;quot;not_analyzed&amp;quot; },
+    &amp;quot;play_name&amp;quot; : {&amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;, &amp;quot;index&amp;quot; : &amp;quot;not_analyzed&amp;quot; },
+    &amp;quot;line_id&amp;quot; : { &amp;quot;type&amp;quot; : &amp;quot;integer&amp;quot; },
+    &amp;quot;speech_number&amp;quot; : { &amp;quot;type&amp;quot; : &amp;quot;integer&amp;quot; }
+   }
+  }
+ }
+}
+&amp;apos;;
+
+curl -XPUT http://localhost:9200/logstash-2015.05.18 -d &amp;apos;
+{
+  &amp;quot;mappings&amp;quot;: {
+    &amp;quot;log&amp;quot;: {
+      &amp;quot;properties&amp;quot;: {
+        &amp;quot;geo&amp;quot;: {
+          &amp;quot;properties&amp;quot;: {
+            &amp;quot;coordinates&amp;quot;: {
+              &amp;quot;type&amp;quot;: &amp;quot;geo_point&amp;quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+&amp;apos;;
+
+curl -XPUT http://localhost:9200/logstash-2015.05.19 -d &amp;apos;
+{
+  &amp;quot;mappings&amp;quot;: {
+    &amp;quot;log&amp;quot;: {
+      &amp;quot;properties&amp;quot;: {
+        &amp;quot;geo&amp;quot;: {
+          &amp;quot;properties&amp;quot;: {
+            &amp;quot;coordinates&amp;quot;: {
+              &amp;quot;type&amp;quot;: &amp;quot;geo_point&amp;quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+&amp;apos;;
+
+curl -XPUT http://localhost:9200/logstash-2015.05.20 -d &amp;apos;
+{
+  &amp;quot;mappings&amp;quot;: {
+    &amp;quot;log&amp;quot;: {
+      &amp;quot;properties&amp;quot;: {
+        &amp;quot;geo&amp;quot;: {
+          &amp;quot;properties&amp;quot;: {
+            &amp;quot;coordinates&amp;quot;: {
+              &amp;quot;type&amp;quot;: &amp;quot;geo_point&amp;quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+&amp;apos;;
+
+curl -XPOST &amp;apos;localhost:9200/bank/account/_bulk?pretty&amp;apos; --data-binary @accounts.json
+curl -XPOST &amp;apos;localhost:9200/shakespeare/_bulk?pretty&amp;apos; --data-binary @shakespeare.json
+curl -XPOST &amp;apos;localhost:9200/_bulk?pretty&amp;apos; --data-binary @logs.jsonl
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u67E5_u770B&quot;&gt;&lt;a href=&quot;#u67E5_u770B&quot; class=&quot;headerlink&quot; title=&quot;查看&quot;&gt;&lt;/a&gt;查看&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;curl localhost:9200/_cat/indices?v
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u67E5_u770B_u96C6_u7FA4_u5065_u5EB7_u4FE1_u606F&quot;&gt;&lt;a href=&quot;#u67E5_u770B_u96C6_u7FA4_u5065_u5EB7_u4FE1_u606F&quot; class=&quot;headerlink&quot; title=&quot;查看集群健康信息&quot;&gt;&lt;/a&gt;查看集群健康信息&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;curl -XGET localhost:9200/_cluster/health
+
+{
+    &amp;quot;cluster_name&amp;quot;: &amp;quot;booksearch&amp;quot;,
+    &amp;quot;status&amp;quot;: &amp;quot;green&amp;quot;,
+    &amp;quot;timed_out&amp;quot;: false,
+    &amp;quot;number_of_nodes&amp;quot;: 2,
+    &amp;quot;number_of_data_nodes&amp;quot;: 2,
+    &amp;quot;active_primary_shards&amp;quot;: 38,
+    &amp;quot;active_shards&amp;quot;: 76,
+    &amp;quot;relocating_shards&amp;quot;: 0,
+    &amp;quot;initializing_shards&amp;quot;: 0,
+    &amp;quot;unassigned_shards&amp;quot;: 0,
+    &amp;quot;delayed_unassigned_shards&amp;quot;: 0,
+    &amp;quot;number_of_pending_tasks&amp;quot;: 0,
+    &amp;quot;number_of_in_flight_fetch&amp;quot;: 0,
+    &amp;quot;task_max_waiting_in_queue_millis&amp;quot;: 0,
+    &amp;quot;active_shards_percent_as_number&amp;quot;: 100
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;status&lt;/p&gt;
+&lt;p&gt;  颜色|意义
+  —–|—–
+  green|所有主要分片和复制分片都可用
+  yellow|所有主要分片可用，但不是所有复制分片都可用
+  red|不是所有的主要分片都可用&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Elasticasearch_u5B89_u88C5_u548C_u4F7F_u7528&quot;&gt;&lt;a href=&quot;#Elasticasearch_u5B89_u88C5_u548C_u4F7F_u7528&quot; class=&quot;headerlink&quot; title=&quot;Elasticasearch安装和使用&quot;&gt;&lt;/a&gt;Elasticasearch安装和使用&lt;/h1&gt;&lt;h2 id=&quot;install&quot;&gt;&lt;a href=&quot;#install&quot; class=&quot;headerlink&quot; title=&quot;install&quot;&gt;&lt;/a&gt;install&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/2.2.0/elasticsearch-2.2.0.zip&quot;&gt;download&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;unzip elasticsearch-2.2.0.zip&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;config&quot;&gt;&lt;a href=&quot;#config&quot; class=&quot;headerlink&quot; title=&quot;config&quot;&gt;&lt;/a&gt;config&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;vim config/elasticsearch.yml
+
+path.data: app_data
+path.logs: app_logs
+network.host: 0.0.0.0
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;install_Marvel_agent_plugin&quot;&gt;&lt;a href=&quot;#install_Marvel_agent_plugin&quot; class=&quot;headerlink&quot; title=&quot;install Marvel agent plugin&quot;&gt;&lt;/a&gt;install Marvel agent plugin&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;bin/plugin install licens
+bin/plugin install marvel-agent
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Elasticasearch" scheme="http://im.yonglang.co/categories/Elasticasearch/"/>
+    
+    
+      <category term="Elasticasearch" scheme="http://im.yonglang.co/tags/Elasticasearch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo运行报错</title>
+    <link href="http://im.yonglang.co/2016/07/15/hexo%E8%BF%90%E8%A1%8C%E6%8A%A5%E9%94%99/"/>
+    <id>http://im.yonglang.co/2016/07/15/hexo运行报错/</id>
+    <published>2016-07-15T01:22:02.000Z</published>
+    <updated>2016-07-15T01:40:21.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;hexo_u8FD0_u884C_u62A5_u9519&quot;&gt;&lt;a href=&quot;#hexo_u8FD0_u884C_u62A5_u9519&quot; class=&quot;headerlink&quot; title=&quot;hexo运行报错&quot;&gt;&lt;/a&gt;hexo运行报错&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;运行hexo命令出现以下错误&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[Error: Module did not self-register.]
+{ [Error: Cannot find module &amp;apos;./build/default/DTraceProviderBindings&amp;apos;] code: &amp;apos;MODULE_NOT_FOUND&amp;apos; }
+{ [Error: Cannot find module &amp;apos;./build/Debug/DTraceProviderBindings&amp;apos;] code: &amp;apos;MODULE_NOT_FOUND&amp;apos; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;解决方法&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm install hexo --no-optional
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;hexo_u8FD0_u884C_u62A5_u9519&quot;&gt;&lt;a href=&quot;#hexo_u8FD0_u884C_u62A5_u9519&quot; class=&quot;headerlink&quot; title=&quot;hexo运行报错&quot;&gt;&lt;/a&gt;hexo运行报错&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;
+    
+    </summary>
+    
+      <category term="Hexo" scheme="http://im.yonglang.co/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="http://im.yonglang.co/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>php+sphinx使用</title>
+    <link href="http://im.yonglang.co/2016/07/15/php-sphinx%E4%BD%BF%E7%94%A8/"/>
+    <id>http://im.yonglang.co/2016/07/15/php-sphinx使用/</id>
+    <published>2016-07-15T01:17:15.000Z</published>
+    <updated>2016-07-15T02:32:00.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Centos7_Sphinx_install&quot;&gt;&lt;a href=&quot;#Centos7_Sphinx_install&quot; class=&quot;headerlink&quot; title=&quot;Centos7 Sphinx install&quot;&gt;&lt;/a&gt;Centos7 Sphinx install&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;安装依赖库&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel expat-devel
+cd /usr/local/src
+
+// https://share.weiyun.com/2da811898545e0043a00c4129fea95c0
+// download coreseek-3.2.14
+tar xvzf coreseek-3.2.14.tar.gz
+cd coreseek-3.2.14
+cd mmseg-3.2.14
+./bootstrap
+./configure --prefix=/usr/local/mmseg3
+make &amp;amp;&amp;amp; make install
+cd /usr/local/src/coreseek-3.2.14/csft-3.2.14
+
+#这里我们要修改 src/sphinxexpr.cpp 文件，将该文件中的 1013、1047、1080 行的 ExprEval 改为 this-&amp;gt;ExprEval
+sh buildconf.sh
+
+#修改configure文件,找到“#define USE_LIBICONV 1”，将注释去掉，并将1改成0。
+make &amp;amp;&amp;amp; make install
+
+cd ..
+cd testpack
+cat var/test/test.xml   #此时应该正确显示中文
+/usr/local/mmseg3/bin/mmseg -d /usr/local/mmseg3/etc var/test/test.xml  #整篇文章进行分词
+/usr/local/coreseek/bin/indexer -c etc/csft.conf --all  #创建索引
+/usr/local/coreseek/bin/search -c etc/csft.conf 网络搜索    #搜索关键字 网络搜索
+/usr/local/coreseek/bin/searchd -c etc/csft.conf    #正常开启搜索服务
+/usr/local/coreseek/bin/searchd -c etc/csft.conf --stop #如要停止搜索服务
+/usr/local/coreseek/bin/indexer -c etc/csft.conf --all --rotate #如要已启动服务，要更新索引
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装PHP扩展&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /usr/local/src/coreseek-3.2.14/csft-3.2.14/api/libsphinxclient
+./configure --prefix=/usr/local/sphinxclient
+make &amp;amp;&amp;amp; make install
+
+cd /usr/local/src
+wget http://pecl.php.net/get/sphinx-1.1.0.tgz
+tar -xzvf sphinx-1.1.0.tgz
+cd sphinx-1.1.0
+/usr/bin/phpize
+./configure --with-php-config=/usr/local/php/bin/php-config --with-sphinx=/usr/local/sphinxclient
+
+make &amp;amp;&amp;amp; make install
+
+#注意，如果你的php版本是5.4，那么在这一步中会出现错误，提示在 sphinx.c:105:2，可以按下面方式修改：
+
+#vim sphinx.c，找到105行
+
+#把 retval = std_hnd-&amp;gt;read_property(object, member, type TSRMLS_CC); 修改成 retval = std_hnd-&amp;gt;read_property(object, member, type TSRMLS_CC, NULL);
+
+# 重新编译
+./configure --with-php-config=/usr/local/php/bin/php-config --with-sphinx=/usr/local/sphinxclient
+make &amp;amp;&amp;amp; make install
+
+# 修改php.ini文件
+vim /usr/local/php/etc/php.ini
+# 在最后一行加上
+extension=&amp;quot;sphinx.so&amp;quot;
+# 重启
+/etc/init.d/php-fpm restart
+/etc/init.d/nginx restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Sphinx配置文件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;首先建立Sphinx配置文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /usr/local/coreseek/etc/
+cp sphinx.conf.dist sphinx.conf
+
+# 删除空格
+sed -i &amp;quot;/^\s*$/d&amp;quot; sphinx.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Sphinx.conf文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;source src1
+{
+    # data source type. mandatory, no default value
+    # known types are mysql, pgsql, mssql, xmlpipe, xmlpipe2, odbc
+    type                    = mysql
+    #####################################################################
+    ## SQL settings (for &amp;apos;mysql&amp;apos; and &amp;apos;pgsql&amp;apos; types)
+    #####################################################################
+    # some straightforward parameters for SQL source types
+    sql_host                = localhost
+    sql_user                = root
+    sql_pass                = 123456
+    sql_db                    = test
+    sql_port                = 3306    # optional, default is 3306
+    sql_query_pre                           = SET NAMES UTF8  # mysql检索字符集
+    sql_query                = \
+        SELECT id, group_id, UNIX_TIMESTAMP(date_added) AS date_added, title, content \
+        FROM documents
+    sql_ranged_throttle = 0
+    sql_query_info        = SELECT * FROM documents WHERE id=$id  # 这里的id对应于数据表的主键
+}
+index test1
+{
+    source            = src1
+    path            = /usr/local/coreseek/var/data/test1
+    docinfo            = extern
+    mlock            = 0
+    morphology        = none
+    #wordforms            = G:\data\wordforms.txt
+    #exceptions        = /data/exceptions.txt
+    min_word_len        = 1
+    charset_type        = utf-8
+    html_strip                = 0
+}
+indexer
+{
+    mem_limit            = 32M
+}
+searchd
+{
+    log                    = /usr/local/coreseek/var/log/searchd.log
+    query_log            = /usr/local/coreseek/var/log/query.log
+    read_timeout        = 5
+    client_timeout        = 300
+    max_children        = 30
+    pid_file            = /usr/local/coreseek/var/log/searchd.pid
+    max_matches            = 1000
+    seamless_rotate        = 1
+    preopen_indexes        = 0
+    unlink_old            = 1
+    mva_updates_pool    = 1M
+    max_packet_size        = 8M
+    max_filters            = 256
+    max_filter_values    = 4096
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;创建数据库，导入测试数据&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在主数据源设置中，sql_query和sql_query_info字段都是From document，这是安装coreseek时提供的测试表，位于/usr/local/coreseek/etc/example.sql&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;mysql -uroot -p123456
+create database test;
+use test;
+source /usr/local/coreseek/etc/example.sql
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;搜索测试&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建索引，每次新增数据后，都要重新索引一次&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;创建索引命令&lt;code&gt;indexer&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;-c 指定配置文件&lt;/li&gt;
+&lt;li&gt;–all 对所有索引重新编制索引&lt;/li&gt;
+&lt;li&gt;–rotate 用于轮换索引，主要是在不停止服务的时候增加索引&lt;/li&gt;
+&lt;li&gt;–merge 合并索引&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;针对test:documents创建索引&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /usr/local/coreseek/bin
+./indexer -c /usr/local/coreseek/etc/sphinx.conf --all
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查询关键字&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查询命令&lt;code&gt;search&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;-c 指定配置文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查关键字&lt;code&gt;test&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /usr/local/coreseek/bin
+./search -c /usr/local/coreseek/etc/sphinx.conf test
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查询关键字&lt;code&gt;group&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./search -c /usr/local/coreseek/etc/sphinx.conf group
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;插入一条数据并检索&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mysql -uroot -p123456 test
+insert into documents(group_id, group_id2, date_added, title, content) values(3,9,now(),&amp;apos;zhangsan&amp;apos;, &amp;apos;zhangsan is a student&amp;apos;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;查询关键字&lt;code&gt;zhangsan&lt;/code&gt;&lt;blockquote&gt;
+&lt;p&gt;检索结果为0，因为每次新增数据都需要重新添加索引&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;插入一条中文书籍并检索&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mysql -uroot -p123456 test
+insert into documents(group_id, group_id2, date_added, title, content) values(3,9,now(),&amp;apos;zhangsan张三&amp;apos;, &amp;apos;张三是一名学生&amp;apos;);
+
+# 重新建立索引
+./indexer -c /usr/local/coreseek/etc/sphinx.conf --all
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5&quot;&gt;&lt;a href=&quot;#coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5&quot; class=&quot;headerlink&quot; title=&quot;coreseek中文搜索测试&quot;&gt;&lt;/a&gt;coreseek中文搜索测试&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;创建coreseek配置文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /usr/local/coreseek/etc/
+cp sphinx.conf csft.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;csft.conf&lt;/code&gt;配置文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;source src1
+{
+    # data source type. mandatory, no default value
+    # known types are mysql, pgsql, mssql, xmlpipe, xmlpipe2, odbc
+    type                    = mysql
+    #####################################################################
+    ## SQL settings (for &amp;apos;mysql&amp;apos; and &amp;apos;pgsql&amp;apos; types)
+    #####################################################################
+    # some straightforward parameters for SQL source types
+    sql_host                = localhost
+    sql_user                = root
+    sql_pass                = 123456
+    sql_db                    = test
+    sql_port                = 3306    # optional, default is 3306
+    sql_query_pre                           = SET NAMES UTF8  # mysql检索字符集
+        #sql_query_pre                           = SET SESSION query_cache_type=1  # 关闭缓存
+    sql_query                = \
+        SELECT id, group_id, UNIX_TIMESTAMP(date_added) AS date_added, title, content \
+        FROM documents
+    sql_ranged_throttle = 0
+    sql_query_info        = SELECT * FROM documents WHERE id=$id  # 这里的id对应于数据表的主键
+}
+index test1
+{
+    source            = src1
+    path            = /usr/local/coreseek/var/data/test1
+    docinfo            = extern
+    mlock            = 0
+    morphology        = none
+    #wordforms            = G:\data\wordforms.txt
+    #exceptions        = /data/exceptions.txt
+    min_word_len        = 1
+    charset_type        = zh_cn.utf-8
+    charset_dictpath    = /usr/local/mmseg3/etc/
+    html_strip                = 0
+}
+indexer
+{
+    mem_limit            = 32M
+}
+searchd
+{
+    log                    = /usr/local/coreseek/var/log/searchd.log
+    query_log            = /usr/local/coreseek/var/log/query.log
+    read_timeout        = 5
+    client_timeout        = 300
+    max_children        = 30
+    pid_file            = /usr/local/coreseek/var/log/searchd.pid
+    max_matches            = 1000
+    seamless_rotate        = 1
+    preopen_indexes        = 0
+    unlink_old            = 1
+    mva_updates_pool    = 1M
+    max_packet_size        = 8M
+    max_filters            = 256
+    max_filter_values    = 4096
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重新测试中文搜索&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /usr/local/coreseek/bin
+
+# 用sphinx搜索显示结果是
+[root@localhost bin]# ./search -c /usr/local/coreseek/etc/sphinx.conf zhangsan张三
+Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
+Copyright (c) 2007-2011,
+Beijing Choice Software Technologies Inc (http://www.coreseek.com)
+
+ using config file &amp;apos;/usr/local/coreseek/etc/sphinx.conf&amp;apos;...
+index &amp;apos;test1&amp;apos;: query &amp;apos;zhangsan张三 &amp;apos;: returned 2 matches of 2 total in 0.000 sec
+
+displaying matches:
+1. document=5, weight=2
+    id=5
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 13:39:02
+    title=zhangsan
+    content=zhangsan is a student
+2. document=6, weight=1
+    id=6
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 13:42:27
+    title=zhangsan张三
+    content=张三是一名学生
+
+words:
+1. &amp;apos;zhangsan&amp;apos;: 2 documents, 3 hits
+
+# 基于coreseek搜索
+# 创建索引
+./indexer -c /usr/local/coreseek/etc/csft.conf --all
+# 搜索结果
+[root@localhost bin]# ./search -c /usr/local/coreseek/etc/csft.conf zhangsan张三
+Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
+Copyright (c) 2007-2011,
+Beijing Choice Software Technologies Inc (http://www.coreseek.com)
+
+ using config file &amp;apos;/usr/local/coreseek/etc/csft.conf&amp;apos;...
+index &amp;apos;test1&amp;apos;: query &amp;apos;zhangsan张三 &amp;apos;: returned 1 matches of 1 total in 0.001 sec
+
+displaying matches:
+1. document=6, weight=5
+    id=6
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 13:42:27
+    title=zhangsan张三
+    content=张三是一名学生
+
+words:
+1. &amp;apos;zhangsan&amp;apos;: 2 documents, 3 hits
+2. &amp;apos;张&amp;apos;: 1 documents, 2 hits
+3. &amp;apos;三&amp;apos;: 1 documents, 2 hits
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重新添加一条数据&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mysql -uroot -p123456 test
+insert into documents(group_id, group_id2, date_added, title, content) values(3, 9, now(), &amp;apos;北京清华大学&amp;apos;, &amp;apos;张三在 北京清华大学上学&amp;apos;);
+
+./indexer -c /usr/local/coreseek/etc/csft.conf --all
+
+# 搜索北京清华大学
+[root@localhost bin]# ./search -c /usr/local/coreseek/etc/csft.conf 北京清华大学
+Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
+Copyright (c) 2007-2011,
+Beijing Choice Software Technologies Inc (http://www.coreseek.com)
+
+ using config file &amp;apos;/usr/local/coreseek/etc/csft.conf&amp;apos;...
+index &amp;apos;test1&amp;apos;: query &amp;apos;北京清华大学 &amp;apos;: returned 1 matches of 1 total in 0.001 sec
+
+displaying matches:
+1. document=7, weight=4
+    id=7
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 14:08:06
+    title=北京清华大学
+    content=张三在北京清华大学上学
+
+words:
+1. &amp;apos;北京&amp;apos;: 1 documents, 2 hits
+2. &amp;apos;清华大学&amp;apos;: 1 documents, 2 hits
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;u5728PHP_u4E2D_u4F7F_u7528Sphinx&quot;&gt;&lt;a href=&quot;#u5728PHP_u4E2D_u4F7F_u7528Sphinx&quot; class=&quot;headerlink&quot; title=&quot;在PHP中使用Sphinx&quot;&gt;&lt;/a&gt;在PHP中使用Sphinx&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;在php中使用sphinx步骤&lt;ul&gt;
+&lt;li&gt;建立sphinx配置文件&lt;/li&gt;
+&lt;li&gt;生成索引&lt;/li&gt;
+&lt;li&gt;启动sphinx服务进程(searchd)&lt;/li&gt;
+&lt;li&gt;安装PHP的sphinx扩展&lt;/li&gt;
+&lt;li&gt;使用php客户端连接sphinx服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;启动sphinx服务命令&lt;code&gt;searchd&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;-c 指定配置文件&lt;/li&gt;
+&lt;li&gt;–stop 停止服务&lt;/li&gt;
+&lt;li&gt;–pidfile 显式指定一个PID文件&lt;/li&gt;
+&lt;li&gt;-p 指定端口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;启动sphinx服务进程(searchd)，并开启端口9312&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /usr/local/coreseek/bin
+./searchd(或者 ./searchd -c /usr/local/coreseek/etc/csft.conf) # 这里默认会加载csft.conf文件，如果配置文件不叫csft.conf可以使用-c命令指定配置文件名称
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看searchd状态&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@localhost bin]# ps aux|grep searchd
+root      10424  0.0  0.0  31696   824 pts/0    S    14:15   0:00 ./searchd
+root      10436  0.0  0.0 112664   992 pts/0    R+   14:17   0:00 grep --color=auto searchd
+[root@localhost bin]# netstat -tunpl | grep 9312
+tcp        0      0 0.0.0.0:9312            0.0.0.0:*               LISTEN      10424/./searchd
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;简单的PHP检索示例&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
+&amp;lt;head&amp;gt;
+    &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
+    &amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;?php
+
+    if (empty($_GET[&amp;apos;key&amp;apos;]) &amp;amp;&amp;amp; !isset($_GET[&amp;apos;key&amp;apos;])) {
+            echo &amp;apos;请输入搜索内容&amp;apos;;
+            exit();
+    }
+
+    define(&amp;apos;INDEX&amp;apos;, &amp;apos;test1&amp;apos;);
+
+    $sphinx = new SphinxClient();
+
+    // 设置主机名和端口号(默认9312)
+    $sphinx-&amp;gt;SetServer(&amp;apos;localhost&amp;apos;, 9312);
+
+    /**
+     * 设置匹配方式
+     * 1. SPH_MATCH_ANY表示所有结果
+     * 2. SPH_MATCH_ALL表示包涵关键词的结果
+     */
+    $sphinx-&amp;gt;SetMatchMode(SPH_MATCH_ANY);
+
+    // query(&amp;apos;a&amp;apos;, &amp;apos;b&amp;apos;)在索引中搜索关键字a, query(&amp;apos;a&amp;apos;, &amp;apos;*&amp;apos;)在所有索引中搜索a
+    $result = $sphinx-&amp;gt;query($_GET[&amp;apos;key&amp;apos;], INDEX);
+
+    echo &amp;apos;&amp;lt;pre&amp;gt;&amp;apos;;
+    print_r($result);
+    echo &amp;apos;&amp;lt;/pre&amp;gt;&amp;apos;;
+
+    $ids = join(&amp;apos;,&amp;apos;, array_keys($result[&amp;apos;matches&amp;apos;]));
+    $mysql = new mysqli(&amp;apos;localhost&amp;apos;, &amp;apos;root&amp;apos;, &amp;apos;123456&amp;apos;, &amp;apos;test&amp;apos;);
+    $mysql-&amp;gt;query(&amp;apos;SET NAMES utf8&amp;apos;);
+    $sql = &amp;quot;select * from documents where id in({$ids})&amp;quot;;
+
+    $opts = array(
+        &amp;apos;before_match&amp;apos; =&amp;gt; &amp;quot;&amp;lt;font style=&amp;apos;font-weight: bold; color: #f00;&amp;apos;&amp;gt;&amp;quot;,
+        &amp;apos;after_match&amp;apos;  =&amp;gt; &amp;apos;&amp;lt;/font&amp;gt;&amp;apos;
+    );
+
+    $res = $mysql-&amp;gt;query($sql);
+
+    $count = $res-&amp;gt;num_rows;
+
+    if ($count &amp;gt; 0) {
+        while ($list = $res-&amp;gt;fetch_assoc()) {
+            $row = $sphinx-&amp;gt;buildExcerpts($list, INDEX, $_GET[&amp;apos;key&amp;apos;], $opts);
+
+            echo &amp;quot;标题：{$row[4]}&amp;lt;br/&amp;gt;&amp;quot;;
+            echo &amp;quot;内容：{$row[5]}&amp;quot;;
+
+            echo &amp;apos;&amp;lt;hr&amp;gt;&amp;apos;;
+        }
+
+        echo &amp;quot;总共搜索到${count}条&amp;quot;;
+    } else {
+        echo &amp;apos;没有搜索到&amp;apos;;
+    }
+?&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos7_Sphinx_install&quot;&gt;&lt;a href=&quot;#Centos7_Sphinx_install&quot; class=&quot;headerlink&quot; title=&quot;Centos7 Sphinx install&quot;&gt;&lt;/a&gt;Centos7 Sphinx install&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;安装依赖库&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel expat-devel
+cd /usr/local/src
+
+// https://share.weiyun.com/2da811898545e0043a00c4129fea95c0
+// download coreseek-3.2.14
+tar xvzf coreseek-3.2.14.tar.gz
+cd coreseek-3.2.14
+cd mmseg-3.2.14
+./bootstrap
+./configure --prefix=/usr/local/mmseg3
+make &amp;amp;&amp;amp; make install
+cd /usr/local/src/coreseek-3.2.14/csft-3.2.14
+
+#这里我们要修改 src/sphinxexpr.cpp 文件，将该文件中的 1013、1047、1080 行的 ExprEval 改为 this-&amp;gt;ExprEval
+sh buildconf.sh
+
+#修改configure文件,找到“#define USE_LIBICONV 1”，将注释去掉，并将1改成0。
+make &amp;amp;&amp;amp; make install
+
+cd ..
+cd testpack
+cat var/test/test.xml   #此时应该正确显示中文
+/usr/local/mmseg3/bin/mmseg -d /usr/local/mmseg3/etc var/test/test.xml  #整篇文章进行分词
+/usr/local/coreseek/bin/indexer -c etc/csft.conf --all  #创建索引
+/usr/local/coreseek/bin/search -c etc/csft.conf 网络搜索    #搜索关键字 网络搜索
+/usr/local/coreseek/bin/searchd -c etc/csft.conf    #正常开启搜索服务
+/usr/local/coreseek/bin/searchd -c etc/csft.conf --stop #如要停止搜索服务
+/usr/local/coreseek/bin/indexer -c etc/csft.conf --all --rotate #如要已启动服务，要更新索引
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="PHP" scheme="http://im.yonglang.co/categories/PHP/"/>
+    
+    
+      <category term="PHP" scheme="http://im.yonglang.co/tags/PHP/"/>
+    
+      <category term="Sphinx" scheme="http://im.yonglang.co/tags/Sphinx/"/>
+    
+      <category term="Coreseek" scheme="http://im.yonglang.co/tags/Coreseek/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos-安装tsung压力测试工具</title>
+    <link href="http://im.yonglang.co/2016/02/26/centos-%E5%AE%89%E8%A3%85tsung%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/"/>
+    <id>http://im.yonglang.co/2016/02/26/centos-安装tsung压力测试工具/</id>
+    <published>2016-02-25T16:20:51.000Z</published>
+    <updated>2016-07-15T03:41:38.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Centos__u5B89_u88C5Tsung_u538B_u529B_u6D4B_u8BD5_u5DE5_u5177&quot;&gt;&lt;a href=&quot;#Centos__u5B89_u88C5Tsung_u538B_u529B_u6D4B_u8BD5_u5DE5_u5177&quot; class=&quot;headerlink&quot; title=&quot;Centos 安装Tsung压力测试工具&quot;&gt;&lt;/a&gt;Centos 安装Tsung压力测试工具&lt;/h1&gt;&lt;h2 id=&quot;Tsung_u5B89_u88C5_u5305_u3001erlang_u5B89_u88C5_u5305_u3001Perl__28__u751F_u6210_u62A5_u544A_u6240_u9700_u6A21_u5757_29_u3001_u56FE_u5F62_u5E93gnuplot_u7B49&quot;&gt;&lt;a href=&quot;#Tsung_u5B89_u88C5_u5305_u3001erlang_u5B89_u88C5_u5305_u3001Perl__28__u751F_u6210_u62A5_u544A_u6240_u9700_u6A21_u5757_29_u3001_u56FE_u5F62_u5E93gnuplot_u7B49&quot; class=&quot;headerlink&quot; title=&quot;Tsung安装包、erlang安装包、Perl ( 生成报告所需模块)、图形库gnuplot等&quot;&gt;&lt;/a&gt;Tsung安装包、erlang安装包、Perl ( 生成报告所需模块)、图形库gnuplot等&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;yum install gd libpng zlib
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u5B89_u88C5erlang&quot;&gt;&lt;a href=&quot;#u5B89_u88C5erlang&quot; class=&quot;headerlink&quot; title=&quot;安装erlang&quot;&gt;&lt;/a&gt;安装erlang&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://www.erlang.org/download/otp_src_R15B02.tar.gz
+tar xvzf otp_src_R15B02.tar.gz
+cd otp_src_R15B02
+./configure  
+// 这一步如果出现configure: error: /bin/sh &amp;apos;/root/otp_src_R15B02/erts/configure&amp;apos; failed for erts
+yum install ncurses-devel
+
+make
+make install
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;u5B89_u88C5gnuplot&quot;&gt;&lt;a href=&quot;#u5B89_u88C5gnuplot&quot; class=&quot;headerlink&quot; title=&quot;安装gnuplot&quot;&gt;&lt;/a&gt;安装gnuplot&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://nchc.dl.sourceforge.net/project/gnuplot/gnuplot/4.4.0/gnuplot-4.4.0.tar.gz
+tar xvzf gnuplot-4.4.0.tar.gz
+cd gnuplot-4.4.0
+./configure
+make
+make install
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u4E0B_u8F7D_u5B89_u88C5Tsung&quot;&gt;&lt;a href=&quot;#u4E0B_u8F7D_u5B89_u88C5Tsung&quot; class=&quot;headerlink&quot; title=&quot;下载安装Tsung&quot;&gt;&lt;/a&gt;下载安装Tsung&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://tsung.erlang-projects.org/dist/tsung-1.4.2.tar.gz  
+tar xvzf tsung-1.4.2.tar.gz
+cd tsung-1.4.2
+./configure
+make &amp;amp;&amp;amp; make install
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u5B89_u88C5perl_Template_2C_u7528_u6765_u751F_u6210_u62A5_u544A_u6A21_u677F&quot;&gt;&lt;a href=&quot;#u5B89_u88C5perl_Template_2C_u7528_u6765_u751F_u6210_u62A5_u544A_u6A21_u677F&quot; class=&quot;headerlink&quot; title=&quot;安装perl Template,用来生成报告模板&quot;&gt;&lt;/a&gt;安装perl Template,用来生成报告模板&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://cpan.org/modules/by-module/Template/Template-Toolkit-2.24.tar.gz  
+tar xvzf Template-Toolkit-2.24.tar.gz
+cd Template-Toolkit-2.24
+perl Makefile.PL
+make
+make test
+make install
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u5728root_u76EE_u5F55_u4E0B_u521B_u5EFA-tsung_u76EE_u5F55&quot;&gt;&lt;a href=&quot;#u5728root_u76EE_u5F55_u4E0B_u521B_u5EFA-tsung_u76EE_u5F55&quot; class=&quot;headerlink&quot; title=&quot;在root目录下创建.tsung目录&quot;&gt;&lt;/a&gt;在root目录下创建.tsung目录&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;mkdir ~/.tsung
+cd ~/.tsung
+cp /usr/local/share/doc/tsung/examples/http_simple.xml ~/.tsung/tsung.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u8FD0_u884C&quot;&gt;&lt;a href=&quot;#u8FD0_u884C&quot; class=&quot;headerlink&quot; title=&quot;运行&quot;&gt;&lt;/a&gt;运行&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;运行，默认执行&lt;code&gt;~/.tsung/tsung.xml&lt;/code&gt;配置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tsung start
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u8FDB_u5165_u9700_u8981_u751F_u6210_u56FE_u8868_u7684log_u76EE_u5F55&quot;&gt;&lt;a href=&quot;#u8FDB_u5165_u9700_u8981_u751F_u6210_u56FE_u8868_u7684log_u76EE_u5F55&quot; class=&quot;headerlink&quot; title=&quot;进入需要生成图表的log目录&quot;&gt;&lt;/a&gt;进入需要生成图表的log目录&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;cd ~/.tsung/log/20141208-1047/
+/usr/local/lib/tsung/bin/tsung_stats.pl
+
+// 如果出现`Error while running gnuplot: 对设备不适当的 ioctl 操作 at /usr/local/lib/tsung/bin/tsung_stats.pl line 223.`
+
+yum -y install gnuplot
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;这是重新启动，进入需要生成图表的log目录&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@iZ2326o1rm2Z ~]# cd .tsung/log/20141208-1047/
+[root@iZ2326o1rm2Z 20141208-1047]# ls
+match.log  tsung_controller@iZ2326o1rm2Z.log  tsung.log  tsung.xml
+[root@iZ2326o1rm2Z 20141208-1047]# /usr/local/lib/tsung/bin/tsung_stats.pl 
+creating subdirectory data 
+creating subdirectory gnuplot_scripts 
+creating subdirectory images 
+Use of uninitialized value $interval in numeric ne (!=) at /usr/local/lib/tsung/bin/tsung_stats.pl line 428.
+No data for Session
+No data for Perfs
+No data for Transactions
+No data for Match
+No data for Event
+No data for Async
+No data for Errors
+No data for Users
+No data for Users_Arrival
+No data for Size
+size_rcv is equal to 0 !
+size_sent is equal to 0 !
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;打开report.html就可以查看生成的报表了&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos__u5B89_u88C5Tsung_u538B_u529B_u6D4B_u8BD5_u5DE5_u5177&quot;&gt;&lt;a href=&quot;#Centos__u5B89_u88C5Tsung_u538B_u529B_u6D4B_u8BD5_u5DE5_u5177&quot; class=&quot;headerlink&quot; title=&quot;Centos 安装Tsung压力测试工具&quot;&gt;&lt;/a&gt;Centos 安装Tsung压力测试工具&lt;/h1&gt;&lt;h2 id=&quot;Tsung_u5B89_u88C5_u5305_u3001erlang_u5B89_u88C5_u5305_u3001Perl__28__u751F_u6210_u62A5_u544A_u6240_u9700_u6A21_u5757_29_u3001_u56FE_u5F62_u5E93gnuplot_u7B49&quot;&gt;&lt;a href=&quot;#Tsung_u5B89_u88C5_u5305_u3001erlang_u5B89_u88C5_u5305_u3001Perl__28__u751F_u6210_u62A5_u544A_u6240_u9700_u6A21_u5757_29_u3001_u56FE_u5F62_u5E93gnuplot_u7B49&quot; class=&quot;headerlink&quot; title=&quot;Tsung安装包、erlang安装包、Perl ( 生成报告所需模块)、图形库gnuplot等&quot;&gt;&lt;/a&gt;Tsung安装包、erlang安装包、Perl ( 生成报告所需模块)、图形库gnuplot等&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;yum install gd libpng zlib
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u5B89_u88C5erlang&quot;&gt;&lt;a href=&quot;#u5B89_u88C5erlang&quot; class=&quot;headerlink&quot; title=&quot;安装erlang&quot;&gt;&lt;/a&gt;安装erlang&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://www.erlang.org/download/otp_src_R15B02.tar.gz
+tar xvzf otp_src_R15B02.tar.gz
+cd otp_src_R15B02
+./configure  
+// 这一步如果出现configure: error: /bin/sh &amp;apos;/root/otp_src_R15B02/erts/configure&amp;apos; failed for erts
+yum install ncurses-devel
+
+make
+make install
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+    
+      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+    
+      <category term="Tsung" scheme="http://im.yonglang.co/tags/Tsung/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos-升级mysql</title>
+    <link href="http://im.yonglang.co/2016/02/26/centos-%E5%8D%87%E7%BA%A7mysql/"/>
+    <id>http://im.yonglang.co/2016/02/26/centos-升级mysql/</id>
+    <published>2016-02-25T16:18:12.000Z</published>
+    <updated>2016-07-15T02:29:32.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Centos__u5347_u7EA7mysql&quot;&gt;&lt;a href=&quot;#Centos__u5347_u7EA7mysql&quot; class=&quot;headerlink&quot; title=&quot;Centos 升级mysql&quot;&gt;&lt;/a&gt;Centos 升级mysql&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Centos默认mysql版本是5.1，但是高版本的mysql对性能有很大的提升。并且支持的字符最多有4个字节，支持emoji表情。查看Centos内核版本，下载对应的&lt;a href=&quot;http://dev.mysql.com/downloads/repo/yum/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;yum源&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rpm -Uvh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
+yum -y upgrade mysql mysql_upgrade
+
+// 配置/etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init_connect=&amp;apos;SET NAMES utf8mb4&amp;apos;
+character-set-client-handshake = FALSE
+[mysql]
+default-character-set=utf8mb4
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+[client]
+default-character-set=utf8mb4
+&lt;/code&gt;&lt;/pre&gt;  &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;启动mysql查看编码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SHOW VARIABLES WHERE Variable_name LIKE &amp;apos;character\_set\_%&amp;apos; OR Variable_name LIKE &amp;apos;collation%&amp;apos;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在连接数据看的时候会出现&lt;code&gt;Cannot load from mysql.proc. The table is probably corrupted&lt;/code&gt;,原因是&lt;code&gt;mysql.proc&lt;/code&gt;在升级的时候有个字段没有生成成功。在5.1中&lt;code&gt;mysql.proc&lt;/code&gt;的&lt;code&gt;comment&lt;/code&gt;字段是&lt;code&gt;varcahr(64)&lt;/code&gt;,但在5.6中应该是text执行下面的语句修改就可以了。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ALTER TABLE `proc` MODIFY COLUMN `comment` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL AFTER `sql_mode`;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos__u5347_u7EA7mysql&quot;&gt;&lt;a href=&quot;#Centos__u5347_u7EA7mysql&quot; class=&quot;headerlink&quot; title=&quot;Centos 升级mysql&quot;&gt;&lt;/a&gt;Centos 升级mysql&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Centos默认mysql版本是5.1，但是高版本的mysql对性能有很大的提升。并且支持的字符最多有4个字节，支持emoji表情。查看Centos内核版本，下载对应的&lt;a href=&quot;http://dev.mysql.com/downloads/repo/yum/&quot;&gt;yum源&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rpm -Uvh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
+yum -y upgrade mysql mysql_upgrade
+
+// 配置/etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init_connect=&amp;apos;SET NAMES utf8mb4&amp;apos;
+character-set-client-handshake = FALSE
+[mysql]
+default-character-set=utf8mb4
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+[client]
+default-character-set=utf8mb4
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+    
+      <category term="MySQL" scheme="http://im.yonglang.co/tags/MySQL/"/>
+    
+      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos-安装nginx</title>
+    <link href="http://im.yonglang.co/2016/02/26/centos-%E5%AE%89%E8%A3%85nginx/"/>
+    <id>http://im.yonglang.co/2016/02/26/centos-安装nginx/</id>
+    <published>2016-02-25T16:17:11.000Z</published>
+    <updated>2016-07-15T03:41:33.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Centos__u5B89_u88C5Nginx&quot;&gt;&lt;a href=&quot;#Centos__u5B89_u88C5Nginx&quot; class=&quot;headerlink&quot; title=&quot;Centos 安装Nginx&quot;&gt;&lt;/a&gt;Centos 安装Nginx&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;yum install gcc-c++
+
+yum -y install zlib zlib-devel openssl openssl--devel pcre pcre-devel
+
+wget http://nginx.org/download/nginx-1.6.2.tar.gz
+
+tar xvzf nginx-1.6.2.tar.gz
+
+cd ./nginx-1.6.2
+
+./configure
+
+make &amp;amp;&amp;amp; make install
+
+// 修改配置防火墙
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+
+service iptables restart
+
+// 启动nginx
+cd /usr/local/nginx/sbin/
+
+./nginx
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos__u5B89_u88C5Nginx&quot;&gt;&lt;a href=&quot;#Centos__u5B89_u88C5Nginx&quot; class=&quot;headerlink&quot; title=&quot;Centos 安装Nginx&quot;&gt;&lt;/a&gt;Centos 安装Nginx&lt;/h1&gt;&lt;pre&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+    
+      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+    
+      <category term="Nginx" scheme="http://im.yonglang.co/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos-查看系统硬件信息</title>
+    <link href="http://im.yonglang.co/2016/02/26/centos-%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF/"/>
+    <id>http://im.yonglang.co/2016/02/26/centos-查看系统硬件信息/</id>
+    <published>2016-02-25T16:13:44.000Z</published>
+    <updated>2016-07-15T03:41:49.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Centos__u67E5_u770B_u7CFB_u7EDF_u786C_u4EF6_u4FE1_u606F&quot;&gt;&lt;a href=&quot;#Centos__u67E5_u770B_u7CFB_u7EDF_u786C_u4EF6_u4FE1_u606F&quot; class=&quot;headerlink&quot; title=&quot;Centos 查看系统硬件信息&quot;&gt;&lt;/a&gt;Centos 查看系统硬件信息&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;查看CPU型号&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+
+2  Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看物理CPU个数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat /proc/cpuinfo | grep physical | uniq -c
+
+1 physical id    : 0
+1 address sizes    : 46 bits physical, 48 bits virtual
+1 physical id    : 2
+1 address sizes    : 46 bits physical, 48 bits virtual
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看CPU运行模式：32位或64位&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;getconf LONG_BIT
+
+64
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看CPU是否支持64位系统，如果大于0，则支持64位运算&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat /proc/cpuinfo | grep flags | grep &amp;apos; lm &amp;apos; | wc -l 
+
+2
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看内存信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat /proc/meminfo 
+
+MemTotal:        1922784 kB
+MemFree:          184468 kB
+Buffers:          198704 kB
+Cached:           630012 kB
+SwapCached:            0 kB
+Active:           997440 kB
+Inactive:         585112 kB
+Active(anon):     753856 kB
+Inactive(anon):      160 kB
+Active(file):     243584 kB
+Inactive(file):   584952 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:                28 kB
+Writeback:             0 kB
+AnonPages:        753960 kB
+Mapped:            30072 kB
+Shmem:               180 kB
+Slab:             124932 kB
+SReclaimable:     102336 kB
+SUnreclaim:        22596 kB
+KernelStack:        3528 kB
+PageTables:         5292 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:      961392 kB
+Committed_AS:    1604768 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:       11064 kB
+VmallocChunk:   34359725180 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:    688128 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:        6144 kB
+DirectMap2M:     2095104 kB
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看当前系统内核信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;uname -a
+
+Linux iZ2326o1rm2Z 2.6.32-431.23.3.el6.x86_64 #1 SMP Thu Jul 31 17:20:51 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看当前操作系统内核信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat /etc/issue | grep linux
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看服务器型号&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;dmidecode | grep &amp;quot;Product Name&amp;quot;
+
+Product Name: HVM domU
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看当前打开的服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;chkconfig --list
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看当前打开的端口&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;netstat -an
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看磁盘信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;fdisk -l
+df -h
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;进程监控命令，实时显示系统进程的资源占用情况&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;top
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;系统监控命令，重点侧重于虚拟内存，也可以监控CPU、进程、内存分页以及IO的状态信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vmstat
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;列举系统中被打开的文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;lsof -i：36000，显示使用36000端口的进程 
+lsof -u root，显示以root运行的程序 
+lsof -c php-fpm，显示php-fpm进程打开的文件 
+lsof php.ini，显示打开php.ini的进程。
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看Linux系统日志&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;系统级别的日志文件存放路径为/var/log
+常用的系统日志为/var/log/messages
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查找文件系统大文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;可以首先通过df命令查看磁盘分区使用情况，比如df -m；
+然后：
+通过du命令查看具体文件夹的大小，比如du -sh ./*，du -h --max-depth=1|head -10；
+使用ls命令列出文件以及大小，比如ls -lSh；
+另外，也可以通过find命令直接查看特定目录下的文件大小，比如find / -type f -size +10M -exec ls -lrt {} \;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos__u67E5_u770B_u7CFB_u7EDF_u786C_u4EF6_u4FE1_u606F&quot;&gt;&lt;a href=&quot;#Centos__u67E5_u770B_u7CFB_u7EDF_u786C_u4EF6_u4FE1_u606F&quot; class=&quot;headerlink&quot; title=&quot;Centos 查看系统硬件信息&quot;&gt;&lt;/a&gt;Centos 查看系统硬件信息&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;查看CPU型号&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+
+2  Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看物理CPU个数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat /proc/cpuinfo | grep physical | uniq -c
+
+1 physical id    : 0
+1 address sizes    : 46 bits physical, 48 bits virtual
+1 physical id    : 2
+1 address sizes    : 46 bits physical, 48 bits virtual
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+    
+      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos-查看端口使用情况</title>
+    <link href="http://im.yonglang.co/2016/02/26/centos-%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/"/>
+    <id>http://im.yonglang.co/2016/02/26/centos-查看端口使用情况/</id>
+    <published>2016-02-25T16:12:23.000Z</published>
+    <updated>2016-07-15T03:41:41.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Centos__u67E5_u770B_u7AEF_u53E3_u4F7F_u7528_u60C5_u51B5&quot;&gt;&lt;a href=&quot;#Centos__u67E5_u770B_u7AEF_u53E3_u4F7F_u7528_u60C5_u51B5&quot; class=&quot;headerlink&quot; title=&quot;Centos 查看端口使用情况&quot;&gt;&lt;/a&gt;Centos 查看端口使用情况&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;通过测试感觉tsung每次进行压测,没进一个用户需要占用本机一个端口，所以系统默认的端口打开是从32768到65535,所以这里就只能进2W多个用户，于是修改默认打开端口数。 &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看端口&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sysctl net.ipv4.ip_local_port_range
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;修改该值&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo 1024 65535 &amp;gt; /proc/sys/net/ipv4/ip_local_port_range  
+
+||
+
+sudo sysctl -w net.ipv4.ip_local_port_range=&amp;quot;1024 64000&amp;quot;
+
+||
+
+如果想一直生效，需要修改 /etc/sysctl.conf文件，加入net.ipv4.ip_local_port_range = 1024 65535,修改完成执行sysctl -p。
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos__u67E5_u770B_u7AEF_u53E3_u4F7F_u7528_u60C5_u51B5&quot;&gt;&lt;a href=&quot;#Centos__u67E5_u770B_u7AEF_u53E3_u4F7F_u7528_u60C5_u51B5&quot; class=&quot;h
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+    
+      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos-安装jdk</title>
+    <link href="http://im.yonglang.co/2016/02/26/centos-%E5%AE%89%E8%A3%85jdk/"/>
+    <id>http://im.yonglang.co/2016/02/26/centos-安装jdk/</id>
+    <published>2016-02-25T16:11:10.000Z</published>
+    <updated>2016-07-15T03:41:26.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Centos_u5B89_u88C5JDK&quot;&gt;&lt;a href=&quot;#Centos_u5B89_u88C5JDK&quot; class=&quot;headerlink&quot; title=&quot;Centos安装JDK&quot;&gt;&lt;/a&gt;Centos安装JDK&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;wget http://download.oracle.com/otn-pub/java/jdk/7u3-b04/jdk-7u3-linux-x64.rpm(当出现秒下时候，出现HTTP request sent, awaiting response... 302 Moved Temporarily错误，通过chrom抓包，获取重定向后的链接地址)
+
+运行rpm -ivh jdk-7u3-linux-x64.rpm
+
+修改profile文件，vi /etc/profile,在文件最后加入
+
+  export JAVA_HOME=/usr/java/jdk1.7.0_03
+  export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+  export PATH=$PATH:$JAVA_HOME/bin
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos_u5B89_u88C5JDK&quot;&gt;&lt;a href=&quot;#Centos_u5B89_u88C5JDK&quot; class=&quot;headerlink&quot; title=&quot;Centos安装JDK&quot;&gt;&lt;/a&gt;Centos安装JDK&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;wget h
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+    
+      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+    
+      <category term="JDK" scheme="http://im.yonglang.co/tags/JDK/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos-开启mysql外部访问</title>
+    <link href="http://im.yonglang.co/2016/02/26/centos-%E5%BC%80%E5%90%AFmysql%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE/"/>
+    <id>http://im.yonglang.co/2016/02/26/centos-开启mysql外部访问/</id>
+    <published>2016-02-25T16:09:43.000Z</published>
+    <updated>2016-07-15T01:43:14.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Centos_u5F00_u542Fmysql_u5916_u90E8_u8BBF_u95EE&quot;&gt;&lt;a href=&quot;#Centos_u5F00_u542Fmysql_u5916_u90E8_u8BBF_u95EE&quot; class=&quot;headerlink&quot; title=&quot;Centos开启mysql外部访问&quot;&gt;&lt;/a&gt;Centos开启mysql外部访问&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;grant all privileges on *.* to &amp;apos;root&amp;apos;@&amp;apos;%&amp;apos; identified by &amp;apos;password&amp;apos; with grant option;
+
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT //开启3306端口
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos_u5F00_u542Fmysql_u5916_u90E8_u8BBF_u95EE&quot;&gt;&lt;a href=&quot;#Centos_u5F00_u542Fmysql_u5916_u90E8_u8BBF_u95EE&quot; class=&quot;headerlink&quot; title
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+    
+      <category term="MySQL" scheme="http://im.yonglang.co/tags/MySQL/"/>
+    
+      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos7-mysql+php+nginx安装</title>
+    <link href="http://im.yonglang.co/2016/02/26/centos7-mysql-php-nginx%E5%AE%89%E8%A3%85/"/>
+    <id>http://im.yonglang.co/2016/02/26/centos7-mysql-php-nginx安装/</id>
+    <published>2016-02-25T16:04:01.000Z</published>
+    <updated>2016-07-15T02:29:47.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Centos7-Mysql+PHP+nginx_u5B89_u88C5&quot;&gt;&lt;a href=&quot;#Centos7-Mysql+PHP+nginx_u5B89_u88C5&quot; class=&quot;headerlink&quot; title=&quot;Centos7-Mysql+PHP+nginx安装&quot;&gt;&lt;/a&gt;Centos7-Mysql+PHP+nginx安装&lt;/h1&gt;&lt;h2 id=&quot;u5B89_u88C5nginx&quot;&gt;&lt;a href=&quot;#u5B89_u88C5nginx&quot; class=&quot;headerlink&quot; title=&quot;安装nginx&quot;&gt;&lt;/a&gt;安装nginx&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;rpm --import http://nginx.org/keys/nginx_signing.key
+rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+yum install nginx
+systemctl start nginx
+systemctl enable nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;nginx 的默认文档要目录是 &lt;code&gt;/usr/share/nginx/html&lt;/code&gt;，里面有&lt;code&gt;index.html&lt;/code&gt;，访问&lt;code&gt;http://ip&lt;/code&gt;入显示&lt;code&gt;welcome&lt;/code&gt;则表示安装成功&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;u5B89_u88C5PHP&quot;&gt;&lt;a href=&quot;#u5B89_u88C5PHP&quot; class=&quot;headerlink&quot; title=&quot;安装PHP&quot;&gt;&lt;/a&gt;安装PHP&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;yum install php php-fpm php-mysql
+systemctl start php-fpm
+systemctl enable php-fpm
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;默认安装php的时候会自动安装apache web服务器，所以避免冲突应该禁掉httpd&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;systemctl disable httpd
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置nginx主机，配置文件在&lt;code&gt;/etc/nginx/conf.d/default.conf&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;server {
+    listen 80;
+    server_name localhost;
+    root /usr/share/nginx/html;
+    index index.php index.html index.htm;
+
+    location / {
+    }
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+    }
+
+    location ~ \.php$ {
+    try_files $uri =404;
+    fastcgi_pass 127.0.0.1:9000;
+    fastcgi_index index.php;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include fastcgi_params;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u5B89_u88C5mysql&quot;&gt;&lt;a href=&quot;#u5B89_u88C5mysql&quot; class=&quot;headerlink&quot; title=&quot;安装mysql&quot;&gt;&lt;/a&gt;安装mysql&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+rpm -ivh mysql-community-release-el7-5.noarch.rpm
+yum install mysql-community-server
+service mysqld start
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;mysql安装完成后，默认root密码为空&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mysql -uroot
+set password for ‘root’@‘localhost’ = password(&amp;apos;mypasswd&amp;apos;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;centos7默认使用的firewall作为防火墙，这里改为iptables防火墙&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;systemctl stop firewalld.service
+systemctl disable firewalld.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装iptables防火墙&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install iptables-services
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;修改防火墙配置文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vi /etc/sysconfig/iptables
+
+# Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重启防火墙和开机启动&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;systemctl restart iptables.service
+systemctl enable iptables.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos7-Mysql+PHP+nginx_u5B89_u88C5&quot;&gt;&lt;a href=&quot;#Centos7-Mysql+PHP+nginx_u5B89_u88C5&quot; class=&quot;headerlink&quot; title=&quot;Centos7-Mysql+PHP+nginx安装&quot;&gt;&lt;/a&gt;Centos7-Mysql+PHP+nginx安装&lt;/h1&gt;&lt;h2 id=&quot;u5B89_u88C5nginx&quot;&gt;&lt;a href=&quot;#u5B89_u88C5nginx&quot; class=&quot;headerlink&quot; title=&quot;安装nginx&quot;&gt;&lt;/a&gt;安装nginx&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;rpm --import http://nginx.org/keys/nginx_signing.key
+rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+yum install nginx
+systemctl start nginx
+systemctl enable nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;nginx 的默认文档要目录是 &lt;code&gt;/usr/share/nginx/html&lt;/code&gt;，里面有&lt;code&gt;index.html&lt;/code&gt;，访问&lt;code&gt;http://ip&lt;/code&gt;入显示&lt;code&gt;welcome&lt;/code&gt;则表示安装成功&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+    
+      <category term="MySQL" scheme="http://im.yonglang.co/tags/MySQL/"/>
+    
+      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+    
+      <category term="Nginx" scheme="http://im.yonglang.co/tags/Nginx/"/>
+    
+      <category term="PHP" scheme="http://im.yonglang.co/tags/PHP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos7-修改网卡、配置网络</title>
+    <link href="http://im.yonglang.co/2016/02/25/centos7-%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E3%80%81%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C/"/>
+    <id>http://im.yonglang.co/2016/02/25/centos7-修改网卡、配置网络/</id>
+    <published>2016-02-25T15:59:46.000Z</published>
+    <updated>2016-07-15T02:34:22.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Centos7-_u4FEE_u6539_u7F51_u5361_u3001_u914D_u7F6E_u7F51_u7EDC&quot;&gt;&lt;a href=&quot;#Centos7-_u4FEE_u6539_u7F51_u5361_u3001_u914D_u7F6E_u7F51_u7EDC&quot; class=&quot;headerlink&quot; title=&quot;Centos7-修改网卡、配置网络&quot;&gt;&lt;/a&gt;Centos7-修改网卡、配置网络&lt;/h1&gt;&lt;h2 id=&quot;u6211_u662F_u5728vmware_u4E2D_u5B89_u88C5_u7684&quot;&gt;&lt;a href=&quot;#u6211_u662F_u5728vmware_u4E2D_u5B89_u88C5_u7684&quot; class=&quot;headerlink&quot; title=&quot;我是在vmware中安装的&quot;&gt;&lt;/a&gt;我是在vmware中安装的&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;网络适配器调为桥接模式&lt;/li&gt;
+&lt;li&gt;修改&lt;code&gt;/etc/sysconfig/network-scripts/ifcfg-xxxx&lt;/code&gt;里面的&lt;code&gt;Name&lt;/code&gt;和&lt;code&gt;Dev&lt;/code&gt;为&lt;code&gt;eth0&lt;/code&gt;
+&lt;img src=&quot;http://7xj3i5.com1.z0.glb.clouddn.com/8C6D5903-85B6-44BD-811C-5F0ADDD9E356.png&quot; alt=&quot;x&quot;&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;修改&lt;code&gt;ifcfg-xxxx&lt;/code&gt;重命名为&lt;code&gt;ifcfg-eth0&lt;/code&gt;
+&lt;img src=&quot;http://7xj3i5.com1.z0.glb.clouddn.com/F6764A8C-88B6-4D39-8C37-DE856EBED293.png&quot; alt=&quot;y&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;禁用可预测的命名规则，编辑&lt;code&gt;/etc/default/grub&lt;/code&gt;为
+&lt;img src=&quot;http://7xj3i5.com1.z0.glb.clouddn.com/4F5BA1BF-4495-4FBE-92BF-EE93DBFED7CE.png&quot; alt=&quot;z&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;执行&lt;code&gt;grub2-mkconfig -o /boot/grub2/grub.cfg&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;修改&lt;code&gt;/etc/resolv.conf&lt;/code&gt;
+&lt;img src=&quot;http://7xj3i5.com1.z0.glb.clouddn.com/70E8BAA9-7F78-4167-B3D7-BDD5951B6EEE.png&quot; alt=&quot;m&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重启network&lt;code&gt;systemctl restart network&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos7-_u4FEE_u6539_u7F51_u5361_u3001_u914D_u7F6E_u7F51_u7EDC&quot;&gt;&lt;a href=&quot;#Centos7-_u4FEE_u6539_u7F51_u5361_u3001_u914D_u7F6E_u7F51_u7EDC&quot; class=&quot;headerlink&quot; title=&quot;Centos7-修改网卡、配置网络&quot;&gt;&lt;/a&gt;Centos7-修改网卡、配置网络&lt;/h1&gt;&lt;h2 id=&quot;u6211_u662F_u5728vmware_u4E2D_u5B89_u88C5_u7684&quot;&gt;&lt;a href=&quot;#u6211_u662F_u5728vmware_u4E2D_u5B89_u88C5_u7684&quot; class=&quot;headerlink&quot; title=&quot;我是在vmware中安装的&quot;&gt;&lt;/a&gt;我是在vmware中安装的&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;网络适配器调为桥接模式&lt;/li&gt;
+&lt;li&gt;修改&lt;code&gt;/etc/sysconfig/network-scripts/ifcfg-xxxx&lt;/code&gt;里面的&lt;code&gt;Name&lt;/code&gt;和&lt;code&gt;Dev&lt;/code&gt;为&lt;code&gt;eth0&lt;/code&gt;
+&lt;img src=&quot;http://7xj3i5.com1.z0.glb.clouddn.com/8C6D5903-85B6-44BD-811C-5F0ADDD9E356.png&quot; alt=&quot;x&quot;&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+    
+      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>keepalived+haproxy高可用负载均衡</title>
+    <link href="http://im.yonglang.co/2016/02/25/keepalived-haproxy%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
+    <id>http://im.yonglang.co/2016/02/25/keepalived-haproxy高可用负载均衡/</id>
+    <published>2016-02-25T15:45:11.000Z</published>
+    <updated>2016-07-15T02:31:16.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861&quot;&gt;&lt;a href=&quot;#u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861&quot; class=&quot;headerlink&quot; title=&quot;基于Keepalived+haproxy实现高可用负载均衡&quot;&gt;&lt;/a&gt;基于Keepalived+haproxy实现高可用负载均衡&lt;/h1&gt;&lt;h2 id=&quot;Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668&quot;&gt;&lt;a href=&quot;#Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668&quot; class=&quot;headerlink&quot; title=&quot;Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器&quot;&gt;&lt;/a&gt;Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;* VIP：192.168.0.185
+* h1：192.168.0.137
+* h2：192.168.0.138
+* web1：192.168.0.130
+* web2：192.168.0.131
+* web3：192.168.0.132
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;h1_u5B89_u88C5keepalived&quot;&gt;&lt;a href=&quot;#h1_u5B89_u88C5keepalived&quot; class=&quot;headerlink&quot; title=&quot;h1安装keepalived&quot;&gt;&lt;/a&gt;h1安装keepalived&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum -y install keepalived
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置h1的keepalived&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vim /etc/keepalived/keepalived.conf
+
+! Configuration File for keepalived
+      global_defs {
+          notification_email {
+              xxx@xx.com
+          }
+      notification_email_from keepalived@localhost
+          smtp_server 127.0.0.1
+          smtp_connect_timeout 30
+          router_id LVS_DEVEL
+      }
+
+      vrrp_script chk_haproxy {
+         script &amp;quot;killall -0 haproxy&amp;quot;
+         interval 2
+         weight 2
+      }
+
+      vrrp_instance VI_1 {
+          state MASTER
+          interface eth0
+          virtual_router_id 85
+          priority 100
+          advert_int 1
+          nopreempt
+          authentication {
+             auth_type PASS
+             auth_pass 1111
+          }
+          track_script {
+             chk_haproxy
+          }
+          virtual_ipaddress {
+             192.168.0.185/24 dev eth0
+          }
+       } 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置h2的keepalived&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vim /etc/keepalived/keepalived.conf
+
+! Configuration File for keepalived
+      global_defs {
+          notification_email {
+              xxx@xx.com
+          }
+      notification_email_from keepalived@localhost
+          smtp_server 127.0.0.1
+          smtp_connect_timeout 30
+          router_id LVS_DEVEL
+      }
+
+      vrrp_script chk_haproxy {
+         script &amp;quot;killall -0 haproxy&amp;quot;
+         interval 2
+         weight 2
+      }
+
+      vrrp_instance VI_1 {
+          state BACKUP
+          interface eth0
+          virtual_router_id 85
+          priority 90
+          advert_int 1
+          authentication {
+             auth_type PASS
+             auth_pass 1111
+          }
+          track_script {
+             chk_haproxy
+          }
+          virtual_ipaddress {
+             192.168.0.185/24 dev eth0
+          }
+       }
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u5B89_u88C5haproxy&quot;&gt;&lt;a href=&quot;#u5B89_u88C5haproxy&quot; class=&quot;headerlink&quot; title=&quot;安装haproxy&quot;&gt;&lt;/a&gt;安装haproxy&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum -y install haproxy
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置haproxy，两台机器的配置都是一样的，所以这里只提供一份&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;global
+log         127.0.0.1 local2
+
+chroot      /var/lib/haproxy
+pidfile     /var/run/haproxy.pid
+maxconn     4000
+user        haproxy
+group       haproxy
+daemon
+
+# turn on stats unix socket
+stats socket /var/lib/haproxy/stats
+
+#---------------------------------------------------------------------
+# common defaults that all the &amp;apos;listen&amp;apos; and &amp;apos;backend&amp;apos; sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+mode                    http
+log                     global
+option                  httplog
+option                  dontlognull
+option http-server-close
+#option forwardfor       except 127.0.0.0/8
+option                  redispatch
+retries                 3
+timeout http-request    10s
+timeout queue           1m
+timeout connect         10s
+timeout client          1m
+timeout server          1m
+timeout http-keep-alive 10s
+timeout check           10s
+maxconn                 3000
+
+# 用来监听状态，访问地址http://server:8080/admin?stats
+listen statistics
+mode http
+bind *:8080
+stats enable
+stats auth admin:admin
+stats uri /admin?stats
+stats hide-version
+stats admin if TRUE
+stats refresh 5s
+acl allow src 192.168.0.0
+
+# tcp监听
+listen tigase_5222
+mode tcp
+bind *:5222
+balance leastconn
+option tcplog
+option redispatch
+option log-health-checks
+timeout connect 1s
+timeout queue 5s
+timeout server 3600s
+timeout client 3600s
+maxconn 5000
+server webserver1 192.168.0.130:5222 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver2 192.168.0.131:5222 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver3 192.168.0.132:5222 inter 3000 rise 1 fall 1 check maxconn 5000
+
+listen tigase_5280
+mode tcp
+bind *:5280
+balance source
+option tcplog
+option redispatch
+option log-health-checks
+timeout connect 1s
+timeout queue 5s
+timeout server 3600s
+timeout client 3600s
+maxconn 5000
+server webserver1 192.168.0.130:5280 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver2 192.168.0.131:5280 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver3 192.168.0.132:5280 inter 3000 rise 1 fall 1 check maxconn 5000
+
+# http连接
+listen apache_httpd
+mode http
+bind *:80
+balance roundrobin
+option httplog
+server webserver1 192.168.0.130:80 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver2 192.168.0.131:80 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver3 192.168.0.132:80 inter 3000 rise 1 fall 1 check maxconn 5000
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u542F_u52A8&quot;&gt;&lt;a href=&quot;#u542F_u52A8&quot; class=&quot;headerlink&quot; title=&quot;启动&quot;&gt;&lt;/a&gt;启动&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;启动haproxy和keepalived，首先先启动h1的haproxy和keepalived，然后启动h2的&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;service haproxy start
+service keepalived
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u67E5_u770B_u72B6_u6001&quot;&gt;&lt;a href=&quot;#u67E5_u770B_u72B6_u6001&quot; class=&quot;headerlink&quot; title=&quot;查看状态&quot;&gt;&lt;/a&gt;查看状态&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;查看VIP状态，当h1正常运行的时候&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@newkeep1 keepalived]# ip a|grep eth0
+2: eth0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    inet 192.168.0.137/24 brd 192.168.0.255 scope global eth0
+    inet 192.168.0.185/24 scope global secondary eth0
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;手动关闭h1的keepalived, 在h2上查看&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@newkeep1 keepalived]# ip a|grep eth0
+2: eth0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    inet 192.168.0.138/24 brd 192.168.0.255 scope global eth0
+    inet 192.168.0.185/24 scope global secondary eth0
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;再去查看h1的时候，发现VIP已经飘走了。当重新启动h1的时候，会恢复主机状态。&lt;/li&gt;
+&lt;li&gt;注意：如果启动的时候发现两台服务器都监听了VIP。则需要关闭防火墙。&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861&quot;&gt;&lt;a href=&quot;#u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861&quot; class=&quot;headerlink&quot; title=&quot;基于Keepalived+haproxy实现高可用负载均衡&quot;&gt;&lt;/a&gt;基于Keepalived+haproxy实现高可用负载均衡&lt;/h1&gt;&lt;h2 id=&quot;Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668&quot;&gt;&lt;a href=&quot;#Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668&quot; class=&quot;headerlink&quot; title=&quot;Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器&quot;&gt;&lt;/a&gt;Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;* VIP：192.168.0.185
+* h1：192.168.0.137
+* h2：192.168.0.138
+* web1：192.168.0.130
+* web2：192.168.0.131
+* web3：192.168.0.132
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Keepalived" scheme="http://im.yonglang.co/categories/Keepalived/"/>
+    
+    
+      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+    
+      <category term="Keepalived" scheme="http://im.yonglang.co/tags/Keepalived/"/>
+    
+      <category term="Haproxy" scheme="http://im.yonglang.co/tags/Haproxy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux-设备文件名</title>
+    <link href="http://im.yonglang.co/2016/02/25/Linux-%E8%AE%BE%E5%A4%87%E6%96%87%E4%BB%B6%E5%90%8D/"/>
+    <id>http://im.yonglang.co/2016/02/25/Linux-设备文件名/</id>
+    <published>2016-02-25T15:34:08.000Z</published>
+    <updated>2016-07-15T01:46:00.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D&quot;&gt;&lt;a href=&quot;#u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D&quot; class=&quot;headerlink&quot; title=&quot;各硬件设备在Linux中的文件名&quot;&gt;&lt;/a&gt;各硬件设备在Linux中的文件名&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;目录&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;IDE硬盘&lt;/td&gt;
+&lt;td&gt;/dev/hd[a-d]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SCSI/SATA/USB硬盘&lt;/td&gt;
+&lt;td&gt;/dev/sd[a-p]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;U盘&lt;/td&gt;
+&lt;td&gt;/dev/sd[a-p]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;软驱&lt;/td&gt;
+&lt;td&gt;/dev/fd[0-1]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;打印机&lt;/td&gt;
+&lt;td&gt;25针:/dev/Ip[0-2],USB:/dev/usb/Ip[0-15]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;鼠标&lt;/td&gt;
+&lt;td&gt;USB:/dev/usb/mouse[0-15],PS2:/dev/psaux&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;当前CD ROM/DVD ROM&lt;/td&gt;
+&lt;td&gt;/dev/cdrom&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;当前鼠标&lt;/td&gt;
+&lt;td&gt;/dev/mouse&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;磁带机&lt;/td&gt;
+&lt;td&gt;IDE:/dev/ht0,SCSI:/dev/st0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D&quot;&gt;&lt;a href=&quot;#u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u76
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>zookeeper</title>
+    <link href="http://im.yonglang.co/2016/02/25/zookeeper/"/>
+    <id>http://im.yonglang.co/2016/02/25/zookeeper/</id>
+    <published>2016-02-25T15:03:14.000Z</published>
+    <updated>2016-07-15T02:32:49.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;zookeeper&quot;&gt;&lt;a href=&quot;#zookeeper&quot; class=&quot;headerlink&quot; title=&quot;zookeeper&quot;&gt;&lt;/a&gt;zookeeper&lt;/h1&gt;&lt;h2 id=&quot;u5B89_u88C5&quot;&gt;&lt;a href=&quot;#u5B89_u88C5&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+tar xvf zookeeper-3.4.8.tar.gz
+cd zookeeper-3.4.8
+cd conf
+cp zoo_sample.cfg zoo.cfg
+
+// zoo.cfg配置
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/tmp/zookeeper
+clientPort=2181
+autopurge.purgeInterval=1
+server.1=localhost:2888:3888
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;zoo-cfg_u914D_u7F6E_u53C2_u6570&quot;&gt;&lt;a href=&quot;#zoo-cfg_u914D_u7F6E_u53C2_u6570&quot; class=&quot;headerlink&quot; title=&quot;zoo.cfg配置参数&quot;&gt;&lt;/a&gt;zoo.cfg配置参数&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;tickTime&lt;blockquote&gt;
+&lt;p&gt;zookeeper服务器之间或客户端与服务器之间维持心跳的时间间隔，每隔tickTime时间就会发一个心跳包&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;initLimit&lt;blockquote&gt;
+&lt;p&gt;配置zookeeper接受客户端初始化连接最长多少个心跳间隔时间,initLimit * tickTime = 20s,超过20s zookeeper服务器还没收到客户端返回信息，表示客户端连接失败&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;syncLimit&lt;blockquote&gt;
+&lt;p&gt;配置项标识Leader与Follower之间发送消息,请求和应答时长,最长不能超过多少个tickTime的时间长度,总的时间长度就是5*2000=10秒；&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;dataDir&lt;blockquote&gt;
+&lt;p&gt;Zookeeper保存数据的目录&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;clientPort&lt;blockquote&gt;
+&lt;p&gt;客户端连接zookeeper服务器的端口&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;server&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;server.1=192.168.1.212:2887:3887
+server.2=192.168.1.213:2888:3888
+server.3=192.168.1.214:2889:3889
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;server.A=B：C：D：
+A是一个数字,表示这个是第几号服务器,B是这个服务器的ip地址
+C第一个端口用来集群成员的信息交换,表示的是这个服务器与集群中的Leader服务器交换信息的端口
+D是在leader挂掉时专门用来进行选举leader所用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;集群模式下需要在&lt;code&gt;dataDir&lt;/code&gt;目录下创建&lt;code&gt;myid&lt;/code&gt;文件，文件内容为&lt;code&gt;A&lt;/code&gt;的值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u542F_u52A8&quot;&gt;&lt;a href=&quot;#u542F_u52A8&quot; class=&quot;headerlink&quot; title=&quot;启动&quot;&gt;&lt;/a&gt;启动&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;bin/zkServer.sh start
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;##查看状态&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/zkServer.sh status
+-- 192.168.1.212状态 --
+[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Mode: follower
+
+--192.168.1.213状态 --
+[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Mode: leader
+
+-- 192.168.1.214状态 --
+[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Mode: follower
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;zookeeper&quot;&gt;&lt;a href=&quot;#zookeeper&quot; class=&quot;headerlink&quot; title=&quot;zookeeper&quot;&gt;&lt;/a&gt;zookeeper&lt;/h1&gt;&lt;h2 id=&quot;u5B89_u88C5&quot;&gt;&lt;a href=&quot;#u5B89_u88C5&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+tar xvf zookeeper-3.4.8.tar.gz
+cd zookeeper-3.4.8
+cd conf
+cp zoo_sample.cfg zoo.cfg
+
+// zoo.cfg配置
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/tmp/zookeeper
+clientPort=2181
+autopurge.purgeInterval=1
+server.1=localhost:2888:3888
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Zookeeper" scheme="http://im.yonglang.co/categories/Zookeeper/"/>
+    
+    
+      <category term="Apache" scheme="http://im.yonglang.co/tags/Apache/"/>
+    
+      <category term="Zookeeper" scheme="http://im.yonglang.co/tags/Zookeeper/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>kafka</title>
+    <link href="http://im.yonglang.co/2016/02/25/kafka/"/>
+    <id>http://im.yonglang.co/2016/02/25/kafka/</id>
+    <published>2016-02-25T15:01:53.000Z</published>
+    <updated>2016-07-15T02:31:10.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;kafka&quot;&gt;&lt;a href=&quot;#kafka&quot; class=&quot;headerlink&quot; title=&quot;kafka&quot;&gt;&lt;/a&gt;kafka&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
+通过zookeeper实现集群
+kafka集群由多个kafka实例组成，每个实例称为broker&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;install&quot;&gt;&lt;a href=&quot;#install&quot; class=&quot;headerlink&quot; title=&quot;install&quot;&gt;&lt;/a&gt;install&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
+tar xzf kafka_2.11-0.9.0.0.tgz
+export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
+cd kafka_2.11-0.9.0.0
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;u542F_u52A8zookeeper&quot;&gt;&lt;a href=&quot;#u542F_u52A8zookeeper&quot; class=&quot;headerlink&quot; title=&quot;启动zookeeper&quot;&gt;&lt;/a&gt;启动zookeeper&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;bin/zookeeper-server-start.sh config/zookeeper.properties
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u542F_u52A8kafka&quot;&gt;&lt;a href=&quot;#u542F_u52A8kafka&quot; class=&quot;headerlink&quot; title=&quot;启动kafka&quot;&gt;&lt;/a&gt;启动kafka&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;bin/kafka-server-start.sh config/server.properties
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u521B_u5EFA_u4E00_u4E2Atopic&quot;&gt;&lt;a href=&quot;#u521B_u5EFA_u4E00_u4E2Atopic&quot; class=&quot;headerlink&quot; title=&quot;创建一个topic&quot;&gt;&lt;/a&gt;创建一个topic&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;创建一个单分区、单副本的&lt;code&gt;test&lt;/code&gt;话题&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;获取&lt;code&gt;topic&lt;/code&gt;列表&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --list --zookeeper localhost:2181
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;当发布到一个不存在的&lt;code&gt;topics&lt;/code&gt;时，可以配置自动创建而不是手动创建&lt;h2 id=&quot;u53D1_u9001_u6D88_u606F&quot;&gt;&lt;a href=&quot;#u53D1_u9001_u6D88_u606F&quot; class=&quot;headerlink&quot; title=&quot;发送消息&quot;&gt;&lt;/a&gt;发送消息&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;运行生产者客户端，然后发送一些消息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005&quot;&gt;&lt;a href=&quot;#u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005&quot; class=&quot;headerlink&quot; title=&quot;启动一个消费者&quot;&gt;&lt;/a&gt;启动一个消费者&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;运行消费者客户端，接收消息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4&quot;&gt;&lt;a href=&quot;#u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4&quot; class=&quot;headerlink&quot; title=&quot;设置多个brokers集群&quot;&gt;&lt;/a&gt;设置多个brokers集群&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;为每个brokers创建一个配置文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cp config/server.properties config/server-1.properties
+cp config/server.properties config/server-2.properties
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置文件内容&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;config/server-1.properties&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;broker.id=1
+port=9093
+log.dir=/tmp/kafka-logs-1
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;config/server-2.properties&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;broker.id=2
+port=9094
+log.dir=/tmp/kafka-logs-2
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;broker.id&lt;/code&gt;是集群节点唯一名称&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;启动两个新节点&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/kafka-server-start.sh config/server-1.properties &amp;amp;
+bin/kafka-server-start.sh config/server-2.properties &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;创建有3个副本的新&lt;code&gt;topics&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-topic
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在集群环境，查看&lt;code&gt;broker&lt;/code&gt;都做了什么&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
+
+Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
+    Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0,1
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;leader&lt;/code&gt;负责节点所有读取和写入指定分区
+&lt;code&gt;replicas&lt;/code&gt;复制此分区节点列表日志
+&lt;code&gt;isr&lt;/code&gt;集中同步副本&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看单复制集下的&lt;code&gt;topics&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
+
+Topic:test    PartitionCount:1 ReplicationFactor:1 Configs:
+    Topic: test    Partition: 0 Leader: 0 Replicas: 0 Isr: 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;给集群中的&lt;code&gt;topics&lt;/code&gt;发送一些消息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-topic
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;接收消息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic my-topic
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;测试容错性，杀掉&lt;code&gt;server-1.properties&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ps aux|grep server-1.properties
+kill -9 PID
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
+
+Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
+    Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E&quot;&gt;&lt;a href=&quot;#u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E&quot; class=&quot;headerlink&quot; title=&quot;使用kafka连接导入/导出数据&quot;&gt;&lt;/a&gt;使用kafka连接导入/导出数据&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用&lt;code&gt;kafka&lt;/code&gt;的&lt;code&gt;connect&lt;/code&gt;工具导入/导出数据&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;首先需要建立一些数据来测试&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo -e &amp;quot;foo\nbar&amp;quot; &amp;gt; test.txt
+
+bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用之前启动默认的本地集群配置并创建两个连接，第一个是源连接器，它从输入文本读取消息，并各自产生的一个输出文件中的一行。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;连接器开始读取&lt;code&gt;test.txt&lt;/code&gt;产生一个&lt;code&gt;topics&lt;/code&gt;为&lt;code&gt;connect-test&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;接收端连接器应该开始从&lt;code&gt;topic&lt;/code&gt;读取消息&lt;code&gt;connect-test&lt;/code&gt;,并写入到&lt;code&gt;test.sink.txt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看&lt;code&gt;topics&lt;/code&gt;列表&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-topics.sh --list --zookeeper localhost:2181
+__consumer_offsets
+connect-test
+my-topic
+test
+test2
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;启动一个消费者控制台查看&lt;code&gt;topic&lt;/code&gt;为&lt;code&gt;connect-test&lt;/code&gt;的数据&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
+{&amp;quot;schema&amp;quot;:{&amp;quot;type&amp;quot;:&amp;quot;string&amp;quot;,&amp;quot;optional&amp;quot;:false},&amp;quot;payload&amp;quot;:&amp;quot;foo&amp;quot;}
+{&amp;quot;schema&amp;quot;:{&amp;quot;type&amp;quot;:&amp;quot;string&amp;quot;,&amp;quot;optional&amp;quot;:false},&amp;quot;payload&amp;quot;:&amp;quot;bar&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重新打开一个终端，给&lt;code&gt;test.txt&lt;/code&gt;中追加数据，再看消费者控制台的数据&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo &amp;quot;Hello world&amp;quot; &amp;gt;&amp;gt; test.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;消费者控制台数据为&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
+{&amp;quot;schema&amp;quot;:{&amp;quot;type&amp;quot;:&amp;quot;string&amp;quot;,&amp;quot;optional&amp;quot;:false},&amp;quot;payload&amp;quot;:&amp;quot;foo&amp;quot;}
+{&amp;quot;schema&amp;quot;:{&amp;quot;type&amp;quot;:&amp;quot;string&amp;quot;,&amp;quot;optional&amp;quot;:false},&amp;quot;payload&amp;quot;:&amp;quot;bar&amp;quot;}
+{&amp;quot;schema&amp;quot;:{&amp;quot;type&amp;quot;:&amp;quot;string&amp;quot;,&amp;quot;optional&amp;quot;:false},&amp;quot;payload&amp;quot;:&amp;quot;Hello world&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;API&quot;&gt;&lt;a href=&quot;#API&quot; class=&quot;headerlink&quot; title=&quot;API&quot;&gt;&lt;/a&gt;API&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;生产者API&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;org.apache.kafka&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;kafka-clients&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;0.9.0.0&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  参考: &lt;a href=&quot;http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;生产者doc&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;消费者API&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;org.apache.kafka&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;kafka-clients&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;0.9.0.0&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  参考: &lt;a href=&quot;http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;消费者doc&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;error&quot;&gt;&lt;a href=&quot;#error&quot; class=&quot;headerlink&quot; title=&quot;error&quot;&gt;&lt;/a&gt;error&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;org.apache.kafka.common.errors.TimeoutException: Batch Expired&lt;/code&gt;修改&lt;code&gt;config/server.properties&lt;/code&gt;文件的&lt;code&gt;advertised.host.name=IP地址&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;server-properties_u914D_u7F6E_u9879&quot;&gt;&lt;a href=&quot;#server-properties_u914D_u7F6E_u9879&quot; class=&quot;headerlink&quot; title=&quot;server.properties配置项&quot;&gt;&lt;/a&gt;server.properties配置项&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;broker.id=0
+listeners=PLAINTEXT://:9092
+advertised.host.name=192.168.1.211
+num.network.threads=3
+
+num.io.threads=8
+socket.send.buffer.bytes=102400
+socket.receive.buffer.bytes=102400
+socket.request.max.bytes=104857600
+log.dirs=/tmp/kafka-logs
+num.partitions=1
+num.recovery.threads.per.data.dir=1
+log.retention.hours=168
+log.segment.bytes=1073741824
+log.retention.check.interval.ms=300000
+log.cleaner.enable=false
+zookeeper.connect=localhost:2181
+zookeeper.connection.timeout.ms=6000
+auto.create.topics.enable=true
+default.replication.factor=3
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;kafka&quot;&gt;&lt;a href=&quot;#kafka&quot; class=&quot;headerlink&quot; title=&quot;kafka&quot;&gt;&lt;/a&gt;kafka&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
+通过zookeeper实现集群
+kafka集群由多个kafka实例组成，每个实例称为broker&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;install&quot;&gt;&lt;a href=&quot;#install&quot; class=&quot;headerlink&quot; title=&quot;install&quot;&gt;&lt;/a&gt;install&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
+tar xzf kafka_2.11-0.9.0.0.tgz
+export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
+cd kafka_2.11-0.9.0.0
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Kafka" scheme="http://im.yonglang.co/categories/Kafka/"/>
+    
+    
+      <category term="Apache" scheme="http://im.yonglang.co/tags/Apache/"/>
+    
+      <category term="Kafka" scheme="http://im.yonglang.co/tags/Kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Shell-redirect</title>
+    <link href="http://im.yonglang.co/2015/12/10/Shell-redirect/"/>
+    <id>http://im.yonglang.co/2015/12/10/Shell-redirect/</id>
+    <published>2015-12-09T18:20:35.000Z</published>
+    <updated>2016-07-15T01:48:46.000Z</updated>
+    
+    <content type="html">&lt;pre&gt;&lt;code&gt;#!/bin/bash
+# 输出重定向
+#  将输出到终端的结果重定向到文件中
+
+# 加上双引号 可以对输出结果换行
+# &amp;gt; 会将已存在的结果覆盖
+# 如果不想覆盖 则使用 &amp;gt;&amp;gt; 如果文件存在，结果将会追加
+echo &amp;quot;$(ls -la)&amp;quot; &amp;gt; file
+
+echo &amp;quot;$(who)&amp;quot; &amp;gt;&amp;gt; file1
+
+
+# 输入结果重定向
+cat &amp;lt; file
+wc -l &amp;lt; file
+
+# 文档嵌入
+wc -l &amp;lt;&amp;lt;EOF
+    hahahhdfdslfjdslfjsdlfjsdlfsd
+    werjewlrjewlrjewlrjewlrjwer
+    werjwelrjwlejrewljrew
+EOF
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;pre&gt;&lt;code&gt;#!/bin/bash
+# 输出重定向
+#  将输出到终端的结果重定向到文件中
+
+# 加上双引号 可以对输出结果换行
+# &amp;gt; 会将已存在的结果覆盖
+# 如果不想覆盖 则使用 &amp;gt;&amp;gt; 如果文件存在，结果将会追加
+echo &amp;quot;$(ls 
+    
+    </summary>
+    
+      <category term="Shell" scheme="http://im.yonglang.co/categories/Shell/"/>
+    
+    
+      <category term="Shell" scheme="http://im.yonglang.co/tags/Shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Shell-for-while</title>
+    <link href="http://im.yonglang.co/2015/12/10/Shell-for-while/"/>
+    <id>http://im.yonglang.co/2015/12/10/Shell-for-while/</id>
+    <published>2015-12-09T18:19:59.000Z</published>
+    <updated>2016-07-15T01:48:31.000Z</updated>
+    
+    <content type="html">&lt;pre&gt;&lt;code&gt;#!/bin/bash
+# for 
+
+arr=(111 2222 3333 4444 5555)
+num=5
+count=5
+
+# for--in--
+for m in ${arr[@]}; do
+    echo $m
+done
+
+echo &amp;quot;------------------------------------------&amp;quot;
+
+for n in $( ls /usr/local ); do
+    echo $n
+done
+
+echo &amp;quot;------------------------------------------&amp;quot;
+
+# while
+while [[ $num -gt 0 ]]; do
+    echo &amp;quot;num: ${num}&amp;quot;
+    num=$(($num - 1))
+done
+
+num=5
+
+echo &amp;quot;------------------------------------------&amp;quot;
+# while --- continue
+while [[ $num -gt 0 ]]; do
+    num=$(($num - 1))
+    if [[ $num -eq 3 ]]; then
+        continue
+    fi
+    echo &amp;quot;num: ${num}&amp;quot;
+done
+
+echo &amp;quot;------------------------------------------&amp;quot;
+# while --- break
+while [[ $count -gt 0 ]]; do
+    count=$(($count - 1))
+    if [[ $count -eq 3 ]]; then
+        break;
+    fi
+    echo &amp;quot;count: ${count}&amp;quot;
+done
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;pre&gt;&lt;code&gt;#!/bin/bash
+# for 
+
+arr=(111 2222 3333 4444 5555)
+num=5
+count=5
+
+# for--in--
+for m in ${arr[@]}; do
+    echo $m
+done
+
+echo &amp;quot;
+    
+    </summary>
+    
+      <category term="Shell" scheme="http://im.yonglang.co/categories/Shell/"/>
+    
+    
+      <category term="Shell" scheme="http://im.yonglang.co/tags/Shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Shell-ifelse</title>
+    <link href="http://im.yonglang.co/2015/12/10/Shell-ifelse/"/>
+    <id>http://im.yonglang.co/2015/12/10/Shell-ifelse/</id>
+    <published>2015-12-09T18:19:16.000Z</published>
+    <updated>2016-07-15T01:48:41.000Z</updated>
+    
+    <content type="html">&lt;pre&gt;&lt;code&gt;#!/bin/bash
+#if--else
+
+NAME=&amp;quot;john&amp;quot;
+
+# 注意if条件两边的空格
+if [ ${NAME} == &amp;quot;john&amp;quot; ]; then
+    echo &amp;quot;hahhahahha&amp;quot;
+else
+    echo &amp;quot;huhuhuhuhu&amp;quot;
+fi
+
+if [ ${NAME} == &amp;quot;john&amp;quot; ]; then
+    echo &amp;quot;hahhahahha&amp;quot;
+elif [ ${NAME} == &amp;quot;johnx&amp;quot; ]; then
+    echo &amp;quot;huhuhuhuhu&amp;quot;
+else
+    echo &amp;quot;xxxxxxxxxx&amp;quot;
+fi
+
+# 数值类型比较
+# $a -lt $b    $a &amp;lt; $b
+# $a -gt $b    $a &amp;gt; $b
+# $a -le $b    $a &amp;lt;= $b
+# $a -ge $b    $a &amp;gt;= $b
+# $a -eq $b    $a is equal to $b
+# $a -ne $b    $a is not equal to $b
+
+# 字符串类型比较
+# &amp;quot;$a&amp;quot; = &amp;quot;$b&amp;quot;     $a 和 $b 相等
+# &amp;quot;$a&amp;quot; == &amp;quot;$b&amp;quot;    $a 和 $b 相等
+# &amp;quot;$a&amp;quot; != &amp;quot;$b&amp;quot;    $a 和 $b 不相等
+# -z &amp;quot;$a&amp;quot;         $a 是空的
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;pre&gt;&lt;code&gt;#!/bin/bash
+#if--else
+
+NAME=&amp;quot;john&amp;quot;
+
+# 注意if条件两边的空格
+if [ ${NAME} == &amp;quot;john&amp;quot; ]; then
+    echo &amp;quot;hahhahahha&amp;qu
+    
+    </summary>
+    
+      <category term="Shell" scheme="http://im.yonglang.co/categories/Shell/"/>
+    
+    
+      <category term="Shell" scheme="http://im.yonglang.co/tags/Shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Shell-数组</title>
+    <link href="http://im.yonglang.co/2015/12/10/Shell-%E6%95%B0%E7%BB%84/"/>
+    <id>http://im.yonglang.co/2015/12/10/Shell-数组/</id>
+    <published>2015-12-09T18:18:38.000Z</published>
+    <updated>2016-07-15T01:48:04.000Z</updated>
+    
+    <content type="html">&lt;pre&gt;&lt;code&gt;#!/bin/bash
+# 数组 不支持多维数组
+# 通过index访问数组元素 arr[1]
+
+arr=(
+    xxxx
+    yyyy
+    wwww
+    &amp;quot;hello world&amp;quot;
+)
+
+# 使用下标定义
+arr1[0]=aaaa
+arr1[1]=bbb
+arr1[2]=cccc
+arr1[5]=dddd
+
+# 获取arr1所有值
+echo ${arr1[@]}
+
+# 获取arr1数组中值
+echo ${arr1[0]}
+echo ${arr1[1]}
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;pre&gt;&lt;code&gt;#!/bin/bash
+# 数组 不支持多维数组
+# 通过index访问数组元素 arr[1]
+
+arr=(
+    xxxx
+    yyyy
+    wwww
+    &amp;quot;hello world&amp;quot;
+)
+
+# 使用下标定义
+arr1[0]
+    
+    </summary>
+    
+      <category term="Shell" scheme="http://im.yonglang.co/categories/Shell/"/>
+    
+    
+      <category term="Shell" scheme="http://im.yonglang.co/tags/Shell/"/>
+    
+  </entry>
+  
+</feed>
