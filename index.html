@@ -34,7 +34,7 @@
     <link rel="apple-touch-icon" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -79,6 +79,571 @@
     </header>
     <div id="container">
       <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/15/hexo运行报错/" title="hexo运行报错" itemprop="url">hexo运行报错</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-15T01:22:02.000Z" itemprop="datePublished"> 发表于 2016-07-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="hexo_u8FD0_u884C_u62A5_u9519"><a href="#hexo_u8FD0_u884C_u62A5_u9519" class="headerlink" title="hexo运行报错"></a>hexo运行报错</h1><ul>
+<li><p>运行hexo命令出现以下错误</p>
+<pre><code>[Error: Module did not self-register.]
+{ [Error: Cannot find module &apos;./build/default/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; }
+{ [Error: Cannot find module &apos;./build/Debug/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; }
+</code></pre></li>
+<li><p>解决方法</p>
+<pre><code>npm install hexo --no-optional
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Hexo/">Hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/07/15/hexo运行报错/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/07/15/hexo运行报错/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/15/php-sphinx使用/" title="php+sphinx使用" itemprop="url">php+sphinx使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-15T01:17:15.000Z" itemprop="datePublished"> 发表于 2016-07-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Centos7_Sphinx_install"><a href="#Centos7_Sphinx_install" class="headerlink" title="Centos7 Sphinx install"></a>Centos7 Sphinx install</h1><ul>
+<li><p>安装依赖库</p>
+<pre><code>yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel expat-devel
+cd /usr/local/src
+
+// https://share.weiyun.com/2da811898545e0043a00c4129fea95c0
+// download coreseek-3.2.14
+tar xvzf coreseek-3.2.14.tar.gz
+cd coreseek-3.2.14
+cd mmseg-3.2.14
+./bootstrap
+./configure --prefix=/usr/local/mmseg3
+make &amp;&amp; make install
+cd /usr/local/src/coreseek-3.2.14/csft-3.2.14
+
+#这里我们要修改 src/sphinxexpr.cpp 文件，将该文件中的 1013、1047、1080 行的 ExprEval 改为 this-&gt;ExprEval
+sh buildconf.sh
+
+#修改configure文件,找到“#define USE_LIBICONV 1”，将注释去掉，并将1改成0。
+make &amp;&amp; make install
+
+cd ..
+cd testpack
+cat var/test/test.xml   #此时应该正确显示中文
+/usr/local/mmseg3/bin/mmseg -d /usr/local/mmseg3/etc var/test/test.xml  #整篇文章进行分词
+/usr/local/coreseek/bin/indexer -c etc/csft.conf --all  #创建索引
+/usr/local/coreseek/bin/search -c etc/csft.conf 网络搜索    #搜索关键字 网络搜索
+/usr/local/coreseek/bin/searchd -c etc/csft.conf    #正常开启搜索服务
+/usr/local/coreseek/bin/searchd -c etc/csft.conf --stop #如要停止搜索服务
+/usr/local/coreseek/bin/indexer -c etc/csft.conf --all --rotate #如要已启动服务，要更新索引
+</code></pre></li>
+<li><p>安装PHP扩展</p>
+<pre><code>cd /usr/local/src/coreseek-3.2.14/csft-3.2.14/api/libsphinxclient
+./configure --prefix=/usr/local/sphinxclient
+make &amp;&amp; make install
+
+cd /usr/local/src
+wget http://pecl.php.net/get/sphinx-1.1.0.tgz
+tar -xzvf sphinx-1.1.0.tgz
+cd sphinx-1.1.0
+/usr/bin/phpize
+./configure --with-php-config=/usr/local/php/bin/php-config --with-sphinx=/usr/local/sphinxclient
+
+make &amp;&amp; make install
+
+#注意，如果你的php版本是5.4，那么在这一步中会出现错误，提示在 sphinx.c:105:2，可以按下面方式修改：
+
+#vim sphinx.c，找到105行
+
+#把 retval = std_hnd-&gt;read_property(object, member, type TSRMLS_CC); 修改成 retval = std_hnd-&gt;read_property(object, member, type TSRMLS_CC, NULL);
+
+# 重新编译
+./configure --with-php-config=/usr/local/php/bin/php-config --with-sphinx=/usr/local/sphinxclient
+make &amp;&amp; make install
+
+# 修改php.ini文件
+vim /usr/local/php/etc/php.ini
+# 在最后一行加上
+extension=&quot;sphinx.so&quot;
+# 重启
+/etc/init.d/php-fpm restart
+/etc/init.d/nginx restart
+</code></pre></li>
+<li><p>Sphinx配置文件</p>
+<ul>
+<li><p>首先建立Sphinx配置文件</p>
+<pre><code>cd /usr/local/coreseek/etc/
+cp sphinx.conf.dist sphinx.conf
+
+# 删除空格
+sed -i &quot;/^\s*$/d&quot; sphinx.conf
+</code></pre></li>
+<li><p>Sphinx.conf文件</p>
+<pre><code>source src1
+{
+    # data source type. mandatory, no default value
+    # known types are mysql, pgsql, mssql, xmlpipe, xmlpipe2, odbc
+    type                    = mysql
+    #####################################################################
+    ## SQL settings (for &apos;mysql&apos; and &apos;pgsql&apos; types)
+    #####################################################################
+    # some straightforward parameters for SQL source types
+    sql_host                = localhost
+    sql_user                = root
+    sql_pass                = 123456
+    sql_db                    = test
+    sql_port                = 3306    # optional, default is 3306
+    sql_query_pre                           = SET NAMES UTF8  # mysql检索字符集
+    sql_query                = \
+        SELECT id, group_id, UNIX_TIMESTAMP(date_added) AS date_added, title, content \
+        FROM documents
+    sql_ranged_throttle = 0
+    sql_query_info        = SELECT * FROM documents WHERE id=$id  # 这里的id对应于数据表的主键
+}
+index test1
+{
+    source            = src1
+    path            = /usr/local/coreseek/var/data/test1
+    docinfo            = extern
+    mlock            = 0
+    morphology        = none
+    #wordforms            = G:\data\wordforms.txt
+    #exceptions        = /data/exceptions.txt
+    min_word_len        = 1
+    charset_type        = utf-8
+    html_strip                = 0
+}
+indexer
+{
+    mem_limit            = 32M
+}
+searchd
+{
+    log                    = /usr/local/coreseek/var/log/searchd.log
+    query_log            = /usr/local/coreseek/var/log/query.log
+    read_timeout        = 5
+    client_timeout        = 300
+    max_children        = 30
+    pid_file            = /usr/local/coreseek/var/log/searchd.pid
+    max_matches            = 1000
+    seamless_rotate        = 1
+    preopen_indexes        = 0
+    unlink_old            = 1
+    mva_updates_pool    = 1M
+    max_packet_size        = 8M
+    max_filters            = 256
+    max_filter_values    = 4096
+}
+</code></pre></li>
+</ul>
+</li>
+<li><p>创建数据库，导入测试数据</p>
+<blockquote>
+<p>在主数据源设置中，sql_query和sql_query_info字段都是From document，这是安装coreseek时提供的测试表，位于/usr/local/coreseek/etc/example.sql</p>
+</blockquote>
+<pre><code>mysql -uroot -p123456
+create database test;
+use test;
+source /usr/local/coreseek/etc/example.sql
+</code></pre></li>
+<li><p>搜索测试</p>
+<ul>
+<li>创建索引，每次新增数据后，都要重新索引一次</li>
+<li><p>创建索引命令<code>indexer</code></p>
+<ul>
+<li>-c 指定配置文件</li>
+<li>–all 对所有索引重新编制索引</li>
+<li>–rotate 用于轮换索引，主要是在不停止服务的时候增加索引</li>
+<li>–merge 合并索引</li>
+<li><p>针对test:documents创建索引</p>
+<pre><code>cd /usr/local/coreseek/bin
+./indexer -c /usr/local/coreseek/etc/sphinx.conf --all
+</code></pre></li>
+</ul>
+</li>
+<li><p>查询关键字</p>
+<ul>
+<li>查询命令<code>search</code><ul>
+<li>-c 指定配置文件</li>
+</ul>
+</li>
+<li><p>查关键字<code>test</code></p>
+<pre><code>cd /usr/local/coreseek/bin
+./search -c /usr/local/coreseek/etc/sphinx.conf test
+</code></pre></li>
+<li><p>查询关键字<code>group</code></p>
+<pre><code>./search -c /usr/local/coreseek/etc/sphinx.conf group
+</code></pre></li>
+<li><p>插入一条数据并检索</p>
+<pre><code>mysql -uroot -p123456 test
+insert into documents(group_id, group_id2, date_added, title, content) values(3,9,now(),&apos;zhangsan&apos;, &apos;zhangsan is a student&apos;);
+</code></pre></li>
+<li>查询关键字<code>zhangsan</code><blockquote>
+<p>检索结果为0，因为每次新增数据都需要重新添加索引</p>
+</blockquote>
+</li>
+<li><p>插入一条中文书籍并检索</p>
+<pre><code>mysql -uroot -p123456 test
+insert into documents(group_id, group_id2, date_added, title, content) values(3,9,now(),&apos;zhangsan张三&apos;, &apos;张三是一名学生&apos;);
+
+# 重新建立索引
+./indexer -c /usr/local/coreseek/etc/sphinx.conf --all
+</code></pre><h1 id="coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5"><a href="#coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5" class="headerlink" title="coreseek中文搜索测试"></a>coreseek中文搜索测试</h1></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>创建coreseek配置文件</p>
+<pre><code>cd /usr/local/coreseek/etc/
+cp sphinx.conf csft.conf
+</code></pre></li>
+<li><p><code>csft.conf</code>配置文件</p>
+<pre><code>source src1
+{
+    # data source type. mandatory, no default value
+    # known types are mysql, pgsql, mssql, xmlpipe, xmlpipe2, odbc
+    type                    = mysql
+    #####################################################################
+    ## SQL settings (for &apos;mysql&apos; and &apos;pgsql&apos; types)
+    #####################################################################
+    # some straightforward parameters for SQL source types
+    sql_host                = localhost
+    sql_user                = root
+    sql_pass                = 123456
+    sql_db                    = test
+    sql_port                = 3306    # optional, default is 3306
+    sql_query_pre                           = SET NAMES UTF8  # mysql检索字符集
+        #sql_query_pre                           = SET SESSION query_cache_type=1  # 关闭缓存
+    sql_query                = \
+        SELECT id, group_id, UNIX_TIMESTAMP(date_added) AS date_added, title, content \
+        FROM documents
+    sql_ranged_throttle = 0
+    sql_query_info        = SELECT * FROM documents WHERE id=$id  # 这里的id对应于数据表的主键
+}
+index test1
+{
+    source            = src1
+    path            = /usr/local/coreseek/var/data/test1
+    docinfo            = extern
+    mlock            = 0
+    morphology        = none
+    #wordforms            = G:\data\wordforms.txt
+    #exceptions        = /data/exceptions.txt
+    min_word_len        = 1
+    charset_type        = zh_cn.utf-8
+    charset_dictpath    = /usr/local/mmseg3/etc/
+    html_strip                = 0
+}
+indexer
+{
+    mem_limit            = 32M
+}
+searchd
+{
+    log                    = /usr/local/coreseek/var/log/searchd.log
+    query_log            = /usr/local/coreseek/var/log/query.log
+    read_timeout        = 5
+    client_timeout        = 300
+    max_children        = 30
+    pid_file            = /usr/local/coreseek/var/log/searchd.pid
+    max_matches            = 1000
+    seamless_rotate        = 1
+    preopen_indexes        = 0
+    unlink_old            = 1
+    mva_updates_pool    = 1M
+    max_packet_size        = 8M
+    max_filters            = 256
+    max_filter_values    = 4096
+}
+</code></pre></li>
+<li><p>重新测试中文搜索</p>
+<pre><code>cd /usr/local/coreseek/bin
+
+# 用sphinx搜索显示结果是
+[root@localhost bin]# ./search -c /usr/local/coreseek/etc/sphinx.conf zhangsan张三
+Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
+Copyright (c) 2007-2011,
+Beijing Choice Software Technologies Inc (http://www.coreseek.com)
+
+ using config file &apos;/usr/local/coreseek/etc/sphinx.conf&apos;...
+index &apos;test1&apos;: query &apos;zhangsan张三 &apos;: returned 2 matches of 2 total in 0.000 sec
+
+displaying matches:
+1. document=5, weight=2
+    id=5
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 13:39:02
+    title=zhangsan
+    content=zhangsan is a student
+2. document=6, weight=1
+    id=6
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 13:42:27
+    title=zhangsan张三
+    content=张三是一名学生
+
+words:
+1. &apos;zhangsan&apos;: 2 documents, 3 hits
+
+# 基于coreseek搜索
+# 创建索引
+./indexer -c /usr/local/coreseek/etc/csft.conf --all
+# 搜索结果
+[root@localhost bin]# ./search -c /usr/local/coreseek/etc/csft.conf zhangsan张三
+Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
+Copyright (c) 2007-2011,
+Beijing Choice Software Technologies Inc (http://www.coreseek.com)
+
+ using config file &apos;/usr/local/coreseek/etc/csft.conf&apos;...
+index &apos;test1&apos;: query &apos;zhangsan张三 &apos;: returned 1 matches of 1 total in 0.001 sec
+
+displaying matches:
+1. document=6, weight=5
+    id=6
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 13:42:27
+    title=zhangsan张三
+    content=张三是一名学生
+
+words:
+1. &apos;zhangsan&apos;: 2 documents, 3 hits
+2. &apos;张&apos;: 1 documents, 2 hits
+3. &apos;三&apos;: 1 documents, 2 hits
+</code></pre></li>
+<li><p>重新添加一条数据</p>
+<pre><code>mysql -uroot -p123456 test
+insert into documents(group_id, group_id2, date_added, title, content) values(3, 9, now(), &apos;北京清华大学&apos;, &apos;张三在 北京清华大学上学&apos;);
+
+./indexer -c /usr/local/coreseek/etc/csft.conf --all
+
+# 搜索北京清华大学
+[root@localhost bin]# ./search -c /usr/local/coreseek/etc/csft.conf 北京清华大学
+Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
+Copyright (c) 2007-2011,
+Beijing Choice Software Technologies Inc (http://www.coreseek.com)
+
+ using config file &apos;/usr/local/coreseek/etc/csft.conf&apos;...
+index &apos;test1&apos;: query &apos;北京清华大学 &apos;: returned 1 matches of 1 total in 0.001 sec
+
+displaying matches:
+1. document=7, weight=4
+    id=7
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 14:08:06
+    title=北京清华大学
+    content=张三在北京清华大学上学
+
+words:
+1. &apos;北京&apos;: 1 documents, 2 hits
+2. &apos;清华大学&apos;: 1 documents, 2 hits
+</code></pre></li>
+</ul>
+<h1 id="u5728PHP_u4E2D_u4F7F_u7528Sphinx"><a href="#u5728PHP_u4E2D_u4F7F_u7528Sphinx" class="headerlink" title="在PHP中使用Sphinx"></a>在PHP中使用Sphinx</h1><ul>
+<li>在php中使用sphinx步骤<ul>
+<li>建立sphinx配置文件</li>
+<li>生成索引</li>
+<li>启动sphinx服务进程(searchd)</li>
+<li>安装PHP的sphinx扩展</li>
+<li>使用php客户端连接sphinx服务器</li>
+</ul>
+</li>
+<li>启动sphinx服务命令<code>searchd</code><ul>
+<li>-c 指定配置文件</li>
+<li>–stop 停止服务</li>
+<li>–pidfile 显式指定一个PID文件</li>
+<li>-p 指定端口</li>
+</ul>
+</li>
+<li><p>启动sphinx服务进程(searchd)，并开启端口9312</p>
+<pre><code>cd /usr/local/coreseek/bin
+./searchd(或者 ./searchd -c /usr/local/coreseek/etc/csft.conf) # 这里默认会加载csft.conf文件，如果配置文件不叫csft.conf可以使用-c命令指定配置文件名称
+</code></pre></li>
+<li><p>查看searchd状态</p>
+<pre><code>[root@localhost bin]# ps aux|grep searchd
+root      10424  0.0  0.0  31696   824 pts/0    S    14:15   0:00 ./searchd
+root      10436  0.0  0.0 112664   992 pts/0    R+   14:17   0:00 grep --color=auto searchd
+[root@localhost bin]# netstat -tunpl | grep 9312
+tcp        0      0 0.0.0.0:9312            0.0.0.0:*               LISTEN      10424/./searchd
+</code></pre></li>
+<li><p>简单的PHP检索示例</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+
+    if (empty($_GET[&apos;key&apos;]) &amp;&amp; !isset($_GET[&apos;key&apos;])) {
+            echo &apos;请输入搜索内容&apos;;
+            exit();
+    }
+
+    define(&apos;INDEX&apos;, &apos;test1&apos;);
+
+    $sphinx = new SphinxClient();
+
+    // 设置主机名和端口号(默认9312)
+    $sphinx-&gt;SetServer(&apos;localhost&apos;, 9312);
+
+    /**
+     * 设置匹配方式
+     * 1. SPH_MATCH_ANY表示所有结果
+     * 2. SPH_MATCH_ALL表示包涵关键词的结果
+     */
+    $sphinx-&gt;SetMatchMode(SPH_MATCH_ANY);
+
+    // query(&apos;a&apos;, &apos;b&apos;)在索引中搜索关键字a, query(&apos;a&apos;, &apos;*&apos;)在所有索引中搜索a
+    $result = $sphinx-&gt;query($_GET[&apos;key&apos;], INDEX);
+
+    echo &apos;&lt;pre&gt;&apos;;
+    print_r($result);
+    echo &apos;&lt;/pre&gt;&apos;;
+</code></pre></li>
+</ul>
+<pre><code>    $ids = join(&apos;,&apos;, array_keys($result[&apos;matches&apos;]));
+    $mysql = new mysqli(&apos;localhost&apos;, &apos;root&apos;, &apos;123456&apos;, &apos;test&apos;);
+    $mysql-&gt;query(&apos;SET NAMES utf8&apos;);
+    $sql = &quot;select * from documents where id in({$ids})&quot;;
+
+    $opts = array(
+        &apos;before_match&apos; =&gt; &quot;&lt;font style=&apos;font-weight: bold; color: #f00;&apos;&gt;&quot;,
+        &apos;after_match&apos;  =&gt; &apos;&lt;/font&gt;&apos;
+    );
+
+    $res = $mysql-&gt;query($sql);
+
+    $count = $res-&gt;num_rows;
+
+    if ($count &gt; 0) {
+        while ($list = $res-&gt;fetch_assoc()) {
+            $row = $sphinx-&gt;buildExcerpts($list, INDEX, $_GET[&apos;key&apos;], $opts);
+
+            echo &quot;标题：{$row[4]}&lt;br/&gt;&quot;;
+            echo &quot;内容：{$row[5]}&quot;;
+
+            echo &apos;&lt;hr&gt;&apos;;
+        }
+
+        echo &quot;总共搜索到${count}条&quot;;
+    } else {
+        echo &apos;没有搜索到&apos;;
+    }
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/PHP/">PHP</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/PHP/">PHP</a><a href="/tags/Sphinx/">Sphinx</a><a href="/tags/Coreseek/">Coreseek</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/07/15/php-sphinx使用/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/07/15/php-sphinx使用/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
 
    
     
@@ -178,13 +743,13 @@ size_sent is equal to 0 !
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Centos7/">Centos7</a>►<a class="article-category-link" href="/categories/Linux/Centos7/Tsung/">Tsung</a>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Centos7/">Centos7</a><a href="/tags/Linux/">Linux</a><a href="/tags/Tsung/">Tsung</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Centos7/">Centos7</a><a href="/tags/Tsung/">Tsung</a>
   </div>
 
 </div>
@@ -272,13 +837,13 @@ default-character-set=utf8mb4
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Centos7/">Centos7</a>►<a class="article-category-link" href="/categories/Linux/Centos7/MySQL/">MySQL</a>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Centos7/">Centos7</a><a href="/tags/Linux/">Linux</a><a href="/tags/MySQL/">MySQL</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/MySQL/">MySQL</a><a href="/tags/Centos7/">Centos7</a>
   </div>
 
 </div>
@@ -357,13 +922,13 @@ cd /usr/local/nginx/sbin/
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Centos7/">Centos7</a>►<a class="article-category-link" href="/categories/Linux/Centos7/Nginx/">Nginx</a>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Centos7/">Centos7</a><a href="/tags/Linux/">Linux</a><a href="/tags/Nginx/">Nginx</a>
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Centos7/">Centos7</a><a href="/tags/Nginx/">Nginx</a>
   </div>
 
 </div>
@@ -388,2019 +953,9 @@ cd /usr/local/nginx/sbin/
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/02/26/centos-查看系统硬件信息/" title="centos-查看系统硬件信息" itemprop="url">centos-查看系统硬件信息</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2016-02-25T16:13:44.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Centos__u67E5_u770B_u7CFB_u7EDF_u786C_u4EF6_u4FE1_u606F"><a href="#Centos__u67E5_u770B_u7CFB_u7EDF_u786C_u4EF6_u4FE1_u606F" class="headerlink" title="Centos 查看系统硬件信息"></a>Centos 查看系统硬件信息</h1><ul>
-<li><p>查看CPU型号</p>
-<pre><code>cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
-
-2  Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz
-</code></pre></li>
-<li><p>查看物理CPU个数</p>
-<pre><code>cat /proc/cpuinfo | grep physical | uniq -c
-
-1 physical id    : 0
-1 address sizes    : 46 bits physical, 48 bits virtual
-1 physical id    : 2
-1 address sizes    : 46 bits physical, 48 bits virtual
-</code></pre></li>
-<li><p>查看CPU运行模式：32位或64位</p>
-<pre><code>getconf LONG_BIT
-
-64
-</code></pre></li>
-<li><p>查看CPU是否支持64位系统，如果大于0，则支持64位运算</p>
-<pre><code>cat /proc/cpuinfo | grep flags | grep &apos; lm &apos; | wc -l 
-
-2
-</code></pre></li>
-<li><p>查看内存信息</p>
-<pre><code>cat /proc/meminfo 
-
-MemTotal:        1922784 kB
-MemFree:          184468 kB
-Buffers:          198704 kB
-Cached:           630012 kB
-SwapCached:            0 kB
-Active:           997440 kB
-Inactive:         585112 kB
-Active(anon):     753856 kB
-Inactive(anon):      160 kB
-Active(file):     243584 kB
-Inactive(file):   584952 kB
-Unevictable:           0 kB
-Mlocked:               0 kB
-SwapTotal:             0 kB
-SwapFree:              0 kB
-Dirty:                28 kB
-Writeback:             0 kB
-AnonPages:        753960 kB
-Mapped:            30072 kB
-Shmem:               180 kB
-Slab:             124932 kB
-SReclaimable:     102336 kB
-SUnreclaim:        22596 kB
-KernelStack:        3528 kB
-PageTables:         5292 kB
-NFS_Unstable:          0 kB
-Bounce:                0 kB
-WritebackTmp:          0 kB
-CommitLimit:      961392 kB
-Committed_AS:    1604768 kB
-VmallocTotal:   34359738367 kB
-VmallocUsed:       11064 kB
-VmallocChunk:   34359725180 kB
-HardwareCorrupted:     0 kB
-AnonHugePages:    688128 kB
-HugePages_Total:       0
-HugePages_Free:        0
-HugePages_Rsvd:        0
-HugePages_Surp:        0
-Hugepagesize:       2048 kB
-DirectMap4k:        6144 kB
-DirectMap2M:     2095104 kB
-</code></pre></li>
-<li><p>查看当前系统内核信息</p>
-<pre><code>uname -a
-
-Linux iZ2326o1rm2Z 2.6.32-431.23.3.el6.x86_64 #1 SMP Thu Jul 31 17:20:51 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
-</code></pre></li>
-<li><p>查看当前操作系统内核信息</p>
-<pre><code>cat /etc/issue | grep linux
-</code></pre></li>
-<li><p>查看服务器型号</p>
-<pre><code>dmidecode | grep &quot;Product Name&quot;
-
-Product Name: HVM domU
-</code></pre></li>
-<li><p>查看当前打开的服务</p>
-<pre><code>chkconfig --list
-</code></pre></li>
-<li><p>查看当前打开的端口</p>
-<pre><code>netstat -an
-</code></pre></li>
-<li><p>查看磁盘信息</p>
-<pre><code>fdisk -l
-df -h
-</code></pre></li>
-<li><p>进程监控命令，实时显示系统进程的资源占用情况</p>
-<pre><code>top
-</code></pre></li>
-<li><p>系统监控命令，重点侧重于虚拟内存，也可以监控CPU、进程、内存分页以及IO的状态信息</p>
-<pre><code>vmstat
-</code></pre></li>
-<li><p>列举系统中被打开的文件</p>
-<pre><code>lsof -i：36000，显示使用36000端口的进程 
-lsof -u root，显示以root运行的程序 
-lsof -c php-fpm，显示php-fpm进程打开的文件 
-lsof php.ini，显示打开php.ini的进程。
-</code></pre></li>
-<li><p>查看Linux系统日志</p>
-<pre><code>系统级别的日志文件存放路径为/var/log
-常用的系统日志为/var/log/messages
-</code></pre></li>
-<li><p>查找文件系统大文件</p>
-<pre><code>可以首先通过df命令查看磁盘分区使用情况，比如df -m；
-然后：
-通过du命令查看具体文件夹的大小，比如du -sh ./*，du -h --max-depth=1|head -10；
-使用ls命令列出文件以及大小，比如ls -lSh；
-另外，也可以通过find命令直接查看特定目录下的文件大小，比如find / -type f -size +10M -exec ls -lrt {} \;
-</code></pre></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Centos7/">Centos7</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Centos7/">Centos7</a><a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/02/26/centos-查看系统硬件信息/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/26/centos-查看系统硬件信息/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/02/26/centos-查看端口使用情况/" title="centos-查看端口使用情况" itemprop="url">centos-查看端口使用情况</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2016-02-25T16:12:23.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Centos__u67E5_u770B_u7AEF_u53E3_u4F7F_u7528_u60C5_u51B5"><a href="#Centos__u67E5_u770B_u7AEF_u53E3_u4F7F_u7528_u60C5_u51B5" class="headerlink" title="Centos 查看端口使用情况"></a>Centos 查看端口使用情况</h1><ul>
-<li>通过测试感觉tsung每次进行压测,没进一个用户需要占用本机一个端口，所以系统默认的端口打开是从32768到65535,所以这里就只能进2W多个用户，于是修改默认打开端口数。 </li>
-<li><p>查看端口</p>
-<pre><code>sysctl net.ipv4.ip_local_port_range
-</code></pre></li>
-<li><p>修改该值</p>
-<pre><code>echo 1024 65535 &gt; /proc/sys/net/ipv4/ip_local_port_range  
-
-||
-
-sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
-
-||
-
-如果想一直生效，需要修改 /etc/sysctl.conf文件，加入net.ipv4.ip_local_port_range = 1024 65535,修改完成执行sysctl -p。
-</code></pre></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Centos7/">Centos7</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Centos7/">Centos7</a><a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/02/26/centos-查看端口使用情况/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/26/centos-查看端口使用情况/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/02/26/centos-安装jdk/" title="centos-安装jdk" itemprop="url">centos-安装jdk</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2016-02-25T16:11:10.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Centos_u5B89_u88C5JDK"><a href="#Centos_u5B89_u88C5JDK" class="headerlink" title="Centos安装JDK"></a>Centos安装JDK</h1><pre><code>wget http://download.oracle.com/otn-pub/java/jdk/7u3-b04/jdk-7u3-linux-x64.rpm(当出现秒下时候，出现HTTP request sent, awaiting response... 302 Moved Temporarily错误，通过chrom抓包，获取重定向后的链接地址)
-
-运行rpm -ivh jdk-7u3-linux-x64.rpm
-
-修改profile文件，vi /etc/profile,在文件最后加入
-
-  export JAVA_HOME=/usr/java/jdk1.7.0_03
-  export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-  export PATH=$PATH:$JAVA_HOME/bin
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Centos7/">Centos7</a>►<a class="article-category-link" href="/categories/Linux/Centos7/JDK/">JDK</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Centos7/">Centos7</a><a href="/tags/JDK/">JDK</a><a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/02/26/centos-安装jdk/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/26/centos-安装jdk/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/02/26/centos-开启mysql外部访问/" title="centos-开启mysql外部访问" itemprop="url">centos-开启mysql外部访问</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2016-02-25T16:09:43.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Centos_u5F00_u542Fmysql_u5916_u90E8_u8BBF_u95EE"><a href="#Centos_u5F00_u542Fmysql_u5916_u90E8_u8BBF_u95EE" class="headerlink" title="Centos开启mysql外部访问"></a>Centos开启mysql外部访问</h1><pre><code>grant all privileges on *.* to &apos;root&apos;@&apos;%&apos; identified by &apos;password&apos; with grant option;
-
-iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT //开启3306端口
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Centos7/">Centos7</a>►<a class="article-category-link" href="/categories/Linux/Centos7/MySQL/">MySQL</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Centos7/">Centos7</a><a href="/tags/Linux/">Linux</a><a href="/tags/MySQL/">MySQL</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/02/26/centos-开启mysql外部访问/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/26/centos-开启mysql外部访问/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/02/26/centos7-mysql-php-nginx安装/" title="centos7-mysql+php+nginx安装" itemprop="url">centos7-mysql+php+nginx安装</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2016-02-25T16:04:01.000Z" itemprop="datePublished"> 发表于 2016-02-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Centos7-Mysql+PHP+nginx_u5B89_u88C5"><a href="#Centos7-Mysql+PHP+nginx_u5B89_u88C5" class="headerlink" title="Centos7-Mysql+PHP+nginx安装"></a>Centos7-Mysql+PHP+nginx安装</h1><h2 id="u5B89_u88C5nginx"><a href="#u5B89_u88C5nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><pre><code>rpm --import http://nginx.org/keys/nginx_signing.key
-rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
-yum install nginx
-systemctl start nginx
-systemctl enable nginx
-</code></pre><ul>
-<li>nginx 的默认文档要目录是 <code>/usr/share/nginx/html</code>，里面有<code>index.html</code>，访问<code>http://ip</code>入显示<code>welcome</code>则表示安装成功</li>
-</ul>
-<h2 id="u5B89_u88C5PHP"><a href="#u5B89_u88C5PHP" class="headerlink" title="安装PHP"></a>安装PHP</h2><pre><code>yum install php php-fpm php-mysql
-systemctl start php-fpm
-systemctl enable php-fpm
-</code></pre><ul>
-<li><p>默认安装php的时候会自动安装apache web服务器，所以避免冲突应该禁掉httpd</p>
-<pre><code>systemctl disable httpd
-</code></pre></li>
-<li><p>配置nginx主机，配置文件在<code>/etc/nginx/conf.d/default.conf</code></p>
-<pre><code>server {
-    listen 80;
-    server_name localhost;
-    root /usr/share/nginx/html;
-    index index.php index.html index.htm;
-
-    location / {
-    }
-
-    error_page 500 502 503 504 /50x.html;
-    location = /50x.html {
-    }
-
-    location ~ \.php$ {
-    try_files $uri =404;
-    fastcgi_pass 127.0.0.1:9000;
-    fastcgi_index index.php;
-    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    include fastcgi_params;
-    }
-}
-</code></pre></li>
-</ul>
-<h2 id="u5B89_u88C5mysql"><a href="#u5B89_u88C5mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><pre><code>wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
-rpm -ivh mysql-community-release-el7-5.noarch.rpm
-yum install mysql-community-server
-service mysqld start
-</code></pre><ul>
-<li><p>mysql安装完成后，默认root密码为空</p>
-<pre><code>mysql -uroot
-set password for ‘root’@‘localhost’ = password(&apos;mypasswd&apos;);
-</code></pre></li>
-<li><p>centos7默认使用的firewall作为防火墙，这里改为iptables防火墙</p>
-<pre><code>systemctl stop firewalld.service
-systemctl disable firewalld.service
-</code></pre></li>
-<li><p>安装iptables防火墙</p>
-<pre><code>yum install iptables-services
-</code></pre></li>
-<li><p>修改防火墙配置文件</p>
-<pre><code>vi /etc/sysconfig/iptables
-
-# Firewall configuration written by system-config-firewall
-# Manual customization of this file is not recommended.
-*filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
--A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
--A INPUT -p icmp -j ACCEPT
--A INPUT -i lo -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
--A INPUT -j REJECT --reject-with icmp-host-prohibited
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
-</code></pre></li>
-<li><p>重启防火墙和开机启动</p>
-<pre><code>systemctl restart iptables.service
-systemctl enable iptables.service
-</code></pre></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Centos7/">Centos7</a>►<a class="article-category-link" href="/categories/Linux/Centos7/MySQL/">MySQL</a>►<a class="article-category-link" href="/categories/Linux/Centos7/MySQL/PHP/">PHP</a>►<a class="article-category-link" href="/categories/Linux/Centos7/MySQL/PHP/Nginx/">Nginx</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Centos7/">Centos7</a><a href="/tags/Linux/">Linux</a><a href="/tags/MySQL/">MySQL</a><a href="/tags/Nginx/">Nginx</a><a href="/tags/PHP/">PHP</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/02/26/centos7-mysql-php-nginx安装/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/26/centos7-mysql-php-nginx安装/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/02/25/centos7-修改网卡、配置网络/" title="centos7-修改网卡、配置网络" itemprop="url">centos7-修改网卡、配置网络</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2016-02-25T15:59:46.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Centos7-_u4FEE_u6539_u7F51_u5361_u3001_u914D_u7F6E_u7F51_u7EDC"><a href="#Centos7-_u4FEE_u6539_u7F51_u5361_u3001_u914D_u7F6E_u7F51_u7EDC" class="headerlink" title="Centos7-修改网卡、配置网络"></a>Centos7-修改网卡、配置网络</h1><h2 id="u6211_u662F_u5728vmware_u4E2D_u5B89_u88C5_u7684"><a href="#u6211_u662F_u5728vmware_u4E2D_u5B89_u88C5_u7684" class="headerlink" title="我是在vmware中安装的"></a>我是在vmware中安装的</h2><ul>
-<li>网络适配器调为桥接模式</li>
-<li><p>修改<code>/etc/sysconfig/network-scripts/ifcfg-xxxx</code>里面的<code>Name</code>和<code>Dev</code>为<code>eth0</code><br><img src="http://7xj3i5.com1.z0.glb.clouddn.com/8C6D5903-85B6-44BD-811C-5F0ADDD9E356.png" alt="x">  </p>
-</li>
-<li><p>修改<code>ifcfg-xxxx</code>重命名为<code>ifcfg-eth0</code><br><img src="http://7xj3i5.com1.z0.glb.clouddn.com/F6764A8C-88B6-4D39-8C37-DE856EBED293.png" alt="y"></p>
-</li>
-<li><p>禁用可预测的命名规则，编辑<code>/etc/default/grub</code>为<br><img src="http://7xj3i5.com1.z0.glb.clouddn.com/4F5BA1BF-4495-4FBE-92BF-EE93DBFED7CE.png" alt="z"></p>
-</li>
-<li><p>执行<code>grub2-mkconfig -o /boot/grub2/grub.cfg</code></p>
-</li>
-<li><p>修改<code>/etc/resolv.conf</code><br><img src="http://7xj3i5.com1.z0.glb.clouddn.com/70E8BAA9-7F78-4167-B3D7-BDD5951B6EEE.png" alt="m"></p>
-</li>
-<li><p>重启network<code>systemctl restart network</code></p>
-</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Centos7/">Centos7</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Centos7/">Centos7</a><a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/02/25/centos7-修改网卡、配置网络/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/centos7-修改网卡、配置网络/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/02/25/keepalived-haproxy高可用负载均衡/" title="keepalived+haproxy高可用负载均衡" itemprop="url">keepalived+haproxy高可用负载均衡</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2016-02-25T15:45:11.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861"><a href="#u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861" class="headerlink" title="基于Keepalived+haproxy实现高可用负载均衡"></a>基于Keepalived+haproxy实现高可用负载均衡</h1><h2 id="Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668"><a href="#Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668" class="headerlink" title="Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器"></a>Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器</h2><pre><code>* VIP：192.168.0.185
-* h1：192.168.0.137
-* h2：192.168.0.138
-* web1：192.168.0.130
-* web2：192.168.0.131
-* web3：192.168.0.132
-</code></pre><h2 id="h1_u5B89_u88C5keepalived"><a href="#h1_u5B89_u88C5keepalived" class="headerlink" title="h1安装keepalived"></a>h1安装keepalived</h2><ul>
-<li><p>安装</p>
-<pre><code>yum -y install keepalived
-</code></pre></li>
-<li><p>配置h1的keepalived</p>
-<pre><code>vim /etc/keepalived/keepalived.conf
-
-! Configuration File for keepalived
-      global_defs {
-          notification_email {
-              xxx@xx.com
-          }
-      notification_email_from keepalived@localhost
-          smtp_server 127.0.0.1
-          smtp_connect_timeout 30
-          router_id LVS_DEVEL
-      }
-
-      vrrp_script chk_haproxy {
-         script &quot;killall -0 haproxy&quot;
-         interval 2
-         weight 2
-      }
-
-      vrrp_instance VI_1 {
-          state MASTER
-          interface eth0
-          virtual_router_id 85
-          priority 100
-          advert_int 1
-          nopreempt
-          authentication {
-             auth_type PASS
-             auth_pass 1111
-          }
-          track_script {
-             chk_haproxy
-          }
-          virtual_ipaddress {
-             192.168.0.185/24 dev eth0
-          }
-       } 
-</code></pre></li>
-<li><p>配置h2的keepalived</p>
-<pre><code>vim /etc/keepalived/keepalived.conf
-
-! Configuration File for keepalived
-      global_defs {
-          notification_email {
-              xxx@xx.com
-          }
-      notification_email_from keepalived@localhost
-          smtp_server 127.0.0.1
-          smtp_connect_timeout 30
-          router_id LVS_DEVEL
-      }
-
-      vrrp_script chk_haproxy {
-         script &quot;killall -0 haproxy&quot;
-         interval 2
-         weight 2
-      }
-
-      vrrp_instance VI_1 {
-          state BACKUP
-          interface eth0
-          virtual_router_id 85
-          priority 90
-          advert_int 1
-          authentication {
-             auth_type PASS
-             auth_pass 1111
-          }
-          track_script {
-             chk_haproxy
-          }
-          virtual_ipaddress {
-             192.168.0.185/24 dev eth0
-          }
-       }
-</code></pre></li>
-</ul>
-<h2 id="u5B89_u88C5haproxy"><a href="#u5B89_u88C5haproxy" class="headerlink" title="安装haproxy"></a>安装haproxy</h2><ul>
-<li><p>安装</p>
-<pre><code>yum -y install haproxy
-</code></pre></li>
-<li><p>配置haproxy，两台机器的配置都是一样的，所以这里只提供一份</p>
-<pre><code>global
-log         127.0.0.1 local2
-
-chroot      /var/lib/haproxy
-pidfile     /var/run/haproxy.pid
-maxconn     4000
-user        haproxy
-group       haproxy
-daemon
-
-# turn on stats unix socket
-stats socket /var/lib/haproxy/stats
-
-#---------------------------------------------------------------------
-# common defaults that all the &apos;listen&apos; and &apos;backend&apos; sections will
-# use if not designated in their block
-#---------------------------------------------------------------------
-defaults
-mode                    http
-log                     global
-option                  httplog
-option                  dontlognull
-option http-server-close
-#option forwardfor       except 127.0.0.0/8
-option                  redispatch
-retries                 3
-timeout http-request    10s
-timeout queue           1m
-timeout connect         10s
-timeout client          1m
-timeout server          1m
-timeout http-keep-alive 10s
-timeout check           10s
-maxconn                 3000
-
-# 用来监听状态，访问地址http://server:8080/admin?stats
-listen statistics
-mode http
-bind *:8080
-stats enable
-stats auth admin:admin
-stats uri /admin?stats
-stats hide-version
-stats admin if TRUE
-stats refresh 5s
-acl allow src 192.168.0.0
-
-# tcp监听
-listen tigase_5222
-mode tcp
-bind *:5222
-balance leastconn
-option tcplog
-option redispatch
-option log-health-checks
-timeout connect 1s
-timeout queue 5s
-timeout server 3600s
-timeout client 3600s
-maxconn 5000
-server webserver1 192.168.0.130:5222 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver2 192.168.0.131:5222 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver3 192.168.0.132:5222 inter 3000 rise 1 fall 1 check maxconn 5000
-
-listen tigase_5280
-mode tcp
-bind *:5280
-balance source
-option tcplog
-option redispatch
-option log-health-checks
-timeout connect 1s
-timeout queue 5s
-timeout server 3600s
-timeout client 3600s
-maxconn 5000
-server webserver1 192.168.0.130:5280 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver2 192.168.0.131:5280 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver3 192.168.0.132:5280 inter 3000 rise 1 fall 1 check maxconn 5000
-
-# http连接
-listen apache_httpd
-mode http
-bind *:80
-balance roundrobin
-option httplog
-server webserver1 192.168.0.130:80 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver2 192.168.0.131:80 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver3 192.168.0.132:80 inter 3000 rise 1 fall 1 check maxconn 5000
-</code></pre></li>
-</ul>
-<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><ul>
-<li><p>启动haproxy和keepalived，首先先启动h1的haproxy和keepalived，然后启动h2的</p>
-<pre><code>service haproxy start
-service keepalived
-</code></pre></li>
-</ul>
-<h2 id="u67E5_u770B_u72B6_u6001"><a href="#u67E5_u770B_u72B6_u6001" class="headerlink" title="查看状态"></a>查看状态</h2><ul>
-<li><p>查看VIP状态，当h1正常运行的时候</p>
-<pre><code>[root@newkeep1 keepalived]# ip a|grep eth0
-2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
-    inet 192.168.0.137/24 brd 192.168.0.255 scope global eth0
-    inet 192.168.0.185/24 scope global secondary eth0
-</code></pre></li>
-<li><p>手动关闭h1的keepalived, 在h2上查看</p>
-<pre><code>[root@newkeep1 keepalived]# ip a|grep eth0
-2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
-    inet 192.168.0.138/24 brd 192.168.0.255 scope global eth0
-    inet 192.168.0.185/24 scope global secondary eth0
-</code></pre></li>
-<li>再去查看h1的时候，发现VIP已经飘走了。当重新启动h1的时候，会恢复主机状态。</li>
-<li>注意：如果启动的时候发现两台服务器都监听了VIP。则需要关闭防火墙。</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Keepalived/">Keepalived</a>►<a class="article-category-link" href="/categories/Linux/Keepalived/Haproxy/">Haproxy</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Haproxy/">Haproxy</a><a href="/tags/Keepalived/">Keepalived</a><a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/02/25/keepalived-haproxy高可用负载均衡/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/keepalived-haproxy高可用负载均衡/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/02/25/Linux-设备文件名/" title="Linux-设备文件名" itemprop="url">Linux-设备文件名</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2016-02-25T15:34:08.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D"><a href="#u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D" class="headerlink" title="各硬件设备在Linux中的文件名"></a>各硬件设备在Linux中的文件名</h1><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>目录</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>IDE硬盘</td>
-<td>/dev/hd[a-d]</td>
-</tr>
-<tr>
-<td>SCSI/SATA/USB硬盘</td>
-<td>/dev/sd[a-p]</td>
-</tr>
-<tr>
-<td>U盘</td>
-<td>/dev/sd[a-p]</td>
-</tr>
-<tr>
-<td>软驱</td>
-<td>/dev/fd[0-1]</td>
-</tr>
-<tr>
-<td>打印机</td>
-<td>25针:/dev/Ip[0-2],USB:/dev/usb/Ip[0-15]</td>
-</tr>
-<tr>
-<td>鼠标</td>
-<td>USB:/dev/usb/mouse[0-15],PS2:/dev/psaux</td>
-</tr>
-<tr>
-<td>当前CD ROM/DVD ROM</td>
-<td>/dev/cdrom</td>
-</tr>
-<tr>
-<td>当前鼠标</td>
-<td>/dev/mouse</td>
-</tr>
-<tr>
-<td>磁带机</td>
-<td>IDE:/dev/ht0,SCSI:/dev/st0</td>
-</tr>
-</tbody>
-</table>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/02/25/Linux-设备文件名/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/Linux-设备文件名/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/02/25/zookeeper/" title="zookeeper" itemprop="url">zookeeper</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2016-02-25T15:03:14.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h1><h2 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h2><pre><code>wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
-tar xvf zookeeper-3.4.8.tar.gz
-cd zookeeper-3.4.8
-cd conf
-cp zoo_sample.cfg zoo.cfg
-
-// zoo.cfg配置
-tickTime=2000
-initLimit=10
-syncLimit=5
-dataDir=/tmp/zookeeper
-clientPort=2181
-autopurge.purgeInterval=1
-server.1=localhost:2888:3888
-</code></pre><h2 id="zoo-cfg_u914D_u7F6E_u53C2_u6570"><a href="#zoo-cfg_u914D_u7F6E_u53C2_u6570" class="headerlink" title="zoo.cfg配置参数"></a>zoo.cfg配置参数</h2><ul>
-<li>tickTime<blockquote>
-<p>zookeeper服务器之间或客户端与服务器之间维持心跳的时间间隔，每隔tickTime时间就会发一个心跳包</p>
-</blockquote>
-</li>
-<li>initLimit<blockquote>
-<p>配置zookeeper接受客户端初始化连接最长多少个心跳间隔时间,initLimit * tickTime = 20s,超过20s zookeeper服务器还没收到客户端返回信息，表示客户端连接失败</p>
-</blockquote>
-</li>
-<li>syncLimit<blockquote>
-<p>配置项标识Leader与Follower之间发送消息,请求和应答时长,最长不能超过多少个tickTime的时间长度,总的时间长度就是5*2000=10秒；</p>
-</blockquote>
-</li>
-<li>dataDir<blockquote>
-<p>Zookeeper保存数据的目录</p>
-</blockquote>
-</li>
-<li>clientPort<blockquote>
-<p>客户端连接zookeeper服务器的端口</p>
-</blockquote>
-</li>
-<li><p>server</p>
-<pre><code>server.1=192.168.1.212:2887:3887
-server.2=192.168.1.213:2888:3888
-server.3=192.168.1.214:2889:3889
-</code></pre><blockquote>
-<p>server.A=B：C：D：<br>A是一个数字,表示这个是第几号服务器,B是这个服务器的ip地址<br>C第一个端口用来集群成员的信息交换,表示的是这个服务器与集群中的Leader服务器交换信息的端口<br>D是在leader挂掉时专门用来进行选举leader所用</p>
-</blockquote>
-</li>
-<li>集群模式下需要在<code>dataDir</code>目录下创建<code>myid</code>文件，文件内容为<code>A</code>的值</li>
-</ul>
-<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><pre><code>bin/zkServer.sh start
-</code></pre><p>##查看状态</p>
-<pre><code>bin/zkServer.sh status
--- 192.168.1.212状态 --
-[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
-ZooKeeper JMX enabled by default
-Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
-Mode: follower
-
---192.168.1.213状态 --
-[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
-ZooKeeper JMX enabled by default
-Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
-Mode: leader
-
--- 192.168.1.214状态 --
-[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
-ZooKeeper JMX enabled by default
-Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
-Mode: follower
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Apache/">Apache</a>►<a class="article-category-link" href="/categories/Apache/Zookeeper/">Zookeeper</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Apache/">Apache</a><a href="/tags/Zookeeper/">Zookeeper</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/02/25/zookeeper/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/zookeeper/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/02/25/kafka/" title="kafka" itemprop="url">kafka</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2016-02-25T15:01:53.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h1><blockquote>
-<p>kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。<br>通过zookeeper实现集群<br>kafka集群由多个kafka实例组成，每个实例称为broker</p>
-</blockquote>
-<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><pre><code>wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-tar xzf kafka_2.11-0.9.0.0.tgz
-export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
-cd kafka_2.11-0.9.0.0
-</code></pre><h2 id="u542F_u52A8zookeeper"><a href="#u542F_u52A8zookeeper" class="headerlink" title="启动zookeeper"></a>启动zookeeper</h2><pre><code>bin/zookeeper-server-start.sh config/zookeeper.properties
-</code></pre><h2 id="u542F_u52A8kafka"><a href="#u542F_u52A8kafka" class="headerlink" title="启动kafka"></a>启动kafka</h2><pre><code>bin/kafka-server-start.sh config/server.properties
-</code></pre><h2 id="u521B_u5EFA_u4E00_u4E2Atopic"><a href="#u521B_u5EFA_u4E00_u4E2Atopic" class="headerlink" title="创建一个topic"></a>创建一个topic</h2><ul>
-<li><p>创建一个单分区、单副本的<code>test</code>话题</p>
-<pre><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
-</code></pre></li>
-<li><p>获取<code>topic</code>列表</p>
-<pre><code>bin/kafka-topics.sh --list --zookeeper localhost:2181
-</code></pre></li>
-<li>当发布到一个不存在的<code>topics</code>时，可以配置自动创建而不是手动创建<h2 id="u53D1_u9001_u6D88_u606F"><a href="#u53D1_u9001_u6D88_u606F" class="headerlink" title="发送消息"></a>发送消息</h2></li>
-<li><p>运行生产者客户端，然后发送一些消息</p>
-<pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
-</code></pre><h2 id="u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005"><a href="#u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005" class="headerlink" title="启动一个消费者"></a>启动一个消费者</h2></li>
-<li><p>运行消费者客户端，接收消息</p>
-<pre><code>bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
-</code></pre><h2 id="u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4"><a href="#u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4" class="headerlink" title="设置多个brokers集群"></a>设置多个brokers集群</h2></li>
-<li><p>为每个brokers创建一个配置文件</p>
-<pre><code>cp config/server.properties config/server-1.properties
-cp config/server.properties config/server-2.properties
-</code></pre></li>
-<li><p>配置文件内容</p>
-<ul>
-<li><p><code>config/server-1.properties</code></p>
-<pre><code>broker.id=1
-port=9093
-log.dir=/tmp/kafka-logs-1
-</code></pre></li>
-<li><p><code>config/server-2.properties</code></p>
-<pre><code>broker.id=2
-port=9094
-log.dir=/tmp/kafka-logs-2
-</code></pre><blockquote>
-<p><code>broker.id</code>是集群节点唯一名称</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>启动两个新节点</p>
-<pre><code>bin/kafka-server-start.sh config/server-1.properties &amp;
-bin/kafka-server-start.sh config/server-2.properties &amp;
-</code></pre></li>
-<li><p>创建有3个副本的新<code>topics</code></p>
-<pre><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-topic
-</code></pre></li>
-<li><p>在集群环境，查看<code>broker</code>都做了什么</p>
-<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
-
-Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
-    Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0,1
-</code></pre><blockquote>
-<p><code>leader</code>负责节点所有读取和写入指定分区<br><code>replicas</code>复制此分区节点列表日志<br><code>isr</code>集中同步副本</p>
-</blockquote>
-</li>
-<li><p>查看单复制集下的<code>topics</code></p>
-<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
-
-Topic:test    PartitionCount:1 ReplicationFactor:1 Configs:
-    Topic: test    Partition: 0 Leader: 0 Replicas: 0 Isr: 0
-</code></pre></li>
-<li><p>给集群中的<code>topics</code>发送一些消息</p>
-<pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-topic
-</code></pre></li>
-<li><p>接收消息</p>
-<pre><code>bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic my-topic
-</code></pre></li>
-<li><p>测试容错性，杀掉<code>server-1.properties</code></p>
-<pre><code>ps aux|grep server-1.properties
-kill -9 PID
-</code></pre></li>
-<li><p>查看</p>
-<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
-
-Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
-    Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0
-</code></pre></li>
-</ul>
-<h2 id="u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E"><a href="#u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E" class="headerlink" title="使用kafka连接导入/导出数据"></a>使用kafka连接导入/导出数据</h2><ul>
-<li><p>使用<code>kafka</code>的<code>connect</code>工具导入/导出数据</p>
-<ul>
-<li><p>首先需要建立一些数据来测试</p>
-<pre><code>echo -e &quot;foo\nbar&quot; &gt; test.txt
-
-bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
-</code></pre></li>
-<li><p>使用之前启动默认的本地集群配置并创建两个连接，第一个是源连接器，它从输入文本读取消息，并各自产生的一个输出文件中的一行。</p>
-<ul>
-<li>连接器开始读取<code>test.txt</code>产生一个<code>topics</code>为<code>connect-test</code></li>
-<li>接收端连接器应该开始从<code>topic</code>读取消息<code>connect-test</code>,并写入到<code>test.sink.txt</code></li>
-<li><p>查看<code>topics</code>列表</p>
-<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-topics.sh --list --zookeeper localhost:2181
-__consumer_offsets
-connect-test
-my-topic
-test
-test2
-</code></pre></li>
-<li><p>启动一个消费者控制台查看<code>topic</code>为<code>connect-test</code>的数据</p>
-<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
-{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;foo&quot;}
-{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;bar&quot;}
-</code></pre></li>
-<li><p>重新打开一个终端，给<code>test.txt</code>中追加数据，再看消费者控制台的数据</p>
-<pre><code>echo &quot;Hello world&quot; &gt;&gt; test.txt
-</code></pre></li>
-<li><p>消费者控制台数据为</p>
-<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
-{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;foo&quot;}
-{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;bar&quot;}
-{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;Hello world&quot;}
-</code></pre></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><ul>
-<li><p>生产者API</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
-    &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;
-    &lt;version&gt;0.9.0.0&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><p>  参考: <a href="http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html" target="_blank" rel="external">生产者doc</a></p>
-</li>
-<li><p>消费者API</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
-    &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;
-    &lt;version&gt;0.9.0.0&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><p>  参考: <a href="http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html" target="_blank" rel="external">消费者doc</a></p>
-</li>
-</ul>
-<h2 id="error"><a href="#error" class="headerlink" title="error"></a>error</h2><ul>
-<li><code>org.apache.kafka.common.errors.TimeoutException: Batch Expired</code>修改<code>config/server.properties</code>文件的<code>advertised.host.name=IP地址</code></li>
-</ul>
-<h2 id="server-properties_u914D_u7F6E_u9879"><a href="#server-properties_u914D_u7F6E_u9879" class="headerlink" title="server.properties配置项"></a>server.properties配置项</h2><pre><code>broker.id=0
-listeners=PLAINTEXT://:9092
-advertised.host.name=192.168.1.211
-num.network.threads=3
-
-num.io.threads=8
-socket.send.buffer.bytes=102400
-socket.receive.buffer.bytes=102400
-socket.request.max.bytes=104857600
-log.dirs=/tmp/kafka-logs
-num.partitions=1
-num.recovery.threads.per.data.dir=1
-log.retention.hours=168
-log.segment.bytes=1073741824
-log.retention.check.interval.ms=300000
-log.cleaner.enable=false
-zookeeper.connect=localhost:2181
-zookeeper.connection.timeout.ms=6000
-auto.create.topics.enable=true
-default.replication.factor=3
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Apache/">Apache</a>►<a class="article-category-link" href="/categories/Apache/Kafka/">Kafka</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Apache/">Apache</a><a href="/tags/Kafka/">Kafka</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2016/02/25/kafka/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/kafka/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-redirect/" title="Shell-redirect" itemprop="url">Shell-redirect</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:20:35.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-# 输出重定向
-#  将输出到终端的结果重定向到文件中
-
-# 加上双引号 可以对输出结果换行
-# &gt; 会将已存在的结果覆盖
-# 如果不想覆盖 则使用 &gt;&gt; 如果文件存在，结果将会追加
-echo &quot;$(ls -la)&quot; &gt; file
-
-echo &quot;$(who)&quot; &gt;&gt; file1
-
-
-# 输入结果重定向
-cat &lt; file
-wc -l &lt; file
-
-# 文档嵌入
-wc -l &lt;&lt;EOF
-    hahahhdfdslfjdslfjsdlfjsdlfsd
-    werjewlrjewlrjewlrjewlrjwer
-    werjwelrjwlejrewljrew
-EOF
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-redirect/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-redirect/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-for-while/" title="Shell-for-while" itemprop="url">Shell-for-while</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:19:59.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-# for 
-
-arr=(111 2222 3333 4444 5555)
-num=5
-count=5
-
-# for--in--
-for m in ${arr[@]}; do
-    echo $m
-done
-
-echo &quot;------------------------------------------&quot;
-
-for n in $( ls /usr/local ); do
-    echo $n
-done
-
-echo &quot;------------------------------------------&quot;
-
-# while
-while [[ $num -gt 0 ]]; do
-    echo &quot;num: ${num}&quot;
-    num=$(($num - 1))
-done
-
-num=5
-
-echo &quot;------------------------------------------&quot;
-# while --- continue
-while [[ $num -gt 0 ]]; do
-    num=$(($num - 1))
-    if [[ $num -eq 3 ]]; then
-        continue
-    fi
-    echo &quot;num: ${num}&quot;
-done
-
-echo &quot;------------------------------------------&quot;
-# while --- break
-while [[ $count -gt 0 ]]; do
-    count=$(($count - 1))
-    if [[ $count -eq 3 ]]; then
-        break;
-    fi
-    echo &quot;count: ${count}&quot;
-done
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-for-while/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-for-while/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-ifelse/" title="Shell-ifelse" itemprop="url">Shell-ifelse</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:19:16.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-#if--else
-
-NAME=&quot;john&quot;
-
-# 注意if条件两边的空格
-if [ ${NAME} == &quot;john&quot; ]; then
-    echo &quot;hahhahahha&quot;
-else
-    echo &quot;huhuhuhuhu&quot;
-fi
-
-if [ ${NAME} == &quot;john&quot; ]; then
-    echo &quot;hahhahahha&quot;
-elif [ ${NAME} == &quot;johnx&quot; ]; then
-    echo &quot;huhuhuhuhu&quot;
-else
-    echo &quot;xxxxxxxxxx&quot;
-fi
-
-# 数值类型比较
-# $a -lt $b    $a &lt; $b
-# $a -gt $b    $a &gt; $b
-# $a -le $b    $a &lt;= $b
-# $a -ge $b    $a &gt;= $b
-# $a -eq $b    $a is equal to $b
-# $a -ne $b    $a is not equal to $b
-
-# 字符串类型比较
-# &quot;$a&quot; = &quot;$b&quot;     $a 和 $b 相等
-# &quot;$a&quot; == &quot;$b&quot;    $a 和 $b 相等
-# &quot;$a&quot; != &quot;$b&quot;    $a 和 $b 不相等
-# -z &quot;$a&quot;         $a 是空的
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-ifelse/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-ifelse/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-数组/" title="Shell-数组" itemprop="url">Shell-数组</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:18:38.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-# 数组 不支持多维数组
-# 通过index访问数组元素 arr[1]
-
-arr=(
-    xxxx
-    yyyy
-    wwww
-    &quot;hello world&quot;
-)
-
-# 使用下标定义
-arr1[0]=aaaa
-arr1[1]=bbb
-arr1[2]=cccc
-arr1[5]=dddd
-
-# 获取arr1所有值
-echo ${arr1[@]}
-
-# 获取arr1数组中值
-echo ${arr1[0]}
-echo ${arr1[1]}
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-数组/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-数组/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-函数/" title="Shell-函数" itemprop="url">Shell-函数</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:18:03.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-# function --
-# 函数返回值只能是整数，用来表示函数执行是否成功，0表示执行成功，其他表示失败
-# 如果返回非整数，则error
-# 函数名前面的function可加可不加
-# 函数可以使用return，return的返回值可以通过$?来接收
-# 
-# 也可以对函数进行删除，使用unset，后面加上.f
-# 如要删除function1函数：unset .f function1
-# 
-
-# 无参函数
-function function1 {
-    echo function1.
-}
-
-# 带参函数
-function function2 {
-    echo $1
-}
-
-# 多个参数
-function function3 {
-    echo $1 --- $2
-}
-
-function4() {
-    echo &quot;function4&quot;
-
-    return $((10 + 20))
-}
-
-# 函数嵌套调用
-function5() {
-    echo &quot;function5&quot;
-
-    function1
-}
-
-# 函数调用
-function1
-
-# 外部参数传入
-function2 $1
-function3 &quot;hello &quot; &quot;world!&quot;
-function4
-
-# 用来接收function4的返回值
-echo $?
-
-function5
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-函数/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-函数/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-转义替换/" title="Shell-转义替换" itemprop="url">Shell-转义替换</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:17:29.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-# 转义替换
-# -e 对转义字符进行替换
-
-echo -e &quot;hello world \n hahahah&quot;
-
-# 将命令执行的结果保存到变量中
-DATE=`date`
-echo $DATE
-
-# ${var:-message} 如果var为空或已被删除，则返回message，不会改变var的值
-# ${var:=message} 如果var为空或已被删除，则返回message，并将var的值设置为message
-# ${var:?message} 如果var为空或已被删除，则把message做为错误消息输出，脚本停止运行
-# ${var:+message} 如果var已被定义，则返回message，不会改变var的值
-
-echo ${var:-&quot;a---hahahahha&quot;}
-echo ${var:=&quot;b---hahhahaha&quot;}
-echo ${var}
-
-unset var
-echo ${var:?&quot;c---hahahahha&quot;} # 程序运行此处将停止
-
-echo ${var:+&quot;d---hahahhaha&quot;}
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-转义替换/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-转义替换/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Shell-case/" title="Shell-case" itemprop="url">Shell-case</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:16:58.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>#!/bin/bash
-#case
-
-NAME=&quot;john&quot;
-
-case ${NAME} in
-    &quot;john&quot; )
-        echo &quot;hahahha --- john&quot;
-        ;;
-    &quot;johnx&quot; )
-        echo &quot;huhuhuhu ---- johnx&quot;
-        ;;
-esac
-
-echo &quot;请输入1-3&quot;
-read INPUT
-case $INPUT in
-    1 )
-        echo &quot;你输入了1&quot;;;
-    2 )
-        echo &quot;你输入了2&quot;;;
-    3 )
-        echo &quot;你输入了3&quot;;;
-    * ) # 当以上条件不匹配，则会进入到这里
-        echo &quot;你的输出超出了范围&quot;;;
-esac
-
-option=&quot;${1}&quot;
-case $option in
-    -f ) FILE=&quot;${2}&quot;
-        echo &quot;file name is $FILE&quot;;;
-    -d ) DIR=&quot;${2}&quot;
-        echo &quot;dir name is $DIR&quot;;;
-    * )
-        echo &quot;`basename ${0}`: usage: [-f file] | [-d directory]&quot;
-        exit 1;; # 脚本运行的返回值 exit 0 表示成功， exit 1 表示失败
-esac
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shell/">Shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Shell-case/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-case/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -2416,11 +971,11 @@ esac
 		<ul>
 		
 		  
-			<li><a href="/categories/Apache/" title="Apache">Apache<sup>2</sup></a></li>
+		
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/" title="Centos7">Centos7<sup>9</sup></a></li>
+		
 		  
 		
 		  
@@ -2434,23 +989,25 @@ esac
 		  
 		
 		  
-			<li><a href="/categories/Linux/Keepalived/Haproxy/" title="Haproxy">Haproxy<sup>1</sup></a></li>
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/JDK/" title="JDK">JDK<sup>1</sup></a></li>
+		
 		  
 		
 		  
-			<li><a href="/categories/Apache/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
+			<li><a href="/categories/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
+		
+		  
+			<li><a href="/categories/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>11</sup></a></li>
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>10</sup></a></li>
 		  
 		
 		  
@@ -2466,19 +1023,13 @@ esac
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/MySQL/" title="MySQL">MySQL<sup>3</sup></a></li>
-		  
-		
-		  
 			<li><a href="/categories/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/MySQL/PHP/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
-		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+		
 		  
 		
 		  
@@ -2486,7 +1037,11 @@ esac
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/MySQL/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+			<li><a href="/categories/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+		  
+		
+		  
+		
 		  
 		
 		  
@@ -2498,27 +1053,29 @@ esac
 		  
 		
 		  
+		
+		  
+		
+		  
 			<li><a href="/categories/Spring-MVC/" title="Spring-MVC">Spring-MVC<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/XMPP/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
+		
+		  
+			<li><a href="/categories/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/Tsung/" title="Tsung">Tsung<sup>1</sup></a></li>
+		
 		  
 		
 		  
-			<li><a href="/categories/XMPP/" title="XMPP">XMPP<sup>4</sup></a></li>
-		  
 		
 		  
-			<li><a href="/categories/Apache/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
+			<li><a href="/categories/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
 		  
 		
-		  
-			<li><a href="/categories/Git/ssh/" title="ssh">ssh<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -2529,7 +1086,7 @@ esac
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
     </div>
   </div>
 

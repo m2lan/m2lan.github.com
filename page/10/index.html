@@ -1,0 +1,930 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
+  <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
+  
+    <title>知识记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="M2">
+    
+
+    
+    <meta name="description" content="Tigase安装、部署、插件编写及其它">
+<meta property="og:type" content="website">
+<meta property="og:title" content="知识记录">
+<meta property="og:url" content="http://im.yonglang.co/page/10/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="Tigase安装、部署、插件编写及其它">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="知识记录">
+<meta name="twitter:description" content="Tigase安装、部署、插件编写及其它">
+<meta name="twitter:creator" content="@763960267">
+
+    
+    <link rel="alternative" href="/atom.xml" title="知识记录" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="知识记录" title="知识记录"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="知识记录">知识记录</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章列表</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					<!--
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" st-default-search-input />
+						<input type="hidden" name="q" value="site:im.yonglang.co" class="st-default-search-input">
+					</form>
+					-->
+					<input type="text" class="st-default-search-input">
+					</li>
+				</ul>
+			</nav>			
+</div>
+<a href="https://github.com/m2lan"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/Docker-详细操作/" title="Docker-详细操作" itemprop="url">Docker-详细操作</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:48:47.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="u83B7_u53D6_u955C_u50CF"><a href="#u83B7_u53D6_u955C_u50CF" class="headerlink" title="获取镜像"></a>获取镜像</h2><pre><code>docker pull ubuntu:14.04
+相当于docker pull registry.hub.docker.com/ubuntu:14.04
+可以从国内镜像网站下载docker pull dl.dockerpool.com:5000/ubuntu:14.04
+</code></pre><h2 id="u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF"><a href="#u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF" class="headerlink" title="列出本地已有的镜像"></a>列出本地已有的镜像</h2><pre><code>docker images
+</code></pre><h2 id="u521B_u5EFA_u955C_u50CF_uFF0C_u5229_u7528Dockerfile_u6765_u521B_u5EFA_u955C_u50CF_2C_u65B0_u5EFA_u4E00_u4E2A_u76EE_u5F55_u548C_u4E00_u4E2ADockerfile"><a href="#u521B_u5EFA_u955C_u50CF_uFF0C_u5229_u7528Dockerfile_u6765_u521B_u5EFA_u955C_u50CF_2C_u65B0_u5EFA_u4E00_u4E2A_u76EE_u5F55_u548C_u4E00_u4E2ADockerfile" class="headerlink" title="创建镜像，利用Dockerfile来创建镜像,新建一个目录和一个Dockerfile"></a>创建镜像，利用Dockerfile来创建镜像,新建一个目录和一个Dockerfile</h2><pre><code>$ mkdir sinatra
+$ cd sinatra
+$ touch Dockerfile
+</code></pre><ul>
+<li><p>Dockerfile 基本的语法是</p>
+<ul>
+<li><p>编写完成Dockerfile后可以使用docker build来生成镜像</p>
+<pre><code>docker build -t=&quot;ouruser/sinatra:v2&quot; .
+</code></pre></li>
+<li>使用<code>#</code>来注释</li>
+<li><code>FROM</code>指令告诉<code>Docker</code>使用哪个镜像作为基础</li>
+<li>接着是维护者的信息</li>
+<li><code>RUN</code>开头的指令会在创建中运行，比如安装一个软件包，在这里使用<code>apt-get</code>来安装了一些软件</li>
+<li>其中<code>-t</code>标记来添加<code>tag</code>，指定新的镜像的用户信息。 “.” 是<code>Dockerfile</code>所在的路径（当前目录），也可以替换为一个具体的<code>Dockerfile</code>的路径。</li>
+<li><code>docker run -t -i ouruser/sinatra:v2 /bin/bash</code>运行</li>
+<li><p><code>Dockerfile</code>文件内容</p>
+<pre><code># This is a comment
+  FROM ubuntu:14.04
+  MAINTAINER Docker Newbee &lt;newbee@docker.com&gt;
+  RUN apt-get -qq update
+  RUN apt-get -qqy install ruby ruby-dev
+  RUN gem install sinatra
+</code></pre></li>
+</ul>
+</li>
+<li><p>如果要导出镜像到本地文件，可以使用<code>docker save</code>命令。</p>
+<pre><code>docker save -o ubuntu_14.04.tar ubuntu:14.04
+</code></pre></li>
+<li><p>载入镜像,可以使用<code>docker load</code>从导出的本地文件中再导入到本地镜像库，例如</p>
+<pre><code>docker load --input ubuntu_14.04.tar
+或
+docker load &lt; ubuntu_14.04.tar
+</code></pre></li>
+<li><p>输出<code>hello world</code></p>
+<pre><code>docker run ubuntu:14.04 /bin/echo &apos;hello world&apos;
+</code></pre></li>
+<li><p>启动一个<code>bash</code>终端，允许用户进行交互</p>
+<pre><code>docker run -t -i ubuntu:14.04 /bin/bash
+</code></pre></li>
+<li><p>让<code>Docker</code>容器在后台以守护状态形式运行，可以通过通过<code>-d</code>参数来实现</p>
+<pre><code>docker run -d ubuntu:14.04 /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;
+</code></pre><ul>
+<li><code>docker ps</code>返回容器信息，包括<code>NAMES</code></li>
+<li><p>获取容器的输出信息，可以通过<code>docker logs</code>命令</p>
+<pre><code>docker logs NAMES
+</code></pre></li>
+</ul>
+</li>
+<li>获取终止状态的容器<code>docker ps -a</code>,终止状态的容器可以通过<code>docker start</code>命令来重新启动，<code>docker restart</code>命令会将一个运行态的容器终止，然后再重新启动。<code>docker restart NAMES</code>。</li>
+<li><p>在使用<code>-d</code>参数时，容器启动后会进入后台。 某些时候需要进入容器进行操作，有很多种方法，包括使用<code>docker attach</code>命令或<code>nsenter</code>工具等。</p>
+<ul>
+<li>如果出现<code>2014/11/10 17:46:08 You cannot attach to a stopped container, start it first</code>,执行<code>docker start berserk_fermat</code></li>
+<li><p>attach</p>
+<pre><code>docker run -idt ubuntu:14.04
+[root@MyCloudServer ~]# docker run -idt ubuntu:12.04
+e13112150bd52dbb12d7fbbe0e24e786ba86e97a2e337db654d0ec144d6b88f4
+[root@MyCloudServer ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                     PORTS               NAMES
+e13112150bd5        ubuntu:12.04        &quot;/bin/bash&quot;            15 seconds ago      Up 14 seconds                                  berserk_fermat
+005c6adf29a4        ubuntu:12.04        &quot;/bin/echo &apos;hello wo   3 minutes ago       Exited (0) 3 minutes ago                       lonely_leakey
+f4d208e3e8e6        ubuntu:12.04        &quot;/bin/bash&quot;            37 minutes ago      Up 4 minutes                                   jovial_rosalind
+[root@MyCloudServer ~]# docker attach berserk_fermat
+root@e13112150bd5:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  selinux  srv  sys  tmp  usr  var
+root@e13112150bd5:/# pwd
+/
+root@e13112150bd5:/# exit
+exit
+</code></pre><h2 id="u5BFC_u51FA_u548C_u5BFC_u5165_u5BB9_u5668"><a href="#u5BFC_u51FA_u548C_u5BFC_u5165_u5BB9_u5668" class="headerlink" title="导出和导入容器"></a>导出和导入容器</h2><h3 id="u5BFC_u51FA_u5BB9_u5668"><a href="#u5BFC_u51FA_u5BB9_u5668" class="headerlink" title="导出容器"></a>导出容器</h3></li>
+</ul>
+</li>
+<li><p>如果要导出本地某个容器，可以使用<code>docker export</code>命令.</p>
+<pre><code>[root@MyCloudServer ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                      PORTS               NAMES
+e13112150bd5        ubuntu:12.04        &quot;/bin/bash&quot;            13 minutes ago      Exited (0) 11 minutes ago                       berserk_fermat
+005c6adf29a4        ubuntu:12.04        &quot;/bin/echo &apos;hello wo   17 minutes ago      Exited (0) 16 minutes ago                       lonely_leakey
+f4d208e3e8e6        ubuntu:12.04        &quot;/bin/bash&quot;            50 minutes ago      Up 17 minutes                                   jovial_rosalind
+[root@MyCloudServer ~]# docker export e13112150bd5&gt;ubuntu.tar
+</code></pre><h3 id="u5BFC_u5165_u5BB9_u5668_u5FEB_u7167"><a href="#u5BFC_u5165_u5BB9_u5668_u5FEB_u7167" class="headerlink" title="导入容器快照"></a>导入容器快照</h3></li>
+<li><p>可以使用<code>docker import</code>从容器快照文件中再导入为镜像，例如</p>
+<pre><code>$ cat ubuntu.tar | sudo docker import - test/buntu:v1.0
+$ sudo docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED              VIRTUAL SIZE
+test/ubuntu         v1.0                9d37a6082e97        About a minute ago   171.3 MB
+</code></pre><h2 id="u5220_u9664_u955C_u50CF"><a href="#u5220_u9664_u955C_u50CF" class="headerlink" title="删除镜像"></a>删除镜像</h2></li>
+<li><code>docker ps -a</code>列出所有依赖<code>Image</code>的<code>container</code></li>
+<li><code>docker rm (CONTAINER ID前4位)</code>执行删除容器操作</li>
+<li><code>docker images</code>列出所有镜像</li>
+<li><code>docker rmi (image id前4位)</code></li>
+<li>如果要删除一个运行中的容器，可以添加<code>-f</code>参数。<code>Docker</code>会发送<code>SIGKILL</code>信号给容器。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Docker/">Docker</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Docker/">Docker</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/Docker-详细操作/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Docker-详细操作/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/Docker-Hub使用/" title="Docker-Hub使用" itemprop="url">Docker-Hub使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:45:26.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="u5F00_u59CB_u4F7F_u7528Docker_Hub"><a href="#u5F00_u59CB_u4F7F_u7528Docker_Hub" class="headerlink" title="开始使用Docker Hub"></a>开始使用Docker Hub</h2><h3 id="Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub"><a href="#Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub" class="headerlink" title="Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub"></a>Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub</h3><ul>
+<li>展示如何创建一个账户。</li>
+<li>Docker Hub和docker及其组件一起工作。Docker Hub会帮助你和你的同事协作，并获取功能最全的docker。要做到这一点，它提供的服务有：<ul>
+<li>Docker镜像主机</li>
+<li>用户认证</li>
+<li>自动镜像构建和工作流程工具，如构建触发器和webhook</li>
+<li>整合了GitHub和BitBucket</li>
+</ul>
+</li>
+<li>为了使用Docker Hub,首先需要注册创建一个账户。别担心，创建一个账户很简单并且是免费的。</li>
+</ul>
+<h2 id="u521B_u5EFADocker_Hub_u8D26_u6237"><a href="#u521B_u5EFADocker_Hub_u8D26_u6237" class="headerlink" title="创建Docker Hub账户"></a>创建Docker Hub账户</h2><ul>
+<li><p>这里有两种访问可以创建和注册一个Docker Hub账户：</p>
+<ul>
+<li>通过网站创建<br>  *填写注册表单,选择您的用户名和密码并指定您的电子邮箱。你也可以报名参加docker邮件列表，会有很多关于docker的信息。<ul>
+<li>一旦你填写表格，查看你的电子邮件，欢迎信息，确认来激活您的账户。</li>
+<li>在完成确认过程之后，您可以使用web控制台登陆</li>
+</ul>
+</li>
+<li><p>通过命令行创建</p>
+<ul>
+<li><p>你可以创建一个Docker Hub账号通过命令行<code>docker login</code>命令</p>
+<pre><code>$ sudo docker login
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>你的Docker账户现在已经激活，你可以使用了。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Docker/">Docker</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Docker/">Docker</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/Docker-Hub使用/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Docker-Hub使用/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/Docker-install注意事项/" title="Docker-install注意事项" itemprop="url">Docker-install注意事项</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:41:55.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li><p>当安装一个不存在的package时<code>yum -y install docker-io</code>,使用</p>
+<pre><code>yum install epel-release
+</code></pre></li>
+<li><p>当出现以下错误时</p>
+<pre><code>Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+Error: Cannot retrieve metalink for repository: epel. Please verify its path and try again
+</code></pre></li>
+<li>运行<code>yum update --disablerepo=epel\*</code></li>
+<li>这时再运行<code>yum -y install docker-io</code></li>
+<li>现在，它已经安装好了，让我们来启动 Docker 守护进程<code>service docker install</code></li>
+<li>如果我们需要开机自启动，如下：<code>chkconfig docker on</code></li>
+<li>现在我们确认 Docker 是否正常工作，首先我们需要获取最新的 CentOS 镜像<code>docker pull centos-latest</code></li>
+<li>下一步，我们要确保通过如下命令可以看到镜像：<code>docker images centos</code></li>
+<li><p>它将会输出如下的信息：</p>
+<pre><code>[root@MyCloudServer ~]# docker images centos
+  REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+  centos              latest              ae0c2d0bdc10        6 days ago          224 M
+</code></pre></li>
+<li>运行简单的<code>bash shell</code>来测试这个镜像<code>docker run -i -t centos /bin/bash</code></li>
+<li>如果正常，你会获得一个简单的<code>bash</code>提示，输入<code>exit</code>退出。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Docker/">Docker</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Docker/">Docker</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/Docker-install注意事项/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Docker-install注意事项/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/Mongodb-部署复制集/" title="Mongodb-部署复制集" itemprop="url">Mongodb-部署复制集</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:37:09.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><a href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6" class="headerlink" title="部署3个节点组成的复制集"></a>部署3个节点组成的复制集</h2><ul>
+<li>3台IP为<ul>
+<li>192.168.0.139 主机名：mongoname1</li>
+<li>192.168.0.140 主机名：mongoname2</li>
+<li>192.168.0.141 主机名：mongoname3</li>
+</ul>
+</li>
+<li>修改<code>/etc/mongodb.conf</code>，添加<code>replSet = rs0</code>(3个节点保持一致)</li>
+<li>启动<code>mongodb</code></li>
+<li><p>在其中一个节点上执行<code>rs.initiate()</code>,用来初始化复制集</p>
+<pre><code>rs.initiate(&quot;mongoname1&quot;)
+</code></pre></li>
+<li><p>查看当前配置信息</p>
+<pre><code>rs.conf()
+</code></pre></li>
+<li><p>将其他节点加入复制集</p>
+<pre><code>rs.add(&quot;mongoname2&quot;);
+rs.add(&quot;mongoname3&quot;);
+</code></pre></li>
+<li><p>查看配置</p>
+<pre><code>rs.conf()
+</code></pre></li>
+<li><p>查看复制集状态</p>
+<pre><code>rs.status()
+</code></pre></li>
+<li><p>如果在多个节点上执行了rs.initate(),可以做以下操作后重启mongodb</p>
+<pre><code>use local
+db.dropDatabase()
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/Mongodb-部署复制集/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Mongodb-部署复制集/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/MongoDB-3-0-3用户认证/" title="MongoDB-3.0.3用户认证" itemprop="url">MongoDB-3.0.3用户认证</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:32:12.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="u5728Mongodb3-0-3_u4E2D_u521B_u5EFAUser_u8FDB_u884C_u6743_u9650_u9A8C_u8BC1"><a href="#u5728Mongodb3-0-3_u4E2D_u521B_u5EFAUser_u8FDB_u884C_u6743_u9650_u9A8C_u8BC1" class="headerlink" title="在Mongodb3.0.3中创建User进行权限验证"></a>在Mongodb3.0.3中创建User进行权限验证</h2><ul>
+<li><p>启动mongodb，切换db为admin</p>
+<pre><code>use admin
+db.system.version.find()
+db.system.version.update({&quot;_id&quot;: &quot;authSchema&quot;}, {&quot;$set&quot;: {&quot;currentVersion&quot;: 3}})
+</code></pre></li>
+<li><p>为数据库创建用户，这里使用的mydb数据库</p>
+<pre><code>use mydb
+db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;123456&quot;, roles: [{role: &quot;dbOwner&quot;, db: &quot;mydb&quot;}]})
+</code></pre></li>
+<li><p>在mongodb.conf中添加authorization: enabled</p>
+<pre><code>security:
+  authorization: enabled
+</code></pre></li>
+<li>完毕！重启mongodb验证。</li>
+<li>参考:<ol>
+<li><a href="http://docs.mongodb.org/manual/reference/configuration-options/" target="_blank" rel="external">配置文件操作</a></li>
+<li><a href="http://docs.mongodb.org/manual/reference/built-in-roles/" target="_blank" rel="external">权限</a></li>
+</ol>
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/MongoDB-3-0-3用户认证/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/MongoDB-3-0-3用户认证/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <a class="extend prev" rel="prev" href="/page/9/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Docker/" title="Docker">Docker<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>4</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mac/" title="Mac">Mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mongodb/" title="Mongodb">Mongodb<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Objective-c/" title="Objective-c">Objective-c<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Shell/" title="Shell">Shell<sup>11</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Spring-MVC/" title="Spring-MVC">Spring-MVC<sup>2</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://golearns.org/" target="_blank" title="go语言搭建的个人博客">golearns</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 记录知识 分享知识 <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/u/1877167031" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/m2lan" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/763960267" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/100006504108865" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:763960267@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="M2">M2</a>
+		
+		
+		</p>
+</div>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','b2cFpoExgUMZu3--zQzE','2.0.0');
+</script></footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"m2langithub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>

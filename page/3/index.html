@@ -34,7 +34,7 @@
     <link rel="apple-touch-icon" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -86,29 +86,537 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/10/Tigase-MUC配置/" title="Tigase-MUC配置" itemprop="url">Tigase-MUC配置</a>
+      <a href="/2016/02/25/centos7-修改网卡、配置网络/" title="centos7-修改网卡、配置网络" itemprop="url">centos7-修改网卡、配置网络</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T16:13:31.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    <time datetime="2016-02-25T15:59:46.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <pre><code>muc#roomconfig_anonymity(匿名房间的级别)
-muc#maxhistoryfetch(历史消息最大记录)
-muc#roomconfig_membersonly(房间仅对成员开放)
-muc#roomconfig_moderatedroom(房间是适度的)
-muc#roomconfig_passwordprotectedroom(需要密码才能进入房间)
-muc#roomconfig_persistentroom(房间是持久的)
-muc#roomconfig_publicroom(列出目录中的房间)
-muc#roomconfig_roomdesc(房间描述)
-muc#roomconfig_roomname(房间名)
-muc#roomconfig_roomsecret(密码)
+        <h1 id="Centos7-_u4FEE_u6539_u7F51_u5361_u3001_u914D_u7F6E_u7F51_u7EDC"><a href="#Centos7-_u4FEE_u6539_u7F51_u5361_u3001_u914D_u7F6E_u7F51_u7EDC" class="headerlink" title="Centos7-修改网卡、配置网络"></a>Centos7-修改网卡、配置网络</h1><h2 id="u6211_u662F_u5728vmware_u4E2D_u5B89_u88C5_u7684"><a href="#u6211_u662F_u5728vmware_u4E2D_u5B89_u88C5_u7684" class="headerlink" title="我是在vmware中安装的"></a>我是在vmware中安装的</h2><ul>
+<li>网络适配器调为桥接模式</li>
+<li><p>修改<code>/etc/sysconfig/network-scripts/ifcfg-xxxx</code>里面的<code>Name</code>和<code>Dev</code>为<code>eth0</code><br><img src="http://7xj3i5.com1.z0.glb.clouddn.com/8C6D5903-85B6-44BD-811C-5F0ADDD9E356.png" alt="x">  </p>
+</li>
+<li><p>修改<code>ifcfg-xxxx</code>重命名为<code>ifcfg-eth0</code><br><img src="http://7xj3i5.com1.z0.glb.clouddn.com/F6764A8C-88B6-4D39-8C37-DE856EBED293.png" alt="y"></p>
+</li>
+<li><p>禁用可预测的命名规则，编辑<code>/etc/default/grub</code>为<br><img src="http://7xj3i5.com1.z0.glb.clouddn.com/4F5BA1BF-4495-4FBE-92BF-EE93DBFED7CE.png" alt="z"></p>
+</li>
+<li><p>执行<code>grub2-mkconfig -o /boot/grub2/grub.cfg</code></p>
+</li>
+<li><p>修改<code>/etc/resolv.conf</code><br><img src="http://7xj3i5.com1.z0.glb.clouddn.com/70E8BAA9-7F78-4167-B3D7-BDD5951B6EEE.png" alt="m"></p>
+</li>
+<li><p>重启network<code>systemctl restart network</code></p>
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Centos7/">Centos7</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/25/centos7-修改网卡、配置网络/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/centos7-修改网卡、配置网络/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/25/keepalived-haproxy高可用负载均衡/" title="keepalived+haproxy高可用负载均衡" itemprop="url">keepalived+haproxy高可用负载均衡</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T15:45:11.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861"><a href="#u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861" class="headerlink" title="基于Keepalived+haproxy实现高可用负载均衡"></a>基于Keepalived+haproxy实现高可用负载均衡</h1><h2 id="Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668"><a href="#Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668" class="headerlink" title="Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器"></a>Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器</h2><pre><code>* VIP：192.168.0.185
+* h1：192.168.0.137
+* h2：192.168.0.138
+* web1：192.168.0.130
+* web2：192.168.0.131
+* web3：192.168.0.132
+</code></pre><h2 id="h1_u5B89_u88C5keepalived"><a href="#h1_u5B89_u88C5keepalived" class="headerlink" title="h1安装keepalived"></a>h1安装keepalived</h2><ul>
+<li><p>安装</p>
+<pre><code>yum -y install keepalived
+</code></pre></li>
+<li><p>配置h1的keepalived</p>
+<pre><code>vim /etc/keepalived/keepalived.conf
+
+! Configuration File for keepalived
+      global_defs {
+          notification_email {
+              xxx@xx.com
+          }
+      notification_email_from keepalived@localhost
+          smtp_server 127.0.0.1
+          smtp_connect_timeout 30
+          router_id LVS_DEVEL
+      }
+
+      vrrp_script chk_haproxy {
+         script &quot;killall -0 haproxy&quot;
+         interval 2
+         weight 2
+      }
+
+      vrrp_instance VI_1 {
+          state MASTER
+          interface eth0
+          virtual_router_id 85
+          priority 100
+          advert_int 1
+          nopreempt
+          authentication {
+             auth_type PASS
+             auth_pass 1111
+          }
+          track_script {
+             chk_haproxy
+          }
+          virtual_ipaddress {
+             192.168.0.185/24 dev eth0
+          }
+       } 
+</code></pre></li>
+<li><p>配置h2的keepalived</p>
+<pre><code>vim /etc/keepalived/keepalived.conf
+
+! Configuration File for keepalived
+      global_defs {
+          notification_email {
+              xxx@xx.com
+          }
+      notification_email_from keepalived@localhost
+          smtp_server 127.0.0.1
+          smtp_connect_timeout 30
+          router_id LVS_DEVEL
+      }
+
+      vrrp_script chk_haproxy {
+         script &quot;killall -0 haproxy&quot;
+         interval 2
+         weight 2
+      }
+
+      vrrp_instance VI_1 {
+          state BACKUP
+          interface eth0
+          virtual_router_id 85
+          priority 90
+          advert_int 1
+          authentication {
+             auth_type PASS
+             auth_pass 1111
+          }
+          track_script {
+             chk_haproxy
+          }
+          virtual_ipaddress {
+             192.168.0.185/24 dev eth0
+          }
+       }
+</code></pre></li>
+</ul>
+<h2 id="u5B89_u88C5haproxy"><a href="#u5B89_u88C5haproxy" class="headerlink" title="安装haproxy"></a>安装haproxy</h2><ul>
+<li><p>安装</p>
+<pre><code>yum -y install haproxy
+</code></pre></li>
+<li><p>配置haproxy，两台机器的配置都是一样的，所以这里只提供一份</p>
+<pre><code>global
+log         127.0.0.1 local2
+
+chroot      /var/lib/haproxy
+pidfile     /var/run/haproxy.pid
+maxconn     4000
+user        haproxy
+group       haproxy
+daemon
+
+# turn on stats unix socket
+stats socket /var/lib/haproxy/stats
+
+#---------------------------------------------------------------------
+# common defaults that all the &apos;listen&apos; and &apos;backend&apos; sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+mode                    http
+log                     global
+option                  httplog
+option                  dontlognull
+option http-server-close
+#option forwardfor       except 127.0.0.0/8
+option                  redispatch
+retries                 3
+timeout http-request    10s
+timeout queue           1m
+timeout connect         10s
+timeout client          1m
+timeout server          1m
+timeout http-keep-alive 10s
+timeout check           10s
+maxconn                 3000
+
+# 用来监听状态，访问地址http://server:8080/admin?stats
+listen statistics
+mode http
+bind *:8080
+stats enable
+stats auth admin:admin
+stats uri /admin?stats
+stats hide-version
+stats admin if TRUE
+stats refresh 5s
+acl allow src 192.168.0.0
+
+# tcp监听
+listen tigase_5222
+mode tcp
+bind *:5222
+balance leastconn
+option tcplog
+option redispatch
+option log-health-checks
+timeout connect 1s
+timeout queue 5s
+timeout server 3600s
+timeout client 3600s
+maxconn 5000
+server webserver1 192.168.0.130:5222 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver2 192.168.0.131:5222 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver3 192.168.0.132:5222 inter 3000 rise 1 fall 1 check maxconn 5000
+
+listen tigase_5280
+mode tcp
+bind *:5280
+balance source
+option tcplog
+option redispatch
+option log-health-checks
+timeout connect 1s
+timeout queue 5s
+timeout server 3600s
+timeout client 3600s
+maxconn 5000
+server webserver1 192.168.0.130:5280 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver2 192.168.0.131:5280 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver3 192.168.0.132:5280 inter 3000 rise 1 fall 1 check maxconn 5000
+
+# http连接
+listen apache_httpd
+mode http
+bind *:80
+balance roundrobin
+option httplog
+server webserver1 192.168.0.130:80 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver2 192.168.0.131:80 inter 3000 rise 1 fall 1 check maxconn 5000
+server webserver3 192.168.0.132:80 inter 3000 rise 1 fall 1 check maxconn 5000
+</code></pre></li>
+</ul>
+<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><ul>
+<li><p>启动haproxy和keepalived，首先先启动h1的haproxy和keepalived，然后启动h2的</p>
+<pre><code>service haproxy start
+service keepalived
+</code></pre></li>
+</ul>
+<h2 id="u67E5_u770B_u72B6_u6001"><a href="#u67E5_u770B_u72B6_u6001" class="headerlink" title="查看状态"></a>查看状态</h2><ul>
+<li><p>查看VIP状态，当h1正常运行的时候</p>
+<pre><code>[root@newkeep1 keepalived]# ip a|grep eth0
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    inet 192.168.0.137/24 brd 192.168.0.255 scope global eth0
+    inet 192.168.0.185/24 scope global secondary eth0
+</code></pre></li>
+<li><p>手动关闭h1的keepalived, 在h2上查看</p>
+<pre><code>[root@newkeep1 keepalived]# ip a|grep eth0
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    inet 192.168.0.138/24 brd 192.168.0.255 scope global eth0
+    inet 192.168.0.185/24 scope global secondary eth0
+</code></pre></li>
+<li>再去查看h1的时候，发现VIP已经飘走了。当重新启动h1的时候，会恢复主机状态。</li>
+<li>注意：如果启动的时候发现两台服务器都监听了VIP。则需要关闭防火墙。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Keepalived/">Keepalived</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Keepalived/">Keepalived</a><a href="/tags/Haproxy/">Haproxy</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/25/keepalived-haproxy高可用负载均衡/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/keepalived-haproxy高可用负载均衡/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/25/Linux-设备文件名/" title="Linux-设备文件名" itemprop="url">Linux-设备文件名</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T15:34:08.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D"><a href="#u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D" class="headerlink" title="各硬件设备在Linux中的文件名"></a>各硬件设备在Linux中的文件名</h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IDE硬盘</td>
+<td>/dev/hd[a-d]</td>
+</tr>
+<tr>
+<td>SCSI/SATA/USB硬盘</td>
+<td>/dev/sd[a-p]</td>
+</tr>
+<tr>
+<td>U盘</td>
+<td>/dev/sd[a-p]</td>
+</tr>
+<tr>
+<td>软驱</td>
+<td>/dev/fd[0-1]</td>
+</tr>
+<tr>
+<td>打印机</td>
+<td>25针:/dev/Ip[0-2],USB:/dev/usb/Ip[0-15]</td>
+</tr>
+<tr>
+<td>鼠标</td>
+<td>USB:/dev/usb/mouse[0-15],PS2:/dev/psaux</td>
+</tr>
+<tr>
+<td>当前CD ROM/DVD ROM</td>
+<td>/dev/cdrom</td>
+</tr>
+<tr>
+<td>当前鼠标</td>
+<td>/dev/mouse</td>
+</tr>
+<tr>
+<td>磁带机</td>
+<td>IDE:/dev/ht0,SCSI:/dev/st0</td>
+</tr>
+</tbody>
+</table>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/25/Linux-设备文件名/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/Linux-设备文件名/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/25/zookeeper/" title="zookeeper" itemprop="url">zookeeper</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-25T15:03:14.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h1><h2 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h2><pre><code>wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+tar xvf zookeeper-3.4.8.tar.gz
+cd zookeeper-3.4.8
+cd conf
+cp zoo_sample.cfg zoo.cfg
+
+// zoo.cfg配置
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/tmp/zookeeper
+clientPort=2181
+autopurge.purgeInterval=1
+server.1=localhost:2888:3888
+</code></pre><h2 id="zoo-cfg_u914D_u7F6E_u53C2_u6570"><a href="#zoo-cfg_u914D_u7F6E_u53C2_u6570" class="headerlink" title="zoo.cfg配置参数"></a>zoo.cfg配置参数</h2><ul>
+<li>tickTime<blockquote>
+<p>zookeeper服务器之间或客户端与服务器之间维持心跳的时间间隔，每隔tickTime时间就会发一个心跳包</p>
+</blockquote>
+</li>
+<li>initLimit<blockquote>
+<p>配置zookeeper接受客户端初始化连接最长多少个心跳间隔时间,initLimit * tickTime = 20s,超过20s zookeeper服务器还没收到客户端返回信息，表示客户端连接失败</p>
+</blockquote>
+</li>
+<li>syncLimit<blockquote>
+<p>配置项标识Leader与Follower之间发送消息,请求和应答时长,最长不能超过多少个tickTime的时间长度,总的时间长度就是5*2000=10秒；</p>
+</blockquote>
+</li>
+<li>dataDir<blockquote>
+<p>Zookeeper保存数据的目录</p>
+</blockquote>
+</li>
+<li>clientPort<blockquote>
+<p>客户端连接zookeeper服务器的端口</p>
+</blockquote>
+</li>
+<li><p>server</p>
+<pre><code>server.1=192.168.1.212:2887:3887
+server.2=192.168.1.213:2888:3888
+server.3=192.168.1.214:2889:3889
+</code></pre><blockquote>
+<p>server.A=B：C：D：<br>A是一个数字,表示这个是第几号服务器,B是这个服务器的ip地址<br>C第一个端口用来集群成员的信息交换,表示的是这个服务器与集群中的Leader服务器交换信息的端口<br>D是在leader挂掉时专门用来进行选举leader所用</p>
+</blockquote>
+</li>
+<li>集群模式下需要在<code>dataDir</code>目录下创建<code>myid</code>文件，文件内容为<code>A</code>的值</li>
+</ul>
+<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><pre><code>bin/zkServer.sh start
+</code></pre><p>##查看状态</p>
+<pre><code>bin/zkServer.sh status
+-- 192.168.1.212状态 --
+[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Mode: follower
+
+--192.168.1.213状态 --
+[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Mode: leader
+
+-- 192.168.1.214状态 --
+[root@keep-haproxy134 zookeeper-3.4.8]# ./bin/zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /root/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Mode: follower
 </code></pre>
         
         
@@ -121,13 +629,13 @@ muc#roomconfig_roomsecret(密码)
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/XMPP/">XMPP</a>►<a class="article-category-link" href="/categories/XMPP/Tigase/">Tigase</a>
+  <a class="article-category-link" href="/categories/Zookeeper/">Zookeeper</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Tigase/">Tigase</a><a href="/tags/XMPP/">XMPP</a>
+  <span></span> <a href="/tags/Apache/">Apache</a><a href="/tags/Zookeeper/">Zookeeper</a>
   </div>
 
 </div>
@@ -138,7 +646,7 @@ muc#roomconfig_roomsecret(密码)
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/12/10/Tigase-MUC配置/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Tigase-MUC配置/" data-count-type="comments">&nbsp;</a>
+		<a href="/2016/02/25/zookeeper/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/zookeeper/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -158,630 +666,183 @@ muc#roomconfig_roomsecret(密码)
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/10/Tigase-0133管理员协议/" title="Tigase-0133管理员协议" itemprop="url">Tigase-0133管理员协议</a>
+      <a href="/2016/02/25/kafka/" title="kafka" itemprop="url">kafka</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T16:11:25.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    <time datetime="2016-02-25T15:01:53.000Z" itemprop="datePublished"> 发表于 2016-02-25</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <ul>
-<li>将<code>src/main/groovy/tigase/admin</code>拷贝到<code>scripts/</code>下,<code>XEP-0133</code>协议由<code>groovy</code>完成。</li>
-<li><p>管理员向服务端发送添加用户的请求，发送至<code>sess-man</code></p>
-<pre><code>&lt;iq id=&quot;EURERE234234234EEWEWEW&quot; to=&quot;sess-man@192.168.0.50&quot; type=&quot;set&quot;&gt;&lt;command xmlns=&quot;http://jabber.org/protocol/commands&quot; node=&quot;http://jabber.org/protocol/admin#add-user&quot;&gt;&lt;/command&gt;&lt;/iq&gt;
+        <h1 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h1><blockquote>
+<p>kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。<br>通过zookeeper实现集群<br>kafka集群由多个kafka实例组成，每个实例称为broker</p>
+</blockquote>
+<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><pre><code>wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
+tar xzf kafka_2.11-0.9.0.0.tgz
+export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
+cd kafka_2.11-0.9.0.0
+</code></pre><h2 id="u542F_u52A8zookeeper"><a href="#u542F_u52A8zookeeper" class="headerlink" title="启动zookeeper"></a>启动zookeeper</h2><pre><code>bin/zookeeper-server-start.sh config/zookeeper.properties
+</code></pre><h2 id="u542F_u52A8kafka"><a href="#u542F_u52A8kafka" class="headerlink" title="启动kafka"></a>启动kafka</h2><pre><code>bin/kafka-server-start.sh config/server.properties
+</code></pre><h2 id="u521B_u5EFA_u4E00_u4E2Atopic"><a href="#u521B_u5EFA_u4E00_u4E2Atopic" class="headerlink" title="创建一个topic"></a>创建一个topic</h2><ul>
+<li><p>创建一个单分区、单副本的<code>test</code>话题</p>
+<pre><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
 </code></pre></li>
-<li><p>接收服务端返回后，提交添加用户数据</p>
-<pre><code>&lt;iq from=&quot;admin@192.168.0.50/smack&quot; id=&quot;KJKJKJWEW121312312&quot; to=&quot;sess-man@192.168.0.50&quot; type=&quot;set&quot; xml:lang=&quot;en&quot;&gt;&lt;command xmlns=&quot;http://jabber.org/protocol/commands&quot; node=&quot;http://jabber.org/protocol/admin#add-user&quot; sessionid=&quot;&quot;&gt;&lt;x xmlns=&quot;jabber:x:data&quot; type=&quot;submit&quot;&gt;&lt;field type=&quot;hidden&quot; var=&quot;FORM_TYPE&quot;&gt;&lt;value&gt;http://jabber.org/protocol/admin&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;accountjid&quot;&gt;&lt;value&gt;test@192.168.0.50&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;password&quot;&gt;&lt;value&gt;123456&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;password-verify&quot;&gt;&lt;value&gt;12345&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;email&quot;&gt;&lt;value&gt;ttt&lt;/value&gt;&lt;/field&gt;&lt;/x&gt;&lt;/command&gt;&lt;/iq&gt;
+<li><p>获取<code>topic</code>列表</p>
+<pre><code>bin/kafka-topics.sh --list --zookeeper localhost:2181
 </code></pre></li>
-<li><a href="http://xmpp.org/extensions/xep-0133.html" target="_blank" rel="external">XMPP-0133协议</a></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/XMPP/">XMPP</a>►<a class="article-category-link" href="/categories/XMPP/Tigase/">Tigase</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Tigase/">Tigase</a><a href="/tags/XMPP/">XMPP</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Tigase-0133管理员协议/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Tigase-0133管理员协议/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/Tigase-配置/" title="Tigase-配置" itemprop="url">Tigase-配置</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T16:09:25.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="u521B_u5EFA_u9ED8_u8BA4_u7684_u914D_u7F6E_u6587_u4EF6_2C_u5305_u542B_u5728_u914D_u7F6E_u7EC4_u4EF6_u5305_u62EC_uFF1A_u4F1A_u8BDD_u7BA1_u7406_u5668_uFF0C_u5BA2_u6237_u7AEF_-__u670D_u52A1_u5668_u8FDE_u63A5_u7BA1_u7406_u5668_u548C_u670D_u52A1_u5668_u5230_u670D_u52A1_u5668_u7684_u8FDE_u63A5_u7BA1_u7406_u5668_u3002"><a href="#u521B_u5EFA_u9ED8_u8BA4_u7684_u914D_u7F6E_u6587_u4EF6_2C_u5305_u542B_u5728_u914D_u7F6E_u7EC4_u4EF6_u5305_u62EC_uFF1A_u4F1A_u8BDD_u7BA1_u7406_u5668_uFF0C_u5BA2_u6237_u7AEF_-__u670D_u52A1_u5668_u8FDE_u63A5_u7BA1_u7406_u5668_u548C_u670D_u52A1_u5668_u5230_u670D_u52A1_u5668_u7684_u8FDE_u63A5_u7BA1_u7406_u5668_u3002" class="headerlink" title="创建默认的配置文件,包含在配置组件包括：会话管理器，客户端 - 服务器连接管理器和服务器到服务器的连接管理器。"></a>创建默认的配置文件,包含在配置组件包括：会话管理器，客户端 - 服务器连接管理器和服务器到服务器的连接管理器。</h1><pre><code>config-type=--gen-config-def
-</code></pre><h1 id="u914D_u7F6E_u7BA1_u7406_u5458_u8D26_u53F7"><a href="#u914D_u7F6E_u7BA1_u7406_u5458_u8D26_u53F7" class="headerlink" title="配置管理员账号"></a>配置管理员账号</h1><pre><code>--admins=admin@192.168.0.50
-</code></pre><h1 id="u914D_u7F6E_u57DF_u540D"><a href="#u914D_u7F6E_u57DF_u540D" class="headerlink" title="配置域名"></a>配置域名</h1><pre><code>--virt-hosts = 192.168.0.50
-</code></pre><h1 id="u8C03_u8BD5_u8F93_u51FA_u4FE1_u606F"><a href="#u8C03_u8BD5_u8F93_u51FA_u4FE1_u606F" class="headerlink" title="调试输出信息"></a>调试输出信息</h1><pre><code>--debug=server,message-archive,muc
-</code></pre><h1 id="u4F7F_u7528_u7684_u6570_u636E_u5E93"><a href="#u4F7F_u7528_u7684_u6570_u636E_u5E93" class="headerlink" title="使用的数据库"></a>使用的数据库</h1><pre><code>--user-db=mysql
---user-db-uri=jdbc:mysql://127.0.0.1:3306/mytigase?user=root&amp;password=feng&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoCreateUser=true
-</code></pre><h1 id="u52A0_u8F7D_u63D2_u4EF6"><a href="#u52A0_u8F7D_u63D2_u4EF6" class="headerlink" title="加载插件"></a>加载插件</h1><pre><code>--sm-plugins=-starttls,message-archive-xep-0136,offlinemessage
-</code></pre><h1 id="u6700_u5927_u7684_u79BB_u7EBF_u6D88_u606F_u914D_u7F6E"><a href="#u6700_u5927_u7684_u79BB_u7EBF_u6D88_u606F_u914D_u7F6E" class="headerlink" title="最大的离线消息配置"></a>最大的离线消息配置</h1><pre><code>sess-man/plugins-conf/amp/store-limit=1000
-</code></pre><h1 id="u9ED8_u8BA4_u623F_u95F4_u662F_u9501_u4F4F_u7684_uFF0C_u5176_u4ED6_u7528_u6237_u5C31_u65E0_u6CD5_u8FDB_u5165_u8BE5_u623F_u95F4"><a href="#u9ED8_u8BA4_u623F_u95F4_u662F_u9501_u4F4F_u7684_uFF0C_u5176_u4ED6_u7528_u6237_u5C31_u65E0_u6CD5_u8FDB_u5165_u8BE5_u623F_u95F4" class="headerlink" title="默认房间是锁住的，其他用户就无法进入该房间"></a>默认房间是锁住的，其他用户就无法进入该房间</h1><pre><code>muc/muc-lock-new-room[B]=false
-</code></pre><h1 id="u6D88_u606F_u8FC7_u6EE4"><a href="#u6D88_u606F_u8FC7_u6EE4" class="headerlink" title="消息过滤"></a>消息过滤</h1><pre><code>muc/message-filter-enabled[B]=false
-</code></pre><h1 id="u5141_u8BB8_u804A_u5929_u72B6_u6001"><a href="#u5141_u8BB8_u804A_u5929_u72B6_u6001" class="headerlink" title="允许聊天状态"></a>允许聊天状态</h1><pre><code>muc/muc-allow-chat-states[B]=true
-</code></pre><h1 id="u9ED8_u8BA4_u60C5_u51B5_u4E0B_2Ctigase_u8BBE_u7F6E_u53D6_u51B3_u4E8E_u6700_u5927_u53EF_u7528_u5185_u5B58_u4E3Atigase_u670D_u52A1_u5668_u8FDB_u7A0B_u961F_u5217_u7684_u5927_u5C0F"><a href="#u9ED8_u8BA4_u60C5_u51B5_u4E0B_2Ctigase_u8BBE_u7F6E_u53D6_u51B3_u4E8E_u6700_u5927_u53EF_u7528_u5185_u5B58_u4E3Atigase_u670D_u52A1_u5668_u8FDB_u7A0B_u961F_u5217_u7684_u5927_u5C0F" class="headerlink" title="默认情况下,tigase设置取决于最大可用内存为tigase服务器进程队列的大小"></a>默认情况下,tigase设置取决于最大可用内存为tigase服务器进程队列的大小</h1><pre><code>--max-queue-size = 10000
-</code></pre><h1 id="u52A0_u8F7D_u7EC4_u4EF6"><a href="#u52A0_u8F7D_u7EC4_u4EF6" class="headerlink" title="加载组件"></a>加载组件</h1><pre><code>--comp-name-1 = muc
---comp-class-1 = tigase.muc.MUCComponent
---comp-name-2=message-archive
---comp-class-2=tigase.archive.MessageArchiveComponent
---comp-name-3 = pubsub
---comp-class-3 = tigase.pubsub.PubSubComponent
-</code></pre><h1 id="u5B58_u50A8_u7528_u6237_u7684_u804A_u5929_u8BB0_u5F55"><a href="#u5B58_u50A8_u7528_u6237_u7684_u804A_u5929_u8BB0_u5F55" class="headerlink" title="存储用户的聊天记录"></a>存储用户的聊天记录</h1><pre><code>message-archive/archive-repo-uri=jdbc:mysql://127.0.0.1:3306/mytigase?user=root&amp;password=feng&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoCreateUser=true
-sess-man/plugins-conf/message-archive-xep-0136/component-jid=message-archive@192.168.0.50
-sess-man/plugins-conf/message-archive-xep-0136/default-store-method=body
-sess-man/plugins-conf/message-archive-xep-0136/required-store-method=body
-sess-man/plugins-conf/message-archive-xep-0136/auto=true
-cl-comp/compress-stream[B]=false
-message-router/components/msg-receivers/s2s.active[B]=false
-c2s/net-buffer-limit[I]=4194304
-</code></pre><ul>
-<li><a href="http://docs.tigase.org/tigase-server/snapshot/Properties_Guide/webhelp/" target="_blank" rel="external">详细参考官方配置</a></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/XMPP/">XMPP</a>►<a class="article-category-link" href="/categories/XMPP/Tigase/">Tigase</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Tigase/">Tigase</a><a href="/tags/XMPP/">XMPP</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/Tigase-配置/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Tigase-配置/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/09/Docker-详细操作/" title="Docker-详细操作" itemprop="url">Docker-详细操作</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T15:48:47.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="u83B7_u53D6_u955C_u50CF"><a href="#u83B7_u53D6_u955C_u50CF" class="headerlink" title="获取镜像"></a>获取镜像</h2><pre><code>docker pull ubuntu:14.04
-相当于docker pull registry.hub.docker.com/ubuntu:14.04
-可以从国内镜像网站下载docker pull dl.dockerpool.com:5000/ubuntu:14.04
-</code></pre><h2 id="u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF"><a href="#u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF" class="headerlink" title="列出本地已有的镜像"></a>列出本地已有的镜像</h2><pre><code>docker images
-</code></pre><h2 id="u521B_u5EFA_u955C_u50CF_uFF0C_u5229_u7528Dockerfile_u6765_u521B_u5EFA_u955C_u50CF_2C_u65B0_u5EFA_u4E00_u4E2A_u76EE_u5F55_u548C_u4E00_u4E2ADockerfile"><a href="#u521B_u5EFA_u955C_u50CF_uFF0C_u5229_u7528Dockerfile_u6765_u521B_u5EFA_u955C_u50CF_2C_u65B0_u5EFA_u4E00_u4E2A_u76EE_u5F55_u548C_u4E00_u4E2ADockerfile" class="headerlink" title="创建镜像，利用Dockerfile来创建镜像,新建一个目录和一个Dockerfile"></a>创建镜像，利用Dockerfile来创建镜像,新建一个目录和一个Dockerfile</h2><pre><code>$ mkdir sinatra
-$ cd sinatra
-$ touch Dockerfile
-</code></pre><ul>
-<li><p>Dockerfile 基本的语法是</p>
+<li>当发布到一个不存在的<code>topics</code>时，可以配置自动创建而不是手动创建<h2 id="u53D1_u9001_u6D88_u606F"><a href="#u53D1_u9001_u6D88_u606F" class="headerlink" title="发送消息"></a>发送消息</h2></li>
+<li><p>运行生产者客户端，然后发送一些消息</p>
+<pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+</code></pre><h2 id="u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005"><a href="#u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005" class="headerlink" title="启动一个消费者"></a>启动一个消费者</h2></li>
+<li><p>运行消费者客户端，接收消息</p>
+<pre><code>bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
+</code></pre><h2 id="u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4"><a href="#u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4" class="headerlink" title="设置多个brokers集群"></a>设置多个brokers集群</h2></li>
+<li><p>为每个brokers创建一个配置文件</p>
+<pre><code>cp config/server.properties config/server-1.properties
+cp config/server.properties config/server-2.properties
+</code></pre></li>
+<li><p>配置文件内容</p>
 <ul>
-<li><p>编写完成Dockerfile后可以使用docker build来生成镜像</p>
-<pre><code>docker build -t=&quot;ouruser/sinatra:v2&quot; .
+<li><p><code>config/server-1.properties</code></p>
+<pre><code>broker.id=1
+port=9093
+log.dir=/tmp/kafka-logs-1
 </code></pre></li>
-<li>使用<code>#</code>来注释</li>
-<li><code>FROM</code>指令告诉<code>Docker</code>使用哪个镜像作为基础</li>
-<li>接着是维护者的信息</li>
-<li><code>RUN</code>开头的指令会在创建中运行，比如安装一个软件包，在这里使用<code>apt-get</code>来安装了一些软件</li>
-<li>其中<code>-t</code>标记来添加<code>tag</code>，指定新的镜像的用户信息。 “.” 是<code>Dockerfile</code>所在的路径（当前目录），也可以替换为一个具体的<code>Dockerfile</code>的路径。</li>
-<li><code>docker run -t -i ouruser/sinatra:v2 /bin/bash</code>运行</li>
-<li><p><code>Dockerfile</code>文件内容</p>
-<pre><code># This is a comment
-  FROM ubuntu:14.04
-  MAINTAINER Docker Newbee &lt;newbee@docker.com&gt;
-  RUN apt-get -qq update
-  RUN apt-get -qqy install ruby ruby-dev
-  RUN gem install sinatra
-</code></pre></li>
+<li><p><code>config/server-2.properties</code></p>
+<pre><code>broker.id=2
+port=9094
+log.dir=/tmp/kafka-logs-2
+</code></pre><blockquote>
+<p><code>broker.id</code>是集群节点唯一名称</p>
+</blockquote>
+</li>
 </ul>
 </li>
-<li><p>如果要导出镜像到本地文件，可以使用<code>docker save</code>命令。</p>
-<pre><code>docker save -o ubuntu_14.04.tar ubuntu:14.04
+<li><p>启动两个新节点</p>
+<pre><code>bin/kafka-server-start.sh config/server-1.properties &amp;
+bin/kafka-server-start.sh config/server-2.properties &amp;
 </code></pre></li>
-<li><p>载入镜像,可以使用<code>docker load</code>从导出的本地文件中再导入到本地镜像库，例如</p>
-<pre><code>docker load --input ubuntu_14.04.tar
-或
-docker load &lt; ubuntu_14.04.tar
+<li><p>创建有3个副本的新<code>topics</code></p>
+<pre><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-topic
 </code></pre></li>
-<li><p>输出<code>hello world</code></p>
-<pre><code>docker run ubuntu:14.04 /bin/echo &apos;hello world&apos;
+<li><p>在集群环境，查看<code>broker</code>都做了什么</p>
+<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
+
+Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
+    Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0,1
+</code></pre><blockquote>
+<p><code>leader</code>负责节点所有读取和写入指定分区<br><code>replicas</code>复制此分区节点列表日志<br><code>isr</code>集中同步副本</p>
+</blockquote>
+</li>
+<li><p>查看单复制集下的<code>topics</code></p>
+<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
+
+Topic:test    PartitionCount:1 ReplicationFactor:1 Configs:
+    Topic: test    Partition: 0 Leader: 0 Replicas: 0 Isr: 0
 </code></pre></li>
-<li><p>启动一个<code>bash</code>终端，允许用户进行交互</p>
-<pre><code>docker run -t -i ubuntu:14.04 /bin/bash
+<li><p>给集群中的<code>topics</code>发送一些消息</p>
+<pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-topic
 </code></pre></li>
-<li><p>让<code>Docker</code>容器在后台以守护状态形式运行，可以通过通过<code>-d</code>参数来实现</p>
-<pre><code>docker run -d ubuntu:14.04 /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;
-</code></pre><ul>
-<li><code>docker ps</code>返回容器信息，包括<code>NAMES</code></li>
-<li><p>获取容器的输出信息，可以通过<code>docker logs</code>命令</p>
-<pre><code>docker logs NAMES
+<li><p>接收消息</p>
+<pre><code>bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic my-topic
+</code></pre></li>
+<li><p>测试容错性，杀掉<code>server-1.properties</code></p>
+<pre><code>ps aux|grep server-1.properties
+kill -9 PID
+</code></pre></li>
+<li><p>查看</p>
+<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
+
+Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
+    Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0
 </code></pre></li>
 </ul>
-</li>
-<li>获取终止状态的容器<code>docker ps -a</code>,终止状态的容器可以通过<code>docker start</code>命令来重新启动，<code>docker restart</code>命令会将一个运行态的容器终止，然后再重新启动。<code>docker restart NAMES</code>。</li>
-<li><p>在使用<code>-d</code>参数时，容器启动后会进入后台。 某些时候需要进入容器进行操作，有很多种方法，包括使用<code>docker attach</code>命令或<code>nsenter</code>工具等。</p>
+<h2 id="u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E"><a href="#u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E" class="headerlink" title="使用kafka连接导入/导出数据"></a>使用kafka连接导入/导出数据</h2><ul>
+<li><p>使用<code>kafka</code>的<code>connect</code>工具导入/导出数据</p>
 <ul>
-<li>如果出现<code>2014/11/10 17:46:08 You cannot attach to a stopped container, start it first</code>,执行<code>docker start berserk_fermat</code></li>
-<li><p>attach</p>
-<pre><code>docker run -idt ubuntu:14.04
-[root@MyCloudServer ~]# docker run -idt ubuntu:12.04
-e13112150bd52dbb12d7fbbe0e24e786ba86e97a2e337db654d0ec144d6b88f4
-[root@MyCloudServer ~]# docker ps -a
-CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                     PORTS               NAMES
-e13112150bd5        ubuntu:12.04        &quot;/bin/bash&quot;            15 seconds ago      Up 14 seconds                                  berserk_fermat
-005c6adf29a4        ubuntu:12.04        &quot;/bin/echo &apos;hello wo   3 minutes ago       Exited (0) 3 minutes ago                       lonely_leakey
-f4d208e3e8e6        ubuntu:12.04        &quot;/bin/bash&quot;            37 minutes ago      Up 4 minutes                                   jovial_rosalind
-[root@MyCloudServer ~]# docker attach berserk_fermat
-root@e13112150bd5:/# ls
-bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  selinux  srv  sys  tmp  usr  var
-root@e13112150bd5:/# pwd
-/
-root@e13112150bd5:/# exit
-exit
-</code></pre><h2 id="u5BFC_u51FA_u548C_u5BFC_u5165_u5BB9_u5668"><a href="#u5BFC_u51FA_u548C_u5BFC_u5165_u5BB9_u5668" class="headerlink" title="导出和导入容器"></a>导出和导入容器</h2><h3 id="u5BFC_u51FA_u5BB9_u5668"><a href="#u5BFC_u51FA_u5BB9_u5668" class="headerlink" title="导出容器"></a>导出容器</h3></li>
-</ul>
-</li>
-<li><p>如果要导出本地某个容器，可以使用<code>docker export</code>命令.</p>
-<pre><code>[root@MyCloudServer ~]# docker ps -a
-CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                      PORTS               NAMES
-e13112150bd5        ubuntu:12.04        &quot;/bin/bash&quot;            13 minutes ago      Exited (0) 11 minutes ago                       berserk_fermat
-005c6adf29a4        ubuntu:12.04        &quot;/bin/echo &apos;hello wo   17 minutes ago      Exited (0) 16 minutes ago                       lonely_leakey
-f4d208e3e8e6        ubuntu:12.04        &quot;/bin/bash&quot;            50 minutes ago      Up 17 minutes                                   jovial_rosalind
-[root@MyCloudServer ~]# docker export e13112150bd5&gt;ubuntu.tar
-</code></pre><h3 id="u5BFC_u5165_u5BB9_u5668_u5FEB_u7167"><a href="#u5BFC_u5165_u5BB9_u5668_u5FEB_u7167" class="headerlink" title="导入容器快照"></a>导入容器快照</h3></li>
-<li><p>可以使用<code>docker import</code>从容器快照文件中再导入为镜像，例如</p>
-<pre><code>$ cat ubuntu.tar | sudo docker import - test/buntu:v1.0
-$ sudo docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED              VIRTUAL SIZE
-test/ubuntu         v1.0                9d37a6082e97        About a minute ago   171.3 MB
-</code></pre><h2 id="u5220_u9664_u955C_u50CF"><a href="#u5220_u9664_u955C_u50CF" class="headerlink" title="删除镜像"></a>删除镜像</h2></li>
-<li><code>docker ps -a</code>列出所有依赖<code>Image</code>的<code>container</code></li>
-<li><code>docker rm (CONTAINER ID前4位)</code>执行删除容器操作</li>
-<li><code>docker images</code>列出所有镜像</li>
-<li><code>docker rmi (image id前4位)</code></li>
-<li>如果要删除一个运行中的容器，可以添加<code>-f</code>参数。<code>Docker</code>会发送<code>SIGKILL</code>信号给容器。</li>
-</ul>
+<li><p>首先需要建立一些数据来测试</p>
+<pre><code>echo -e &quot;foo\nbar&quot; &gt; test.txt
 
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Docker/">Docker</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Docker/">Docker</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/09/Docker-详细操作/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Docker-详细操作/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/09/Docker-Hub使用/" title="Docker-Hub使用" itemprop="url">Docker-Hub使用</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T15:45:26.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="u5F00_u59CB_u4F7F_u7528Docker_Hub"><a href="#u5F00_u59CB_u4F7F_u7528Docker_Hub" class="headerlink" title="开始使用Docker Hub"></a>开始使用Docker Hub</h2><h3 id="Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub"><a href="#Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub" class="headerlink" title="Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub"></a>Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub</h3><ul>
-<li>展示如何创建一个账户。</li>
-<li>Docker Hub和docker及其组件一起工作。Docker Hub会帮助你和你的同事协作，并获取功能最全的docker。要做到这一点，它提供的服务有：<ul>
-<li>Docker镜像主机</li>
-<li>用户认证</li>
-<li>自动镜像构建和工作流程工具，如构建触发器和webhook</li>
-<li>整合了GitHub和BitBucket</li>
-</ul>
-</li>
-<li>为了使用Docker Hub,首先需要注册创建一个账户。别担心，创建一个账户很简单并且是免费的。</li>
-</ul>
-<h2 id="u521B_u5EFADocker_Hub_u8D26_u6237"><a href="#u521B_u5EFADocker_Hub_u8D26_u6237" class="headerlink" title="创建Docker Hub账户"></a>创建Docker Hub账户</h2><ul>
-<li><p>这里有两种访问可以创建和注册一个Docker Hub账户：</p>
+bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
+</code></pre></li>
+<li><p>使用之前启动默认的本地集群配置并创建两个连接，第一个是源连接器，它从输入文本读取消息，并各自产生的一个输出文件中的一行。</p>
 <ul>
-<li>通过网站创建<br>  *填写注册表单,选择您的用户名和密码并指定您的电子邮箱。你也可以报名参加docker邮件列表，会有很多关于docker的信息。<ul>
-<li>一旦你填写表格，查看你的电子邮件，欢迎信息，确认来激活您的账户。</li>
-<li>在完成确认过程之后，您可以使用web控制台登陆</li>
-</ul>
-</li>
-<li><p>通过命令行创建</p>
-<ul>
-<li><p>你可以创建一个Docker Hub账号通过命令行<code>docker login</code>命令</p>
-<pre><code>$ sudo docker login
+<li>连接器开始读取<code>test.txt</code>产生一个<code>topics</code>为<code>connect-test</code></li>
+<li>接收端连接器应该开始从<code>topic</code>读取消息<code>connect-test</code>,并写入到<code>test.sink.txt</code></li>
+<li><p>查看<code>topics</code>列表</p>
+<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-topics.sh --list --zookeeper localhost:2181
+__consumer_offsets
+connect-test
+my-topic
+test
+test2
+</code></pre></li>
+<li><p>启动一个消费者控制台查看<code>topic</code>为<code>connect-test</code>的数据</p>
+<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
+{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;foo&quot;}
+{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;bar&quot;}
+</code></pre></li>
+<li><p>重新打开一个终端，给<code>test.txt</code>中追加数据，再看消费者控制台的数据</p>
+<pre><code>echo &quot;Hello world&quot; &gt;&gt; test.txt
+</code></pre></li>
+<li><p>消费者控制台数据为</p>
+<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
+{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;foo&quot;}
+{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;bar&quot;}
+{&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;Hello world&quot;}
 </code></pre></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>你的Docker账户现在已经激活，你可以使用了。</li>
 </ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Docker/">Docker</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Docker/">Docker</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/09/Docker-Hub使用/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Docker-Hub使用/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/09/Docker-install注意事项/" title="Docker-install注意事项" itemprop="url">Docker-install注意事项</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T15:41:55.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ul>
-<li><p>当安装一个不存在的package时<code>yum -y install docker-io</code>,使用</p>
-<pre><code>yum install epel-release
-</code></pre></li>
-<li><p>当出现以下错误时</p>
-<pre><code>Loaded plugins: fastestmirror
-Loading mirror speeds from cached hostfile
-Error: Cannot retrieve metalink for repository: epel. Please verify its path and try again
-</code></pre></li>
-<li>运行<code>yum update --disablerepo=epel\*</code></li>
-<li>这时再运行<code>yum -y install docker-io</code></li>
-<li>现在，它已经安装好了，让我们来启动 Docker 守护进程<code>service docker install</code></li>
-<li>如果我们需要开机自启动，如下：<code>chkconfig docker on</code></li>
-<li>现在我们确认 Docker 是否正常工作，首先我们需要获取最新的 CentOS 镜像<code>docker pull centos-latest</code></li>
-<li>下一步，我们要确保通过如下命令可以看到镜像：<code>docker images centos</code></li>
-<li><p>它将会输出如下的信息：</p>
-<pre><code>[root@MyCloudServer ~]# docker images centos
-  REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-  centos              latest              ae0c2d0bdc10        6 days ago          224 M
-</code></pre></li>
-<li>运行简单的<code>bash shell</code>来测试这个镜像<code>docker run -i -t centos /bin/bash</code></li>
-<li>如果正常，你会获得一个简单的<code>bash</code>提示，输入<code>exit</code>退出。</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Docker/">Docker</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Docker/">Docker</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/09/Docker-install注意事项/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Docker-install注意事项/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/09/Mongodb-部署复制集/" title="Mongodb-部署复制集" itemprop="url">Mongodb-部署复制集</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T15:37:09.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><a href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6" class="headerlink" title="部署3个节点组成的复制集"></a>部署3个节点组成的复制集</h2><ul>
-<li>3台IP为<ul>
-<li>192.168.0.139 主机名：mongoname1</li>
-<li>192.168.0.140 主机名：mongoname2</li>
-<li>192.168.0.141 主机名：mongoname3</li>
-</ul>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><ul>
+<li><p>生产者API</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
+    &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;
+    &lt;version&gt;0.9.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>  参考: <a href="http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html" target="_blank" rel="external">生产者doc</a></p>
 </li>
-<li>修改<code>/etc/mongodb.conf</code>，添加<code>replSet = rs0</code>(3个节点保持一致)</li>
-<li>启动<code>mongodb</code></li>
-<li><p>在其中一个节点上执行<code>rs.initiate()</code>,用来初始化复制集</p>
-<pre><code>rs.initiate(&quot;mongoname1&quot;)
-</code></pre></li>
-<li><p>查看当前配置信息</p>
-<pre><code>rs.conf()
-</code></pre></li>
-<li><p>将其他节点加入复制集</p>
-<pre><code>rs.add(&quot;mongoname2&quot;);
-rs.add(&quot;mongoname3&quot;);
-</code></pre></li>
-<li><p>查看配置</p>
-<pre><code>rs.conf()
-</code></pre></li>
-<li><p>查看复制集状态</p>
-<pre><code>rs.status()
-</code></pre></li>
-<li><p>如果在多个节点上执行了rs.initate(),可以做以下操作后重启mongodb</p>
-<pre><code>use local
-db.dropDatabase()
-</code></pre></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/09/Mongodb-部署复制集/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Mongodb-部署复制集/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/09/MongoDB-3-0-3用户认证/" title="MongoDB-3.0.3用户认证" itemprop="url">MongoDB-3.0.3用户认证</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T15:32:12.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="u5728Mongodb3-0-3_u4E2D_u521B_u5EFAUser_u8FDB_u884C_u6743_u9650_u9A8C_u8BC1"><a href="#u5728Mongodb3-0-3_u4E2D_u521B_u5EFAUser_u8FDB_u884C_u6743_u9650_u9A8C_u8BC1" class="headerlink" title="在Mongodb3.0.3中创建User进行权限验证"></a>在Mongodb3.0.3中创建User进行权限验证</h2><ul>
-<li><p>启动mongodb，切换db为admin</p>
-<pre><code>use admin
-db.system.version.find()
-db.system.version.update({&quot;_id&quot;: &quot;authSchema&quot;}, {&quot;$set&quot;: {&quot;currentVersion&quot;: 3}})
-</code></pre></li>
-<li><p>为数据库创建用户，这里使用的mydb数据库</p>
-<pre><code>use mydb
-db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;123456&quot;, roles: [{role: &quot;dbOwner&quot;, db: &quot;mydb&quot;}]})
-</code></pre></li>
-<li><p>在mongodb.conf中添加authorization: enabled</p>
-<pre><code>security:
-  authorization: enabled
-</code></pre></li>
-<li>完毕！重启mongodb验证。</li>
-<li>参考:<ol>
-<li><a href="http://docs.mongodb.org/manual/reference/configuration-options/" target="_blank" rel="external">配置文件操作</a></li>
-<li><a href="http://docs.mongodb.org/manual/reference/built-in-roles/" target="_blank" rel="external">权限</a></li>
-</ol>
+<li><p>消费者API</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
+    &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;
+    &lt;version&gt;0.9.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>  参考: <a href="http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html" target="_blank" rel="external">消费者doc</a></p>
 </li>
 </ul>
+<h2 id="error"><a href="#error" class="headerlink" title="error"></a>error</h2><ul>
+<li><code>org.apache.kafka.common.errors.TimeoutException: Batch Expired</code>修改<code>config/server.properties</code>文件的<code>advertised.host.name=IP地址</code></li>
+</ul>
+<h2 id="server-properties_u914D_u7F6E_u9879"><a href="#server-properties_u914D_u7F6E_u9879" class="headerlink" title="server.properties配置项"></a>server.properties配置项</h2><pre><code>broker.id=0
+listeners=PLAINTEXT://:9092
+advertised.host.name=192.168.1.211
+num.network.threads=3
 
+num.io.threads=8
+socket.send.buffer.bytes=102400
+socket.receive.buffer.bytes=102400
+socket.request.max.bytes=104857600
+log.dirs=/tmp/kafka-logs
+num.partitions=1
+num.recovery.threads.per.data.dir=1
+log.retention.hours=168
+log.segment.bytes=1073741824
+log.retention.check.interval.ms=300000
+log.cleaner.enable=false
+zookeeper.connect=localhost:2181
+zookeeper.connection.timeout.ms=6000
+auto.create.topics.enable=true
+default.replication.factor=3
+</code></pre>
         
         
         <p class="article-more-link">
@@ -793,13 +854,13 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
+  <a class="article-category-link" href="/categories/Kafka/">Kafka</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  <span></span> <a href="/tags/Apache/">Apache</a><a href="/tags/Kafka/">Kafka</a>
   </div>
 
 </div>
@@ -810,162 +871,7 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/12/09/MongoDB-3-0-3用户认证/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/MongoDB-3-0-3用户认证/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/09/Mongodb-启动/" title="Mongodb-启动" itemprop="url">Mongodb-启动</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T15:26:15.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><a href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55" class="headerlink" title="Mac下安装PHP的mongodb扩展"></a>Mac下安装PHP的mongodb扩展</h2><ul>
-<li><p><code>XAMPP/bin</code></p>
-<pre><code>sudo pecl install mongo
-</code></pre></li>
-<li><p><code>php.ini</code>添加</p>
-<pre><code>extension=mongo.so
-</code></pre></li>
-</ul>
-<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><ul>
-<li>创建<code>/data/db</code>目录<code>sudo mkdir -p /data/db</code></li>
-<li>设置<code>/data/db</code>目录权限<code>sudo chown -R 你的系统登录用户名 /data</code></li>
-<li>终端执行<code>mongod</code></li>
-<li>输入<code>mongo</code>便可连结到默认的数据库</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/09/Mongodb-启动/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Mongodb-启动/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/09/MySQL-修改数据库和表的编码/" title="MySQL-修改数据库和表的编码" itemprop="url">MySQL-修改数据库和表的编码</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T15:23:13.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ul>
-<li><p>查看数据库编码 </p>
-<pre><code>show variables like &apos;char%&apos;;
-</code></pre></li>
-<li><p>修改表编码 </p>
-<pre><code>ALTER TABLE &apos;table&apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
-</code></pre></li>
-<li><p>修改表字段编码 </p>
-<pre><code>ALTER TABLE &apos;test&apos; CHANGE &apos;name&apos; &apos;name&apos; VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
-</code></pre></li>
-<li><p>查看表编码 </p>
-<pre><code>show create table mytable
-</code></pre></li>
-<li><p>修改mysql默认编码</p>
-<pre><code>[mysqld]和[client]后添加character_set_server=utf8
-</code></pre></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/MySQL/">MySQL</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/09/MySQL-修改数据库和表的编码/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/MySQL-修改数据库和表的编码/" data-count-type="comments">&nbsp;</a>
+		<a href="/2016/02/25/kafka/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/25/kafka/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -981,7 +887,7 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
   </nav>
 
 </div>
@@ -997,11 +903,11 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
 		<ul>
 		
 		  
-			<li><a href="/categories/Apache/" title="Apache">Apache<sup>2</sup></a></li>
+		
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/" title="Centos7">Centos7<sup>9</sup></a></li>
+		
 		  
 		
 		  
@@ -1015,23 +921,25 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
 		  
 		
 		  
-			<li><a href="/categories/Linux/Keepalived/Haproxy/" title="Haproxy">Haproxy<sup>1</sup></a></li>
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/JDK/" title="JDK">JDK<sup>1</sup></a></li>
+		
 		  
 		
 		  
-			<li><a href="/categories/Apache/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
+			<li><a href="/categories/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
+		
+		  
+			<li><a href="/categories/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>11</sup></a></li>
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>10</sup></a></li>
 		  
 		
 		  
@@ -1047,19 +955,13 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/MySQL/" title="MySQL">MySQL<sup>3</sup></a></li>
-		  
-		
-		  
 			<li><a href="/categories/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/MySQL/PHP/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
-		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+		
 		  
 		
 		  
@@ -1067,7 +969,11 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/MySQL/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+			<li><a href="/categories/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+		  
+		
+		  
+		
 		  
 		
 		  
@@ -1079,27 +985,29 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
 		  
 		
 		  
+		
+		  
+		
+		  
 			<li><a href="/categories/Spring-MVC/" title="Spring-MVC">Spring-MVC<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/XMPP/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
+		
+		  
+			<li><a href="/categories/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/Tsung/" title="Tsung">Tsung<sup>1</sup></a></li>
+		
 		  
 		
 		  
-			<li><a href="/categories/XMPP/" title="XMPP">XMPP<sup>4</sup></a></li>
-		  
 		
 		  
-			<li><a href="/categories/Apache/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
+			<li><a href="/categories/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
 		  
 		
-		  
-			<li><a href="/categories/Git/ssh/" title="ssh">ssh<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -1110,7 +1018,7 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
     </div>
   </div>
 

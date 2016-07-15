@@ -29,7 +29,7 @@
 如果是100个请求、1000个请求，那就得请求100次、1000次
 所以使用多个请求的时候使用管道来操作(如果管道打包的命令太多占用的内存也会越大，适量)
 以下是使用3种方式进行的测试(循环写入1">
-<meta property="og:updated_time" content="2016-02-25T16:44:13.000Z">
+<meta property="og:updated_time" content="2016-07-15T01:47:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis优化">
 <meta name="twitter:description" content="redis优化
@@ -50,7 +50,7 @@
     <link rel="apple-touch-icon" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -265,11 +265,11 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Apache/" title="Apache">Apache<sup>2</sup></a></li>
+		
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/" title="Centos7">Centos7<sup>9</sup></a></li>
+		
 		  
 		
 		  
@@ -283,23 +283,25 @@
 		  
 		
 		  
-			<li><a href="/categories/Linux/Keepalived/Haproxy/" title="Haproxy">Haproxy<sup>1</sup></a></li>
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/JDK/" title="JDK">JDK<sup>1</sup></a></li>
+		
 		  
 		
 		  
-			<li><a href="/categories/Apache/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
+			<li><a href="/categories/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
+		
+		  
+			<li><a href="/categories/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>11</sup></a></li>
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>10</sup></a></li>
 		  
 		
 		  
@@ -315,19 +317,13 @@
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/MySQL/" title="MySQL">MySQL<sup>3</sup></a></li>
-		  
-		
-		  
 			<li><a href="/categories/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/MySQL/PHP/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
-		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+		
 		  
 		
 		  
@@ -335,7 +331,11 @@
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/MySQL/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+			<li><a href="/categories/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+		  
+		
+		  
+		
 		  
 		
 		  
@@ -347,27 +347,29 @@
 		  
 		
 		  
+		
+		  
+		
+		  
 			<li><a href="/categories/Spring-MVC/" title="Spring-MVC">Spring-MVC<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/XMPP/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
+		
+		  
+			<li><a href="/categories/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/Centos7/Tsung/" title="Tsung">Tsung<sup>1</sup></a></li>
+		
 		  
 		
 		  
-			<li><a href="/categories/XMPP/" title="XMPP">XMPP<sup>4</sup></a></li>
-		  
 		
 		  
-			<li><a href="/categories/Apache/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
+			<li><a href="/categories/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
 		  
 		
-		  
-			<li><a href="/categories/Git/ssh/" title="ssh">ssh<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -378,7 +380,7 @@
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
     </div>
   </div>
 

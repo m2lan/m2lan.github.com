@@ -1,0 +1,1011 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
+  <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
+  
+    <title>php+sphinx使用 | 知识记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="M2">
+    
+
+    
+    <meta name="description" content="Centos7 Sphinx install
+安装依赖库
+yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel expat-devel
+cd /usr/local/src
+
+// https://share.weiyun.com/2da811898545e0043a00c4129fea95c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php+sphinx使用">
+<meta property="og:url" content="http://im.yonglang.co/2016/07/15/php-sphinx使用/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="Centos7 Sphinx install
+安装依赖库
+yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel expat-devel
+cd /usr/local/src
+
+// https://share.weiyun.com/2da811898545e0043a00c4129fea95c">
+<meta property="og:updated_time" content="2016-07-15T01:37:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php+sphinx使用">
+<meta name="twitter:description" content="Centos7 Sphinx install
+安装依赖库
+yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel expat-devel
+cd /usr/local/src
+
+// https://share.weiyun.com/2da811898545e0043a00c4129fea95c">
+<meta name="twitter:creator" content="@763960267">
+
+    
+    <link rel="alternative" href="/atom.xml" title="知识记录" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="知识记录" title="知识记录"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="知识记录">知识记录</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章列表</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					<!--
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" st-default-search-input />
+						<input type="hidden" name="q" value="site:im.yonglang.co" class="st-default-search-input">
+					</form>
+					-->
+					<input type="text" class="st-default-search-input">
+					</li>
+				</ul>
+			</nav>			
+</div>
+<a href="https://github.com/m2lan"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/15/php-sphinx使用/" title="php+sphinx使用" itemprop="url">php+sphinx使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-15T01:17:15.000Z" itemprop="datePublished"> 发表于 2016-07-15</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Centos7_Sphinx_install"><span class="toc-number">1.</span> <span class="toc-text">Centos7 Sphinx install</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5"><span class="toc-number">2.</span> <span class="toc-text">coreseek中文搜索测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#u5728PHP_u4E2D_u4F7F_u7528Sphinx"><span class="toc-number">3.</span> <span class="toc-text">在PHP中使用Sphinx</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="Centos7_Sphinx_install"><a href="#Centos7_Sphinx_install" class="headerlink" title="Centos7 Sphinx install"></a>Centos7 Sphinx install</h1><ul>
+<li><p>安装依赖库</p>
+<pre><code>yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel expat-devel
+cd /usr/local/src
+
+// https://share.weiyun.com/2da811898545e0043a00c4129fea95c0
+// download coreseek-3.2.14
+tar xvzf coreseek-3.2.14.tar.gz
+cd coreseek-3.2.14
+cd mmseg-3.2.14
+./bootstrap
+./configure --prefix=/usr/local/mmseg3
+make &amp;&amp; make install
+cd /usr/local/src/coreseek-3.2.14/csft-3.2.14
+
+#这里我们要修改 src/sphinxexpr.cpp 文件，将该文件中的 1013、1047、1080 行的 ExprEval 改为 this-&gt;ExprEval
+sh buildconf.sh
+
+#修改configure文件,找到“#define USE_LIBICONV 1”，将注释去掉，并将1改成0。
+make &amp;&amp; make install
+
+cd ..
+cd testpack
+cat var/test/test.xml   #此时应该正确显示中文
+/usr/local/mmseg3/bin/mmseg -d /usr/local/mmseg3/etc var/test/test.xml  #整篇文章进行分词
+/usr/local/coreseek/bin/indexer -c etc/csft.conf --all  #创建索引
+/usr/local/coreseek/bin/search -c etc/csft.conf 网络搜索    #搜索关键字 网络搜索
+/usr/local/coreseek/bin/searchd -c etc/csft.conf    #正常开启搜索服务
+/usr/local/coreseek/bin/searchd -c etc/csft.conf --stop #如要停止搜索服务
+/usr/local/coreseek/bin/indexer -c etc/csft.conf --all --rotate #如要已启动服务，要更新索引
+</code></pre></li>
+<li><p>安装PHP扩展</p>
+<pre><code>cd /usr/local/src/coreseek-3.2.14/csft-3.2.14/api/libsphinxclient
+./configure --prefix=/usr/local/sphinxclient
+make &amp;&amp; make install
+
+cd /usr/local/src
+wget http://pecl.php.net/get/sphinx-1.1.0.tgz
+tar -xzvf sphinx-1.1.0.tgz
+cd sphinx-1.1.0
+/usr/bin/phpize
+./configure --with-php-config=/usr/local/php/bin/php-config --with-sphinx=/usr/local/sphinxclient
+
+make &amp;&amp; make install
+
+#注意，如果你的php版本是5.4，那么在这一步中会出现错误，提示在 sphinx.c:105:2，可以按下面方式修改：
+
+#vim sphinx.c，找到105行
+
+#把 retval = std_hnd-&gt;read_property(object, member, type TSRMLS_CC); 修改成 retval = std_hnd-&gt;read_property(object, member, type TSRMLS_CC, NULL);
+
+# 重新编译
+./configure --with-php-config=/usr/local/php/bin/php-config --with-sphinx=/usr/local/sphinxclient
+make &amp;&amp; make install
+
+# 修改php.ini文件
+vim /usr/local/php/etc/php.ini
+# 在最后一行加上
+extension=&quot;sphinx.so&quot;
+# 重启
+/etc/init.d/php-fpm restart
+/etc/init.d/nginx restart
+</code></pre></li>
+<li><p>Sphinx配置文件</p>
+<ul>
+<li><p>首先建立Sphinx配置文件</p>
+<pre><code>cd /usr/local/coreseek/etc/
+cp sphinx.conf.dist sphinx.conf
+
+# 删除空格
+sed -i &quot;/^\s*$/d&quot; sphinx.conf
+</code></pre></li>
+<li><p>Sphinx.conf文件</p>
+<pre><code>source src1
+{
+    # data source type. mandatory, no default value
+    # known types are mysql, pgsql, mssql, xmlpipe, xmlpipe2, odbc
+    type                    = mysql
+    #####################################################################
+    ## SQL settings (for &apos;mysql&apos; and &apos;pgsql&apos; types)
+    #####################################################################
+    # some straightforward parameters for SQL source types
+    sql_host                = localhost
+    sql_user                = root
+    sql_pass                = 123456
+    sql_db                    = test
+    sql_port                = 3306    # optional, default is 3306
+    sql_query_pre                           = SET NAMES UTF8  # mysql检索字符集
+    sql_query                = \
+        SELECT id, group_id, UNIX_TIMESTAMP(date_added) AS date_added, title, content \
+        FROM documents
+    sql_ranged_throttle = 0
+    sql_query_info        = SELECT * FROM documents WHERE id=$id  # 这里的id对应于数据表的主键
+}
+index test1
+{
+    source            = src1
+    path            = /usr/local/coreseek/var/data/test1
+    docinfo            = extern
+    mlock            = 0
+    morphology        = none
+    #wordforms            = G:\data\wordforms.txt
+    #exceptions        = /data/exceptions.txt
+    min_word_len        = 1
+    charset_type        = utf-8
+    html_strip                = 0
+}
+indexer
+{
+    mem_limit            = 32M
+}
+searchd
+{
+    log                    = /usr/local/coreseek/var/log/searchd.log
+    query_log            = /usr/local/coreseek/var/log/query.log
+    read_timeout        = 5
+    client_timeout        = 300
+    max_children        = 30
+    pid_file            = /usr/local/coreseek/var/log/searchd.pid
+    max_matches            = 1000
+    seamless_rotate        = 1
+    preopen_indexes        = 0
+    unlink_old            = 1
+    mva_updates_pool    = 1M
+    max_packet_size        = 8M
+    max_filters            = 256
+    max_filter_values    = 4096
+}
+</code></pre></li>
+</ul>
+</li>
+<li><p>创建数据库，导入测试数据</p>
+<blockquote>
+<p>在主数据源设置中，sql_query和sql_query_info字段都是From document，这是安装coreseek时提供的测试表，位于/usr/local/coreseek/etc/example.sql</p>
+</blockquote>
+<pre><code>mysql -uroot -p123456
+create database test;
+use test;
+source /usr/local/coreseek/etc/example.sql
+</code></pre></li>
+<li><p>搜索测试</p>
+<ul>
+<li>创建索引，每次新增数据后，都要重新索引一次</li>
+<li><p>创建索引命令<code>indexer</code></p>
+<ul>
+<li>-c 指定配置文件</li>
+<li>–all 对所有索引重新编制索引</li>
+<li>–rotate 用于轮换索引，主要是在不停止服务的时候增加索引</li>
+<li>–merge 合并索引</li>
+<li><p>针对test:documents创建索引</p>
+<pre><code>cd /usr/local/coreseek/bin
+./indexer -c /usr/local/coreseek/etc/sphinx.conf --all
+</code></pre></li>
+</ul>
+</li>
+<li><p>查询关键字</p>
+<ul>
+<li>查询命令<code>search</code><ul>
+<li>-c 指定配置文件</li>
+</ul>
+</li>
+<li><p>查关键字<code>test</code></p>
+<pre><code>cd /usr/local/coreseek/bin
+./search -c /usr/local/coreseek/etc/sphinx.conf test
+</code></pre></li>
+<li><p>查询关键字<code>group</code></p>
+<pre><code>./search -c /usr/local/coreseek/etc/sphinx.conf group
+</code></pre></li>
+<li><p>插入一条数据并检索</p>
+<pre><code>mysql -uroot -p123456 test
+insert into documents(group_id, group_id2, date_added, title, content) values(3,9,now(),&apos;zhangsan&apos;, &apos;zhangsan is a student&apos;);
+</code></pre></li>
+<li>查询关键字<code>zhangsan</code><blockquote>
+<p>检索结果为0，因为每次新增数据都需要重新添加索引</p>
+</blockquote>
+</li>
+<li><p>插入一条中文书籍并检索</p>
+<pre><code>mysql -uroot -p123456 test
+insert into documents(group_id, group_id2, date_added, title, content) values(3,9,now(),&apos;zhangsan张三&apos;, &apos;张三是一名学生&apos;);
+
+# 重新建立索引
+./indexer -c /usr/local/coreseek/etc/sphinx.conf --all
+</code></pre><h1 id="coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5"><a href="#coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5" class="headerlink" title="coreseek中文搜索测试"></a>coreseek中文搜索测试</h1></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>创建coreseek配置文件</p>
+<pre><code>cd /usr/local/coreseek/etc/
+cp sphinx.conf csft.conf
+</code></pre></li>
+<li><p><code>csft.conf</code>配置文件</p>
+<pre><code>source src1
+{
+    # data source type. mandatory, no default value
+    # known types are mysql, pgsql, mssql, xmlpipe, xmlpipe2, odbc
+    type                    = mysql
+    #####################################################################
+    ## SQL settings (for &apos;mysql&apos; and &apos;pgsql&apos; types)
+    #####################################################################
+    # some straightforward parameters for SQL source types
+    sql_host                = localhost
+    sql_user                = root
+    sql_pass                = 123456
+    sql_db                    = test
+    sql_port                = 3306    # optional, default is 3306
+    sql_query_pre                           = SET NAMES UTF8  # mysql检索字符集
+        #sql_query_pre                           = SET SESSION query_cache_type=1  # 关闭缓存
+    sql_query                = \
+        SELECT id, group_id, UNIX_TIMESTAMP(date_added) AS date_added, title, content \
+        FROM documents
+    sql_ranged_throttle = 0
+    sql_query_info        = SELECT * FROM documents WHERE id=$id  # 这里的id对应于数据表的主键
+}
+index test1
+{
+    source            = src1
+    path            = /usr/local/coreseek/var/data/test1
+    docinfo            = extern
+    mlock            = 0
+    morphology        = none
+    #wordforms            = G:\data\wordforms.txt
+    #exceptions        = /data/exceptions.txt
+    min_word_len        = 1
+    charset_type        = zh_cn.utf-8
+    charset_dictpath    = /usr/local/mmseg3/etc/
+    html_strip                = 0
+}
+indexer
+{
+    mem_limit            = 32M
+}
+searchd
+{
+    log                    = /usr/local/coreseek/var/log/searchd.log
+    query_log            = /usr/local/coreseek/var/log/query.log
+    read_timeout        = 5
+    client_timeout        = 300
+    max_children        = 30
+    pid_file            = /usr/local/coreseek/var/log/searchd.pid
+    max_matches            = 1000
+    seamless_rotate        = 1
+    preopen_indexes        = 0
+    unlink_old            = 1
+    mva_updates_pool    = 1M
+    max_packet_size        = 8M
+    max_filters            = 256
+    max_filter_values    = 4096
+}
+</code></pre></li>
+<li><p>重新测试中文搜索</p>
+<pre><code>cd /usr/local/coreseek/bin
+
+# 用sphinx搜索显示结果是
+[root@localhost bin]# ./search -c /usr/local/coreseek/etc/sphinx.conf zhangsan张三
+Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
+Copyright (c) 2007-2011,
+Beijing Choice Software Technologies Inc (http://www.coreseek.com)
+
+ using config file &apos;/usr/local/coreseek/etc/sphinx.conf&apos;...
+index &apos;test1&apos;: query &apos;zhangsan张三 &apos;: returned 2 matches of 2 total in 0.000 sec
+
+displaying matches:
+1. document=5, weight=2
+    id=5
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 13:39:02
+    title=zhangsan
+    content=zhangsan is a student
+2. document=6, weight=1
+    id=6
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 13:42:27
+    title=zhangsan张三
+    content=张三是一名学生
+
+words:
+1. &apos;zhangsan&apos;: 2 documents, 3 hits
+
+# 基于coreseek搜索
+# 创建索引
+./indexer -c /usr/local/coreseek/etc/csft.conf --all
+# 搜索结果
+[root@localhost bin]# ./search -c /usr/local/coreseek/etc/csft.conf zhangsan张三
+Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
+Copyright (c) 2007-2011,
+Beijing Choice Software Technologies Inc (http://www.coreseek.com)
+
+ using config file &apos;/usr/local/coreseek/etc/csft.conf&apos;...
+index &apos;test1&apos;: query &apos;zhangsan张三 &apos;: returned 1 matches of 1 total in 0.001 sec
+
+displaying matches:
+1. document=6, weight=5
+    id=6
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 13:42:27
+    title=zhangsan张三
+    content=张三是一名学生
+
+words:
+1. &apos;zhangsan&apos;: 2 documents, 3 hits
+2. &apos;张&apos;: 1 documents, 2 hits
+3. &apos;三&apos;: 1 documents, 2 hits
+</code></pre></li>
+<li><p>重新添加一条数据</p>
+<pre><code>mysql -uroot -p123456 test
+insert into documents(group_id, group_id2, date_added, title, content) values(3, 9, now(), &apos;北京清华大学&apos;, &apos;张三在 北京清华大学上学&apos;);
+
+./indexer -c /usr/local/coreseek/etc/csft.conf --all
+
+# 搜索北京清华大学
+[root@localhost bin]# ./search -c /usr/local/coreseek/etc/csft.conf 北京清华大学
+Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
+Copyright (c) 2007-2011,
+Beijing Choice Software Technologies Inc (http://www.coreseek.com)
+
+ using config file &apos;/usr/local/coreseek/etc/csft.conf&apos;...
+index &apos;test1&apos;: query &apos;北京清华大学 &apos;: returned 1 matches of 1 total in 0.001 sec
+
+displaying matches:
+1. document=7, weight=4
+    id=7
+    group_id=3
+    group_id2=9
+    date_added=2016-07-10 14:08:06
+    title=北京清华大学
+    content=张三在北京清华大学上学
+
+words:
+1. &apos;北京&apos;: 1 documents, 2 hits
+2. &apos;清华大学&apos;: 1 documents, 2 hits
+</code></pre></li>
+</ul>
+<h1 id="u5728PHP_u4E2D_u4F7F_u7528Sphinx"><a href="#u5728PHP_u4E2D_u4F7F_u7528Sphinx" class="headerlink" title="在PHP中使用Sphinx"></a>在PHP中使用Sphinx</h1><ul>
+<li>在php中使用sphinx步骤<ul>
+<li>建立sphinx配置文件</li>
+<li>生成索引</li>
+<li>启动sphinx服务进程(searchd)</li>
+<li>安装PHP的sphinx扩展</li>
+<li>使用php客户端连接sphinx服务器</li>
+</ul>
+</li>
+<li>启动sphinx服务命令<code>searchd</code><ul>
+<li>-c 指定配置文件</li>
+<li>–stop 停止服务</li>
+<li>–pidfile 显式指定一个PID文件</li>
+<li>-p 指定端口</li>
+</ul>
+</li>
+<li><p>启动sphinx服务进程(searchd)，并开启端口9312</p>
+<pre><code>cd /usr/local/coreseek/bin
+./searchd(或者 ./searchd -c /usr/local/coreseek/etc/csft.conf) # 这里默认会加载csft.conf文件，如果配置文件不叫csft.conf可以使用-c命令指定配置文件名称
+</code></pre></li>
+<li><p>查看searchd状态</p>
+<pre><code>[root@localhost bin]# ps aux|grep searchd
+root      10424  0.0  0.0  31696   824 pts/0    S    14:15   0:00 ./searchd
+root      10436  0.0  0.0 112664   992 pts/0    R+   14:17   0:00 grep --color=auto searchd
+[root@localhost bin]# netstat -tunpl | grep 9312
+tcp        0      0 0.0.0.0:9312            0.0.0.0:*               LISTEN      10424/./searchd
+</code></pre></li>
+<li><p>简单的PHP检索示例</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+
+    if (empty($_GET[&apos;key&apos;]) &amp;&amp; !isset($_GET[&apos;key&apos;])) {
+            echo &apos;请输入搜索内容&apos;;
+            exit();
+    }
+
+    define(&apos;INDEX&apos;, &apos;test1&apos;);
+
+    $sphinx = new SphinxClient();
+
+    // 设置主机名和端口号(默认9312)
+    $sphinx-&gt;SetServer(&apos;localhost&apos;, 9312);
+
+    /**
+     * 设置匹配方式
+     * 1. SPH_MATCH_ANY表示所有结果
+     * 2. SPH_MATCH_ALL表示包涵关键词的结果
+     */
+    $sphinx-&gt;SetMatchMode(SPH_MATCH_ANY);
+
+    // query(&apos;a&apos;, &apos;b&apos;)在索引中搜索关键字a, query(&apos;a&apos;, &apos;*&apos;)在所有索引中搜索a
+    $result = $sphinx-&gt;query($_GET[&apos;key&apos;], INDEX);
+
+    echo &apos;&lt;pre&gt;&apos;;
+    print_r($result);
+    echo &apos;&lt;/pre&gt;&apos;;
+</code></pre></li>
+</ul>
+<pre><code>    $ids = join(&apos;,&apos;, array_keys($result[&apos;matches&apos;]));
+    $mysql = new mysqli(&apos;localhost&apos;, &apos;root&apos;, &apos;123456&apos;, &apos;test&apos;);
+    $mysql-&gt;query(&apos;SET NAMES utf8&apos;);
+    $sql = &quot;select * from documents where id in({$ids})&quot;;
+
+    $opts = array(
+        &apos;before_match&apos; =&gt; &quot;&lt;font style=&apos;font-weight: bold; color: #f00;&apos;&gt;&quot;,
+        &apos;after_match&apos;  =&gt; &apos;&lt;/font&gt;&apos;
+    );
+
+    $res = $mysql-&gt;query($sql);
+
+    $count = $res-&gt;num_rows;
+
+    if ($count &gt; 0) {
+        while ($list = $res-&gt;fetch_assoc()) {
+            $row = $sphinx-&gt;buildExcerpts($list, INDEX, $_GET[&apos;key&apos;], $opts);
+
+            echo &quot;标题：{$row[4]}&lt;br/&gt;&quot;;
+            echo &quot;内容：{$row[5]}&quot;;
+
+            echo &apos;&lt;hr&gt;&apos;;
+        }
+
+        echo &quot;总共搜索到${count}条&quot;;
+    } else {
+        echo &apos;没有搜索到&apos;;
+    }
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/PHP/">PHP</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/PHP/">PHP</a><a href="/tags/Sphinx/">Sphinx</a><a href="/tags/Coreseek/">Coreseek</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://im.yonglang.co/2016/07/15/php-sphinx使用/" data-title="php+sphinx使用 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/07/15/hexo运行报错/" title="hexo运行报错">
+  <strong>上一篇：</strong><br/>
+  <span>
+  hexo运行报错</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/02/26/centos-安装tsung压力测试工具/"  title="centos-安装tsung压力测试工具">
+ <strong>下一篇：</strong><br/> 
+ <span>centos-安装tsung压力测试工具
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/07/15/php-sphinx使用/" data-title="php+sphinx使用" data-url="http://im.yonglang.co/2016/07/15/php-sphinx使用/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Centos7_Sphinx_install"><span class="toc-number">1.</span> <span class="toc-text">Centos7 Sphinx install</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5"><span class="toc-number">2.</span> <span class="toc-text">coreseek中文搜索测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#u5728PHP_u4E2D_u4F7F_u7528Sphinx"><span class="toc-number">3.</span> <span class="toc-text">在PHP中使用Sphinx</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Docker/" title="Docker">Docker<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>4</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mac/" title="Mac">Mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mongodb/" title="Mongodb">Mongodb<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Objective-c/" title="Objective-c">Objective-c<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Shell/" title="Shell">Shell<sup>11</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Spring-MVC/" title="Spring-MVC">Spring-MVC<sup>2</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://golearns.org/" target="_blank" title="go语言搭建的个人博客">golearns</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 记录知识 分享知识 <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/u/1877167031" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/m2lan" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/763960267" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/100006504108865" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:763960267@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="M2">M2</a>
+		
+		
+		</p>
+</div>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','b2cFpoExgUMZu3--zQzE','2.0.0');
+</script></footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"m2langithub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
