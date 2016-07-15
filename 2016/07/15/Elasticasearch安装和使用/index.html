@@ -1,0 +1,777 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="H-L9QB4DPW-NKtL1L6vu_CwCUaHzhT8Bx9G8Z8hUqoo" />
+  <meta name="baidu-site-verification" content="5O3LcPu3ZS" />
+  
+    <title>Elasticasearch安装和使用 | 知识记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="M2">
+    
+
+    
+    <meta name="description" content="Elasticasearch安装和使用install
+download
+unzip elasticsearch-2.2.0.zip
+
+configvim config/elasticsearch.yml
+
+path.data: app_data
+path.logs: app_logs
+network.host: 0.0.0.0
+install Marvel agent pluginbin/plug">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elasticasearch安装和使用">
+<meta property="og:url" content="http://im.yonglang.co/2016/07/15/Elasticasearch安装和使用/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="Elasticasearch安装和使用install
+download
+unzip elasticsearch-2.2.0.zip
+
+configvim config/elasticsearch.yml
+
+path.data: app_data
+path.logs: app_logs
+network.host: 0.0.0.0
+install Marvel agent pluginbin/plug">
+<meta property="og:updated_time" content="2016-07-15T02:27:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Elasticasearch安装和使用">
+<meta name="twitter:description" content="Elasticasearch安装和使用install
+download
+unzip elasticsearch-2.2.0.zip
+
+configvim config/elasticsearch.yml
+
+path.data: app_data
+path.logs: app_logs
+network.host: 0.0.0.0
+install Marvel agent pluginbin/plug">
+<meta name="twitter:creator" content="@763960267">
+
+    
+    <link rel="alternative" href="/atom.xml" title="知识记录" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/http://7xj3i5.com1.z0.glb.clouddn.com/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="知识记录" title="知识记录"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="知识记录">知识记录</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章列表</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					<!--
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" st-default-search-input />
+						<input type="hidden" name="q" value="site:im.yonglang.co" class="st-default-search-input">
+					</form>
+					-->
+					<input type="text" class="st-default-search-input">
+					</li>
+				</ul>
+			</nav>			
+</div>
+<a href="https://github.com/m2lan"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/15/Elasticasearch安装和使用/" title="Elasticasearch安装和使用" itemprop="url">Elasticasearch安装和使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-15T02:00:43.000Z" itemprop="datePublished"> 发表于 2016-07-15</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Elasticasearch_u5B89_u88C5_u548C_u4F7F_u7528"><span class="toc-number">1.</span> <span class="toc-text">Elasticasearch安装和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#install"><span class="toc-number">1.1.</span> <span class="toc-text">install</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#config"><span class="toc-number">1.2.</span> <span class="toc-text">config</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install_Marvel_agent_plugin"><span class="toc-number">1.3.</span> <span class="toc-text">install Marvel agent plugin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cluster"><span class="toc-number">1.4.</span> <span class="toc-text">cluster</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#start_elasticsearch"><span class="toc-number">1.5.</span> <span class="toc-text">start elasticsearch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install_kibana"><span class="toc-number">1.6.</span> <span class="toc-text">install kibana</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5173_u95ED_u76D1_u63A7"><span class="toc-number">1.7.</span> <span class="toc-text">关闭监控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#create_an_index"><span class="toc-number">1.8.</span> <span class="toc-text">create an index</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BE6_u7EC6_u7684_u6587_u6863_u64CD_u4F5C"><span class="toc-number">1.9.</span> <span class="toc-text">详细的文档操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5head_uFF0C_u7528_u6765_u67E5_u770B_u96C6_u7FA4_u4FE1_u606F"><span class="toc-number">1.10.</span> <span class="toc-text">安装head，用来查看集群信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5F00_u542F_u52A8_u6001_u811A_u672C"><span class="toc-number">1.11.</span> <span class="toc-text">开启动态脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u81EA_u52A8_u521B_u5EFA_u7D22_u5F15"><span class="toc-number">1.12.</span> <span class="toc-text">自动创建索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u52A0_u8F7D_u6570_u636E"><span class="toc-number">1.13.</span> <span class="toc-text">加载数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u67E5_u770B"><span class="toc-number">1.14.</span> <span class="toc-text">查看</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u67E5_u770B_u96C6_u7FA4_u5065_u5EB7_u4FE1_u606F"><span class="toc-number">1.15.</span> <span class="toc-text">查看集群健康信息</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Elasticasearch_u5B89_u88C5_u548C_u4F7F_u7528"><a href="#Elasticasearch_u5B89_u88C5_u548C_u4F7F_u7528" class="headerlink" title="Elasticasearch安装和使用"></a>Elasticasearch安装和使用</h1><h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><ul>
+<li><a href="https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/2.2.0/elasticsearch-2.2.0.zip" target="_blank" rel="external">download</a></li>
+<li><code>unzip elasticsearch-2.2.0.zip</code></li>
+</ul>
+<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><pre><code>vim config/elasticsearch.yml
+
+path.data: app_data
+path.logs: app_logs
+network.host: 0.0.0.0
+</code></pre><h2 id="install_Marvel_agent_plugin"><a href="#install_Marvel_agent_plugin" class="headerlink" title="install Marvel agent plugin"></a>install Marvel agent plugin</h2><pre><code>bin/plugin install licens
+bin/plugin install marvel-agent
+</code></pre><a id="more"></a>    
+<h2 id="cluster"><a href="#cluster" class="headerlink" title="cluster"></a>cluster</h2><pre><code>cluster.name: booksearch
+path.data: app_data
+path.logs: app_logs
+network.host: 0.0.0.0
+</code></pre><h2 id="start_elasticsearch"><a href="#start_elasticsearch" class="headerlink" title="start elasticsearch"></a>start elasticsearch</h2><pre><code>bin/elasticsearch
+
+||
+
+ES_HEAP_SIZE=256m; bin/elasticsearch
+
+|| 守护进程模式运行
+
+bin/elasticsearch -d
+</code></pre><h2 id="install_kibana"><a href="#install_kibana" class="headerlink" title="install kibana"></a>install kibana</h2><pre><code>wget https://download.elastic.co/kibana/kibana/kibana-4.4.1-linux-x64.tar.gz
+tar xzvf kibana-4.4.1-linux-x64.tar.gz
+cd kibana-4.4.1-linux-x64
+bin/kibana plugin --install elasticsearch/marvel/latest
+
+# 修改配置文件
+vim config/kibana.yml
+elasticsearch.url: &quot;http://localhost:9200&quot;
+
+# 启动
+bin/kibana
+</code></pre><h2 id="u5173_u95ED_u76D1_u63A7"><a href="#u5173_u95ED_u76D1_u63A7" class="headerlink" title="关闭监控"></a>关闭监控</h2><pre><code>vim config/elasticsearch.yml
+marvel.agent.enabled: false
+</code></pre><h2 id="create_an_index"><a href="#create_an_index" class="headerlink" title="create an index"></a>create an index</h2><ul>
+<li><p>创建一个名为customer的索引</p>
+<pre><code>curl -XPUT localhost:9200/customer?pretty
+</code></pre></li>
+<li><p>显示所有的索引信息 </p>
+<pre><code>curl localhost:9200/_cat/indices?v
+</code></pre></li>
+<li><p>添加一个文档</p>
+<pre><code>curl -XPUT &apos;localhost:9200/customer/external/1?pretty&apos; -d &apos;{&quot;name&quot;: &quot;John Doe&quot;}&apos;
+</code></pre></li>
+<li><p>获取</p>
+<pre><code>curl -XGET localhost:9200/customer/external/1?pretty
+</code></pre></li>
+<li><p>删除一个索引</p>
+<pre><code>curl -XDELETE localhost:9200/customer?pretty
+</code></pre></li>
+<li><p>更新文档</p>
+<pre><code>curl -XPOST localhost:9200/customer/external/1/_update?pretty -d &apos;{&quot;doc&quot;: {&quot;name&quot;: &quot;Jane doe&quot;}}&apos;
+</code></pre></li>
+</ul>
+<h2 id="u8BE6_u7EC6_u7684_u6587_u6863_u64CD_u4F5C"><a href="#u8BE6_u7EC6_u7684_u6587_u6863_u64CD_u4F5C" class="headerlink" title="详细的文档操作"></a>详细的文档操作</h2><ul>
+<li><p>创建索引</p>
+<pre><code>curl -XPUT localhost:9200/website?pretty
+</code></pre></li>
+<li><p>添加文档</p>
+<pre><code>curl -XPUT localhost:9200/website/blog/123 -d &apos;{&quot;title&quot;: &quot;my first blog entry&quot;, &quot;text&quot;: &quot;just trying this out...&quot;, &quot;date&quot;: &quot;2014/01/01&quot;}&apos;
+curl -XPOST localhost:9200/website/blog/ -d &apos;{&quot;title&quot;: &quot;my second blog entry&quot;, &quot;text&quot;: &quot;still trying this out...&quot;, &quot;date&quot;: &quot;2014/01/01&quot;}&apos;
+</code></pre></li>
+<li><p>获取文档</p>
+<pre><code>curl -XGET localhost:9200/website/blog/123?pretty
+</code></pre></li>
+<li><p>返回文档的一部分</p>
+<ul>
+<li><p>返回文档的title、text字段</p>
+<pre><code>curl -XGET localhost:9200/website/blog/123?_source=title,text
+</code></pre></li>
+<li><p>只返回_source字段</p>
+<pre><code>curl -XGET localhost:9200/website/blog/123/_source
+</code></pre></li>
+</ul>
+</li>
+<li><p>检查文档是否存在</p>
+<pre><code>curl -XHEAD localhost:9200/website/blog/124 -i
+
+HTTP/1.1 404 Not Found
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 0
+
+||
+
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 0
+</code></pre></li>
+<li><p>更新文档</p>
+<pre><code>curl -XPUT localhost:9200/website/blog/123 -d &apos;{&quot;title&quot;: &quot;hello world&quot;, &quot;text&quot;: &quot;hahahhahahaha&quot;, &quot;date&quot;: &quot;2015/01/01&quot;}&apos;
+</code></pre></li>
+<li><p>删除文档</p>
+<pre><code>curl -XDELETE localhost:9200/website/blog/123
+</code></pre></li>
+</ul>
+<h2 id="u5B89_u88C5head_uFF0C_u7528_u6765_u67E5_u770B_u96C6_u7FA4_u4FE1_u606F"><a href="#u5B89_u88C5head_uFF0C_u7528_u6765_u67E5_u770B_u96C6_u7FA4_u4FE1_u606F" class="headerlink" title="安装head，用来查看集群信息"></a>安装head，用来查看集群信息</h2><pre><code>bin/plugin install mobz/elasticsearch-head
+
+url: http://192.168.1.219:9200/_plugin/head/
+</code></pre><h2 id="u5F00_u542F_u52A8_u6001_u811A_u672C"><a href="#u5F00_u542F_u52A8_u6001_u811A_u672C" class="headerlink" title="开启动态脚本"></a>开启动态脚本</h2><ul>
+<li><p>修改配置文件</p>
+<pre><code>vim config/elasticsearch.yml
+
+cluster.name: booksearch
+path.data: app_logs
+path.logs: app_logs
+network.host: 0.0.0.0
+script.inline: true
+script.indexed: true
+</code></pre></li>
+<li><p>执行脚本修改</p>
+<pre><code>curl -XPOST &apos;localhost:9200/customer/external/1/_update?pretty&apos; -d &apos;
+{
+  &quot;script&quot; : &quot;ctx._source.age += 5&quot;
+}&apos;
+</code></pre></li>
+</ul>
+<h2 id="u81EA_u52A8_u521B_u5EFA_u7D22_u5F15"><a href="#u81EA_u52A8_u521B_u5EFA_u7D22_u5F15" class="headerlink" title="自动创建索引"></a>自动创建索引</h2><pre><code>action.auto_create_index: .marvel-*
+</code></pre><h2 id="u52A0_u8F7D_u6570_u636E"><a href="#u52A0_u8F7D_u6570_u636E" class="headerlink" title="加载数据"></a>加载数据</h2><pre><code>wget https://www.elastic.co/guide/en/kibana/3.0/snippets/shakespeare.json
+wget https://github.com/bly2k/files/blob/master/accounts.zip?raw=true
+wget https://download.elastic.co/demos/kibana/gettingstarted/logs.jsonl.gz
+
+unzip accounts.zip
+gunzip logs.jsonl.gz
+
+curl -XPUT http://localhost:9200/shakespeare -d &apos;
+{
+ &quot;mappings&quot; : {
+  &quot;_default_&quot; : {
+   &quot;properties&quot; : {
+    &quot;speaker&quot; : {&quot;type&quot;: &quot;string&quot;, &quot;index&quot; : &quot;not_analyzed&quot; },
+    &quot;play_name&quot; : {&quot;type&quot;: &quot;string&quot;, &quot;index&quot; : &quot;not_analyzed&quot; },
+    &quot;line_id&quot; : { &quot;type&quot; : &quot;integer&quot; },
+    &quot;speech_number&quot; : { &quot;type&quot; : &quot;integer&quot; }
+   }
+  }
+ }
+}
+&apos;;
+
+curl -XPUT http://localhost:9200/logstash-2015.05.18 -d &apos;
+{
+  &quot;mappings&quot;: {
+    &quot;log&quot;: {
+      &quot;properties&quot;: {
+        &quot;geo&quot;: {
+          &quot;properties&quot;: {
+            &quot;coordinates&quot;: {
+              &quot;type&quot;: &quot;geo_point&quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+&apos;;
+
+curl -XPUT http://localhost:9200/logstash-2015.05.19 -d &apos;
+{
+  &quot;mappings&quot;: {
+    &quot;log&quot;: {
+      &quot;properties&quot;: {
+        &quot;geo&quot;: {
+          &quot;properties&quot;: {
+            &quot;coordinates&quot;: {
+              &quot;type&quot;: &quot;geo_point&quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+&apos;;
+
+curl -XPUT http://localhost:9200/logstash-2015.05.20 -d &apos;
+{
+  &quot;mappings&quot;: {
+    &quot;log&quot;: {
+      &quot;properties&quot;: {
+        &quot;geo&quot;: {
+          &quot;properties&quot;: {
+            &quot;coordinates&quot;: {
+              &quot;type&quot;: &quot;geo_point&quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+&apos;;
+
+curl -XPOST &apos;localhost:9200/bank/account/_bulk?pretty&apos; --data-binary @accounts.json
+curl -XPOST &apos;localhost:9200/shakespeare/_bulk?pretty&apos; --data-binary @shakespeare.json
+curl -XPOST &apos;localhost:9200/_bulk?pretty&apos; --data-binary @logs.jsonl
+</code></pre><h2 id="u67E5_u770B"><a href="#u67E5_u770B" class="headerlink" title="查看"></a>查看</h2><pre><code>curl localhost:9200/_cat/indices?v
+</code></pre><h2 id="u67E5_u770B_u96C6_u7FA4_u5065_u5EB7_u4FE1_u606F"><a href="#u67E5_u770B_u96C6_u7FA4_u5065_u5EB7_u4FE1_u606F" class="headerlink" title="查看集群健康信息"></a>查看集群健康信息</h2><pre><code>curl -XGET localhost:9200/_cluster/health
+
+{
+    &quot;cluster_name&quot;: &quot;booksearch&quot;,
+    &quot;status&quot;: &quot;green&quot;,
+    &quot;timed_out&quot;: false,
+    &quot;number_of_nodes&quot;: 2,
+    &quot;number_of_data_nodes&quot;: 2,
+    &quot;active_primary_shards&quot;: 38,
+    &quot;active_shards&quot;: 76,
+    &quot;relocating_shards&quot;: 0,
+    &quot;initializing_shards&quot;: 0,
+    &quot;unassigned_shards&quot;: 0,
+    &quot;delayed_unassigned_shards&quot;: 0,
+    &quot;number_of_pending_tasks&quot;: 0,
+    &quot;number_of_in_flight_fetch&quot;: 0,
+    &quot;task_max_waiting_in_queue_millis&quot;: 0,
+    &quot;active_shards_percent_as_number&quot;: 100
+}
+</code></pre><ul>
+<li><p>status</p>
+<p>  颜色|意义
+  —–|—–
+  green|所有主要分片和复制分片都可用
+  yellow|所有主要分片可用，但不是所有复制分片都可用
+  red|不是所有的主要分片都可用</p>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Elasticasearch/">Elasticasearch</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Elasticasearch/">Elasticasearch</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://im.yonglang.co/2016/07/15/Elasticasearch安装和使用/" data-title="Elasticasearch安装和使用 | 知识记录" data-tsina="1877167031" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/07/15/hexo运行报错/"  title="hexo运行报错">
+ <strong>下一篇：</strong><br/> 
+ <span>hexo运行报错
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/07/15/Elasticasearch安装和使用/" data-title="Elasticasearch安装和使用" data-url="http://im.yonglang.co/2016/07/15/Elasticasearch安装和使用/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Elasticasearch_u5B89_u88C5_u548C_u4F7F_u7528"><span class="toc-number">1.</span> <span class="toc-text">Elasticasearch安装和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#install"><span class="toc-number">1.1.</span> <span class="toc-text">install</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#config"><span class="toc-number">1.2.</span> <span class="toc-text">config</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install_Marvel_agent_plugin"><span class="toc-number">1.3.</span> <span class="toc-text">install Marvel agent plugin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cluster"><span class="toc-number">1.4.</span> <span class="toc-text">cluster</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#start_elasticsearch"><span class="toc-number">1.5.</span> <span class="toc-text">start elasticsearch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install_kibana"><span class="toc-number">1.6.</span> <span class="toc-text">install kibana</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5173_u95ED_u76D1_u63A7"><span class="toc-number">1.7.</span> <span class="toc-text">关闭监控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#create_an_index"><span class="toc-number">1.8.</span> <span class="toc-text">create an index</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BE6_u7EC6_u7684_u6587_u6863_u64CD_u4F5C"><span class="toc-number">1.9.</span> <span class="toc-text">详细的文档操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5head_uFF0C_u7528_u6765_u67E5_u770B_u96C6_u7FA4_u4FE1_u606F"><span class="toc-number">1.10.</span> <span class="toc-text">安装head，用来查看集群信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5F00_u542F_u52A8_u6001_u811A_u672C"><span class="toc-number">1.11.</span> <span class="toc-text">开启动态脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u81EA_u52A8_u521B_u5EFA_u7D22_u5F15"><span class="toc-number">1.12.</span> <span class="toc-text">自动创建索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u52A0_u8F7D_u6570_u636E"><span class="toc-number">1.13.</span> <span class="toc-text">加载数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u67E5_u770B"><span class="toc-number">1.14.</span> <span class="toc-text">查看</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u67E5_u770B_u96C6_u7FA4_u5065_u5EB7_u4FE1_u606F"><span class="toc-number">1.15.</span> <span class="toc-text">查看集群健康信息</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Docker/" title="Docker">Docker<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Elasticasearch/" title="Elasticasearch">Elasticasearch<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Keepalived/" title="Keepalived">Keepalived<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mac/" title="Mac">Mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Mongodb/" title="Mongodb">Mongodb<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Objective-c/" title="Objective-c">Objective-c<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/PHP/" title="PHP">PHP<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Shell/" title="Shell">Shell<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Spring-MVC/" title="Spring-MVC">Spring-MVC<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Tigase/" title="Tigase">Tigase<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Elasticasearch/" style="font-size: 10px;">Elasticasearch</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://golearns.org/" target="_blank" title="go语言搭建的个人博客">golearns</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 记录知识 分享知识 <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/u/1877167031" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/m2lan" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/763960267" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/100006504108865" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:763960267@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="M2">M2</a>
+		
+		
+		</p>
+</div>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','b2cFpoExgUMZu3--zQzE','2.0.0');
+</script></footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"m2langithub"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

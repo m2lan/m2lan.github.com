@@ -14,30 +14,33 @@
 
     
     <meta name="description" content="kafka
-kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。通过zookeeper实现集群kafka集群由多个kafka实例组成，每个实例称为broker
+kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
+通过zookeeper实现集群
+kafka集群由多个kafka实例组成，每个实例称为broker
 
 installwget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-tar xzf kafka_2.11-0.9.0.0.tgz
-e">
+tar xzf kafka_2.11-0.9.0.0.tgz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kafka">
 <meta property="og:url" content="http://im.yonglang.co/2016/02/25/kafka/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="kafka
-kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。通过zookeeper实现集群kafka集群由多个kafka实例组成，每个实例称为broker
+kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
+通过zookeeper实现集群
+kafka集群由多个kafka实例组成，每个实例称为broker
 
 installwget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-tar xzf kafka_2.11-0.9.0.0.tgz
-e">
-<meta property="og:updated_time" content="2016-07-15T01:45:27.000Z">
+tar xzf kafka_2.11-0.9.0.0.tgz">
+<meta property="og:updated_time" content="2016-07-15T02:31:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kafka">
 <meta name="twitter:description" content="kafka
-kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。通过zookeeper实现集群kafka集群由多个kafka实例组成，每个实例称为broker
+kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
+通过zookeeper实现集群
+kafka集群由多个kafka实例组成，每个实例称为broker
 
 installwget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-tar xzf kafka_2.11-0.9.0.0.tgz
-e">
+tar xzf kafka_2.11-0.9.0.0.tgz">
 <meta name="twitter:creator" content="@763960267">
 
     
@@ -121,13 +124,16 @@ e">
 		</div>
 		
 		<h1 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h1><blockquote>
-<p>kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。<br>通过zookeeper实现集群<br>kafka集群由多个kafka实例组成，每个实例称为broker</p>
+<p>kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
+通过zookeeper实现集群
+kafka集群由多个kafka实例组成，每个实例称为broker</p>
 </blockquote>
 <h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><pre><code>wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
 tar xzf kafka_2.11-0.9.0.0.tgz
 export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
 cd kafka_2.11-0.9.0.0
-</code></pre><h2 id="u542F_u52A8zookeeper"><a href="#u542F_u52A8zookeeper" class="headerlink" title="启动zookeeper"></a>启动zookeeper</h2><pre><code>bin/zookeeper-server-start.sh config/zookeeper.properties
+</code></pre><a id="more"></a>
+<h2 id="u542F_u52A8zookeeper"><a href="#u542F_u52A8zookeeper" class="headerlink" title="启动zookeeper"></a>启动zookeeper</h2><pre><code>bin/zookeeper-server-start.sh config/zookeeper.properties
 </code></pre><h2 id="u542F_u52A8kafka"><a href="#u542F_u52A8kafka" class="headerlink" title="启动kafka"></a>启动kafka</h2><pre><code>bin/kafka-server-start.sh config/server.properties
 </code></pre><h2 id="u521B_u5EFA_u4E00_u4E2Atopic"><a href="#u521B_u5EFA_u4E00_u4E2Atopic" class="headerlink" title="创建一个topic"></a>创建一个topic</h2><ul>
 <li><p>创建一个单分区、单副本的<code>test</code>话题</p>
@@ -177,7 +183,9 @@ bin/kafka-server-start.sh config/server-2.properties &amp;
 Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
     Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0,1
 </code></pre><blockquote>
-<p><code>leader</code>负责节点所有读取和写入指定分区<br><code>replicas</code>复制此分区节点列表日志<br><code>isr</code>集中同步副本</p>
+<p><code>leader</code>负责节点所有读取和写入指定分区
+<code>replicas</code>复制此分区节点列表日志
+<code>isr</code>集中同步副本</p>
 </blockquote>
 </li>
 <li><p>查看单复制集下的<code>topics</code></p>
@@ -367,6 +375,10 @@ default.replication.factor=3
 		  
 		
 		  
+			<li><a href="/categories/Elasticasearch/" title="Elasticasearch">Elasticasearch<sup>1</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/Git/" title="Git">Git<sup>4</sup></a></li>
 		  
 		
@@ -438,7 +450,7 @@ default.replication.factor=3
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Elasticasearch/" style="font-size: 10px;">Elasticasearch</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
     </div>
   </div>
 

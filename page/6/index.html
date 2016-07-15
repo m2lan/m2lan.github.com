@@ -86,24 +86,41 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/10/Shell-helloworld/" title="Shell-helloworld" itemprop="url">Shell-helloworld</a>
+      <a href="/2015/12/09/MongoDB-3-0-3用户认证/" title="MongoDB-3.0.3用户认证" itemprop="url">MongoDB-3.0.3用户认证</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T18:11:03.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    <time datetime="2015-12-09T15:32:12.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <pre><code>#!/bin/bash
-# &quot;#!&quot;是一个约定的标记，用来告诉系统这个脚本需要使用什么解释器来执行，使用哪一种shell
-# 
-echo &quot;hello world!&quot;;
-</code></pre>
+        <h2 id="u5728Mongodb3-0-3_u4E2D_u521B_u5EFAUser_u8FDB_u884C_u6743_u9650_u9A8C_u8BC1"><a href="#u5728Mongodb3-0-3_u4E2D_u521B_u5EFAUser_u8FDB_u884C_u6743_u9650_u9A8C_u8BC1" class="headerlink" title="在Mongodb3.0.3中创建User进行权限验证"></a>在Mongodb3.0.3中创建User进行权限验证</h2><ul>
+<li><p>启动mongodb，切换db为admin</p>
+<pre><code>use admin
+db.system.version.find()
+db.system.version.update({&quot;_id&quot;: &quot;authSchema&quot;}, {&quot;$set&quot;: {&quot;currentVersion&quot;: 3}})
+</code></pre></li>
+<li><p>为数据库创建用户，这里使用的mydb数据库</p>
+<pre><code>use mydb
+db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;123456&quot;, roles: [{role: &quot;dbOwner&quot;, db: &quot;mydb&quot;}]})
+</code></pre></li>
+<li><p>在mongodb.conf中添加authorization: enabled</p>
+<pre><code>security:
+  authorization: enabled
+</code></pre></li>
+<li>完毕！重启mongodb验证。</li>
+<li>参考:<ol>
+<li><a href="http://docs.mongodb.org/manual/reference/configuration-options/" target="_blank" rel="external">配置文件操作</a></li>
+<li><a href="http://docs.mongodb.org/manual/reference/built-in-roles/" target="_blank" rel="external">权限</a></li>
+</ol>
+</li>
+</ul>
+
         
         
         <p class="article-more-link">
@@ -115,13 +132,13 @@ echo &quot;hello world!&quot;;
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Shell/">Shell</a>
+  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
   </div>
 
 </div>
@@ -132,7 +149,7 @@ echo &quot;hello world!&quot;;
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/12/10/Shell-helloworld/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-helloworld/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/12/09/MongoDB-3-0-3用户认证/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/MongoDB-3-0-3用户认证/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -152,27 +169,34 @@ echo &quot;hello world!&quot;;
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/10/OC-检测视图退出/" title="OC-检测视图退出" itemprop="url">OC-检测视图退出</a>
+      <a href="/2015/12/09/Mongodb-启动/" title="Mongodb-启动" itemprop="url">Mongodb-启动</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T18:10:15.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    <time datetime="2015-12-09T15:26:15.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <pre><code>-(void) viewWillDisappear:(BOOL)animated {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-       // back button was pressed.  We know this is true because self is no longer
-       // in the navigation stack.  
-    }
-    [super viewWillDisappear:animated];
-}
-</code></pre>
+        <h2 id="Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55"><a href="#Mac_u4E0B_u5B89_u88C5PHP_u7684mongodb_u6269_u5C55" class="headerlink" title="Mac下安装PHP的mongodb扩展"></a>Mac下安装PHP的mongodb扩展</h2><ul>
+<li><p><code>XAMPP/bin</code></p>
+<pre><code>sudo pecl install mongo
+</code></pre></li>
+<li><p><code>php.ini</code>添加</p>
+<pre><code>extension=mongo.so
+</code></pre></li>
+</ul>
+<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><ul>
+<li>创建<code>/data/db</code>目录<code>sudo mkdir -p /data/db</code></li>
+<li>设置<code>/data/db</code>目录权限<code>sudo chown -R 你的系统登录用户名 /data</code></li>
+<li>终端执行<code>mongod</code></li>
+<li>输入<code>mongo</code>便可连结到默认的数据库</li>
+</ul>
+
         
         
         <p class="article-more-link">
@@ -184,13 +208,13 @@ echo &quot;hello world!&quot;;
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Objective-c/">Objective-c</a>
+  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Objective-c/">Objective-c</a>
+  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
   </div>
 
 </div>
@@ -201,7 +225,7 @@ echo &quot;hello world!&quot;;
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/12/10/OC-检测视图退出/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/OC-检测视图退出/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/12/09/Mongodb-启动/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Mongodb-启动/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -221,62 +245,37 @@ echo &quot;hello world!&quot;;
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/10/OC-UIButton中设置image大小/" title="OC-UIButton中设置image大小" itemprop="url">OC-UIButton中设置image大小</a>
+      <a href="/2015/12/09/MySQL-修改数据库和表的编码/" title="MySQL-修改数据库和表的编码" itemprop="url">MySQL-修改数据库和表的编码</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T18:08:49.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    <time datetime="2015-12-09T15:23:13.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <pre><code>#import &lt;UIKit/UIKit.h&gt;
+        <ul>
+<li><p>查看数据库编码 </p>
+<pre><code>show variables like &apos;char%&apos;;
+</code></pre></li>
+<li><p>修改表编码 </p>
+<pre><code>ALTER TABLE &apos;table&apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
+</code></pre></li>
+<li><p>修改表字段编码 </p>
+<pre><code>ALTER TABLE &apos;test&apos; CHANGE &apos;name&apos; &apos;name&apos; VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
+</code></pre></li>
+<li><p>查看表编码 </p>
+<pre><code>show create table mytable
+</code></pre></li>
+<li><p>修改mysql默认编码</p>
+<pre><code>[mysqld]和[client]后添加character_set_server=utf8
+</code></pre></li>
+</ul>
 
-@interface UIImage (Category)
-
-- (UIImage*)transformWidth:(CGFloat)width
-                    height:(CGFloat)height;
-
-@end
-
-
-#import &quot;UIImage+Category.h&quot;
-
-@implementation UIImage (Category)
-
-- (UIImage*)transformWidth:(CGFloat)width
-               height:(CGFloat)height {
-
-    CGFloat destW = width;
-    CGFloat destH = height;
-    CGFloat sourceW = width;
-    CGFloat sourceH = height;
-
-    CGImageRef imageRef = self.CGImage;
-    CGContextRef bitmap = CGBitmapContextCreate(NULL,
-                                               destW,
-                                               destH,
-                                               CGImageGetBitsPerComponent(imageRef),
-                                               4*destW,
-                                               CGImageGetColorSpace(imageRef),
-                                               (kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst));
-
-    CGContextDrawImage(bitmap, CGRectMake(0, 0, sourceW, sourceH), imageRef);
-
-    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
-    UIImage *resultImage = [UIImage imageWithCGImage:ref];
-    CGContextRelease(bitmap);
-    CGImageRelease(ref);
-
-    return resultImage;
-}
-
-@end
-</code></pre>
         
         
         <p class="article-more-link">
@@ -288,13 +287,13 @@ echo &quot;hello world!&quot;;
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Objective-c/">Objective-c</a>
+  <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Objective-c/">Objective-c</a>
+  <span></span> <a href="/tags/MySQL/">MySQL</a>
   </div>
 
 </div>
@@ -305,193 +304,7 @@ echo &quot;hello world!&quot;;
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/12/10/OC-UIButton中设置image大小/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/OC-UIButton中设置image大小/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/IOS-创建文件目录/" title="IOS-创建文件目录" itemprop="url">IOS-创建文件目录</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:07:32.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <pre><code>//
-//  ViewController.m
-//  chat-view
-//
-//  Created by yonglang on 14/12/4.
-//  Copyright (c) 2014年 yonglang. All rights reserved.
-//
-
-#import &quot;ViewController.h&quot;
-
-static NSString *homeDir = nil;
-
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    NSLog(@&quot;audioDir: %@&quot;, [self createFileDirectory]);
-}
-
-- (NSString *)createFileDirectory {
-    if (!homeDir) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        homeDir = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;1321312321/home&quot;]];
-
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if (![fileManager fileExistsAtPath:homeDir]) {
-            [fileManager createDirectoryAtPath:homeDir withIntermediateDirectories:YES attributes:nil error:nil];
-        }
-    }
-    return homeDir;
-}
-
-@end
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Objective-c/">Objective-c</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Objective-c/">Objective-c</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/IOS-创建文件目录/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/IOS-创建文件目录/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/10/OC-数组对象排序/" title="OC-数组对象排序" itemprop="url">OC-数组对象排序</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-09T18:06:15.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="Comparator_u6392_u5E8F"><a href="#Comparator_u6392_u5E8F" class="headerlink" title="Comparator排序"></a>Comparator排序</h2><pre><code>NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-
-    HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1];
-    HLMessage *msg2 = [[NSClassFromString([obj2 messageClassName]) alloc]initWithManagedObject:obj2];
-
-    NSComparisonResult result = [[msg1 timestamp] compare:[msg2 timestamp]];
-
-    switch(result) {
-        case NSOrderedAscending:
-            return NSOrderedAscending;
-        case NSOrderedDescending:
-            return NSOrderedDescending;
-        case NSOrderedSame:
-            return NSOrderedSame;
-        default:
-            return NSOrderedSame;
-    }
-}];
-return arr;
-</code></pre><h2 id="SortDescriptor_u6392_u5E8F"><a href="#SortDescriptor_u6392_u5E8F" class="headerlink" title="SortDescriptor排序"></a>SortDescriptor排序</h2><pre><code>NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@&quot;timestamp&quot; ascending:YES];
-NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-NSArray *sortArray = [array sortedArrayUsingDescriptors:sortDescriptors];
-
-return sortArray;
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Objective-c/">Objective-c</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Objective-c/">Objective-c</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/12/10/OC-数组对象排序/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/OC-数组对象排序/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/12/09/MySQL-修改数据库和表的编码/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/MySQL-修改数据库和表的编码/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -507,7 +320,7 @@ return sortArray;
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
   </nav>
 
 </div>
@@ -524,6 +337,10 @@ return sortArray;
 		
 		  
 			<li><a href="/categories/Docker/" title="Docker">Docker<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Elasticasearch/" title="Elasticasearch">Elasticasearch<sup>1</sup></a></li>
 		  
 		
 		  
@@ -598,7 +415,7 @@ return sortArray;
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Elasticasearch/" style="font-size: 10px;">Elasticasearch</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
     </div>
   </div>
 

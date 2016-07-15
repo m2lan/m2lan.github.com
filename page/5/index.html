@@ -86,46 +86,27 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/10/Shell-转义替换/" title="Shell-转义替换" itemprop="url">Shell-转义替换</a>
+      <a href="/2015/12/10/SpringMVC-学习01/" title="SpringMVC-学习01" itemprop="url">SpringMVC-学习01</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T18:17:29.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    <time datetime="2015-12-09T17:19:19.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <pre><code>#!/bin/bash
-# 转义替换
-# -e 对转义字符进行替换
-
-echo -e &quot;hello world \n hahahah&quot;
-
-# 将命令执行的结果保存到变量中
-DATE=`date`
-echo $DATE
-
-# ${var:-message} 如果var为空或已被删除，则返回message，不会改变var的值
-# ${var:=message} 如果var为空或已被删除，则返回message，并将var的值设置为message
-# ${var:?message} 如果var为空或已被删除，则把message做为错误消息输出，脚本停止运行
-# ${var:+message} 如果var已被定义，则返回message，不会改变var的值
-
-echo ${var:-&quot;a---hahahahha&quot;}
-echo ${var:=&quot;b---hahhahaha&quot;}
-echo ${var}
-
-unset var
-echo ${var:?&quot;c---hahahahha&quot;} # 程序运行此处将停止
-
-echo ${var:+&quot;d---hahahhaha&quot;}
-</code></pre>
+        <ul>
+<li>下载<a href="http://maven.springframework.org/release/org/springframework/spring/">springframework</a></li>
+<li>新建web项目，拷贝<code>spring-framework-4.1.2.RELEASE/libs</code>下面所有的<code>*.RELEASE.jar</code>到<code>lib</code>目录下。
         
         
         <p class="article-more-link">
+          
+            <a href="/2015/12/10/SpringMVC-学习01/#more">阅读全文</a>
           
        </p>
     </div>
@@ -134,13 +115,13 @@ echo ${var:+&quot;d---hahahhaha&quot;}
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  <a class="article-category-link" href="/categories/Spring-MVC/">Spring-MVC</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Shell/">Shell</a>
+  <span></span> <a href="/tags/Spring-MVC/">Spring-MVC</a>
   </div>
 
 </div>
@@ -151,7 +132,7 @@ echo ${var:+&quot;d---hahahhaha&quot;}
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/12/10/Shell-转义替换/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-转义替换/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/12/10/SpringMVC-学习01/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/SpringMVC-学习01/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -171,60 +152,29 @@ echo ${var:+&quot;d---hahahhaha&quot;}
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/10/Shell-case/" title="Shell-case" itemprop="url">Shell-case</a>
+      <a href="/2015/12/10/Mac-配置vim/" title="Mac-配置vim" itemprop="url">Mac-配置vim</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T18:16:58.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    <time datetime="2015-12-09T17:17:00.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <pre><code>#!/bin/bash
-#case
-
-NAME=&quot;john&quot;
-
-case ${NAME} in
-    &quot;john&quot; )
-        echo &quot;hahahha --- john&quot;
-        ;;
-    &quot;johnx&quot; )
-        echo &quot;huhuhuhu ---- johnx&quot;
-        ;;
-esac
-
-echo &quot;请输入1-3&quot;
-read INPUT
-case $INPUT in
-    1 )
-        echo &quot;你输入了1&quot;;;
-    2 )
-        echo &quot;你输入了2&quot;;;
-    3 )
-        echo &quot;你输入了3&quot;;;
-    * ) # 当以上条件不匹配，则会进入到这里
-        echo &quot;你的输出超出了范围&quot;;;
-esac
-
-option=&quot;${1}&quot;
-case $option in
-    -f ) FILE=&quot;${2}&quot;
-        echo &quot;file name is $FILE&quot;;;
-    -d ) DIR=&quot;${2}&quot;
-        echo &quot;dir name is $DIR&quot;;;
-    * )
-        echo &quot;`basename ${0}`: usage: [-f file] | [-d directory]&quot;
-        exit 1;; # 脚本运行的返回值 exit 0 表示成功， exit 1 表示失败
-esac
-</code></pre>
+        <ul>
+<li>下载配色方案<a href="https://github.com/tomasr/molokai">molokai</a></li>
+<li>在当前用户根目录下的<code>~/.vim</code>创建<code>colors</code>目录，将下载的配色方案中的<code>molokai.vim</code>移动到<code>~/.vim/colors</code>中</li>
+<li>在当前用户根目录下新建<code>.vimrc</code>，添加<code>colorscheme molokai</code><ul>
+<li><code>vimrc</code>可以把<code>/usr/share/vim/vimrc</code>拷贝过来
         
         
         <p class="article-more-link">
+          
+            <a href="/2015/12/10/Mac-配置vim/#more">阅读全文</a>
           
        </p>
     </div>
@@ -233,13 +183,13 @@ esac
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  <a class="article-category-link" href="/categories/Mac/">Mac</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Shell/">Shell</a>
+  <span></span> <a href="/tags/Mac/">Mac</a>
   </div>
 
 </div>
@@ -250,7 +200,7 @@ esac
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/12/10/Shell-case/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-case/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/12/10/Mac-配置vim/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Mac-配置vim/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -270,38 +220,39 @@ esac
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/10/Shell-包含文件/" title="Shell-包含文件" itemprop="url">Shell-包含文件</a>
+      <a href="/2015/12/10/Tigase-操作/" title="Tigase-操作" itemprop="url">Tigase-操作</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T18:16:28.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    <time datetime="2015-12-09T16:14:17.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <pre><code># shell 中包含外部脚本，可以使用
-# 1. . filename
-# 2. source filename
-# 现在新建一个脚本test.sh，内容如下
-
-USERNAME=&quot;john&quot;
-PASSWORD=&quot;123456&quot;
-
-# 再新建一个include.sh，内容如下
-
-#!/bin/bash
-
-. ./test.sh
-
-echo $USERNAME  # 输出john
-</code></pre>
+        <h3 id="Tigase_u64CD_u4F5C"><a href="#Tigase_u64CD_u4F5C" class="headerlink" title="Tigase操作"></a>Tigase操作</h3><hr>
+<h4 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h4><ul>
+<li>在<a href="https://projects.tigase.org/projects/tigase-server/repository">Tigase-server</a>下载<code>Tigase</code>源码</li>
+<li><code>git clone https://repository.tigase.org/git/tigase-server.git</code>默认下载的时最新版本</li>
+<li>如果要下载其他版本，在本机创建目录，在目录下<ul>
+<li><code>git init</code></li>
+<li><code>git remote add origin https://repository.tigase.org/git/tigase-server.git</code></li>
+<li>如果要下载比如说<code>5.2.0</code>,<code>git pull origin tigase-server-5.2.0</code></li>
+</ul>
+</li>
+<li>由于是源码要在<code>eclipse</code>中运行，运行<code>mvn eclipse:eclipse</code>先转成<code>eclipse</code>项目</li>
+<li>打开<code>eclipse</code>导入<code>tigase</code>项目</li>
+<li>下载下来后进入，修改<code>etc/tigase.conf</code>，修改<code>JAVA_HOME</code></li>
+<li>修改<code>etc/init.properties</code>,详细配置参数请见:<a href="http://golearns.org/topic/view/28">config</a></li>
+<li>这时就可以启动项目了，入口文件是<code>XMPPServer.java</code>
         
         
         <p class="article-more-link">
+          
+            <a href="/2015/12/10/Tigase-操作/#more">阅读全文</a>
           
        </p>
     </div>
@@ -310,13 +261,13 @@ echo $USERNAME  # 输出john
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  <a class="article-category-link" href="/categories/Tigase/">Tigase</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Shell/">Shell</a>
+  <span></span> <a href="/tags/XMPP/">XMPP</a><a href="/tags/Tigase/">Tigase</a>
   </div>
 
 </div>
@@ -327,7 +278,7 @@ echo $USERNAME  # 输出john
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/12/10/Shell-包含文件/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-包含文件/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/12/10/Tigase-操作/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Tigase-操作/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -347,69 +298,29 @@ echo $USERNAME  # 输出john
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/10/Shell-算术运算符-字符串操作/" title="Shell-算术运算符+字符串操作" itemprop="url">Shell-算术运算符+字符串操作</a>
+      <a href="/2015/12/10/Tigase-MUC配置/" title="Tigase-MUC配置" itemprop="url">Tigase-MUC配置</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T18:15:16.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    <time datetime="2015-12-09T16:13:31.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <pre><code>#!/bin/bash
-#算术运算符
-
-A=10
-B=$(($A+20))
-echo ${B}
-
-echo $((10+10))
-
-# 表达式和运算符之间要存在空格,不能写成2+2
-num=`expr 2 + 2`
-echo $num
-
-echo $((10/10))
-echo `expr 10 / 10`
-echo $((10*10))
-
-# 乘法*号前面添加反斜杠才能进行运算
-echo `expr 10 \* 10`
-</code></pre><p>==========</p>
-<pre><code>#!/bin/bash
-#string
-
-STRING=&quot;hello world&quot;
-SUBSTRING=&quot;wqpeowqpeowq xxxworldxxxx world&quot;
-STRING2=&quot;QQQQQ WWWWWW BBBBBB EEEEEE&quot;
-
-#字符串替换
-echo ${STRING[@]/world/world!}
-
-#字符串替换所有
-echo ${SUBSTRING[@]//world/world!}
-
-#字符串截取 ${STRING:n} 从第N个位置到结尾
-echo ${STRING:2}
-
-#字符串截取 ${STRING:POS:LEN} 从从第POS位置开始截取LEN长度的字符
-echo ${STRING:2:5}
-
-#删除字符串中的字符，和空替换 
-echo ${STRING2[@]// WWWWWW}
-
-#将字符串开头的字符替换
-echo ${STRING2[@]/#QQQQQ/MMMMM}
-
-#将字符串结尾的字符替换
-echo ${STRING2[@]/%EEEEEE/PPPPP}
-
-#将字符串提出为shell命令
-echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
+        <pre><code>muc#roomconfig_anonymity(匿名房间的级别)
+muc#maxhistoryfetch(历史消息最大记录)
+muc#roomconfig_membersonly(房间仅对成员开放)
+muc#roomconfig_moderatedroom(房间是适度的)
+muc#roomconfig_passwordprotectedroom(需要密码才能进入房间)
+muc#roomconfig_persistentroom(房间是持久的)
+muc#roomconfig_publicroom(列出目录中的房间)
+muc#roomconfig_roomdesc(房间描述)
+muc#roomconfig_roomname(房间名)
+muc#roomconfig_roomsecret(密码)
 </code></pre>
         
         
@@ -422,13 +333,13 @@ echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  <a class="article-category-link" href="/categories/Tigase/">Tigase</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Shell/">Shell</a>
+  <span></span> <a href="/tags/XMPP/">XMPP</a><a href="/tags/Tigase/">Tigase</a>
   </div>
 
 </div>
@@ -439,7 +350,7 @@ echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/12/10/Shell-算术运算符-字符串操作/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-算术运算符-字符串操作/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/12/10/Tigase-MUC配置/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Tigase-MUC配置/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -459,92 +370,29 @@ echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/10/Shell-变量/" title="Shell-变量" itemprop="url">Shell-变量</a>
+      <a href="/2015/12/10/Tigase-0133管理员协议/" title="Tigase-0133管理员协议" itemprop="url">Tigase-0133管理员协议</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-09T18:11:37.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    <time datetime="2015-12-09T16:11:25.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <pre><code>#!/bin/bash
-
-# 变量 if---else---fi
-# 变量赋值不能有空格
-# USERNAME = &quot;zhangsan&quot; error
-# 使用定义过的变量 前面加上美元符$
-USERNAME=&quot;zhangsan&quot;
-
-# 重新定义变量
-# USERNAME=&quot;hahhahaha&quot;
-# 
-# 变量可以定义为只读的 如下：
-# 
-# URL=&quot;http://www.baidu.com&quot;
-# readonly URL
-# URL=&quot;http://www.google.com.hk&quot; --- error 
-# echo $URL
-# 
-# 删除变量 使用unset，不能删除只读变量
-# unset USERNAME
-# echo ${USERNAME} --- 输出为空
-# 
-if [ $USERNAME == &quot;zhangsan&quot; ]; then
-    echo &quot;ok $USERNAME&quot;
-    echo ${USERNAME}  # 返回变量值，更可观
-    echo $USERNAME    # 返回变量值
-else
-    echo &quot;buok&quot;
-fi
-
-# 特殊变量
-# $ 表示当前shell的进程ID，即PID
-# 
-echo $$
-echo $?
-</code></pre><table>
-<thead>
-<tr>
-<th>变量</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$0</td>
-<td>当前脚本文件名</td>
-</tr>
-<tr>
-<td>$n</td>
-<td>传递给脚本或者函数的参数，n表示一个数字，如：第一个参数$1,第二个参数$2</td>
-</tr>
-<tr>
-<td>$#</td>
-<td>传递给脚本的参数个数</td>
-</tr>
-<tr>
-<td>$*</td>
-<td>传递给脚本或者函数的所有参数</td>
-</tr>
-<tr>
-<td>$@</td>
-<td>传递给脚本或者函数的所有参数</td>
-</tr>
-<tr>
-<td>$?</td>
-<td>上个命令的退出状态，或函数的返回值</td>
-</tr>
-<tr>
-<td>$$</td>
-<td>当前shell的进程ID，即PID</td>
-</tr>
-</tbody>
-</table>
+        <ul>
+<li>将<code>src/main/groovy/tigase/admin</code>拷贝到<code>scripts/</code>下,<code>XEP-0133</code>协议由<code>groovy</code>完成。</li>
+<li><p>管理员向服务端发送添加用户的请求，发送至<code>sess-man</code></p>
+<pre><code>&lt;iq id=&quot;EURERE234234234EEWEWEW&quot; to=&quot;sess-man@192.168.0.50&quot; type=&quot;set&quot;&gt;&lt;command xmlns=&quot;http://jabber.org/protocol/commands&quot; node=&quot;http://jabber.org/protocol/admin#add-user&quot;&gt;&lt;/command&gt;&lt;/iq&gt;
+</code></pre></li>
+<li><p>接收服务端返回后，提交添加用户数据</p>
+<pre><code>&lt;iq from=&quot;admin@192.168.0.50/smack&quot; id=&quot;KJKJKJWEW121312312&quot; to=&quot;sess-man@192.168.0.50&quot; type=&quot;set&quot; xml:lang=&quot;en&quot;&gt;&lt;command xmlns=&quot;http://jabber.org/protocol/commands&quot; node=&quot;http://jabber.org/protocol/admin#add-user&quot; sessionid=&quot;&quot;&gt;&lt;x xmlns=&quot;jabber:x:data&quot; type=&quot;submit&quot;&gt;&lt;field type=&quot;hidden&quot; var=&quot;FORM_TYPE&quot;&gt;&lt;value&gt;http://jabber.org/protocol/admin&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;accountjid&quot;&gt;&lt;value&gt;test@192.168.0.50&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;password&quot;&gt;&lt;value&gt;123456&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;password-verify&quot;&gt;&lt;value&gt;12345&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;email&quot;&gt;&lt;value&gt;ttt&lt;/value&gt;&lt;/field&gt;&lt;/x&gt;&lt;/command&gt;&lt;/iq&gt;
+</code></pre></li>
+<li><a href="http://xmpp.org/extensions/xep-0133.html" target="_blank" rel="external">XMPP-0133协议</a></li>
+</ul>
 
         
         
@@ -557,13 +405,13 @@ echo $?
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  <a class="article-category-link" href="/categories/Tigase/">Tigase</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Shell/">Shell</a>
+  <span></span> <a href="/tags/XMPP/">XMPP</a><a href="/tags/Tigase/">Tigase</a>
   </div>
 
 </div>
@@ -574,7 +422,419 @@ echo $?
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/12/10/Shell-变量/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Shell-变量/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/12/10/Tigase-0133管理员协议/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Tigase-0133管理员协议/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/10/Tigase-配置/" title="Tigase-配置" itemprop="url">Tigase-配置</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T16:09:25.000Z" itemprop="datePublished"> 发表于 2015-12-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="u521B_u5EFA_u9ED8_u8BA4_u7684_u914D_u7F6E_u6587_u4EF6_2C_u5305_u542B_u5728_u914D_u7F6E_u7EC4_u4EF6_u5305_u62EC_uFF1A_u4F1A_u8BDD_u7BA1_u7406_u5668_uFF0C_u5BA2_u6237_u7AEF_-__u670D_u52A1_u5668_u8FDE_u63A5_u7BA1_u7406_u5668_u548C_u670D_u52A1_u5668_u5230_u670D_u52A1_u5668_u7684_u8FDE_u63A5_u7BA1_u7406_u5668_u3002"><a href="#u521B_u5EFA_u9ED8_u8BA4_u7684_u914D_u7F6E_u6587_u4EF6_2C_u5305_u542B_u5728_u914D_u7F6E_u7EC4_u4EF6_u5305_u62EC_uFF1A_u4F1A_u8BDD_u7BA1_u7406_u5668_uFF0C_u5BA2_u6237_u7AEF_-__u670D_u52A1_u5668_u8FDE_u63A5_u7BA1_u7406_u5668_u548C_u670D_u52A1_u5668_u5230_u670D_u52A1_u5668_u7684_u8FDE_u63A5_u7BA1_u7406_u5668_u3002" class="headerlink" title="创建默认的配置文件,包含在配置组件包括：会话管理器，客户端 - 服务器连接管理器和服务器到服务器的连接管理器。"></a>创建默认的配置文件,包含在配置组件包括：会话管理器，客户端 - 服务器连接管理器和服务器到服务器的连接管理器。</h1><pre><code>config-type=--gen-config-def
+</code></pre><h1 id="u914D_u7F6E_u7BA1_u7406_u5458_u8D26_u53F7"><a href="#u914D_u7F6E_u7BA1_u7406_u5458_u8D26_u53F7" class="headerlink" title="配置管理员账号"></a>配置管理员账号</h1><pre><code>--admins=admin@192.168.0.50
+</code></pre><h1 id="u914D_u7F6E_u57DF_u540D"><a href="#u914D_u7F6E_u57DF_u540D" class="headerlink" title="配置域名"></a>配置域名</h1><pre><code>--virt-hosts = 192.168.0.50
+</code></pre><h1 id="u8C03_u8BD5_u8F93_u51FA_u4FE1_u606F"><a href="#u8C03_u8BD5_u8F93_u51FA_u4FE1_u606F" class="headerlink" title="调试输出信息"></a>调试输出信息</h1><pre><code>--debug=server,message-archive,muc
+</code></pre><h1 id="u4F7F_u7528_u7684_u6570_u636E_u5E93"><a href="#u4F7F_u7528_u7684_u6570_u636E_u5E93" class="headerlink" title="使用的数据库"></a>使用的数据库</h1><pre><code>--user-db=mysql
+--user-db-uri=jdbc:mysql://127.0.0.1:3306/mytigase?user=root&amp;password=feng&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoCreateUser=true
+</code></pre><h1 id="u52A0_u8F7D_u63D2_u4EF6"><a href="#u52A0_u8F7D_u63D2_u4EF6" class="headerlink" title="加载插件"></a>加载插件</h1><pre><code>--sm-plugins=-starttls,message-archive-xep-0136,offlinemessage
+</code></pre><h1 id="u6700_u5927_u7684_u79BB_u7EBF_u6D88_u606F_u914D_u7F6E"><a href="#u6700_u5927_u7684_u79BB_u7EBF_u6D88_u606F_u914D_u7F6E" class="headerlink" title="最大的离线消息配置"></a>最大的离线消息配置</h1><pre><code>sess-man/plugins-conf/amp/store-limit=1000
+</code></pre><h1 id="u9ED8_u8BA4_u623F_u95F4_u662F_u9501_u4F4F_u7684_uFF0C_u5176_u4ED6_u7528_u6237_u5C31_u65E0_u6CD5_u8FDB_u5165_u8BE5_u623F_u95F4"><a href="#u9ED8_u8BA4_u623F_u95F4_u662F_u9501_u4F4F_u7684_uFF0C_u5176_u4ED6_u7528_u6237_u5C31_u65E0_u6CD5_u8FDB_u5165_u8BE5_u623F_u95F4" class="headerlink" title="默认房间是锁住的，其他用户就无法进入该房间"></a>默认房间是锁住的，其他用户就无法进入该房间</h1><pre><code>muc/muc-lock-new-room[B]=false
+</code></pre><h1 id="u6D88_u606F_u8FC7_u6EE4"><a href="#u6D88_u606F_u8FC7_u6EE4" class="headerlink" title="消息过滤"></a>消息过滤</h1><pre><code>muc/message-filter-enabled[B]=false
+</code></pre><h1 id="u5141_u8BB8_u804A_u5929_u72B6_u6001"><a href="#u5141_u8BB8_u804A_u5929_u72B6_u6001" class="headerlink" title="允许聊天状态"></a>允许聊天状态</h1><pre><code>muc/muc-allow-chat-states[B]=true
+</code></pre><h1 id="u9ED8_u8BA4_u60C5_u51B5_u4E0B_2Ctigase_u8BBE_u7F6E_u53D6_u51B3_u4E8E_u6700_u5927_u53EF_u7528_u5185_u5B58_u4E3Atigase_u670D_u52A1_u5668_u8FDB_u7A0B_u961F_u5217_u7684_u5927_u5C0F"><a href="#u9ED8_u8BA4_u60C5_u51B5_u4E0B_2Ctigase_u8BBE_u7F6E_u53D6_u51B3_u4E8E_u6700_u5927_u53EF_u7528_u5185_u5B58_u4E3Atigase_u670D_u52A1_u5668_u8FDB_u7A0B_u961F_u5217_u7684_u5927_u5C0F" class="headerlink" title="默认情况下,tigase设置取决于最大可用内存为tigase服务器进程队列的大小"></a>默认情况下,tigase设置取决于最大可用内存为tigase服务器进程队列的大小</h1><pre><code>--max-queue-size = 10000
+</code></pre><h1 id="u52A0_u8F7D_u7EC4_u4EF6"><a href="#u52A0_u8F7D_u7EC4_u4EF6" class="headerlink" title="加载组件"></a>加载组件</h1><pre><code>--comp-name-1 = muc
+--comp-class-1 = tigase.muc.MUCComponent
+--comp-name-2=message-archive
+--comp-class-2=tigase.archive.MessageArchiveComponent
+--comp-name-3 = pubsub
+--comp-class-3 = tigase.pubsub.PubSubComponent
+</code></pre><h1 id="u5B58_u50A8_u7528_u6237_u7684_u804A_u5929_u8BB0_u5F55"><a href="#u5B58_u50A8_u7528_u6237_u7684_u804A_u5929_u8BB0_u5F55" class="headerlink" title="存储用户的聊天记录"></a>存储用户的聊天记录</h1><pre><code>message-archive/archive-repo-uri=jdbc:mysql://127.0.0.1:3306/mytigase?user=root&amp;password=feng&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoCreateUser=true
+sess-man/plugins-conf/message-archive-xep-0136/component-jid=message-archive@192.168.0.50
+sess-man/plugins-conf/message-archive-xep-0136/default-store-method=body
+sess-man/plugins-conf/message-archive-xep-0136/required-store-method=body
+sess-man/plugins-conf/message-archive-xep-0136/auto=true
+cl-comp/compress-stream[B]=false
+message-router/components/msg-receivers/s2s.active[B]=false
+c2s/net-buffer-limit[I]=4194304
+</code></pre><ul>
+<li><a href="http://docs.tigase.org/tigase-server/snapshot/Properties_Guide/webhelp/" target="_blank" rel="external">详细参考官方配置</a></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tigase/">Tigase</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/XMPP/">XMPP</a><a href="/tags/Tigase/">Tigase</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/10/Tigase-配置/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/10/Tigase-配置/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/Docker-详细操作/" title="Docker-详细操作" itemprop="url">Docker-详细操作</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:48:47.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="u83B7_u53D6_u955C_u50CF"><a href="#u83B7_u53D6_u955C_u50CF" class="headerlink" title="获取镜像"></a>获取镜像</h2><pre><code>docker pull ubuntu:14.04
+相当于docker pull registry.hub.docker.com/ubuntu:14.04
+可以从国内镜像网站下载docker pull dl.dockerpool.com:5000/ubuntu:14.04
+</code></pre><h2 id="u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF"><a href="#u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF" class="headerlink" title="列出本地已有的镜像"></a>列出本地已有的镜像</h2><pre><code>docker images
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/12/09/Docker-详细操作/#more">阅读全文</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Docker/">Docker</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Docker/">Docker</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/Docker-详细操作/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Docker-详细操作/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/Docker-Hub使用/" title="Docker-Hub使用" itemprop="url">Docker-Hub使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:45:26.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="u5F00_u59CB_u4F7F_u7528Docker_Hub"><a href="#u5F00_u59CB_u4F7F_u7528Docker_Hub" class="headerlink" title="开始使用Docker Hub"></a>开始使用Docker Hub</h2><h3 id="Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub"><a href="#Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub" class="headerlink" title="Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub"></a>Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub</h3><ul>
+<li>展示如何创建一个账户。</li>
+<li>Docker Hub和docker及其组件一起工作。Docker Hub会帮助你和你的同事协作，并获取功能最全的docker。要做到这一点，它提供的服务有：<ul>
+<li>Docker镜像主机</li>
+<li>用户认证</li>
+<li>自动镜像构建和工作流程工具，如构建触发器和webhook</li>
+<li>整合了GitHub和BitBucket</li>
+</ul>
+</li>
+<li>为了使用Docker Hub,首先需要注册创建一个账户。别担心，创建一个账户很简单并且是免费的。</li>
+</ul>
+<h2 id="u521B_u5EFADocker_Hub_u8D26_u6237"><a href="#u521B_u5EFADocker_Hub_u8D26_u6237" class="headerlink" title="创建Docker Hub账户"></a>创建Docker Hub账户</h2><ul>
+<li><p>这里有两种访问可以创建和注册一个Docker Hub账户：</p>
+<ul>
+<li>通过网站创建
+  *填写注册表单,选择您的用户名和密码并指定您的电子邮箱。你也可以报名参加docker邮件列表，会有很多关于docker的信息。<ul>
+<li>一旦你填写表格，查看你的电子邮件，欢迎信息，确认来激活您的账户。</li>
+<li>在完成确认过程之后，您可以使用web控制台登陆</li>
+</ul>
+</li>
+<li><p>通过命令行创建</p>
+<ul>
+<li><p>你可以创建一个Docker Hub账号通过命令行<code>docker login</code>命令</p>
+<pre><code>$ sudo docker login
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>你的Docker账户现在已经激活，你可以使用了。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Docker/">Docker</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Docker/">Docker</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/Docker-Hub使用/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Docker-Hub使用/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/Docker-install注意事项/" title="Docker-install注意事项" itemprop="url">Docker-install注意事项</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:41:55.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li><p>当安装一个不存在的package时<code>yum -y install docker-io</code>,使用</p>
+<pre><code>yum install epel-release
+</code></pre></li>
+</ul>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/12/09/Docker-install注意事项/#more">阅读全文</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Docker/">Docker</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Docker/">Docker</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/Docker-install注意事项/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Docker-install注意事项/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/Mongodb-部署复制集/" title="Mongodb-部署复制集" itemprop="url">Mongodb-部署复制集</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M2" target="_blank" itemprop="author">M2</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-09T15:37:09.000Z" itemprop="datePublished"> 发表于 2015-12-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><a href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6" class="headerlink" title="部署3个节点组成的复制集"></a>部署3个节点组成的复制集</h2><ul>
+<li>3台IP为<ul>
+<li>192.168.0.139 主机名：mongoname1</li>
+<li>192.168.0.140 主机名：mongoname2</li>
+<li>192.168.0.141 主机名：mongoname3</li>
+</ul>
+</li>
+<li>修改<code>/etc/mongodb.conf</code>，添加<code>replSet = rs0</code>(3个节点保持一致)</li>
+<li>启动<code>mongodb</code></li>
+<li><p>在其中一个节点上执行<code>rs.initiate()</code>,用来初始化复制集</p>
+<pre><code>rs.initiate(&quot;mongoname1&quot;)
+</code></pre></li>
+<li><p>查看当前配置信息</p>
+<pre><code>rs.conf()
+</code></pre></li>
+<li><p>将其他节点加入复制集</p>
+<pre><code>rs.add(&quot;mongoname2&quot;);
+rs.add(&quot;mongoname3&quot;);
+</code></pre></li>
+<li><p>查看配置</p>
+<pre><code>rs.conf()
+</code></pre></li>
+<li><p>查看复制集状态</p>
+<pre><code>rs.status()
+</code></pre></li>
+<li><p>如果在多个节点上执行了rs.initate(),可以做以下操作后重启mongodb</p>
+<pre><code>use local
+db.dropDatabase()
+</code></pre></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Mongodb/">Mongodb</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/12/09/Mongodb-部署复制集/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/12/09/Mongodb-部署复制集/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -590,7 +850,7 @@ echo $?
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
   </nav>
 
 </div>
@@ -607,6 +867,10 @@ echo $?
 		
 		  
 			<li><a href="/categories/Docker/" title="Docker">Docker<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Elasticasearch/" title="Elasticasearch">Elasticasearch<sup>1</sup></a></li>
 		  
 		
 		  
@@ -681,7 +945,7 @@ echo $?
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+       <a href="/tags/Apache/" style="font-size: 11.67px;">Apache</a> <a href="/tags/Centos7/" style="font-size: 18.33px;">Centos7</a> <a href="/tags/Coreseek/" style="font-size: 10px;">Coreseek</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Elasticasearch/" style="font-size: 10px;">Elasticasearch</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Haproxy/" style="font-size: 10px;">Haproxy</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongodb/" style="font-size: 13.33px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 11.67px;">Nginx</a> <a href="/tags/Objective-c/" style="font-size: 16.67px;">Objective-c</a> <a href="/tags/PHP/" style="font-size: 11.67px;">PHP</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/Sphinx/" style="font-size: 10px;">Sphinx</a> <a href="/tags/Spring-MVC/" style="font-size: 11.67px;">Spring-MVC</a> <a href="/tags/Tigase/" style="font-size: 15px;">Tigase</a> <a href="/tags/Tsung/" style="font-size: 10px;">Tsung</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
     </div>
   </div>
 
