@@ -29,7 +29,7 @@ yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel
 cd /usr/local/src
 
 // https://share.weiyun.com/2da811898545e0043a00c4129fea95c">
-<meta property="og:updated_time" content="2016-07-15T01:37:55.000Z">
+<meta property="og:updated_time" content="2016-07-15T01:54:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php+sphinx使用">
 <meta name="twitter:description" content="Centos7 Sphinx install
@@ -302,11 +302,13 @@ insert into documents(group_id, group_id2, date_added, title, content) values(3,
 
 # 重新建立索引
 ./indexer -c /usr/local/coreseek/etc/sphinx.conf --all
-</code></pre><h1 id="coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5"><a href="#coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5" class="headerlink" title="coreseek中文搜索测试"></a>coreseek中文搜索测试</h1></li>
+</code></pre></li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<h1 id="coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5"><a href="#coreseek_u4E2D_u6587_u641C_u7D22_u6D4B_u8BD5" class="headerlink" title="coreseek中文搜索测试"></a>coreseek中文搜索测试</h1><ul>
 <li><p>创建coreseek配置文件</p>
 <pre><code>cd /usr/local/coreseek/etc/
 cp sphinx.conf csft.conf
@@ -518,9 +520,8 @@ tcp        0      0 0.0.0.0:9312            0.0.0.0:*               LISTEN      
     echo &apos;&lt;pre&gt;&apos;;
     print_r($result);
     echo &apos;&lt;/pre&gt;&apos;;
-</code></pre></li>
-</ul>
-<pre><code>    $ids = join(&apos;,&apos;, array_keys($result[&apos;matches&apos;]));
+
+    $ids = join(&apos;,&apos;, array_keys($result[&apos;matches&apos;]));
     $mysql = new mysqli(&apos;localhost&apos;, &apos;root&apos;, &apos;123456&apos;, &apos;test&apos;);
     $mysql-&gt;query(&apos;SET NAMES utf8&apos;);
     $sql = &quot;select * from documents where id in({$ids})&quot;;
@@ -551,7 +552,9 @@ tcp        0      0 0.0.0.0:9312            0.0.0.0:*               LISTEN      
 ?&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>  
+</code></pre></li>
+</ul>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -631,14 +634,6 @@ tcp        0      0 0.0.0.0:9312            0.0.0.0:*               LISTEN      
 		<ul>
 		
 		  
-		
-		  
-		
-		  
-		
-		  
-		
-		  
 			<li><a href="/categories/Docker/" title="Docker">Docker<sup>3</sup></a></li>
 		  
 		
@@ -647,19 +642,11 @@ tcp        0      0 0.0.0.0:9312            0.0.0.0:*               LISTEN      
 		  
 		
 		  
-		
-		  
 			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
 		  
 		
 		  
-		
-		  
-		
-		  
 			<li><a href="/categories/Kafka/" title="Kafka">Kafka<sup>1</sup></a></li>
-		  
-		
 		  
 		
 		  
@@ -687,21 +674,11 @@ tcp        0      0 0.0.0.0:9312            0.0.0.0:*               LISTEN      
 		  
 		
 		  
-		
-		  
-		
-		  
-		
-		  
 			<li><a href="/categories/Objective-c/" title="Objective-c">Objective-c<sup>6</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/PHP/" title="PHP">PHP<sup>1</sup></a></li>
-		  
-		
-		  
-		
 		  
 		
 		  
@@ -713,13 +690,7 @@ tcp        0      0 0.0.0.0:9312            0.0.0.0:*               LISTEN      
 		  
 		
 		  
-		
-		  
-		
-		  
 			<li><a href="/categories/Spring-MVC/" title="Spring-MVC">Spring-MVC<sup>2</sup></a></li>
-		  
-		
 		  
 		
 		  
@@ -727,15 +698,7 @@ tcp        0      0 0.0.0.0:9312            0.0.0.0:*               LISTEN      
 		  
 		
 		  
-		
-		  
-		
-		  
-		
-		  
 			<li><a href="/categories/Zookeeper/" title="Zookeeper">Zookeeper<sup>1</sup></a></li>
-		  
-		
 		  
 		
 		</ul>
