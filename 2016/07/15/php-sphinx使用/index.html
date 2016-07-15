@@ -29,7 +29,7 @@ yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel
 cd /usr/local/src
 
 // https://share.weiyun.com/2da811898545e0043a00c4129fea95c">
-<meta property="og:updated_time" content="2016-07-15T01:54:25.000Z">
+<meta property="og:updated_time" content="2016-07-15T01:55:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php+sphinx使用">
 <meta name="twitter:description" content="Centos7 Sphinx install
@@ -290,7 +290,8 @@ source /usr/local/coreseek/etc/example.sql
 </code></pre></li>
 <li><p>插入一条数据并检索</p>
 <pre><code>mysql -uroot -p123456 test
-insert into documents(group_id, group_id2, date_added, title, content) values(3,9,now(),&apos;zhangsan&apos;, &apos;zhangsan is a student&apos;);
+insert into documents(group_id, group_id2, date_added, title, content)
+ values(3,9,now(),&apos;zhangsan&apos;, &apos;zhangsan is a student&apos;);
 </code></pre></li>
 <li>查询关键字<code>zhangsan</code><blockquote>
 <p>检索结果为0，因为每次新增数据都需要重新添加索引</p>
