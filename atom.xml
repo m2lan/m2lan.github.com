@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://im.yonglang.co/"/>
-  <updated>2016-07-15T02:27:33.000Z</updated>
+  <updated>2016-07-19T10:42:12.000Z</updated>
   <id>http://im.yonglang.co/</id>
   
   <author>
@@ -14,6 +14,462 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql嵌套集模型</title>
+    <link href="http://im.yonglang.co/2016/07/19/MySQL-%E5%B5%8C%E5%A5%97%E9%9B%86%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://im.yonglang.co/2016/07/19/MySQL-嵌套集模型/</id>
+    <published>2016-07-19T10:38:03.000Z</published>
+    <updated>2016-07-19T10:42:12.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;u5D4C_u5957_u96C6_u6A21_u578B&quot;&gt;&lt;a href=&quot;#u5D4C_u5957_u96C6_u6A21_u578B&quot; class=&quot;headerlink&quot; title=&quot;嵌套集模型&quot;&gt;&lt;/a&gt;嵌套集模型&lt;/h1&gt;&lt;h2 id=&quot;u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002&quot;&gt;&lt;a href=&quot;#u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002&quot; class=&quot;headerlink&quot; title=&quot;在分类表中，通过左和右值来代表我们的嵌套节点。&quot;&gt;&lt;/a&gt;在分类表中，通过左和右值来代表我们的嵌套节点。&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;创建表并添加测试数据&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;CREATE TABLE category (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    lft INT NOT NULL,
+    rgt INT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO category VALUES
+                            (1,&amp;apos;ELECTRONICS&amp;apos;,1,20),
+                            (2,&amp;apos;TELEVISIONS&amp;apos;,2,9),
+                            (3,&amp;apos;TUBE&amp;apos;,3,4),
+                            (4,&amp;apos;LCD&amp;apos;,5,6),
+                            (5,&amp;apos;PLASMA&amp;apos;,7,8),
+                            (6,&amp;apos;PORTABLE ELECTRONICS&amp;apos;,10,19),
+                            (7,&amp;apos;MP3 PLAYERS&amp;apos;,11,14),
+                            (8,&amp;apos;FLASH&amp;apos;,12,13),
+                            (9,&amp;apos;CD PLAYERS&amp;apos;,15,16),
+                            (10,&amp;apos;2 WAY RADIOS&amp;apos;,17,18);
+
+MariaDB [work]&amp;gt; select * from category;
++-------------+----------------------+-----+-----+
+| category_id | name                 | lft | rgt |
++-------------+----------------------+-----+-----+
+|           1 | ELECTRONICS          |   1 |  20 |
+|           2 | TELEVISIONS          |   2 |   9 |
+|           3 | TUBE                 |   3 |   4 |
+|           4 | LCD                  |   5 |   6 |
+|           5 | PLASMA               |   7 |   8 |
+|           6 | PORTABLE ELECTRONICS |  10 |  19 |
+|           7 | MP3 PLAYERS          |  11 |  14 |
+|           8 | FLASH                |  12 |  13 |
+|           9 | CD PLAYERS           |  15 |  16 |
+|          10 | 2 WAY RADIOS         |  17 |  18 |
++-------------+----------------------+-----+-----+
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;如何确定左边和右边的值，我们在外部节点的最左侧和右侧开始编号
+&lt;img src=&quot;http://7xj3i5.com1.z0.glb.clouddn.com/start.png&quot; alt=&quot;start.png&quot;&gt;&lt;/li&gt;
+&lt;li&gt;这种设计可用于典型的树
+&lt;img src=&quot;http://7xj3i5.com1.z0.glb.clouddn.com/design.png&quot; alt=&quot;design.png&quot;&gt;&lt;/li&gt;
+&lt;li&gt;当树在工作的时候，我们从左到右一层一层将右边的数字一次分配给子节点。这种方法被称为&lt;strong&gt;改进的前序遍历树算法&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;u68C0_u7D22_u4E00_u4E2A_u5B8C_u6574_u7684_u6811&quot;&gt;&lt;a href=&quot;#u68C0_u7D22_u4E00_u4E2A_u5B8C_u6574_u7684_u6811&quot; class=&quot;headerlink&quot; title=&quot;检索一个完整的树&quot;&gt;&lt;/a&gt;检索一个完整的树&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;我们可以通过使用自链接检索一个完整的树节点在父节点lft和rgt之前的节点&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT node.name FROM category AS node, category AS parent
+    WHERE node.lft BETWEEN parent.lft AND parent.rgt
+    AND parent.name = &amp;apos;ELECTRONICS&amp;apos; ORDER BY node.lft;
+
++----------------------+
+| name                 |
++----------------------+
+| ELECTRONICS          |
+| TELEVISIONS          |
+| TUBE                 |
+| LCD                  |
+| PLASMA               |
+| PORTABLE ELECTRONICS |
+| MP3 PLAYERS          |
+| FLASH                |
+| CD PLAYERS           |
+| 2 WAY RADIOS         |
++----------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;u67E5_u627E_u6240_u6709_u7684_u53F6_u5B50_u8282_u70B9&quot;&gt;&lt;a href=&quot;#u67E5_u627E_u6240_u6709_u7684_u53F6_u5B50_u8282_u70B9&quot; class=&quot;headerlink&quot; title=&quot;查找所有的叶子节点&quot;&gt;&lt;/a&gt;查找所有的叶子节点&lt;/h1&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看&lt;code&gt;category&lt;/code&gt;表会发现叶节点的左、右值是连续的数字。为了查找叶节点通过使用&lt;code&gt;rgt = lft + 1&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;select name from category where rgt = lft + 1;
+
++--------------+
+| name         |
++--------------+
+| TUBE         |
+| LCD          |
+| PLASMA       |
+| FLASH        |
+| CD PLAYERS   |
+| 2 WAY RADIOS |
++--------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;u68C0_u7D22_u5355_u4E2A_u8DEF_u5F84&quot;&gt;&lt;a href=&quot;#u68C0_u7D22_u5355_u4E2A_u8DEF_u5F84&quot; class=&quot;headerlink&quot; title=&quot;检索单个路径&quot;&gt;&lt;/a&gt;检索单个路径&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;select parent.name from category as node, category as parent where 
+    node.lft between parent.lft and parent.rgt and node.name = &amp;apos;FLASH&amp;apos; order
+    by parent.lft;
+
++----------------------+
+| name                 |
++----------------------+
+| ELECTRONICS          |
+| PORTABLE ELECTRONICS |
+| MP3 PLAYERS          |
+| FLASH                |
++----------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;u67E5_u627E_u6240_u6709_u8282_u70B9_u7684_u6DF1_u5EA6&quot;&gt;&lt;a href=&quot;#u67E5_u627E_u6240_u6709_u8282_u70B9_u7684_u6DF1_u5EA6&quot; class=&quot;headerlink&quot; title=&quot;查找所有节点的深度&quot;&gt;&lt;/a&gt;查找所有节点的深度&lt;/h1&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;我们已经看过如何显示整个目录树，但是如果想显示树中每个节点的深度，以便更好的确定每个节点的层次结构。可以通过&lt;code&gt;Count&lt;/code&gt;函数和&lt;code&gt;Group by&lt;/code&gt;子句添加到我们现有的查询语句中&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;select node.name, (count(parent.name) - 1) as depth from category as node,
+    category as parent where node.lft between parent.lft and parent.rgt group
+    by node.name order by node.lft;
+
++----------------------+-------+
+| name                 | depth |
++----------------------+-------+
+| ELECTRONICS          |     0 |
+| TELEVISIONS          |     1 |
+| TUBE                 |     2 |
+| LCD                  |     2 |
+| PLASMA               |     2 |
+| PORTABLE ELECTRONICS |     1 |
+| MP3 PLAYERS          |     2 |
+| FLASH                |     3 |
+| CD PLAYERS           |     2 |
+| 2 WAY RADIOS         |     2 |
++----------------------+-------+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;我们可以使用&lt;code&gt;depth&lt;/code&gt;和&lt;code&gt;Concat&lt;/code&gt;来缩紧我们的类别名称&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;select concat(repeat(&amp;apos;          &amp;apos;, count(parent.name) - 1), node.name) as
+    name from category as node, category as parent where node.lft between
+    parent.lft and parent.rgt group by node.name order by node.lft;
+
++-------------------------------------+
+| name                                |
++-------------------------------------+
+| ELECTRONICS                         |
+|           TELEVISIONS               |
+|                     TUBE            |
+|                     LCD             |
+|                     PLASMA          |
+|           PORTABLE ELECTRONICS      |
+|                     MP3 PLAYERS     |
+|                               FLASH |
+|                     CD PLAYERS      |
+|                     2 WAY RADIOS    |
++-------------------------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;u5B50_u6811_u7684_u6DF1_u5EA6&quot;&gt;&lt;a href=&quot;#u5B50_u6811_u7684_u6DF1_u5EA6&quot; class=&quot;headerlink&quot; title=&quot;子树的深度&quot;&gt;&lt;/a&gt;子树的深度&lt;/h1&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;当我们需要一个子树的深度信息，我们添加第三个自链接，以及子查询来查找子树的深度&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;select node.name, (count(parent.name) - (sub_tree.depth + 1)) as depth from
+    category as node, category as parent, category as sub_parent, 
+(
+    select node.name, (count(parent.name) - 1) as depth from category as
+    node, category as parent where node.lft between parent.lft and
+    parent.rgt and node.name = &amp;apos;PORTABLE ELECTRONICS&amp;apos; group by node.name
+    order by node.lft
+) as sub_tree
+    where node.lft between parent.lft and parent.rgt and node.lft
+    between sub_parent.lft and sub_parent.rgt and sub_parent.name =
+    sub_tree.name group by node.name order by node.lft;
+
++----------------------+-------+
+| name                 | depth |
++----------------------+-------+
+| PORTABLE ELECTRONICS |     0 |
+| MP3 PLAYERS          |     1 |
+| FLASH                |     2 |
+| CD PLAYERS           |     1 |
+| 2 WAY RADIOS         |     1 |
++----------------------+-------+
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;u67E5_u627E_u4E00_u4E2A_u8282_u70B9_u7684_u76F4_u63A5_u4E0B_u5C5E&quot;&gt;&lt;a href=&quot;#u67E5_u627E_u4E00_u4E2A_u8282_u70B9_u7684_u76F4_u63A5_u4E0B_u5C5E&quot; class=&quot;headerlink&quot; title=&quot;查找一个节点的直接下属&quot;&gt;&lt;/a&gt;查找一个节点的直接下属&lt;/h1&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;这可以很容易的将&lt;code&gt;Having&lt;/code&gt;子句加入之前的查询语句中&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;select node.name, (count(parent.name) - (sub_tree.depth + 1)) as depth from
+    category as node, category as parent, category as sub_parent, 
+(
+    select node.name, (count(parent.name) - 1) as depth from category as
+    node,category as parent where node.lft between parent.lft and parent.rgt
+    and node.name = &amp;apos;PORTABLE ELECTRONICS&amp;apos; group by node.name order by
+    node.lft
+) as sub_tree 
+    where node.lft between parent.lft and parent.rgt
+    and node.lft between sub_parent.lft and sub_parent.rgt and
+    sub_parent.name = sub_tree.name group by node.name having depth &amp;lt;= 1
+    order by node.lft;
+
++----------------------+-------+
+| name                 | depth |
++----------------------+-------+
+| PORTABLE ELECTRONICS |     0 |
+| MP3 PLAYERS          |     1 |
+| CD PLAYERS           |     1 |
+| 2 WAY RADIOS         |     1 |
++----------------------+-------+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;如果不想显示父节点，将&lt;code&gt;having depth &amp;lt;= 1&lt;/code&gt;修改为&lt;code&gt;having depth = 1&lt;/code&gt;&lt;h1 id=&quot;u5D4C_u5957_u96C6_u5408_u4E2D_u4E2D_u7684_u805A_u5408_u51FD_u6570&quot;&gt;&lt;a href=&quot;#u5D4C_u5957_u96C6_u5408_u4E2D_u4E2D_u7684_u805A_u5408_u51FD_u6570&quot; class=&quot;headerlink&quot; title=&quot;嵌套集合中中的聚合函数&quot;&gt;&lt;/a&gt;嵌套集合中中的聚合函数&lt;/h1&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;添加一个产品表&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;CREATE TABLE `product` (
+  `product_id` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `name` varchar(40) NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO product(name, category_id) VALUES
+                                               (&amp;apos;20&amp;quot; TV&amp;apos;,3),
+                                               (&amp;apos;36&amp;quot; TV&amp;apos;,3),
+                                               (&amp;apos;Super-LCD 42&amp;quot;&amp;apos;,4),
+                                               (&amp;apos;Ultra-Plasma 62&amp;quot;&amp;apos;,5),
+                                               (&amp;apos;Value Plasma 38&amp;quot;&amp;apos;,5),
+                                               (&amp;apos;Power-MP3 5gb&amp;apos;,7),
+                                               (&amp;apos;Super-Player 1gb&amp;apos;,8),
+                                               (&amp;apos;Porta CD&amp;apos;,9),
+                                               (&amp;apos;CD To go!&amp;apos;,9),
+                                               (&amp;apos;Family Talk 360&amp;apos;,10);
+
+MariaDB [work]&amp;gt; select * from product;
++------------+------------------+-------------+
+| product_id | name             | category_id |
++------------+------------------+-------------+
+|          1 | 20&amp;quot; TV           |           3 |
+|          2 | 36&amp;quot; TV           |           3 |
+|          3 | Super-LCD 42&amp;quot;    |           4 |
+|          4 | Ultra-Plasma 62&amp;quot; |           5 |
+|          5 | Value Plasma 38&amp;quot; |           5 |
+|          6 | Power-MP3 5gb    |           7 |
+|          7 | Super-Player 1gb |           8 |
+|          8 | Porta CD         |           9 |
+|          9 | CD To go!        |           9 |
+|         10 | Family Talk 360  |          10 |
++------------+------------------+-------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;现在检索&lt;code&gt;category&lt;/code&gt;树和每个产品类别的数量&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;select parent.name, count(product.name) from category as node, category as
+    parent, product where node.lft between parent.lft and parent.rgt and
+    node.category_id = product.category_id group by parent.name order by
+    node.lft;
+
++----------------------+---------------------+
+| name                 | count(product.name) |
++----------------------+---------------------+
+| ELECTRONICS          |                  10 |
+| TELEVISIONS          |                   5 |
+| TUBE                 |                   2 |
+| LCD                  |                   1 |
+| PLASMA               |                   2 |
+| PORTABLE ELECTRONICS |                   5 |
+| MP3 PLAYERS          |                   2 |
+| FLASH                |                   1 |
+| CD PLAYERS           |                   2 |
+| 2 WAY RADIOS         |                   1 |
++----------------------+---------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;u6DFB_u52A0_u4E00_u4E2A_u65B0_u8282_u70B9&quot;&gt;&lt;a href=&quot;#u6DFB_u52A0_u4E00_u4E2A_u65B0_u8282_u70B9&quot; class=&quot;headerlink&quot; title=&quot;添加一个新节点&quot;&gt;&lt;/a&gt;添加一个新节点&lt;/h1&gt;&lt;/li&gt;
+&lt;li&gt;添加一个新节点更新我们的树，再看看嵌套关系图
+&lt;img src=&quot;http://7xj3i5.com1.z0.glb.clouddn.com/newNode.png&quot; alt=&quot;newnode&quot;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果我们想添加一个在&lt;code&gt;TELEVISIONS&lt;/code&gt;和&lt;code&gt;PORTABLE ELECTRONICS&lt;/code&gt;节点的新节点，这个新节点的&lt;code&gt;lft&lt;/code&gt;和&lt;code&gt;rgt&lt;/code&gt;值就是10和11，并且其右侧的所有节点将自己的&lt;code&gt;lft&lt;/code&gt;和&lt;code&gt;rgt&lt;/code&gt;值+2。然后我们用合适的&lt;code&gt;lft&lt;/code&gt;和&lt;code&gt;rgt&lt;/code&gt;值添加新节点&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;MariaDB [work]&amp;gt; DELIMITER //
+MariaDB [work]&amp;gt; create procedure addNodes(findName varchar(20) charset utf8, newName varchar(20) charset utf8)
+    -&amp;gt; begin
+    -&amp;gt; select @myRight := rgt from category where name = findName;
+    -&amp;gt; update category set rgt = rgt + 2 where rgt &amp;gt; @myRight;
+    -&amp;gt; update category set lft = lft + 2 where lft &amp;gt; @myRight;
+    -&amp;gt; insert into category(name, lft, rgt) values(newName, @myRight + 1, @myRight + 2);
+    -&amp;gt; end;
+    -&amp;gt; //
+Query OK, 0 rows affected (0.02 sec)
+
+MariaDB [work]&amp;gt; delimiter ;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;然后使用缩进树查询&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;select concat(repeat(&amp;apos;          &amp;apos;, count(parent.name) - 1), node.name) as
+    name from category as node, category as parent where node.lft between
+    parent.lft and parent.rgt group by node.name order by node.lft;
+
++-------------------------------------+
+| name                                |
++-------------------------------------+
+| ELECTRONICS                         |
+|           TELEVISIONS               |
+|                     TUBE            |
+|                     LCD             |
+|                     PLASMA          |
+|           GAME CONSOLES             |
+|           PORTABLE ELECTRONICS      |
+|                     MP3 PLAYERS     |
+|                               FLASH |
+|                     CD PLAYERS      |
+|                     2 WAY RADIOS    |
++-------------------------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果我们想要将节点添加为没有子节点的子节点，需要做些修改&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;MariaDB [work]&amp;gt; DELIMITER //
+MariaDB [work]&amp;gt; create procedure noChildNodes(findName varchar(20) charset utf8, newName varchar(20) charset utf8)
+    -&amp;gt; begin
+    -&amp;gt; select @myLeft := lft from category where name = findName;
+    -&amp;gt; update category set rgt = rgt + 2 where rgt &amp;gt; @myLeft;
+    -&amp;gt; update category set lft = lft + 2 where lft &amp;gt; @myLeft;
+    -&amp;gt; insert into category(name, lft, rgt) values(newName, @myLeft + 1, @myLeft + 2);
+    -&amp;gt; end;
+    -&amp;gt; //
+Query OK, 0 rows affected (0.03 sec)
+
+MariaDB [work]&amp;gt; DELIMITER ;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用缩进树查询&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;+-------------------------------------+
+| name                                |
++-------------------------------------+
+| ELECTRONICS                         |
+|           TELEVISIONS               |
+|                     TUBE            |
+|                     LCD             |
+|                     PLASMA          |
+|           GAME CONSOLES             |
+|           PORTABLE ELECTRONICS      |
+|                     MP3 PLAYERS     |
+|                               FLASH |
+|                     CD PLAYERS      |
+|                     2 WAY RADIOS    |
+|                               FRS   |
++-------------------------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;u5220_u9664_u8282_u70B9&quot;&gt;&lt;a href=&quot;#u5220_u9664_u8282_u70B9&quot; class=&quot;headerlink&quot; title=&quot;删除节点&quot;&gt;&lt;/a&gt;删除节点&lt;/h1&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;删除一个节点取决于节点在层次结构中的位置，很容易删除节点和子节点。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;MariaDB [work]&amp;gt; DELIMITER //
+MariaDB [work]&amp;gt; create procedure delNodes(findName varchar(20) charset utf8)
+    -&amp;gt; begin
+    -&amp;gt; select @myLeft := lft, @myRight := rgt, @myWidth := rgt - lft + 1 from category where name = findName;
+    -&amp;gt; delete from category where lft between @myLeft and @myRight;
+    -&amp;gt; update category set rgt = rgt - @myWidth where rgt &amp;gt; @myRight;
+    -&amp;gt; update category set lft = lft - @myWidth where lft &amp;gt; @myRight;
+    -&amp;gt; end;
+    -&amp;gt; //
+Query OK, 0 rows affected (0.03 sec)
+
+MariaDB [work]&amp;gt; DELIMITER ;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用缩进树查询&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;+-------------------------------------+
+| name                                |
++-------------------------------------+
+| ELECTRONICS                         |
+|           TELEVISIONS               |
+|                     TUBE            |
+|                     LCD             |
+|                     PLASMA          |
+|           PORTABLE ELECTRONICS      |
+|                     MP3 PLAYERS     |
+|                               FLASH |
+|                     CD PLAYERS      |
+|                     2 WAY RADIOS    |
+|                               FRS   |
++-------------------------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;我们必须处理一种情况删除父节点，但不删除子节点。子节点应该转向已删除的父级别&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;MariaDB [work]&amp;gt; DELIMITER //
+MariaDB [work]&amp;gt; create procedure delParentNodes(findName varchar(20) charset utf8)
+    -&amp;gt; begin
+    -&amp;gt; select @myLeft := lft, @myRight := rgt, @myWidth := rgt - lft + 1 from category where name = findName;
+    -&amp;gt; delete from category where lft = @myLeft;
+    -&amp;gt; update category set rgt = rgt - 1, lft = lft - 1 where lft between @myLeft and @myRight;
+    -&amp;gt; update category set rgt = rgt - 2 where rgt &amp;gt; @myRight;
+    -&amp;gt; update category set lft = lft - 2 where lft &amp;gt; @myRight;
+    -&amp;gt; end;
+    -&amp;gt; //
+Query OK, 0 rows affected (0.03 sec)
+
+MariaDB [work]&amp;gt; DELIMITER ;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用缩进树查询&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;+----------------------------+
+| name                       |
++----------------------------+
+| ELECTRONICS                |
+|           TELEVISIONS      |
+|                     TUBE   |
+|                     LCD    |
+|                     PLASMA |
+|           MP3 PLAYERS      |
+|                     FLASH  |
+|           CD PLAYERS       |
+|           2 WAY RADIOS     |
+|                     FRS    |
++----------------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;u5D4C_u5957_u96C6_u6A21_u578B&quot;&gt;&lt;a href=&quot;#u5D4C_u5957_u96C6_u6A21_u578B&quot; class=&quot;headerlink&quot; title=&quot;嵌套集模型&quot;&gt;&lt;/a&gt;嵌套集模型&lt;/h1&gt;&lt;h2 id=&quot;u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002&quot;&gt;&lt;a href=&quot;#u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002&quot; class=&quot;headerlink&quot; title=&quot;在分类表中，通过左和右值来代表我们的嵌套节点。&quot;&gt;&lt;/a&gt;在分类表中，通过左和右值来代表我们的嵌套节点。&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;创建表并添加测试数据&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;CREATE TABLE category (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    lft INT NOT NULL,
+    rgt INT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO category VALUES
+                            (1,&amp;apos;ELECTRONICS&amp;apos;,1,20),
+                            (2,&amp;apos;TELEVISIONS&amp;apos;,2,9),
+                            (3,&amp;apos;TUBE&amp;apos;,3,4),
+                            (4,&amp;apos;LCD&amp;apos;,5,6),
+                            (5,&amp;apos;PLASMA&amp;apos;,7,8),
+                            (6,&amp;apos;PORTABLE ELECTRONICS&amp;apos;,10,19),
+                            (7,&amp;apos;MP3 PLAYERS&amp;apos;,11,14),
+                            (8,&amp;apos;FLASH&amp;apos;,12,13),
+                            (9,&amp;apos;CD PLAYERS&amp;apos;,15,16),
+                            (10,&amp;apos;2 WAY RADIOS&amp;apos;,17,18);
+
+MariaDB [work]&amp;gt; select * from category;
++-------------+----------------------+-----+-----+
+| category_id | name                 | lft | rgt |
++-------------+----------------------+-----+-----+
+|           1 | ELECTRONICS          |   1 |  20 |
+|           2 | TELEVISIONS          |   2 |   9 |
+|           3 | TUBE                 |   3 |   4 |
+|           4 | LCD                  |   5 |   6 |
+|           5 | PLASMA               |   7 |   8 |
+|           6 | PORTABLE ELECTRONICS |  10 |  19 |
+|           7 | MP3 PLAYERS          |  11 |  14 |
+|           8 | FLASH                |  12 |  13 |
+|           9 | CD PLAYERS           |  15 |  16 |
+|          10 | 2 WAY RADIOS         |  17 |  18 |
++-------------+----------------------+-----+-----+
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="MySQL" scheme="http://im.yonglang.co/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="http://im.yonglang.co/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nuclide编辑器安装</title>
+    <link href="http://im.yonglang.co/2016/07/15/nuclide%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%89%E8%A3%85/"/>
+    <id>http://im.yonglang.co/2016/07/15/nuclide编辑器安装/</id>
+    <published>2016-07-15T09:13:50.000Z</published>
+    <updated>2016-07-15T09:15:05.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;nuclide_u7F16_u8F91_u5668_u5B89_u88C5&quot;&gt;&lt;a href=&quot;#nuclide_u7F16_u8F91_u5668_u5B89_u88C5&quot; class=&quot;headerlink&quot; title=&quot;nuclide编辑器安装&quot;&gt;&lt;/a&gt;nuclide编辑器安装&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;nuclide是基于atom构建的开发环境&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;install atom&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;brew install Caskroom/cask/atom
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;install nuclide&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;apm install nuclide
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;nuclide_u7F16_u8F91_u5668_u5B89_u88C5&quot;&gt;&lt;a href=&quot;#nuclide_u7F16_u8F91_u5668_u5B89_u88C5&quot; class=&quot;headerlink&quot; title=&quot;nuclide编辑器安装&quot;&gt;&lt;/a&gt;
+    
+    </summary>
+    
+      <category term="React-native" scheme="http://im.yonglang.co/categories/React-native/"/>
+    
+    
+      <category term="React-native" scheme="http://im.yonglang.co/tags/React-native/"/>
+    
+      <category term="nuclide" scheme="http://im.yonglang.co/tags/nuclide/"/>
+    
+  </entry>
   
   <entry>
     <title>Elasticasearch安装和使用</title>
@@ -2197,125 +2653,6 @@ for m in ${arr[@]}; do
 done
 
 echo &amp;quot;
-    
-    </summary>
-    
-      <category term="Shell" scheme="http://im.yonglang.co/categories/Shell/"/>
-    
-    
-      <category term="Shell" scheme="http://im.yonglang.co/tags/Shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Shell-ifelse</title>
-    <link href="http://im.yonglang.co/2015/12/10/Shell-ifelse/"/>
-    <id>http://im.yonglang.co/2015/12/10/Shell-ifelse/</id>
-    <published>2015-12-09T18:19:16.000Z</published>
-    <updated>2016-07-15T01:48:41.000Z</updated>
-    
-    <content type="html">&lt;pre&gt;&lt;code&gt;#!/bin/bash
-#if--else
-
-NAME=&amp;quot;john&amp;quot;
-
-# 注意if条件两边的空格
-if [ ${NAME} == &amp;quot;john&amp;quot; ]; then
-    echo &amp;quot;hahhahahha&amp;quot;
-else
-    echo &amp;quot;huhuhuhuhu&amp;quot;
-fi
-
-if [ ${NAME} == &amp;quot;john&amp;quot; ]; then
-    echo &amp;quot;hahhahahha&amp;quot;
-elif [ ${NAME} == &amp;quot;johnx&amp;quot; ]; then
-    echo &amp;quot;huhuhuhuhu&amp;quot;
-else
-    echo &amp;quot;xxxxxxxxxx&amp;quot;
-fi
-
-# 数值类型比较
-# $a -lt $b    $a &amp;lt; $b
-# $a -gt $b    $a &amp;gt; $b
-# $a -le $b    $a &amp;lt;= $b
-# $a -ge $b    $a &amp;gt;= $b
-# $a -eq $b    $a is equal to $b
-# $a -ne $b    $a is not equal to $b
-
-# 字符串类型比较
-# &amp;quot;$a&amp;quot; = &amp;quot;$b&amp;quot;     $a 和 $b 相等
-# &amp;quot;$a&amp;quot; == &amp;quot;$b&amp;quot;    $a 和 $b 相等
-# &amp;quot;$a&amp;quot; != &amp;quot;$b&amp;quot;    $a 和 $b 不相等
-# -z &amp;quot;$a&amp;quot;         $a 是空的
-&lt;/code&gt;&lt;/pre&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;pre&gt;&lt;code&gt;#!/bin/bash
-#if--else
-
-NAME=&amp;quot;john&amp;quot;
-
-# 注意if条件两边的空格
-if [ ${NAME} == &amp;quot;john&amp;quot; ]; then
-    echo &amp;quot;hahhahahha&amp;qu
-    
-    </summary>
-    
-      <category term="Shell" scheme="http://im.yonglang.co/categories/Shell/"/>
-    
-    
-      <category term="Shell" scheme="http://im.yonglang.co/tags/Shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Shell-数组</title>
-    <link href="http://im.yonglang.co/2015/12/10/Shell-%E6%95%B0%E7%BB%84/"/>
-    <id>http://im.yonglang.co/2015/12/10/Shell-数组/</id>
-    <published>2015-12-09T18:18:38.000Z</published>
-    <updated>2016-07-15T01:48:04.000Z</updated>
-    
-    <content type="html">&lt;pre&gt;&lt;code&gt;#!/bin/bash
-# 数组 不支持多维数组
-# 通过index访问数组元素 arr[1]
-
-arr=(
-    xxxx
-    yyyy
-    wwww
-    &amp;quot;hello world&amp;quot;
-)
-
-# 使用下标定义
-arr1[0]=aaaa
-arr1[1]=bbb
-arr1[2]=cccc
-arr1[5]=dddd
-
-# 获取arr1所有值
-echo ${arr1[@]}
-
-# 获取arr1数组中值
-echo ${arr1[0]}
-echo ${arr1[1]}
-&lt;/code&gt;&lt;/pre&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;pre&gt;&lt;code&gt;#!/bin/bash
-# 数组 不支持多维数组
-# 通过index访问数组元素 arr[1]
-
-arr=(
-    xxxx
-    yyyy
-    wwww
-    &amp;quot;hello world&amp;quot;
-)
-
-# 使用下标定义
-arr1[0]
     
     </summary>
     
