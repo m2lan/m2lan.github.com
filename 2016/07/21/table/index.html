@@ -125,7 +125,7 @@ decimal(10,2)
 
 
 rank_points">
-<meta property="og:updated_time" content="2016-07-21T06:45:11.000Z">
+<meta property="og:updated_time" content="2016-07-21T10:37:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ectouch数据库字典">
 <meta name="twitter:description" content="Ectouch2.0 数据库结构用户账目日志表ecs_account_log
@@ -738,7 +738,7 @@ rank_points">
 <tr>
 <td>lang_type</td>
 <td>varchar(50)</td>
-<td></td>
+<td>语言类型</td>
 </tr>
 <tr>
 <td>agency_id</td>
@@ -748,7 +748,7 @@ rank_points">
 <tr>
 <td>suppliers_id</td>
 <td>smallint(5)</td>
-<td></td>
+<td>供货商ID</td>
 </tr>
 <tr>
 <td>todolist</td>
@@ -758,6 +758,7 @@ rank_points">
 <tr>
 <td>role_id</td>
 <td>smallint(5)</td>
+<td>角色ID</td>
 </tr>
 </tbody>
 </table>
@@ -787,7 +788,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_ad_custom"><a href="#ecs_ad_custom" class="headerlink" title="<code>ecs_ad_custom</code>"></a><code>ecs_ad_custom</code></h2><table>
+<h2 id="u81EA_u5B9A_u4E49_u5E7F_u544A_u8868ecs_ad_custom"><a href="#u81EA_u5B9A_u4E49_u5E7F_u544A_u8868ecs_ad_custom" class="headerlink" title="自定义广告表<code>ecs_ad_custom</code>"></a>自定义广告表<code>ecs_ad_custom</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -804,31 +805,32 @@ rank_points">
 <tr>
 <td>ad_type</td>
 <td>tinyint(1)</td>
-<td></td>
+<td>广告类型</td>
 </tr>
 <tr>
 <td>ad_name</td>
 <td>varchar(60)</td>
-<td></td>
+<td>广告名称</td>
 </tr>
 <tr>
 <td>add_time</td>
 <td>int(10)</td>
-<td></td>
+<td>添加时间</td>
 </tr>
 <tr>
 <td>content</td>
 <td>mediumtext</td>
-<td></td>
+<td>内容</td>
 </tr>
 <tr>
 <td>url</td>
 <td>varchar(255)</td>
-<td></td>
+<td>链接地址</td>
 </tr>
 <tr>
 <td>ad_status</td>
 <td>tinyint(3)</td>
+<td>广告状态</td>
 </tr>
 </tbody>
 </table>
@@ -1200,7 +1202,10 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="u5904_u7406_u6587_u7AE0_uFF0C_u5546_u54C1_u81EA_u52A8_u4E0A_u4E0B_u7EBF_u7684_u8BA1_u5212_u4EFB_u52A1_u5217_u8868_uFF08_u9700_u8981_u5B89_u88C5_u8BA1_u5212_u4EFB_u52A1_u63D2_u4EF6_uFF09ecs_auto_manage"><a href="#u5904_u7406_u6587_u7AE0_uFF0C_u5546_u54C1_u81EA_u52A8_u4E0A_u4E0B_u7EBF_u7684_u8BA1_u5212_u4EFB_u52A1_u5217_u8868_uFF08_u9700_u8981_u5B89_u88C5_u8BA1_u5212_u4EFB_u52A1_u63D2_u4EF6_uFF09ecs_auto_manage" class="headerlink" title="处理文章，商品自动上下线的计划任务列表（需要安装计划任务插件）<code>ecs_auto_manage</code>"></a>处理文章，商品自动上下线的计划任务列表（需要安装计划任务插件）<code>ecs_auto_manage</code></h2><table>
+<h2 id="u8BA1_u5212_u4EFB_u52A1_u8868_ecs_auto_manage"><a href="#u8BA1_u5212_u4EFB_u52A1_u8868_ecs_auto_manage" class="headerlink" title="计划任务表 <code>ecs_auto_manage</code>"></a>计划任务表 <code>ecs_auto_manage</code></h2><blockquote>
+<p>处理文章，商品自动上下线的计划任务列表（需要安装计划任务插件）</p>
+</blockquote>
+<table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -1231,7 +1236,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_back_goods"><a href="#ecs_back_goods" class="headerlink" title="<code>ecs_back_goods</code>"></a><code>ecs_back_goods</code></h2><table>
+<h2 id="u9000_u8D27_u5546_u54C1_u4FE1_u606Fecs_back_goods"><a href="#u9000_u8D27_u5546_u54C1_u4FE1_u606Fecs_back_goods" class="headerlink" title="退货商品信息<code>ecs_back_goods</code>"></a>退货商品信息<code>ecs_back_goods</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -1248,55 +1253,56 @@ rank_points">
 <tr>
 <td>back_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>退货单ID</td>
 </tr>
 <tr>
 <td>goods_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>商品ID</td>
 </tr>
 <tr>
 <td>product_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>货品ID</td>
 </tr>
 <tr>
 <td>product_sn</td>
 <td>varchar(60)</td>
-<td></td>
+<td>货品编号</td>
 </tr>
 <tr>
 <td>goods_name</td>
 <td>varchar(120)</td>
-<td></td>
+<td>商品名称</td>
 </tr>
 <tr>
 <td>brand_name</td>
 <td>varchar(60)</td>
-<td></td>
+<td>品牌名称</td>
 </tr>
 <tr>
 <td>goods_sn</td>
 <td>varchar(60)</td>
-<td></td>
+<td>商品编号</td>
 </tr>
 <tr>
 <td>is_real</td>
 <td>tinyint(1)</td>
-<td></td>
+<td>是否是实体商铺</td>
 </tr>
 <tr>
 <td>send_number</td>
 <td>smallint(5)</td>
-<td></td>
+<td>发货数量</td>
 </tr>
 <tr>
 <td>goods_attr</td>
 <td>text</td>
+<td>商品属性</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_back_order"><a href="#ecs_back_order" class="headerlink" title="<code>ecs_back_order</code>"></a><code>ecs_back_order</code></h2><table>
+<h2 id="u9000_u8D27_u5355_u4FE1_u606Fecs_back_order"><a href="#u9000_u8D27_u5355_u4FE1_u606Fecs_back_order" class="headerlink" title="退货单信息<code>ecs_back_order</code>"></a>退货单信息<code>ecs_back_order</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -1313,151 +1319,152 @@ rank_points">
 <tr>
 <td>delivery_sn</td>
 <td>varchar(20)</td>
-<td></td>
+<td>发货单号</td>
 </tr>
 <tr>
 <td>order_sn</td>
 <td>varchar(20)</td>
-<td></td>
+<td>订单号</td>
 </tr>
 <tr>
 <td>order_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>订单ID</td>
 </tr>
 <tr>
 <td>invoice_no</td>
 <td>varchar(50)</td>
-<td></td>
+<td>物流单号</td>
 </tr>
 <tr>
 <td>add_time</td>
 <td>int(10)</td>
-<td></td>
+<td>添加时间</td>
 </tr>
 <tr>
 <td>shipping_id</td>
 <td>tinyint(3)</td>
-<td></td>
+<td>订单编号</td>
 </tr>
 <tr>
 <td>shipping_name</td>
 <td>varchar(120)</td>
-<td></td>
+<td>订单名称</td>
 </tr>
 <tr>
 <td>user_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>用户ID</td>
 </tr>
 <tr>
 <td>action_user</td>
 <td>varchar(30)</td>
-<td></td>
+<td>当前操作员</td>
 </tr>
 <tr>
 <td>consignee</td>
 <td>varchar(60)</td>
-<td></td>
+<td>收货人姓名</td>
 </tr>
 <tr>
 <td>address</td>
 <td>varchar(250)</td>
-<td></td>
+<td>收货人地址</td>
 </tr>
 <tr>
 <td>country</td>
 <td>smallint(5)</td>
-<td></td>
+<td>国家</td>
 </tr>
 <tr>
 <td>province</td>
 <td>smallint(5)</td>
-<td></td>
+<td>省份</td>
 </tr>
 <tr>
 <td>city</td>
 <td>smallint(5)</td>
-<td></td>
+<td>城市</td>
 </tr>
 <tr>
 <td>district</td>
 <td>smallint(5)</td>
-<td></td>
+<td>收货人区/县</td>
 </tr>
 <tr>
 <td>sign_building</td>
 <td>varchar(120)</td>
-<td></td>
+<td>标志建筑</td>
 </tr>
 <tr>
 <td>email</td>
 <td>varchar(60)</td>
-<td></td>
+<td>邮箱地址</td>
 </tr>
 <tr>
 <td>zipcode</td>
 <td>varchar(60)</td>
-<td></td>
+<td>邮编</td>
 </tr>
 <tr>
 <td>tel</td>
 <td>varchar(60)</td>
-<td></td>
+<td>电话</td>
 </tr>
 <tr>
 <td>mobile</td>
 <td>varchar(60)</td>
-<td></td>
+<td>备用电话</td>
 </tr>
 <tr>
 <td>best_time</td>
 <td>varchar(120)</td>
-<td></td>
+<td>最佳送货时间</td>
 </tr>
 <tr>
 <td>postscript</td>
 <td>varchar(255)</td>
-<td></td>
+<td>备注－订单</td>
 </tr>
 <tr>
 <td>how_oos</td>
 <td>varchar(120)</td>
-<td></td>
+<td>缺货处理</td>
 </tr>
 <tr>
 <td>insure_fee</td>
 <td>decimal(10,2)</td>
-<td></td>
+<td>计算报价费</td>
 </tr>
 <tr>
 <td>shipping_fee</td>
 <td>decimal(10,2)</td>
-<td></td>
+<td>配送费用</td>
 </tr>
 <tr>
 <td>update_time</td>
 <td>int(10)</td>
-<td></td>
+<td>更新时间</td>
 </tr>
 <tr>
 <td>suppliers_id</td>
 <td>smallint(5)</td>
-<td></td>
+<td>供应商ID</td>
 </tr>
 <tr>
 <td>status</td>
 <td>tinyint(1)</td>
-<td></td>
+<td>状态</td>
 </tr>
 <tr>
 <td>return_time</td>
 <td>int(10)</td>
-<td></td>
+<td>退货时间</td>
 </tr>
 <tr>
 <td>agency_id</td>
 <td>smallint(5)</td>
+<td>办事处ID</td>
 </tr>
 </tbody>
 </table>
@@ -1877,7 +1884,10 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_cat_recommend"><a href="#ecs_cat_recommend" class="headerlink" title="<code>ecs_cat_recommend</code>"></a><code>ecs_cat_recommend</code></h2><table>
+<h2 id="u9996_u9875_u63A8_u8350_u6269_u5C55_u5206_u7C7B_u8868ecs_cat_recommend"><a href="#u9996_u9875_u63A8_u8350_u6269_u5C55_u5206_u7C7B_u8868ecs_cat_recommend" class="headerlink" title="首页推荐扩展分类表<code>ecs_cat_recommend</code>"></a>首页推荐扩展分类表<code>ecs_cat_recommend</code></h2><blockquote>
+<p>放在首页推荐,比如新品上市，精品推荐，热卖商品</p>
+</blockquote>
+<table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -1894,10 +1904,14 @@ rank_points">
 <tr>
 <td>recommend_type</td>
 <td>tinyint(1)</td>
+<td>推荐类型</td>
 </tr>
 </tbody>
 </table>
-<h2 id="u4F1A_u5458_u6536_u85CF_u5546_u54C1_u7684_u8BB0_u5F55_u5217_u8868_uFF0C_u4E00_u6761_u8BB0_u5F55_u4E00_u4E2A_u6536_u85CF_u5546_u54C1ecs_collect_goods"><a href="#u4F1A_u5458_u6536_u85CF_u5546_u54C1_u7684_u8BB0_u5F55_u5217_u8868_uFF0C_u4E00_u6761_u8BB0_u5F55_u4E00_u4E2A_u6536_u85CF_u5546_u54C1ecs_collect_goods" class="headerlink" title="会员收藏商品的记录列表，一条记录一个收藏商品<code>ecs_collect_goods</code>"></a>会员收藏商品的记录列表，一条记录一个收藏商品<code>ecs_collect_goods</code></h2><table>
+<h2 id="u6536_u85CF_u7EAA_u5F55_u8868ecs_collect_goods"><a href="#u6536_u85CF_u7EAA_u5F55_u8868ecs_collect_goods" class="headerlink" title="收藏纪录表<code>ecs_collect_goods</code>"></a>收藏纪录表<code>ecs_collect_goods</code></h2><blockquote>
+<p>会员收藏商品的记录列表，一条记录一个收藏商品</p>
+</blockquote>
+<table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -1933,7 +1947,10 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="u7528_u6237_u5BF9_u6587_u7AE0_u548C_u4EA7_u54C1_u7684_u8BC4_u8BBA_u5217_u8868ecs_comment"><a href="#u7528_u6237_u5BF9_u6587_u7AE0_u548C_u4EA7_u54C1_u7684_u8BC4_u8BBA_u5217_u8868ecs_comment" class="headerlink" title="用户对文章和产品的评论列表<code>ecs_comment</code>"></a>用户对文章和产品的评论列表<code>ecs_comment</code></h2><table>
+<h2 id="u8BC4_u8BBA_u8868ecs_comment"><a href="#u8BC4_u8BBA_u8868ecs_comment" class="headerlink" title="评论表<code>ecs_comment</code>"></a>评论表<code>ecs_comment</code></h2><blockquote>
+<p>用户对文章和产品的评论列表</p>
+</blockquote>
+<table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2004,7 +2021,10 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="u8BA1_u5212_u4EFB_u52A1_u63D2_u4EF6_u5B89_u88C5_u914D_u7F6E_u4FE1_u606Fecs_crons"><a href="#u8BA1_u5212_u4EFB_u52A1_u63D2_u4EF6_u5B89_u88C5_u914D_u7F6E_u4FE1_u606Fecs_crons" class="headerlink" title="计划任务插件安装配置信息<code>ecs_crons</code>"></a>计划任务插件安装配置信息<code>ecs_crons</code></h2><table>
+<h2 id="u8BA1_u5212_u4EFB_u52A1ecs_crons"><a href="#u8BA1_u5212_u4EFB_u52A1ecs_crons" class="headerlink" title="计划任务<code>ecs_crons</code>"></a>计划任务<code>ecs_crons</code></h2><blockquote>
+<p>计划任务插件安装配置信息</p>
+</blockquote>
+<table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2095,7 +2115,10 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_delivery_goods"><a href="#ecs_delivery_goods" class="headerlink" title="<code>ecs_delivery_goods</code>"></a><code>ecs_delivery_goods</code></h2><table>
+<h2 id="u53D1_u8D27_u5355_u5546_u54C1_u4FE1_u606F_u8868ecs_delivery_goods"><a href="#u53D1_u8D27_u5355_u5546_u54C1_u4FE1_u606F_u8868ecs_delivery_goods" class="headerlink" title="发货单商品信息表<code>ecs_delivery_goods</code>"></a>发货单商品信息表<code>ecs_delivery_goods</code></h2><blockquote>
+<p>订单系统使用</p>
+</blockquote>
+<table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2112,65 +2135,69 @@ rank_points">
 <tr>
 <td>delivery_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>发货单ID</td>
 </tr>
 <tr>
 <td>goods_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>商品ID</td>
 </tr>
 <tr>
 <td>product_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>货品ID</td>
 </tr>
 <tr>
 <td>product_sn</td>
 <td>varchar(60)</td>
-<td></td>
+<td>货品号</td>
 </tr>
 <tr>
 <td>goods_name</td>
 <td>varchar(120)</td>
-<td></td>
+<td>商品名称</td>
 </tr>
 <tr>
 <td>brand_name</td>
 <td>varchar(60)</td>
-<td></td>
+<td>品牌名称</td>
 </tr>
 <tr>
 <td>goods_sn</td>
 <td>varchar(60)</td>
-<td></td>
+<td>商品号</td>
 </tr>
 <tr>
 <td>is_real</td>
 <td>tinyint(1)</td>
-<td></td>
+<td>是否是实物</td>
 </tr>
 <tr>
 <td>extension_code</td>
 <td>varchar(30)</td>
-<td></td>
+<td>虚拟商品扩展代码，实体商品为空</td>
 </tr>
 <tr>
 <td>parent_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>父ID</td>
 </tr>
 <tr>
 <td>send_number</td>
 <td>smallint(5)</td>
-<td></td>
+<td>发货数量</td>
 </tr>
 <tr>
 <td>goods_attr</td>
 <td>text</td>
+<td>商品属性</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_delivery_order"><a href="#ecs_delivery_order" class="headerlink" title="<code>ecs_delivery_order</code>"></a><code>ecs_delivery_order</code></h2><table>
+<h2 id="u53D1_u8D27_u5355_u4FE1_u606F_u8868ecs_delivery_order"><a href="#u53D1_u8D27_u5355_u4FE1_u606F_u8868ecs_delivery_order" class="headerlink" title="发货单信息表<code>ecs_delivery_order</code>"></a>发货单信息表<code>ecs_delivery_order</code></h2><blockquote>
+<p>status字段表示发货单状态,2-未发货，1-取消，0-已经发货</p>
+</blockquote>
+<table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2182,155 +2209,161 @@ rank_points">
 <tr>
 <td>delivery_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>发货单ID</td>
 </tr>
 <tr>
 <td>delivery_sn</td>
 <td>varchar(20)</td>
-<td></td>
+<td>发货单号</td>
 </tr>
 <tr>
 <td>order_sn</td>
 <td>varchar(20)</td>
-<td></td>
+<td>订单号</td>
 </tr>
 <tr>
 <td>order_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>订单ID</td>
 </tr>
 <tr>
 <td>invoice_no</td>
 <td>varchar(50)</td>
-<td></td>
+<td>物流单号</td>
 </tr>
 <tr>
 <td>add_time</td>
 <td>int(10)</td>
-<td></td>
+<td>添加时间</td>
 </tr>
 <tr>
 <td>shipping_id</td>
 <td>tinyint(3)</td>
-<td></td>
+<td>供应商ID</td>
 </tr>
 <tr>
 <td>shipping_name</td>
 <td>varchar(120)</td>
-<td></td>
+<td>供应商名称</td>
 </tr>
 <tr>
 <td>user_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>用户ID</td>
 </tr>
 <tr>
 <td>action_user</td>
 <td>varchar(30)</td>
-<td></td>
+<td>当前操作员</td>
 </tr>
 <tr>
 <td>consignee</td>
 <td>varchar(60)</td>
-<td></td>
+<td>收货人姓名</td>
 </tr>
 <tr>
 <td>address</td>
 <td>varchar(250)</td>
-<td></td>
+<td>收货人地址</td>
 </tr>
 <tr>
 <td>country</td>
 <td>smallint(5)</td>
-<td></td>
+<td>国家</td>
 </tr>
 <tr>
 <td>province</td>
 <td>smallint(5)</td>
-<td></td>
+<td>省份</td>
 </tr>
 <tr>
 <td>city</td>
 <td>smallint(5)</td>
-<td></td>
+<td>城市</td>
 </tr>
 <tr>
 <td>district</td>
 <td>smallint(5)</td>
-<td></td>
+<td>收货人区/县</td>
 </tr>
 <tr>
 <td>sign_building</td>
 <td>varchar(120)</td>
-<td></td>
+<td>标志建筑</td>
 </tr>
 <tr>
 <td>email</td>
 <td>varchar(60)</td>
-<td></td>
+<td>邮箱地址</td>
 </tr>
 <tr>
 <td>zipcode</td>
 <td>varchar(60)</td>
-<td></td>
+<td>邮编</td>
 </tr>
 <tr>
 <td>tel</td>
 <td>varchar(60)</td>
-<td></td>
+<td>电话</td>
 </tr>
 <tr>
 <td>mobile</td>
 <td>varchar(60)</td>
-<td></td>
+<td>备用电话</td>
 </tr>
 <tr>
 <td>best_time</td>
 <td>varchar(120)</td>
-<td></td>
+<td>最佳送货时间</td>
 </tr>
 <tr>
 <td>postscript</td>
 <td>varchar(255)</td>
-<td></td>
+<td>备注－订单</td>
 </tr>
 <tr>
 <td>how_oos</td>
 <td>varchar(120)</td>
-<td></td>
+<td>缺货处理</td>
 </tr>
 <tr>
 <td>insure_fee</td>
 <td>decimal(10,2)</td>
-<td></td>
+<td>计算报价费</td>
 </tr>
 <tr>
 <td>shipping_fee</td>
 <td>decimal(10,2)</td>
-<td></td>
+<td>配送费用</td>
 </tr>
 <tr>
 <td>update_time</td>
 <td>int(10)</td>
-<td></td>
+<td>更新时间</td>
 </tr>
 <tr>
 <td>suppliers_id</td>
 <td>smallint(5)</td>
-<td></td>
+<td>供应商ID</td>
 </tr>
 <tr>
 <td>status</td>
 <td>tinyint(1)</td>
-<td></td>
+<td>状态</td>
+</tr>
+<tr>
+<td>return_time</td>
+<td>int(10)</td>
+<td>退货时间</td>
 </tr>
 <tr>
 <td>agency_id</td>
 <td>smallint(5)</td>
+<td>办事处ID</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_drp_apply"><a href="#ecs_drp_apply" class="headerlink" title="<code>ecs_drp_apply</code>"></a><code>ecs_drp_apply</code></h2><table>
+<h2 id="u5206_u9500_u652F_u4ED8_u7EAA_u5F55ecs_drp_apply"><a href="#u5206_u9500_u652F_u4ED8_u7EAA_u5F55ecs_drp_apply" class="headerlink" title="分销支付纪录<code>ecs_drp_apply</code>"></a>分销支付纪录<code>ecs_drp_apply</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2352,20 +2385,21 @@ rank_points">
 <tr>
 <td>user_id</td>
 <td>int(10)</td>
-<td></td>
+<td>用户ID</td>
 </tr>
 <tr>
 <td>time</td>
 <td>int(12)</td>
-<td></td>
+<td>时间</td>
 </tr>
 <tr>
 <td>amount</td>
 <td>decimal(10,2)</td>
+<td>商品总额</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_drp_bank"><a href="#ecs_drp_bank" class="headerlink" title="<code>ecs_drp_bank</code>"></a><code>ecs_drp_bank</code></h2><table>
+<h2 id="u5FAE_u5206_u9500_u94F6_u884C_u5361_u4FE1_u606Fecs_drp_bank"><a href="#u5FAE_u5206_u9500_u94F6_u884C_u5361_u4FE1_u606Fecs_drp_bank" class="headerlink" title="微分销银行卡信息<code>ecs_drp_bank</code>"></a>微分销银行卡信息<code>ecs_drp_bank</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2382,30 +2416,31 @@ rank_points">
 <tr>
 <td>bank_region</td>
 <td>varchar(255)</td>
-<td></td>
+<td>开户所在地</td>
 </tr>
 <tr>
 <td>bank_name</td>
 <td>varchar(50)</td>
-<td></td>
+<td>银行名称</td>
 </tr>
 <tr>
 <td>bank_user_name</td>
 <td>varchar(50)</td>
-<td></td>
+<td>开户名称</td>
 </tr>
 <tr>
 <td>bank_card</td>
 <td>varchar(50)</td>
-<td></td>
+<td>开户卡号</td>
 </tr>
 <tr>
 <td>user_id</td>
 <td>int(10)</td>
+<td>用户ID</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_drp_config"><a href="#ecs_drp_config" class="headerlink" title="<code>ecs_drp_config</code>"></a><code>ecs_drp_config</code></h2><table>
+<h2 id="u5FAE_u5206_u9500_u914D_u7F6Eecs_drp_config"><a href="#u5FAE_u5206_u9500_u914D_u7F6Eecs_drp_config" class="headerlink" title="微分销配置<code>ecs_drp_config</code>"></a>微分销配置<code>ecs_drp_config</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2451,7 +2486,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_drp_goods"><a href="#ecs_drp_goods" class="headerlink" title="<code>ecs_drp_goods</code>"></a><code>ecs_drp_goods</code></h2><table>
+<h2 id="u5206_u9500_u5546_u54C1ecs_drp_goods"><a href="#u5206_u9500_u5546_u54C1ecs_drp_goods" class="headerlink" title="分销商品<code>ecs_drp_goods</code>"></a>分销商品<code>ecs_drp_goods</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2468,20 +2503,21 @@ rank_points">
 <tr>
 <td>goods_id</td>
 <td>int(10)</td>
-<td></td>
+<td>商品ID</td>
 </tr>
 <tr>
 <td>touch_sale</td>
 <td>decimal(10,2)</td>
-<td></td>
+<td>销售佣金</td>
 </tr>
 <tr>
 <td>touch_fencheng</td>
 <td>decimal(10,2)</td>
+<td>分成佣金</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_drp_log"><a href="#ecs_drp_log" class="headerlink" title="<code>ecs_drp_log</code>"></a><code>ecs_drp_log</code></h2><table>
+<h2 id="u4F63_u91D1_u63D0_u73B0_u8BB0_u5F55ecs_drp_log"><a href="#u4F63_u91D1_u63D0_u73B0_u8BB0_u5F55ecs_drp_log" class="headerlink" title="佣金提现记录<code>ecs_drp_log</code>"></a>佣金提现记录<code>ecs_drp_log</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2498,49 +2534,51 @@ rank_points">
 <tr>
 <td>user_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>会员ID</td>
 </tr>
 <tr>
 <td>user_money</td>
 <td>decimal(10,2)</td>
-<td></td>
+<td>提现金额</td>
 </tr>
 <tr>
 <td>pay_points</td>
 <td>mediumint(9)</td>
-<td></td>
+<td>消费积分变动</td>
 </tr>
 <tr>
 <td>change_time</td>
 <td>int(10)</td>
-<td></td>
+<td>变动时间</td>
 </tr>
 <tr>
 <td>change_desc</td>
 <td>varchar(255)</td>
-<td></td>
+<td>变动说明</td>
 </tr>
 <tr>
 <td>change_type</td>
 <td>tinyint(3)</td>
-<td></td>
+<td>变动类型(0为佣金分成，1为佣金提现)</td>
 </tr>
 <tr>
 <td>bank_info</td>
+<td>text</td>
 <td>提现银行卡信息</td>
 </tr>
 <tr>
 <td>order_id</td>
 <td>int(10)</td>
-<td></td>
+<td>订单ID</td>
 </tr>
 <tr>
 <td>status</td>
 <td>int(1)</td>
+<td>佣金状态,1为已支付,0为未支付</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_drp_order_goods"><a href="#ecs_drp_order_goods" class="headerlink" title="<code>ecs_drp_order_goods</code>"></a><code>ecs_drp_order_goods</code></h2><table>
+<h2 id="u5206_u9500_u8BA2_u5355_u7684_u5546_u54C1ecs_drp_order_goods"><a href="#u5206_u9500_u8BA2_u5355_u7684_u5546_u54C1ecs_drp_order_goods" class="headerlink" title="分销订单的商品<code>ecs_drp_order_goods</code>"></a>分销订单的商品<code>ecs_drp_order_goods</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2557,25 +2595,26 @@ rank_points">
 <tr>
 <td>goods_id</td>
 <td>int(10)</td>
-<td></td>
+<td>商品ID</td>
 </tr>
 <tr>
 <td>touch_sale</td>
 <td>decimal(10,2)</td>
-<td></td>
+<td>销售佣金</td>
 </tr>
 <tr>
 <td>touch_fencheng</td>
 <td>decimal(10,2)</td>
-<td></td>
+<td>分成佣金</td>
 </tr>
 <tr>
 <td>order_id</td>
 <td>int(10)</td>
+<td>订单ID</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_drp_order_info"><a href="#ecs_drp_order_info" class="headerlink" title="<code>ecs_drp_order_info</code>"></a><code>ecs_drp_order_info</code></h2><table>
+<h2 id="u5206_u9500_u5546_u8BA2_u5355_u8868ecs_drp_order_info"><a href="#u5206_u9500_u5546_u8BA2_u5355_u8868ecs_drp_order_info" class="headerlink" title="分销商订单表<code>ecs_drp_order_info</code>"></a>分销商订单表<code>ecs_drp_order_info</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2592,7 +2631,7 @@ rank_points">
 <tr>
 <td>drp_id</td>
 <td>int(10)</td>
-<td></td>
+<td>分销商ID</td>
 </tr>
 <tr>
 <td>shop_separate</td>
@@ -2602,10 +2641,11 @@ rank_points">
 <tr>
 <td>order_id</td>
 <td>int(10)</td>
+<td>订单ID</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_drp_profit"><a href="#ecs_drp_profit" class="headerlink" title="<code>ecs_drp_profit</code>"></a><code>ecs_drp_profit</code></h2><table>
+<h2 id="u9500_u552E_u4F63_u91D1_u8BBE_u7F6E_u8868ecs_drp_profit"><a href="#u9500_u552E_u4F63_u91D1_u8BBE_u7F6E_u8868ecs_drp_profit" class="headerlink" title="销售佣金设置表<code>ecs_drp_profit</code>"></a>销售佣金设置表<code>ecs_drp_profit</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2627,21 +2667,21 @@ rank_points">
 <tr>
 <td>profit1</td>
 <td>float(20,2)</td>
-<td>分销利润1级</td>
+<td>本店销售佣金</td>
 </tr>
 <tr>
 <td>profit2</td>
 <td>float(20,2)</td>
-<td>分销利润2级</td>
+<td>一级分店佣金</td>
 </tr>
 <tr>
 <td>profit3</td>
 <td>float(20,2)</td>
-<td>分销利润3级</td>
+<td>二级分店佣金</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_drp_shop"><a href="#ecs_drp_shop" class="headerlink" title="<code>ecs_drp_shop</code>"></a><code>ecs_drp_shop</code></h2><table>
+<h2 id="u5206_u9500_u5546_u5217_u8868ecs_drp_shop"><a href="#u5206_u9500_u5546_u5217_u8868ecs_drp_shop" class="headerlink" title="分销商列表<code>ecs_drp_shop</code>"></a>分销商列表<code>ecs_drp_shop</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2683,7 +2723,7 @@ rank_points">
 <tr>
 <td>user_id</td>
 <td>int(10)</td>
-<td></td>
+<td>用户ID</td>
 </tr>
 <tr>
 <td>cat_id</td>
@@ -2693,7 +2733,7 @@ rank_points">
 <tr>
 <td>create_time</td>
 <td>int(11)</td>
-<td></td>
+<td>开店时间</td>
 </tr>
 <tr>
 <td>money</td>
@@ -2717,7 +2757,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_drp_visiter"><a href="#ecs_drp_visiter" class="headerlink" title="<code>ecs_drp_visiter</code>"></a><code>ecs_drp_visiter</code></h2><table>
+<h2 id="u8BBF_u5BA2_u4FE1_u606F_u8868ecs_drp_visiter"><a href="#u8BBF_u5BA2_u4FE1_u606F_u8868ecs_drp_visiter" class="headerlink" title="访客信息表<code>ecs_drp_visiter</code>"></a>访客信息表<code>ecs_drp_visiter</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2734,12 +2774,12 @@ rank_points">
 <tr>
 <td>user_id</td>
 <td>int(10)</td>
-<td></td>
+<td>会员ID</td>
 </tr>
 <tr>
 <td>drp_id</td>
 <td>int(10)</td>
-<td></td>
+<td>分销商ID</td>
 </tr>
 <tr>
 <td>visit_time</td>
@@ -2856,7 +2896,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_exchange_goods"><a href="#ecs_exchange_goods" class="headerlink" title="<code>ecs_exchange_goods</code>"></a><code>ecs_exchange_goods</code></h2><table>
+<h2 id="u79EF_u5206_u5546_u57CEecs_exchange_goods"><a href="#u79EF_u5206_u5546_u57CEecs_exchange_goods" class="headerlink" title="积分商城<code>ecs_exchange_goods</code>"></a>积分商城<code>ecs_exchange_goods</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -2873,7 +2913,7 @@ rank_points">
 <tr>
 <td>exchange_integral</td>
 <td>int(10)</td>
-<td></td>
+<td>交换积分</td>
 </tr>
 <tr>
 <td>is_exchange</td>
@@ -2963,6 +3003,7 @@ rank_points">
 <tr>
 <td>touch_img</td>
 <td>varchar(50)</td>
+<td>logo名称</td>
 </tr>
 </tbody>
 </table>
@@ -3038,6 +3079,7 @@ rank_points">
 <tr>
 <td>msg_area</td>
 <td>tinyint(1)</td>
+<td>是否显示反馈信息</td>
 </tr>
 </tbody>
 </table>
@@ -3219,7 +3261,7 @@ rank_points">
 <tr>
 <td>is_shipping</td>
 <td>tinyint(1)</td>
-<td></td>
+<td>是否免运费，1，是；0，否</td>
 </tr>
 <tr>
 <td>integral</td>
@@ -3289,12 +3331,12 @@ rank_points">
 <tr>
 <td>rank_integral</td>
 <td>int(11)</td>
-<td></td>
+<td>等级积分</td>
 </tr>
 <tr>
 <td>suppliers_id</td>
 <td>smallint(5)</td>
-<td></td>
+<td>供应商ID</td>
 </tr>
 <tr>
 <td>is_check</td>
@@ -3364,11 +3406,12 @@ rank_points">
 <tr>
 <td>ext_info</td>
 <td>text</td>
-<td></td>
+<td>扩展信息</td>
 </tr>
 <tr>
 <td>touch_img</td>
 <td>varchar(50)</td>
+<td>logo名称</td>
 </tr>
 </tbody>
 </table>
@@ -3719,12 +3762,12 @@ rank_points">
 <tr>
 <td>ctype</td>
 <td>varchar(10)</td>
-<td></td>
+<td>分类类型</td>
 </tr>
 <tr>
 <td>cid</td>
 <td>smallint(5)</td>
-<td></td>
+<td>分类ID</td>
 </tr>
 <tr>
 <td>name</td>
@@ -3826,7 +3869,7 @@ rank_points">
 <tr>
 <td>rec_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>编号</td>
 </tr>
 <tr>
 <td>order_id</td>
@@ -3851,7 +3894,7 @@ rank_points">
 <tr>
 <td>product_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>货品ID</td>
 </tr>
 <tr>
 <td>goods_number</td>
@@ -3901,6 +3944,7 @@ rank_points">
 <tr>
 <td>goods_attr_id</td>
 <td>varchar(255)</td>
+<td>货品属性ID</td>
 </tr>
 </tbody>
 </table>
@@ -4266,7 +4310,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_package_goods"><a href="#ecs_package_goods" class="headerlink" title="<code>ecs_package_goods</code>"></a><code>ecs_package_goods</code></h2><table>
+<h2 id="u793C_u5305_u5546_u54C1_u8868ecs_package_goods"><a href="#u793C_u5305_u5546_u54C1_u8868ecs_package_goods" class="headerlink" title="礼包商品表<code>ecs_package_goods</code>"></a>礼包商品表<code>ecs_package_goods</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -4283,21 +4327,22 @@ rank_points">
 <tr>
 <td>goods_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>商品ID</td>
 </tr>
 <tr>
 <td>product_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>产品ID</td>
 </tr>
 <tr>
 <td>goods_number</td>
 <td>smallint(5)</td>
-<td></td>
+<td>商品数量</td>
 </tr>
 <tr>
 <td>admin_id</td>
 <td>tinyint(3)</td>
+<td>管理员ID</td>
 </tr>
 </tbody>
 </table>
@@ -4399,10 +4444,11 @@ rank_points">
 <tr>
 <td>openid</td>
 <td>int(4)</td>
+<td>微信用户唯一标识</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_plugins"><a href="#ecs_plugins" class="headerlink" title="<code>ecs_plugins</code>"></a><code>ecs_plugins</code></h2><table>
+<h2 id="u63D2_u4EF6_u8868ecs_plugins"><a href="#u63D2_u4EF6_u8868ecs_plugins" class="headerlink" title="插件表<code>ecs_plugins</code>"></a>插件表<code>ecs_plugins</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -4414,12 +4460,12 @@ rank_points">
 <tr>
 <td>code</td>
 <td>varchar(30)</td>
-<td></td>
+<td>插件名称</td>
 </tr>
 <tr>
 <td>version</td>
 <td>varchar(10)</td>
-<td></td>
+<td>版本</td>
 </tr>
 <tr>
 <td>library</td>
@@ -4437,7 +4483,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_products"><a href="#ecs_products" class="headerlink" title="<code>ecs_products</code>"></a><code>ecs_products</code></h2><table>
+<h2 id="u8D27_u54C1_u8868ecs_products"><a href="#u8D27_u54C1_u8868ecs_products" class="headerlink" title="货品表<code>ecs_products</code>"></a>货品表<code>ecs_products</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -4449,26 +4495,27 @@ rank_points">
 <tr>
 <td>product_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>货品ID</td>
 </tr>
 <tr>
 <td>goods_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>商品ID</td>
 </tr>
 <tr>
 <td>goods_attr</td>
 <td>varchar(50)</td>
-<td></td>
+<td>商品属性</td>
 </tr>
 <tr>
 <td>product_sn</td>
 <td>varchar(60)</td>
-<td></td>
+<td>货号</td>
 </tr>
 <tr>
 <td>product_number</td>
 <td>smallint(5)</td>
+<td>货品数量</td>
 </tr>
 </tbody>
 </table>
@@ -4508,7 +4555,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_reg_extend_info"><a href="#ecs_reg_extend_info" class="headerlink" title="<code>ecs_reg_extend_info</code>"></a><code>ecs_reg_extend_info</code></h2><table>
+<h2 id="u6CE8_u518C_u7684_u6269_u5C55_u4FE1_u606F_u8868ecs_reg_extend_info"><a href="#u6CE8_u518C_u7684_u6269_u5C55_u4FE1_u606F_u8868ecs_reg_extend_info" class="headerlink" title="注册的扩展信息表<code>ecs_reg_extend_info</code>"></a>注册的扩展信息表<code>ecs_reg_extend_info</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -4525,20 +4572,21 @@ rank_points">
 <tr>
 <td>user_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>用户ID</td>
 </tr>
 <tr>
 <td>reg_field_id</td>
 <td>int(10)</td>
-<td></td>
+<td>注册字段ID</td>
 </tr>
 <tr>
 <td>content</td>
 <td>text</td>
+<td>内容</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_reg_fields"><a href="#ecs_reg_fields" class="headerlink" title="<code>ecs_reg_fields</code>"></a><code>ecs_reg_fields</code></h2><table>
+<h2 id="u6CE8_u518C_u5B57_u6BB5_u8868ecs_reg_fields"><a href="#u6CE8_u518C_u5B57_u6BB5_u8868ecs_reg_fields" class="headerlink" title="注册字段表<code>ecs_reg_fields</code>"></a>注册字段表<code>ecs_reg_fields</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -4554,31 +4602,31 @@ rank_points">
 </tr>
 <tr>
 <td>reg_field_name</td>
-<td></td>
-<td></td>
+<td>注册字段名</td>
 </tr>
 <tr>
 <td>dis_order</td>
 <td>tinyint(3)</td>
-<td></td>
+<td>显示顺序</td>
 </tr>
 <tr>
 <td>display</td>
 <td>tinyint(1)</td>
-<td></td>
+<td>显示否</td>
 </tr>
 <tr>
 <td>type</td>
 <td>tinyint(1)</td>
-<td></td>
+<td>类型</td>
 </tr>
 <tr>
 <td>is_need</td>
 <td>tinyint(1)</td>
+<td>是否需要</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_role"><a href="#ecs_role" class="headerlink" title="<code>ecs_role</code>"></a><code>ecs_role</code></h2><table>
+<h2 id="u89D2_u8272_u8868ecs_role"><a href="#u89D2_u8272_u8868ecs_role" class="headerlink" title="角色表<code>ecs_role</code>"></a>角色表<code>ecs_role</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -4590,21 +4638,22 @@ rank_points">
 <tr>
 <td>role_id</td>
 <td>smallint(5)</td>
-<td></td>
+<td>角色ID</td>
 </tr>
 <tr>
 <td>role_name</td>
 <td>varchar(60)</td>
-<td></td>
+<td>角色名</td>
 </tr>
 <tr>
 <td>action_list</td>
 <td>text</td>
-<td></td>
+<td>权限列表</td>
 </tr>
 <tr>
 <td>role_describe</td>
 <td>text</td>
+<td>角色描述</td>
 </tr>
 </tbody>
 </table>
@@ -4671,22 +4720,22 @@ rank_points">
 <tr>
 <td>user_name</td>
 <td>varchar(60)</td>
-<td></td>
+<td>用户名</td>
 </tr>
 <tr>
 <td>user_rank</td>
 <td>tinyint(3)</td>
-<td></td>
+<td>用户等级</td>
 </tr>
 <tr>
 <td>discount</td>
 <td>decimal(3,2)</td>
-<td></td>
+<td>折扣价</td>
 </tr>
 <tr>
 <td>email</td>
 <td>varchar(60)</td>
-<td></td>
+<td>邮箱</td>
 </tr>
 <tr>
 <td>data</td>
@@ -4767,27 +4816,28 @@ rank_points">
 </tr>
 <tr>
 <td>shipping_print</td>
-<td></td>
-<td></td>
+<td>text</td>
+<td>快递单打印模版</td>
 </tr>
 <tr>
 <td>print_bg</td>
 <td>varchar(255)</td>
-<td></td>
+<td>快递单背景图片路径名</td>
 </tr>
 <tr>
 <td>config_lable</td>
 <td>text</td>
-<td></td>
+<td>打印快递单标签位置信息</td>
 </tr>
 <tr>
 <td>print_model</td>
 <td>tinyint(1)</td>
-<td></td>
+<td>编辑器模式</td>
 </tr>
 <tr>
 <td>shipping_order</td>
 <td>tinyint(3)</td>
+<td>排序</td>
 </tr>
 </tbody>
 </table>
@@ -4970,7 +5020,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_suppliers"><a href="#ecs_suppliers" class="headerlink" title="<code>ecs_suppliers</code>"></a><code>ecs_suppliers</code></h2><table>
+<h2 id="u4F9B_u8D27_u5546_u8868ecs_suppliers"><a href="#u4F9B_u8D27_u5546_u8868ecs_suppliers" class="headerlink" title="供货商表<code>ecs_suppliers</code>"></a>供货商表<code>ecs_suppliers</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -4982,17 +5032,17 @@ rank_points">
 <tr>
 <td>suppliers_id</td>
 <td>smallint(5)</td>
-<td></td>
+<td>供货商ID</td>
 </tr>
 <tr>
 <td>suppliers_name</td>
 <td>varchar(255)</td>
-<td></td>
+<td>供货商名称</td>
 </tr>
 <tr>
 <td>suppliers_desc</td>
 <td>mediumtext</td>
-<td></td>
+<td>描述</td>
 </tr>
 <tr>
 <td>is_check</td>
@@ -5139,17 +5189,17 @@ rank_points">
 <tr>
 <td>topic_img</td>
 <td>varchar(255)</td>
-<td></td>
+<td>主图</td>
 </tr>
 <tr>
 <td>title_pic</td>
 <td>varchar(255)</td>
-<td></td>
+<td>标题图</td>
 </tr>
 <tr>
 <td>base_style</td>
 <td>char(6)</td>
-<td></td>
+<td>基本风格样式</td>
 </tr>
 <tr>
 <td>htmls</td>
@@ -5159,15 +5209,16 @@ rank_points">
 <tr>
 <td>keywords</td>
 <td>varchar(255)</td>
-<td></td>
+<td>关键字</td>
 </tr>
 <tr>
 <td>description</td>
 <td>varchar(255)</td>
+<td>描述</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_touch_activity"><a href="#ecs_touch_activity" class="headerlink" title="<code>ecs_touch_activity</code>"></a><code>ecs_touch_activity</code></h2><table>
+<h2 id="u4F18_u60E0_u6D3B_u52A8ecs_touch_activity"><a href="#u4F18_u60E0_u6D3B_u52A8ecs_touch_activity" class="headerlink" title="优惠活动<code>ecs_touch_activity</code>"></a>优惠活动<code>ecs_touch_activity</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -5184,10 +5235,11 @@ rank_points">
 <tr>
 <td>act_banner</td>
 <td>varchar(255)</td>
+<td>活动banner</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_touch_auth"><a href="#ecs_touch_auth" class="headerlink" title="<code>ecs_touch_auth</code>"></a><code>ecs_touch_auth</code></h2><table>
+<h2 id="u5DE5_u5177_u7BB1-_26gt_3B_u767B_u5F55_u63D2_u4EF6ecs_touch_auth"><a href="#u5DE5_u5177_u7BB1-_26gt_3B_u767B_u5F55_u63D2_u4EF6ecs_touch_auth" class="headerlink" title="工具箱-&gt;登录插件<code>ecs_touch_auth</code>"></a>工具箱-&gt;登录插件<code>ecs_touch_auth</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -5204,15 +5256,16 @@ rank_points">
 <tr>
 <td>auth_config</td>
 <td>text</td>
-<td></td>
+<td>配置信息</td>
 </tr>
 <tr>
 <td>from</td>
 <td>varchar(10)</td>
+<td>插件名</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_touch_category"><a href="#ecs_touch_category" class="headerlink" title="<code>ecs_touch_category</code>"></a><code>ecs_touch_category</code></h2><table>
+<h2 id="u5206_u7C7Becs_touch_category"><a href="#u5206_u7C7Becs_touch_category" class="headerlink" title="分类<code>ecs_touch_category</code>"></a>分类<code>ecs_touch_category</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -5238,7 +5291,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_touch_feedback"><a href="#ecs_touch_feedback" class="headerlink" title="<code>ecs_touch_feedback</code>"></a><code>ecs_touch_feedback</code></h2><table>
+<h2 id="u6D88_u606Fecs_touch_feedback"><a href="#u6D88_u606Fecs_touch_feedback" class="headerlink" title="消息<code>ecs_touch_feedback</code>"></a>消息<code>ecs_touch_feedback</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -5255,15 +5308,16 @@ rank_points">
 <tr>
 <td>msg_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>消息ID</td>
 </tr>
 <tr>
 <td>msg_read</td>
 <td>int(1)</td>
+<td>消息是否已读</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_touch_goods"><a href="#ecs_touch_goods" class="headerlink" title="<code>ecs_touch_goods</code>"></a><code>ecs_touch_goods</code></h2><table>
+<h2 id="u5546_u54C1ecs_touch_goods"><a href="#u5546_u54C1ecs_touch_goods" class="headerlink" title="商品<code>ecs_touch_goods</code>"></a>商品<code>ecs_touch_goods</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -5284,7 +5338,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_touch_goods_activity"><a href="#ecs_touch_goods_activity" class="headerlink" title="<code>ecs_touch_goods_activity</code>"></a><code>ecs_touch_goods_activity</code></h2><table>
+<h2 id="u5546_u54C1_u6D3B_u52A8ecs_touch_goods_activity"><a href="#u5546_u54C1_u6D3B_u52A8ecs_touch_goods_activity" class="headerlink" title="商品活动<code>ecs_touch_goods_activity</code>"></a>商品活动<code>ecs_touch_goods_activity</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -5301,25 +5355,26 @@ rank_points">
 <tr>
 <td>act_banner</td>
 <td>varchar(255)</td>
-<td></td>
+<td>活动banner</td>
 </tr>
 <tr>
 <td>sales_count</td>
 <td>int(10)</td>
-<td></td>
+<td>促销商品数</td>
 </tr>
 <tr>
 <td>click_num</td>
 <td>int(10)</td>
-<td></td>
+<td>点击次数</td>
 </tr>
 <tr>
 <td>cur_price</td>
 <td>decimal(10,2)</td>
+<td>当前价格</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_touch_nav"><a href="#ecs_touch_nav" class="headerlink" title="<code>ecs_touch_nav</code>"></a><code>ecs_touch_nav</code></h2><table>
+<h2 id="u5DE5_u5177_u7BB1-_26gt_3B_u5BFC_u822A_u680F_u8BBE_u7F6Eecs_touch_nav"><a href="#u5DE5_u5177_u7BB1-_26gt_3B_u5BFC_u822A_u680F_u8BBE_u7F6Eecs_touch_nav" class="headerlink" title="工具箱-&gt;导航栏设置<code>ecs_touch_nav</code>"></a>工具箱-&gt;导航栏设置<code>ecs_touch_nav</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -5346,12 +5401,12 @@ rank_points">
 <tr>
 <td>name</td>
 <td>varchar(255)</td>
-<td></td>
+<td>名称</td>
 </tr>
 <tr>
 <td>ifshow</td>
 <td>tinyint(1)</td>
-<td></td>
+<td>是否显示，1显示，0不显示</td>
 </tr>
 <tr>
 <td>vieworder</td>
@@ -5366,12 +5421,12 @@ rank_points">
 <tr>
 <td>url</td>
 <td>varchar(255)</td>
-<td></td>
+<td>链接地址</td>
 </tr>
 <tr>
 <td>pic</td>
 <td>varchar(255)</td>
-<td></td>
+<td>图片地址</td>
 </tr>
 <tr>
 <td>type</td>
@@ -5379,7 +5434,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_touch_topic"><a href="#ecs_touch_topic" class="headerlink" title="<code>ecs_touch_topic</code>"></a><code>ecs_touch_topic</code></h2><table>
+<h2 id="u4E13_u9898_u8868ecs_touch_topic"><a href="#u4E13_u9898_u8868ecs_touch_topic" class="headerlink" title="专题表<code>ecs_touch_topic</code>"></a>专题表<code>ecs_touch_topic</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -5396,22 +5451,22 @@ rank_points">
 <tr>
 <td>title</td>
 <td>varchar(255)</td>
-<td></td>
+<td>标题</td>
 </tr>
 <tr>
 <td>intro</td>
 <td>text</td>
-<td></td>
+<td>介绍</td>
 </tr>
 <tr>
 <td>start_time</td>
 <td>int(11)</td>
-<td></td>
+<td>开始时间</td>
 </tr>
 <tr>
 <td>end_time</td>
 <td>int(10)</td>
-<td></td>
+<td>结束时间</td>
 </tr>
 <tr>
 <td>data</td>
@@ -5458,7 +5513,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_touch_user_info"><a href="#ecs_touch_user_info" class="headerlink" title="<code>ecs_touch_user_info</code>"></a><code>ecs_touch_user_info</code></h2><table>
+<h2 id="u7528_u6237_u4FE1_u606Fecs_touch_user_info"><a href="#u7528_u6237_u4FE1_u606Fecs_touch_user_info" class="headerlink" title="用户信息<code>ecs_touch_user_info</code>"></a>用户信息<code>ecs_touch_user_info</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -5591,12 +5646,12 @@ rank_points">
 <tr>
 <td>ec_salt</td>
 <td>varchar(10)</td>
-<td></td>
+<td>加密因子</td>
 </tr>
 <tr>
 <td>salt</td>
 <td>varchar(10)</td>
-<td></td>
+<td>salt值</td>
 </tr>
 <tr>
 <td>parent_id</td>
@@ -5651,16 +5706,17 @@ rank_points">
 <tr>
 <td>passwd_question</td>
 <td>varchar(50)</td>
-<td></td>
+<td>设置密码问题</td>
 </tr>
 <tr>
 <td>passwd_answer</td>
 <td>varchar(255)</td>
-<td></td>
+<td>答案</td>
 </tr>
 <tr>
 <td>apply_sale</td>
 <td>int(1)</td>
+<td>提交申请</td>
 </tr>
 </tbody>
 </table>
@@ -5862,7 +5918,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_user_feed"><a href="#ecs_user_feed" class="headerlink" title="<code>ecs_user_feed</code>"></a><code>ecs_user_feed</code></h2><table>
+<h2 id="u7528_u6237_u8D44_u6599ecs_user_feed"><a href="#u7528_u6237_u8D44_u6599ecs_user_feed" class="headerlink" title="用户资料<code>ecs_user_feed</code>"></a>用户资料<code>ecs_user_feed</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -5879,7 +5935,7 @@ rank_points">
 <tr>
 <td>user_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>用户ID</td>
 </tr>
 <tr>
 <td>value_id</td>
@@ -6004,7 +6060,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_volume_price"><a href="#ecs_volume_price" class="headerlink" title="<code>ecs_volume_price</code>"></a><code>ecs_volume_price</code></h2><table>
+<h2 id="u4FDD_u5B58_u67D0_u5546_u54C1_u7684_u4F18_u60E0_u4EF7_u683C_u8868ecs_volume_price"><a href="#u4FDD_u5B58_u67D0_u5546_u54C1_u7684_u4F18_u60E0_u4EF7_u683C_u8868ecs_volume_price" class="headerlink" title="保存某商品的优惠价格表<code>ecs_volume_price</code>"></a>保存某商品的优惠价格表<code>ecs_volume_price</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6016,21 +6072,22 @@ rank_points">
 <tr>
 <td>price_type</td>
 <td>tinyint(1)</td>
-<td></td>
+<td>价格类型</td>
 </tr>
 <tr>
 <td>goods_id</td>
 <td>mediumint(8)</td>
-<td></td>
+<td>商品编号</td>
 </tr>
 <tr>
 <td>volume_number</td>
 <td>smallint(5)</td>
-<td></td>
+<td>价格对应的数量上下限</td>
 </tr>
 <tr>
 <td>volume_price</td>
 <td>decimal(10,2)</td>
+<td>价格</td>
 </tr>
 </tbody>
 </table>
@@ -6138,10 +6195,11 @@ rank_points">
 <tr>
 <td>option_order</td>
 <td>tinyint(3)</td>
+<td>选项排序</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat"><a href="#ecs_wechat" class="headerlink" title="<code>ecs_wechat</code>"></a><code>ecs_wechat</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u8868ecs_wechat"><a href="#u5FAE_u4FE1_u901A_u8868ecs_wechat" class="headerlink" title="微信通表<code>ecs_wechat</code>"></a>微信通表<code>ecs_wechat</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6198,22 +6256,22 @@ rank_points">
 <tr>
 <td>oauth_name</td>
 <td>varchar(100)</td>
-<td></td>
+<td>微信OAuth名称</td>
 </tr>
 <tr>
 <td>oauth_redirecturi</td>
 <td>varchar(255)</td>
-<td></td>
+<td>微信OAuth回调地址</td>
 </tr>
 <tr>
 <td>oauth_count</td>
 <td>int(11)</td>
-<td></td>
+<td>微信OAuth推送量</td>
 </tr>
 <tr>
 <td>time</td>
 <td>int(11)</td>
-<td></td>
+<td>时间</td>
 </tr>
 <tr>
 <td>sort</td>
@@ -6232,7 +6290,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_custom_message"><a href="#ecs_wechat_custom_message" class="headerlink" title="<code>ecs_wechat_custom_message</code>"></a><code>ecs_wechat_custom_message</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u81EA_u5B9A_u4E49_u6D88_u606Fecs_wechat_custom_message"><a href="#u5FAE_u4FE1_u901A_u81EA_u5B9A_u4E49_u6D88_u606Fecs_wechat_custom_message" class="headerlink" title="微信通自定义消息<code>ecs_wechat_custom_message</code>"></a>微信通自定义消息<code>ecs_wechat_custom_message</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6268,7 +6326,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_extend"><a href="#ecs_wechat_extend" class="headerlink" title="<code>ecs_wechat_extend</code>"></a><code>ecs_wechat_extend</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u6269_u5C55ecs_wechat_extend"><a href="#u5FAE_u4FE1_u901A_u6269_u5C55ecs_wechat_extend" class="headerlink" title="微信通扩展<code>ecs_wechat_extend</code>"></a>微信通扩展<code>ecs_wechat_extend</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6290,7 +6348,7 @@ rank_points">
 <tr>
 <td>keywords</td>
 <td>varchar(20)</td>
-<td></td>
+<td>关键词</td>
 </tr>
 <tr>
 <td>command</td>
@@ -6305,7 +6363,7 @@ rank_points">
 <tr>
 <td>type</td>
 <td>varchar(20)</td>
-<td></td>
+<td>类型</td>
 </tr>
 <tr>
 <td>enable</td>
@@ -6315,12 +6373,12 @@ rank_points">
 <tr>
 <td>author</td>
 <td>varchar(100)</td>
-<td></td>
+<td>作者</td>
 </tr>
 <tr>
 <td>website</td>
 <td>varchar(100)</td>
-<td></td>
+<td>站点</td>
 </tr>
 <tr>
 <td>wechat_id</td>
@@ -6329,7 +6387,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_mass_history"><a href="#ecs_wechat_mass_history" class="headerlink" title="<code>ecs_wechat_mass_history</code>"></a><code>ecs_wechat_mass_history</code></h2><table>
+<h2 id="u7FA4_u53D1_u6D88_u606F_u5386_u53F2ecs_wechat_mass_history"><a href="#u7FA4_u53D1_u6D88_u606F_u5386_u53F2ecs_wechat_mass_history" class="headerlink" title="群发消息历史<code>ecs_wechat_mass_history</code>"></a>群发消息历史<code>ecs_wechat_mass_history</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6366,7 +6424,7 @@ rank_points">
 <tr>
 <td>send_time</td>
 <td>int(11)</td>
-<td></td>
+<td>发送时间</td>
 </tr>
 <tr>
 <td>msg_id</td>
@@ -6381,7 +6439,7 @@ rank_points">
 <tr>
 <td>filtercount</td>
 <td>int(10)</td>
-<td></td>
+<td>过滤（过滤是指特定地区、性别的过滤、用户设置拒收的过滤，用户接收已超4条的过滤）后，准备发送的粉丝数</td>
 </tr>
 <tr>
 <td>sentcount</td>
@@ -6395,7 +6453,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_media"><a href="#ecs_wechat_media" class="headerlink" title="<code>ecs_wechat_media</code>"></a><code>ecs_wechat_media</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u591A_u5A92_u4F53_u6D88_u606Fecs_wechat_media"><a href="#u5FAE_u4FE1_u901A_u591A_u5A92_u4F53_u6D88_u606Fecs_wechat_media" class="headerlink" title="微信通多媒体消息<code>ecs_wechat_media</code>"></a>微信通多媒体消息<code>ecs_wechat_media</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6427,7 +6485,7 @@ rank_points">
 <tr>
 <td>author</td>
 <td>varchar(20)</td>
-<td></td>
+<td>作者</td>
 </tr>
 <tr>
 <td>is_show</td>
@@ -6467,7 +6525,7 @@ rank_points">
 <tr>
 <td>thumb</td>
 <td>varchar(255)</td>
-<td></td>
+<td>缩略图</td>
 </tr>
 <tr>
 <td>add_time</td>
@@ -6477,25 +6535,26 @@ rank_points">
 <tr>
 <td>edit_time</td>
 <td>int(11)</td>
-<td></td>
+<td>修改时间</td>
 </tr>
 <tr>
 <td>type</td>
 <td>varchar(10)</td>
-<td></td>
+<td>类型</td>
 </tr>
 <tr>
 <td>article_id</td>
 <td>varchar(100)</td>
-<td></td>
+<td>文章ID</td>
 </tr>
 <tr>
 <td>sort</td>
 <td>int(10)</td>
+<td>排序</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_menu"><a href="#ecs_wechat_menu" class="headerlink" title="<code>ecs_wechat_menu</code>"></a><code>ecs_wechat_menu</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u83DC_u5355ecs_wechat_menu"><a href="#u5FAE_u4FE1_u901A_u83DC_u5355ecs_wechat_menu" class="headerlink" title="微信通菜单<code>ecs_wechat_menu</code>"></a>微信通菜单<code>ecs_wechat_menu</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6551,7 +6610,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_point"><a href="#ecs_wechat_point" class="headerlink" title="<code>ecs_wechat_point</code>"></a><code>ecs_wechat_point</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u79EF_u5206ecs_wechat_point"><a href="#u5FAE_u4FE1_u901A_u79EF_u5206ecs_wechat_point" class="headerlink" title="微信通积分<code>ecs_wechat_point</code>"></a>微信通积分<code>ecs_wechat_point</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6568,7 +6627,7 @@ rank_points">
 <tr>
 <td>openid</td>
 <td>varchar(100)</td>
-<td></td>
+<td>用户的标识</td>
 </tr>
 <tr>
 <td>keywords</td>
@@ -6578,10 +6637,11 @@ rank_points">
 <tr>
 <td>createtime</td>
 <td>int(11)</td>
+<td>创建时间</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_prize"><a href="#ecs_wechat_prize" class="headerlink" title="<code>ecs_wechat_prize</code>"></a><code>ecs_wechat_prize</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u5956_u54C1ecs_wechat_prize"><a href="#u5FAE_u4FE1_u901A_u5956_u54C1ecs_wechat_prize" class="headerlink" title="微信通奖品<code>ecs_wechat_prize</code>"></a>微信通奖品<code>ecs_wechat_prize</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6603,12 +6663,12 @@ rank_points">
 <tr>
 <td>openid</td>
 <td>varchar(100)</td>
-<td></td>
+<td>用户的标识</td>
 </tr>
 <tr>
 <td>prize_name</td>
 <td>varchar(100)</td>
-<td></td>
+<td>奖品名称</td>
 </tr>
 <tr>
 <td>issue_status</td>
@@ -6618,12 +6678,12 @@ rank_points">
 <tr>
 <td>winner</td>
 <td>varchar(255)</td>
-<td></td>
+<td>赢家数据</td>
 </tr>
 <tr>
 <td>dateline</td>
 <td>int(11)</td>
-<td></td>
+<td>日期</td>
 </tr>
 <tr>
 <td>prize_type</td>
@@ -6637,7 +6697,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_qrcode"><a href="#ecs_wechat_qrcode" class="headerlink" title="<code>ecs_wechat_qrcode</code>"></a><code>ecs_wechat_qrcode</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u4E8C_u7EF4_u7801ecs_wechat_qrcode"><a href="#u5FAE_u4FE1_u901A_u4E8C_u7EF4_u7801ecs_wechat_qrcode" class="headerlink" title="微信通二维码<code>ecs_wechat_qrcode</code>"></a>微信通二维码<code>ecs_wechat_qrcode</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6709,10 +6769,11 @@ rank_points">
 <tr>
 <td>sort</td>
 <td>int(10)</td>
+<td>排序</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_reply"><a href="#ecs_wechat_reply" class="headerlink" title="<code>ecs_wechat_reply</code>"></a><code>ecs_wechat_reply</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u56DE_u590Decs_wechat_reply"><a href="#u5FAE_u4FE1_u901A_u56DE_u590Decs_wechat_reply" class="headerlink" title="微信通回复<code>ecs_wechat_reply</code>"></a>微信通回复<code>ecs_wechat_reply</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6739,22 +6800,22 @@ rank_points">
 <tr>
 <td>content</td>
 <td>varchar(255)</td>
-<td></td>
+<td>内容</td>
 </tr>
 <tr>
 <td>media_id</td>
 <td>int(10)</td>
-<td></td>
+<td>多媒体id</td>
 </tr>
 <tr>
 <td>rule_name</td>
 <td>varchar(180)</td>
-<td></td>
+<td>规则名称</td>
 </tr>
 <tr>
 <td>add_time</td>
 <td>int(11)</td>
-<td></td>
+<td>添加时间</td>
 </tr>
 <tr>
 <td>reply_type</td>
@@ -6763,7 +6824,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_rule_keywords"><a href="#ecs_wechat_rule_keywords" class="headerlink" title="<code>ecs_wechat_rule_keywords</code>"></a><code>ecs_wechat_rule_keywords</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u89C4_u5219_u5173_u952E_u5B57ecs_wechat_rule_keywords"><a href="#u5FAE_u4FE1_u901A_u89C4_u5219_u5173_u952E_u5B57ecs_wechat_rule_keywords" class="headerlink" title="微信通规则关键字<code>ecs_wechat_rule_keywords</code>"></a>微信通规则关键字<code>ecs_wechat_rule_keywords</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6785,10 +6846,11 @@ rank_points">
 <tr>
 <td>rule_keywords</td>
 <td>varchar(255)</td>
+<td>规则关键字</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_template"><a href="#ecs_wechat_template" class="headerlink" title="<code>ecs_wechat_template</code>"></a><code>ecs_wechat_template</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u6A21_u7248ecs_wechat_template"><a href="#u5FAE_u4FE1_u901A_u6A21_u7248ecs_wechat_template" class="headerlink" title="微信通模版<code>ecs_wechat_template</code>"></a>微信通模版<code>ecs_wechat_template</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6805,31 +6867,32 @@ rank_points">
 <tr>
 <td>open_id</td>
 <td>varchar(255)</td>
-<td></td>
+<td>用户的标识</td>
 </tr>
 <tr>
 <td>template_id</td>
 <td>varchar(255)</td>
-<td></td>
+<td>模版ID</td>
 </tr>
 <tr>
 <td>contents</td>
 <td>varchar(133)</td>
-<td></td>
+<td>模版内容</td>
 </tr>
 <tr>
 <td>template</td>
-<td>text,</td>
+<td>text</td>
+<td>模版</td>
 </tr>
 <tr>
 <td>title</td>
 <td>varchar(33)</td>
-<td></td>
+<td>标题</td>
 </tr>
 <tr>
 <td>add_time</td>
 <td>int(11)</td>
-<td></td>
+<td>添加时间</td>
 </tr>
 <tr>
 <td>switch</td>
@@ -6837,7 +6900,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_user"><a href="#ecs_wechat_user" class="headerlink" title="<code>ecs_wechat_user</code>"></a><code>ecs_wechat_user</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u7528_u6237ecs_wechat_user"><a href="#u5FAE_u4FE1_u901A_u7528_u6237ecs_wechat_user" class="headerlink" title="微信通用户<code>ecs_wechat_user</code>"></a>微信通用户<code>ecs_wechat_user</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -6909,17 +6972,17 @@ rank_points">
 <tr>
 <td>remark</td>
 <td>varchar(255)</td>
-<td></td>
+<td>备注</td>
 </tr>
 <tr>
 <td>privilege</td>
 <td>varchar(255)</td>
-<td></td>
+<td>权限</td>
 </tr>
 <tr>
 <td>unionid</td>
 <td>varchar(255)</td>
-<td></td>
+<td>只有在用户将公众号绑定到微信开放平台账号后，查看公众号是否绑定</td>
 </tr>
 <tr>
 <td>group_id</td>
@@ -6943,7 +7006,7 @@ rank_points">
 </tr>
 </tbody>
 </table>
-<h2 id="ecs_wechat_user_group"><a href="#ecs_wechat_user_group" class="headerlink" title="<code>ecs_wechat_user_group</code>"></a><code>ecs_wechat_user_group</code></h2><table>
+<h2 id="u5FAE_u4FE1_u901A_u7528_u6237_u7EC4ecs_wechat_user_group"><a href="#u5FAE_u4FE1_u901A_u7528_u6237_u7EC4ecs_wechat_user_group" class="headerlink" title="微信通用户组<code>ecs_wechat_user_group</code>"></a>微信通用户组<code>ecs_wechat_user_group</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -7247,7 +7310,7 @@ rank_points">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ectouch2-0__u6570_u636E_u5E93_u7ED3_u6784"><span class="nav-number">1.</span> <span class="nav-text">Ectouch2.0 数据库结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7528_u6237_u8D26_u76EE_u65E5_u5FD7_u8868ecs_account_log"><span class="nav-number">1.1.</span> <span class="nav-text">用户账目日志表ecs_account_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5E7F_u544A_u8868ecs_ad"><span class="nav-number">1.2.</span> <span class="nav-text">广告表ecs_ad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7BA1_u7406_u6743_u9650_u5206_u914D_u8868ecs_admin_action"><span class="nav-number">1.3.</span> <span class="nav-text">管理权限分配表ecs_admin_action</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7BA1_u7406_u65E5_u5FD7_u8868ecs_admin_log"><span class="nav-number">1.4.</span> <span class="nav-text">管理日志表ecs_admin_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7BA1_u7406_u5458_u7559_u8A00_u8868ecs_admin_message"><span class="nav-number">1.5.</span> <span class="nav-text">管理员留言表ecs_admin_message</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7BA1_u7406_u5458_u7BA1_u7406_u8868ecs_admin_user"><span class="nav-number">1.6.</span> <span class="nav-text">管理员管理表ecs_admin_user</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5E7F_u544A_u70B9_u51FB_u7387_u7EDF_u8BA1_u8868ecs_adsense"><span class="nav-number">1.7.</span> <span class="nav-text">广告点击率统计表ecs_adsense</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_ad_custom"><span class="nav-number">1.8.</span> <span class="nav-text">ecs_ad_custom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5E7F_u544A_u4F4D_u8868ecs_ad_position"><span class="nav-number">1.9.</span> <span class="nav-text">广告位表ecs_ad_position</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7BA1_u7406_u65E5_u5FD7ecs_affiliate_log"><span class="nav-number">1.10.</span> <span class="nav-text">管理日志ecs_affiliate_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u529E_u4E8B_u5904_u4FE1_u606Fecs_agency"><span class="nav-number">1.11.</span> <span class="nav-text">办事处信息ecs_agency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BB0_u5F55_u914D_u9001_u533A_u57DF_u5173_u8054ID_u8868ecs_area_region"><span class="nav-number">1.12.</span> <span class="nav-text">记录配送区域关联ID表ecs_area_region</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6587_u7AE0ecs_article"><span class="nav-number">1.13.</span> <span class="nav-text">文章ecs_article</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6587_u7AE0_u5206_u7C7B_u4FE1_u606F_u8868ecs_article_cat"><span class="nav-number">1.14.</span> <span class="nav-text">文章分类信息表ecs_article_cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u7C7B_u578B_u5C5E_u6027ecs_attribute"><span class="nav-number">1.15.</span> <span class="nav-text">商品类型属性ecs_attribute</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u62CD_u5356_u51FA_u4EF7_u8BB0_u5F55_u8868ecs_auction_log"><span class="nav-number">1.16.</span> <span class="nav-text">拍卖出价记录表ecs_auction_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5904_u7406_u6587_u7AE0_uFF0C_u5546_u54C1_u81EA_u52A8_u4E0A_u4E0B_u7EBF_u7684_u8BA1_u5212_u4EFB_u52A1_u5217_u8868_uFF08_u9700_u8981_u5B89_u88C5_u8BA1_u5212_u4EFB_u52A1_u63D2_u4EF6_uFF09ecs_auto_manage"><span class="nav-number">1.17.</span> <span class="nav-text">处理文章，商品自动上下线的计划任务列表（需要安装计划任务插件）ecs_auto_manage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_back_goods"><span class="nav-number">1.18.</span> <span class="nav-text">ecs_back_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_back_order"><span class="nav-number">1.19.</span> <span class="nav-text">ecs_back_order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EA2_u5305_u7C7B_u578B_u8868ecs_bonus_type"><span class="nav-number">1.20.</span> <span class="nav-text">红包类型表ecs_bonus_type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7F3A_u8D27_u767B_u8BB0_u7684_u8BA2_u8D2D_u548C_u5904_u7406_u8BB0_u5F55_u8868ecs_booking_goods"><span class="nav-number">1.21.</span> <span class="nav-text">缺货登记的订购和处理记录表ecs_booking_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u54C1_u724C_u8868ecs_brand"><span class="nav-number">1.22.</span> <span class="nav-text">商品品牌表ecs_brand</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5361_u7247_u914D_u7F6E_u4FE1_u606Fecs_card"><span class="nav-number">1.23.</span> <span class="nav-text">卡片配置信息ecs_card</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8D2D_u7269_u8F66_u8D2D_u7269_u4FE1_u606F_u8BB0_u5F55_u8868ecs_cart"><span class="nav-number">1.24.</span> <span class="nav-text">购物车购物信息记录表ecs_cart</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u5206_u7C7B_u8868_uFF0C_u8BB0_u5F55_u5546_u54C1_u5206_u7C7B_u4FE1_u606Fecs_category"><span class="nav-number">1.25.</span> <span class="nav-text">商品分类表，记录商品分类信息ecs_category</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_cat_recommend"><span class="nav-number">1.26.</span> <span class="nav-text">ecs_cat_recommend</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F1A_u5458_u6536_u85CF_u5546_u54C1_u7684_u8BB0_u5F55_u5217_u8868_uFF0C_u4E00_u6761_u8BB0_u5F55_u4E00_u4E2A_u6536_u85CF_u5546_u54C1ecs_collect_goods"><span class="nav-number">1.27.</span> <span class="nav-text">会员收藏商品的记录列表，一条记录一个收藏商品ecs_collect_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7528_u6237_u5BF9_u6587_u7AE0_u548C_u4EA7_u54C1_u7684_u8BC4_u8BBA_u5217_u8868ecs_comment"><span class="nav-number">1.28.</span> <span class="nav-text">用户对文章和产品的评论列表ecs_comment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BA1_u5212_u4EFB_u52A1_u63D2_u4EF6_u5B89_u88C5_u914D_u7F6E_u4FE1_u606Fecs_crons"><span class="nav-number">1.29.</span> <span class="nav-text">计划任务插件安装配置信息ecs_crons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_delivery_goods"><span class="nav-number">1.30.</span> <span class="nav-text">ecs_delivery_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_delivery_order"><span class="nav-number">1.31.</span> <span class="nav-text">ecs_delivery_order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_drp_apply"><span class="nav-number">1.32.</span> <span class="nav-text">ecs_drp_apply</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_drp_bank"><span class="nav-number">1.33.</span> <span class="nav-text">ecs_drp_bank</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_drp_config"><span class="nav-number">1.34.</span> <span class="nav-text">ecs_drp_config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_drp_goods"><span class="nav-number">1.35.</span> <span class="nav-text">ecs_drp_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_drp_log"><span class="nav-number">1.36.</span> <span class="nav-text">ecs_drp_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_drp_order_goods"><span class="nav-number">1.37.</span> <span class="nav-text">ecs_drp_order_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_drp_order_info"><span class="nav-number">1.38.</span> <span class="nav-text">ecs_drp_order_info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_drp_profit"><span class="nav-number">1.39.</span> <span class="nav-text">ecs_drp_profit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_drp_shop"><span class="nav-number">1.40.</span> <span class="nav-text">ecs_drp_shop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_drp_visiter"><span class="nav-number">1.41.</span> <span class="nav-text">ecs_drp_visiter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u589E_u52A0_u7535_u5B50_u6742_u5FD7_u8BA2_u9605_u8868ecs_email_list"><span class="nav-number">1.42.</span> <span class="nav-text">增加电子杂志订阅表ecs_email_list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u589E_u52A0_u53D1_u9001_u961F_u5217_u8868ecs_email_sendlist"><span class="nav-number">1.43.</span> <span class="nav-text">增加发送队列表ecs_email_sendlist</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BE5_u8868_u7528_u6765_u8BB0_u5F55_u9875_u9762_u89E6_u53D1_u8BA1_u5212_u4EFB_u52A1_u65F6_u5931_u8D25_u6240_u4EA7_u751F_u7684_u9519_u8BEFecs_error_log"><span class="nav-number">1.44.</span> <span class="nav-text">该表用来记录页面触发计划任务时失败所产生的错误ecs_error_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_exchange_goods"><span class="nav-number">1.45.</span> <span class="nav-text">ecs_exchange_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F18_u60E0_u6D3B_u52A8_u7684_u914D_u7F6E_u4FE1_u606F_uFF08_u9001_u793C_u3001_u51CF_u514D_u3001_u6253_u6298_uFF09ecs_favourable_activity"><span class="nav-number">1.46.</span> <span class="nav-text">优惠活动的配置信息（送礼、减免、打折）ecs_favourable_activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7528_u6237_u53CD_u9988_u4FE1_u606F_u8868ecs_feedback"><span class="nav-number">1.47.</span> <span class="nav-text">用户反馈信息表ecs_feedback</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u53CB_u60C5_u94FE_u63A5_u914D_u7F6E_u4FE1_u606F_u8868ecs_friend_link"><span class="nav-number">1.48.</span> <span class="nav-text">友情链接配置信息表ecs_friend_link</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u8868ecs_goods"><span class="nav-number">1.49.</span> <span class="nav-text">商品表ecs_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u62CD_u5356_u6D3B_u52A8_u548C_u593A_u5B9D_u5947_u5175_u6D3B_u52A8_u914D_u7F6E_u4FE1_u606Fecs_goods_activity"><span class="nav-number">1.50.</span> <span class="nav-text">拍卖活动和夺宝奇兵活动配置信息ecs_goods_activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6587_u7AE0_u5173_u8054_u4EA7_u54C1_u8868ecs_goods_article"><span class="nav-number">1.51.</span> <span class="nav-text">文章关联产品表ecs_goods_article</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5177_u4F53_u5546_u54C1_u5C5E_u6027_u8868ecs_goods_attr"><span class="nav-number">1.52.</span> <span class="nav-text">具体商品属性表ecs_goods_attr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u7684_u62D3_u5C55_u5206_u7C7Becs_goods_cat"><span class="nav-number">1.53.</span> <span class="nav-text">商品的拓展分类ecs_goods_cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u76F8_u518C_u8868ecs_goods_gallery"><span class="nav-number">1.54.</span> <span class="nav-text">商品相册表ecs_goods_gallery</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u7C7B_u578Becs_goods_type"><span class="nav-number">1.55.</span> <span class="nav-text">商品类型ecs_goods_type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u914D_u4EF6_u914D_u7F6E_u8868ecs_group_goods"><span class="nav-number">1.56.</span> <span class="nav-text">商品配件配置表ecs_group_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u9875_u9762_u641C_u7D22_u5173_u952E_u5B57_u641C_u7D22_u8BB0_u5F55ecs_keywords"><span class="nav-number">1.57.</span> <span class="nav-text">页面搜索关键字搜索记录ecs_keywords</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5173_u8054_u5546_u54C1_u4FE1_u606F_u8868ecs_link_goods"><span class="nav-number">1.58.</span> <span class="nav-text">关联商品信息表ecs_link_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5404_u79CD_u90AE_u4EF6_u7684_u6A21_u677F_u914D_u7F6E_u6A21_u677Fecs_mail_templates"><span class="nav-number">1.59.</span> <span class="nav-text">各种邮件的模板配置模板ecs_mail_templates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F1A_u5458_u6298_u6263_u4EF7ecs_member_price"><span class="nav-number">1.60.</span> <span class="nav-text">会员折扣价ecs_member_price</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E0A_u4E2D_u4E0B3_u4E2A_u5BFC_u822A_u680F_u7684_u663E_u793A_u914D_u7F6Eecs_nav"><span class="nav-number">1.61.</span> <span class="nav-text">上中下3个导航栏的显示配置ecs_nav</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5BF9_u8BA2_u5355_u64CD_u4F5C_u65E5_u5FD7_u8868ecs_order_action"><span class="nav-number">1.62.</span> <span class="nav-text">对订单操作日志表ecs_order_action</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BA2_u5355_u7684_u5546_u54C1_u4FE1_u606Fecs_order_goods"><span class="nav-number">1.63.</span> <span class="nav-text">订单的商品信息ecs_order_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BA2_u5355_u7684_u914D_u9001ecs_order_info"><span class="nav-number">1.64.</span> <span class="nav-text">订单的配送ecs_order_info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u5305_u88C5_u4FE1_u606F_u914D_u7F6E_u8868ecs_pack"><span class="nav-number">1.65.</span> <span class="nav-text">商品包装信息配置表ecs_pack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_package_goods"><span class="nav-number">1.66.</span> <span class="nav-text">ecs_package_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5B89_u88C5_u7684_u652F_u4ED8_u65B9_u5F0F_u914D_u7F6E_u4FE1_u606Fecs_payment"><span class="nav-number">1.67.</span> <span class="nav-text">安装的支付方式配置信息ecs_payment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7CFB_u7EDF_u652F_u4ED8_u8BB0_u5F55ecs_pay_log"><span class="nav-number">1.68.</span> <span class="nav-text">系统支付记录ecs_pay_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_plugins"><span class="nav-number">1.69.</span> <span class="nav-text">ecs_plugins</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_products"><span class="nav-number">1.70.</span> <span class="nav-text">ecs_products</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5730_u533A_u5217_u8868ecs_region"><span class="nav-number">1.71.</span> <span class="nav-text">地区列表ecs_region</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_reg_extend_info"><span class="nav-number">1.72.</span> <span class="nav-text">ecs_reg_extend_info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_reg_fields"><span class="nav-number">1.73.</span> <span class="nav-text">ecs_reg_fields</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_role"><span class="nav-number">1.74.</span> <span class="nav-text">ecs_role</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u641C_u7D22_u5F15_u64CE_u8BBF_u95EE_u8BB0_u5F55ecs_searchengine"><span class="nav-number">1.75.</span> <span class="nav-text">搜索引擎访问记录ecs_searchengine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session_u8BB0_u5F55_u8868ecs_sessions"><span class="nav-number">1.76.</span> <span class="nav-text">session记录表ecs_sessions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session_u6570_u636E_u8868ecs_sessions_data"><span class="nav-number">1.77.</span> <span class="nav-text">session数据表ecs_sessions_data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u914D_u9001_u65B9_u5F0F_u914D_u7F6E_u4FE1_u606F_u8868ecs_shipping"><span class="nav-number">1.78.</span> <span class="nav-text">配送方式配置信息表ecs_shipping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u914D_u9001_u65B9_u5F0F_u6240_u5C5E_u7684_u914D_u9001_u533A_u57DF_u548C_u914D_u9001_u8D39_u7528_u4FE1_u606Fecs_shipping_area"><span class="nav-number">1.79.</span> <span class="nav-text">配送方式所属的配送区域和配送费用信息ecs_shipping_area</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5168_u7AD9_u914D_u7F6E_u4FE1_u606F_u8868ecs_shop_config"><span class="nav-number">1.80.</span> <span class="nav-text">全站配置信息表ecs_shop_config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u593A_u5B9D_u5947_u5175_u51FA_u4EF7_u8BB0_u5F55_u8868ecs_snatch_log"><span class="nav-number">1.81.</span> <span class="nav-text">夺宝奇兵出价记录表ecs_snatch_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BBF_u95EE_u4FE1_u606F_u8BB0_u5F55_u8868ecs_stats"><span class="nav-number">1.82.</span> <span class="nav-text">访问信息记录表ecs_stats</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_suppliers"><span class="nav-number">1.83.</span> <span class="nav-text">ecs_suppliers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u7684_u6807_u8BB0ecs_tag"><span class="nav-number">1.84.</span> <span class="nav-text">商品的标记ecs_tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6A21_u677F_u8BBE_u7F6E_u6570_u636E_u8868ecs_template"><span class="nav-number">1.85.</span> <span class="nav-text">模板设置数据表ecs_template</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E13_u9898_u6D3B_u52A8_u914D_u7F6E_u8868ecs_topic"><span class="nav-number">1.86.</span> <span class="nav-text">专题活动配置表ecs_topic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_touch_activity"><span class="nav-number">1.87.</span> <span class="nav-text">ecs_touch_activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_touch_auth"><span class="nav-number">1.88.</span> <span class="nav-text">ecs_touch_auth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_touch_category"><span class="nav-number">1.89.</span> <span class="nav-text">ecs_touch_category</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_touch_feedback"><span class="nav-number">1.90.</span> <span class="nav-text">ecs_touch_feedback</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_touch_goods"><span class="nav-number">1.91.</span> <span class="nav-text">ecs_touch_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_touch_goods_activity"><span class="nav-number">1.92.</span> <span class="nav-text">ecs_touch_goods_activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_touch_nav"><span class="nav-number">1.93.</span> <span class="nav-text">ecs_touch_nav</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_touch_topic"><span class="nav-number">1.94.</span> <span class="nav-text">ecs_touch_topic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_touch_user_info"><span class="nav-number">1.95.</span> <span class="nav-text">ecs_touch_user_info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F1A_u5458_u8868ecs_users"><span class="nav-number">1.96.</span> <span class="nav-text">会员表ecs_users</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7528_u6237_u8D44_u91D1_u6D41_u52A8_u8868ecs_user_account"><span class="nav-number">1.97.</span> <span class="nav-text">用户资金流动表ecs_user_account</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6536_u8D27_u4EBA_u7684_u4FE1_u606F_u5217_u8868ecs_user_address"><span class="nav-number">1.98.</span> <span class="nav-text">收货人的信息列表ecs_user_address</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5DF2_u7ECF_u53D1_u9001_u7684_u7EA2_u5305_u4FE1_u606F_u5217_u8868ecs_user_bonus"><span class="nav-number">1.99.</span> <span class="nav-text">已经发送的红包信息列表ecs_user_bonus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_user_feed"><span class="nav-number">1.100.</span> <span class="nav-text">ecs_user_feed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F1A_u5458_u7B49_u7EA7_u914D_u7F6E_u4FE1_u606Fecs_user_rank"><span class="nav-number">1.101.</span> <span class="nav-text">会员等级配置信息ecs_user_rank</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u865A_u62DF_u5361_u5361_u53F7_u5E93ecs_virtual_card"><span class="nav-number">1.102.</span> <span class="nav-text">虚拟卡卡号库ecs_virtual_card</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_volume_price"><span class="nav-number">1.103.</span> <span class="nav-text">ecs_volume_price</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7F51_u7AD9_u8C03_u67E5_u4FE1_u606F_u8BB0_u5F55_u8868ecs_vote"><span class="nav-number">1.104.</span> <span class="nav-text">网站调查信息记录表ecs_vote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6295_u7968_u8BB0_u5F55_u8868ecs_vote_log"><span class="nav-number">1.105.</span> <span class="nav-text">投票记录表ecs_vote_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6295_u7968_u7684_u9009_u9879_u5185_u5BB9_u8868ecs_vote_option"><span class="nav-number">1.106.</span> <span class="nav-text">投票的选项内容表ecs_vote_option</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat"><span class="nav-number">1.107.</span> <span class="nav-text">ecs_wechat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_custom_message"><span class="nav-number">1.108.</span> <span class="nav-text">ecs_wechat_custom_message</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_extend"><span class="nav-number">1.109.</span> <span class="nav-text">ecs_wechat_extend</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_mass_history"><span class="nav-number">1.110.</span> <span class="nav-text">ecs_wechat_mass_history</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_media"><span class="nav-number">1.111.</span> <span class="nav-text">ecs_wechat_media</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_menu"><span class="nav-number">1.112.</span> <span class="nav-text">ecs_wechat_menu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_point"><span class="nav-number">1.113.</span> <span class="nav-text">ecs_wechat_point</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_prize"><span class="nav-number">1.114.</span> <span class="nav-text">ecs_wechat_prize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_qrcode"><span class="nav-number">1.115.</span> <span class="nav-text">ecs_wechat_qrcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_reply"><span class="nav-number">1.116.</span> <span class="nav-text">ecs_wechat_reply</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_rule_keywords"><span class="nav-number">1.117.</span> <span class="nav-text">ecs_wechat_rule_keywords</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_template"><span class="nav-number">1.118.</span> <span class="nav-text">ecs_wechat_template</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_user"><span class="nav-number">1.119.</span> <span class="nav-text">ecs_wechat_user</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ecs_wechat_user_group"><span class="nav-number">1.120.</span> <span class="nav-text">ecs_wechat_user_group</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6279_u53D1_u65B9_u6848_u8868ecs_wholesale"><span class="nav-number">1.121.</span> <span class="nav-text">批发方案表ecs_wholesale</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ectouch2-0__u6570_u636E_u5E93_u7ED3_u6784"><span class="nav-number">1.</span> <span class="nav-text">Ectouch2.0 数据库结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7528_u6237_u8D26_u76EE_u65E5_u5FD7_u8868ecs_account_log"><span class="nav-number">1.1.</span> <span class="nav-text">用户账目日志表ecs_account_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5E7F_u544A_u8868ecs_ad"><span class="nav-number">1.2.</span> <span class="nav-text">广告表ecs_ad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7BA1_u7406_u6743_u9650_u5206_u914D_u8868ecs_admin_action"><span class="nav-number">1.3.</span> <span class="nav-text">管理权限分配表ecs_admin_action</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7BA1_u7406_u65E5_u5FD7_u8868ecs_admin_log"><span class="nav-number">1.4.</span> <span class="nav-text">管理日志表ecs_admin_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7BA1_u7406_u5458_u7559_u8A00_u8868ecs_admin_message"><span class="nav-number">1.5.</span> <span class="nav-text">管理员留言表ecs_admin_message</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7BA1_u7406_u5458_u7BA1_u7406_u8868ecs_admin_user"><span class="nav-number">1.6.</span> <span class="nav-text">管理员管理表ecs_admin_user</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5E7F_u544A_u70B9_u51FB_u7387_u7EDF_u8BA1_u8868ecs_adsense"><span class="nav-number">1.7.</span> <span class="nav-text">广告点击率统计表ecs_adsense</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u81EA_u5B9A_u4E49_u5E7F_u544A_u8868ecs_ad_custom"><span class="nav-number">1.8.</span> <span class="nav-text">自定义广告表ecs_ad_custom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5E7F_u544A_u4F4D_u8868ecs_ad_position"><span class="nav-number">1.9.</span> <span class="nav-text">广告位表ecs_ad_position</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7BA1_u7406_u65E5_u5FD7ecs_affiliate_log"><span class="nav-number">1.10.</span> <span class="nav-text">管理日志ecs_affiliate_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u529E_u4E8B_u5904_u4FE1_u606Fecs_agency"><span class="nav-number">1.11.</span> <span class="nav-text">办事处信息ecs_agency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BB0_u5F55_u914D_u9001_u533A_u57DF_u5173_u8054ID_u8868ecs_area_region"><span class="nav-number">1.12.</span> <span class="nav-text">记录配送区域关联ID表ecs_area_region</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6587_u7AE0ecs_article"><span class="nav-number">1.13.</span> <span class="nav-text">文章ecs_article</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6587_u7AE0_u5206_u7C7B_u4FE1_u606F_u8868ecs_article_cat"><span class="nav-number">1.14.</span> <span class="nav-text">文章分类信息表ecs_article_cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u7C7B_u578B_u5C5E_u6027ecs_attribute"><span class="nav-number">1.15.</span> <span class="nav-text">商品类型属性ecs_attribute</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u62CD_u5356_u51FA_u4EF7_u8BB0_u5F55_u8868ecs_auction_log"><span class="nav-number">1.16.</span> <span class="nav-text">拍卖出价记录表ecs_auction_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BA1_u5212_u4EFB_u52A1_u8868_ecs_auto_manage"><span class="nav-number">1.17.</span> <span class="nav-text">计划任务表 ecs_auto_manage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u9000_u8D27_u5546_u54C1_u4FE1_u606Fecs_back_goods"><span class="nav-number">1.18.</span> <span class="nav-text">退货商品信息ecs_back_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u9000_u8D27_u5355_u4FE1_u606Fecs_back_order"><span class="nav-number">1.19.</span> <span class="nav-text">退货单信息ecs_back_order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EA2_u5305_u7C7B_u578B_u8868ecs_bonus_type"><span class="nav-number">1.20.</span> <span class="nav-text">红包类型表ecs_bonus_type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7F3A_u8D27_u767B_u8BB0_u7684_u8BA2_u8D2D_u548C_u5904_u7406_u8BB0_u5F55_u8868ecs_booking_goods"><span class="nav-number">1.21.</span> <span class="nav-text">缺货登记的订购和处理记录表ecs_booking_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u54C1_u724C_u8868ecs_brand"><span class="nav-number">1.22.</span> <span class="nav-text">商品品牌表ecs_brand</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5361_u7247_u914D_u7F6E_u4FE1_u606Fecs_card"><span class="nav-number">1.23.</span> <span class="nav-text">卡片配置信息ecs_card</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8D2D_u7269_u8F66_u8D2D_u7269_u4FE1_u606F_u8BB0_u5F55_u8868ecs_cart"><span class="nav-number">1.24.</span> <span class="nav-text">购物车购物信息记录表ecs_cart</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u5206_u7C7B_u8868_uFF0C_u8BB0_u5F55_u5546_u54C1_u5206_u7C7B_u4FE1_u606Fecs_category"><span class="nav-number">1.25.</span> <span class="nav-text">商品分类表，记录商品分类信息ecs_category</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u9996_u9875_u63A8_u8350_u6269_u5C55_u5206_u7C7B_u8868ecs_cat_recommend"><span class="nav-number">1.26.</span> <span class="nav-text">首页推荐扩展分类表ecs_cat_recommend</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6536_u85CF_u7EAA_u5F55_u8868ecs_collect_goods"><span class="nav-number">1.27.</span> <span class="nav-text">收藏纪录表ecs_collect_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BC4_u8BBA_u8868ecs_comment"><span class="nav-number">1.28.</span> <span class="nav-text">评论表ecs_comment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BA1_u5212_u4EFB_u52A1ecs_crons"><span class="nav-number">1.29.</span> <span class="nav-text">计划任务ecs_crons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u53D1_u8D27_u5355_u5546_u54C1_u4FE1_u606F_u8868ecs_delivery_goods"><span class="nav-number">1.30.</span> <span class="nav-text">发货单商品信息表ecs_delivery_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u53D1_u8D27_u5355_u4FE1_u606F_u8868ecs_delivery_order"><span class="nav-number">1.31.</span> <span class="nav-text">发货单信息表ecs_delivery_order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5206_u9500_u652F_u4ED8_u7EAA_u5F55ecs_drp_apply"><span class="nav-number">1.32.</span> <span class="nav-text">分销支付纪录ecs_drp_apply</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u5206_u9500_u94F6_u884C_u5361_u4FE1_u606Fecs_drp_bank"><span class="nav-number">1.33.</span> <span class="nav-text">微分销银行卡信息ecs_drp_bank</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u5206_u9500_u914D_u7F6Eecs_drp_config"><span class="nav-number">1.34.</span> <span class="nav-text">微分销配置ecs_drp_config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5206_u9500_u5546_u54C1ecs_drp_goods"><span class="nav-number">1.35.</span> <span class="nav-text">分销商品ecs_drp_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F63_u91D1_u63D0_u73B0_u8BB0_u5F55ecs_drp_log"><span class="nav-number">1.36.</span> <span class="nav-text">佣金提现记录ecs_drp_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5206_u9500_u8BA2_u5355_u7684_u5546_u54C1ecs_drp_order_goods"><span class="nav-number">1.37.</span> <span class="nav-text">分销订单的商品ecs_drp_order_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5206_u9500_u5546_u8BA2_u5355_u8868ecs_drp_order_info"><span class="nav-number">1.38.</span> <span class="nav-text">分销商订单表ecs_drp_order_info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u9500_u552E_u4F63_u91D1_u8BBE_u7F6E_u8868ecs_drp_profit"><span class="nav-number">1.39.</span> <span class="nav-text">销售佣金设置表ecs_drp_profit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5206_u9500_u5546_u5217_u8868ecs_drp_shop"><span class="nav-number">1.40.</span> <span class="nav-text">分销商列表ecs_drp_shop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BBF_u5BA2_u4FE1_u606F_u8868ecs_drp_visiter"><span class="nav-number">1.41.</span> <span class="nav-text">访客信息表ecs_drp_visiter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u589E_u52A0_u7535_u5B50_u6742_u5FD7_u8BA2_u9605_u8868ecs_email_list"><span class="nav-number">1.42.</span> <span class="nav-text">增加电子杂志订阅表ecs_email_list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u589E_u52A0_u53D1_u9001_u961F_u5217_u8868ecs_email_sendlist"><span class="nav-number">1.43.</span> <span class="nav-text">增加发送队列表ecs_email_sendlist</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BE5_u8868_u7528_u6765_u8BB0_u5F55_u9875_u9762_u89E6_u53D1_u8BA1_u5212_u4EFB_u52A1_u65F6_u5931_u8D25_u6240_u4EA7_u751F_u7684_u9519_u8BEFecs_error_log"><span class="nav-number">1.44.</span> <span class="nav-text">该表用来记录页面触发计划任务时失败所产生的错误ecs_error_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u79EF_u5206_u5546_u57CEecs_exchange_goods"><span class="nav-number">1.45.</span> <span class="nav-text">积分商城ecs_exchange_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F18_u60E0_u6D3B_u52A8_u7684_u914D_u7F6E_u4FE1_u606F_uFF08_u9001_u793C_u3001_u51CF_u514D_u3001_u6253_u6298_uFF09ecs_favourable_activity"><span class="nav-number">1.46.</span> <span class="nav-text">优惠活动的配置信息（送礼、减免、打折）ecs_favourable_activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7528_u6237_u53CD_u9988_u4FE1_u606F_u8868ecs_feedback"><span class="nav-number">1.47.</span> <span class="nav-text">用户反馈信息表ecs_feedback</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u53CB_u60C5_u94FE_u63A5_u914D_u7F6E_u4FE1_u606F_u8868ecs_friend_link"><span class="nav-number">1.48.</span> <span class="nav-text">友情链接配置信息表ecs_friend_link</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u8868ecs_goods"><span class="nav-number">1.49.</span> <span class="nav-text">商品表ecs_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u62CD_u5356_u6D3B_u52A8_u548C_u593A_u5B9D_u5947_u5175_u6D3B_u52A8_u914D_u7F6E_u4FE1_u606Fecs_goods_activity"><span class="nav-number">1.50.</span> <span class="nav-text">拍卖活动和夺宝奇兵活动配置信息ecs_goods_activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6587_u7AE0_u5173_u8054_u4EA7_u54C1_u8868ecs_goods_article"><span class="nav-number">1.51.</span> <span class="nav-text">文章关联产品表ecs_goods_article</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5177_u4F53_u5546_u54C1_u5C5E_u6027_u8868ecs_goods_attr"><span class="nav-number">1.52.</span> <span class="nav-text">具体商品属性表ecs_goods_attr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u7684_u62D3_u5C55_u5206_u7C7Becs_goods_cat"><span class="nav-number">1.53.</span> <span class="nav-text">商品的拓展分类ecs_goods_cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u76F8_u518C_u8868ecs_goods_gallery"><span class="nav-number">1.54.</span> <span class="nav-text">商品相册表ecs_goods_gallery</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u7C7B_u578Becs_goods_type"><span class="nav-number">1.55.</span> <span class="nav-text">商品类型ecs_goods_type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u914D_u4EF6_u914D_u7F6E_u8868ecs_group_goods"><span class="nav-number">1.56.</span> <span class="nav-text">商品配件配置表ecs_group_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u9875_u9762_u641C_u7D22_u5173_u952E_u5B57_u641C_u7D22_u8BB0_u5F55ecs_keywords"><span class="nav-number">1.57.</span> <span class="nav-text">页面搜索关键字搜索记录ecs_keywords</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5173_u8054_u5546_u54C1_u4FE1_u606F_u8868ecs_link_goods"><span class="nav-number">1.58.</span> <span class="nav-text">关联商品信息表ecs_link_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5404_u79CD_u90AE_u4EF6_u7684_u6A21_u677F_u914D_u7F6E_u6A21_u677Fecs_mail_templates"><span class="nav-number">1.59.</span> <span class="nav-text">各种邮件的模板配置模板ecs_mail_templates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F1A_u5458_u6298_u6263_u4EF7ecs_member_price"><span class="nav-number">1.60.</span> <span class="nav-text">会员折扣价ecs_member_price</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E0A_u4E2D_u4E0B3_u4E2A_u5BFC_u822A_u680F_u7684_u663E_u793A_u914D_u7F6Eecs_nav"><span class="nav-number">1.61.</span> <span class="nav-text">上中下3个导航栏的显示配置ecs_nav</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5BF9_u8BA2_u5355_u64CD_u4F5C_u65E5_u5FD7_u8868ecs_order_action"><span class="nav-number">1.62.</span> <span class="nav-text">对订单操作日志表ecs_order_action</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BA2_u5355_u7684_u5546_u54C1_u4FE1_u606Fecs_order_goods"><span class="nav-number">1.63.</span> <span class="nav-text">订单的商品信息ecs_order_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BA2_u5355_u7684_u914D_u9001ecs_order_info"><span class="nav-number">1.64.</span> <span class="nav-text">订单的配送ecs_order_info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u5305_u88C5_u4FE1_u606F_u914D_u7F6E_u8868ecs_pack"><span class="nav-number">1.65.</span> <span class="nav-text">商品包装信息配置表ecs_pack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u793C_u5305_u5546_u54C1_u8868ecs_package_goods"><span class="nav-number">1.66.</span> <span class="nav-text">礼包商品表ecs_package_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5B89_u88C5_u7684_u652F_u4ED8_u65B9_u5F0F_u914D_u7F6E_u4FE1_u606Fecs_payment"><span class="nav-number">1.67.</span> <span class="nav-text">安装的支付方式配置信息ecs_payment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7CFB_u7EDF_u652F_u4ED8_u8BB0_u5F55ecs_pay_log"><span class="nav-number">1.68.</span> <span class="nav-text">系统支付记录ecs_pay_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u63D2_u4EF6_u8868ecs_plugins"><span class="nav-number">1.69.</span> <span class="nav-text">插件表ecs_plugins</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8D27_u54C1_u8868ecs_products"><span class="nav-number">1.70.</span> <span class="nav-text">货品表ecs_products</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5730_u533A_u5217_u8868ecs_region"><span class="nav-number">1.71.</span> <span class="nav-text">地区列表ecs_region</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6CE8_u518C_u7684_u6269_u5C55_u4FE1_u606F_u8868ecs_reg_extend_info"><span class="nav-number">1.72.</span> <span class="nav-text">注册的扩展信息表ecs_reg_extend_info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6CE8_u518C_u5B57_u6BB5_u8868ecs_reg_fields"><span class="nav-number">1.73.</span> <span class="nav-text">注册字段表ecs_reg_fields</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u89D2_u8272_u8868ecs_role"><span class="nav-number">1.74.</span> <span class="nav-text">角色表ecs_role</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u641C_u7D22_u5F15_u64CE_u8BBF_u95EE_u8BB0_u5F55ecs_searchengine"><span class="nav-number">1.75.</span> <span class="nav-text">搜索引擎访问记录ecs_searchengine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session_u8BB0_u5F55_u8868ecs_sessions"><span class="nav-number">1.76.</span> <span class="nav-text">session记录表ecs_sessions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session_u6570_u636E_u8868ecs_sessions_data"><span class="nav-number">1.77.</span> <span class="nav-text">session数据表ecs_sessions_data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u914D_u9001_u65B9_u5F0F_u914D_u7F6E_u4FE1_u606F_u8868ecs_shipping"><span class="nav-number">1.78.</span> <span class="nav-text">配送方式配置信息表ecs_shipping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u914D_u9001_u65B9_u5F0F_u6240_u5C5E_u7684_u914D_u9001_u533A_u57DF_u548C_u914D_u9001_u8D39_u7528_u4FE1_u606Fecs_shipping_area"><span class="nav-number">1.79.</span> <span class="nav-text">配送方式所属的配送区域和配送费用信息ecs_shipping_area</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5168_u7AD9_u914D_u7F6E_u4FE1_u606F_u8868ecs_shop_config"><span class="nav-number">1.80.</span> <span class="nav-text">全站配置信息表ecs_shop_config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u593A_u5B9D_u5947_u5175_u51FA_u4EF7_u8BB0_u5F55_u8868ecs_snatch_log"><span class="nav-number">1.81.</span> <span class="nav-text">夺宝奇兵出价记录表ecs_snatch_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BBF_u95EE_u4FE1_u606F_u8BB0_u5F55_u8868ecs_stats"><span class="nav-number">1.82.</span> <span class="nav-text">访问信息记录表ecs_stats</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F9B_u8D27_u5546_u8868ecs_suppliers"><span class="nav-number">1.83.</span> <span class="nav-text">供货商表ecs_suppliers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u7684_u6807_u8BB0ecs_tag"><span class="nav-number">1.84.</span> <span class="nav-text">商品的标记ecs_tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6A21_u677F_u8BBE_u7F6E_u6570_u636E_u8868ecs_template"><span class="nav-number">1.85.</span> <span class="nav-text">模板设置数据表ecs_template</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E13_u9898_u6D3B_u52A8_u914D_u7F6E_u8868ecs_topic"><span class="nav-number">1.86.</span> <span class="nav-text">专题活动配置表ecs_topic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F18_u60E0_u6D3B_u52A8ecs_touch_activity"><span class="nav-number">1.87.</span> <span class="nav-text">优惠活动ecs_touch_activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5DE5_u5177_u7BB1-_26gt_3B_u767B_u5F55_u63D2_u4EF6ecs_touch_auth"><span class="nav-number">1.88.</span> <span class="nav-text">工具箱->登录插件ecs_touch_auth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5206_u7C7Becs_touch_category"><span class="nav-number">1.89.</span> <span class="nav-text">分类ecs_touch_category</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6D88_u606Fecs_touch_feedback"><span class="nav-number">1.90.</span> <span class="nav-text">消息ecs_touch_feedback</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1ecs_touch_goods"><span class="nav-number">1.91.</span> <span class="nav-text">商品ecs_touch_goods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5546_u54C1_u6D3B_u52A8ecs_touch_goods_activity"><span class="nav-number">1.92.</span> <span class="nav-text">商品活动ecs_touch_goods_activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5DE5_u5177_u7BB1-_26gt_3B_u5BFC_u822A_u680F_u8BBE_u7F6Eecs_touch_nav"><span class="nav-number">1.93.</span> <span class="nav-text">工具箱->导航栏设置ecs_touch_nav</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E13_u9898_u8868ecs_touch_topic"><span class="nav-number">1.94.</span> <span class="nav-text">专题表ecs_touch_topic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7528_u6237_u4FE1_u606Fecs_touch_user_info"><span class="nav-number">1.95.</span> <span class="nav-text">用户信息ecs_touch_user_info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F1A_u5458_u8868ecs_users"><span class="nav-number">1.96.</span> <span class="nav-text">会员表ecs_users</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7528_u6237_u8D44_u91D1_u6D41_u52A8_u8868ecs_user_account"><span class="nav-number">1.97.</span> <span class="nav-text">用户资金流动表ecs_user_account</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6536_u8D27_u4EBA_u7684_u4FE1_u606F_u5217_u8868ecs_user_address"><span class="nav-number">1.98.</span> <span class="nav-text">收货人的信息列表ecs_user_address</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5DF2_u7ECF_u53D1_u9001_u7684_u7EA2_u5305_u4FE1_u606F_u5217_u8868ecs_user_bonus"><span class="nav-number">1.99.</span> <span class="nav-text">已经发送的红包信息列表ecs_user_bonus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7528_u6237_u8D44_u6599ecs_user_feed"><span class="nav-number">1.100.</span> <span class="nav-text">用户资料ecs_user_feed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F1A_u5458_u7B49_u7EA7_u914D_u7F6E_u4FE1_u606Fecs_user_rank"><span class="nav-number">1.101.</span> <span class="nav-text">会员等级配置信息ecs_user_rank</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u865A_u62DF_u5361_u5361_u53F7_u5E93ecs_virtual_card"><span class="nav-number">1.102.</span> <span class="nav-text">虚拟卡卡号库ecs_virtual_card</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4FDD_u5B58_u67D0_u5546_u54C1_u7684_u4F18_u60E0_u4EF7_u683C_u8868ecs_volume_price"><span class="nav-number">1.103.</span> <span class="nav-text">保存某商品的优惠价格表ecs_volume_price</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7F51_u7AD9_u8C03_u67E5_u4FE1_u606F_u8BB0_u5F55_u8868ecs_vote"><span class="nav-number">1.104.</span> <span class="nav-text">网站调查信息记录表ecs_vote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6295_u7968_u8BB0_u5F55_u8868ecs_vote_log"><span class="nav-number">1.105.</span> <span class="nav-text">投票记录表ecs_vote_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6295_u7968_u7684_u9009_u9879_u5185_u5BB9_u8868ecs_vote_option"><span class="nav-number">1.106.</span> <span class="nav-text">投票的选项内容表ecs_vote_option</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u8868ecs_wechat"><span class="nav-number">1.107.</span> <span class="nav-text">微信通表ecs_wechat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u81EA_u5B9A_u4E49_u6D88_u606Fecs_wechat_custom_message"><span class="nav-number">1.108.</span> <span class="nav-text">微信通自定义消息ecs_wechat_custom_message</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u6269_u5C55ecs_wechat_extend"><span class="nav-number">1.109.</span> <span class="nav-text">微信通扩展ecs_wechat_extend</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7FA4_u53D1_u6D88_u606F_u5386_u53F2ecs_wechat_mass_history"><span class="nav-number">1.110.</span> <span class="nav-text">群发消息历史ecs_wechat_mass_history</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u591A_u5A92_u4F53_u6D88_u606Fecs_wechat_media"><span class="nav-number">1.111.</span> <span class="nav-text">微信通多媒体消息ecs_wechat_media</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u83DC_u5355ecs_wechat_menu"><span class="nav-number">1.112.</span> <span class="nav-text">微信通菜单ecs_wechat_menu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u79EF_u5206ecs_wechat_point"><span class="nav-number">1.113.</span> <span class="nav-text">微信通积分ecs_wechat_point</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u5956_u54C1ecs_wechat_prize"><span class="nav-number">1.114.</span> <span class="nav-text">微信通奖品ecs_wechat_prize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u4E8C_u7EF4_u7801ecs_wechat_qrcode"><span class="nav-number">1.115.</span> <span class="nav-text">微信通二维码ecs_wechat_qrcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u56DE_u590Decs_wechat_reply"><span class="nav-number">1.116.</span> <span class="nav-text">微信通回复ecs_wechat_reply</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u89C4_u5219_u5173_u952E_u5B57ecs_wechat_rule_keywords"><span class="nav-number">1.117.</span> <span class="nav-text">微信通规则关键字ecs_wechat_rule_keywords</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u6A21_u7248ecs_wechat_template"><span class="nav-number">1.118.</span> <span class="nav-text">微信通模版ecs_wechat_template</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u7528_u6237ecs_wechat_user"><span class="nav-number">1.119.</span> <span class="nav-text">微信通用户ecs_wechat_user</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5FAE_u4FE1_u901A_u7528_u6237_u7EC4ecs_wechat_user_group"><span class="nav-number">1.120.</span> <span class="nav-text">微信通用户组ecs_wechat_user_group</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6279_u53D1_u65B9_u6848_u8868ecs_wholesale"><span class="nav-number">1.121.</span> <span class="nav-text">批发方案表ecs_wholesale</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
