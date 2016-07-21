@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://im.yonglang.co/"/>
-  <updated>2016-07-21T06:18:33.000Z</updated>
+  <updated>2016-07-21T06:24:35.000Z</updated>
   <id>http://im.yonglang.co/</id>
   
   <author>
@@ -20,10 +20,10 @@
     <link href="http://im.yonglang.co/2016/07/21/table/"/>
     <id>http://im.yonglang.co/2016/07/21/table/</id>
     <published>2016-07-21T05:52:10.000Z</published>
-    <updated>2016-07-21T06:18:33.000Z</updated>
+    <updated>2016-07-21T06:24:35.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Ectouch2-0__u6570_u636E_u5E93_u7ED3_u6784&quot;&gt;&lt;a href=&quot;#Ectouch2-0__u6570_u636E_u5E93_u7ED3_u6784&quot; class=&quot;headerlink&quot; title=&quot;Ectouch2.0 数据库结构&quot;&gt;&lt;/a&gt;Ectouch2.0 数据库结构&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;用户账目日志表&lt;code&gt;ecs_account_log&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;用户账目日志表&lt;code&gt;ecs_account_log&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -81,7 +81,6 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;广告表&lt;code&gt;ecs_ad&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -6862,7 +6861,6 @@
 &lt;tr&gt;
 &lt;td&gt;subscribe_time&lt;/td&gt;
 &lt;td&gt;int(11)&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
 &lt;td&gt;用户关注时间&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -6898,7 +6896,6 @@
 &lt;tr&gt;
 &lt;td&gt;isbind&lt;/td&gt;
 &lt;td&gt;tinyint(1)&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
 &lt;td&gt;是否绑定过&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -6995,65 +6992,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Ectouch2-0__u6570_u636E_u5E93_u7ED3_u6784&quot;&gt;&lt;a href=&quot;#Ectouch2-0__u6570_u636E_u5E93_u7ED3_u6784&quot; class=&quot;headerlink&quot; title=&quot;Ectouch2.0 数据库结构&quot;&gt;&lt;/a&gt;Ectouch2.0 数据库结构&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;用户账目日志表&lt;code&gt;ecs_account_log&lt;/code&gt; &lt;/li&gt;
-&lt;/ul&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;字段名称&lt;/th&gt;
-&lt;th&gt;字段类型&lt;/th&gt;
-&lt;th&gt;字段说明&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;log_id&lt;/td&gt;
-&lt;td&gt;mediumint(8)&lt;/td&gt;
-&lt;td&gt;日志ID&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;user_id&lt;/td&gt;
-&lt;td&gt;mediumint(8)&lt;/td&gt;
-&lt;td&gt;用户ID&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;user_money&lt;/td&gt;
-&lt;td&gt;decimal(10,2)&lt;/td&gt;
-&lt;td&gt;用户该笔记录的余额&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;frozen_money&lt;/td&gt;
-&lt;td&gt;decimal(10,2)&lt;/td&gt;
-&lt;td&gt;被冻结的资金&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;rank_points&lt;/td&gt;
-&lt;td&gt;mediumint(9)&lt;/td&gt;
-&lt;td&gt;等级积分，跟消费积分是分开的&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;pay_points&lt;/td&gt;
-&lt;td&gt;mediumint(9)&lt;/td&gt;
-&lt;td&gt;消费积分，跟等级积分是分开的&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;change_time&lt;/td&gt;
-&lt;td&gt;int(10)&lt;/td&gt;
-&lt;td&gt;该笔操作发生的事件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;change_desc&lt;/td&gt;
-&lt;td&gt;varchar(255)&lt;/td&gt;
-&lt;td&gt;该笔操作的备注&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;change_type&lt;/td&gt;
-&lt;td&gt;tinyint(3)&lt;/td&gt;
-&lt;td&gt;操作类型，0: 充值，1: 提现，2: 管理员调节，99: 其它类型&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+      &lt;h1 id=&quot;Ectouch2-0__u6570_u636E_u5E93_u7ED3_u6784&quot;&gt;&lt;a href=&quot;#Ectouch2-0__u6570_u636E_u5E93_u7ED3_u6784&quot; class=&quot;headerlink&quot; title=&quot;Ectouch2.0
     
     </summary>
     
