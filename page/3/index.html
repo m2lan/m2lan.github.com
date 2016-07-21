@@ -268,6 +268,167 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/Shell-for-while/" itemprop="url">
+                  Shell-for-while
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:19:59+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-for-while/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-for-while/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# for 
+
+arr=(111 2222 3333 4444 5555)
+num=5
+count=5
+
+# for--in--
+for m in ${arr[@]}; do
+    echo $m
+done
+
+echo &quot;------------------------------------------&quot;
+
+for n in $( ls /usr/local ); do
+    echo $n
+done
+
+echo &quot;------------------------------------------&quot;
+
+# while
+while [[ $num -gt 0 ]]; do
+    echo &quot;num: ${num}&quot;
+    num=$(($num - 1))
+done
+
+num=5
+
+echo &quot;------------------------------------------&quot;
+# while --- continue
+while [[ $num -gt 0 ]]; do
+    num=$(($num - 1))
+    if [[ $num -eq 3 ]]; then
+        continue
+    fi
+    echo &quot;num: ${num}&quot;
+done
+
+echo &quot;------------------------------------------&quot;
+# while --- break
+while [[ $count -gt 0 ]]; do
+    count=$(($count - 1))
+    if [[ $count -eq 3 ]]; then
+        break;
+    fi
+    echo &quot;count: ${count}&quot;
+done
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/Shell-ifelse/" itemprop="url">
                   Shell-ifelse
                 </a>
@@ -1582,127 +1743,6 @@ echo &quot;hello world!&quot;;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/OC-检测视图退出/" itemprop="url">
-                  OC-检测视图退出
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:10:15+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/OC-检测视图退出/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-检测视图退出/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>-(void) viewWillDisappear:(BOOL)animated {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-       // back button was pressed.  We know this is true because self is no longer
-       // in the navigation stack.  
-    }
-    [super viewWillDisappear:animated];
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1748,7 +1788,7 @@ echo &quot;hello world!&quot;;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">56</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1756,7 +1796,7 @@ echo &quot;hello world!&quot;;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1765,7 +1805,7 @@ echo &quot;hello world!&quot;;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
