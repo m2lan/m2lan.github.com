@@ -1,364 +1,25 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
-
-
-
-
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="MySQL," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
-
-
-
-
-
-
-<meta name="description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。
+<!doctype html><html class="theme-next pisces use-motion"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css"><link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css"><meta name="keywords" content="MySQL,"><link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0"><meta name="description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。
 创建表并添加测试数据
 CREATE TABLE category (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
     lft INT NOT NULL,
     rgt INT NOT NULL
-) ENGINE=InnoD">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mysql嵌套集模型">
-<meta property="og:url" content="http://im.yonglang.co/2016/07/19/MySQL-嵌套集模型/index.html">
-<meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。
+) ENGINE=InnoD"><meta property="og:type" content="article"><meta property="og:title" content="mysql嵌套集模型"><meta property="og:url" content="http://im.yonglang.co/2016/07/19/MySQL-嵌套集模型/index.html"><meta property="og:site_name" content="知识记录"><meta property="og:description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。
 创建表并添加测试数据
 CREATE TABLE category (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
     lft INT NOT NULL,
     rgt INT NOT NULL
-) ENGINE=InnoD">
-<meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/start.png">
-<meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/design.png">
-<meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/newNode.png">
-<meta property="og:updated_time" content="2016-07-19T10:42:12.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql嵌套集模型">
-<meta name="twitter:description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。
+) ENGINE=InnoD"><meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/start.png"><meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/design.png"><meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/newNode.png"><meta property="og:updated_time" content="2016-07-19T10:42:12.000Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="mysql嵌套集模型"><meta name="twitter:description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。
 创建表并添加测试数据
 CREATE TABLE category (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
     lft INT NOT NULL,
     rgt INT NOT NULL
-) ENGINE=InnoD">
-<meta name="twitter:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/start.png">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"always"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 2746085,
-      author: 'M2'
-    }
-  };
-</script>
-
-  <title> mysql嵌套集模型 | 知识记录 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?46e0944dcdcd5a2363bcb97f299eccf9";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">知识记录</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle"></p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="#" class="st-search-show-outputs">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
-
-  
-    <div class="site-search">
-      
-  <form class="site-search-form">
-  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-</form>
-
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install', 'b2cFpoExgUMZu3--zQzE','2.0.0');
-</script>
-
-
-
-    </div>
-  
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                mysql嵌套集模型
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-19T18:38:03+08:00" content="2016-07-19">
-              2016-07-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/19/MySQL-嵌套集模型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/19/MySQL-嵌套集模型/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h1 id="u5D4C_u5957_u96C6_u6A21_u578B"><a href="#u5D4C_u5957_u96C6_u6A21_u578B" class="headerlink" title="嵌套集模型"></a>嵌套集模型</h1><h2 id="u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002"><a href="#u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002" class="headerlink" title="在分类表中，通过左和右值来代表我们的嵌套节点。"></a>在分类表中，通过左和右值来代表我们的嵌套节点。</h2><ul>
-<li><p>创建表并添加测试数据</p>
-<pre><code>CREATE TABLE category (
+) ENGINE=InnoD"><meta name="twitter:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/start.png"><script type="text/javascript" id="hexo.configuration">var NexT=window.NexT||{},CONFIG={scheme:"Pisces",sidebar:{position:"left",display:"always"},fancybox:!0,motion:!0,duoshuo:{userId:2746085,author:"M2"}};</script><title>mysql嵌套集模型 | 知识记录</title></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="//hm.baidu.com/hm.js?46e0944dcdcd5a2363bcb97f299eccf9";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(e,c)}();</script><div class="container one-collumn sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">知识记录</span> <span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle"></p></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-home fa-fw"></i><br>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-th fa-fw"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives" rel="section"><i class="menu-item-icon fa fa-archive fa-fw"></i><br>归档</a></li><li class="menu-item menu-item-tags"><a href="/tags" rel="section"><i class="menu-item-icon fa fa-tags fa-fw"></i><br>标签</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="menu-item-icon fa fa-user fa-fw"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href="#" class="st-search-show-outputs"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><form class="site-search-form"><input type="text" id="st-search-input" class="st-search-input st-default-search-input"></form><script type="text/javascript">!function(t,e,n,s,c,i,a){t.SwiftypeObject=c,t[c]=t[c]||function(){(t[c].q=t[c].q||[]).push(arguments)},i=e.createElement(n),a=e.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","//s.swiftypecdn.com/install/v2/st.js","_st"),_st("install","b2cFpoExgUMZu3--zQzE","2.0.0");</script></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline">mysql嵌套集模型</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-07-19T18:38:03+08:00" content="2016-07-19">2016-07-19</time></span> <span class="post-category">&nbsp; | &nbsp; <span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp; <a href="/2016/07/19/MySQL-嵌套集模型/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016/07/19/MySQL-嵌套集模型/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><h1 id="u5D4C_u5957_u96C6_u6A21_u578B"><a href="#u5D4C_u5957_u96C6_u6A21_u578B" class="headerlink" title="嵌套集模型"></a>嵌套集模型</h1><h2 id="u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002"><a href="#u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002" class="headerlink" title="在分类表中，通过左和右值来代表我们的嵌套节点。"></a>在分类表中，通过左和右值来代表我们的嵌套节点。</h2><ul><li><p>创建表并添加测试数据</p><pre><code>CREATE TABLE category (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
     lft INT NOT NULL,
@@ -392,16 +53,7 @@ MariaDB [work]&gt; select * from category;
 |           9 | CD PLAYERS           |  15 |  16 |
 |          10 | 2 WAY RADIOS         |  17 |  18 |
 +-------------+----------------------+-----+-----+
-</code></pre><a id="more"></a></li>
-<li>如何确定左边和右边的值，我们在外部节点的最左侧和右侧开始编号
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/start.png" alt="start.png"></li>
-<li>这种设计可用于典型的树
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/design.png" alt="design.png"></li>
-<li>当树在工作的时候，我们从左到右一层一层将右边的数字一次分配给子节点。这种方法被称为<strong>改进的前序遍历树算法</strong></li>
-</ul>
-<h1 id="u68C0_u7D22_u4E00_u4E2A_u5B8C_u6574_u7684_u6811"><a href="#u68C0_u7D22_u4E00_u4E2A_u5B8C_u6574_u7684_u6811" class="headerlink" title="检索一个完整的树"></a>检索一个完整的树</h1><ul>
-<li><p>我们可以通过使用自链接检索一个完整的树节点在父节点lft和rgt之前的节点</p>
-<pre><code>SELECT node.name FROM category AS node, category AS parent
+</code></pre><a id="more"></a></li><li>如何确定左边和右边的值，我们在外部节点的最左侧和右侧开始编号 <img src="http://7xj3i5.com1.z0.glb.clouddn.com/start.png" alt="start.png"></li><li>这种设计可用于典型的树 <img src="http://7xj3i5.com1.z0.glb.clouddn.com/design.png" alt="design.png"></li><li>当树在工作的时候，我们从左到右一层一层将右边的数字一次分配给子节点。这种方法被称为<strong>改进的前序遍历树算法</strong></li></ul><h1 id="u68C0_u7D22_u4E00_u4E2A_u5B8C_u6574_u7684_u6811"><a href="#u68C0_u7D22_u4E00_u4E2A_u5B8C_u6574_u7684_u6811" class="headerlink" title="检索一个完整的树"></a>检索一个完整的树</h1><ul><li><p>我们可以通过使用自链接检索一个完整的树节点在父节点lft和rgt之前的节点</p><pre><code>SELECT node.name FROM category AS node, category AS parent
     WHERE node.lft BETWEEN parent.lft AND parent.rgt
     AND parent.name = &apos;ELECTRONICS&apos; ORDER BY node.lft;
 
@@ -419,9 +71,7 @@ MariaDB [work]&gt; select * from category;
 | CD PLAYERS           |
 | 2 WAY RADIOS         |
 +----------------------+
-</code></pre><h1 id="u67E5_u627E_u6240_u6709_u7684_u53F6_u5B50_u8282_u70B9"><a href="#u67E5_u627E_u6240_u6709_u7684_u53F6_u5B50_u8282_u70B9" class="headerlink" title="查找所有的叶子节点"></a>查找所有的叶子节点</h1></li>
-<li><p>查看<code>category</code>表会发现叶节点的左、右值是连续的数字。为了查找叶节点通过使用<code>rgt = lft + 1</code></p>
-<pre><code>select name from category where rgt = lft + 1;
+</code></pre><h1 id="u67E5_u627E_u6240_u6709_u7684_u53F6_u5B50_u8282_u70B9"><a href="#u67E5_u627E_u6240_u6709_u7684_u53F6_u5B50_u8282_u70B9" class="headerlink" title="查找所有的叶子节点"></a>查找所有的叶子节点</h1></li><li><p>查看<code>category</code>表会发现叶节点的左、右值是连续的数字。为了查找叶节点通过使用<code>rgt = lft + 1</code></p><pre><code>select name from category where rgt = lft + 1;
 
 +--------------+
 | name         |
@@ -445,9 +95,7 @@ MariaDB [work]&gt; select * from category;
 | MP3 PLAYERS          |
 | FLASH                |
 +----------------------+
-</code></pre><h1 id="u67E5_u627E_u6240_u6709_u8282_u70B9_u7684_u6DF1_u5EA6"><a href="#u67E5_u627E_u6240_u6709_u8282_u70B9_u7684_u6DF1_u5EA6" class="headerlink" title="查找所有节点的深度"></a>查找所有节点的深度</h1></li>
-<li><p>我们已经看过如何显示整个目录树，但是如果想显示树中每个节点的深度，以便更好的确定每个节点的层次结构。可以通过<code>Count</code>函数和<code>Group by</code>子句添加到我们现有的查询语句中</p>
-<pre><code>select node.name, (count(parent.name) - 1) as depth from category as node,
+</code></pre><h1 id="u67E5_u627E_u6240_u6709_u8282_u70B9_u7684_u6DF1_u5EA6"><a href="#u67E5_u627E_u6240_u6709_u8282_u70B9_u7684_u6DF1_u5EA6" class="headerlink" title="查找所有节点的深度"></a>查找所有节点的深度</h1></li><li><p>我们已经看过如何显示整个目录树，但是如果想显示树中每个节点的深度，以便更好的确定每个节点的层次结构。可以通过<code>Count</code>函数和<code>Group by</code>子句添加到我们现有的查询语句中</p><pre><code>select node.name, (count(parent.name) - 1) as depth from category as node,
     category as parent where node.lft between parent.lft and parent.rgt group
     by node.name order by node.lft;
 
@@ -465,9 +113,7 @@ MariaDB [work]&gt; select * from category;
 | CD PLAYERS           |     2 |
 | 2 WAY RADIOS         |     2 |
 +----------------------+-------+
-</code></pre></li>
-<li><p>我们可以使用<code>depth</code>和<code>Concat</code>来缩紧我们的类别名称</p>
-<pre><code>select concat(repeat(&apos;          &apos;, count(parent.name) - 1), node.name) as
+</code></pre></li><li><p>我们可以使用<code>depth</code>和<code>Concat</code>来缩紧我们的类别名称</p><pre><code>select concat(repeat(&apos;          &apos;, count(parent.name) - 1), node.name) as
     name from category as node, category as parent where node.lft between
     parent.lft and parent.rgt group by node.name order by node.lft;
 
@@ -485,9 +131,7 @@ MariaDB [work]&gt; select * from category;
 |                     CD PLAYERS      |
 |                     2 WAY RADIOS    |
 +-------------------------------------+
-</code></pre><h1 id="u5B50_u6811_u7684_u6DF1_u5EA6"><a href="#u5B50_u6811_u7684_u6DF1_u5EA6" class="headerlink" title="子树的深度"></a>子树的深度</h1></li>
-<li><p>当我们需要一个子树的深度信息，我们添加第三个自链接，以及子查询来查找子树的深度</p>
-<pre><code>select node.name, (count(parent.name) - (sub_tree.depth + 1)) as depth from
+</code></pre><h1 id="u5B50_u6811_u7684_u6DF1_u5EA6"><a href="#u5B50_u6811_u7684_u6DF1_u5EA6" class="headerlink" title="子树的深度"></a>子树的深度</h1></li><li><p>当我们需要一个子树的深度信息，我们添加第三个自链接，以及子查询来查找子树的深度</p><pre><code>select node.name, (count(parent.name) - (sub_tree.depth + 1)) as depth from
     category as node, category as parent, category as sub_parent, 
 (
     select node.name, (count(parent.name) - 1) as depth from category as
@@ -508,9 +152,7 @@ MariaDB [work]&gt; select * from category;
 | CD PLAYERS           |     1 |
 | 2 WAY RADIOS         |     1 |
 +----------------------+-------+
-</code></pre><h1 id="u67E5_u627E_u4E00_u4E2A_u8282_u70B9_u7684_u76F4_u63A5_u4E0B_u5C5E"><a href="#u67E5_u627E_u4E00_u4E2A_u8282_u70B9_u7684_u76F4_u63A5_u4E0B_u5C5E" class="headerlink" title="查找一个节点的直接下属"></a>查找一个节点的直接下属</h1></li>
-<li><p>这可以很容易的将<code>Having</code>子句加入之前的查询语句中</p>
-<pre><code>select node.name, (count(parent.name) - (sub_tree.depth + 1)) as depth from
+</code></pre><h1 id="u67E5_u627E_u4E00_u4E2A_u8282_u70B9_u7684_u76F4_u63A5_u4E0B_u5C5E"><a href="#u67E5_u627E_u4E00_u4E2A_u8282_u70B9_u7684_u76F4_u63A5_u4E0B_u5C5E" class="headerlink" title="查找一个节点的直接下属"></a>查找一个节点的直接下属</h1></li><li><p>这可以很容易的将<code>Having</code>子句加入之前的查询语句中</p><pre><code>select node.name, (count(parent.name) - (sub_tree.depth + 1)) as depth from
     category as node, category as parent, category as sub_parent, 
 (
     select node.name, (count(parent.name) - 1) as depth from category as
@@ -531,10 +173,7 @@ MariaDB [work]&gt; select * from category;
 | CD PLAYERS           |     1 |
 | 2 WAY RADIOS         |     1 |
 +----------------------+-------+
-</code></pre></li>
-<li>如果不想显示父节点，将<code>having depth &lt;= 1</code>修改为<code>having depth = 1</code><h1 id="u5D4C_u5957_u96C6_u5408_u4E2D_u4E2D_u7684_u805A_u5408_u51FD_u6570"><a href="#u5D4C_u5957_u96C6_u5408_u4E2D_u4E2D_u7684_u805A_u5408_u51FD_u6570" class="headerlink" title="嵌套集合中中的聚合函数"></a>嵌套集合中中的聚合函数</h1></li>
-<li><p>添加一个产品表</p>
-<pre><code>CREATE TABLE `product` (
+</code></pre></li><li>如果不想显示父节点，将<code>having depth &lt;= 1</code>修改为<code>having depth = 1</code><h1 id="u5D4C_u5957_u96C6_u5408_u4E2D_u4E2D_u7684_u805A_u5408_u51FD_u6570"><a href="#u5D4C_u5957_u96C6_u5408_u4E2D_u4E2D_u7684_u805A_u5408_u51FD_u6570" class="headerlink" title="嵌套集合中中的聚合函数"></a>嵌套集合中中的聚合函数</h1></li><li><p>添加一个产品表</p><pre><code>CREATE TABLE `product` (
   `product_id` int(11) AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(40) NOT NULL,
   `category_id` int(11) NOT NULL
@@ -567,9 +206,7 @@ MariaDB [work]&gt; select * from product;
 |          9 | CD To go!        |           9 |
 |         10 | Family Talk 360  |          10 |
 +------------+------------------+-------------+
-</code></pre></li>
-<li><p>现在检索<code>category</code>树和每个产品类别的数量</p>
-<pre><code>select parent.name, count(product.name) from category as node, category as
+</code></pre></li><li><p>现在检索<code>category</code>树和每个产品类别的数量</p><pre><code>select parent.name, count(product.name) from category as node, category as
     parent, product where node.lft between parent.lft and parent.rgt and
     node.category_id = product.category_id group by parent.name order by
     node.lft;
@@ -588,11 +225,7 @@ MariaDB [work]&gt; select * from product;
 | CD PLAYERS           |                   2 |
 | 2 WAY RADIOS         |                   1 |
 +----------------------+---------------------+
-</code></pre><h1 id="u6DFB_u52A0_u4E00_u4E2A_u65B0_u8282_u70B9"><a href="#u6DFB_u52A0_u4E00_u4E2A_u65B0_u8282_u70B9" class="headerlink" title="添加一个新节点"></a>添加一个新节点</h1></li>
-<li>添加一个新节点更新我们的树，再看看嵌套关系图
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/newNode.png" alt="newnode"></li>
-<li><p>如果我们想添加一个在<code>TELEVISIONS</code>和<code>PORTABLE ELECTRONICS</code>节点的新节点，这个新节点的<code>lft</code>和<code>rgt</code>值就是10和11，并且其右侧的所有节点将自己的<code>lft</code>和<code>rgt</code>值+2。然后我们用合适的<code>lft</code>和<code>rgt</code>值添加新节点</p>
-<pre><code>MariaDB [work]&gt; DELIMITER //
+</code></pre><h1 id="u6DFB_u52A0_u4E00_u4E2A_u65B0_u8282_u70B9"><a href="#u6DFB_u52A0_u4E00_u4E2A_u65B0_u8282_u70B9" class="headerlink" title="添加一个新节点"></a>添加一个新节点</h1></li><li>添加一个新节点更新我们的树，再看看嵌套关系图 <img src="http://7xj3i5.com1.z0.glb.clouddn.com/newNode.png" alt="newnode"></li><li><p>如果我们想添加一个在<code>TELEVISIONS</code>和<code>PORTABLE ELECTRONICS</code>节点的新节点，这个新节点的<code>lft</code>和<code>rgt</code>值就是10和11，并且其右侧的所有节点将自己的<code>lft</code>和<code>rgt</code>值+2。然后我们用合适的<code>lft</code>和<code>rgt</code>值添加新节点</p><pre><code>MariaDB [work]&gt; DELIMITER //
 MariaDB [work]&gt; create procedure addNodes(findName varchar(20) charset utf8, newName varchar(20) charset utf8)
     -&gt; begin
     -&gt; select @myRight := rgt from category where name = findName;
@@ -604,9 +237,7 @@ MariaDB [work]&gt; create procedure addNodes(findName varchar(20) charset utf8, 
 Query OK, 0 rows affected (0.02 sec)
 
 MariaDB [work]&gt; delimiter ;
-</code></pre></li>
-<li><p>然后使用缩进树查询</p>
-<pre><code>select concat(repeat(&apos;          &apos;, count(parent.name) - 1), node.name) as
+</code></pre></li><li><p>然后使用缩进树查询</p><pre><code>select concat(repeat(&apos;          &apos;, count(parent.name) - 1), node.name) as
     name from category as node, category as parent where node.lft between
     parent.lft and parent.rgt group by node.name order by node.lft;
 
@@ -625,9 +256,7 @@ MariaDB [work]&gt; delimiter ;
 |                     CD PLAYERS      |
 |                     2 WAY RADIOS    |
 +-------------------------------------+
-</code></pre></li>
-<li><p>如果我们想要将节点添加为没有子节点的子节点，需要做些修改</p>
-<pre><code>MariaDB [work]&gt; DELIMITER //
+</code></pre></li><li><p>如果我们想要将节点添加为没有子节点的子节点，需要做些修改</p><pre><code>MariaDB [work]&gt; DELIMITER //
 MariaDB [work]&gt; create procedure noChildNodes(findName varchar(20) charset utf8, newName varchar(20) charset utf8)
     -&gt; begin
     -&gt; select @myLeft := lft from category where name = findName;
@@ -639,9 +268,7 @@ MariaDB [work]&gt; create procedure noChildNodes(findName varchar(20) charset ut
 Query OK, 0 rows affected (0.03 sec)
 
 MariaDB [work]&gt; DELIMITER ;
-</code></pre></li>
-<li><p>使用缩进树查询</p>
-<pre><code>+-------------------------------------+
+</code></pre></li><li><p>使用缩进树查询</p><pre><code>+-------------------------------------+
 | name                                |
 +-------------------------------------+
 | ELECTRONICS                         |
@@ -657,9 +284,7 @@ MariaDB [work]&gt; DELIMITER ;
 |                     2 WAY RADIOS    |
 |                               FRS   |
 +-------------------------------------+
-</code></pre><h1 id="u5220_u9664_u8282_u70B9"><a href="#u5220_u9664_u8282_u70B9" class="headerlink" title="删除节点"></a>删除节点</h1></li>
-<li><p>删除一个节点取决于节点在层次结构中的位置，很容易删除节点和子节点。</p>
-<pre><code>MariaDB [work]&gt; DELIMITER //
+</code></pre><h1 id="u5220_u9664_u8282_u70B9"><a href="#u5220_u9664_u8282_u70B9" class="headerlink" title="删除节点"></a>删除节点</h1></li><li><p>删除一个节点取决于节点在层次结构中的位置，很容易删除节点和子节点。</p><pre><code>MariaDB [work]&gt; DELIMITER //
 MariaDB [work]&gt; create procedure delNodes(findName varchar(20) charset utf8)
     -&gt; begin
     -&gt; select @myLeft := lft, @myRight := rgt, @myWidth := rgt - lft + 1 from category where name = findName;
@@ -671,9 +296,7 @@ MariaDB [work]&gt; create procedure delNodes(findName varchar(20) charset utf8)
 Query OK, 0 rows affected (0.03 sec)
 
 MariaDB [work]&gt; DELIMITER ;
-</code></pre></li>
-<li><p>使用缩进树查询</p>
-<pre><code>+-------------------------------------+
+</code></pre></li><li><p>使用缩进树查询</p><pre><code>+-------------------------------------+
 | name                                |
 +-------------------------------------+
 | ELECTRONICS                         |
@@ -688,9 +311,7 @@ MariaDB [work]&gt; DELIMITER ;
 |                     2 WAY RADIOS    |
 |                               FRS   |
 +-------------------------------------+
-</code></pre></li>
-<li><p>我们必须处理一种情况删除父节点，但不删除子节点。子节点应该转向已删除的父级别</p>
-<pre><code>MariaDB [work]&gt; DELIMITER //
+</code></pre></li><li><p>我们必须处理一种情况删除父节点，但不删除子节点。子节点应该转向已删除的父级别</p><pre><code>MariaDB [work]&gt; DELIMITER //
 MariaDB [work]&gt; create procedure delParentNodes(findName varchar(20) charset utf8)
     -&gt; begin
     -&gt; select @myLeft := lft, @myRight := rgt, @myWidth := rgt - lft + 1 from category where name = findName;
@@ -703,9 +324,7 @@ MariaDB [work]&gt; create procedure delParentNodes(findName varchar(20) charset 
 Query OK, 0 rows affected (0.03 sec)
 
 MariaDB [work]&gt; DELIMITER ;
-</code></pre></li>
-<li><p>使用缩进树查询</p>
-<pre><code>+----------------------------+
+</code></pre></li><li><p>使用缩进树查询</p><pre><code>+----------------------------+
 | name                       |
 +----------------------------+
 | ELECTRONICS                |
@@ -719,374 +338,4 @@ MariaDB [work]&gt; DELIMITER ;
 |           2 WAY RADIOS     |
 |                     FRS    |
 +----------------------------+
-</code></pre></li>
-</ul>
-
-      
-    </div>
-
-    <div>
-      
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/07/15/nuclide编辑器安装/" rel="next" title="nuclide编辑器安装">
-                <i class="fa fa-chevron-left"></i> nuclide编辑器安装
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/21/table/" rel="prev" title="Ectouch数据库字典">
-                Ectouch数据库字典 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-        
-<script>
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/07/19/MySQL-嵌套集模型/"
-           data-title="mysql嵌套集模型" data-url="http://im.yonglang.co/2016/07/19/MySQL-嵌套集模型/">
-      </div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M2" />
-          <p class="site-author-name" itemprop="name">M2</p>
-          <p class="site-description motion-element" itemprop="description">记录知识，分享知识</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">57</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">21</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">36</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/m2lan" target="_blank">
-                  
-                    <i class="fa fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://twitter.com/763960267" target="_blank">
-                  
-                    <i class="fa fa-twitter"></i>
-                  
-                  Twitter
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://www.facebook.com/100006504108865" target="_blank">
-                  
-                    <i class="fa fa-facebook"></i>
-                  
-                  Facebook
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/u/1877167031" target="_blank">
-                  
-                    <i class="fa fa-globe"></i>
-                  
-                  微博
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank">
-                  
-                    <i class="fa fa-globe"></i>
-                  
-                  知乎
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="mailto:763960267@qq.com" target="_blank">
-                  
-                    <i class="fa fa-globe"></i>
-                  
-                  Mail
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        <div class="links-of-blogroll motion-element">
-          
-        </div>
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u5D4C_u5957_u96C6_u6A21_u578B"><span class="nav-number">1.</span> <span class="nav-text">嵌套集模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002"><span class="nav-number">1.1.</span> <span class="nav-text">在分类表中，通过左和右值来代表我们的嵌套节点。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u68C0_u7D22_u4E00_u4E2A_u5B8C_u6574_u7684_u6811"><span class="nav-number">2.</span> <span class="nav-text">检索一个完整的树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u67E5_u627E_u6240_u6709_u7684_u53F6_u5B50_u8282_u70B9"><span class="nav-number">3.</span> <span class="nav-text">查找所有的叶子节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u68C0_u7D22_u5355_u4E2A_u8DEF_u5F84"><span class="nav-number">4.</span> <span class="nav-text">检索单个路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u67E5_u627E_u6240_u6709_u8282_u70B9_u7684_u6DF1_u5EA6"><span class="nav-number">5.</span> <span class="nav-text">查找所有节点的深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5B50_u6811_u7684_u6DF1_u5EA6"><span class="nav-number">6.</span> <span class="nav-text">子树的深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u67E5_u627E_u4E00_u4E2A_u8282_u70B9_u7684_u76F4_u63A5_u4E0B_u5C5E"><span class="nav-number">7.</span> <span class="nav-text">查找一个节点的直接下属</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5D4C_u5957_u96C6_u5408_u4E2D_u4E2D_u7684_u805A_u5408_u51FD_u6570"><span class="nav-number">8.</span> <span class="nav-text">嵌套集合中中的聚合函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u6DFB_u52A0_u4E00_u4E2A_u65B0_u8282_u70B9"><span class="nav-number">9.</span> <span class="nav-text">添加一个新节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5220_u9664_u8282_u70B9"><span class="nav-number">10.</span> <span class="nav-text">删除节点</span></a></li></ol></div>
-            
-          </div>
-        </section>
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">M2</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-
-  
-
-
-
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
-
-
-
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"m2langithub"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
-      <script src="/js/src/hook-duoshuo.js"></script>
-    
-  
-
-
-
-
-
-  
-  
-  
-
-  
-
-  
-
-</body>
-</html>
+</code></pre></li></ul></div><div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/MySQL/" rel="tag">#MySQL</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2016/07/15/nuclide编辑器安装/" rel="next" title="nuclide编辑器安装"><i class="fa fa-chevron-left"></i> nuclide编辑器安装</a></div><div class="post-nav-prev post-nav-item"><a href="/2016/07/21/table/" rel="prev" title="Ectouch数据库字典">Ectouch数据库字典 <i class="fa fa-chevron-right"></i></a></div></div></footer></article><div class="post-spread"><script>with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion="+~(-new Date/36e5)];</script></div></div></div><div class="comments" id="comments"><div class="ds-thread" data-thread-key="2016/07/19/MySQL-嵌套集模型/" data-title="mysql嵌套集模型" data-url="http://im.yonglang.co/2016/07/19/MySQL-嵌套集模型/"></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview">站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M2"><p class="site-author-name" itemprop="name">M2</p><p class="site-description motion-element" itemprop="description">记录知识，分享知识</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives"><span class="site-state-item-count">57</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories"><span class="site-state-item-count">21</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags"><span class="site-state-item-count">36</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/m2lan" target="_blank"><i class="fa fa-github"></i> GitHub</a></span> <span class="links-of-author-item"><a href="https://twitter.com/763960267" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></span> <span class="links-of-author-item"><a href="https://www.facebook.com/100006504108865" target="_blank"><i class="fa fa-facebook"></i> Facebook</a></span> <span class="links-of-author-item"><a href="http://weibo.com/u/1877167031" target="_blank"><i class="fa fa-globe"></i> 微博</a></span> <span class="links-of-author-item"><a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank"><i class="fa fa-globe"></i> 知乎</a></span> <span class="links-of-author-item"><a href="mailto:763960267@qq.com" target="_blank"><i class="fa fa-globe"></i> Mail</a></span></div><div class="links-of-blogroll motion-element"></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u5D4C_u5957_u96C6_u6A21_u578B"><span class="nav-number">1.</span> <span class="nav-text">嵌套集模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002"><span class="nav-number">1.1.</span> <span class="nav-text">在分类表中，通过左和右值来代表我们的嵌套节点。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u68C0_u7D22_u4E00_u4E2A_u5B8C_u6574_u7684_u6811"><span class="nav-number">2.</span> <span class="nav-text">检索一个完整的树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u67E5_u627E_u6240_u6709_u7684_u53F6_u5B50_u8282_u70B9"><span class="nav-number">3.</span> <span class="nav-text">查找所有的叶子节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u68C0_u7D22_u5355_u4E2A_u8DEF_u5F84"><span class="nav-number">4.</span> <span class="nav-text">检索单个路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u67E5_u627E_u6240_u6709_u8282_u70B9_u7684_u6DF1_u5EA6"><span class="nav-number">5.</span> <span class="nav-text">查找所有节点的深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5B50_u6811_u7684_u6DF1_u5EA6"><span class="nav-number">6.</span> <span class="nav-text">子树的深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u67E5_u627E_u4E00_u4E2A_u8282_u70B9_u7684_u76F4_u63A5_u4E0B_u5C5E"><span class="nav-number">7.</span> <span class="nav-text">查找一个节点的直接下属</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5D4C_u5957_u96C6_u5408_u4E2D_u4E2D_u7684_u805A_u5408_u51FD_u6570"><span class="nav-number">8.</span> <span class="nav-text">嵌套集合中中的聚合函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u6DFB_u52A0_u4E00_u4E2A_u65B0_u8282_u70B9"><span class="nav-number">9.</span> <span class="nav-text">添加一个新节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5220_u9664_u8282_u70B9"><span class="nav-number">10.</span> <span class="nav-text">删除节点</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2016</span> <span class="with-love"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">M2</span></div><div class="powered-by">由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动</div><div class="theme-info">主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null);</script><script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script><script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script><script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script><script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script><script type="text/javascript">var duoshuoQuery={short_name:"m2langithub"};!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.id="duoshuo-script",t.src=("https:"==document.location.protocol?"https:":"http:")+"//static.duoshuo.com/embed.js",t.charset="UTF-8",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(t)}();</script><script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script><script src="/js/src/hook-duoshuo.js"></script></body></html>
