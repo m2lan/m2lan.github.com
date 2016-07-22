@@ -1,86 +1,501 @@
-<!doctype html><html class="theme-next pisces use-motion"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css"><link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css"><meta name="keywords" content="Apache,Kafka,"><link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0"><meta name="description" content="kafka
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Apache,Kafka," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="kafka
 kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
 通过zookeeper实现集群
 kafka集群由多个kafka实例组成，每个实例称为broker
 
 installwget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-tar xzf kafka_2.11-0.9.0.0.tgz"><meta property="og:type" content="article"><meta property="og:title" content="kafka"><meta property="og:url" content="http://im.yonglang.co/2016/02/25/kafka/index.html"><meta property="og:site_name" content="知识记录"><meta property="og:description" content="kafka
+tar xzf kafka_2.11-0.9.0.0.tgz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kafka">
+<meta property="og:url" content="http://im.yonglang.co/2016/02/25/kafka/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="kafka
 kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
 通过zookeeper实现集群
 kafka集群由多个kafka实例组成，每个实例称为broker
 
 installwget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-tar xzf kafka_2.11-0.9.0.0.tgz"><meta property="og:updated_time" content="2016-07-15T02:31:10.000Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="kafka"><meta name="twitter:description" content="kafka
+tar xzf kafka_2.11-0.9.0.0.tgz">
+<meta property="og:updated_time" content="2016-07-15T02:31:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kafka">
+<meta name="twitter:description" content="kafka
 kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
 通过zookeeper实现集群
 kafka集群由多个kafka实例组成，每个实例称为broker
 
 installwget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-tar xzf kafka_2.11-0.9.0.0.tgz"><script type="text/javascript" id="hexo.configuration">var NexT=window.NexT||{},CONFIG={scheme:"Pisces",sidebar:{position:"left",display:"always"},fancybox:!0,motion:!0,duoshuo:{userId:2746085,author:"M2"}};</script><title>kafka | 知识记录</title></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="//hm.baidu.com/hm.js?46e0944dcdcd5a2363bcb97f299eccf9";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(e,c)}();</script><div class="container one-collumn sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">知识记录</span> <span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle"></p></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-home fa-fw"></i><br>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-th fa-fw"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives" rel="section"><i class="menu-item-icon fa fa-archive fa-fw"></i><br>归档</a></li><li class="menu-item menu-item-tags"><a href="/tags" rel="section"><i class="menu-item-icon fa fa-tags fa-fw"></i><br>标签</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="menu-item-icon fa fa-user fa-fw"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href="#" class="st-search-show-outputs"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><form class="site-search-form"><input type="text" id="st-search-input" class="st-search-input st-default-search-input"></form><script type="text/javascript">!function(t,e,n,s,c,i,a){t.SwiftypeObject=c,t[c]=t[c]||function(){(t[c].q=t[c].q||[]).push(arguments)},i=e.createElement(n),a=e.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","//s.swiftypecdn.com/install/v2/st.js","_st"),_st("install","b2cFpoExgUMZu3--zQzE","2.0.0");</script></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline">kafka</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-25T23:01:53+08:00" content="2016-02-25">2016-02-25</time></span> <span class="post-category">&nbsp; | &nbsp; <span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/Kafka/" itemprop="url" rel="index"><span itemprop="name">Kafka</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp; <a href="/2016/02/25/kafka/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/kafka/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><h1 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h1><blockquote><p>kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。 通过zookeeper实现集群 kafka集群由多个kafka实例组成，每个实例称为broker</p></blockquote><h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><pre><code>wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
+tar xzf kafka_2.11-0.9.0.0.tgz">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 2746085,
+      author: 'M2'
+    }
+  };
+</script>
+
+  <title> kafka | 知识记录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?46e0944dcdcd5a2363bcb97f299eccf9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知识记录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'b2cFpoExgUMZu3--zQzE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                kafka
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-25T23:01:53+08:00" content="2016-02-25">
+              2016-02-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">Kafka</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/25/kafka/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/kafka/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h1><blockquote>
+<p>kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
+通过zookeeper实现集群
+kafka集群由多个kafka实例组成，每个实例称为broker</p>
+</blockquote>
+<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><pre><code>wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
 tar xzf kafka_2.11-0.9.0.0.tgz
 export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
 cd kafka_2.11-0.9.0.0
-</code></pre><a id="more"></a><h2 id="u542F_u52A8zookeeper"><a href="#u542F_u52A8zookeeper" class="headerlink" title="启动zookeeper"></a>启动zookeeper</h2><pre><code>bin/zookeeper-server-start.sh config/zookeeper.properties
+</code></pre><a id="more"></a>
+<h2 id="u542F_u52A8zookeeper"><a href="#u542F_u52A8zookeeper" class="headerlink" title="启动zookeeper"></a>启动zookeeper</h2><pre><code>bin/zookeeper-server-start.sh config/zookeeper.properties
 </code></pre><h2 id="u542F_u52A8kafka"><a href="#u542F_u52A8kafka" class="headerlink" title="启动kafka"></a>启动kafka</h2><pre><code>bin/kafka-server-start.sh config/server.properties
-</code></pre><h2 id="u521B_u5EFA_u4E00_u4E2Atopic"><a href="#u521B_u5EFA_u4E00_u4E2Atopic" class="headerlink" title="创建一个topic"></a>创建一个topic</h2><ul><li><p>创建一个单分区、单副本的<code>test</code>话题</p><pre><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
-</code></pre></li><li><p>获取<code>topic</code>列表</p><pre><code>bin/kafka-topics.sh --list --zookeeper localhost:2181
-</code></pre></li><li>当发布到一个不存在的<code>topics</code>时，可以配置自动创建而不是手动创建<h2 id="u53D1_u9001_u6D88_u606F"><a href="#u53D1_u9001_u6D88_u606F" class="headerlink" title="发送消息"></a>发送消息</h2></li><li><p>运行生产者客户端，然后发送一些消息</p><pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
-</code></pre><h2 id="u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005"><a href="#u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005" class="headerlink" title="启动一个消费者"></a>启动一个消费者</h2></li><li><p>运行消费者客户端，接收消息</p><pre><code>bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
-</code></pre><h2 id="u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4"><a href="#u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4" class="headerlink" title="设置多个brokers集群"></a>设置多个brokers集群</h2></li><li><p>为每个brokers创建一个配置文件</p><pre><code>cp config/server.properties config/server-1.properties
+</code></pre><h2 id="u521B_u5EFA_u4E00_u4E2Atopic"><a href="#u521B_u5EFA_u4E00_u4E2Atopic" class="headerlink" title="创建一个topic"></a>创建一个topic</h2><ul>
+<li><p>创建一个单分区、单副本的<code>test</code>话题</p>
+<pre><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+</code></pre></li>
+<li><p>获取<code>topic</code>列表</p>
+<pre><code>bin/kafka-topics.sh --list --zookeeper localhost:2181
+</code></pre></li>
+<li>当发布到一个不存在的<code>topics</code>时，可以配置自动创建而不是手动创建<h2 id="u53D1_u9001_u6D88_u606F"><a href="#u53D1_u9001_u6D88_u606F" class="headerlink" title="发送消息"></a>发送消息</h2></li>
+<li><p>运行生产者客户端，然后发送一些消息</p>
+<pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+</code></pre><h2 id="u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005"><a href="#u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005" class="headerlink" title="启动一个消费者"></a>启动一个消费者</h2></li>
+<li><p>运行消费者客户端，接收消息</p>
+<pre><code>bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
+</code></pre><h2 id="u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4"><a href="#u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4" class="headerlink" title="设置多个brokers集群"></a>设置多个brokers集群</h2></li>
+<li><p>为每个brokers创建一个配置文件</p>
+<pre><code>cp config/server.properties config/server-1.properties
 cp config/server.properties config/server-2.properties
-</code></pre></li><li><p>配置文件内容</p><ul><li><p><code>config/server-1.properties</code></p><pre><code>broker.id=1
+</code></pre></li>
+<li><p>配置文件内容</p>
+<ul>
+<li><p><code>config/server-1.properties</code></p>
+<pre><code>broker.id=1
 port=9093
 log.dir=/tmp/kafka-logs-1
-</code></pre></li><li><p><code>config/server-2.properties</code></p><pre><code>broker.id=2
+</code></pre></li>
+<li><p><code>config/server-2.properties</code></p>
+<pre><code>broker.id=2
 port=9094
 log.dir=/tmp/kafka-logs-2
-</code></pre><blockquote><p><code>broker.id</code>是集群节点唯一名称</p></blockquote></li></ul></li><li><p>启动两个新节点</p><pre><code>bin/kafka-server-start.sh config/server-1.properties &amp;
+</code></pre><blockquote>
+<p><code>broker.id</code>是集群节点唯一名称</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>启动两个新节点</p>
+<pre><code>bin/kafka-server-start.sh config/server-1.properties &amp;
 bin/kafka-server-start.sh config/server-2.properties &amp;
-</code></pre></li><li><p>创建有3个副本的新<code>topics</code></p><pre><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-topic
-</code></pre></li><li><p>在集群环境，查看<code>broker</code>都做了什么</p><pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
+</code></pre></li>
+<li><p>创建有3个副本的新<code>topics</code></p>
+<pre><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-topic
+</code></pre></li>
+<li><p>在集群环境，查看<code>broker</code>都做了什么</p>
+<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
 
 Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
     Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0,1
-</code></pre><blockquote><p><code>leader</code>负责节点所有读取和写入指定分区 <code>replicas</code>复制此分区节点列表日志 <code>isr</code>集中同步副本</p></blockquote></li><li><p>查看单复制集下的<code>topics</code></p><pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
+</code></pre><blockquote>
+<p><code>leader</code>负责节点所有读取和写入指定分区
+<code>replicas</code>复制此分区节点列表日志
+<code>isr</code>集中同步副本</p>
+</blockquote>
+</li>
+<li><p>查看单复制集下的<code>topics</code></p>
+<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
 
 Topic:test    PartitionCount:1 ReplicationFactor:1 Configs:
     Topic: test    Partition: 0 Leader: 0 Replicas: 0 Isr: 0
-</code></pre></li><li><p>给集群中的<code>topics</code>发送一些消息</p><pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-topic
-</code></pre></li><li><p>接收消息</p><pre><code>bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic my-topic
-</code></pre></li><li><p>测试容错性，杀掉<code>server-1.properties</code></p><pre><code>ps aux|grep server-1.properties
+</code></pre></li>
+<li><p>给集群中的<code>topics</code>发送一些消息</p>
+<pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-topic
+</code></pre></li>
+<li><p>接收消息</p>
+<pre><code>bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic my-topic
+</code></pre></li>
+<li><p>测试容错性，杀掉<code>server-1.properties</code></p>
+<pre><code>ps aux|grep server-1.properties
 kill -9 PID
-</code></pre></li><li><p>查看</p><pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
+</code></pre></li>
+<li><p>查看</p>
+<pre><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
 
 Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
     Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0
-</code></pre></li></ul><h2 id="u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E"><a href="#u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E" class="headerlink" title="使用kafka连接导入/导出数据"></a>使用kafka连接导入/导出数据</h2><ul><li><p>使用<code>kafka</code>的<code>connect</code>工具导入/导出数据</p><ul><li><p>首先需要建立一些数据来测试</p><pre><code>echo -e &quot;foo\nbar&quot; &gt; test.txt
+</code></pre></li>
+</ul>
+<h2 id="u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E"><a href="#u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E" class="headerlink" title="使用kafka连接导入/导出数据"></a>使用kafka连接导入/导出数据</h2><ul>
+<li><p>使用<code>kafka</code>的<code>connect</code>工具导入/导出数据</p>
+<ul>
+<li><p>首先需要建立一些数据来测试</p>
+<pre><code>echo -e &quot;foo\nbar&quot; &gt; test.txt
 
 bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
-</code></pre></li><li><p>使用之前启动默认的本地集群配置并创建两个连接，第一个是源连接器，它从输入文本读取消息，并各自产生的一个输出文件中的一行。</p><ul><li>连接器开始读取<code>test.txt</code>产生一个<code>topics</code>为<code>connect-test</code></li><li>接收端连接器应该开始从<code>topic</code>读取消息<code>connect-test</code>,并写入到<code>test.sink.txt</code></li><li><p>查看<code>topics</code>列表</p><pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-topics.sh --list --zookeeper localhost:2181
+</code></pre></li>
+<li><p>使用之前启动默认的本地集群配置并创建两个连接，第一个是源连接器，它从输入文本读取消息，并各自产生的一个输出文件中的一行。</p>
+<ul>
+<li>连接器开始读取<code>test.txt</code>产生一个<code>topics</code>为<code>connect-test</code></li>
+<li>接收端连接器应该开始从<code>topic</code>读取消息<code>connect-test</code>,并写入到<code>test.sink.txt</code></li>
+<li><p>查看<code>topics</code>列表</p>
+<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-topics.sh --list --zookeeper localhost:2181
 __consumer_offsets
 connect-test
 my-topic
 test
 test2
-</code></pre></li><li><p>启动一个消费者控制台查看<code>topic</code>为<code>connect-test</code>的数据</p><pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
+</code></pre></li>
+<li><p>启动一个消费者控制台查看<code>topic</code>为<code>connect-test</code>的数据</p>
+<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
 {&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;foo&quot;}
 {&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;bar&quot;}
-</code></pre></li><li><p>重新打开一个终端，给<code>test.txt</code>中追加数据，再看消费者控制台的数据</p><pre><code>echo &quot;Hello world&quot; &gt;&gt; test.txt
-</code></pre></li><li><p>消费者控制台数据为</p><pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
+</code></pre></li>
+<li><p>重新打开一个终端，给<code>test.txt</code>中追加数据，再看消费者控制台的数据</p>
+<pre><code>echo &quot;Hello world&quot; &gt;&gt; test.txt
+</code></pre></li>
+<li><p>消费者控制台数据为</p>
+<pre><code>[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
 {&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;foo&quot;}
 {&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;bar&quot;}
 {&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;Hello world&quot;}
-</code></pre></li></ul></li></ul></li></ul><h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><ul><li><p>生产者API</p><pre><code>&lt;dependency&gt;
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><ul>
+<li><p>生产者API</p>
+<pre><code>&lt;dependency&gt;
     &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
     &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;
     &lt;version&gt;0.9.0.0&lt;/version&gt;
 &lt;/dependency&gt;
-</code></pre><p>参考: <a href="http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html" target="_blank" rel="external">生产者doc</a></p></li><li><p>消费者API</p><pre><code>&lt;dependency&gt;
+</code></pre><p>  参考: <a href="http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html" target="_blank" rel="external">生产者doc</a></p>
+</li>
+<li><p>消费者API</p>
+<pre><code>&lt;dependency&gt;
     &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
     &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;
     &lt;version&gt;0.9.0.0&lt;/version&gt;
 &lt;/dependency&gt;
-</code></pre><p>参考: <a href="http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html" target="_blank" rel="external">消费者doc</a></p></li></ul><h2 id="error"><a href="#error" class="headerlink" title="error"></a>error</h2><ul><li><code>org.apache.kafka.common.errors.TimeoutException: Batch Expired</code>修改<code>config/server.properties</code>文件的<code>advertised.host.name=IP地址</code></li></ul><h2 id="server-properties_u914D_u7F6E_u9879"><a href="#server-properties_u914D_u7F6E_u9879" class="headerlink" title="server.properties配置项"></a>server.properties配置项</h2><pre><code>broker.id=0
+</code></pre><p>  参考: <a href="http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html" target="_blank" rel="external">消费者doc</a></p>
+</li>
+</ul>
+<h2 id="error"><a href="#error" class="headerlink" title="error"></a>error</h2><ul>
+<li><code>org.apache.kafka.common.errors.TimeoutException: Batch Expired</code>修改<code>config/server.properties</code>文件的<code>advertised.host.name=IP地址</code></li>
+</ul>
+<h2 id="server-properties_u914D_u7F6E_u9879"><a href="#server-properties_u914D_u7F6E_u9879" class="headerlink" title="server.properties配置项"></a>server.properties配置项</h2><pre><code>broker.id=0
 listeners=PLAINTEXT://:9092
 advertised.host.name=192.168.1.211
 num.network.threads=3
@@ -100,4 +515,374 @@ zookeeper.connect=localhost:2181
 zookeeper.connection.timeout.ms=6000
 auto.create.topics.enable=true
 default.replication.factor=3
-</code></pre></div><div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Apache/" rel="tag">#Apache</a> <a href="/tags/Kafka/" rel="tag">#Kafka</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2015/12/10/Shell-redirect/" rel="next" title="Shell-redirect"><i class="fa fa-chevron-left"></i> Shell-redirect</a></div><div class="post-nav-prev post-nav-item"><a href="/2016/02/25/zookeeper/" rel="prev" title="zookeeper">zookeeper <i class="fa fa-chevron-right"></i></a></div></div></footer></article><div class="post-spread"><script>with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion="+~(-new Date/36e5)];</script></div></div></div><div class="comments" id="comments"><div class="ds-thread" data-thread-key="2016/02/25/kafka/" data-title="kafka" data-url="http://im.yonglang.co/2016/02/25/kafka/"></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview">站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M2"><p class="site-author-name" itemprop="name">M2</p><p class="site-description motion-element" itemprop="description">记录知识，分享知识</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives"><span class="site-state-item-count">57</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories"><span class="site-state-item-count">21</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags"><span class="site-state-item-count">36</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/m2lan" target="_blank"><i class="fa fa-github"></i> GitHub</a></span> <span class="links-of-author-item"><a href="https://twitter.com/763960267" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></span> <span class="links-of-author-item"><a href="https://www.facebook.com/100006504108865" target="_blank"><i class="fa fa-facebook"></i> Facebook</a></span> <span class="links-of-author-item"><a href="http://weibo.com/u/1877167031" target="_blank"><i class="fa fa-globe"></i> 微博</a></span> <span class="links-of-author-item"><a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank"><i class="fa fa-globe"></i> 知乎</a></span> <span class="links-of-author-item"><a href="mailto:763960267@qq.com" target="_blank"><i class="fa fa-globe"></i> Mail</a></span></div><div class="links-of-blogroll motion-element"></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kafka"><span class="nav-number">1.</span> <span class="nav-text">kafka</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#install"><span class="nav-number">1.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u542F_u52A8zookeeper"><span class="nav-number">1.2.</span> <span class="nav-text">启动zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u542F_u52A8kafka"><span class="nav-number">1.3.</span> <span class="nav-text">启动kafka</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u521B_u5EFA_u4E00_u4E2Atopic"><span class="nav-number">1.4.</span> <span class="nav-text">创建一个topic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u53D1_u9001_u6D88_u606F"><span class="nav-number">1.5.</span> <span class="nav-text">发送消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005"><span class="nav-number">1.6.</span> <span class="nav-text">启动一个消费者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4"><span class="nav-number">1.7.</span> <span class="nav-text">设置多个brokers集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E"><span class="nav-number">1.8.</span> <span class="nav-text">使用kafka连接导入/导出数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">1.9.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#error"><span class="nav-number">1.10.</span> <span class="nav-text">error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#server-properties_u914D_u7F6E_u9879"><span class="nav-number">1.11.</span> <span class="nav-text">server.properties配置项</span></a></li></ol></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2016</span> <span class="with-love"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">M2</span></div><div class="powered-by">由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动</div><div class="theme-info">主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null);</script><script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script><script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script><script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script><script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script><script type="text/javascript">var duoshuoQuery={short_name:"m2langithub"};!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.id="duoshuo-script",t.src=("https:"==document.location.protocol?"https:":"http:")+"//static.duoshuo.com/embed.js",t.charset="UTF-8",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(t)}();</script><script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script><script src="/js/src/hook-duoshuo.js"></script></body></html>
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Apache/" rel="tag">#Apache</a>
+          
+            <a href="/tags/Kafka/" rel="tag">#Kafka</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/10/Shell-redirect/" rel="next" title="Shell-redirect">
+                <i class="fa fa-chevron-left"></i> Shell-redirect
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/25/zookeeper/" rel="prev" title="zookeeper">
+                zookeeper <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/02/25/kafka/"
+           data-title="kafka" data-url="http://im.yonglang.co/2016/02/25/kafka/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M2" />
+          <p class="site-author-name" itemprop="name">M2</p>
+          <p class="site-description motion-element" itemprop="description">记录知识，分享知识</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/m2lan" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/763960267" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/100006504108865" target="_blank">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1877167031" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:763960267@qq.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kafka"><span class="nav-number">1.</span> <span class="nav-text">kafka</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#install"><span class="nav-number">1.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u542F_u52A8zookeeper"><span class="nav-number">1.2.</span> <span class="nav-text">启动zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u542F_u52A8kafka"><span class="nav-number">1.3.</span> <span class="nav-text">启动kafka</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u521B_u5EFA_u4E00_u4E2Atopic"><span class="nav-number">1.4.</span> <span class="nav-text">创建一个topic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u53D1_u9001_u6D88_u606F"><span class="nav-number">1.5.</span> <span class="nav-text">发送消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005"><span class="nav-number">1.6.</span> <span class="nav-text">启动一个消费者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4"><span class="nav-number">1.7.</span> <span class="nav-text">设置多个brokers集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E"><span class="nav-number">1.8.</span> <span class="nav-text">使用kafka连接导入/导出数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">1.9.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#error"><span class="nav-number">1.10.</span> <span class="nav-text">error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#server-properties_u914D_u7F6E_u9879"><span class="nav-number">1.11.</span> <span class="nav-text">server.properties配置项</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M2</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"m2langithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

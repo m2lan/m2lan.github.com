@@ -1,26 +1,371 @@
-<!doctype html><html class="theme-next pisces use-motion"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css"><link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css"><meta name="keywords" content="Git,"><link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0"><meta name="description" content="版本回退
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Git," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="版本回退
 如果信息显示过多的话,可以使用git log --pretty=oneline
 dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
 9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
-2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a."><meta property="og:type" content="article"><meta property="og:title" content="Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略"><meta property="og:url" content="http://im.yonglang.co/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/index.html"><meta property="og:site_name" content="知识记录"><meta property="og:description" content="版本回退
+2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略">
+<meta property="og:url" content="http://im.yonglang.co/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="版本回退
 如果信息显示过多的话,可以使用git log --pretty=oneline
 dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
 9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
-2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a."><meta property="og:updated_time" content="2016-07-15T02:30:28.000Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略"><meta name="twitter:description" content="版本回退
+2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.">
+<meta property="og:updated_time" content="2016-07-15T02:30:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略">
+<meta name="twitter:description" content="版本回退
 如果信息显示过多的话,可以使用git log --pretty=oneline
 dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
 9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
-2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a."><script type="text/javascript" id="hexo.configuration">var NexT=window.NexT||{},CONFIG={scheme:"Pisces",sidebar:{position:"left",display:"always"},fancybox:!0,motion:!0,duoshuo:{userId:2746085,author:"M2"}};</script><title>Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略 | 知识记录</title></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="//hm.baidu.com/hm.js?46e0944dcdcd5a2363bcb97f299eccf9";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(e,c)}();</script><div class="container one-collumn sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">知识记录</span> <span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle"></p></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-home fa-fw"></i><br>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-th fa-fw"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives" rel="section"><i class="menu-item-icon fa fa-archive fa-fw"></i><br>归档</a></li><li class="menu-item menu-item-tags"><a href="/tags" rel="section"><i class="menu-item-icon fa fa-tags fa-fw"></i><br>标签</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="menu-item-icon fa fa-user fa-fw"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href="#" class="st-search-show-outputs"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><form class="site-search-form"><input type="text" id="st-search-input" class="st-search-input st-default-search-input"></form><script type="text/javascript">!function(t,e,n,s,c,i,a){t.SwiftypeObject=c,t[c]=t[c]||function(){(t[c].q=t[c].q||[]).push(arguments)},i=e.createElement(n),a=e.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","//s.swiftypecdn.com/install/v2/st.js","_st"),_st("install","b2cFpoExgUMZu3--zQzE","2.0.0");</script></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline">Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2015-12-10T01:39:28+08:00" content="2015-12-10">2015-12-10</time></span> <span class="post-category">&nbsp; | &nbsp; <span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp; <a href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><h2 id="u7248_u672C_u56DE_u9000"><a href="#u7248_u672C_u56DE_u9000" class="headerlink" title="版本回退"></a>版本回退</h2><ul><li><p>如果信息显示过多的话,可以使用<code>git log --pretty=oneline</code></p><pre><code>dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
+2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 2746085,
+      author: 'M2'
+    }
+  };
+</script>
+
+  <title> Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略 | 知识记录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?46e0944dcdcd5a2363bcb97f299eccf9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知识记录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'b2cFpoExgUMZu3--zQzE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T01:39:28+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="u7248_u672C_u56DE_u9000"><a href="#u7248_u672C_u56DE_u9000" class="headerlink" title="版本回退"></a>版本回退</h2><ul>
+<li><p>如果信息显示过多的话,可以使用<code>git log --pretty=oneline</code></p>
+<pre><code>dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
 9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
 2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.txt
-</code></pre></li><li>如果想回退到上个版本,可以使用<code>git reset --hard HEAD^</code>,如果想回退前2个版本<code>git reset --hard HEAD^^</code>,多个版本添加多个^。如果回退前100个版本,可以使用<code>git reset --hard HEAD~100</code></li><li><p>如果想回退到最新版本<code>git reset –hard</code>版本号,查看最新版本版本号<code>git reflog</code></p><pre><code>9bdf0e5 HEAD@{0}: reset: moving to HEAD~2
+</code></pre></li>
+<li>如果想回退到上个版本,可以使用<code>git reset --hard HEAD^</code>,如果想回退前2个版本<code>git reset --hard HEAD^^</code>,多个版本添加多个^。如果回退前100个版本,可以使用<code>git reset --hard HEAD~100</code></li>
+<li><p>如果想回退到最新版本<code>git reset –hard</code>版本号,查看最新版本版本号<code>git reflog</code></p>
+<pre><code>9bdf0e5 HEAD@{0}: reset: moving to HEAD~2
 5b95f49 HEAD@{1}: commit: a.txt
 28cb7d2 HEAD@{2}: commit: a.txt
 9bdf0e5 HEAD@{3}: reset: moving to HEAD^
 dfffd94 HEAD@{4}: commit: update a.txt
 9bdf0e5 HEAD@{5}: commit: update a.txt
 2a474cb HEAD@{6}: commit (initial): add a.txt
-</code></pre></li><li>执行<code>git reset --hard 9bdf0e5</code><a id="more"></a><h2 id="u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6"><a href="#u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6" class="headerlink" title="撤销修改和删除文件"></a>撤销修改和删除文件</h2><h3 id="u64A4_u9500_u4FEE_u6539"><a href="#u64A4_u9500_u4FEE_u6539" class="headerlink" title="撤销修改"></a>撤销修改</h3></li><li>在我未提交之前，我发现添加的内容有误，所以我得马上恢复以前的版本，现在我可以有如下几种方法可以做修改：<ul><li>第一：如果我知道要删掉那些内容的话，直接手动更改去掉那些需要的文件，然后add添加到暂存区，最后commit掉。</li><li>第二：我可以按以前的方法直接恢复到上一个版本。使用 <code>git reset –hard HEAD^</code></li></ul></li><li><p>但是现在我不想使用上面的2种方法，我想直接想使用撤销命令该如何操作呢？首先在做撤销之前，我们可以先用<code>git status</code>查看下当前的状态。如下所示：</p><pre><code>AndytekiMacBook-Air:demo1 yonglang$ git status
+</code></pre></li>
+<li>执行<code>git reset --hard 9bdf0e5</code><a id="more"></a>
+<h2 id="u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6"><a href="#u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6" class="headerlink" title="撤销修改和删除文件"></a>撤销修改和删除文件</h2><h3 id="u64A4_u9500_u4FEE_u6539"><a href="#u64A4_u9500_u4FEE_u6539" class="headerlink" title="撤销修改"></a>撤销修改</h3></li>
+<li>在我未提交之前，我发现添加的内容有误，所以我得马上恢复以前的版本，现在我可以有如下几种方法可以做修改：<ul>
+<li>第一：如果我知道要删掉那些内容的话，直接手动更改去掉那些需要的文件，然后add添加到暂存区，最后commit掉。</li>
+<li>第二：我可以按以前的方法直接恢复到上一个版本。使用 <code>git reset –hard HEAD^</code></li>
+</ul>
+</li>
+<li><p>但是现在我不想使用上面的2种方法，我想直接想使用撤销命令该如何操作呢？首先在做撤销之前，我们可以先用<code>git status</code>查看下当前的状态。如下所示：</p>
+<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git status
 # On branch master
 # Changes not staged for commit:
 #   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
@@ -29,7 +374,9 @@ dfffd94 HEAD@{4}: commit: update a.txt
 #    modified:   a.txt
 #
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre></li><li><p>可以发现，Git会告诉你，<code>git checkout -- file</code> 可以丢弃工作区的修改，如下命令：<code>git checkout -- a.txt</code>,如下所示：</p><pre><code>AndytekiMacBook-Air:demo1 yonglang$ git checkout -- a.txt
+</code></pre></li>
+<li><p>可以发现，Git会告诉你，<code>git checkout -- file</code> 可以丢弃工作区的修改，如下命令：<code>git checkout -- a.txt</code>,如下所示：</p>
+<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git checkout -- a.txt
 AndytekiMacBook-Air:demo1 yonglang$ 
 AndytekiMacBook-Air:demo1 yonglang$
 AndytekiMacBook-Air:demo1 yonglang$
@@ -38,9 +385,13 @@ aaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbb
 ccccccccccccccc
 ddddddddddddddd
-</code></pre></li><li><p>命令<code>git checkout -- a.txt</code>意思就是，把a.txt文件在工作区做的修改全部撤销，这里有2种情况，如下：</p><pre><code>- readme.txt自动修改后，还没有放到暂存区，使用 撤销修改就回到和版本库一模一样的状态。
+</code></pre></li>
+<li><p>命令<code>git checkout -- a.txt</code>意思就是，把a.txt文件在工作区做的修改全部撤销，这里有2种情况，如下：</p>
+<pre><code>- readme.txt自动修改后，还没有放到暂存区，使用 撤销修改就回到和版本库一模一样的状态。
 - 另外一种是readme.txt已经放入暂存区了，接着又作了修改，撤销修改就回到添加暂存区后的状态。
-</code></pre></li><li><p>对于第二种情况，我想我们继续做demo来看下，假如现在我对于<code>readme.txt</code>添加一行 内容为<code>6666666666666</code>，我<code>git add</code>增加到暂存区后，接着添加内容<code>7777777</code>，我想通过撤销命令让其回到暂存区后的状态。如下所示：</p><pre><code>AndytekiMacBook-Air:demo1 yonglang$ vim a.txt
+</code></pre></li>
+<li><p>对于第二种情况，我想我们继续做demo来看下，假如现在我对于<code>readme.txt</code>添加一行 内容为<code>6666666666666</code>，我<code>git add</code>增加到暂存区后，接着添加内容<code>7777777</code>，我想通过撤销命令让其回到暂存区后的状态。如下所示：</p>
+<pre><code>AndytekiMacBook-Air:demo1 yonglang$ vim a.txt
 AndytekiMacBook-Air:demo1 yonglang$ cat a.txt 
 aaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbb
@@ -64,7 +415,9 @@ bbbbbbbbbbbbbbb
 ccccccccccccccc
 ddddddddddddddd
 eeeeeeeeeeeeeee
-</code></pre><h3 id="u5220_u9664_u6587_u4EF6"><a href="#u5220_u9664_u6587_u4EF6" class="headerlink" title="删除文件"></a>删除文件</h3></li><li><p>假如我现在版本库目录添加一个文件<code>c.txt</code>,然后提交。如下：</p><pre><code>AndytekiMacBook-Air:demo1 yonglang$ git add c.txt
+</code></pre><h3 id="u5220_u9664_u6587_u4EF6"><a href="#u5220_u9664_u6587_u4EF6" class="headerlink" title="删除文件"></a>删除文件</h3></li>
+<li><p>假如我现在版本库目录添加一个文件<code>c.txt</code>,然后提交。如下：</p>
+<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git add c.txt
 AndytekiMacBook-Air:demo1 yonglang$ git commit -m &apos;添加c.txt&apos;
 [master 2cd7d93] 添加c.txt
 1 file changed, 0 insertions(+), 0 deletions(-)
@@ -79,14 +432,18 @@ AndytekiMacBook-Air:demo1 yonglang$ git status
 #    deleted:    c.txt
 #
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre></li><li><p>如上：一般情况下，可以直接在文件目录中把文件删了，或者使用如上<code>rm</code>命令：<code>rm c.txt</code>，如果我想彻底从版本库中删掉了此文件的话，可以再执行<code>commit</code>命令 提交掉，现在目录是这样的，</p><pre><code> AndytekiMacBook-Air:demo1 yonglang$ ls -la
+</code></pre></li>
+<li><p>如上：一般情况下，可以直接在文件目录中把文件删了，或者使用如上<code>rm</code>命令：<code>rm c.txt</code>，如果我想彻底从版本库中删掉了此文件的话，可以再执行<code>commit</code>命令 提交掉，现在目录是这样的，</p>
+<pre><code> AndytekiMacBook-Air:demo1 yonglang$ ls -la
 total 16
 drwxr-xr-x   5 yonglang  staff  170 11  5 18:14 .
 drwxr-xr-x   3 yonglang  staff  102 11  5 17:40 ..
 drwxr-xr-x  13 yonglang  staff  442 11  5 18:14 .git
 -rw-r--r--   1 yonglang  staff   80 11  5 18:09 a.txt
 -rw-r--r--   1 yonglang  staff    6 11  5 17:56 b.txt
-</code></pre></li><li><p>只要没有<code>commit</code>之前，如果我想在版本库中恢复此文件如何操作呢？可以使用如下命令 <code>git checkout -- c.txt</code>，如下所示：</p><pre><code>AndytekiMacBook-Air:demo1 yonglang$ git checkout -- c.txt
+</code></pre></li>
+<li><p>只要没有<code>commit</code>之前，如果我想在版本库中恢复此文件如何操作呢？可以使用如下命令 <code>git checkout -- c.txt</code>，如下所示：</p>
+<pre><code>AndytekiMacBook-Air:demo1 yonglang$ git checkout -- c.txt
 AndytekiMacBook-Air:demo1 yonglang$ ls -la
 total 16
 drwxr-xr-x   6 yonglang  staff  204 11  5 18:18 .
@@ -95,7 +452,26 @@ drwxr-xr-x  13 yonglang  staff  442 11  5 18:18 .git
 -rw-r--r--   1 yonglang  staff   80 11  5 18:09 a.txt
 -rw-r--r--   1 yonglang  staff    6 11  5 17:56 b.txt
 -rw-r--r--   1 yonglang  staff    0 11  5 18:18 c.txt
-</code></pre><h2 id="u8FDC_u7A0B_u4ED3_u5E93"><a href="#u8FDC_u7A0B_u4ED3_u5E93" class="headerlink" title="远程仓库"></a>远程仓库</h2></li><li>在<code>github</code>上创建一个<code>git</code>库，本地执行<code>git remote add origin http://xxxx.git</code></li><li>将本地代码推动到远程仓库的master分支<code>git push -u origin master</code>，加<code>-u</code>首次会和远程<code>master</code>分支关联，后面再使用就不用加了。</li><li>创建本地分支<code>git checkout -b dev == git branch dev,git checkout dev</code>,并切换到<code>dev</code>分支,这时添加文件<code>p.txt</code>后<code>git add p.txt,git commit -m &#39;add p.txt in dev&#39;</code>,切换到<code>master</code>分支再看，发现没有<code>p.txt</code></li><li>合并<code>dev</code>分支到<code>master</code>分支,<code>git checkout master</code>切换到<code>master</code>分支后执行<code>git merge dev</code></li><li>删除分支<code>git branch -d dev</code></li><li>查看分支<code>git branch</code></li><li>创建分支<code>git branch name</code></li><li>切换分支<code>git checkout name</code></li><li>创建+切换分支<code>git checkout –b name</code></li><li>合并某分支到当前分支<code>git merge name</code><h2 id="u5206_u652F_u7BA1_u7406_u7B56_u7565"><a href="#u5206_u652F_u7BA1_u7406_u7B56_u7565" class="headerlink" title="分支管理策略"></a>分支管理策略</h2></li><li><p>通常合并分支时，<code>git</code>一般使用<code>Fast forward</code>模式，在这种模式下，删除分支后，会丢掉分支信息，现在我们来使用带参数<code>–no-ff</code>来禁用<code>Fast forward</code>模式。首先我们来做<code>demo</code>演示下:</p><ul><li>创建一个<code>dev</code>分支。</li><li>修改<code>readme.txt</code>内容。</li><li>添加到暂存区。</li><li>切换回主分支<code>(master)</code>。</li><li>合并<code>dev</code>分支，使用命令<code>git merge –no-ff -m “注释” dev</code></li><li><p>查看历史记录</p><pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout -b dev
+</code></pre><h2 id="u8FDC_u7A0B_u4ED3_u5E93"><a href="#u8FDC_u7A0B_u4ED3_u5E93" class="headerlink" title="远程仓库"></a>远程仓库</h2></li>
+<li>在<code>github</code>上创建一个<code>git</code>库，本地执行<code>git remote add origin http://xxxx.git</code></li>
+<li>将本地代码推动到远程仓库的master分支<code>git push -u origin master</code>，加<code>-u</code>首次会和远程<code>master</code>分支关联，后面再使用就不用加了。</li>
+<li>创建本地分支<code>git checkout -b dev == git branch dev,git checkout dev</code>,并切换到<code>dev</code>分支,这时添加文件<code>p.txt</code>后<code>git add p.txt,git commit -m &#39;add p.txt in dev&#39;</code>,切换到<code>master</code>分支再看，发现没有<code>p.txt</code></li>
+<li>合并<code>dev</code>分支到<code>master</code>分支,<code>git checkout master</code>切换到<code>master</code>分支后执行<code>git merge dev</code></li>
+<li>删除分支<code>git branch -d dev</code></li>
+<li>查看分支<code>git branch</code></li>
+<li>创建分支<code>git branch name</code></li>
+<li>切换分支<code>git checkout name</code></li>
+<li>创建+切换分支<code>git checkout –b name</code></li>
+<li>合并某分支到当前分支<code>git merge name</code><h2 id="u5206_u652F_u7BA1_u7406_u7B56_u7565"><a href="#u5206_u652F_u7BA1_u7406_u7B56_u7565" class="headerlink" title="分支管理策略"></a>分支管理策略</h2></li>
+<li><p>通常合并分支时，<code>git</code>一般使用<code>Fast forward</code>模式，在这种模式下，删除分支后，会丢掉分支信息，现在我们来使用带参数<code>–no-ff</code>来禁用<code>Fast forward</code>模式。首先我们来做<code>demo</code>演示下:</p>
+<ul>
+<li>创建一个<code>dev</code>分支。</li>
+<li>修改<code>readme.txt</code>内容。</li>
+<li>添加到暂存区。</li>
+<li>切换回主分支<code>(master)</code>。</li>
+<li>合并<code>dev</code>分支，使用命令<code>git merge –no-ff -m “注释” dev</code></li>
+<li><p>查看历史记录</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout -b dev
 Switched to a new branch &apos;dev&apos;
 AndytekiMacBook-Air:git-test yonglang$ vim a.txt 
 AndytekiMacBook-Air:git-test yonglang$ git add a.txt 
@@ -125,7 +501,14 @@ AndytekiMacBook-Air:git-test yonglang$ git log --graph --pretty=oneline --abbrev
 |/  
 * 1beff04 dev分支添加hello world2
 * 33a4fad add a.txt
-</code></pre></li><li>我们会发现被删除的分支信息还存在。</li><li>分支策略：首先master主分支应该是非常稳定的，也就是用来发布新版本，一般情况下不允许在上面干活，干活一般情况下在新建的dev分支上干活，干完后，比如上要发布，或者说dev分支代码稳定后可以合并到主分支master上来。<h2 id="bug_u5206_u652F"><a href="#bug_u5206_u652F" class="headerlink" title="bug分支"></a>bug分支</h2></li></ul></li><li>在开发中，会经常碰到<code>bug</code>问题，那么有了<code>bug</code>就需要修复，在<code>Git</code>中，分支是很强大的，每个<code>bug</code>都可以通过一个临时分支来修复，修复完成后，合并分支，然后将临时的分支删除掉。</li><li><p>比如我在开发中接到一个<code>404bug</code>时候，我们可以创建一个<code>404分支</code>来修复它，但是，当前的<code>dev分支</code>上的工作还没有提交。比如如下：</p><pre><code>AndytekiMacBook-Air:git-test yonglang$ git status
+</code></pre></li>
+<li>我们会发现被删除的分支信息还存在。</li>
+<li>分支策略：首先master主分支应该是非常稳定的，也就是用来发布新版本，一般情况下不允许在上面干活，干活一般情况下在新建的dev分支上干活，干完后，比如上要发布，或者说dev分支代码稳定后可以合并到主分支master上来。<h2 id="bug_u5206_u652F"><a href="#bug_u5206_u652F" class="headerlink" title="bug分支"></a>bug分支</h2></li>
+</ul>
+</li>
+<li>在开发中，会经常碰到<code>bug</code>问题，那么有了<code>bug</code>就需要修复，在<code>Git</code>中，分支是很强大的，每个<code>bug</code>都可以通过一个临时分支来修复，修复完成后，合并分支，然后将临时的分支删除掉。</li>
+<li><p>比如我在开发中接到一个<code>404bug</code>时候，我们可以创建一个<code>404分支</code>来修复它，但是，当前的<code>dev分支</code>上的工作还没有提交。比如如下：</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git status
 # On branch dev
 # Changes not staged for commit:
 #   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
@@ -134,7 +517,9 @@ AndytekiMacBook-Air:git-test yonglang$ git log --graph --pretty=oneline --abbrev
 #    modified:   a.txt
 #
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre></li><li><p>并不是我不想提交，而是工作进行到一半时候，我们还无法提交，比如我这个分支<code>bug</code>要2天完成，但是我<code>404bug</code>需要5个小时内完成。怎么办呢？还好，<code>Git</code>还提供了一个<code>stash</code>功能，可以把当前工作现场 ”隐藏起来”，等以后恢复现场后继续工作。如下：</p><pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash
+</code></pre></li>
+<li><p>并不是我不想提交，而是工作进行到一半时候，我们还无法提交，比如我这个分支<code>bug</code>要2天完成，但是我<code>404bug</code>需要5个小时内完成。怎么办呢？还好，<code>Git</code>还提供了一个<code>stash</code>功能，可以把当前工作现场 ”隐藏起来”，等以后恢复现场后继续工作。如下：</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash
 Saved working directory and index state WIP on dev: f4d6d93 merge
 HEAD is now at f4d6d93 merge
 AndytekiMacBook-Air:git-test yonglang$ 
@@ -143,7 +528,9 @@ AndytekiMacBook-Air:git-test yonglang$
 AndytekiMacBook-Air:git-test yonglang$ git status
 # On branch dev
 nothing to commit, working directory clean
-</code></pre></li><li><p>所以现在我可以通过创建<code>404分支</code>来修复<code>bug</code>了。首先我们要确定在那个分支上修复<code>bug</code>，比如我现在是在主分支<code>master</code>上来修复的，现在我要在<code>master</code>分支上创建一个临时分支，演示如下：</p><pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout master
+</code></pre></li>
+<li><p>所以现在我可以通过创建<code>404分支</code>来修复<code>bug</code>了。首先我们要确定在那个分支上修复<code>bug</code>，比如我现在是在主分支<code>master</code>上来修复的，现在我要在<code>master</code>分支上创建一个临时分支，演示如下：</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout master
 Switched to branch &apos;master&apos;
 AndytekiMacBook-Air:git-test yonglang$ git checkout -b 404
 Switched to a new branch &apos;404&apos;
@@ -162,7 +549,9 @@ AndytekiMacBook-Air:git-test yonglang$ git add a.txt
 AndytekiMacBook-Air:git-test yonglang$ git commit -m &apos;add 404&apos;
 [404 d1d5dac] add 404
 1 file changed, 1 insertion(+)
-</code></pre></li><li><p>修复完成后，切换到<code>master</code>分支上，并完成合并，最后删除<code>404</code>分支。演示如下：</p><pre><code> AndytekiMacBook-Air:git-test yonglang$ git checkout master
+</code></pre></li>
+<li><p>修复完成后，切换到<code>master</code>分支上，并完成合并，最后删除<code>404</code>分支。演示如下：</p>
+<pre><code> AndytekiMacBook-Air:git-test yonglang$ git checkout master
 Switched to branch &apos;master&apos;
 AndytekiMacBook-Air:git-test yonglang$ git merge --no-ff -m &apos;merge 404&apos; 404
 Merge made by the &apos;recursive&apos; strategy.
@@ -180,14 +569,23 @@ hello world6
 hello world404
 AndytekiMacBook-Air:git-test yonglang$ git branch -d 404
 Deleted branch 404 (was d1d5dac).
-</code></pre></li><li><p>现在，我们回到<code>dev分支</code>上干活了。</p><pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout dev
+</code></pre></li>
+<li><p>现在，我们回到<code>dev分支</code>上干活了。</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git checkout dev
 Switched to branch &apos;dev&apos;
 AndytekiMacBook-Air:git-test yonglang$ git status
 # On branch dev
 nothing to commit, working directory clean
-</code></pre></li><li><p>工作区是干净的，那么我们工作现场去哪里呢？我们可以使用命令<code>git stash list</code>来查看下。如下：</p><pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash list
+</code></pre></li>
+<li><p>工作区是干净的，那么我们工作现场去哪里呢？我们可以使用命令<code>git stash list</code>来查看下。如下：</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash list
 stash@{0}: WIP on dev: f4d6d93 merge
-</code></pre></li><li><p>工作现场还在，<code>Git</code>把<code>stash</code>内容存在某个地方了，但是需要恢复一下，可以使用如下2个方法：</p><ul><li><code>git stash apply</code>恢复，恢复后，<code>stash</code>内容并不删除，你需要使用命令<code>git stash drop</code>来删除。</li><li><p>另一种方式是使用<code>git stash pop</code>,恢复的同时把<code>stash</code>内容也删除了。</p><pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash apply
+</code></pre></li>
+<li><p>工作现场还在，<code>Git</code>把<code>stash</code>内容存在某个地方了，但是需要恢复一下，可以使用如下2个方法：</p>
+<ul>
+<li><code>git stash apply</code>恢复，恢复后，<code>stash</code>内容并不删除，你需要使用命令<code>git stash drop</code>来删除。</li>
+<li><p>另一种方式是使用<code>git stash pop</code>,恢复的同时把<code>stash</code>内容也删除了。</p>
+<pre><code>AndytekiMacBook-Air:git-test yonglang$ git stash apply
 # On branch dev
 # Changes not staged for commit:
 #   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
@@ -214,4 +612,378 @@ AndytekiMacBook-Air:git-test yonglang$ git stash list
 AndytekiMacBook-Air:git-test yonglang$
 </code></pre><h2 id="u66F4_u6539_u8FDC_u7A0B_u4ED3_u5E93_u5730_u5740"><a href="#u66F4_u6539_u8FDC_u7A0B_u4ED3_u5E93_u5730_u5740" class="headerlink" title="更改远程仓库地址"></a>更改远程仓库地址</h2><pre><code>git remote set-url origin remote_git_address
 </code></pre><h2 id="u67E5_u770B_u6587_u4EF6_u6BCF_u4E00_u884C_u7684_u4F5C_u8005_u662Fwho"><a href="#u67E5_u770B_u6587_u4EF6_u6BCF_u4E00_u884C_u7684_u4F5C_u8005_u662Fwho" class="headerlink" title="查看文件每一行的作者是who"></a>查看文件每一行的作者是who</h2><pre><code>git blame [file_name]
-</code></pre><h2 id="u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4"><a href="#u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4" class="headerlink" title="检查丢失的提交"></a>检查丢失的提交</h2></li></ul></li><li><code>git fsck --lost-found</code>这里你可以看到一个丢失的提交。你可以通过<code>git show [commit_hash]</code>查看提交的更改或者通过运行<code>git merge[commit_hash]</code>命令进行恢复。</li><li><code>gitfsck</code>跟<code>reflog</code>命令相比有一个优点。假设你删除了一个远程分支，然后<code>clone</code>了这个库。用<code>fsck</code>命令你可以找到并且恢复这个删除的远程分支。</li></ul></div><div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Git/" rel="tag">#Git</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2015/12/10/Git-ssh连接/" rel="next" title="Git-ssh连接"><i class="fa fa-chevron-left"></i> Git-ssh连接</a></div><div class="post-nav-prev post-nav-item"><a href="/2015/12/10/redis优化/" rel="prev" title="redis优化">redis优化 <i class="fa fa-chevron-right"></i></a></div></div></footer></article><div class="post-spread"><script>with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion="+~(-new Date/36e5)];</script></div></div></div><div class="comments" id="comments"><div class="ds-thread" data-thread-key="2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" data-title="Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略" data-url="http://im.yonglang.co/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/"></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview">站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M2"><p class="site-author-name" itemprop="name">M2</p><p class="site-description motion-element" itemprop="description">记录知识，分享知识</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives"><span class="site-state-item-count">57</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories"><span class="site-state-item-count">21</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags"><span class="site-state-item-count">36</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/m2lan" target="_blank"><i class="fa fa-github"></i> GitHub</a></span> <span class="links-of-author-item"><a href="https://twitter.com/763960267" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></span> <span class="links-of-author-item"><a href="https://www.facebook.com/100006504108865" target="_blank"><i class="fa fa-facebook"></i> Facebook</a></span> <span class="links-of-author-item"><a href="http://weibo.com/u/1877167031" target="_blank"><i class="fa fa-globe"></i> 微博</a></span> <span class="links-of-author-item"><a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank"><i class="fa fa-globe"></i> 知乎</a></span> <span class="links-of-author-item"><a href="mailto:763960267@qq.com" target="_blank"><i class="fa fa-globe"></i> Mail</a></span></div><div class="links-of-blogroll motion-element"></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7248_u672C_u56DE_u9000"><span class="nav-number">1.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6"><span class="nav-number">2.</span> <span class="nav-text">撤销修改和删除文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u64A4_u9500_u4FEE_u6539"><span class="nav-number">2.1.</span> <span class="nav-text">撤销修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5220_u9664_u6587_u4EF6"><span class="nav-number">2.2.</span> <span class="nav-text">删除文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8FDC_u7A0B_u4ED3_u5E93"><span class="nav-number">3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5206_u652F_u7BA1_u7406_u7B56_u7565"><span class="nav-number">4.</span> <span class="nav-text">分支管理策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bug_u5206_u652F"><span class="nav-number">5.</span> <span class="nav-text">bug分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u66F4_u6539_u8FDC_u7A0B_u4ED3_u5E93_u5730_u5740"><span class="nav-number">6.</span> <span class="nav-text">更改远程仓库地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u67E5_u770B_u6587_u4EF6_u6BCF_u4E00_u884C_u7684_u4F5C_u8005_u662Fwho"><span class="nav-number">7.</span> <span class="nav-text">查看文件每一行的作者是who</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4"><span class="nav-number">8.</span> <span class="nav-text">检查丢失的提交</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2016</span> <span class="with-love"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">M2</span></div><div class="powered-by">由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动</div><div class="theme-info">主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null);</script><script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script><script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script><script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script><script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script><script type="text/javascript">var duoshuoQuery={short_name:"m2langithub"};!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.id="duoshuo-script",t.src=("https:"==document.location.protocol?"https:":"http:")+"//static.duoshuo.com/embed.js",t.charset="UTF-8",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(t)}();</script><script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script><script src="/js/src/hook-duoshuo.js"></script></body></html>
+</code></pre><h2 id="u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4"><a href="#u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4" class="headerlink" title="检查丢失的提交"></a>检查丢失的提交</h2></li>
+</ul>
+</li>
+<li><code>git fsck --lost-found</code>这里你可以看到一个丢失的提交。你可以通过<code>git show [commit_hash]</code>查看提交的更改或者通过运行<code>git merge[commit_hash]</code>命令进行恢复。</li>
+<li><code>gitfsck</code>跟<code>reflog</code>命令相比有一个优点。假设你删除了一个远程分支，然后<code>clone</code>了这个库。用<code>fsck</code>命令你可以找到并且恢复这个删除的远程分支。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag">#Git</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/10/Git-ssh连接/" rel="next" title="Git-ssh连接">
+                <i class="fa fa-chevron-left"></i> Git-ssh连接
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/10/redis优化/" rel="prev" title="redis优化">
+                redis优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/"
+           data-title="Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略" data-url="http://im.yonglang.co/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M2" />
+          <p class="site-author-name" itemprop="name">M2</p>
+          <p class="site-description motion-element" itemprop="description">记录知识，分享知识</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/m2lan" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/763960267" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/100006504108865" target="_blank">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1877167031" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:763960267@qq.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7248_u672C_u56DE_u9000"><span class="nav-number">1.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6"><span class="nav-number">2.</span> <span class="nav-text">撤销修改和删除文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u64A4_u9500_u4FEE_u6539"><span class="nav-number">2.1.</span> <span class="nav-text">撤销修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5220_u9664_u6587_u4EF6"><span class="nav-number">2.2.</span> <span class="nav-text">删除文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8FDC_u7A0B_u4ED3_u5E93"><span class="nav-number">3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5206_u652F_u7BA1_u7406_u7B56_u7565"><span class="nav-number">4.</span> <span class="nav-text">分支管理策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bug_u5206_u652F"><span class="nav-number">5.</span> <span class="nav-text">bug分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u66F4_u6539_u8FDC_u7A0B_u4ED3_u5E93_u5730_u5740"><span class="nav-number">6.</span> <span class="nav-text">更改远程仓库地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u67E5_u770B_u6587_u4EF6_u6BCF_u4E00_u884C_u7684_u4F5C_u8005_u662Fwho"><span class="nav-number">7.</span> <span class="nav-text">查看文件每一行的作者是who</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4"><span class="nav-number">8.</span> <span class="nav-text">检查丢失的提交</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M2</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"m2langithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
