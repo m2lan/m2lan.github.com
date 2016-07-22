@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://im.yonglang.co/"/>
-  <updated>2016-07-21T10:37:28.000Z</updated>
+  <updated>2016-07-22T02:54:56.000Z</updated>
   <id>http://im.yonglang.co/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一键生成Android和IOS平台图标和启动页</title>
+    <link href="http://im.yonglang.co/2016/07/22/createIcon/"/>
+    <id>http://im.yonglang.co/2016/07/22/createIcon/</id>
+    <published>2016-07-22T02:53:33.000Z</published>
+    <updated>2016-07-22T02:54:56.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;u4E00_u952E_u751F_u6210Android_u548CIOS_u56FE_u6807_u548C_u542F_u52A8_u753B_u9762&quot;&gt;&lt;a href=&quot;#u4E00_u952E_u751F_u6210Android_u548CIOS_u56FE_u6807_u548C_u542F_u52A8_u753B_u9762&quot; class=&quot;headerlink&quot; title=&quot;一键生成Android和IOS图标和启动画面&quot;&gt;&lt;/a&gt;一键生成Android和IOS图标和启动画面&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;操作步骤&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm install -g ionic
+ionic start myapp
+
+cd myapp
+ionic platform android ios
+
+mkdir resources
+
+// 拷贝高清图片到resources，命名为icon.png和splash.png
+// 运行
+ionic resources // 生成android和ios所需图片
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;u4E00_u952E_u751F_u6210Android_u548CIOS_u56FE_u6807_u548C_u542F_u52A8_u753B_u9762&quot;&gt;&lt;a href=&quot;#u4E00_u952E_u751F_u6210Android_u548CIOS
+    
+    </summary>
+    
+      <category term="ionic" scheme="http://im.yonglang.co/categories/ionic/"/>
+    
+    
+      <category term="ionic" scheme="http://im.yonglang.co/tags/ionic/"/>
+    
+      <category term="ios图标生成" scheme="http://im.yonglang.co/tags/ios%E5%9B%BE%E6%A0%87%E7%94%9F%E6%88%90/"/>
+    
+      <category term="android图标生成" scheme="http://im.yonglang.co/tags/android%E5%9B%BE%E6%A0%87%E7%94%9F%E6%88%90/"/>
+    
+  </entry>
   
   <entry>
     <title>Ectouch数据库字典</title>
@@ -9276,57 +9317,6 @@ cd kafka_2.11-0.9.0.0
       <category term="Apache" scheme="http://im.yonglang.co/tags/Apache/"/>
     
       <category term="Kafka" scheme="http://im.yonglang.co/tags/Kafka/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Shell-redirect</title>
-    <link href="http://im.yonglang.co/2015/12/10/Shell-redirect/"/>
-    <id>http://im.yonglang.co/2015/12/10/Shell-redirect/</id>
-    <published>2015-12-09T18:20:35.000Z</published>
-    <updated>2016-07-15T01:48:46.000Z</updated>
-    
-    <content type="html">&lt;pre&gt;&lt;code&gt;#!/bin/bash
-# 输出重定向
-#  将输出到终端的结果重定向到文件中
-
-# 加上双引号 可以对输出结果换行
-# &amp;gt; 会将已存在的结果覆盖
-# 如果不想覆盖 则使用 &amp;gt;&amp;gt; 如果文件存在，结果将会追加
-echo &amp;quot;$(ls -la)&amp;quot; &amp;gt; file
-
-echo &amp;quot;$(who)&amp;quot; &amp;gt;&amp;gt; file1
-
-
-# 输入结果重定向
-cat &amp;lt; file
-wc -l &amp;lt; file
-
-# 文档嵌入
-wc -l &amp;lt;&amp;lt;EOF
-    hahahhdfdslfjdslfjsdlfjsdlfsd
-    werjewlrjewlrjewlrjewlrjwer
-    werjwelrjwlejrewljrew
-EOF
-&lt;/code&gt;&lt;/pre&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;pre&gt;&lt;code&gt;#!/bin/bash
-# 输出重定向
-#  将输出到终端的结果重定向到文件中
-
-# 加上双引号 可以对输出结果换行
-# &amp;gt; 会将已存在的结果覆盖
-# 如果不想覆盖 则使用 &amp;gt;&amp;gt; 如果文件存在，结果将会追加
-echo &amp;quot;$(ls 
-    
-    </summary>
-    
-      <category term="Shell" scheme="http://im.yonglang.co/categories/Shell/"/>
-    
-    
-      <category term="Shell" scheme="http://im.yonglang.co/tags/Shell/"/>
     
   </entry>
   
