@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://im.yonglang.co/"/>
+  <link href="http://golearns.org/"/>
   <updated>2016-08-03T07:36:41.000Z</updated>
-  <id>http://im.yonglang.co/</id>
+  <id>http://golearns.org/</id>
   
   <author>
     <name>M2</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>tigase用户密码加密</title>
-    <link href="http://im.yonglang.co/2016/08/03/tigase%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86/"/>
-    <id>http://im.yonglang.co/2016/08/03/tigase用户密码加密/</id>
+    <link href="http://golearns.org/2016/08/03/tigase%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86/"/>
+    <id>http://golearns.org/2016/08/03/tigase用户密码加密/</id>
     <published>2016-08-03T07:36:11.000Z</published>
     <updated>2016-08-03T07:36:41.000Z</updated>
     
@@ -31,17 +31,17 @@
     
     </summary>
     
-      <category term="Tigase" scheme="http://im.yonglang.co/categories/Tigase/"/>
+      <category term="Tigase" scheme="http://golearns.org/categories/Tigase/"/>
     
     
-      <category term="Tigase" scheme="http://im.yonglang.co/tags/Tigase/"/>
+      <category term="Tigase" scheme="http://golearns.org/tags/Tigase/"/>
     
   </entry>
   
   <entry>
     <title>一键生成Android和IOS平台图标和启动页</title>
-    <link href="http://im.yonglang.co/2016/07/22/createIcon/"/>
-    <id>http://im.yonglang.co/2016/07/22/createIcon/</id>
+    <link href="http://golearns.org/2016/07/22/createIcon/"/>
+    <id>http://golearns.org/2016/07/22/createIcon/</id>
     <published>2016-07-22T02:53:33.000Z</published>
     <updated>2016-07-22T02:54:56.000Z</updated>
     
@@ -68,21 +68,21 @@ ionic resources // 生成android和ios所需图片
     
     </summary>
     
-      <category term="ionic" scheme="http://im.yonglang.co/categories/ionic/"/>
+      <category term="ionic" scheme="http://golearns.org/categories/ionic/"/>
     
     
-      <category term="ionic" scheme="http://im.yonglang.co/tags/ionic/"/>
+      <category term="ionic" scheme="http://golearns.org/tags/ionic/"/>
     
-      <category term="ios图标生成" scheme="http://im.yonglang.co/tags/ios%E5%9B%BE%E6%A0%87%E7%94%9F%E6%88%90/"/>
+      <category term="ios图标生成" scheme="http://golearns.org/tags/ios%E5%9B%BE%E6%A0%87%E7%94%9F%E6%88%90/"/>
     
-      <category term="android图标生成" scheme="http://im.yonglang.co/tags/android%E5%9B%BE%E6%A0%87%E7%94%9F%E6%88%90/"/>
+      <category term="android图标生成" scheme="http://golearns.org/tags/android%E5%9B%BE%E6%A0%87%E7%94%9F%E6%88%90/"/>
     
   </entry>
   
   <entry>
     <title>Ectouch数据库字典</title>
-    <link href="http://im.yonglang.co/2016/07/21/table/"/>
-    <id>http://im.yonglang.co/2016/07/21/table/</id>
+    <link href="http://golearns.org/2016/07/21/table/"/>
+    <id>http://golearns.org/2016/07/21/table/</id>
     <published>2016-07-21T05:52:10.000Z</published>
     <updated>2016-07-21T10:37:28.000Z</updated>
     
@@ -6816,21 +6816,21 @@ ionic resources // 生成android和ios所需图片
     
     </summary>
     
-      <category term="ectouch" scheme="http://im.yonglang.co/categories/ectouch/"/>
+      <category term="ectouch" scheme="http://golearns.org/categories/ectouch/"/>
     
     
-      <category term="ecshop" scheme="http://im.yonglang.co/tags/ecshop/"/>
+      <category term="ecshop" scheme="http://golearns.org/tags/ecshop/"/>
     
-      <category term="ectouch" scheme="http://im.yonglang.co/tags/ectouch/"/>
+      <category term="ectouch" scheme="http://golearns.org/tags/ectouch/"/>
     
-      <category term="ectouch数据库字典" scheme="http://im.yonglang.co/tags/ectouch%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%97%E5%85%B8/"/>
+      <category term="ectouch数据库字典" scheme="http://golearns.org/tags/ectouch%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%97%E5%85%B8/"/>
     
   </entry>
   
   <entry>
     <title>mysql嵌套集模型</title>
-    <link href="http://im.yonglang.co/2016/07/19/MySQL-%E5%B5%8C%E5%A5%97%E9%9B%86%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://im.yonglang.co/2016/07/19/MySQL-嵌套集模型/</id>
+    <link href="http://golearns.org/2016/07/19/MySQL-%E5%B5%8C%E5%A5%97%E9%9B%86%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://golearns.org/2016/07/19/MySQL-嵌套集模型/</id>
     <published>2016-07-19T10:38:03.000Z</published>
     <updated>2016-07-19T10:42:12.000Z</updated>
     
@@ -7243,17 +7243,17 @@ MariaDB [work]&amp;gt; select * from category;
     
     </summary>
     
-      <category term="MySQL" scheme="http://im.yonglang.co/categories/MySQL/"/>
+      <category term="MySQL" scheme="http://golearns.org/categories/MySQL/"/>
     
     
-      <category term="MySQL" scheme="http://im.yonglang.co/tags/MySQL/"/>
+      <category term="MySQL" scheme="http://golearns.org/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>nuclide编辑器安装</title>
-    <link href="http://im.yonglang.co/2016/07/15/nuclide%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%89%E8%A3%85/"/>
-    <id>http://im.yonglang.co/2016/07/15/nuclide编辑器安装/</id>
+    <link href="http://golearns.org/2016/07/15/nuclide%E7%BC%96%E8%BE%91%E5%99%A8%E5%AE%89%E8%A3%85/"/>
+    <id>http://golearns.org/2016/07/15/nuclide编辑器安装/</id>
     <published>2016-07-15T09:13:50.000Z</published>
     <updated>2016-07-15T09:15:05.000Z</updated>
     
@@ -7274,19 +7274,19 @@ MariaDB [work]&amp;gt; select * from category;
     
     </summary>
     
-      <category term="React-native" scheme="http://im.yonglang.co/categories/React-native/"/>
+      <category term="React-native" scheme="http://golearns.org/categories/React-native/"/>
     
     
-      <category term="React-native" scheme="http://im.yonglang.co/tags/React-native/"/>
+      <category term="React-native" scheme="http://golearns.org/tags/React-native/"/>
     
-      <category term="nuclide" scheme="http://im.yonglang.co/tags/nuclide/"/>
+      <category term="nuclide" scheme="http://golearns.org/tags/nuclide/"/>
     
   </entry>
   
   <entry>
     <title>Elasticasearch安装和使用</title>
-    <link href="http://im.yonglang.co/2016/07/15/Elasticasearch%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
-    <id>http://im.yonglang.co/2016/07/15/Elasticasearch安装和使用/</id>
+    <link href="http://golearns.org/2016/07/15/Elasticasearch%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
+    <id>http://golearns.org/2016/07/15/Elasticasearch安装和使用/</id>
     <published>2016-07-15T02:00:43.000Z</published>
     <updated>2016-07-15T02:27:33.000Z</updated>
     
@@ -7538,17 +7538,17 @@ bin/plugin install marvel-agent
     
     </summary>
     
-      <category term="Elasticasearch" scheme="http://im.yonglang.co/categories/Elasticasearch/"/>
+      <category term="Elasticasearch" scheme="http://golearns.org/categories/Elasticasearch/"/>
     
     
-      <category term="Elasticasearch" scheme="http://im.yonglang.co/tags/Elasticasearch/"/>
+      <category term="Elasticasearch" scheme="http://golearns.org/tags/Elasticasearch/"/>
     
   </entry>
   
   <entry>
     <title>hexo运行报错</title>
-    <link href="http://im.yonglang.co/2016/07/15/hexo%E8%BF%90%E8%A1%8C%E6%8A%A5%E9%94%99/"/>
-    <id>http://im.yonglang.co/2016/07/15/hexo运行报错/</id>
+    <link href="http://golearns.org/2016/07/15/hexo%E8%BF%90%E8%A1%8C%E6%8A%A5%E9%94%99/"/>
+    <id>http://golearns.org/2016/07/15/hexo运行报错/</id>
     <published>2016-07-15T01:22:02.000Z</published>
     <updated>2016-07-15T01:40:21.000Z</updated>
     
@@ -7571,17 +7571,17 @@ bin/plugin install marvel-agent
     
     </summary>
     
-      <category term="Hexo" scheme="http://im.yonglang.co/categories/Hexo/"/>
+      <category term="Hexo" scheme="http://golearns.org/categories/Hexo/"/>
     
     
-      <category term="Hexo" scheme="http://im.yonglang.co/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://golearns.org/tags/Hexo/"/>
     
   </entry>
   
   <entry>
     <title>php+sphinx使用</title>
-    <link href="http://im.yonglang.co/2016/07/15/php-sphinx%E4%BD%BF%E7%94%A8/"/>
-    <id>http://im.yonglang.co/2016/07/15/php-sphinx使用/</id>
+    <link href="http://golearns.org/2016/07/15/php-sphinx%E4%BD%BF%E7%94%A8/"/>
+    <id>http://golearns.org/2016/07/15/php-sphinx使用/</id>
     <published>2016-07-15T01:17:15.000Z</published>
     <updated>2016-07-15T02:32:00.000Z</updated>
     
@@ -8057,21 +8057,21 @@ cat var/test/test.xml   #此时应该正确显示中文
     
     </summary>
     
-      <category term="PHP" scheme="http://im.yonglang.co/categories/PHP/"/>
+      <category term="PHP" scheme="http://golearns.org/categories/PHP/"/>
     
     
-      <category term="PHP" scheme="http://im.yonglang.co/tags/PHP/"/>
+      <category term="PHP" scheme="http://golearns.org/tags/PHP/"/>
     
-      <category term="Sphinx" scheme="http://im.yonglang.co/tags/Sphinx/"/>
+      <category term="Sphinx" scheme="http://golearns.org/tags/Sphinx/"/>
     
-      <category term="Coreseek" scheme="http://im.yonglang.co/tags/Coreseek/"/>
+      <category term="Coreseek" scheme="http://golearns.org/tags/Coreseek/"/>
     
   </entry>
   
   <entry>
     <title>centos-安装tsung压力测试工具</title>
-    <link href="http://im.yonglang.co/2016/02/26/centos-%E5%AE%89%E8%A3%85tsung%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/"/>
-    <id>http://im.yonglang.co/2016/02/26/centos-安装tsung压力测试工具/</id>
+    <link href="http://golearns.org/2016/02/26/centos-%E5%AE%89%E8%A3%85tsung%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/"/>
+    <id>http://golearns.org/2016/02/26/centos-安装tsung压力测试工具/</id>
     <published>2016-02-25T16:20:51.000Z</published>
     <updated>2016-07-15T03:41:38.000Z</updated>
     
@@ -8161,21 +8161,21 @@ make install
     
     </summary>
     
-      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/tags/Linux/"/>
     
-      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+      <category term="Centos7" scheme="http://golearns.org/tags/Centos7/"/>
     
-      <category term="Tsung" scheme="http://im.yonglang.co/tags/Tsung/"/>
+      <category term="Tsung" scheme="http://golearns.org/tags/Tsung/"/>
     
   </entry>
   
   <entry>
     <title>centos-升级mysql</title>
-    <link href="http://im.yonglang.co/2016/02/26/centos-%E5%8D%87%E7%BA%A7mysql/"/>
-    <id>http://im.yonglang.co/2016/02/26/centos-升级mysql/</id>
+    <link href="http://golearns.org/2016/02/26/centos-%E5%8D%87%E7%BA%A7mysql/"/>
+    <id>http://golearns.org/2016/02/26/centos-升级mysql/</id>
     <published>2016-02-25T16:18:12.000Z</published>
     <updated>2016-07-15T02:29:32.000Z</updated>
     
@@ -8243,21 +8243,21 @@ default-character-set=utf8mb4
     
     </summary>
     
-      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/tags/Linux/"/>
     
-      <category term="MySQL" scheme="http://im.yonglang.co/tags/MySQL/"/>
+      <category term="MySQL" scheme="http://golearns.org/tags/MySQL/"/>
     
-      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+      <category term="Centos7" scheme="http://golearns.org/tags/Centos7/"/>
     
   </entry>
   
   <entry>
     <title>centos-安装nginx</title>
-    <link href="http://im.yonglang.co/2016/02/26/centos-%E5%AE%89%E8%A3%85nginx/"/>
-    <id>http://im.yonglang.co/2016/02/26/centos-安装nginx/</id>
+    <link href="http://golearns.org/2016/02/26/centos-%E5%AE%89%E8%A3%85nginx/"/>
+    <id>http://golearns.org/2016/02/26/centos-安装nginx/</id>
     <published>2016-02-25T16:17:11.000Z</published>
     <updated>2016-07-15T03:41:33.000Z</updated>
     
@@ -8292,21 +8292,21 @@ cd /usr/local/nginx/sbin/
     
     </summary>
     
-      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/tags/Linux/"/>
     
-      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+      <category term="Centos7" scheme="http://golearns.org/tags/Centos7/"/>
     
-      <category term="Nginx" scheme="http://im.yonglang.co/tags/Nginx/"/>
+      <category term="Nginx" scheme="http://golearns.org/tags/Nginx/"/>
     
   </entry>
   
   <entry>
     <title>centos-查看系统硬件信息</title>
-    <link href="http://im.yonglang.co/2016/02/26/centos-%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF/"/>
-    <id>http://im.yonglang.co/2016/02/26/centos-查看系统硬件信息/</id>
+    <link href="http://golearns.org/2016/02/26/centos-%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF/"/>
+    <id>http://golearns.org/2016/02/26/centos-查看系统硬件信息/</id>
     <published>2016-02-25T16:13:44.000Z</published>
     <updated>2016-07-15T03:41:49.000Z</updated>
     
@@ -8448,19 +8448,19 @@ lsof php.ini，显示打开php.ini的进程。
     
     </summary>
     
-      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/tags/Linux/"/>
     
-      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+      <category term="Centos7" scheme="http://golearns.org/tags/Centos7/"/>
     
   </entry>
   
   <entry>
     <title>centos-查看端口使用情况</title>
-    <link href="http://im.yonglang.co/2016/02/26/centos-%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/"/>
-    <id>http://im.yonglang.co/2016/02/26/centos-查看端口使用情况/</id>
+    <link href="http://golearns.org/2016/02/26/centos-%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/"/>
+    <id>http://golearns.org/2016/02/26/centos-查看端口使用情况/</id>
     <published>2016-02-25T16:12:23.000Z</published>
     <updated>2016-07-15T03:41:41.000Z</updated>
     
@@ -8489,19 +8489,19 @@ sudo sysctl -w net.ipv4.ip_local_port_range=&amp;quot;1024 64000&amp;quot;
     
     </summary>
     
-      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/tags/Linux/"/>
     
-      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+      <category term="Centos7" scheme="http://golearns.org/tags/Centos7/"/>
     
   </entry>
   
   <entry>
     <title>centos-安装jdk</title>
-    <link href="http://im.yonglang.co/2016/02/26/centos-%E5%AE%89%E8%A3%85jdk/"/>
-    <id>http://im.yonglang.co/2016/02/26/centos-安装jdk/</id>
+    <link href="http://golearns.org/2016/02/26/centos-%E5%AE%89%E8%A3%85jdk/"/>
+    <id>http://golearns.org/2016/02/26/centos-安装jdk/</id>
     <published>2016-02-25T16:11:10.000Z</published>
     <updated>2016-07-15T03:41:26.000Z</updated>
     
@@ -8522,21 +8522,21 @@ sudo sysctl -w net.ipv4.ip_local_port_range=&amp;quot;1024 64000&amp;quot;
     
     </summary>
     
-      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/tags/Linux/"/>
     
-      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+      <category term="Centos7" scheme="http://golearns.org/tags/Centos7/"/>
     
-      <category term="JDK" scheme="http://im.yonglang.co/tags/JDK/"/>
+      <category term="JDK" scheme="http://golearns.org/tags/JDK/"/>
     
   </entry>
   
   <entry>
     <title>centos-开启mysql外部访问</title>
-    <link href="http://im.yonglang.co/2016/02/26/centos-%E5%BC%80%E5%90%AFmysql%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE/"/>
-    <id>http://im.yonglang.co/2016/02/26/centos-开启mysql外部访问/</id>
+    <link href="http://golearns.org/2016/02/26/centos-%E5%BC%80%E5%90%AFmysql%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE/"/>
+    <id>http://golearns.org/2016/02/26/centos-开启mysql外部访问/</id>
     <published>2016-02-25T16:09:43.000Z</published>
     <updated>2016-07-15T01:43:14.000Z</updated>
     
@@ -8551,21 +8551,21 @@ iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT //�
     
     </summary>
     
-      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/tags/Linux/"/>
     
-      <category term="MySQL" scheme="http://im.yonglang.co/tags/MySQL/"/>
+      <category term="MySQL" scheme="http://golearns.org/tags/MySQL/"/>
     
-      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+      <category term="Centos7" scheme="http://golearns.org/tags/Centos7/"/>
     
   </entry>
   
   <entry>
     <title>centos7-mysql+php+nginx安装</title>
-    <link href="http://im.yonglang.co/2016/02/26/centos7-mysql-php-nginx%E5%AE%89%E8%A3%85/"/>
-    <id>http://im.yonglang.co/2016/02/26/centos7-mysql-php-nginx安装/</id>
+    <link href="http://golearns.org/2016/02/26/centos7-mysql-php-nginx%E5%AE%89%E8%A3%85/"/>
+    <id>http://golearns.org/2016/02/26/centos7-mysql-php-nginx安装/</id>
     <published>2016-02-25T16:04:01.000Z</published>
     <updated>2016-07-15T02:29:47.000Z</updated>
     
@@ -8664,25 +8664,25 @@ systemctl enable nginx
     
     </summary>
     
-      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/tags/Linux/"/>
     
-      <category term="MySQL" scheme="http://im.yonglang.co/tags/MySQL/"/>
+      <category term="MySQL" scheme="http://golearns.org/tags/MySQL/"/>
     
-      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+      <category term="Centos7" scheme="http://golearns.org/tags/Centos7/"/>
     
-      <category term="Nginx" scheme="http://im.yonglang.co/tags/Nginx/"/>
+      <category term="Nginx" scheme="http://golearns.org/tags/Nginx/"/>
     
-      <category term="PHP" scheme="http://im.yonglang.co/tags/PHP/"/>
+      <category term="PHP" scheme="http://golearns.org/tags/PHP/"/>
     
   </entry>
   
   <entry>
     <title>centos7-修改网卡、配置网络</title>
-    <link href="http://im.yonglang.co/2016/02/25/centos7-%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E3%80%81%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C/"/>
-    <id>http://im.yonglang.co/2016/02/25/centos7-修改网卡、配置网络/</id>
+    <link href="http://golearns.org/2016/02/25/centos7-%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E3%80%81%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C/"/>
+    <id>http://golearns.org/2016/02/25/centos7-修改网卡、配置网络/</id>
     <published>2016-02-25T15:59:46.000Z</published>
     <updated>2016-07-15T02:34:22.000Z</updated>
     
@@ -8719,19 +8719,19 @@ systemctl enable nginx
     
     </summary>
     
-      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/tags/Linux/"/>
     
-      <category term="Centos7" scheme="http://im.yonglang.co/tags/Centos7/"/>
+      <category term="Centos7" scheme="http://golearns.org/tags/Centos7/"/>
     
   </entry>
   
   <entry>
     <title>keepalived+haproxy高可用负载均衡</title>
-    <link href="http://im.yonglang.co/2016/02/25/keepalived-haproxy%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
-    <id>http://im.yonglang.co/2016/02/25/keepalived-haproxy高可用负载均衡/</id>
+    <link href="http://golearns.org/2016/02/25/keepalived-haproxy%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
+    <id>http://golearns.org/2016/02/25/keepalived-haproxy高可用负载均衡/</id>
     <published>2016-02-25T15:45:11.000Z</published>
     <updated>2016-07-15T02:31:16.000Z</updated>
     
@@ -8956,21 +8956,21 @@ service keepalived
     
     </summary>
     
-      <category term="Keepalived" scheme="http://im.yonglang.co/categories/Keepalived/"/>
+      <category term="Keepalived" scheme="http://golearns.org/categories/Keepalived/"/>
     
     
-      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/tags/Linux/"/>
     
-      <category term="Keepalived" scheme="http://im.yonglang.co/tags/Keepalived/"/>
+      <category term="Keepalived" scheme="http://golearns.org/tags/Keepalived/"/>
     
-      <category term="Haproxy" scheme="http://im.yonglang.co/tags/Haproxy/"/>
+      <category term="Haproxy" scheme="http://golearns.org/tags/Haproxy/"/>
     
   </entry>
   
   <entry>
     <title>Linux-设备文件名</title>
-    <link href="http://im.yonglang.co/2016/02/25/Linux-%E8%AE%BE%E5%A4%87%E6%96%87%E4%BB%B6%E5%90%8D/"/>
-    <id>http://im.yonglang.co/2016/02/25/Linux-设备文件名/</id>
+    <link href="http://golearns.org/2016/02/25/Linux-%E8%AE%BE%E5%A4%87%E6%96%87%E4%BB%B6%E5%90%8D/"/>
+    <id>http://golearns.org/2016/02/25/Linux-设备文件名/</id>
     <published>2016-02-25T15:34:08.000Z</published>
     <updated>2016-07-15T01:46:00.000Z</updated>
     
@@ -9028,17 +9028,17 @@ service keepalived
     
     </summary>
     
-      <category term="Linux" scheme="http://im.yonglang.co/categories/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://im.yonglang.co/tags/Linux/"/>
+      <category term="Linux" scheme="http://golearns.org/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>zookeeper</title>
-    <link href="http://im.yonglang.co/2016/02/25/zookeeper/"/>
-    <id>http://im.yonglang.co/2016/02/25/zookeeper/</id>
+    <link href="http://golearns.org/2016/02/25/zookeeper/"/>
+    <id>http://golearns.org/2016/02/25/zookeeper/</id>
     <published>2016-02-25T15:03:14.000Z</published>
     <updated>2016-07-15T02:32:49.000Z</updated>
     
@@ -9133,12 +9133,12 @@ server.1=localhost:2888:3888
     
     </summary>
     
-      <category term="Zookeeper" scheme="http://im.yonglang.co/categories/Zookeeper/"/>
+      <category term="Zookeeper" scheme="http://golearns.org/categories/Zookeeper/"/>
     
     
-      <category term="Apache" scheme="http://im.yonglang.co/tags/Apache/"/>
+      <category term="Apache" scheme="http://golearns.org/tags/Apache/"/>
     
-      <category term="Zookeeper" scheme="http://im.yonglang.co/tags/Zookeeper/"/>
+      <category term="Zookeeper" scheme="http://golearns.org/tags/Zookeeper/"/>
     
   </entry>
   
