@@ -266,6 +266,132 @@
             
               
                 
+                <a class="post-title-link" href="/2016/02/25/kafka/" itemprop="url">
+                  kafka
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-25T23:01:53+08:00" content="2016-02-25">
+              2016-02-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">Kafka</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/25/kafka/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/kafka/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h1><blockquote>
+<p>kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
+通过zookeeper实现集群
+kafka集群由多个kafka实例组成，每个实例称为broker</p>
+</blockquote>
+<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><pre><code>wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
+tar xzf kafka_2.11-0.9.0.0.tgz
+export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
+cd kafka_2.11-0.9.0.0
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/25/kafka/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/Shell-redirect/" itemprop="url">
                   Shell-redirect
                 </a>
@@ -1572,193 +1698,6 @@ echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Shell-变量/" itemprop="url">
-                  Shell-变量
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:11:37+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-变量/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-变量/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>#!/bin/bash
-
-# 变量 if---else---fi
-# 变量赋值不能有空格
-# USERNAME = &quot;zhangsan&quot; error
-# 使用定义过的变量 前面加上美元符$
-USERNAME=&quot;zhangsan&quot;
-
-# 重新定义变量
-# USERNAME=&quot;hahhahaha&quot;
-# 
-# 变量可以定义为只读的 如下：
-# 
-# URL=&quot;http://www.baidu.com&quot;
-# readonly URL
-# URL=&quot;http://www.google.com.hk&quot; --- error 
-# echo $URL
-# 
-# 删除变量 使用unset，不能删除只读变量
-# unset USERNAME
-# echo ${USERNAME} --- 输出为空
-# 
-if [ $USERNAME == &quot;zhangsan&quot; ]; then
-    echo &quot;ok $USERNAME&quot;
-    echo ${USERNAME}  # 返回变量值，更可观
-    echo $USERNAME    # 返回变量值
-else
-    echo &quot;buok&quot;
-fi
-
-# 特殊变量
-# $ 表示当前shell的进程ID，即PID
-# 
-echo $$
-echo $?
-</code></pre><table>
-<thead>
-<tr>
-<th>变量</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$0</td>
-<td>当前脚本文件名</td>
-</tr>
-<tr>
-<td>$n</td>
-<td>传递给脚本或者函数的参数，n表示一个数字，如：第一个参数$1,第二个参数$2</td>
-</tr>
-<tr>
-<td>$#</td>
-<td>传递给脚本的参数个数</td>
-</tr>
-<tr>
-<td>$*</td>
-<td>传递给脚本或者函数的所有参数</td>
-</tr>
-<tr>
-<td>$@</td>
-<td>传递给脚本或者函数的所有参数</td>
-</tr>
-<tr>
-<td>$?</td>
-<td>上个命令的退出状态，或函数的返回值</td>
-</tr>
-<tr>
-<td>$$</td>
-<td>当前shell的进程ID，即PID</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1804,7 +1743,7 @@ echo $?
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

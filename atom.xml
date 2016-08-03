@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://im.yonglang.co/"/>
-  <updated>2016-07-22T02:54:56.000Z</updated>
+  <updated>2016-08-03T07:36:41.000Z</updated>
   <id>http://im.yonglang.co/</id>
   
   <author>
@@ -14,6 +14,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>tigase用户密码加密</title>
+    <link href="http://im.yonglang.co/2016/08/03/tigase%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86/"/>
+    <id>http://im.yonglang.co/2016/08/03/tigase用户密码加密/</id>
+    <published>2016-08-03T07:36:11.000Z</published>
+    <updated>2016-08-03T07:36:41.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Tigase__u7528_u6237_u5BC6_u7801_u52A0_u5BC6&quot;&gt;&lt;a href=&quot;#Tigase__u7528_u6237_u5BC6_u7801_u52A0_u5BC6&quot; class=&quot;headerlink&quot; title=&quot;Tigase 用户密码加密&quot;&gt;&lt;/a&gt;Tigase 用户密码加密&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;call TigPutDBProperty(&amp;apos;password-encoding&amp;apos;, &amp;apos;MD5-PASSWORD&amp;apos;);
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Tigase__u7528_u6237_u5BC6_u7801_u52A0_u5BC6&quot;&gt;&lt;a href=&quot;#Tigase__u7528_u6237_u5BC6_u7801_u52A0_u5BC6&quot; class=&quot;headerlink&quot; title=&quot;Tigase
+    
+    </summary>
+    
+      <category term="Tigase" scheme="http://im.yonglang.co/categories/Tigase/"/>
+    
+    
+      <category term="Tigase" scheme="http://im.yonglang.co/tags/Tigase/"/>
+    
+  </entry>
   
   <entry>
     <title>一键生成Android和IOS平台图标和启动页</title>
@@ -9116,207 +9139,6 @@ server.1=localhost:2888:3888
       <category term="Apache" scheme="http://im.yonglang.co/tags/Apache/"/>
     
       <category term="Zookeeper" scheme="http://im.yonglang.co/tags/Zookeeper/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>kafka</title>
-    <link href="http://im.yonglang.co/2016/02/25/kafka/"/>
-    <id>http://im.yonglang.co/2016/02/25/kafka/</id>
-    <published>2016-02-25T15:01:53.000Z</published>
-    <updated>2016-07-15T02:31:10.000Z</updated>
-    
-    <content type="html">&lt;h1 id=&quot;kafka&quot;&gt;&lt;a href=&quot;#kafka&quot; class=&quot;headerlink&quot; title=&quot;kafka&quot;&gt;&lt;/a&gt;kafka&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
-通过zookeeper实现集群
-kafka集群由多个kafka实例组成，每个实例称为broker&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;install&quot;&gt;&lt;a href=&quot;#install&quot; class=&quot;headerlink&quot; title=&quot;install&quot;&gt;&lt;/a&gt;install&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-tar xzf kafka_2.11-0.9.0.0.tgz
-export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
-cd kafka_2.11-0.9.0.0
-&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;u542F_u52A8zookeeper&quot;&gt;&lt;a href=&quot;#u542F_u52A8zookeeper&quot; class=&quot;headerlink&quot; title=&quot;启动zookeeper&quot;&gt;&lt;/a&gt;启动zookeeper&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;bin/zookeeper-server-start.sh config/zookeeper.properties
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u542F_u52A8kafka&quot;&gt;&lt;a href=&quot;#u542F_u52A8kafka&quot; class=&quot;headerlink&quot; title=&quot;启动kafka&quot;&gt;&lt;/a&gt;启动kafka&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;bin/kafka-server-start.sh config/server.properties
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u521B_u5EFA_u4E00_u4E2Atopic&quot;&gt;&lt;a href=&quot;#u521B_u5EFA_u4E00_u4E2Atopic&quot; class=&quot;headerlink&quot; title=&quot;创建一个topic&quot;&gt;&lt;/a&gt;创建一个topic&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;创建一个单分区、单副本的&lt;code&gt;test&lt;/code&gt;话题&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;获取&lt;code&gt;topic&lt;/code&gt;列表&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --list --zookeeper localhost:2181
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;当发布到一个不存在的&lt;code&gt;topics&lt;/code&gt;时，可以配置自动创建而不是手动创建&lt;h2 id=&quot;u53D1_u9001_u6D88_u606F&quot;&gt;&lt;a href=&quot;#u53D1_u9001_u6D88_u606F&quot; class=&quot;headerlink&quot; title=&quot;发送消息&quot;&gt;&lt;/a&gt;发送消息&lt;/h2&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;运行生产者客户端，然后发送一些消息&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005&quot;&gt;&lt;a href=&quot;#u542F_u52A8_u4E00_u4E2A_u6D88_u8D39_u8005&quot; class=&quot;headerlink&quot; title=&quot;启动一个消费者&quot;&gt;&lt;/a&gt;启动一个消费者&lt;/h2&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;运行消费者客户端，接收消息&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4&quot;&gt;&lt;a href=&quot;#u8BBE_u7F6E_u591A_u4E2Abrokers_u96C6_u7FA4&quot; class=&quot;headerlink&quot; title=&quot;设置多个brokers集群&quot;&gt;&lt;/a&gt;设置多个brokers集群&lt;/h2&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;为每个brokers创建一个配置文件&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cp config/server.properties config/server-1.properties
-cp config/server.properties config/server-2.properties
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;配置文件内容&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;config/server-1.properties&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;broker.id=1
-port=9093
-log.dir=/tmp/kafka-logs-1
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;config/server-2.properties&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;broker.id=2
-port=9094
-log.dir=/tmp/kafka-logs-2
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;broker.id&lt;/code&gt;是集群节点唯一名称&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;启动两个新节点&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bin/kafka-server-start.sh config/server-1.properties &amp;amp;
-bin/kafka-server-start.sh config/server-2.properties &amp;amp;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;创建有3个副本的新&lt;code&gt;topics&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-topic
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在集群环境，查看&lt;code&gt;broker&lt;/code&gt;都做了什么&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
-
-Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
-    Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0,1
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;leader&lt;/code&gt;负责节点所有读取和写入指定分区
-&lt;code&gt;replicas&lt;/code&gt;复制此分区节点列表日志
-&lt;code&gt;isr&lt;/code&gt;集中同步副本&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查看单复制集下的&lt;code&gt;topics&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
-
-Topic:test    PartitionCount:1 ReplicationFactor:1 Configs:
-    Topic: test    Partition: 0 Leader: 0 Replicas: 0 Isr: 0
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;给集群中的&lt;code&gt;topics&lt;/code&gt;发送一些消息&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-topic
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;接收消息&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic my-topic
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;测试容错性，杀掉&lt;code&gt;server-1.properties&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ps aux|grep server-1.properties
-kill -9 PID
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查看&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-topic
-
-Topic:my-topic    PartitionCount:1 ReplicationFactor:3 Configs:
-    Topic: my-topic    Partition: 0 Leader: 2 Replicas: 2,0,1 Isr: 2,0
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E&quot;&gt;&lt;a href=&quot;#u4F7F_u7528kafka_u8FDE_u63A5_u5BFC_u5165/_u5BFC_u51FA_u6570_u636E&quot; class=&quot;headerlink&quot; title=&quot;使用kafka连接导入/导出数据&quot;&gt;&lt;/a&gt;使用kafka连接导入/导出数据&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;使用&lt;code&gt;kafka&lt;/code&gt;的&lt;code&gt;connect&lt;/code&gt;工具导入/导出数据&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;首先需要建立一些数据来测试&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;echo -e &amp;quot;foo\nbar&amp;quot; &amp;gt; test.txt
-
-bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;使用之前启动默认的本地集群配置并创建两个连接，第一个是源连接器，它从输入文本读取消息，并各自产生的一个输出文件中的一行。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;连接器开始读取&lt;code&gt;test.txt&lt;/code&gt;产生一个&lt;code&gt;topics&lt;/code&gt;为&lt;code&gt;connect-test&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;接收端连接器应该开始从&lt;code&gt;topic&lt;/code&gt;读取消息&lt;code&gt;connect-test&lt;/code&gt;,并写入到&lt;code&gt;test.sink.txt&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查看&lt;code&gt;topics&lt;/code&gt;列表&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-topics.sh --list --zookeeper localhost:2181
-__consumer_offsets
-connect-test
-my-topic
-test
-test2
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;启动一个消费者控制台查看&lt;code&gt;topic&lt;/code&gt;为&lt;code&gt;connect-test&lt;/code&gt;的数据&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
-{&amp;quot;schema&amp;quot;:{&amp;quot;type&amp;quot;:&amp;quot;string&amp;quot;,&amp;quot;optional&amp;quot;:false},&amp;quot;payload&amp;quot;:&amp;quot;foo&amp;quot;}
-{&amp;quot;schema&amp;quot;:{&amp;quot;type&amp;quot;:&amp;quot;string&amp;quot;,&amp;quot;optional&amp;quot;:false},&amp;quot;payload&amp;quot;:&amp;quot;bar&amp;quot;}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;重新打开一个终端，给&lt;code&gt;test.txt&lt;/code&gt;中追加数据，再看消费者控制台的数据&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;echo &amp;quot;Hello world&amp;quot; &amp;gt;&amp;gt; test.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;消费者控制台数据为&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[root@keep-haproxy134 kafka_2.11-0.9.0.0]# bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning
-{&amp;quot;schema&amp;quot;:{&amp;quot;type&amp;quot;:&amp;quot;string&amp;quot;,&amp;quot;optional&amp;quot;:false},&amp;quot;payload&amp;quot;:&amp;quot;foo&amp;quot;}
-{&amp;quot;schema&amp;quot;:{&amp;quot;type&amp;quot;:&amp;quot;string&amp;quot;,&amp;quot;optional&amp;quot;:false},&amp;quot;payload&amp;quot;:&amp;quot;bar&amp;quot;}
-{&amp;quot;schema&amp;quot;:{&amp;quot;type&amp;quot;:&amp;quot;string&amp;quot;,&amp;quot;optional&amp;quot;:false},&amp;quot;payload&amp;quot;:&amp;quot;Hello world&amp;quot;}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;API&quot;&gt;&lt;a href=&quot;#API&quot; class=&quot;headerlink&quot; title=&quot;API&quot;&gt;&lt;/a&gt;API&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;生产者API&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
-    &amp;lt;groupId&amp;gt;org.apache.kafka&amp;lt;/groupId&amp;gt;
-    &amp;lt;artifactId&amp;gt;kafka-clients&amp;lt;/artifactId&amp;gt;
-    &amp;lt;version&amp;gt;0.9.0.0&amp;lt;/version&amp;gt;
-&amp;lt;/dependency&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  参考: &lt;a href=&quot;http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;生产者doc&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;消费者API&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
-    &amp;lt;groupId&amp;gt;org.apache.kafka&amp;lt;/groupId&amp;gt;
-    &amp;lt;artifactId&amp;gt;kafka-clients&amp;lt;/artifactId&amp;gt;
-    &amp;lt;version&amp;gt;0.9.0.0&amp;lt;/version&amp;gt;
-&amp;lt;/dependency&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  参考: &lt;a href=&quot;http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;消费者doc&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;error&quot;&gt;&lt;a href=&quot;#error&quot; class=&quot;headerlink&quot; title=&quot;error&quot;&gt;&lt;/a&gt;error&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;org.apache.kafka.common.errors.TimeoutException: Batch Expired&lt;/code&gt;修改&lt;code&gt;config/server.properties&lt;/code&gt;文件的&lt;code&gt;advertised.host.name=IP地址&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;server-properties_u914D_u7F6E_u9879&quot;&gt;&lt;a href=&quot;#server-properties_u914D_u7F6E_u9879&quot; class=&quot;headerlink&quot; title=&quot;server.properties配置项&quot;&gt;&lt;/a&gt;server.properties配置项&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;broker.id=0
-listeners=PLAINTEXT://:9092
-advertised.host.name=192.168.1.211
-num.network.threads=3
-
-num.io.threads=8
-socket.send.buffer.bytes=102400
-socket.receive.buffer.bytes=102400
-socket.request.max.bytes=104857600
-log.dirs=/tmp/kafka-logs
-num.partitions=1
-num.recovery.threads.per.data.dir=1
-log.retention.hours=168
-log.segment.bytes=1073741824
-log.retention.check.interval.ms=300000
-log.cleaner.enable=false
-zookeeper.connect=localhost:2181
-zookeeper.connection.timeout.ms=6000
-auto.create.topics.enable=true
-default.replication.factor=3
-&lt;/code&gt;&lt;/pre&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;kafka&quot;&gt;&lt;a href=&quot;#kafka&quot; class=&quot;headerlink&quot; title=&quot;kafka&quot;&gt;&lt;/a&gt;kafka&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
-通过zookeeper实现集群
-kafka集群由多个kafka实例组成，每个实例称为broker&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;install&quot;&gt;&lt;a href=&quot;#install&quot; class=&quot;headerlink&quot; title=&quot;install&quot;&gt;&lt;/a&gt;install&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-tar xzf kafka_2.11-0.9.0.0.tgz
-export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
-cd kafka_2.11-0.9.0.0
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="Kafka" scheme="http://im.yonglang.co/categories/Kafka/"/>
-    
-    
-      <category term="Apache" scheme="http://im.yonglang.co/tags/Apache/"/>
-    
-      <category term="Kafka" scheme="http://im.yonglang.co/tags/Kafka/"/>
     
   </entry>
   
