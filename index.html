@@ -335,7 +335,13 @@
       
         
           
-            <h1 id="PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210"><a href="#PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210" class="headerlink" title="PHP生成圆角图片+图片合成"></a>PHP生成圆角图片+图片合成</h1><pre><code>&lt;?php
+            <h1 id="PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210"><a href="#PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210" class="headerlink" title="PHP生成圆角图片+图片合成"></a>PHP生成圆角图片+图片合成</h1><h1 id="u4F7F_u7528_u65B9_u6CD5"><a href="#u4F7F_u7528_u65B9_u6CD5" class="headerlink" title="使用方法"></a>使用方法</h1><pre><code>&lt;?php
+    create_qrcode(&apos;images/head_290_00a4e60499ffb5c3.jpg&apos;, &apos;images/WechatIMG12.png&apos;, &apos;测试数据测试数据&apos;, &apos;images/create.jpg&apos;, &apos;images/test.jpg&apos;, &apos;simhei.ttf&apos;);
+
+    echo &quot;&lt;img src=&apos;images/test.jpg&apos;/&gt;&quot;;
+?&gt;
+&lt;!--more--&gt;
+</code></pre><h1 id="u516C_u7528_u65B9_u6CD5"><a href="#u516C_u7528_u65B9_u6CD5" class="headerlink" title="公用方法"></a>公用方法</h1><pre><code>&lt;?php
     /** 画圆角
      * @param $radius 圆角位置
      * @param $color_r 色值0-255
@@ -566,11 +572,6 @@
         imagejpeg($backgroundImage, $save_path);
         imagedestroy($backgroundImage);
 } 
-?&gt;
-</code></pre><h1 id="u4F7F_u7528_u65B9_u6CD5"><a href="#u4F7F_u7528_u65B9_u6CD5" class="headerlink" title="使用方法"></a>使用方法</h1><pre><code>&lt;?php
-    create_qrcode(&apos;images/head_290_00a4e60499ffb5c3.jpg&apos;, &apos;images/WechatIMG12.png&apos;, &apos;测试数据测试数据&apos;, &apos;images/create.jpg&apos;, &apos;images/test.jpg&apos;, &apos;simhei.ttf&apos;);
-
-    echo &quot;&lt;img src=&apos;images/test.jpg&apos;/&gt;&quot;;
 ?&gt;
 </code></pre>
           

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2016-09-23T03:03:51.000Z</updated>
+  <updated>2016-09-23T03:06:33.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -20,9 +20,15 @@
     <link href="http://blog.golearns.org/2016/09/23/PHP%E7%94%9F%E6%88%90%E5%9C%86%E8%A7%92%E5%9B%BE%E7%89%87-%E5%9B%BE%E7%89%87%E5%90%88%E6%88%90/"/>
     <id>http://blog.golearns.org/2016/09/23/PHP生成圆角图片-图片合成/</id>
     <published>2016-09-23T02:58:47.000Z</published>
-    <updated>2016-09-23T03:03:51.000Z</updated>
+    <updated>2016-09-23T03:06:33.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210&quot;&gt;&lt;a href=&quot;#PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210&quot; class=&quot;headerlink&quot; title=&quot;PHP生成圆角图片+图片合成&quot;&gt;&lt;/a&gt;PHP生成圆角图片+图片合成&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+    <content type="html">&lt;h1 id=&quot;PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210&quot;&gt;&lt;a href=&quot;#PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210&quot; class=&quot;headerlink&quot; title=&quot;PHP生成圆角图片+图片合成&quot;&gt;&lt;/a&gt;PHP生成圆角图片+图片合成&lt;/h1&gt;&lt;h1 id=&quot;u4F7F_u7528_u65B9_u6CD5&quot;&gt;&lt;a href=&quot;#u4F7F_u7528_u65B9_u6CD5&quot; class=&quot;headerlink&quot; title=&quot;使用方法&quot;&gt;&lt;/a&gt;使用方法&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+    create_qrcode(&amp;apos;images/head_290_00a4e60499ffb5c3.jpg&amp;apos;, &amp;apos;images/WechatIMG12.png&amp;apos;, &amp;apos;测试数据测试数据&amp;apos;, &amp;apos;images/create.jpg&amp;apos;, &amp;apos;images/test.jpg&amp;apos;, &amp;apos;simhei.ttf&amp;apos;);
+
+    echo &amp;quot;&amp;lt;img src=&amp;apos;images/test.jpg&amp;apos;/&amp;gt;&amp;quot;;
+?&amp;gt;
+&amp;lt;!--more--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;u516C_u7528_u65B9_u6CD5&quot;&gt;&lt;a href=&quot;#u516C_u7528_u65B9_u6CD5&quot; class=&quot;headerlink&quot; title=&quot;公用方法&quot;&gt;&lt;/a&gt;公用方法&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;?php
     /** 画圆角
      * @param $radius 圆角位置
      * @param $color_r 色值0-255
@@ -253,11 +259,6 @@
         imagejpeg($backgroundImage, $save_path);
         imagedestroy($backgroundImage);
 } 
-?&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;u4F7F_u7528_u65B9_u6CD5&quot;&gt;&lt;a href=&quot;#u4F7F_u7528_u65B9_u6CD5&quot; class=&quot;headerlink&quot; title=&quot;使用方法&quot;&gt;&lt;/a&gt;使用方法&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;?php
-    create_qrcode(&amp;apos;images/head_290_00a4e60499ffb5c3.jpg&amp;apos;, &amp;apos;images/WechatIMG12.png&amp;apos;, &amp;apos;测试数据测试数据&amp;apos;, &amp;apos;images/create.jpg&amp;apos;, &amp;apos;images/test.jpg&amp;apos;, &amp;apos;simhei.ttf&amp;apos;);
-
-    echo &amp;quot;&amp;lt;img src=&amp;apos;images/test.jpg&amp;apos;/&amp;gt;&amp;quot;;
 ?&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;</content>
     
@@ -8928,9 +8929,9 @@ systemctl enable nginx
     
       <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
     
-      <category term="PHP" scheme="http://blog.golearns.org/tags/PHP/"/>
-    
       <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
+    
+      <category term="PHP" scheme="http://blog.golearns.org/tags/PHP/"/>
     
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     

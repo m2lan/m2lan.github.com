@@ -57,40 +57,19 @@
 
 
 
-<meta name="description" content="PHP生成圆角图片+图片合成&amp;lt;?php
-    /** 画圆角
-     * @param $radius 圆角位置
-     * @param $color_r 色值0-255
-     * @param $color_g 色值0-255
-     * @param $color_b 色值0-255
-     * @return resource 返回圆角
-     */
-    func">
+<meta name="description" content="PHP生成圆角图片+图片合成使用方法&amp;lt;?php
+    create_qrcode(&amp;apos;images/head_290_00a4e60499ffb5c3.jpg&amp;apos;, &amp;apos;images/WechatIMG12.png&amp;apos;, &amp;apos;测试数据测试数据&amp;apos;, &amp;apos;images/create.jpg&amp;apos;, &amp;apos;images/tes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP生成圆角图片+图片合成">
 <meta property="og:url" content="http://blog.golearns.org/2016/09/23/PHP生成圆角图片-图片合成/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="PHP生成圆角图片+图片合成&amp;lt;?php
-    /** 画圆角
-     * @param $radius 圆角位置
-     * @param $color_r 色值0-255
-     * @param $color_g 色值0-255
-     * @param $color_b 色值0-255
-     * @return resource 返回圆角
-     */
-    func">
-<meta property="og:updated_time" content="2016-09-23T03:03:51.000Z">
+<meta property="og:description" content="PHP生成圆角图片+图片合成使用方法&amp;lt;?php
+    create_qrcode(&amp;apos;images/head_290_00a4e60499ffb5c3.jpg&amp;apos;, &amp;apos;images/WechatIMG12.png&amp;apos;, &amp;apos;测试数据测试数据&amp;apos;, &amp;apos;images/create.jpg&amp;apos;, &amp;apos;images/tes">
+<meta property="og:updated_time" content="2016-09-23T03:06:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP生成圆角图片+图片合成">
-<meta name="twitter:description" content="PHP生成圆角图片+图片合成&amp;lt;?php
-    /** 画圆角
-     * @param $radius 圆角位置
-     * @param $color_r 色值0-255
-     * @param $color_g 色值0-255
-     * @param $color_b 色值0-255
-     * @return resource 返回圆角
-     */
-    func">
+<meta name="twitter:description" content="PHP生成圆角图片+图片合成使用方法&amp;lt;?php
+    create_qrcode(&amp;apos;images/head_290_00a4e60499ffb5c3.jpg&amp;apos;, &amp;apos;images/WechatIMG12.png&amp;apos;, &amp;apos;测试数据测试数据&amp;apos;, &amp;apos;images/create.jpg&amp;apos;, &amp;apos;images/tes">
 
 
 
@@ -353,7 +332,13 @@
       
 
       
-        <h1 id="PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210"><a href="#PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210" class="headerlink" title="PHP生成圆角图片+图片合成"></a>PHP生成圆角图片+图片合成</h1><pre><code>&lt;?php
+        <h1 id="PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210"><a href="#PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210" class="headerlink" title="PHP生成圆角图片+图片合成"></a>PHP生成圆角图片+图片合成</h1><h1 id="u4F7F_u7528_u65B9_u6CD5"><a href="#u4F7F_u7528_u65B9_u6CD5" class="headerlink" title="使用方法"></a>使用方法</h1><pre><code>&lt;?php
+    create_qrcode(&apos;images/head_290_00a4e60499ffb5c3.jpg&apos;, &apos;images/WechatIMG12.png&apos;, &apos;测试数据测试数据&apos;, &apos;images/create.jpg&apos;, &apos;images/test.jpg&apos;, &apos;simhei.ttf&apos;);
+
+    echo &quot;&lt;img src=&apos;images/test.jpg&apos;/&gt;&quot;;
+?&gt;
+&lt;!--more--&gt;
+</code></pre><h1 id="u516C_u7528_u65B9_u6CD5"><a href="#u516C_u7528_u65B9_u6CD5" class="headerlink" title="公用方法"></a>公用方法</h1><pre><code>&lt;?php
     /** 画圆角
      * @param $radius 圆角位置
      * @param $color_r 色值0-255
@@ -585,11 +570,6 @@
         imagedestroy($backgroundImage);
 } 
 ?&gt;
-</code></pre><h1 id="u4F7F_u7528_u65B9_u6CD5"><a href="#u4F7F_u7528_u65B9_u6CD5" class="headerlink" title="使用方法"></a>使用方法</h1><pre><code>&lt;?php
-    create_qrcode(&apos;images/head_290_00a4e60499ffb5c3.jpg&apos;, &apos;images/WechatIMG12.png&apos;, &apos;测试数据测试数据&apos;, &apos;images/create.jpg&apos;, &apos;images/test.jpg&apos;, &apos;simhei.ttf&apos;);
-
-    echo &quot;&lt;img src=&apos;images/test.jpg&apos;/&gt;&quot;;
-?&gt;
 </code></pre>
       
     </div>
@@ -808,7 +788,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210"><span class="nav-number">1.</span> <span class="nav-text">PHP生成圆角图片+图片合成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4F7F_u7528_u65B9_u6CD5"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210"><span class="nav-number">1.</span> <span class="nav-text">PHP生成圆角图片+图片合成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4F7F_u7528_u65B9_u6CD5"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u516C_u7528_u65B9_u6CD5"><span class="nav-number">3.</span> <span class="nav-text">公用方法</span></a></li></ol></div>
             
           </div>
         </section>
