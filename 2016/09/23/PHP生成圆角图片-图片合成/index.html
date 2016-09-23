@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="PHP生成圆角图片+图片合成使用方法&amp;lt;?php
     create_qrcode(&amp;apos;images/head_290_00a4e60499ffb5c3.jpg&amp;apos;, &amp;apos;images/WechatIMG12.png&amp;apos;, &amp;apos;测试数据测试数据&amp;apos;, &amp;apos;images/create.jpg&amp;apos;, &amp;apos;images/tes">
-<meta property="og:updated_time" content="2016-09-23T03:22:20.000Z">
+<meta property="og:updated_time" content="2016-09-23T03:26:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP生成圆角图片+图片合成">
 <meta name="twitter:description" content="PHP生成圆角图片+图片合成使用方法&amp;lt;?php
@@ -554,8 +554,9 @@
 
         imagettftext($backgroundImage, $config[&apos;font_size&apos;], 0, $fx, $fy, $col, $config[&apos;font_file&apos;], $config[&apos;font_text&apos;]);
 
-    //    $image = new \Think\Image();
-    //    $image-&gt;open($config[&apos;qrcode&apos;])-&gt;thumb($config[&apos;qrcode_size&apos;][0], $config[&apos;qrcode_size&apos;][1])-&gt;save($config[&apos;qrcode&apos;]);
+        // 可以借助Thinkphp的Image类库，对图片进行缩放
+        // $image = new \Think\Image();
+        // $image-&gt;open($config[&apos;qrcode&apos;])-&gt;thumb($config[&apos;qrcode_size&apos;][0], $config[&apos;qrcode_size&apos;][1])-&gt;save($config[&apos;qrcode&apos;]);
 
         $qrcode_info = getimagesize($config[&apos;qrcode&apos;]);
 
