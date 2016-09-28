@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2016-09-28T03:24:12.000Z</updated>
+  <updated>2016-09-28T03:25:57.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="http://blog.golearns.org/2016/09/28/Druid-Springboot%E9%85%8D%E7%BD%AE/"/>
     <id>http://blog.golearns.org/2016/09/28/Druid-Springboot配置/</id>
     <published>2016-09-28T03:20:30.000Z</published>
-    <updated>2016-09-28T03:24:12.000Z</updated>
+    <updated>2016-09-28T03:25:57.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Druid_+_Springboot_u914D_u7F6E&quot;&gt;&lt;a href=&quot;#Druid_+_Springboot_u914D_u7F6E&quot; class=&quot;headerlink&quot; title=&quot;Druid + Springboot配置&quot;&gt;&lt;/a&gt;Druid + Springboot配置&lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;pom.xml配置&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
     &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt;
     &amp;lt;artifactId&amp;gt;druid&amp;lt;/artifactId&amp;gt;
-    &amp;lt;version&amp;gt;1.0.19&amp;lt;/version&amp;gt;
+    &amp;lt;version&amp;gt;1.0.24&amp;lt;/version&amp;gt;
 &amp;lt;/dependency&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;  &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;DruidConfiguration配置&lt;/p&gt;
@@ -135,7 +135,7 @@ public class Application extends SpringBootServletInitializer {
 &lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
     &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt;
     &amp;lt;artifactId&amp;gt;druid&amp;lt;/artifactId&amp;gt;
-    &amp;lt;version&amp;gt;1.0.19&amp;lt;/version&amp;gt;
+    &amp;lt;version&amp;gt;1.0.24&amp;lt;/version&amp;gt;
 &amp;lt;/dependency&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
     
@@ -9072,9 +9072,9 @@ systemctl enable nginx
     
       <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
     
-      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
-    
       <category term="PHP" scheme="http://blog.golearns.org/tags/PHP/"/>
+    
+      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
     
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     
