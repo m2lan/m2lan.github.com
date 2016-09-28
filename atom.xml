@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2016-09-23T03:26:55.000Z</updated>
+  <updated>2016-09-28T03:22:03.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,136 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Druid+Springboot配置</title>
+    <link href="http://blog.golearns.org/2016/09/28/Druid-Springboot%E9%85%8D%E7%BD%AE/"/>
+    <id>http://blog.golearns.org/2016/09/28/Druid-Springboot配置/</id>
+    <published>2016-09-28T03:20:30.000Z</published>
+    <updated>2016-09-28T03:22:03.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Druid_+_Springboot_u914D_u7F6E&quot;&gt;&lt;a href=&quot;#Druid_+_Springboot_u914D_u7F6E&quot; class=&quot;headerlink&quot; title=&quot;Druid + Springboot配置&quot;&gt;&lt;/a&gt;Druid + Springboot配置&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;pom.xml配置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;druid&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;1.0.19&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;DruidConfiguration配置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.alibaba.druid.pool.DruidDataSource;
+
+@Configuration
+public class DruidConfiguration {
+
+    @Bean
+    public DataSource druidDataSource(@Value(&amp;quot;${spring.datasource.driver-class-name}&amp;quot;) String driver,
+                                      @Value(&amp;quot;${spring.datasource.url}&amp;quot;) String url, 
+                                      @Value(&amp;quot;${spring.datasource.username}&amp;quot;) String username,
+                                      @Value(&amp;quot;${spring.datasource.password}&amp;quot;) String password) {
+        DruidDataSource druidDataSource = new DruidDataSource();
+        druidDataSource.setDriverClassName(driver);
+        druidDataSource.setUrl(url);
+        druidDataSource.setUsername(username);
+        druidDataSource.setPassword(password);
+        // 间隔多长时间将统计数据写入日志
+        druidDataSource.setTimeBetweenLogStatsMillis(300000);
+        try {
+            druidDataSource.setFilters(&amp;quot;stat, wall&amp;quot;);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return druidDataSource;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;servlet配置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
+
+import com.alibaba.druid.support.http.StatViewServlet;
+
+@SuppressWarnings(&amp;quot;serial&amp;quot;)
+@WebServlet(urlPatterns = &amp;quot;/druid/*&amp;quot;, 
+initParams={
+        @WebInitParam(name=&amp;quot;allow&amp;quot;,value=&amp;quot;192.168.1.252,127.0.0.1&amp;quot;),// IP白名单 (没有配置或者为空，则允许所有访问)
+        @WebInitParam(name=&amp;quot;deny&amp;quot;,value=&amp;quot;192.168.1.250&amp;quot;),// IP黑名单 (存在共同时，deny优先于allow)
+        @WebInitParam(name=&amp;quot;loginUsername&amp;quot;,value=&amp;quot;zyk1991&amp;quot;),// 用户名
+        @WebInitParam(name=&amp;quot;loginPassword&amp;quot;,value=&amp;quot;zyk123456&amp;quot;),// 密码
+        @WebInitParam(name=&amp;quot;resetEnable&amp;quot;,value=&amp;quot;false&amp;quot;)// 禁用HTML页面上的“Reset All”功能
+})
+public class DruidStatViewServlet extends StatViewServlet {
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;filter配置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
+
+import com.alibaba.druid.support.http.WebStatFilter;
+
+@WebFilter(filterName=&amp;quot;druidWebStatFilter&amp;quot;,urlPatterns=&amp;quot;/*&amp;quot;,
+initParams={
+    @WebInitParam(name=&amp;quot;exclusions&amp;quot;,value=&amp;quot;*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*&amp;quot;),// 忽略资源
+    @WebInitParam(name=&amp;quot;filters&amp;quot;,value=&amp;quot;log4j2&amp;quot;) // 配置日志使用log4j2
+})
+public class DruidStatFilter extends WebStatFilter {
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;application.properties配置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#datasource
+spring.datasource.url=jdbc:mysql://localhost/test?useUnicode=true&amp;amp;characterEncoding=UTF-8
+spring.datasource.username=root
+spring.datasource.password=123456
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.tomcat.max-wait=10000
+spring.datasource.tomcat.max-active=50
+spring.datasource.tomcat.test-on-borrow=true
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Application配置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@ServletComponentScan
+@SpringBootApplication
+public class Application extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;访问&lt;a href=&quot;http://localhost:8080/project/druid&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080/project/druid&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Druid_+_Springboot_u914D_u7F6E&quot;&gt;&lt;a href=&quot;#Druid_+_Springboot_u914D_u7F6E&quot; class=&quot;headerlink&quot; title=&quot;Druid + Springboot配置&quot;&gt;&lt;/a&gt;Druid 
+    
+    </summary>
+    
+      <category term="druid" scheme="http://blog.golearns.org/categories/druid/"/>
+    
+      <category term="springboot" scheme="http://blog.golearns.org/categories/druid/springboot/"/>
+    
+    
+      <category term="druid" scheme="http://blog.golearns.org/tags/druid/"/>
+    
+      <category term="springboot" scheme="http://blog.golearns.org/tags/springboot/"/>
+    
+  </entry>
   
   <entry>
     <title>PHP生成圆角图片+图片合成</title>
@@ -9230,74 +9360,6 @@ service keepalived
       <category term="Keepalived" scheme="http://blog.golearns.org/tags/Keepalived/"/>
     
       <category term="Haproxy" scheme="http://blog.golearns.org/tags/Haproxy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux-设备文件名</title>
-    <link href="http://blog.golearns.org/2016/02/25/Linux-%E8%AE%BE%E5%A4%87%E6%96%87%E4%BB%B6%E5%90%8D/"/>
-    <id>http://blog.golearns.org/2016/02/25/Linux-设备文件名/</id>
-    <published>2016-02-25T15:34:08.000Z</published>
-    <updated>2016-07-15T01:46:00.000Z</updated>
-    
-    <content type="html">&lt;h1 id=&quot;u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D&quot;&gt;&lt;a href=&quot;#u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D&quot; class=&quot;headerlink&quot; title=&quot;各硬件设备在Linux中的文件名&quot;&gt;&lt;/a&gt;各硬件设备在Linux中的文件名&lt;/h1&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;名称&lt;/th&gt;
-&lt;th&gt;目录&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;IDE硬盘&lt;/td&gt;
-&lt;td&gt;/dev/hd[a-d]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;SCSI/SATA/USB硬盘&lt;/td&gt;
-&lt;td&gt;/dev/sd[a-p]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;U盘&lt;/td&gt;
-&lt;td&gt;/dev/sd[a-p]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;软驱&lt;/td&gt;
-&lt;td&gt;/dev/fd[0-1]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;打印机&lt;/td&gt;
-&lt;td&gt;25针:/dev/Ip[0-2],USB:/dev/usb/Ip[0-15]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;鼠标&lt;/td&gt;
-&lt;td&gt;USB:/dev/usb/mouse[0-15],PS2:/dev/psaux&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;当前CD ROM/DVD ROM&lt;/td&gt;
-&lt;td&gt;/dev/cdrom&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;当前鼠标&lt;/td&gt;
-&lt;td&gt;/dev/mouse&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;磁带机&lt;/td&gt;
-&lt;td&gt;IDE:/dev/ht0,SCSI:/dev/st0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D&quot;&gt;&lt;a href=&quot;#u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u76
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
     
   </entry>
   
