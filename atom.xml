@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2016-09-28T03:25:57.000Z</updated>
+  <updated>2016-10-09T06:19:47.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Chrome浏览器如何静音</title>
+    <link href="http://blog.golearns.org/2016/10/09/Chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E9%9D%99%E9%9F%B3/"/>
+    <id>http://blog.golearns.org/2016/10/09/Chrome浏览器如何静音/</id>
+    <published>2016-10-09T06:18:47.000Z</published>
+    <updated>2016-10-09T06:19:47.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Chrome_u6D4F_u89C8_u5668_u5982_u4F55_u9759_u97F3&quot;&gt;&lt;a href=&quot;#Chrome_u6D4F_u89C8_u5668_u5982_u4F55_u9759_u97F3&quot; class=&quot;headerlink&quot; title=&quot;Chrome浏览器如何静音&quot;&gt;&lt;/a&gt;Chrome浏览器如何静音&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;在浏览器输入&lt;code&gt;chrome://flags/#enable-tab-audio-muting&lt;/code&gt;
+&lt;img src=&quot;http://7xj3i5.com1.z0.glb.clouddn.com/837D6910-25E7-4F61-A58A-6EAD12C4E74C.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;li&gt;点击启用
+&lt;img src=&quot;http://7xj3i5.com1.z0.glb.clouddn.com/1E686FEE-3542-486C-8E19-AA0AEF8F484A.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;li&gt;重新启动
+&lt;img src=&quot;http://7xj3i5.com1.z0.glb.clouddn.com/547E1019-6B59-40CA-A793-825006856A72.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;li&gt;点击声音可以开启和静音,也可以在标签上通过右键来设置。&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Chrome_u6D4F_u89C8_u5668_u5982_u4F55_u9759_u97F3&quot;&gt;&lt;a href=&quot;#Chrome_u6D4F_u89C8_u5668_u5982_u4F55_u9759_u97F3&quot; class=&quot;headerlink&quot; tit
+    
+    </summary>
+    
+      <category term="Chrome" scheme="http://blog.golearns.org/categories/Chrome/"/>
+    
+    
+      <category term="Chrome" scheme="http://blog.golearns.org/tags/Chrome/"/>
+    
+  </entry>
   
   <entry>
     <title>Druid+Springboot配置</title>
@@ -9072,9 +9103,9 @@ systemctl enable nginx
     
       <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
     
-      <category term="PHP" scheme="http://blog.golearns.org/tags/PHP/"/>
-    
       <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
+    
+      <category term="PHP" scheme="http://blog.golearns.org/tags/PHP/"/>
     
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     
@@ -9128,245 +9159,6 @@ systemctl enable nginx
       <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
     
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>keepalived+haproxy高可用负载均衡</title>
-    <link href="http://blog.golearns.org/2016/02/25/keepalived-haproxy%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
-    <id>http://blog.golearns.org/2016/02/25/keepalived-haproxy高可用负载均衡/</id>
-    <published>2016-02-25T15:45:11.000Z</published>
-    <updated>2016-07-15T02:31:16.000Z</updated>
-    
-    <content type="html">&lt;h1 id=&quot;u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861&quot;&gt;&lt;a href=&quot;#u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861&quot; class=&quot;headerlink&quot; title=&quot;基于Keepalived+haproxy实现高可用负载均衡&quot;&gt;&lt;/a&gt;基于Keepalived+haproxy实现高可用负载均衡&lt;/h1&gt;&lt;h2 id=&quot;Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668&quot;&gt;&lt;a href=&quot;#Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668&quot; class=&quot;headerlink&quot; title=&quot;Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器&quot;&gt;&lt;/a&gt;Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;* VIP：192.168.0.185
-* h1：192.168.0.137
-* h2：192.168.0.138
-* web1：192.168.0.130
-* web2：192.168.0.131
-* web3：192.168.0.132
-&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;h1_u5B89_u88C5keepalived&quot;&gt;&lt;a href=&quot;#h1_u5B89_u88C5keepalived&quot; class=&quot;headerlink&quot; title=&quot;h1安装keepalived&quot;&gt;&lt;/a&gt;h1安装keepalived&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;安装&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;yum -y install keepalived
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;配置h1的keepalived&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;vim /etc/keepalived/keepalived.conf
-
-! Configuration File for keepalived
-      global_defs {
-          notification_email {
-              xxx@xx.com
-          }
-      notification_email_from keepalived@localhost
-          smtp_server 127.0.0.1
-          smtp_connect_timeout 30
-          router_id LVS_DEVEL
-      }
-
-      vrrp_script chk_haproxy {
-         script &amp;quot;killall -0 haproxy&amp;quot;
-         interval 2
-         weight 2
-      }
-
-      vrrp_instance VI_1 {
-          state MASTER
-          interface eth0
-          virtual_router_id 85
-          priority 100
-          advert_int 1
-          nopreempt
-          authentication {
-             auth_type PASS
-             auth_pass 1111
-          }
-          track_script {
-             chk_haproxy
-          }
-          virtual_ipaddress {
-             192.168.0.185/24 dev eth0
-          }
-       } 
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;配置h2的keepalived&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;vim /etc/keepalived/keepalived.conf
-
-! Configuration File for keepalived
-      global_defs {
-          notification_email {
-              xxx@xx.com
-          }
-      notification_email_from keepalived@localhost
-          smtp_server 127.0.0.1
-          smtp_connect_timeout 30
-          router_id LVS_DEVEL
-      }
-
-      vrrp_script chk_haproxy {
-         script &amp;quot;killall -0 haproxy&amp;quot;
-         interval 2
-         weight 2
-      }
-
-      vrrp_instance VI_1 {
-          state BACKUP
-          interface eth0
-          virtual_router_id 85
-          priority 90
-          advert_int 1
-          authentication {
-             auth_type PASS
-             auth_pass 1111
-          }
-          track_script {
-             chk_haproxy
-          }
-          virtual_ipaddress {
-             192.168.0.185/24 dev eth0
-          }
-       }
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;u5B89_u88C5haproxy&quot;&gt;&lt;a href=&quot;#u5B89_u88C5haproxy&quot; class=&quot;headerlink&quot; title=&quot;安装haproxy&quot;&gt;&lt;/a&gt;安装haproxy&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;安装&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;yum -y install haproxy
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;配置haproxy，两台机器的配置都是一样的，所以这里只提供一份&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;global
-log         127.0.0.1 local2
-
-chroot      /var/lib/haproxy
-pidfile     /var/run/haproxy.pid
-maxconn     4000
-user        haproxy
-group       haproxy
-daemon
-
-# turn on stats unix socket
-stats socket /var/lib/haproxy/stats
-
-#---------------------------------------------------------------------
-# common defaults that all the &amp;apos;listen&amp;apos; and &amp;apos;backend&amp;apos; sections will
-# use if not designated in their block
-#---------------------------------------------------------------------
-defaults
-mode                    http
-log                     global
-option                  httplog
-option                  dontlognull
-option http-server-close
-#option forwardfor       except 127.0.0.0/8
-option                  redispatch
-retries                 3
-timeout http-request    10s
-timeout queue           1m
-timeout connect         10s
-timeout client          1m
-timeout server          1m
-timeout http-keep-alive 10s
-timeout check           10s
-maxconn                 3000
-
-# 用来监听状态，访问地址http://server:8080/admin?stats
-listen statistics
-mode http
-bind *:8080
-stats enable
-stats auth admin:admin
-stats uri /admin?stats
-stats hide-version
-stats admin if TRUE
-stats refresh 5s
-acl allow src 192.168.0.0
-
-# tcp监听
-listen tigase_5222
-mode tcp
-bind *:5222
-balance leastconn
-option tcplog
-option redispatch
-option log-health-checks
-timeout connect 1s
-timeout queue 5s
-timeout server 3600s
-timeout client 3600s
-maxconn 5000
-server webserver1 192.168.0.130:5222 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver2 192.168.0.131:5222 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver3 192.168.0.132:5222 inter 3000 rise 1 fall 1 check maxconn 5000
-
-listen tigase_5280
-mode tcp
-bind *:5280
-balance source
-option tcplog
-option redispatch
-option log-health-checks
-timeout connect 1s
-timeout queue 5s
-timeout server 3600s
-timeout client 3600s
-maxconn 5000
-server webserver1 192.168.0.130:5280 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver2 192.168.0.131:5280 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver3 192.168.0.132:5280 inter 3000 rise 1 fall 1 check maxconn 5000
-
-# http连接
-listen apache_httpd
-mode http
-bind *:80
-balance roundrobin
-option httplog
-server webserver1 192.168.0.130:80 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver2 192.168.0.131:80 inter 3000 rise 1 fall 1 check maxconn 5000
-server webserver3 192.168.0.132:80 inter 3000 rise 1 fall 1 check maxconn 5000
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;u542F_u52A8&quot;&gt;&lt;a href=&quot;#u542F_u52A8&quot; class=&quot;headerlink&quot; title=&quot;启动&quot;&gt;&lt;/a&gt;启动&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;启动haproxy和keepalived，首先先启动h1的haproxy和keepalived，然后启动h2的&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;service haproxy start
-service keepalived
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;u67E5_u770B_u72B6_u6001&quot;&gt;&lt;a href=&quot;#u67E5_u770B_u72B6_u6001&quot; class=&quot;headerlink&quot; title=&quot;查看状态&quot;&gt;&lt;/a&gt;查看状态&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;查看VIP状态，当h1正常运行的时候&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[root@newkeep1 keepalived]# ip a|grep eth0
-2: eth0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
-    inet 192.168.0.137/24 brd 192.168.0.255 scope global eth0
-    inet 192.168.0.185/24 scope global secondary eth0
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;手动关闭h1的keepalived, 在h2上查看&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[root@newkeep1 keepalived]# ip a|grep eth0
-2: eth0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
-    inet 192.168.0.138/24 brd 192.168.0.255 scope global eth0
-    inet 192.168.0.185/24 scope global secondary eth0
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;再去查看h1的时候，发现VIP已经飘走了。当重新启动h1的时候，会恢复主机状态。&lt;/li&gt;
-&lt;li&gt;注意：如果启动的时候发现两台服务器都监听了VIP。则需要关闭防火墙。&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861&quot;&gt;&lt;a href=&quot;#u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861&quot; class=&quot;headerlink&quot; title=&quot;基于Keepalived+haproxy实现高可用负载均衡&quot;&gt;&lt;/a&gt;基于Keepalived+haproxy实现高可用负载均衡&lt;/h1&gt;&lt;h2 id=&quot;Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668&quot;&gt;&lt;a href=&quot;#Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668&quot; class=&quot;headerlink&quot; title=&quot;Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器&quot;&gt;&lt;/a&gt;Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;* VIP：192.168.0.185
-* h1：192.168.0.137
-* h2：192.168.0.138
-* web1：192.168.0.130
-* web2：192.168.0.131
-* web3：192.168.0.132
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="Keepalived" scheme="http://blog.golearns.org/categories/Keepalived/"/>
-    
-    
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
-      <category term="Keepalived" scheme="http://blog.golearns.org/tags/Keepalived/"/>
-    
-      <category term="Haproxy" scheme="http://blog.golearns.org/tags/Haproxy/"/>
     
   </entry>
   

@@ -266,6 +266,157 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/Shell-case/" itemprop="url">
+                  Shell-case
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:16:58+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-case/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-case/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+#case
+
+NAME=&quot;john&quot;
+
+case ${NAME} in
+    &quot;john&quot; )
+        echo &quot;hahahha --- john&quot;
+        ;;
+    &quot;johnx&quot; )
+        echo &quot;huhuhuhu ---- johnx&quot;
+        ;;
+esac
+
+echo &quot;请输入1-3&quot;
+read INPUT
+case $INPUT in
+    1 )
+        echo &quot;你输入了1&quot;;;
+    2 )
+        echo &quot;你输入了2&quot;;;
+    3 )
+        echo &quot;你输入了3&quot;;;
+    * ) # 当以上条件不匹配，则会进入到这里
+        echo &quot;你的输出超出了范围&quot;;;
+esac
+
+option=&quot;${1}&quot;
+case $option in
+    -f ) FILE=&quot;${2}&quot;
+        echo &quot;file name is $FILE&quot;;;
+    -d ) DIR=&quot;${2}&quot;
+        echo &quot;dir name is $DIR&quot;;;
+    * )
+        echo &quot;`basename ${0}`: usage: [-f file] | [-d directory]&quot;
+        exit 1;; # 脚本运行的返回值 exit 0 表示成功， exit 1 表示失败
+esac
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/Shell-包含文件/" itemprop="url">
                   Shell-包含文件
                 </a>
@@ -1600,206 +1751,11 @@ return sortArray;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/UITabBarController使用/" itemprop="url">
-                  UITabBarController使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:02:13+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/UITabBarController使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/UITabBarController使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>//
-//  ViewController.m
-//  ceshi
-//
-//  Created by yonglang on 14/11/6.
-//  Copyright (c) 2014年 yonglang. All rights reserved.
-//  图片资源 https://github.com/m2lan/Resource
-//
-
-#import &quot;ViewController.h&quot;
-#import &quot;OneViewController.h&quot;
-#import &quot;TwoViewController.h&quot;
-#import &quot;ThreeViewController.h&quot;
-
-@interface MainController () {
-    UITabBarController *_tabC;
-}
-
-@end
-
-@implementation MainController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    _tabC = [[UITabBarController alloc] init];
-    [_tabC.tabBar setBackgroundColor:[UIColor clearColor]];
-    [_tabC.view setFrame:self.view.frame];
-    [self.view addSubview:_tabC.view];
-
-    OneViewController *one = [[OneViewController alloc] init];
-    TwoViewController *two = [[TwoViewController alloc] init];
-    ThreeViewController *three = [[ThreeViewController alloc] init];
-    _tabC.viewControllers = @[one, two, three ];
-
-    [_tabC.tabBar setBackgroundColor:[UIColor whiteColor]];
-    NSArray *ar = _tabC.viewControllers;
-    NSMutableArray *arD = [NSMutableArray new];
-    [ar enumerateObjectsUsingBlock:^(UIViewController *viewController, NSUInteger idx, BOOL *stop)
-    {
-        UITabBarItem *item = nil;
-        switch (idx)
-        {
-           case 0:
-           {
-               item = [[UITabBarItem alloc] initWithTitle:@&quot;消息&quot; image:[[UIImage imageNamed:@&quot;tab_recent_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@&quot;tab_recent_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               break;
-           }
-           case 1:
-           {
-               item = [[UITabBarItem alloc] initWithTitle:@&quot;联系人&quot; image:nil tag:1];
-               [item setImage:[[UIImage imageNamed:@&quot;tab_buddy_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               [item setSelectedImage:[[UIImage imageNamed:@&quot;tab_buddy_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               break;
-           }
-           case 2:
-           {
-               item = [[UITabBarItem alloc]initWithTitle:@&quot;动态&quot; image:nil tag:1];
-               [item setImage:[[UIImage imageNamed:@&quot;tab_qworld_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               [item setSelectedImage:[[UIImage imageNamed:@&quot;tab_qworld_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               break;
-           }
-        }
-        viewController.tabBarItem = item;
-        [arD addObject:viewController];
-    }];
-    _tabC.viewControllers = arD;
-
-    [[UITabBarItem appearance] setTitleTextAttributes:
-    [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:96/255.f green:164/255.f blue:222/255.f alpha:1], UITextAttributeTextColor, nil]
-                                       forState:UIControlStateSelected];
-
-    [_tabC setSelectedIndex:1];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-@end
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1840,7 +1796,7 @@ return sortArray;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1848,7 +1804,7 @@ return sortArray;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1857,7 +1813,7 @@ return sortArray;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
