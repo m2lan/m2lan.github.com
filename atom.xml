@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2016-11-10T11:48:48.000Z</updated>
+  <updated>2016-11-10T11:49:39.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>mysql定时任务</title>
-    <link href="http://blog.golearns.org/2016/11/10/mysql%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
-    <id>http://blog.golearns.org/2016/11/10/mysql定时任务/</id>
+    <link href="http://blog.golearns.org/2016/11/10/MySQL-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
+    <id>http://blog.golearns.org/2016/11/10/MySQL-定时任务/</id>
     <published>2016-11-10T11:47:59.000Z</published>
-    <updated>2016-11-10T11:48:48.000Z</updated>
+    <updated>2016-11-10T11:49:39.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;mysql__u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#mysql__u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;mysql 定时任务&quot;&gt;&lt;/a&gt;mysql 定时任务&lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;[on completion [not] preserve]&lt;/code&gt;可以设置这个事件是执行一次还是持久执行,默认为&lt;code&gt;not preserve。&lt;/code&gt;
@@ -29,7 +29,8 @@
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;u67E5_u770B_u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#u67E5_u770B_u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;查看定时任务&quot;&gt;&lt;/a&gt;查看定时任务&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;show events;
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u67E5_u770B_u662F_u5426_u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#u67E5_u770B_u662F_u5426_u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;查看是否开启定时任务&quot;&gt;&lt;/a&gt;查看是否开启定时任务&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;SHOW VARIABLES LIKE &amp;apos;event_scheduler&amp;apos;;
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u5173_u95ED_u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#u5173_u95ED_u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;关闭定时任务&quot;&gt;&lt;/a&gt;关闭定时任务&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;alter event EVENT_NAME disable;
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;u5173_u95ED_u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#u5173_u95ED_u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;关闭定时任务&quot;&gt;&lt;/a&gt;关闭定时任务&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;alter event EVENT_NAME disable;
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;开启定时任务&quot;&gt;&lt;/a&gt;开启定时任务&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;alter event EVENT_NAME enable;
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u5220_u9664_u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#u5220_u9664_u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;删除定时任务&quot;&gt;&lt;/a&gt;删除定时任务&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;drop event EVENT_NAME;
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1_u7684_u51E0_u79CD_u65B9_u5F0F&quot;&gt;&lt;a href=&quot;#u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1_u7684_u51E0_u79CD_u65B9_u5F0F&quot; class=&quot;headerlink&quot; title=&quot;开启定时任务的几种方式&quot;&gt;&lt;/a&gt;开启定时任务的几种方式&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;SET GLOBAL event_scheduler = ON;
@@ -117,7 +118,14 @@ END
     
     <summary type="html">
     
-      &lt;h1 id=&quot;mysql__u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#mysql__u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;mysql 定时任务&quot;&gt;&lt;/a&gt;mysql 定时任务&lt;/h1&gt;&lt;
+      &lt;h1 id=&quot;mysql__u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#mysql__u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;mysql 定时任务&quot;&gt;&lt;/a&gt;mysql 定时任务&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;[on completion [not] preserve]&lt;/code&gt;可以设置这个事件是执行一次还是持久执行,默认为&lt;code&gt;not preserve。&lt;/code&gt;
+&lt;code&gt;[enable | disenable]&lt;/code&gt;可是设置该事件创建后状态是否开启或关闭,默认为&lt;code&gt;enable&lt;/code&gt;。
+&lt;code&gt;[commet &amp;#39;commet&amp;#39;]&lt;/code&gt;可以给该事件加上注释。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;u67E5_u770B_u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#u67E5_u770B_u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;查看定时任务&quot;&gt;&lt;/a&gt;查看定时任务&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;show events;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u67E5_u770B_u662F_u5426_u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#u67E5_u770B_u662F_u5426_u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;查看是否开启定时任务&quot;&gt;&lt;/a&gt;查看是否开启定时任务&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;SHOW VARIABLES LIKE &amp;apos;event_scheduler&amp;apos;;
+&lt;/code&gt;&lt;/pre&gt;
     
     </summary>
     

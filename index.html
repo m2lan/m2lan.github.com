@@ -266,7 +266,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/10/mysql定时任务/" itemprop="url">
+                <a class="post-title-link" href="/2016/11/10/MySQL-定时任务/" itemprop="url">
                   mysql定时任务
                 </a>
               
@@ -310,8 +310,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/10/mysql定时任务/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/mysql定时任务/" itemprop="commentsCount"></span>
+                <a href="/2016/11/10/MySQL-定时任务/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/MySQL-定时任务/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -334,100 +334,19 @@
 
       
         
-          
-            <h1 id="mysql__u5B9A_u65F6_u4EFB_u52A1"><a href="#mysql__u5B9A_u65F6_u4EFB_u52A1" class="headerlink" title="mysql 定时任务"></a>mysql 定时任务</h1><blockquote>
+          <h1 id="mysql__u5B9A_u65F6_u4EFB_u52A1"><a href="#mysql__u5B9A_u65F6_u4EFB_u52A1" class="headerlink" title="mysql 定时任务"></a>mysql 定时任务</h1><blockquote>
 <p><code>[on completion [not] preserve]</code>可以设置这个事件是执行一次还是持久执行,默认为<code>not preserve。</code>
 <code>[enable | disenable]</code>可是设置该事件创建后状态是否开启或关闭,默认为<code>enable</code>。
 <code>[commet &#39;commet&#39;]</code>可以给该事件加上注释。</p>
 </blockquote>
 <h2 id="u67E5_u770B_u5B9A_u65F6_u4EFB_u52A1"><a href="#u67E5_u770B_u5B9A_u65F6_u4EFB_u52A1" class="headerlink" title="查看定时任务"></a>查看定时任务</h2><pre><code>show events;
 </code></pre><h2 id="u67E5_u770B_u662F_u5426_u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1"><a href="#u67E5_u770B_u662F_u5426_u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1" class="headerlink" title="查看是否开启定时任务"></a>查看是否开启定时任务</h2><pre><code>SHOW VARIABLES LIKE &apos;event_scheduler&apos;;
-</code></pre><h2 id="u5173_u95ED_u5B9A_u65F6_u4EFB_u52A1"><a href="#u5173_u95ED_u5B9A_u65F6_u4EFB_u52A1" class="headerlink" title="关闭定时任务"></a>关闭定时任务</h2><pre><code>alter event EVENT_NAME disable;
-</code></pre><h2 id="u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1"><a href="#u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1" class="headerlink" title="开启定时任务"></a>开启定时任务</h2><pre><code>alter event EVENT_NAME enable;
-</code></pre><h2 id="u5220_u9664_u5B9A_u65F6_u4EFB_u52A1"><a href="#u5220_u9664_u5B9A_u65F6_u4EFB_u52A1" class="headerlink" title="删除定时任务"></a>删除定时任务</h2><pre><code>drop event EVENT_NAME;
-</code></pre><h2 id="u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1_u7684_u51E0_u79CD_u65B9_u5F0F"><a href="#u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1_u7684_u51E0_u79CD_u65B9_u5F0F" class="headerlink" title="开启定时任务的几种方式"></a>开启定时任务的几种方式</h2><pre><code>SET GLOBAL event_scheduler = ON;
-SET @@global.event_scheduler = ON;
-SET GLOBAL event_scheduler = 1;
-SET @@global.event_scheduler = 1;
-</code></pre><h2 id="u5173_u95ED_u5B9A_u65F6_u4EFB_u52A1_u7684_u51E0_u79CD_u65B9_u5F0F"><a href="#u5173_u95ED_u5B9A_u65F6_u4EFB_u52A1_u7684_u51E0_u79CD_u65B9_u5F0F" class="headerlink" title="关闭定时任务的几种方式"></a>关闭定时任务的几种方式</h2><pre><code>SET GLOBAL event_scheduler = OFF;
-SET @@global.event_scheduler = OFF;
-SET GLOBAL event_scheduler = 0;
-SET @@global.event_scheduler = 0;
-</code></pre><h2 id="u6216_u8005_u4FEE_u6539my-cnf__7C_7C_my-ini_u914D_u7F6E_u6587_u4EF6"><a href="#u6216_u8005_u4FEE_u6539my-cnf__7C_7C_my-ini_u914D_u7F6E_u6587_u4EF6" class="headerlink" title="或者修改<code>my.cnf</code> || <code>my.ini</code>配置文件"></a>或者修改<code>my.cnf</code> || <code>my.ini</code>配置文件</h2><pre><code>event_scheduler=ENABLE
-event_scheduler=DISABLED
-</code></pre><h2 id="u521B_u5EFA_u4E8B_u4EF6"><a href="#u521B_u5EFA_u4E8B_u4EF6" class="headerlink" title="创建事件"></a>创建事件</h2><pre><code>create evnet  [if not exists] event_name
-on schedule schedule
-[on completion [not] preserve]
-[enable | disenable]
-[commet &apos;commet&apos;]
-do sql_statement;
-schedule:
-AT timestamp [+ interval interval] | every interval [starts timestamp] [ends timestamp]
-interval:
-quantity {year | quarter | month | day | hour | minute | week | sencond | year_month | day_hour | day_minute | day_sencond | hour_minute | hour_sencond | minute_sencond}
-</code></pre><h2 id="u521B_u5EFA_u4E00_u4E2A_u5B9A_u65F6_u4EFB_u52A1_u6BCF_u96941s_u5411_u8868_u4E2D_u63D2_u5165_u6570_u636E"><a href="#u521B_u5EFA_u4E00_u4E2A_u5B9A_u65F6_u4EFB_u52A1_u6BCF_u96941s_u5411_u8868_u4E2D_u63D2_u5165_u6570_u636E" class="headerlink" title="创建一个定时任务每隔1s向表中插入数据"></a>创建一个定时任务每隔1s向表中插入数据</h2><pre><code>create event event_table_insert
-on schedule every 1 sencond
-do insert into TABLE_NAME values(now());
-</code></pre><h2 id="10_u5929_u540E_u6E05_u7A7A_u8868"><a href="#10_u5929_u540E_u6E05_u7A7A_u8868" class="headerlink" title="10天后清空表"></a>10天后清空表</h2><pre><code>create evnet event_truct_table
-on schedule at current_timestamp + interal 10 day
-do truncate table TABLE_NAME;
-</code></pre><h2 id="2016_u5E7411_u670811_u53F700_3A00_3A00_u6E05_u7A7A_u8868"><a href="#2016_u5E7411_u670811_u53F700_3A00_3A00_u6E05_u7A7A_u8868" class="headerlink" title="2016年11月11号00:00:00清空表"></a>2016年11月11号00:00:00清空表</h2><pre><code>create evnet event_time_truct_table
-on schedule at timestamp &apos;2016-11-11 00:00:00&apos;
-do truncate table TABLE_NAME;
-</code></pre><h2 id="2_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u5E74_u540E_u505C_u6B62_u6267_u884C"><a href="#2_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u5E74_u540E_u505C_u6B62_u6267_u884C" class="headerlink" title="2天后开启每天定时清空表，一年后停止执行"></a>2天后开启每天定时清空表，一年后停止执行</h2><pre><code>create evnet event_time_year_truct_table
-on schedule every 1 day
-starts current_timestamp + interval 2 day
-ends   current_timestamp + interval 1 year
-do truncate table TABLE_NAME;
-</code></pre><h2 id="5_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u4E2A_u6708_u540E_u505C_u6B62_u6267_u884C"><a href="#5_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u4E2A_u6708_u540E_u505C_u6B62_u6267_u884C" class="headerlink" title="5天后开启每天定时清空表，一个月后停止执行"></a>5天后开启每天定时清空表，一个月后停止执行</h2><pre><code>CREATE EVENT e_test
-ON SCHEDULE EVERY 1 DAY
-STARTS CURRENT_TIMESTAMP + INTERVAL 5 DAY
-ENDS CURRENT_TIMESTAMP + INTERVAL 1 MONTH
-DO TRUNCATE TABLE TABLE_NAME;
-</code></pre><h2 id="u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u53EA_u6267_u884C_u4E00_u6B21_uFF0C_u4EFB_u52A1_u5B8C_u6210_u540E_u5C31_u7EC8_u6B62_u8BE5_u4E8B_u4EF6"><a href="#u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u53EA_u6267_u884C_u4E00_u6B21_uFF0C_u4EFB_u52A1_u5B8C_u6210_u540E_u5C31_u7EC8_u6B62_u8BE5_u4E8B_u4EF6" class="headerlink" title="每天定时清空表，只执行一次，任务完成后就终止该事件"></a>每天定时清空表，只执行一次，任务完成后就终止该事件</h2><pre><code>create evnet event_one_truct_table
-on schedule every 1 day
-on completion not preserve
-do truncate table TABLE_NAME;
-</code></pre><h2 id="u4ECE_u73B0_u5728_u5F00_u59CB_u6BCF_u96949_u5929_u5B9A_u65F6_u6267_u884C"><a href="#u4ECE_u73B0_u5728_u5F00_u59CB_u6BCF_u96949_u5929_u5B9A_u65F6_u6267_u884C" class="headerlink" title="从现在开始每隔9天定时执行"></a>从现在开始每隔9天定时执行</h2><pre><code>CREATE EVENT EVENT1
-ON SCHEDULE EVERY 9 DAY STARTS NOW()
-ON COMPLETION PRESERVE ENABLE
-DO
-BEGIN
-    CALL TOTAL();
-END  
-</code></pre><h2 id="u6BCF_u4E2A_u6708_u7684_u4E00_u53F7_u51CC_u66681_u70B9_u6267_u884C"><a href="#u6BCF_u4E2A_u6708_u7684_u4E00_u53F7_u51CC_u66681_u70B9_u6267_u884C" class="headerlink" title="每个月的一号凌晨1点执行"></a>每个月的一号凌晨1点执行</h2><pre><code>CREATE EVENT EVENT2
-ON SCHEDULE EVERY 1 MONTH STARTS 
-DATE_ADD(DATE_ADD(DATE_SUB(CURDATE(),INTERVAL DAY(CURDATE())-1 DAY), 
-INTERVAL 1 MONTH),INTERVAL 1 HOUR)
-ON COMPLETION PRESERVE ENABLE
-DO
-BEGIN
-    CALL STAT();
-END
-</code></pre><h2 id="u6BCF_u4E2A_u5B63_u5EA6_u4E00_u53F7_u7684_u51CC_u66682_u70B9_u6267_u884C"><a href="#u6BCF_u4E2A_u5B63_u5EA6_u4E00_u53F7_u7684_u51CC_u66682_u70B9_u6267_u884C" class="headerlink" title="每个季度一号的凌晨2点执行"></a>每个季度一号的凌晨2点执行</h2><pre><code>CREATE  EVENT TOTAL_SEASON_EVENT
-ON SCHEDULE EVERY 1 QUARTER STARTS 
-DATE_ADD(DATE_ADD(DATE( CONCAT(YEAR(CURDATE()),&apos;-&apos;,ELT(QUARTER(CURDATE()),1,4,7,10),&apos;-&apos;,1)),INTERVAL 1 QUARTER),INTERVAL 2 HOUR)  
-ON COMPLETION PRESERVE ENABLE  
-DO
-BEGIN
-    CALL SEASON_STAT();
-END
-</code></pre><h2 id="u6BCF_u5E741_u67081_u53F7_u51CC_u66684_u70B9_u6267_u884C"><a href="#u6BCF_u5E741_u67081_u53F7_u51CC_u66684_u70B9_u6267_u884C" class="headerlink" title="每年1月1号凌晨4点执行"></a>每年1月1号凌晨4点执行</h2><pre><code>CREATE  EVENT TOTAL_YEAR_EVENT  
-ON SCHEDULE EVERY 1 YEAR STARTS 
-DATE_ADD(DATE(CONCAT(YEAR(CURDATE()) + 1,&apos;-&apos;,1,&apos;-&apos;,1)),INTERVAL 4 HOUR)  
-ON COMPLETION PRESERVE ENABLE
-DO
-BEGIN
-    CALL YEAR_STAT();
-END
-</code></pre><h2 id="u4E8B_u4EF6_u5F00_u542F_u548C_u5173_u95ED"><a href="#u4E8B_u4EF6_u5F00_u542F_u548C_u5173_u95ED" class="headerlink" title="事件开启和关闭"></a>事件开启和关闭</h2><pre><code>开启：ALTER EVENT EVENT_NAME ON COMPLETION PRESERVE ENABLE;
-关闭：ALTER EVENT EVENT_NAME ON COMPLETION PRESERVE DISABLE;
-</code></pre><ul>
-<li><strong>对于主从架构的数据库要注意将从库的任务调度关闭，以防止在主库执行了之后，从库又重复在备库进行调度evnet。</strong></li>
-<li><strong>对于我们线上环境来说，使用event时，注意在主库上开启定时器，从库上关闭定时器，event触发所有操作均会记录binlog进行主从同步，从库上开启定时器很可能造成卡库。切换主库后之后记得将新主库上的定时器打开。</strong></li>
-</ul>
-
-          
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/10/MySQL-定时任务/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
