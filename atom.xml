@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2016-11-10T11:49:39.000Z</updated>
+  <updated>2016-11-10T11:52:45.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL-快速复制数据库</title>
+    <link href="http://blog.golearns.org/2016/11/10/MySQL-%E5%BF%AB%E9%80%9F%E5%A4%8D%E5%88%B6%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>http://blog.golearns.org/2016/11/10/MySQL-快速复制数据库/</id>
+    <published>2016-11-10T11:52:25.000Z</published>
+    <updated>2016-11-10T11:52:45.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;mysql__u5FEB_u901F_u590D_u5236_u6570_u636E_u5E93&quot;&gt;&lt;a href=&quot;#mysql__u5FEB_u901F_u590D_u5236_u6570_u636E_u5E93&quot; class=&quot;headerlink&quot; title=&quot;mysql 快速复制数据库&quot;&gt;&lt;/a&gt;mysql 快速复制数据库&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;从shopimport 复制到 shopimport2&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./mysqldump shopimport -uroot -p123456 --add-drop-table | ./mysql shopimport2 -uroot -p123456
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;mysql__u5FEB_u901F_u590D_u5236_u6570_u636E_u5E93&quot;&gt;&lt;a href=&quot;#mysql__u5FEB_u901F_u590D_u5236_u6570_u636E_u5E93&quot; class=&quot;headerlink&quot; tit
+    
+    </summary>
+    
+      <category term="MySQL" scheme="http://blog.golearns.org/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>mysql定时任务</title>
@@ -9114,123 +9141,6 @@ iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT //�
       <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
     
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos7-mysql+php+nginx安装</title>
-    <link href="http://blog.golearns.org/2016/02/26/centos7-mysql-php-nginx%E5%AE%89%E8%A3%85/"/>
-    <id>http://blog.golearns.org/2016/02/26/centos7-mysql-php-nginx安装/</id>
-    <published>2016-02-25T16:04:01.000Z</published>
-    <updated>2016-07-15T02:29:47.000Z</updated>
-    
-    <content type="html">&lt;h1 id=&quot;Centos7-Mysql+PHP+nginx_u5B89_u88C5&quot;&gt;&lt;a href=&quot;#Centos7-Mysql+PHP+nginx_u5B89_u88C5&quot; class=&quot;headerlink&quot; title=&quot;Centos7-Mysql+PHP+nginx安装&quot;&gt;&lt;/a&gt;Centos7-Mysql+PHP+nginx安装&lt;/h1&gt;&lt;h2 id=&quot;u5B89_u88C5nginx&quot;&gt;&lt;a href=&quot;#u5B89_u88C5nginx&quot; class=&quot;headerlink&quot; title=&quot;安装nginx&quot;&gt;&lt;/a&gt;安装nginx&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;rpm --import http://nginx.org/keys/nginx_signing.key
-rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
-yum install nginx
-systemctl start nginx
-systemctl enable nginx
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;nginx 的默认文档要目录是 &lt;code&gt;/usr/share/nginx/html&lt;/code&gt;，里面有&lt;code&gt;index.html&lt;/code&gt;，访问&lt;code&gt;http://ip&lt;/code&gt;入显示&lt;code&gt;welcome&lt;/code&gt;则表示安装成功&lt;/li&gt;
-&lt;/ul&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;u5B89_u88C5PHP&quot;&gt;&lt;a href=&quot;#u5B89_u88C5PHP&quot; class=&quot;headerlink&quot; title=&quot;安装PHP&quot;&gt;&lt;/a&gt;安装PHP&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;yum install php php-fpm php-mysql
-systemctl start php-fpm
-systemctl enable php-fpm
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;默认安装php的时候会自动安装apache web服务器，所以避免冲突应该禁掉httpd&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;systemctl disable httpd
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;配置nginx主机，配置文件在&lt;code&gt;/etc/nginx/conf.d/default.conf&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;server {
-    listen 80;
-    server_name localhost;
-    root /usr/share/nginx/html;
-    index index.php index.html index.htm;
-
-    location / {
-    }
-
-    error_page 500 502 503 504 /50x.html;
-    location = /50x.html {
-    }
-
-    location ~ \.php$ {
-    try_files $uri =404;
-    fastcgi_pass 127.0.0.1:9000;
-    fastcgi_index index.php;
-    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    include fastcgi_params;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;u5B89_u88C5mysql&quot;&gt;&lt;a href=&quot;#u5B89_u88C5mysql&quot; class=&quot;headerlink&quot; title=&quot;安装mysql&quot;&gt;&lt;/a&gt;安装mysql&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
-rpm -ivh mysql-community-release-el7-5.noarch.rpm
-yum install mysql-community-server
-service mysqld start
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;mysql安装完成后，默认root密码为空&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;mysql -uroot
-set password for ‘root’@‘localhost’ = password(&amp;apos;mypasswd&amp;apos;);
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;centos7默认使用的firewall作为防火墙，这里改为iptables防火墙&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;systemctl stop firewalld.service
-systemctl disable firewalld.service
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;安装iptables防火墙&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;yum install iptables-services
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;修改防火墙配置文件&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;vi /etc/sysconfig/iptables
-
-# Firewall configuration written by system-config-firewall
-# Manual customization of this file is not recommended.
-*filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
--A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
--A INPUT -p icmp -j ACCEPT
--A INPUT -i lo -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
--A INPUT -j REJECT --reject-with icmp-host-prohibited
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;重启防火墙和开机启动&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;systemctl restart iptables.service
-systemctl enable iptables.service
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Centos7-Mysql+PHP+nginx_u5B89_u88C5&quot;&gt;&lt;a href=&quot;#Centos7-Mysql+PHP+nginx_u5B89_u88C5&quot; class=&quot;headerlink&quot; title=&quot;Centos7-Mysql+PHP+nginx安装&quot;&gt;&lt;/a&gt;Centos7-Mysql+PHP+nginx安装&lt;/h1&gt;&lt;h2 id=&quot;u5B89_u88C5nginx&quot;&gt;&lt;a href=&quot;#u5B89_u88C5nginx&quot; class=&quot;headerlink&quot; title=&quot;安装nginx&quot;&gt;&lt;/a&gt;安装nginx&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;rpm --import http://nginx.org/keys/nginx_signing.key
-rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
-yum install nginx
-systemctl start nginx
-systemctl enable nginx
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;nginx 的默认文档要目录是 &lt;code&gt;/usr/share/nginx/html&lt;/code&gt;，里面有&lt;code&gt;index.html&lt;/code&gt;，访问&lt;code&gt;http://ip&lt;/code&gt;入显示&lt;code&gt;welcome&lt;/code&gt;则表示安装成功&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
-      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
-    
-      <category term="PHP" scheme="http://blog.golearns.org/tags/PHP/"/>
-    
-      <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
-    
-      <category term="Nginx" scheme="http://blog.golearns.org/tags/Nginx/"/>
     
   </entry>
   

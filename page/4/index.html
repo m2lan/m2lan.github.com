@@ -266,6 +266,171 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/Shell-函数/" itemprop="url">
+                  Shell-函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:18:03+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-函数/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# function --
+# 函数返回值只能是整数，用来表示函数执行是否成功，0表示执行成功，其他表示失败
+# 如果返回非整数，则error
+# 函数名前面的function可加可不加
+# 函数可以使用return，return的返回值可以通过$?来接收
+# 
+# 也可以对函数进行删除，使用unset，后面加上.f
+# 如要删除function1函数：unset .f function1
+# 
+
+# 无参函数
+function function1 {
+    echo function1.
+}
+
+# 带参函数
+function function2 {
+    echo $1
+}
+
+# 多个参数
+function function3 {
+    echo $1 --- $2
+}
+
+function4() {
+    echo &quot;function4&quot;
+
+    return $((10 + 20))
+}
+
+# 函数嵌套调用
+function5() {
+    echo &quot;function5&quot;
+
+    function1
+}
+
+# 函数调用
+function1
+
+# 外部参数传入
+function2 $1
+function3 &quot;hello &quot; &quot;world!&quot;
+function4
+
+# 用来接收function4的返回值
+echo $?
+
+function5
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/Shell-转义替换/" itemprop="url">
                   Shell-转义替换
                 </a>
@@ -1560,144 +1725,6 @@ static NSString *homeDir = nil;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/OC-数组对象排序/" itemprop="url">
-                  OC-数组对象排序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:06:15+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/OC-数组对象排序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-数组对象排序/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Comparator_u6392_u5E8F"><a href="#Comparator_u6392_u5E8F" class="headerlink" title="Comparator排序"></a>Comparator排序</h2><pre><code>NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-
-    HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1];
-    HLMessage *msg2 = [[NSClassFromString([obj2 messageClassName]) alloc]initWithManagedObject:obj2];
-
-    NSComparisonResult result = [[msg1 timestamp] compare:[msg2 timestamp]];
-
-    switch(result) {
-        case NSOrderedAscending:
-            return NSOrderedAscending;
-        case NSOrderedDescending:
-            return NSOrderedDescending;
-        case NSOrderedSame:
-            return NSOrderedSame;
-        default:
-            return NSOrderedSame;
-    }
-}];
-return arr;
-</code></pre><h2 id="SortDescriptor_u6392_u5E8F"><a href="#SortDescriptor_u6392_u5E8F" class="headerlink" title="SortDescriptor排序"></a>SortDescriptor排序</h2><pre><code>NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@&quot;timestamp&quot; ascending:YES];
-NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-NSArray *sortArray = [array sortedArrayUsingDescriptors:sortDescriptors];
-
-return sortArray;
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1743,7 +1770,7 @@ return sortArray;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
