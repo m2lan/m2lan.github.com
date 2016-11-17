@@ -47,7 +47,7 @@
     <link href="http://blog.golearns.org/2016/11/10/MySQL-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
     <id>http://blog.golearns.org/2016/11/10/MySQL-定时任务/</id>
     <published>2016-11-10T11:47:59.000Z</published>
-    <updated>2016-11-10T11:49:39.000Z</updated>
+    <updated>2016-11-11T02:10:45.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;mysql__u5B9A_u65F6_u4EFB_u52A1&quot;&gt;&lt;a href=&quot;#mysql__u5B9A_u65F6_u4EFB_u52A1&quot; class=&quot;headerlink&quot; title=&quot;mysql 定时任务&quot;&gt;&lt;/a&gt;mysql 定时任务&lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;[on completion [not] preserve]&lt;/code&gt;可以设置这个事件是执行一次还是持久执行,默认为&lt;code&gt;not preserve。&lt;/code&gt;
@@ -83,15 +83,15 @@ quantity {year | quarter | month | day | hour | minute | week | sencond | year_m
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;u521B_u5EFA_u4E00_u4E2A_u5B9A_u65F6_u4EFB_u52A1_u6BCF_u96941s_u5411_u8868_u4E2D_u63D2_u5165_u6570_u636E&quot;&gt;&lt;a href=&quot;#u521B_u5EFA_u4E00_u4E2A_u5B9A_u65F6_u4EFB_u52A1_u6BCF_u96941s_u5411_u8868_u4E2D_u63D2_u5165_u6570_u636E&quot; class=&quot;headerlink&quot; title=&quot;创建一个定时任务每隔1s向表中插入数据&quot;&gt;&lt;/a&gt;创建一个定时任务每隔1s向表中插入数据&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;create event event_table_insert
 on schedule every 1 sencond
 do insert into TABLE_NAME values(now());
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;10_u5929_u540E_u6E05_u7A7A_u8868&quot;&gt;&lt;a href=&quot;#10_u5929_u540E_u6E05_u7A7A_u8868&quot; class=&quot;headerlink&quot; title=&quot;10天后清空表&quot;&gt;&lt;/a&gt;10天后清空表&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;create evnet event_truct_table
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;10_u5929_u540E_u6E05_u7A7A_u8868&quot;&gt;&lt;a href=&quot;#10_u5929_u540E_u6E05_u7A7A_u8868&quot; class=&quot;headerlink&quot; title=&quot;10天后清空表&quot;&gt;&lt;/a&gt;10天后清空表&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;create event event_truct_table
 on schedule at current_timestamp + interal 10 day
 do truncate table TABLE_NAME;
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;2016_u5E7411_u670811_u53F700_3A00_3A00_u6E05_u7A7A_u8868&quot;&gt;&lt;a href=&quot;#2016_u5E7411_u670811_u53F700_3A00_3A00_u6E05_u7A7A_u8868&quot; class=&quot;headerlink&quot; title=&quot;2016年11月11号00:00:00清空表&quot;&gt;&lt;/a&gt;2016年11月11号00:00:00清空表&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;create evnet event_time_truct_table
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;2016_u5E7411_u670811_u53F700_3A00_3A00_u6E05_u7A7A_u8868&quot;&gt;&lt;a href=&quot;#2016_u5E7411_u670811_u53F700_3A00_3A00_u6E05_u7A7A_u8868&quot; class=&quot;headerlink&quot; title=&quot;2016年11月11号00:00:00清空表&quot;&gt;&lt;/a&gt;2016年11月11号00:00:00清空表&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;create event event_time_truct_table
 on schedule at timestamp &amp;apos;2016-11-11 00:00:00&amp;apos;
 do truncate table TABLE_NAME;
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;2_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u5E74_u540E_u505C_u6B62_u6267_u884C&quot;&gt;&lt;a href=&quot;#2_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u5E74_u540E_u505C_u6B62_u6267_u884C&quot; class=&quot;headerlink&quot; title=&quot;2天后开启每天定时清空表，一年后停止执行&quot;&gt;&lt;/a&gt;2天后开启每天定时清空表，一年后停止执行&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;create evnet event_time_year_truct_table
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;2_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u5E74_u540E_u505C_u6B62_u6267_u884C&quot;&gt;&lt;a href=&quot;#2_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u5E74_u540E_u505C_u6B62_u6267_u884C&quot; class=&quot;headerlink&quot; title=&quot;2天后开启每天定时清空表，一年后停止执行&quot;&gt;&lt;/a&gt;2天后开启每天定时清空表，一年后停止执行&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;create event event_time_year_truct_table
 on schedule every 1 day
-starts current_timestamp + interval 2 day
+starts current_timestamp + interval  2 day
 ends   current_timestamp + interval 1 year
 do truncate table TABLE_NAME;
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;5_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u4E2A_u6708_u540E_u505C_u6B62_u6267_u884C&quot;&gt;&lt;a href=&quot;#5_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u4E2A_u6708_u540E_u505C_u6B62_u6267_u884C&quot; class=&quot;headerlink&quot; title=&quot;5天后开启每天定时清空表，一个月后停止执行&quot;&gt;&lt;/a&gt;5天后开启每天定时清空表，一个月后停止执行&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;CREATE EVENT e_test

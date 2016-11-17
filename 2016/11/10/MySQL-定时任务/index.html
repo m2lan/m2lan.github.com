@@ -27,14 +27,14 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
@@ -75,7 +75,7 @@
 
 查看定时任务show events;
 查看是否开启定时任务SHOW">
-<meta property="og:updated_time" content="2016-11-10T11:49:39.000Z">
+<meta property="og:updated_time" content="2016-11-11T02:10:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql定时任务">
 <meta name="twitter:description" content="mysql 定时任务
@@ -381,15 +381,15 @@ quantity {year | quarter | month | day | hour | minute | week | sencond | year_m
 </code></pre><h2 id="u521B_u5EFA_u4E00_u4E2A_u5B9A_u65F6_u4EFB_u52A1_u6BCF_u96941s_u5411_u8868_u4E2D_u63D2_u5165_u6570_u636E"><a href="#u521B_u5EFA_u4E00_u4E2A_u5B9A_u65F6_u4EFB_u52A1_u6BCF_u96941s_u5411_u8868_u4E2D_u63D2_u5165_u6570_u636E" class="headerlink" title="创建一个定时任务每隔1s向表中插入数据"></a>创建一个定时任务每隔1s向表中插入数据</h2><pre><code>create event event_table_insert
 on schedule every 1 sencond
 do insert into TABLE_NAME values(now());
-</code></pre><h2 id="10_u5929_u540E_u6E05_u7A7A_u8868"><a href="#10_u5929_u540E_u6E05_u7A7A_u8868" class="headerlink" title="10天后清空表"></a>10天后清空表</h2><pre><code>create evnet event_truct_table
+</code></pre><h2 id="10_u5929_u540E_u6E05_u7A7A_u8868"><a href="#10_u5929_u540E_u6E05_u7A7A_u8868" class="headerlink" title="10天后清空表"></a>10天后清空表</h2><pre><code>create event event_truct_table
 on schedule at current_timestamp + interal 10 day
 do truncate table TABLE_NAME;
-</code></pre><h2 id="2016_u5E7411_u670811_u53F700_3A00_3A00_u6E05_u7A7A_u8868"><a href="#2016_u5E7411_u670811_u53F700_3A00_3A00_u6E05_u7A7A_u8868" class="headerlink" title="2016年11月11号00:00:00清空表"></a>2016年11月11号00:00:00清空表</h2><pre><code>create evnet event_time_truct_table
+</code></pre><h2 id="2016_u5E7411_u670811_u53F700_3A00_3A00_u6E05_u7A7A_u8868"><a href="#2016_u5E7411_u670811_u53F700_3A00_3A00_u6E05_u7A7A_u8868" class="headerlink" title="2016年11月11号00:00:00清空表"></a>2016年11月11号00:00:00清空表</h2><pre><code>create event event_time_truct_table
 on schedule at timestamp &apos;2016-11-11 00:00:00&apos;
 do truncate table TABLE_NAME;
-</code></pre><h2 id="2_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u5E74_u540E_u505C_u6B62_u6267_u884C"><a href="#2_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u5E74_u540E_u505C_u6B62_u6267_u884C" class="headerlink" title="2天后开启每天定时清空表，一年后停止执行"></a>2天后开启每天定时清空表，一年后停止执行</h2><pre><code>create evnet event_time_year_truct_table
+</code></pre><h2 id="2_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u5E74_u540E_u505C_u6B62_u6267_u884C"><a href="#2_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u5E74_u540E_u505C_u6B62_u6267_u884C" class="headerlink" title="2天后开启每天定时清空表，一年后停止执行"></a>2天后开启每天定时清空表，一年后停止执行</h2><pre><code>create event event_time_year_truct_table
 on schedule every 1 day
-starts current_timestamp + interval 2 day
+starts current_timestamp + interval  2 day
 ends   current_timestamp + interval 1 year
 do truncate table TABLE_NAME;
 </code></pre><h2 id="5_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u4E2A_u6708_u540E_u505C_u6B62_u6267_u884C"><a href="#5_u5929_u540E_u5F00_u542F_u6BCF_u5929_u5B9A_u65F6_u6E05_u7A7A_u8868_uFF0C_u4E00_u4E2A_u6708_u540E_u505C_u6B62_u6267_u884C" class="headerlink" title="5天后开启每天定时清空表，一个月后停止执行"></a>5天后开启每天定时清空表，一个月后停止执行</h2><pre><code>CREATE EVENT e_test
@@ -723,17 +723,17 @@ END
 </script>
 
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
 
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
 
 
   
@@ -789,7 +789,7 @@ END
 
   
     
-      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
       <script src="/js/src/hook-duoshuo.js"></script>
     
   
