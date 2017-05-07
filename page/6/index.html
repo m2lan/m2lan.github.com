@@ -266,6 +266,127 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/redis优化/" itemprop="url">
+                  redis优化
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:00:33+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/redis优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/redis优化/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="redis优化"><a href="#redis优化" class="headerlink" title="redis优化"></a>redis优化</h2><ul>
+<li>在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。</li>
+<li>客户端请求服务器一次就发送一个报文 -&gt; 等待服务端的返回 -&gt; 关闭连接</li>
+<li>如果是100个请求、1000个请求，那就得请求100次、1000次</li>
+<li>所以使用多个请求的时候使用管道来操作(<code>如果管道打包的命令太多占用的内存也会越大，适量</code>)
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/10/redis优化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" itemprop="url">
                   Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略
                 </a>
@@ -1441,130 +1562,6 @@ public String say3(String username, Model model) {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Tigase-MUC配置/" itemprop="url">
-                  Tigase-MUC配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T00:13:31+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Tigase/" itemprop="url" rel="index">
-                    <span itemprop="name">Tigase</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Tigase-MUC配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Tigase-MUC配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>muc#roomconfig_anonymity(匿名房间的级别)
-muc#maxhistoryfetch(历史消息最大记录)
-muc#roomconfig_membersonly(房间仅对成员开放)
-muc#roomconfig_moderatedroom(房间是适度的)
-muc#roomconfig_passwordprotectedroom(需要密码才能进入房间)
-muc#roomconfig_persistentroom(房间是持久的)
-muc#roomconfig_publicroom(列出目录中的房间)
-muc#roomconfig_roomdesc(房间描述)
-muc#roomconfig_roomname(房间名)
-muc#roomconfig_roomsecret(密码)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1610,7 +1607,7 @@ muc#roomconfig_roomsecret(密码)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">69</span>
+              <span class="site-state-item-count">70</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

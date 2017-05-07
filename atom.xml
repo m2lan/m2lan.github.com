@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-07T06:18:17.000Z</updated>
+  <updated>2017-05-07T06:24:44.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,168 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mybatis逆向工程</title>
+    <link href="http://blog.golearns.org/2017/05/07/mybatis%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
+    <id>http://blog.golearns.org/2017/05/07/mybatis逆向工程/</id>
+    <published>2017-05-07T06:20:42.000Z</published>
+    <updated>2017-05-07T06:24:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mybatis-逆向工程"><a href="#mybatis-逆向工程" class="headerlink" title="mybatis 逆向工程"></a>mybatis 逆向工程</h1><ul>
+<li>新建maven simple project</li>
+<li><p>pom.xml </p>
+<pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;5.1.40&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+        &lt;version&gt;3.4.1&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;log4j&lt;/groupId&gt;
+        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;version&gt;1.2.17&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;
+        &lt;version&gt;1.3.5&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.12&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre></li>
+</ul>
+<a id="more"></a>    
+<ul>
+<li><p>创建generatorConfig.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE generatorConfiguration
+  PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;
+  &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;
+
+&lt;generatorConfiguration&gt;
+    &lt;!-- 无Example查询条件内容 --&gt;
+    &lt;context id=&quot;DB2Tables&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;
+    &lt;!-- 有Example查询条件内容 --&gt;
+    &lt;!-- &lt;context id=&quot;DB2Tables&quot; targetRuntime=&quot;MyBatis3&quot;&gt; --&gt;
+        &lt;commentGenerator&gt;
+            &lt;!-- 是否去除自动生成的注释 --&gt;
+            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot; /&gt;
+        &lt;/commentGenerator&gt;
+
+        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;
+            connectionURL=&quot;jdbc:mysql://localhost:3306/test&quot; userId=&quot;root&quot; password=&quot;123456&quot;&gt;
+        &lt;/jdbcConnection&gt;
+
+        &lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为Integer，
+            为true时把 JDBC DECIMAL 和 NUMERIC 解析为 java.math.BigDecimal--&gt;
+        &lt;javaTypeResolver&gt;
+            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot; /&gt;
+        &lt;/javaTypeResolver&gt;
+
+        &lt;!-- targetPackage: 生成Entity类的路径 --&gt;
+        &lt;javaModelGenerator targetPackage=&quot;com.example.mybatis.entity&quot;
+            targetProject=&quot;src&quot;&gt;
+            &lt;!-- 是否让schema作为包的后缀 --&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+            &lt;!-- 从数据库返回的值被清理前后的空格 --&gt;
+            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;
+        &lt;/javaModelGenerator&gt;
+
+        &lt;!-- 映射文件生成的路径 --&gt;
+        &lt;sqlMapGenerator targetPackage=&quot;com.example.mybatis.mapper&quot;
+            targetProject=&quot;src&quot;&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+        &lt;/sqlMapGenerator&gt;
+
+        &lt;!-- mapper接口生成的路径 --&gt;
+        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot;
+            targetPackage=&quot;com.example.mybatis.mapper&quot; targetProject=&quot;src&quot;&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+        &lt;/javaClientGenerator&gt;
+
+        &lt;!-- 数据库表名字和entity类映射 --&gt;
+        &lt;table tableName=&quot;user&quot; domainObjectName=&quot;User&quot;&gt;&lt;/table&gt;
+        &lt;!-- &lt;table tableName=&quot;user&quot; domainObjectName=&quot;User&quot;&gt;&lt;/table&gt;
+        &lt;table tableName=&quot;user&quot; domainObjectName=&quot;User&quot;&gt;&lt;/table&gt;
+        &lt;table tableName=&quot;user&quot; domainObjectName=&quot;User&quot;&gt;&lt;/table&gt;
+        &lt;table tableName=&quot;user&quot; domainObjectName=&quot;User&quot;&gt;&lt;/table&gt; --&gt;
+
+    &lt;/context&gt;
+&lt;/generatorConfiguration&gt;
+</code></pre><ul>
+<li><p>新建Main.java</p>
+<pre><code>public static void main(String[] args) throws Exception {
+    List&lt;String&gt; warnings = new ArrayList&lt;String&gt;();
+    boolean overwrite = true;
+    URL url = ClassLoader.getSystemResource(&quot;generatorConfig.xml&quot;);
+    File configFile = new File(url.toURI());
+    ConfigurationParser cp = new ConfigurationParser(warnings);
+    Configuration config = cp.parseConfiguration(configFile);
+    DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+    MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+    myBatisGenerator.generate(null);
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;mybatis-逆向工程&quot;&gt;&lt;a href=&quot;#mybatis-逆向工程&quot; class=&quot;headerlink&quot; title=&quot;mybatis 逆向工程&quot;&gt;&lt;/a&gt;mybatis 逆向工程&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;新建maven simple project&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;pom.xml &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;dependencies&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;5.1.40&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;3.4.1&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;log4j&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;1.2.17&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.mybatis.generator&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;mybatis-generator-core&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;1.3.5&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;4.12&amp;lt;/version&amp;gt;
+        &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+&amp;lt;/dependencies&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/categories/mybatis/"/>
+    
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
+    
+  </entry>
   
   <entry>
     <title>mybatis-spring-springmvc</title>
@@ -9721,110 +9883,6 @@ cat var/test/test.xml   #此时应该正确显示中文
       <category term="Sphinx" scheme="http://blog.golearns.org/tags/Sphinx/"/>
     
       <category term="Coreseek" scheme="http://blog.golearns.org/tags/Coreseek/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos-安装tsung压力测试工具</title>
-    <link href="http://blog.golearns.org/2016/02/26/centos-%E5%AE%89%E8%A3%85tsung%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/"/>
-    <id>http://blog.golearns.org/2016/02/26/centos-安装tsung压力测试工具/</id>
-    <published>2016-02-25T16:20:51.000Z</published>
-    <updated>2016-07-15T03:41:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Centos-安装Tsung压力测试工具"><a href="#Centos-安装Tsung压力测试工具" class="headerlink" title="Centos 安装Tsung压力测试工具"></a>Centos 安装Tsung压力测试工具</h1><h2 id="Tsung安装包、erlang安装包、Perl-生成报告所需模块-、图形库gnuplot等"><a href="#Tsung安装包、erlang安装包、Perl-生成报告所需模块-、图形库gnuplot等" class="headerlink" title="Tsung安装包、erlang安装包、Perl ( 生成报告所需模块)、图形库gnuplot等"></a>Tsung安装包、erlang安装包、Perl ( 生成报告所需模块)、图形库gnuplot等</h2><pre><code>yum install gd libpng zlib
-</code></pre><h2 id="安装erlang"><a href="#安装erlang" class="headerlink" title="安装erlang"></a>安装erlang</h2><pre><code>wget http://www.erlang.org/download/otp_src_R15B02.tar.gz
-tar xvzf otp_src_R15B02.tar.gz
-cd otp_src_R15B02
-./configure  
-// 这一步如果出现configure: error: /bin/sh &apos;/root/otp_src_R15B02/erts/configure&apos; failed for erts
-yum install ncurses-devel
-
-make
-make install
-</code></pre><a id="more"></a>
-<h2 id="安装gnuplot"><a href="#安装gnuplot" class="headerlink" title="安装gnuplot"></a>安装gnuplot</h2><pre><code>wget http://nchc.dl.sourceforge.net/project/gnuplot/gnuplot/4.4.0/gnuplot-4.4.0.tar.gz
-tar xvzf gnuplot-4.4.0.tar.gz
-cd gnuplot-4.4.0
-./configure
-make
-make install
-</code></pre><h2 id="下载安装Tsung"><a href="#下载安装Tsung" class="headerlink" title="下载安装Tsung"></a>下载安装Tsung</h2><pre><code>wget http://tsung.erlang-projects.org/dist/tsung-1.4.2.tar.gz  
-tar xvzf tsung-1.4.2.tar.gz
-cd tsung-1.4.2
-./configure
-make &amp;&amp; make install
-</code></pre><h2 id="安装perl-Template-用来生成报告模板"><a href="#安装perl-Template-用来生成报告模板" class="headerlink" title="安装perl Template,用来生成报告模板"></a>安装perl Template,用来生成报告模板</h2><pre><code>wget http://cpan.org/modules/by-module/Template/Template-Toolkit-2.24.tar.gz  
-tar xvzf Template-Toolkit-2.24.tar.gz
-cd Template-Toolkit-2.24
-perl Makefile.PL
-make
-make test
-make install
-</code></pre><h2 id="在root目录下创建-tsung目录"><a href="#在root目录下创建-tsung目录" class="headerlink" title="在root目录下创建.tsung目录"></a>在root目录下创建.tsung目录</h2><pre><code>mkdir ~/.tsung
-cd ~/.tsung
-cp /usr/local/share/doc/tsung/examples/http_simple.xml ~/.tsung/tsung.xml
-</code></pre><h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><ul>
-<li><p>运行，默认执行<code>~/.tsung/tsung.xml</code>配置</p>
-<pre><code>tsung start
-</code></pre></li>
-</ul>
-<h2 id="进入需要生成图表的log目录"><a href="#进入需要生成图表的log目录" class="headerlink" title="进入需要生成图表的log目录"></a>进入需要生成图表的log目录</h2><pre><code>cd ~/.tsung/log/20141208-1047/
-/usr/local/lib/tsung/bin/tsung_stats.pl
-
-// 如果出现`Error while running gnuplot: 对设备不适当的 ioctl 操作 at /usr/local/lib/tsung/bin/tsung_stats.pl line 223.`
-
-yum -y install gnuplot
-</code></pre><ul>
-<li><p>这是重新启动，进入需要生成图表的log目录</p>
-<pre><code>[root@iZ2326o1rm2Z ~]# cd .tsung/log/20141208-1047/
-[root@iZ2326o1rm2Z 20141208-1047]# ls
-match.log  tsung_controller@iZ2326o1rm2Z.log  tsung.log  tsung.xml
-[root@iZ2326o1rm2Z 20141208-1047]# /usr/local/lib/tsung/bin/tsung_stats.pl 
-creating subdirectory data 
-creating subdirectory gnuplot_scripts 
-creating subdirectory images 
-Use of uninitialized value $interval in numeric ne (!=) at /usr/local/lib/tsung/bin/tsung_stats.pl line 428.
-No data for Session
-No data for Perfs
-No data for Transactions
-No data for Match
-No data for Event
-No data for Async
-No data for Errors
-No data for Users
-No data for Users_Arrival
-No data for Size
-size_rcv is equal to 0 !
-size_sent is equal to 0 !
-</code></pre></li>
-<li>打开report.html就可以查看生成的报表了</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Centos-安装Tsung压力测试工具&quot;&gt;&lt;a href=&quot;#Centos-安装Tsung压力测试工具&quot; class=&quot;headerlink&quot; title=&quot;Centos 安装Tsung压力测试工具&quot;&gt;&lt;/a&gt;Centos 安装Tsung压力测试工具&lt;/h1&gt;&lt;h2 id=&quot;Tsung安装包、erlang安装包、Perl-生成报告所需模块-、图形库gnuplot等&quot;&gt;&lt;a href=&quot;#Tsung安装包、erlang安装包、Perl-生成报告所需模块-、图形库gnuplot等&quot; class=&quot;headerlink&quot; title=&quot;Tsung安装包、erlang安装包、Perl ( 生成报告所需模块)、图形库gnuplot等&quot;&gt;&lt;/a&gt;Tsung安装包、erlang安装包、Perl ( 生成报告所需模块)、图形库gnuplot等&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;yum install gd libpng zlib
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;安装erlang&quot;&gt;&lt;a href=&quot;#安装erlang&quot; class=&quot;headerlink&quot; title=&quot;安装erlang&quot;&gt;&lt;/a&gt;安装erlang&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;wget http://www.erlang.org/download/otp_src_R15B02.tar.gz
-tar xvzf otp_src_R15B02.tar.gz
-cd otp_src_R15B02
-./configure  
-// 这一步如果出现configure: error: /bin/sh &amp;apos;/root/otp_src_R15B02/erts/configure&amp;apos; failed for erts
-yum install ncurses-devel
-
-make
-make install
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
-      <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
-    
-      <category term="Tsung" scheme="http://blog.golearns.org/tags/Tsung/"/>
     
   </entry>
   
