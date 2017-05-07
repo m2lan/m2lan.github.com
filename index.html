@@ -334,124 +334,13 @@
 
       
         
-          
-            <h1 id="mybatis环境安装"><a href="#mybatis环境安装" class="headerlink" title="mybatis环境安装"></a>mybatis环境安装</h1><h2 id="Eclipse插件安装"><a href="#Eclipse插件安装" class="headerlink" title="Eclipse插件安装"></a>Eclipse插件安装</h2><pre><code>Help -&gt; Eclipse Marketplace -&gt; Search -&gt; MyBatipse -&gt; install
-</code></pre><h2 id="新建maven-project-simple-project"><a href="#新建maven-project-simple-project" class="headerlink" title="新建maven project(simple project)"></a>新建maven project(simple project)</h2><ul>
-<li><p>pom.xml</p>
-<pre><code>&lt;profiles&gt;
-    &lt;profile&gt;
-        &lt;activation&gt;
-            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
-            &lt;jdk&gt;1.8&lt;/jdk&gt;
-        &lt;/activation&gt;
-        &lt;properties&gt;
-            &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-            &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
-            &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
-            &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
-            &lt;maven.compiler.compilerVersion&gt;1.8&lt;/maven.compiler.compilerVersion&gt;
-            &lt;java.version&gt;1.8&lt;/java.version&gt;
-            &lt;mybatis.version&gt;3.4.1&lt;/mybatis.version&gt;
-            &lt;mysql.version&gt;5.1.40&lt;/mysql.version&gt;
-            &lt;log4j.version&gt;1.2.17&lt;/log4j.version&gt;
-            &lt;junit.version&gt;4.12&lt;/junit.version&gt;
-            &lt;mybatis.ehcache.version&gt;1.1.0&lt;/mybatis.ehcache.version&gt;
-        &lt;/properties&gt;
-    &lt;/profile&gt;
-&lt;/profiles&gt;
-
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
-        &lt;version&gt;${mybatis.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;mysql&lt;/groupId&gt;
-        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-        &lt;version&gt;${mysql.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;log4j&lt;/groupId&gt;
-        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
-        &lt;version&gt;${log4j.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.mybatis.caches&lt;/groupId&gt;
-        &lt;artifactId&gt;mybatis-ehcache&lt;/artifactId&gt;
-        &lt;version&gt;${mybatis.ehcache.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;junit&lt;/groupId&gt;
-        &lt;artifactId&gt;junit&lt;/artifactId&gt;
-        &lt;version&gt;${junit.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</code></pre><ul>
-<li>maven -&gt; update project</li>
-<li><p>resources下创建mybatis-config.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-&lt;!DOCTYPE configuration
-  PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
-  &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
-&lt;configuration&gt;
-    &lt;!-- 数据库配置文件 --&gt;
-    &lt;properties resource=&quot;jdbc.properties&quot;&gt;&lt;/properties&gt;
-    &lt;settings&gt;
-        &lt;!-- 开启缓存和懒加载 --&gt;
-        &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;
-        &lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;
-        &lt;setting name=&quot;aggressiveLazyLoading&quot; value=&quot;false&quot;/&gt;
-        &lt;!-- 日志使用log4j --&gt;
-        &lt;setting name=&quot;logImpl&quot; value=&quot;LOG4J&quot;/&gt;
-    &lt;/settings&gt;
-    &lt;environments default=&quot;development&quot;&gt;
-        &lt;environment id=&quot;development&quot;&gt;
-            &lt;transactionManager type=&quot;JDBC&quot; /&gt;
-            &lt;dataSource type=&quot;POOLED&quot;&gt;
-                &lt;property name=&quot;driver&quot; value=&quot;${jdbc.driverClass}&quot; /&gt;
-                &lt;property name=&quot;url&quot; value=&quot;${jdbc.jdbcUrl}&quot; /&gt;
-                &lt;property name=&quot;username&quot; value=&quot;${jdbc.user}&quot; /&gt;
-                &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot; /&gt;
-            &lt;/dataSource&gt;
-        &lt;/environment&gt;
-    &lt;/environments&gt;
-&lt;/configuration&gt;
-</code></pre></li>
-<li><p>创建jdbc.properties</p>
-<pre><code>jdbc.user=root
-jdbc.password=123456
-jdbc.driverClass=com.mysql.jdbc.Driver
-jdbc.jdbcUrl=jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true
-</code></pre></li>
-<li><p>log4j.properties</p>
-<pre><code>log4j.rootLogger=DEBUG, stdout
-
-log4j.appender.stdout=org.apache.log4j.ConsoleAppender
-log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-log4j.appender.stdout.layout.ConversionPattern=%d %p [%c] - %m %n
-
-# General Apache libraries
-log4j.logger.org.apache=WARN
-
-# Disable verbose logging
-log4j.java.sql=DEBUG
-log4j.category.org.apache.ibatis=DEBUG
-</code></pre></li>
-<li><p>为了方便提示</p>
-<pre><code>下载:
-    http://mybatis.org/dtd/mybatis-3-mapper.dtd
-    http://mybatis.org/dtd/mybatis-3-config.dtd
-
-Eclise -&gt; 偏好设置 -&gt; XML -&gt; XML Catalog -&gt; add
-</code></pre><p>  <img src="http://7xj3i5.com1.z0.glb.clouddn.com/mybatisConfig.png" alt="mybatis-config">
-  <img src="http://7xj3i5.com1.z0.glb.clouddn.com/mybatisMapper.png" alt="mybatis-mapper"></p>
-</li>
-</ul>
-</li>
-</ul>
-
-          
+          <h1 id="mybatis环境安装"><a href="#mybatis环境安装" class="headerlink" title="mybatis环境安装"></a>mybatis环境安装</h1><h2 id="Eclipse插件安装"><a href="#Eclipse插件安装" class="headerlink" title="Eclipse插件安装"></a>Eclipse插件安装</h2><pre><code>Help -&gt; Eclipse Marketplace -&gt; Search -&gt; MyBatipse -&gt; install
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis环境安装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-07T03:59:02.000Z</updated>
+  <updated>2017-05-07T04:06:02.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -20,10 +20,11 @@
     <link href="http://blog.golearns.org/2017/05/07/mybatis%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/"/>
     <id>http://blog.golearns.org/2017/05/07/mybatis环境安装/</id>
     <published>2017-05-07T02:08:54.000Z</published>
-    <updated>2017-05-07T03:59:02.000Z</updated>
+    <updated>2017-05-07T04:06:02.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="mybatis环境安装"><a href="#mybatis环境安装" class="headerlink" title="mybatis环境安装"></a>mybatis环境安装</h1><h2 id="Eclipse插件安装"><a href="#Eclipse插件安装" class="headerlink" title="Eclipse插件安装"></a>Eclipse插件安装</h2><pre><code>Help -&gt; Eclipse Marketplace -&gt; Search -&gt; MyBatipse -&gt; install
-</code></pre><h2 id="新建maven-project-simple-project"><a href="#新建maven-project-simple-project" class="headerlink" title="新建maven project(simple project)"></a>新建maven project(simple project)</h2><ul>
+</code></pre><a id="more"></a>    
+<h2 id="新建maven-project-simple-project"><a href="#新建maven-project-simple-project" class="headerlink" title="新建maven project(simple project)"></a>新建maven project(simple project)</h2><ul>
 <li><p>pom.xml</p>
 <pre><code>&lt;profiles&gt;
     &lt;profile&gt;
@@ -141,7 +142,8 @@ Eclise -&gt; 偏好设置 -&gt; XML -&gt; XML Catalog -&gt; add
     
     <summary type="html">
     
-      &lt;h1 id=&quot;mybatis环境安装&quot;&gt;&lt;a href=&quot;#mybatis环境安装&quot; class=&quot;headerlink&quot; title=&quot;mybatis环境安装&quot;&gt;&lt;/a&gt;mybatis环境安装&lt;/h1&gt;&lt;h2 id=&quot;Eclipse插件安装&quot;&gt;&lt;a href=&quot;#Eclips
+      &lt;h1 id=&quot;mybatis环境安装&quot;&gt;&lt;a href=&quot;#mybatis环境安装&quot; class=&quot;headerlink&quot; title=&quot;mybatis环境安装&quot;&gt;&lt;/a&gt;mybatis环境安装&lt;/h1&gt;&lt;h2 id=&quot;Eclipse插件安装&quot;&gt;&lt;a href=&quot;#Eclipse插件安装&quot; class=&quot;headerlink&quot; title=&quot;Eclipse插件安装&quot;&gt;&lt;/a&gt;Eclipse插件安装&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;Help -&amp;gt; Eclipse Marketplace -&amp;gt; Search -&amp;gt; MyBatipse -&amp;gt; install
+&lt;/code&gt;&lt;/pre&gt;
     
     </summary>
     
