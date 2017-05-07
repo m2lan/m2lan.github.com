@@ -334,8 +334,7 @@
 
       
         
-          
-            <h1 id="mybatis多表关联"><a href="#mybatis多表关联" class="headerlink" title="mybatis多表关联"></a>mybatis多表关联</h1><ul>
+          <h1 id="mybatis多表关联"><a href="#mybatis多表关联" class="headerlink" title="mybatis多表关联"></a>mybatis多表关联</h1><ul>
 <li><p>表结构</p>
 <pre><code>CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -352,123 +351,12 @@ CREATE TABLE `idCard` (
   `card` char(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-</code></pre></li>
-<li>创建User和IDCard的javabean文件</li>
-<li><p><code>UserMapper</code></p>
-<pre><code>public interface UserMapper {
-
-    public Integer addUser(User user);
-
-    public void delUser(Integer id);
-
-    public void updateUser(User user);
-
-    public User getUserById(Integer id);
-
-    public List&lt;User&gt; getAll();
-
-    // 和idCard表关联
-    public User getUserAndCardById(Integer id);
-}
-</code></pre></li>
-<li><p><code>UserMapper.xml</code></p>
-<pre><code>&lt;resultMap type=&quot;com.example.mybatis.model.IDCard&quot; id=&quot;cardResultMap&quot;&gt;
-    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
-    &lt;result property=&quot;card&quot; column=&quot;card&quot;/&gt;
-&lt;/resultMap&gt;
-&lt;resultMap type=&quot;com.example.mybatis.model.User&quot; id=&quot;userCardResultMap&quot;&gt;
-    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
-    &lt;result property=&quot;username&quot; column=&quot;username&quot;/&gt;
-    &lt;result property=&quot;password&quot; column=&quot;password&quot;/&gt;
-    &lt;result property=&quot;email&quot; column=&quot;email&quot;/&gt;
-    &lt;association property=&quot;card&quot; column=&quot;icard&quot; columnPrefix=&quot;card_&quot; resultMap=&quot;cardResultMap&quot;&gt;&lt;/association&gt;
-&lt;/resultMap&gt;
-&lt;select id=&quot;getUserAndCardById&quot; parameterType=&quot;Integer&quot;
-    resultType=&quot;com.example.mybatis.model.User&quot; resultMap=&quot;userCardResultMap&quot;&gt;
-    select
-        u.id as id,
-        u.username as username,
-        u.password as password,
-        u.email as email,
-        c.id as card_id,
-        c.card as card_card
-    from user u left join idCard c on u.icard = c.id
-    where u.id = #{id}
-&lt;/select&gt;
-</code></pre></li>
-<li><p>测试文件</p>
-<pre><code>@Test
-public void testGetUserAndCardById() {
-    try (SqlSession session = sessionFactory.openSession()) {
-        UserMapper userMapper = session.getMapper(UserMapper.class);
-        User user = userMapper.getUserAndCardById(1);
-        System.out.println(user);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-</code></pre></li>
-</ul>
-<h2 id="第二种关联方式"><a href="#第二种关联方式" class="headerlink" title="第二种关联方式"></a>第二种关联方式</h2><ul>
-<li><p>新建<code>CardMapper.java</code></p>
-<pre><code>public interface CardMapper {
-
-    public IDCard getCard(Integer id);
-}
-</code></pre></li>
-<li><p>新建<code>CardMapper.xml</code></p>
-<pre><code>&lt;mapper namespace=&quot;com.example.mybatis.mapper.CardMapper&quot;&gt;
-    &lt;select id=&quot;getCard&quot; parameterType=&quot;Integer&quot; resultType=&quot;com.example.mybatis.model.IDCard&quot;&gt;
-        select id, card from idCard where id = #{id}
-    &lt;/select&gt;
-&lt;/mapper&gt;
-</code></pre></li>
-<li><p>加入<code>mybatis-config.xml</code></p>
-<pre><code>&lt;mapper resource=&quot;CardMapper.xml&quot;/&gt;
-</code></pre></li>
-<li><p><code>UserMapper.xml</code>配置</p>
-<pre><code>&lt;resultMap type=&quot;com.example.mybatis.model.User&quot; id=&quot;userAndCardResultMap&quot;&gt;
-    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
-    &lt;result property=&quot;username&quot; column=&quot;username&quot;/&gt;
-    &lt;result property=&quot;password&quot; column=&quot;password&quot;/&gt;
-    &lt;result property=&quot;email&quot; column=&quot;email&quot;/&gt;
-    &lt;!-- 注意这里 --&gt;
-    &lt;association property=&quot;card&quot; column=&quot;icard&quot; select=&quot;com.example.mybatis.mapper.CardMapper.getCard&quot; /&gt;
-&lt;/resultMap&gt;
-&lt;select id=&quot;getUserAndCardById&quot; parameterType=&quot;Integer&quot; 
-    resultType=&quot;com.example.mybatis.model.User&quot; resultMap=&quot;userAndCardResultMap&quot;&gt;
-    select id, username, password, email, icard from user where id = #{id}
-&lt;/select&gt;
-</code></pre></li>
-</ul>
-<h2 id="注解配置"><a href="#注解配置" class="headerlink" title="注解配置"></a>注解配置</h2><ul>
-<li><p><code>UserMapperAnnotation.java</code>添加</p>
-<pre><code>@Select(&quot;select id, username, password, email, icard from user where id = #{id}&quot;)
-@Results({
-    @Result(id=true, property=&quot;id&quot;, column=&quot;id&quot;),
-    @Result(property=&quot;username&quot;, column=&quot;username&quot;),
-    @Result(property=&quot;password&quot;, column=&quot;password&quot;),
-    @Result(property=&quot;email&quot;, column=&quot;email&quot;),
-    @Result(property=&quot;card&quot;, column=&quot;icard&quot;, one=@One(select=&quot;com.example.mybatis.mapper.CardMapper.getCard&quot;))
-})
-public User getUserAndCardById(Integer id);
-</code></pre></li>
-<li><p>测试</p>
-<pre><code>@Test
-public void testGetUserAndCardById() {
-    try (SqlSession session = sessionFactory.openSession()) {
-        UserMapperAnnotation mapper = session.getMapper(UserMapperAnnotation.class);
-        User user = mapper.getUserAndCardById(1);
-        System.out.println(user.getUsername());
-        System.out.println(user.getCard());
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-</code></pre></li>
-</ul>
-
-          
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis-多表关联操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -580,8 +468,7 @@ public void testGetUserAndCardById() {
 
       
         
-          
-            <h1 id="mybatis注解"><a href="#mybatis注解" class="headerlink" title="mybatis注解"></a>mybatis注解</h1><ul>
+          <h1 id="mybatis注解"><a href="#mybatis注解" class="headerlink" title="mybatis注解"></a>mybatis注解</h1><ul>
 <li><p>新建<code>UserMapperAnnotation.java</code>文件</p>
 <pre><code>public interface UserMapperAnnotation {
 
@@ -601,39 +488,12 @@ public void testGetUserAndCardById() {
     @Select(&quot;select id, username, password, email from user&quot;)
     public List&lt;User&gt; getAll();
 }
-</code></pre></li>
-<li><p>在mybatis-config.xml中添加</p>
-<pre><code>&lt;mappers&gt;
-    &lt;mapper resource=&quot;UserMapper.xml&quot;/&gt;
-    &lt;mapper class=&quot;com.example.mybatis.mapper.UserMapperAnnotation&quot;/&gt;
-&lt;/mappers&gt;
-</code></pre></li>
-<li><p>新建测试文件</p>
-<pre><code>public class TestUserMapperAnnotation {
-
-    private SqlSessionFactory sessionFactory;
-
-    @Before
-    public void init() throws IOException {
-        InputStream inputStream = Resources.getResourceAsStream(&quot;mybatis-config.xml&quot;);
-        sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    }
-
-    @Test
-    public void testGetAll() {
-        try (SqlSession session = sessionFactory.openSession()) {
-            UserMapperAnnotation mapper = session.getMapper(UserMapperAnnotation.class);
-            List&lt;User&gt; lists = mapper.getAll();
-            System.out.println(lists);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre></li>
-</ul>
-
-          
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis-注解操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -745,8 +605,7 @@ public void testGetUserAndCardById() {
 
       
         
-          
-            <h1 id="mybatis操作"><a href="#mybatis操作" class="headerlink" title="mybatis操作"></a>mybatis操作</h1><ul>
+          <h1 id="mybatis操作"><a href="#mybatis操作" class="headerlink" title="mybatis操作"></a>mybatis操作</h1><ul>
 <li><p>表结构</p>
 <pre><code>CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -756,120 +615,12 @@ public void testGetUserAndCardById() {
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-</code></pre></li>
-<li>创建Java Bean文件<code>User.java</code></li>
-<li><p>创建<code>UserMapper.java</code>接口文件</p>
-<pre><code>public interface UserMapper {
-
-    public Integer addUser(User user);
-    public void delUser(Integer id);
-    public void updateUser(User user);
-    public User getUserById(Integer id);
-    public List&lt;User&gt; getAll();
-}
-</code></pre></li>
-<li><p>在类路径下创建<code>UserMapper.xml</code></p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
-&lt;mapper namespace=&quot;com.example.mybatis.mapper.UserMapper&quot;&gt;
-    &lt;insert id=&quot;addUser&quot; parameterType=&quot;com.example.mybatis.model.User&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;
-        insert into user(username, password, email) values(#{username}, #{password}, #{email})
-    &lt;/insert&gt;
-    &lt;delete id=&quot;delUser&quot; parameterType=&quot;Integer&quot;&gt;
-        delete from user where id = #{id}
-    &lt;/delete&gt;
-    &lt;update id=&quot;updateUser&quot; parameterType=&quot;com.example.mybatis.model.User&quot;&gt;
-        update user set password = #{password} where id = #{id}
-    &lt;/update&gt;
-    &lt;select id=&quot;getUserById&quot; resultType=&quot;com.example.mybatis.model.User&quot; parameterType=&quot;Integer&quot;&gt;
-        select id, username, password, email from user where id = #{id}
-    &lt;/select&gt;
-    &lt;select id=&quot;getAll&quot; resultType=&quot;com.example.mybatis.model.User&quot;&gt;
-        select id, username, password, email from user
-    &lt;/select&gt;
-&lt;/mapper&gt;
-</code></pre></li>
-<li><p>在mybatis-config.xml的configuration标签里加入</p>
-<pre><code>&lt;mappers&gt;
-    &lt;mapper resource=&quot;UserMapper.xml&quot;/&gt;
-&lt;/mappers&gt;
-</code></pre></li>
-<li><p>创建junit测试文件</p>
-<pre><code>public class TestUserMapper {
-
-    private SqlSessionFactory sessionFactory;
-
-    @Before
-    public void init() throws IOException {
-        InputStream inputStream = Resources.getResourceAsStream(&quot;mybatis-config.xml&quot;);
-        sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    }
-
-    @Test
-    public void testAddUser() {
-        try (SqlSession session = sessionFactory.openSession()) {
-            UserMapper userMapper = session.getMapper(UserMapper.class);
-            User user = new User(&quot;lisi&quot;, &quot;123456&quot;, &quot;lisi@qq.com&quot;);
-            userMapper.addUser(user);
-            session.commit();
-
-            System.out.println(&quot;last user id: &quot; + user.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testDelUser() {
-        try (SqlSession session = sessionFactory.openSession()) {
-            UserMapper userMapper = session.getMapper(UserMapper.class);
-            userMapper.delUser(10);
-            session.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testUpdateUser() {
-        try (SqlSession session = sessionFactory.openSession()) {
-            UserMapper userMapper = session.getMapper(UserMapper.class);
-            User user = new User();
-            user.setId(1);
-            user.setPassword(&quot;654321&quot;);
-            userMapper.updateUser(user);
-            session.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testGetUserById() {
-        try (SqlSession session = sessionFactory.openSession()) {
-            UserMapper userMapper = session.getMapper(UserMapper.class);
-            User user = userMapper.getUserById(1);
-            System.out.println(user);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testGetAll() {
-        try (SqlSession session = sessionFactory.openSession()) {
-            UserMapper userMapper = session.getMapper(UserMapper.class);
-            List&lt;User&gt; lists = userMapper.getAll();
-            System.out.println(lists);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre></li>
-</ul>
-
-          
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis-操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
