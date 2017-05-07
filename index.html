@@ -334,8 +334,7 @@
 
       
         
-          
-            <h1 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h1><h2 id="新建一个web客户端"><a href="#新建一个web客户端" class="headerlink" title="新建一个web客户端"></a>新建一个web客户端</h2><ul>
+          <h1 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h1><h2 id="新建一个web客户端"><a href="#新建一个web客户端" class="headerlink" title="新建一个web客户端"></a>新建一个web客户端</h2><ul>
 <li><p>index.jsp</p>
 <pre><code>&lt;html&gt;
     &lt;body&gt;
@@ -355,34 +354,11 @@
 &lt;/html&gt;
 </code></pre></li>
 </ul>
-<h2 id="web服务端"><a href="#web服务端" class="headerlink" title="web服务端"></a>web服务端</h2><ul>
-<li><p>新建JsonpAdvice.java</p>
-<pre><code>@ControllerAdvice
-public class JsonpAdvice extends AbstractJsonpResponseBodyAdvice {
-
-    public JsonpAdvice() {
-        super(&quot;callback&quot;);
-    }
-}
-</code></pre></li>
-<li><p>UserController.java</p>
-<pre><code>@Controller
-public class UserController {
-    @RequestMapping(value=&quot;getUser&quot;, produces=MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Map&lt;String, String&gt; getUser() {
-        Map&lt;String, String&gt; maps = new HashMap&lt;&gt;();
-        maps.put(&quot;username&quot;, &quot;zhangsan&quot;);
-        maps.put(&quot;password&quot;, &quot;123456&quot;);
-        return maps;
-    }
-}
-</code></pre></li>
-<li><p>返回</p>
-<pre><code>Object {password: &quot;123456&quot;, username: &quot;zhangsan&quot;}
-</code></pre></li>
-</ul>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/jsonp/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

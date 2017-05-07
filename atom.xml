@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-07T07:38:28.000Z</updated>
+  <updated>2017-05-07T07:43:02.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://blog.golearns.org/2017/05/07/jsonp/"/>
     <id>http://blog.golearns.org/2017/05/07/jsonp/</id>
     <published>2017-05-07T07:34:55.000Z</published>
-    <updated>2017-05-07T07:38:28.000Z</updated>
+    <updated>2017-05-07T07:43:02.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h1><h2 id="新建一个web客户端"><a href="#新建一个web客户端" class="headerlink" title="新建一个web客户端"></a>新建一个web客户端</h2><ul>
 <li><p>index.jsp</p>
@@ -42,6 +42,7 @@
 &lt;/html&gt;
 </code></pre></li>
 </ul>
+<a id="more"></a>
 <h2 id="web服务端"><a href="#web服务端" class="headerlink" title="web服务端"></a>web服务端</h2><ul>
 <li><p>新建JsonpAdvice.java</p>
 <pre><code>@ControllerAdvice
@@ -72,7 +73,26 @@ public class UserController {
     
     <summary type="html">
     
-      &lt;h1 id=&quot;jsonp&quot;&gt;&lt;a href=&quot;#jsonp&quot; class=&quot;headerlink&quot; title=&quot;jsonp&quot;&gt;&lt;/a&gt;jsonp&lt;/h1&gt;&lt;h2 id=&quot;新建一个web客户端&quot;&gt;&lt;a href=&quot;#新建一个web客户端&quot; class=&quot;headerlink&quot; 
+      &lt;h1 id=&quot;jsonp&quot;&gt;&lt;a href=&quot;#jsonp&quot; class=&quot;headerlink&quot; title=&quot;jsonp&quot;&gt;&lt;/a&gt;jsonp&lt;/h1&gt;&lt;h2 id=&quot;新建一个web客户端&quot;&gt;&lt;a href=&quot;#新建一个web客户端&quot; class=&quot;headerlink&quot; title=&quot;新建一个web客户端&quot;&gt;&lt;/a&gt;新建一个web客户端&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;index.jsp&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+    &amp;lt;body&amp;gt;
+        &amp;lt;script src=&amp;quot;https://cdn.staticfile.org/jquery/2.1.1/jquery.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+        &amp;lt;script&amp;gt;
+        $(function() {
+            $.ajax({
+                url: &amp;apos;http://192.168.0.1:8080/spring_mybatis/getUser?callback=?&amp;apos;,
+                dataType: &amp;apos;jsonp&amp;apos;,
+                success: function(data) {
+                    console.log(data)
+                }
+            });
+        });
+        &amp;lt;/script&amp;gt;
+    &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
