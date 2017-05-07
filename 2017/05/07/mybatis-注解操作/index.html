@@ -64,7 +64,7 @@
 <meta property="og:url" content="http://blog.golearns.org/2017/05/07/mybatis-注解操作/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="mybatis注解 新建UserMapperAnnotation.java文件 public interface UserMapperAnnotation {      @Insert(&amp;quot;insert into user(username, password, email) values(#{username}, #{password}, #{email})&amp;quot;)     @Op">
-<meta property="og:updated_time" content="2017-05-07T05:08:07.000Z">
+<meta property="og:updated_time" content="2017-05-07T05:10:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis-注解操作">
 <meta name="twitter:description" content="mybatis注解 新建UserMapperAnnotation.java文件 public interface UserMapperAnnotation {      @Insert(&amp;quot;insert into user(username, password, email) values(#{username}, #{password}, #{email})&amp;quot;)     @Op">
@@ -350,7 +350,10 @@
     @Select(&quot;select id, username, password, email from user&quot;)
     public List&lt;User&gt; getAll();
 }
-</code></pre><a id="more"></a>    </li>
+</code></pre></li>
+</ul>
+<a id="more"></a>    
+<ul>
 <li><p>在mybatis-config.xml中添加</p>
 <pre><code>&lt;mappers&gt;
     &lt;mapper resource=&quot;UserMapper.xml&quot;/&gt;

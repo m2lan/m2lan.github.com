@@ -64,7 +64,7 @@
 <meta property="og:url" content="http://blog.golearns.org/2017/05/07/mybatis-多表关联操作/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="mybatis多表关联 表结构 CREATE TABLE `user` (   `id` int(11) NOT NULL AUTO_INCREMENT,   `username` varchar(100) NOT NULL,   `password` varchar(100) DEFAULT NULL,   `email` varchar(100) DEFAULT NULL,   `icard`">
-<meta property="og:updated_time" content="2017-05-07T05:08:14.000Z">
+<meta property="og:updated_time" content="2017-05-07T05:09:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis-多表关联操作">
 <meta name="twitter:description" content="mybatis多表关联 表结构 CREATE TABLE `user` (   `id` int(11) NOT NULL AUTO_INCREMENT,   `username` varchar(100) NOT NULL,   `password` varchar(100) DEFAULT NULL,   `email` varchar(100) DEFAULT NULL,   `icard`">
@@ -347,7 +347,10 @@ CREATE TABLE `idCard` (
   `card` char(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-</code></pre><a id="more"></a>    </li>
+</code></pre></li>
+</ul>
+<a id="more"></a>    
+<ul>
 <li>创建User和IDCard的javabean文件</li>
 <li><p><code>UserMapper</code></p>
 <pre><code>public interface UserMapper {
