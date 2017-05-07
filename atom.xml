@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-07T04:07:43.000Z</updated>
+  <updated>2017-05-07T05:06:30.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,382 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mybatis-多表关联操作</title>
+    <link href="http://blog.golearns.org/2017/05/07/mybatis-%E5%A4%9A%E8%A1%A8%E5%85%B3%E8%81%94%E6%93%8D%E4%BD%9C/"/>
+    <id>http://blog.golearns.org/2017/05/07/mybatis-多表关联操作/</id>
+    <published>2017-05-07T04:38:44.000Z</published>
+    <updated>2017-05-07T05:06:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mybatis多表关联"><a href="#mybatis多表关联" class="headerlink" title="mybatis多表关联"></a>mybatis多表关联</h1><ul>
+<li><p>表结构</p>
+<pre><code>CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `icard` int(11) NOT NULL DEFAULT &apos;0&apos;,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `idCard` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `card` char(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+</code></pre></li>
+<li>创建User和IDCard的javabean文件</li>
+<li><p><code>UserMapper</code></p>
+<pre><code>public interface UserMapper {
+
+    public Integer addUser(User user);
+
+    public void delUser(Integer id);
+
+    public void updateUser(User user);
+
+    public User getUserById(Integer id);
+
+    public List&lt;User&gt; getAll();
+
+    // 和idCard表关联
+    public User getUserAndCardById(Integer id);
+}
+</code></pre></li>
+<li><p><code>UserMapper.xml</code></p>
+<pre><code>&lt;resultMap type=&quot;com.example.mybatis.model.IDCard&quot; id=&quot;cardResultMap&quot;&gt;
+    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+    &lt;result property=&quot;card&quot; column=&quot;card&quot;/&gt;
+&lt;/resultMap&gt;
+&lt;resultMap type=&quot;com.example.mybatis.model.User&quot; id=&quot;userCardResultMap&quot;&gt;
+    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+    &lt;result property=&quot;username&quot; column=&quot;username&quot;/&gt;
+    &lt;result property=&quot;password&quot; column=&quot;password&quot;/&gt;
+    &lt;result property=&quot;email&quot; column=&quot;email&quot;/&gt;
+    &lt;association property=&quot;card&quot; column=&quot;icard&quot; columnPrefix=&quot;card_&quot; resultMap=&quot;cardResultMap&quot;&gt;&lt;/association&gt;
+&lt;/resultMap&gt;
+&lt;select id=&quot;getUserAndCardById&quot; parameterType=&quot;Integer&quot;
+    resultType=&quot;com.example.mybatis.model.User&quot; resultMap=&quot;userCardResultMap&quot;&gt;
+    select
+        u.id as id,
+        u.username as username,
+        u.password as password,
+        u.email as email,
+        c.id as card_id,
+        c.card as card_card
+    from user u left join idCard c on u.icard = c.id
+    where u.id = #{id}
+&lt;/select&gt;
+</code></pre></li>
+<li><p>测试文件</p>
+<pre><code>@Test
+public void testGetUserAndCardById() {
+    try (SqlSession session = sessionFactory.openSession()) {
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        User user = userMapper.getUserAndCardById(1);
+        System.out.println(user);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre></li>
+</ul>
+<h2 id="第二种关联方式"><a href="#第二种关联方式" class="headerlink" title="第二种关联方式"></a>第二种关联方式</h2><ul>
+<li><p>新建<code>CardMapper.java</code></p>
+<pre><code>public interface CardMapper {
+
+    public IDCard getCard(Integer id);
+}
+</code></pre></li>
+<li><p>新建<code>CardMapper.xml</code></p>
+<pre><code>&lt;mapper namespace=&quot;com.example.mybatis.mapper.CardMapper&quot;&gt;
+    &lt;select id=&quot;getCard&quot; parameterType=&quot;Integer&quot; resultType=&quot;com.example.mybatis.model.IDCard&quot;&gt;
+        select id, card from idCard where id = #{id}
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre></li>
+<li><p>加入<code>mybatis-config.xml</code></p>
+<pre><code>&lt;mapper resource=&quot;CardMapper.xml&quot;/&gt;
+</code></pre></li>
+<li><p><code>UserMapper.xml</code>配置</p>
+<pre><code>&lt;resultMap type=&quot;com.example.mybatis.model.User&quot; id=&quot;userAndCardResultMap&quot;&gt;
+    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+    &lt;result property=&quot;username&quot; column=&quot;username&quot;/&gt;
+    &lt;result property=&quot;password&quot; column=&quot;password&quot;/&gt;
+    &lt;result property=&quot;email&quot; column=&quot;email&quot;/&gt;
+    &lt;!-- 注意这里 --&gt;
+    &lt;association property=&quot;card&quot; column=&quot;icard&quot; select=&quot;com.example.mybatis.mapper.CardMapper.getCard&quot; /&gt;
+&lt;/resultMap&gt;
+&lt;select id=&quot;getUserAndCardById&quot; parameterType=&quot;Integer&quot; 
+    resultType=&quot;com.example.mybatis.model.User&quot; resultMap=&quot;userAndCardResultMap&quot;&gt;
+    select id, username, password, email, icard from user where id = #{id}
+&lt;/select&gt;
+</code></pre></li>
+</ul>
+<h2 id="注解配置"><a href="#注解配置" class="headerlink" title="注解配置"></a>注解配置</h2><ul>
+<li><p><code>UserMapperAnnotation.java</code>添加</p>
+<pre><code>@Select(&quot;select id, username, password, email, icard from user where id = #{id}&quot;)
+@Results({
+    @Result(id=true, property=&quot;id&quot;, column=&quot;id&quot;),
+    @Result(property=&quot;username&quot;, column=&quot;username&quot;),
+    @Result(property=&quot;password&quot;, column=&quot;password&quot;),
+    @Result(property=&quot;email&quot;, column=&quot;email&quot;),
+    @Result(property=&quot;card&quot;, column=&quot;icard&quot;, one=@One(select=&quot;com.example.mybatis.mapper.CardMapper.getCard&quot;))
+})
+public User getUserAndCardById(Integer id);
+</code></pre></li>
+<li><p>测试</p>
+<pre><code>@Test
+public void testGetUserAndCardById() {
+    try (SqlSession session = sessionFactory.openSession()) {
+        UserMapperAnnotation mapper = session.getMapper(UserMapperAnnotation.class);
+        User user = mapper.getUserAndCardById(1);
+        System.out.println(user.getUsername());
+        System.out.println(user.getCard());
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;mybatis多表关联&quot;&gt;&lt;a href=&quot;#mybatis多表关联&quot; class=&quot;headerlink&quot; title=&quot;mybatis多表关联&quot;&gt;&lt;/a&gt;mybatis多表关联&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;表结构&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;CREATE
+    
+    </summary>
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/categories/mybatis/"/>
+    
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mybatis-注解操作</title>
+    <link href="http://blog.golearns.org/2017/05/07/mybatis-%E6%B3%A8%E8%A7%A3%E6%93%8D%E4%BD%9C/"/>
+    <id>http://blog.golearns.org/2017/05/07/mybatis-注解操作/</id>
+    <published>2017-05-07T04:31:50.000Z</published>
+    <updated>2017-05-07T04:35:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mybatis注解"><a href="#mybatis注解" class="headerlink" title="mybatis注解"></a>mybatis注解</h1><ul>
+<li><p>新建<code>UserMapperAnnotation.java</code>文件</p>
+<pre><code>public interface UserMapperAnnotation {
+
+    @Insert(&quot;insert into user(username, password, email) values(#{username}, #{password}, #{email})&quot;)
+    @Options(useGeneratedKeys=true, keyProperty=&quot;id&quot;)
+    public Integer addUser(User user);
+
+    @Delete(&quot;delete from user where id = #{id}&quot;)
+    public void delUser(Integer id);
+
+    @Update(&quot;update user set password = #{password} where id = #{id}&quot;)
+    public void updateUser(User user);
+
+    @Select(&quot;select id, username, password, email from user where id = #{id}&quot;)
+    public User getUserById(Integer id);
+
+    @Select(&quot;select id, username, password, email from user&quot;)
+    public List&lt;User&gt; getAll();
+}
+</code></pre></li>
+<li><p>在mybatis-config.xml中添加</p>
+<pre><code>&lt;mappers&gt;
+    &lt;mapper resource=&quot;UserMapper.xml&quot;/&gt;
+    &lt;mapper class=&quot;com.example.mybatis.mapper.UserMapperAnnotation&quot;/&gt;
+&lt;/mappers&gt;
+</code></pre></li>
+<li><p>新建测试文件</p>
+<pre><code>public class TestUserMapperAnnotation {
+
+    private SqlSessionFactory sessionFactory;
+
+    @Before
+    public void init() throws IOException {
+        InputStream inputStream = Resources.getResourceAsStream(&quot;mybatis-config.xml&quot;);
+        sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    }
+
+    @Test
+    public void testGetAll() {
+        try (SqlSession session = sessionFactory.openSession()) {
+            UserMapperAnnotation mapper = session.getMapper(UserMapperAnnotation.class);
+            List&lt;User&gt; lists = mapper.getAll();
+            System.out.println(lists);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;mybatis注解&quot;&gt;&lt;a href=&quot;#mybatis注解&quot; class=&quot;headerlink&quot; title=&quot;mybatis注解&quot;&gt;&lt;/a&gt;mybatis注解&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;新建&lt;code&gt;UserMapperAnnotation.java
+    
+    </summary>
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/categories/mybatis/"/>
+    
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mybatis-操作</title>
+    <link href="http://blog.golearns.org/2017/05/07/mybatis-%E6%93%8D%E4%BD%9C/"/>
+    <id>http://blog.golearns.org/2017/05/07/mybatis-操作/</id>
+    <published>2017-05-07T04:09:39.000Z</published>
+    <updated>2017-05-07T04:28:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mybatis操作"><a href="#mybatis操作" class="headerlink" title="mybatis操作"></a>mybatis操作</h1><ul>
+<li><p>表结构</p>
+<pre><code>CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+</code></pre></li>
+<li>创建Java Bean文件<code>User.java</code></li>
+<li><p>创建<code>UserMapper.java</code>接口文件</p>
+<pre><code>public interface UserMapper {
+
+    public Integer addUser(User user);
+    public void delUser(Integer id);
+    public void updateUser(User user);
+    public User getUserById(Integer id);
+    public List&lt;User&gt; getAll();
+}
+</code></pre></li>
+<li><p>在类路径下创建<code>UserMapper.xml</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.example.mybatis.mapper.UserMapper&quot;&gt;
+    &lt;insert id=&quot;addUser&quot; parameterType=&quot;com.example.mybatis.model.User&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;
+        insert into user(username, password, email) values(#{username}, #{password}, #{email})
+    &lt;/insert&gt;
+    &lt;delete id=&quot;delUser&quot; parameterType=&quot;Integer&quot;&gt;
+        delete from user where id = #{id}
+    &lt;/delete&gt;
+    &lt;update id=&quot;updateUser&quot; parameterType=&quot;com.example.mybatis.model.User&quot;&gt;
+        update user set password = #{password} where id = #{id}
+    &lt;/update&gt;
+    &lt;select id=&quot;getUserById&quot; resultType=&quot;com.example.mybatis.model.User&quot; parameterType=&quot;Integer&quot;&gt;
+        select id, username, password, email from user where id = #{id}
+    &lt;/select&gt;
+    &lt;select id=&quot;getAll&quot; resultType=&quot;com.example.mybatis.model.User&quot;&gt;
+        select id, username, password, email from user
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre></li>
+<li><p>在mybatis-config.xml的configuration标签里加入</p>
+<pre><code>&lt;mappers&gt;
+    &lt;mapper resource=&quot;UserMapper.xml&quot;/&gt;
+&lt;/mappers&gt;
+</code></pre></li>
+<li><p>创建junit测试文件</p>
+<pre><code>public class TestUserMapper {
+
+    private SqlSessionFactory sessionFactory;
+
+    @Before
+    public void init() throws IOException {
+        InputStream inputStream = Resources.getResourceAsStream(&quot;mybatis-config.xml&quot;);
+        sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    }
+
+    @Test
+    public void testAddUser() {
+        try (SqlSession session = sessionFactory.openSession()) {
+            UserMapper userMapper = session.getMapper(UserMapper.class);
+            User user = new User(&quot;lisi&quot;, &quot;123456&quot;, &quot;lisi@qq.com&quot;);
+            userMapper.addUser(user);
+            session.commit();
+
+            System.out.println(&quot;last user id: &quot; + user.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testDelUser() {
+        try (SqlSession session = sessionFactory.openSession()) {
+            UserMapper userMapper = session.getMapper(UserMapper.class);
+            userMapper.delUser(10);
+            session.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testUpdateUser() {
+        try (SqlSession session = sessionFactory.openSession()) {
+            UserMapper userMapper = session.getMapper(UserMapper.class);
+            User user = new User();
+            user.setId(1);
+            user.setPassword(&quot;654321&quot;);
+            userMapper.updateUser(user);
+            session.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testGetUserById() {
+        try (SqlSession session = sessionFactory.openSession()) {
+            UserMapper userMapper = session.getMapper(UserMapper.class);
+            User user = userMapper.getUserById(1);
+            System.out.println(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testGetAll() {
+        try (SqlSession session = sessionFactory.openSession()) {
+            UserMapper userMapper = session.getMapper(UserMapper.class);
+            List&lt;User&gt; lists = userMapper.getAll();
+            System.out.println(lists);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;mybatis操作&quot;&gt;&lt;a href=&quot;#mybatis操作&quot; class=&quot;headerlink&quot; title=&quot;mybatis操作&quot;&gt;&lt;/a&gt;mybatis操作&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;表结构&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;CREATE TABLE `
+    
+    </summary>
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/categories/mybatis/"/>
+    
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
+    
+  </entry>
   
   <entry>
     <title>mybatis环境安装</title>
@@ -9025,237 +9401,6 @@ cd /usr/local/nginx/sbin/
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     
       <category term="Nginx" scheme="http://blog.golearns.org/tags/Nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos-查看系统硬件信息</title>
-    <link href="http://blog.golearns.org/2016/02/26/centos-%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF/"/>
-    <id>http://blog.golearns.org/2016/02/26/centos-查看系统硬件信息/</id>
-    <published>2016-02-25T16:13:44.000Z</published>
-    <updated>2016-07-15T03:41:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Centos-查看系统硬件信息"><a href="#Centos-查看系统硬件信息" class="headerlink" title="Centos 查看系统硬件信息"></a>Centos 查看系统硬件信息</h1><ul>
-<li><p>查看CPU型号</p>
-<pre><code>cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
-
-2  Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz
-</code></pre></li>
-<li><p>查看物理CPU个数</p>
-<pre><code>cat /proc/cpuinfo | grep physical | uniq -c
-
-1 physical id    : 0
-1 address sizes    : 46 bits physical, 48 bits virtual
-1 physical id    : 2
-1 address sizes    : 46 bits physical, 48 bits virtual
-</code></pre><a id="more"></a></li>
-<li><p>查看CPU运行模式：32位或64位</p>
-<pre><code>getconf LONG_BIT
-
-64
-</code></pre></li>
-<li><p>查看CPU是否支持64位系统，如果大于0，则支持64位运算</p>
-<pre><code>cat /proc/cpuinfo | grep flags | grep &apos; lm &apos; | wc -l 
-
-2
-</code></pre></li>
-<li><p>查看内存信息</p>
-<pre><code>cat /proc/meminfo 
-
-MemTotal:        1922784 kB
-MemFree:          184468 kB
-Buffers:          198704 kB
-Cached:           630012 kB
-SwapCached:            0 kB
-Active:           997440 kB
-Inactive:         585112 kB
-Active(anon):     753856 kB
-Inactive(anon):      160 kB
-Active(file):     243584 kB
-Inactive(file):   584952 kB
-Unevictable:           0 kB
-Mlocked:               0 kB
-SwapTotal:             0 kB
-SwapFree:              0 kB
-Dirty:                28 kB
-Writeback:             0 kB
-AnonPages:        753960 kB
-Mapped:            30072 kB
-Shmem:               180 kB
-Slab:             124932 kB
-SReclaimable:     102336 kB
-SUnreclaim:        22596 kB
-KernelStack:        3528 kB
-PageTables:         5292 kB
-NFS_Unstable:          0 kB
-Bounce:                0 kB
-WritebackTmp:          0 kB
-CommitLimit:      961392 kB
-Committed_AS:    1604768 kB
-VmallocTotal:   34359738367 kB
-VmallocUsed:       11064 kB
-VmallocChunk:   34359725180 kB
-HardwareCorrupted:     0 kB
-AnonHugePages:    688128 kB
-HugePages_Total:       0
-HugePages_Free:        0
-HugePages_Rsvd:        0
-HugePages_Surp:        0
-Hugepagesize:       2048 kB
-DirectMap4k:        6144 kB
-DirectMap2M:     2095104 kB
-</code></pre></li>
-<li><p>查看当前系统内核信息</p>
-<pre><code>uname -a
-
-Linux iZ2326o1rm2Z 2.6.32-431.23.3.el6.x86_64 #1 SMP Thu Jul 31 17:20:51 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
-</code></pre></li>
-<li><p>查看当前操作系统内核信息</p>
-<pre><code>cat /etc/issue | grep linux
-</code></pre></li>
-<li><p>查看服务器型号</p>
-<pre><code>dmidecode | grep &quot;Product Name&quot;
-
-Product Name: HVM domU
-</code></pre></li>
-<li><p>查看当前打开的服务</p>
-<pre><code>chkconfig --list
-</code></pre></li>
-<li><p>查看当前打开的端口</p>
-<pre><code>netstat -an
-</code></pre></li>
-<li><p>查看磁盘信息</p>
-<pre><code>fdisk -l
-df -h
-</code></pre></li>
-<li><p>进程监控命令，实时显示系统进程的资源占用情况</p>
-<pre><code>top
-</code></pre></li>
-<li><p>系统监控命令，重点侧重于虚拟内存，也可以监控CPU、进程、内存分页以及IO的状态信息</p>
-<pre><code>vmstat
-</code></pre></li>
-<li><p>列举系统中被打开的文件</p>
-<pre><code>lsof -i：36000，显示使用36000端口的进程 
-lsof -u root，显示以root运行的程序 
-lsof -c php-fpm，显示php-fpm进程打开的文件 
-lsof php.ini，显示打开php.ini的进程。
-</code></pre></li>
-<li><p>查看Linux系统日志</p>
-<pre><code>系统级别的日志文件存放路径为/var/log
-常用的系统日志为/var/log/messages
-</code></pre></li>
-<li><p>查找文件系统大文件</p>
-<pre><code>可以首先通过df命令查看磁盘分区使用情况，比如df -m；
-然后：
-通过du命令查看具体文件夹的大小，比如du -sh ./*，du -h --max-depth=1|head -10；
-使用ls命令列出文件以及大小，比如ls -lSh；
-另外，也可以通过find命令直接查看特定目录下的文件大小，比如find / -type f -size +10M -exec ls -lrt {} \;
-</code></pre></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Centos-查看系统硬件信息&quot;&gt;&lt;a href=&quot;#Centos-查看系统硬件信息&quot; class=&quot;headerlink&quot; title=&quot;Centos 查看系统硬件信息&quot;&gt;&lt;/a&gt;Centos 查看系统硬件信息&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;查看CPU型号&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
-
-2  Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查看物理CPU个数&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cat /proc/cpuinfo | grep physical | uniq -c
-
-1 physical id    : 0
-1 address sizes    : 46 bits physical, 48 bits virtual
-1 physical id    : 2
-1 address sizes    : 46 bits physical, 48 bits virtual
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
-      <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos-查看端口使用情况</title>
-    <link href="http://blog.golearns.org/2016/02/26/centos-%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/"/>
-    <id>http://blog.golearns.org/2016/02/26/centos-查看端口使用情况/</id>
-    <published>2016-02-25T16:12:23.000Z</published>
-    <updated>2016-07-15T03:41:41.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Centos-查看端口使用情况"><a href="#Centos-查看端口使用情况" class="headerlink" title="Centos 查看端口使用情况"></a>Centos 查看端口使用情况</h1><ul>
-<li>通过测试感觉tsung每次进行压测,没进一个用户需要占用本机一个端口，所以系统默认的端口打开是从32768到65535,所以这里就只能进2W多个用户，于是修改默认打开端口数。 </li>
-<li><p>查看端口</p>
-<pre><code>sysctl net.ipv4.ip_local_port_range
-</code></pre></li>
-<li><p>修改该值</p>
-<pre><code>echo 1024 65535 &gt; /proc/sys/net/ipv4/ip_local_port_range  
-
-||
-
-sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
-
-||
-
-如果想一直生效，需要修改 /etc/sysctl.conf文件，加入net.ipv4.ip_local_port_range = 1024 65535,修改完成执行sysctl -p。
-</code></pre></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Centos-查看端口使用情况&quot;&gt;&lt;a href=&quot;#Centos-查看端口使用情况&quot; class=&quot;headerlink&quot; title=&quot;Centos 查看端口使用情况&quot;&gt;&lt;/a&gt;Centos 查看端口使用情况&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;通过测试感觉tsung每
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
-      <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos-安装jdk</title>
-    <link href="http://blog.golearns.org/2016/02/26/centos-%E5%AE%89%E8%A3%85jdk/"/>
-    <id>http://blog.golearns.org/2016/02/26/centos-安装jdk/</id>
-    <published>2016-02-25T16:11:10.000Z</published>
-    <updated>2016-07-15T03:41:26.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Centos安装JDK"><a href="#Centos安装JDK" class="headerlink" title="Centos安装JDK"></a>Centos安装JDK</h1><pre><code>wget http://download.oracle.com/otn-pub/java/jdk/7u3-b04/jdk-7u3-linux-x64.rpm(当出现秒下时候，出现HTTP request sent, awaiting response... 302 Moved Temporarily错误，通过chrom抓包，获取重定向后的链接地址)
-
-运行rpm -ivh jdk-7u3-linux-x64.rpm
-
-修改profile文件，vi /etc/profile,在文件最后加入
-
-  export JAVA_HOME=/usr/java/jdk1.7.0_03
-  export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-  export PATH=$PATH:$JAVA_HOME/bin
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Centos安装JDK&quot;&gt;&lt;a href=&quot;#Centos安装JDK&quot; class=&quot;headerlink&quot; title=&quot;Centos安装JDK&quot;&gt;&lt;/a&gt;Centos安装JDK&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;wget http://download.oracl
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
-      <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
-    
-      <category term="JDK" scheme="http://blog.golearns.org/tags/JDK/"/>
     
   </entry>
   

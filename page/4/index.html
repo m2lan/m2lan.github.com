@@ -266,6 +266,450 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/Shell-redirect/" itemprop="url">
+                  Shell-redirect
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:20:35+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-redirect/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-redirect/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# 输出重定向
+#  将输出到终端的结果重定向到文件中
+
+# 加上双引号 可以对输出结果换行
+# &gt; 会将已存在的结果覆盖
+# 如果不想覆盖 则使用 &gt;&gt; 如果文件存在，结果将会追加
+echo &quot;$(ls -la)&quot; &gt; file
+
+echo &quot;$(who)&quot; &gt;&gt; file1
+
+
+# 输入结果重定向
+cat &lt; file
+wc -l &lt; file
+
+# 文档嵌入
+wc -l &lt;&lt;EOF
+    hahahhdfdslfjdslfjsdlfjsdlfsd
+    werjewlrjewlrjewlrjewlrjwer
+    werjwelrjwlejrewljrew
+EOF
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/Shell-for-while/" itemprop="url">
+                  Shell-for-while
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:19:59+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-for-while/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-for-while/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# for 
+
+arr=(111 2222 3333 4444 5555)
+num=5
+count=5
+
+# for--in--
+for m in ${arr[@]}; do
+    echo $m
+done
+
+echo &quot;------------------------------------------&quot;
+
+for n in $( ls /usr/local ); do
+    echo $n
+done
+
+echo &quot;------------------------------------------&quot;
+
+# while
+while [[ $num -gt 0 ]]; do
+    echo &quot;num: ${num}&quot;
+    num=$(($num - 1))
+done
+
+num=5
+
+echo &quot;------------------------------------------&quot;
+# while --- continue
+while [[ $num -gt 0 ]]; do
+    num=$(($num - 1))
+    if [[ $num -eq 3 ]]; then
+        continue
+    fi
+    echo &quot;num: ${num}&quot;
+done
+
+echo &quot;------------------------------------------&quot;
+# while --- break
+while [[ $count -gt 0 ]]; do
+    count=$(($count - 1))
+    if [[ $count -eq 3 ]]; then
+        break;
+    fi
+    echo &quot;count: ${count}&quot;
+done
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/Shell-ifelse/" itemprop="url">
+                  Shell-ifelse
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:19:16+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-ifelse/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-ifelse/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+#if--else
+
+NAME=&quot;john&quot;
+
+# 注意if条件两边的空格
+if [ ${NAME} == &quot;john&quot; ]; then
+    echo &quot;hahhahahha&quot;
+else
+    echo &quot;huhuhuhuhu&quot;
+fi
+
+if [ ${NAME} == &quot;john&quot; ]; then
+    echo &quot;hahhahahha&quot;
+elif [ ${NAME} == &quot;johnx&quot; ]; then
+    echo &quot;huhuhuhuhu&quot;
+else
+    echo &quot;xxxxxxxxxx&quot;
+fi
+
+# 数值类型比较
+# $a -lt $b    $a &lt; $b
+# $a -gt $b    $a &gt; $b
+# $a -le $b    $a &lt;= $b
+# $a -ge $b    $a &gt;= $b
+# $a -eq $b    $a is equal to $b
+# $a -ne $b    $a is not equal to $b
+
+# 字符串类型比较
+# &quot;$a&quot; = &quot;$b&quot;     $a 和 $b 相等
+# &quot;$a&quot; == &quot;$b&quot;    $a 和 $b 相等
+# &quot;$a&quot; != &quot;$b&quot;    $a 和 $b 不相等
+# -z &quot;$a&quot;         $a 是空的
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/Shell-数组/" itemprop="url">
                   Shell-数组
                 </a>
@@ -1315,401 +1759,6 @@ echo $?
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Shell-helloworld/" itemprop="url">
-                  Shell-helloworld
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:11:03+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-helloworld/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-helloworld/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>#!/bin/bash
-# &quot;#!&quot;是一个约定的标记，用来告诉系统这个脚本需要使用什么解释器来执行，使用哪一种shell
-# 
-echo &quot;hello world!&quot;;
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/OC-检测视图退出/" itemprop="url">
-                  OC-检测视图退出
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:10:15+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/OC-检测视图退出/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-检测视图退出/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>-(void) viewWillDisappear:(BOOL)animated {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-       // back button was pressed.  We know this is true because self is no longer
-       // in the navigation stack.  
-    }
-    [super viewWillDisappear:animated];
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/OC-UIButton中设置image大小/" itemprop="url">
-                  OC-UIButton中设置image大小
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:08:49+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/OC-UIButton中设置image大小/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-UIButton中设置image大小/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>#import &lt;UIKit/UIKit.h&gt;
-
-@interface UIImage (Category)
-
-- (UIImage*)transformWidth:(CGFloat)width
-                    height:(CGFloat)height;
-
-@end
-
-
-#import &quot;UIImage+Category.h&quot;
-
-@implementation UIImage (Category)
-
-- (UIImage*)transformWidth:(CGFloat)width
-               height:(CGFloat)height {
-
-    CGFloat destW = width;
-    CGFloat destH = height;
-    CGFloat sourceW = width;
-    CGFloat sourceH = height;
-
-    CGImageRef imageRef = self.CGImage;
-    CGContextRef bitmap = CGBitmapContextCreate(NULL,
-                                               destW,
-                                               destH,
-                                               CGImageGetBitsPerComponent(imageRef),
-                                               4*destW,
-                                               CGImageGetColorSpace(imageRef),
-                                               (kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst));
-
-    CGContextDrawImage(bitmap, CGRectMake(0, 0, sourceW, sourceH), imageRef);
-
-    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
-    UIImage *resultImage = [UIImage imageWithCGImage:ref];
-    CGContextRelease(bitmap);
-    CGImageRelease(ref);
-
-    return resultImage;
-}
-
-@end
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1755,7 +1804,7 @@ echo &quot;hello world!&quot;;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">64</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
