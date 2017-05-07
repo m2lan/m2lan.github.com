@@ -57,28 +57,17 @@
 
 
 
-<meta name="description" content="redis优化
-在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。
-客户端请求服务器一次就发送一个报文 -&amp;gt; 等待服务端的返回 -&amp;gt; 关闭连接
-如果是100个请求、1000个请求，那就得请求100次、1000次
-所以使用多个请求的时候使用管道来操作(如果管道打包的命令太多占用的内存也会越大，适量)">
+<meta name="description" content="redis优化 在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。 客户端请求服务器一次就发送一个报文 -&amp;gt; 等待服务端的返回 -&amp;gt; 关闭连接 如果是100个请求、1000个请求，那就得请求100次、1000次 所以使用多个请求的时候使用管道来操作(如果管道打包的命令太多占用的内存也会越大，适量)">
+<meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis优化">
 <meta property="og:url" content="http://blog.golearns.org/2015/12/10/redis优化/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="redis优化
-在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。
-客户端请求服务器一次就发送一个报文 -&amp;gt; 等待服务端的返回 -&amp;gt; 关闭连接
-如果是100个请求、1000个请求，那就得请求100次、1000次
-所以使用多个请求的时候使用管道来操作(如果管道打包的命令太多占用的内存也会越大，适量)">
+<meta property="og:description" content="redis优化 在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。 客户端请求服务器一次就发送一个报文 -&amp;gt; 等待服务端的返回 -&amp;gt; 关闭连接 如果是100个请求、1000个请求，那就得请求100次、1000次 所以使用多个请求的时候使用管道来操作(如果管道打包的命令太多占用的内存也会越大，适量)">
 <meta property="og:updated_time" content="2016-07-15T02:32:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis优化">
-<meta name="twitter:description" content="redis优化
-在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。
-客户端请求服务器一次就发送一个报文 -&amp;gt; 等待服务端的返回 -&amp;gt; 关闭连接
-如果是100个请求、1000个请求，那就得请求100次、1000次
-所以使用多个请求的时候使用管道来操作(如果管道打包的命令太多占用的内存也会越大，适量)">
+<meta name="twitter:description" content="redis优化 在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。 客户端请求服务器一次就发送一个报文 -&amp;gt; 等待服务端的返回 -&amp;gt; 关闭连接 如果是100个请求、1000个请求，那就得请求100次、1000次 所以使用多个请求的时候使用管道来操作(如果管道打包的命令太多占用的内存也会越大，适量)">
 
 
 
@@ -341,7 +330,7 @@
       
 
       
-        <h2 id="redis_u4F18_u5316"><a href="#redis_u4F18_u5316" class="headerlink" title="redis优化"></a>redis优化</h2><ul>
+        <h2 id="redis优化"><a href="#redis优化" class="headerlink" title="redis优化"></a>redis优化</h2><ul>
 <li>在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。</li>
 <li>客户端请求服务器一次就发送一个报文 -&gt; 等待服务端的返回 -&gt; 关闭连接</li>
 <li>如果是100个请求、1000个请求，那就得请求100次、1000次</li>
@@ -517,7 +506,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -525,7 +514,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -534,7 +523,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -628,7 +617,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis_u4F18_u5316"><span class="nav-number">1.</span> <span class="nav-text">redis优化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis优化"><span class="nav-number">1.</span> <span class="nav-text">redis优化</span></a></li></ol></div>
             
           </div>
         </section>
@@ -646,8 +635,8 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

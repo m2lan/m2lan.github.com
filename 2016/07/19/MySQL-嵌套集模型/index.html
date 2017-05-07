@@ -57,40 +57,20 @@
 
 
 
-<meta name="description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。
-创建表并添加测试数据
-CREATE TABLE category (
-    category_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(20) NOT NULL,
-    lft INT NOT NULL,
-    rgt INT NOT NULL
-) ENGINE=InnoD">
+<meta name="description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。 创建表并添加测试数据 CREATE TABLE category (     category_id INT AUTO_INCREMENT PRIMARY KEY,     name VARCHAR(20) NOT NULL,     lft INT NOT NULL,     rgt INT NOT NULL ) ENGINE=InnoD">
+<meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql嵌套集模型">
 <meta property="og:url" content="http://blog.golearns.org/2016/07/19/MySQL-嵌套集模型/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。
-创建表并添加测试数据
-CREATE TABLE category (
-    category_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(20) NOT NULL,
-    lft INT NOT NULL,
-    rgt INT NOT NULL
-) ENGINE=InnoD">
+<meta property="og:description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。 创建表并添加测试数据 CREATE TABLE category (     category_id INT AUTO_INCREMENT PRIMARY KEY,     name VARCHAR(20) NOT NULL,     lft INT NOT NULL,     rgt INT NOT NULL ) ENGINE=InnoD">
 <meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/start.png">
 <meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/design.png">
 <meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/newNode.png">
 <meta property="og:updated_time" content="2016-07-19T10:42:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql嵌套集模型">
-<meta name="twitter:description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。
-创建表并添加测试数据
-CREATE TABLE category (
-    category_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(20) NOT NULL,
-    lft INT NOT NULL,
-    rgt INT NOT NULL
-) ENGINE=InnoD">
+<meta name="twitter:description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。 创建表并添加测试数据 CREATE TABLE category (     category_id INT AUTO_INCREMENT PRIMARY KEY,     name VARCHAR(20) NOT NULL,     lft INT NOT NULL,     rgt INT NOT NULL ) ENGINE=InnoD">
 <meta name="twitter:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/start.png">
 
 
@@ -354,7 +334,7 @@ CREATE TABLE category (
       
 
       
-        <h1 id="u5D4C_u5957_u96C6_u6A21_u578B"><a href="#u5D4C_u5957_u96C6_u6A21_u578B" class="headerlink" title="嵌套集模型"></a>嵌套集模型</h1><h2 id="u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002"><a href="#u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002" class="headerlink" title="在分类表中，通过左和右值来代表我们的嵌套节点。"></a>在分类表中，通过左和右值来代表我们的嵌套节点。</h2><ul>
+        <h1 id="嵌套集模型"><a href="#嵌套集模型" class="headerlink" title="嵌套集模型"></a>嵌套集模型</h1><h2 id="在分类表中，通过左和右值来代表我们的嵌套节点。"><a href="#在分类表中，通过左和右值来代表我们的嵌套节点。" class="headerlink" title="在分类表中，通过左和右值来代表我们的嵌套节点。"></a>在分类表中，通过左和右值来代表我们的嵌套节点。</h2><ul>
 <li><p>创建表并添加测试数据</p>
 <pre><code>CREATE TABLE category (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -397,7 +377,7 @@ MariaDB [work]&gt; select * from category;
 <img src="http://7xj3i5.com1.z0.glb.clouddn.com/design.png" alt="design.png"></li>
 <li>当树在工作的时候，我们从左到右一层一层将右边的数字一次分配给子节点。这种方法被称为<strong>改进的前序遍历树算法</strong></li>
 </ul>
-<h1 id="u68C0_u7D22_u4E00_u4E2A_u5B8C_u6574_u7684_u6811"><a href="#u68C0_u7D22_u4E00_u4E2A_u5B8C_u6574_u7684_u6811" class="headerlink" title="检索一个完整的树"></a>检索一个完整的树</h1><ul>
+<h1 id="检索一个完整的树"><a href="#检索一个完整的树" class="headerlink" title="检索一个完整的树"></a>检索一个完整的树</h1><ul>
 <li><p>我们可以通过使用自链接检索一个完整的树节点在父节点lft和rgt之前的节点</p>
 <pre><code>SELECT node.name FROM category AS node, category AS parent
     WHERE node.lft BETWEEN parent.lft AND parent.rgt
@@ -417,7 +397,7 @@ MariaDB [work]&gt; select * from category;
 | CD PLAYERS           |
 | 2 WAY RADIOS         |
 +----------------------+
-</code></pre><h1 id="u67E5_u627E_u6240_u6709_u7684_u53F6_u5B50_u8282_u70B9"><a href="#u67E5_u627E_u6240_u6709_u7684_u53F6_u5B50_u8282_u70B9" class="headerlink" title="查找所有的叶子节点"></a>查找所有的叶子节点</h1></li>
+</code></pre><h1 id="查找所有的叶子节点"><a href="#查找所有的叶子节点" class="headerlink" title="查找所有的叶子节点"></a>查找所有的叶子节点</h1></li>
 <li><p>查看<code>category</code>表会发现叶节点的左、右值是连续的数字。为了查找叶节点通过使用<code>rgt = lft + 1</code></p>
 <pre><code>select name from category where rgt = lft + 1;
 
@@ -431,7 +411,7 @@ MariaDB [work]&gt; select * from category;
 | CD PLAYERS   |
 | 2 WAY RADIOS |
 +--------------+
-</code></pre><h1 id="u68C0_u7D22_u5355_u4E2A_u8DEF_u5F84"><a href="#u68C0_u7D22_u5355_u4E2A_u8DEF_u5F84" class="headerlink" title="检索单个路径"></a>检索单个路径</h1><pre><code>select parent.name from category as node, category as parent where 
+</code></pre><h1 id="检索单个路径"><a href="#检索单个路径" class="headerlink" title="检索单个路径"></a>检索单个路径</h1><pre><code>select parent.name from category as node, category as parent where 
     node.lft between parent.lft and parent.rgt and node.name = &apos;FLASH&apos; order
     by parent.lft;
 
@@ -443,7 +423,7 @@ MariaDB [work]&gt; select * from category;
 | MP3 PLAYERS          |
 | FLASH                |
 +----------------------+
-</code></pre><h1 id="u67E5_u627E_u6240_u6709_u8282_u70B9_u7684_u6DF1_u5EA6"><a href="#u67E5_u627E_u6240_u6709_u8282_u70B9_u7684_u6DF1_u5EA6" class="headerlink" title="查找所有节点的深度"></a>查找所有节点的深度</h1></li>
+</code></pre><h1 id="查找所有节点的深度"><a href="#查找所有节点的深度" class="headerlink" title="查找所有节点的深度"></a>查找所有节点的深度</h1></li>
 <li><p>我们已经看过如何显示整个目录树，但是如果想显示树中每个节点的深度，以便更好的确定每个节点的层次结构。可以通过<code>Count</code>函数和<code>Group by</code>子句添加到我们现有的查询语句中</p>
 <pre><code>select node.name, (count(parent.name) - 1) as depth from category as node,
     category as parent where node.lft between parent.lft and parent.rgt group
@@ -483,7 +463,7 @@ MariaDB [work]&gt; select * from category;
 |                     CD PLAYERS      |
 |                     2 WAY RADIOS    |
 +-------------------------------------+
-</code></pre><h1 id="u5B50_u6811_u7684_u6DF1_u5EA6"><a href="#u5B50_u6811_u7684_u6DF1_u5EA6" class="headerlink" title="子树的深度"></a>子树的深度</h1></li>
+</code></pre><h1 id="子树的深度"><a href="#子树的深度" class="headerlink" title="子树的深度"></a>子树的深度</h1></li>
 <li><p>当我们需要一个子树的深度信息，我们添加第三个自链接，以及子查询来查找子树的深度</p>
 <pre><code>select node.name, (count(parent.name) - (sub_tree.depth + 1)) as depth from
     category as node, category as parent, category as sub_parent, 
@@ -506,7 +486,7 @@ MariaDB [work]&gt; select * from category;
 | CD PLAYERS           |     1 |
 | 2 WAY RADIOS         |     1 |
 +----------------------+-------+
-</code></pre><h1 id="u67E5_u627E_u4E00_u4E2A_u8282_u70B9_u7684_u76F4_u63A5_u4E0B_u5C5E"><a href="#u67E5_u627E_u4E00_u4E2A_u8282_u70B9_u7684_u76F4_u63A5_u4E0B_u5C5E" class="headerlink" title="查找一个节点的直接下属"></a>查找一个节点的直接下属</h1></li>
+</code></pre><h1 id="查找一个节点的直接下属"><a href="#查找一个节点的直接下属" class="headerlink" title="查找一个节点的直接下属"></a>查找一个节点的直接下属</h1></li>
 <li><p>这可以很容易的将<code>Having</code>子句加入之前的查询语句中</p>
 <pre><code>select node.name, (count(parent.name) - (sub_tree.depth + 1)) as depth from
     category as node, category as parent, category as sub_parent, 
@@ -530,7 +510,7 @@ MariaDB [work]&gt; select * from category;
 | 2 WAY RADIOS         |     1 |
 +----------------------+-------+
 </code></pre></li>
-<li>如果不想显示父节点，将<code>having depth &lt;= 1</code>修改为<code>having depth = 1</code><h1 id="u5D4C_u5957_u96C6_u5408_u4E2D_u4E2D_u7684_u805A_u5408_u51FD_u6570"><a href="#u5D4C_u5957_u96C6_u5408_u4E2D_u4E2D_u7684_u805A_u5408_u51FD_u6570" class="headerlink" title="嵌套集合中中的聚合函数"></a>嵌套集合中中的聚合函数</h1></li>
+<li>如果不想显示父节点，将<code>having depth &lt;= 1</code>修改为<code>having depth = 1</code><h1 id="嵌套集合中中的聚合函数"><a href="#嵌套集合中中的聚合函数" class="headerlink" title="嵌套集合中中的聚合函数"></a>嵌套集合中中的聚合函数</h1></li>
 <li><p>添加一个产品表</p>
 <pre><code>CREATE TABLE `product` (
   `product_id` int(11) AUTO_INCREMENT PRIMARY KEY,
@@ -586,7 +566,7 @@ MariaDB [work]&gt; select * from product;
 | CD PLAYERS           |                   2 |
 | 2 WAY RADIOS         |                   1 |
 +----------------------+---------------------+
-</code></pre><h1 id="u6DFB_u52A0_u4E00_u4E2A_u65B0_u8282_u70B9"><a href="#u6DFB_u52A0_u4E00_u4E2A_u65B0_u8282_u70B9" class="headerlink" title="添加一个新节点"></a>添加一个新节点</h1></li>
+</code></pre><h1 id="添加一个新节点"><a href="#添加一个新节点" class="headerlink" title="添加一个新节点"></a>添加一个新节点</h1></li>
 <li>添加一个新节点更新我们的树，再看看嵌套关系图
 <img src="http://7xj3i5.com1.z0.glb.clouddn.com/newNode.png" alt="newnode"></li>
 <li><p>如果我们想添加一个在<code>TELEVISIONS</code>和<code>PORTABLE ELECTRONICS</code>节点的新节点，这个新节点的<code>lft</code>和<code>rgt</code>值就是10和11，并且其右侧的所有节点将自己的<code>lft</code>和<code>rgt</code>值+2。然后我们用合适的<code>lft</code>和<code>rgt</code>值添加新节点</p>
@@ -655,7 +635,7 @@ MariaDB [work]&gt; DELIMITER ;
 |                     2 WAY RADIOS    |
 |                               FRS   |
 +-------------------------------------+
-</code></pre><h1 id="u5220_u9664_u8282_u70B9"><a href="#u5220_u9664_u8282_u70B9" class="headerlink" title="删除节点"></a>删除节点</h1></li>
+</code></pre><h1 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h1></li>
 <li><p>删除一个节点取决于节点在层次结构中的位置，很容易删除节点和子节点。</p>
 <pre><code>MariaDB [work]&gt; DELIMITER //
 MariaDB [work]&gt; create procedure delNodes(findName varchar(20) charset utf8)
@@ -830,7 +810,7 @@ MariaDB [work]&gt; DELIMITER ;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -838,7 +818,7 @@ MariaDB [work]&gt; DELIMITER ;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -847,7 +827,7 @@ MariaDB [work]&gt; DELIMITER ;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -941,7 +921,7 @@ MariaDB [work]&gt; DELIMITER ;
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u5D4C_u5957_u96C6_u6A21_u578B"><span class="nav-number">1.</span> <span class="nav-text">嵌套集模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002"><span class="nav-number">1.1.</span> <span class="nav-text">在分类表中，通过左和右值来代表我们的嵌套节点。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u68C0_u7D22_u4E00_u4E2A_u5B8C_u6574_u7684_u6811"><span class="nav-number">2.</span> <span class="nav-text">检索一个完整的树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u67E5_u627E_u6240_u6709_u7684_u53F6_u5B50_u8282_u70B9"><span class="nav-number">3.</span> <span class="nav-text">查找所有的叶子节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u68C0_u7D22_u5355_u4E2A_u8DEF_u5F84"><span class="nav-number">4.</span> <span class="nav-text">检索单个路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u67E5_u627E_u6240_u6709_u8282_u70B9_u7684_u6DF1_u5EA6"><span class="nav-number">5.</span> <span class="nav-text">查找所有节点的深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5B50_u6811_u7684_u6DF1_u5EA6"><span class="nav-number">6.</span> <span class="nav-text">子树的深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u67E5_u627E_u4E00_u4E2A_u8282_u70B9_u7684_u76F4_u63A5_u4E0B_u5C5E"><span class="nav-number">7.</span> <span class="nav-text">查找一个节点的直接下属</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5D4C_u5957_u96C6_u5408_u4E2D_u4E2D_u7684_u805A_u5408_u51FD_u6570"><span class="nav-number">8.</span> <span class="nav-text">嵌套集合中中的聚合函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u6DFB_u52A0_u4E00_u4E2A_u65B0_u8282_u70B9"><span class="nav-number">9.</span> <span class="nav-text">添加一个新节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5220_u9664_u8282_u70B9"><span class="nav-number">10.</span> <span class="nav-text">删除节点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#嵌套集模型"><span class="nav-number">1.</span> <span class="nav-text">嵌套集模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在分类表中，通过左和右值来代表我们的嵌套节点。"><span class="nav-number">1.1.</span> <span class="nav-text">在分类表中，通过左和右值来代表我们的嵌套节点。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#检索一个完整的树"><span class="nav-number">2.</span> <span class="nav-text">检索一个完整的树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查找所有的叶子节点"><span class="nav-number">3.</span> <span class="nav-text">查找所有的叶子节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#检索单个路径"><span class="nav-number">4.</span> <span class="nav-text">检索单个路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查找所有节点的深度"><span class="nav-number">5.</span> <span class="nav-text">查找所有节点的深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子树的深度"><span class="nav-number">6.</span> <span class="nav-text">子树的深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查找一个节点的直接下属"><span class="nav-number">7.</span> <span class="nav-text">查找一个节点的直接下属</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#嵌套集合中中的聚合函数"><span class="nav-number">8.</span> <span class="nav-text">嵌套集合中中的聚合函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加一个新节点"><span class="nav-number">9.</span> <span class="nav-text">添加一个新节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除节点"><span class="nav-number">10.</span> <span class="nav-text">删除节点</span></a></li></ol></div>
             
           </div>
         </section>
@@ -959,8 +939,8 @@ MariaDB [work]&gt; DELIMITER ;
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

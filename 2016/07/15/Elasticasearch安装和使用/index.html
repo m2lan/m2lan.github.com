@@ -57,43 +57,17 @@
 
 
 
-<meta name="description" content="Elasticasearch安装和使用install
-download
-unzip elasticsearch-2.2.0.zip
-
-configvim config/elasticsearch.yml
-
-path.data: app_data
-path.logs: app_logs
-network.host: 0.0.0.0
-install Marvel agent pluginbin/plug">
+<meta name="description" content="Elasticasearch安装和使用install download unzip elasticsearch-2.2.0.zip  configvim config/elasticsearch.yml  path.data: app_data path.logs: app_logs network.host: 0.0.0.0 install Marvel agent pluginbin/plug">
+<meta name="keywords" content="Elasticasearch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Elasticasearch安装和使用">
 <meta property="og:url" content="http://blog.golearns.org/2016/07/15/Elasticasearch安装和使用/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Elasticasearch安装和使用install
-download
-unzip elasticsearch-2.2.0.zip
-
-configvim config/elasticsearch.yml
-
-path.data: app_data
-path.logs: app_logs
-network.host: 0.0.0.0
-install Marvel agent pluginbin/plug">
+<meta property="og:description" content="Elasticasearch安装和使用install download unzip elasticsearch-2.2.0.zip  configvim config/elasticsearch.yml  path.data: app_data path.logs: app_logs network.host: 0.0.0.0 install Marvel agent pluginbin/plug">
 <meta property="og:updated_time" content="2016-07-15T02:27:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticasearch安装和使用">
-<meta name="twitter:description" content="Elasticasearch安装和使用install
-download
-unzip elasticsearch-2.2.0.zip
-
-configvim config/elasticsearch.yml
-
-path.data: app_data
-path.logs: app_logs
-network.host: 0.0.0.0
-install Marvel agent pluginbin/plug">
+<meta name="twitter:description" content="Elasticasearch安装和使用install download unzip elasticsearch-2.2.0.zip  configvim config/elasticsearch.yml  path.data: app_data path.logs: app_logs network.host: 0.0.0.0 install Marvel agent pluginbin/plug">
 
 
 
@@ -356,7 +330,7 @@ install Marvel agent pluginbin/plug">
       
 
       
-        <h1 id="Elasticasearch_u5B89_u88C5_u548C_u4F7F_u7528"><a href="#Elasticasearch_u5B89_u88C5_u548C_u4F7F_u7528" class="headerlink" title="Elasticasearch安装和使用"></a>Elasticasearch安装和使用</h1><h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><ul>
+        <h1 id="Elasticasearch安装和使用"><a href="#Elasticasearch安装和使用" class="headerlink" title="Elasticasearch安装和使用"></a>Elasticasearch安装和使用</h1><h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><ul>
 <li><a href="https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/2.2.0/elasticsearch-2.2.0.zip" target="_blank" rel="external">download</a></li>
 <li><code>unzip elasticsearch-2.2.0.zip</code></li>
 </ul>
@@ -365,14 +339,14 @@ install Marvel agent pluginbin/plug">
 path.data: app_data
 path.logs: app_logs
 network.host: 0.0.0.0
-</code></pre><h2 id="install_Marvel_agent_plugin"><a href="#install_Marvel_agent_plugin" class="headerlink" title="install Marvel agent plugin"></a>install Marvel agent plugin</h2><pre><code>bin/plugin install licens
+</code></pre><h2 id="install-Marvel-agent-plugin"><a href="#install-Marvel-agent-plugin" class="headerlink" title="install Marvel agent plugin"></a>install Marvel agent plugin</h2><pre><code>bin/plugin install licens
 bin/plugin install marvel-agent
 </code></pre><a id="more"></a>    
 <h2 id="cluster"><a href="#cluster" class="headerlink" title="cluster"></a>cluster</h2><pre><code>cluster.name: booksearch
 path.data: app_data
 path.logs: app_logs
 network.host: 0.0.0.0
-</code></pre><h2 id="start_elasticsearch"><a href="#start_elasticsearch" class="headerlink" title="start elasticsearch"></a>start elasticsearch</h2><pre><code>bin/elasticsearch
+</code></pre><h2 id="start-elasticsearch"><a href="#start-elasticsearch" class="headerlink" title="start elasticsearch"></a>start elasticsearch</h2><pre><code>bin/elasticsearch
 
 ||
 
@@ -381,7 +355,7 @@ ES_HEAP_SIZE=256m; bin/elasticsearch
 || 守护进程模式运行
 
 bin/elasticsearch -d
-</code></pre><h2 id="install_kibana"><a href="#install_kibana" class="headerlink" title="install kibana"></a>install kibana</h2><pre><code>wget https://download.elastic.co/kibana/kibana/kibana-4.4.1-linux-x64.tar.gz
+</code></pre><h2 id="install-kibana"><a href="#install-kibana" class="headerlink" title="install kibana"></a>install kibana</h2><pre><code>wget https://download.elastic.co/kibana/kibana/kibana-4.4.1-linux-x64.tar.gz
 tar xzvf kibana-4.4.1-linux-x64.tar.gz
 cd kibana-4.4.1-linux-x64
 bin/kibana plugin --install elasticsearch/marvel/latest
@@ -392,9 +366,9 @@ elasticsearch.url: &quot;http://localhost:9200&quot;
 
 # 启动
 bin/kibana
-</code></pre><h2 id="u5173_u95ED_u76D1_u63A7"><a href="#u5173_u95ED_u76D1_u63A7" class="headerlink" title="关闭监控"></a>关闭监控</h2><pre><code>vim config/elasticsearch.yml
+</code></pre><h2 id="关闭监控"><a href="#关闭监控" class="headerlink" title="关闭监控"></a>关闭监控</h2><pre><code>vim config/elasticsearch.yml
 marvel.agent.enabled: false
-</code></pre><h2 id="create_an_index"><a href="#create_an_index" class="headerlink" title="create an index"></a>create an index</h2><ul>
+</code></pre><h2 id="create-an-index"><a href="#create-an-index" class="headerlink" title="create an index"></a>create an index</h2><ul>
 <li><p>创建一个名为customer的索引</p>
 <pre><code>curl -XPUT localhost:9200/customer?pretty
 </code></pre></li>
@@ -414,7 +388,7 @@ marvel.agent.enabled: false
 <pre><code>curl -XPOST localhost:9200/customer/external/1/_update?pretty -d &apos;{&quot;doc&quot;: {&quot;name&quot;: &quot;Jane doe&quot;}}&apos;
 </code></pre></li>
 </ul>
-<h2 id="u8BE6_u7EC6_u7684_u6587_u6863_u64CD_u4F5C"><a href="#u8BE6_u7EC6_u7684_u6587_u6863_u64CD_u4F5C" class="headerlink" title="详细的文档操作"></a>详细的文档操作</h2><ul>
+<h2 id="详细的文档操作"><a href="#详细的文档操作" class="headerlink" title="详细的文档操作"></a>详细的文档操作</h2><ul>
 <li><p>创建索引</p>
 <pre><code>curl -XPUT localhost:9200/website?pretty
 </code></pre></li>
@@ -455,10 +429,10 @@ Content-Length: 0
 <pre><code>curl -XDELETE localhost:9200/website/blog/123
 </code></pre></li>
 </ul>
-<h2 id="u5B89_u88C5head_uFF0C_u7528_u6765_u67E5_u770B_u96C6_u7FA4_u4FE1_u606F"><a href="#u5B89_u88C5head_uFF0C_u7528_u6765_u67E5_u770B_u96C6_u7FA4_u4FE1_u606F" class="headerlink" title="安装head，用来查看集群信息"></a>安装head，用来查看集群信息</h2><pre><code>bin/plugin install mobz/elasticsearch-head
+<h2 id="安装head，用来查看集群信息"><a href="#安装head，用来查看集群信息" class="headerlink" title="安装head，用来查看集群信息"></a>安装head，用来查看集群信息</h2><pre><code>bin/plugin install mobz/elasticsearch-head
 
 url: http://192.168.1.219:9200/_plugin/head/
-</code></pre><h2 id="u5F00_u542F_u52A8_u6001_u811A_u672C"><a href="#u5F00_u542F_u52A8_u6001_u811A_u672C" class="headerlink" title="开启动态脚本"></a>开启动态脚本</h2><ul>
+</code></pre><h2 id="开启动态脚本"><a href="#开启动态脚本" class="headerlink" title="开启动态脚本"></a>开启动态脚本</h2><ul>
 <li><p>修改配置文件</p>
 <pre><code>vim config/elasticsearch.yml
 
@@ -476,8 +450,8 @@ script.indexed: true
 }&apos;
 </code></pre></li>
 </ul>
-<h2 id="u81EA_u52A8_u521B_u5EFA_u7D22_u5F15"><a href="#u81EA_u52A8_u521B_u5EFA_u7D22_u5F15" class="headerlink" title="自动创建索引"></a>自动创建索引</h2><pre><code>action.auto_create_index: .marvel-*
-</code></pre><h2 id="u52A0_u8F7D_u6570_u636E"><a href="#u52A0_u8F7D_u6570_u636E" class="headerlink" title="加载数据"></a>加载数据</h2><pre><code>wget https://www.elastic.co/guide/en/kibana/3.0/snippets/shakespeare.json
+<h2 id="自动创建索引"><a href="#自动创建索引" class="headerlink" title="自动创建索引"></a>自动创建索引</h2><pre><code>action.auto_create_index: .marvel-*
+</code></pre><h2 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h2><pre><code>wget https://www.elastic.co/guide/en/kibana/3.0/snippets/shakespeare.json
 wget https://github.com/bly2k/files/blob/master/accounts.zip?raw=true
 wget https://download.elastic.co/demos/kibana/gettingstarted/logs.jsonl.gz
 
@@ -556,8 +530,8 @@ curl -XPUT http://localhost:9200/logstash-2015.05.20 -d &apos;
 curl -XPOST &apos;localhost:9200/bank/account/_bulk?pretty&apos; --data-binary @accounts.json
 curl -XPOST &apos;localhost:9200/shakespeare/_bulk?pretty&apos; --data-binary @shakespeare.json
 curl -XPOST &apos;localhost:9200/_bulk?pretty&apos; --data-binary @logs.jsonl
-</code></pre><h2 id="u67E5_u770B"><a href="#u67E5_u770B" class="headerlink" title="查看"></a>查看</h2><pre><code>curl localhost:9200/_cat/indices?v
-</code></pre><h2 id="u67E5_u770B_u96C6_u7FA4_u5065_u5EB7_u4FE1_u606F"><a href="#u67E5_u770B_u96C6_u7FA4_u5065_u5EB7_u4FE1_u606F" class="headerlink" title="查看集群健康信息"></a>查看集群健康信息</h2><pre><code>curl -XGET localhost:9200/_cluster/health
+</code></pre><h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><pre><code>curl localhost:9200/_cat/indices?v
+</code></pre><h2 id="查看集群健康信息"><a href="#查看集群健康信息" class="headerlink" title="查看集群健康信息"></a>查看集群健康信息</h2><pre><code>curl -XGET localhost:9200/_cluster/health
 
 {
     &quot;cluster_name&quot;: &quot;booksearch&quot;,
@@ -696,7 +670,7 @@ curl -XPOST &apos;localhost:9200/_bulk?pretty&apos; --data-binary @logs.jsonl
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -704,7 +678,7 @@ curl -XPOST &apos;localhost:9200/_bulk?pretty&apos; --data-binary @logs.jsonl
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -713,7 +687,7 @@ curl -XPOST &apos;localhost:9200/_bulk?pretty&apos; --data-binary @logs.jsonl
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -807,7 +781,7 @@ curl -XPOST &apos;localhost:9200/_bulk?pretty&apos; --data-binary @logs.jsonl
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Elasticasearch_u5B89_u88C5_u548C_u4F7F_u7528"><span class="nav-number">1.</span> <span class="nav-text">Elasticasearch安装和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#install"><span class="nav-number">1.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config"><span class="nav-number">1.2.</span> <span class="nav-text">config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install_Marvel_agent_plugin"><span class="nav-number">1.3.</span> <span class="nav-text">install Marvel agent plugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cluster"><span class="nav-number">1.4.</span> <span class="nav-text">cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#start_elasticsearch"><span class="nav-number">1.5.</span> <span class="nav-text">start elasticsearch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install_kibana"><span class="nav-number">1.6.</span> <span class="nav-text">install kibana</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5173_u95ED_u76D1_u63A7"><span class="nav-number">1.7.</span> <span class="nav-text">关闭监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#create_an_index"><span class="nav-number">1.8.</span> <span class="nav-text">create an index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BE6_u7EC6_u7684_u6587_u6863_u64CD_u4F5C"><span class="nav-number">1.9.</span> <span class="nav-text">详细的文档操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5B89_u88C5head_uFF0C_u7528_u6765_u67E5_u770B_u96C6_u7FA4_u4FE1_u606F"><span class="nav-number">1.10.</span> <span class="nav-text">安装head，用来查看集群信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5F00_u542F_u52A8_u6001_u811A_u672C"><span class="nav-number">1.11.</span> <span class="nav-text">开启动态脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u81EA_u52A8_u521B_u5EFA_u7D22_u5F15"><span class="nav-number">1.12.</span> <span class="nav-text">自动创建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u52A0_u8F7D_u6570_u636E"><span class="nav-number">1.13.</span> <span class="nav-text">加载数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u67E5_u770B"><span class="nav-number">1.14.</span> <span class="nav-text">查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u67E5_u770B_u96C6_u7FA4_u5065_u5EB7_u4FE1_u606F"><span class="nav-number">1.15.</span> <span class="nav-text">查看集群健康信息</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Elasticasearch安装和使用"><span class="nav-number">1.</span> <span class="nav-text">Elasticasearch安装和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#install"><span class="nav-number">1.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config"><span class="nav-number">1.2.</span> <span class="nav-text">config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-Marvel-agent-plugin"><span class="nav-number">1.3.</span> <span class="nav-text">install Marvel agent plugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cluster"><span class="nav-number">1.4.</span> <span class="nav-text">cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#start-elasticsearch"><span class="nav-number">1.5.</span> <span class="nav-text">start elasticsearch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-kibana"><span class="nav-number">1.6.</span> <span class="nav-text">install kibana</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关闭监控"><span class="nav-number">1.7.</span> <span class="nav-text">关闭监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#create-an-index"><span class="nav-number">1.8.</span> <span class="nav-text">create an index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细的文档操作"><span class="nav-number">1.9.</span> <span class="nav-text">详细的文档操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装head，用来查看集群信息"><span class="nav-number">1.10.</span> <span class="nav-text">安装head，用来查看集群信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启动态脚本"><span class="nav-number">1.11.</span> <span class="nav-text">开启动态脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动创建索引"><span class="nav-number">1.12.</span> <span class="nav-text">自动创建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载数据"><span class="nav-number">1.13.</span> <span class="nav-text">加载数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看"><span class="nav-number">1.14.</span> <span class="nav-text">查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看集群健康信息"><span class="nav-number">1.15.</span> <span class="nav-text">查看集群健康信息</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -825,8 +799,8 @@ curl -XPOST &apos;localhost:9200/_bulk?pretty&apos; --data-binary @logs.jsonl
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

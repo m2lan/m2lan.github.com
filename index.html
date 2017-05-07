@@ -266,6 +266,235 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/07/mybatis环境安装/" itemprop="url">
+                  mybatis环境安装
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-07T10:08:54+08:00" content="2017-05-07">
+              2017-05-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/07/mybatis环境安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis环境安装/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="mybatis环境安装"><a href="#mybatis环境安装" class="headerlink" title="mybatis环境安装"></a>mybatis环境安装</h1><h2 id="Eclipse插件安装"><a href="#Eclipse插件安装" class="headerlink" title="Eclipse插件安装"></a>Eclipse插件安装</h2><pre><code>Help -&gt; Eclipse Marketplace -&gt; Search -&gt; MyBatipse -&gt; install
+</code></pre><h2 id="新建maven-project-simple-project"><a href="#新建maven-project-simple-project" class="headerlink" title="新建maven project(simple project)"></a>新建maven project(simple project)</h2><ul>
+<li><p>pom.xml</p>
+<pre><code>&lt;profiles&gt;
+    &lt;profile&gt;
+        &lt;activation&gt;
+            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+            &lt;jdk&gt;1.8&lt;/jdk&gt;
+        &lt;/activation&gt;
+        &lt;properties&gt;
+            &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+            &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+            &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+            &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+            &lt;maven.compiler.compilerVersion&gt;1.8&lt;/maven.compiler.compilerVersion&gt;
+            &lt;java.version&gt;1.8&lt;/java.version&gt;
+            &lt;mybatis.version&gt;3.4.1&lt;/mybatis.version&gt;
+            &lt;mysql.version&gt;5.1.40&lt;/mysql.version&gt;
+            &lt;log4j.version&gt;1.2.17&lt;/log4j.version&gt;
+            &lt;junit.version&gt;4.12&lt;/junit.version&gt;
+            &lt;mybatis.ehcache.version&gt;1.1.0&lt;/mybatis.ehcache.version&gt;
+        &lt;/properties&gt;
+    &lt;/profile&gt;
+&lt;/profiles&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+        &lt;version&gt;${mybatis.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;${mysql.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;log4j&lt;/groupId&gt;
+        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;version&gt;${log4j.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis.caches&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-ehcache&lt;/artifactId&gt;
+        &lt;version&gt;${mybatis.ehcache.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;${junit.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre><ul>
+<li>maven -&gt; update project</li>
+<li><p>resources下创建mybatis-config.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE configuration
+  PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+  &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+    &lt;!-- 数据库配置文件 --&gt;
+    &lt;properties resource=&quot;jdbc.properties&quot;&gt;&lt;/properties&gt;
+    &lt;settings&gt;
+        &lt;!-- 开启缓存和懒加载 --&gt;
+        &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;
+        &lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;
+        &lt;setting name=&quot;aggressiveLazyLoading&quot; value=&quot;false&quot;/&gt;
+        &lt;!-- 日志使用log4j --&gt;
+        &lt;setting name=&quot;logImpl&quot; value=&quot;LOG4J&quot;/&gt;
+    &lt;/settings&gt;
+    &lt;environments default=&quot;development&quot;&gt;
+        &lt;environment id=&quot;development&quot;&gt;
+            &lt;transactionManager type=&quot;JDBC&quot; /&gt;
+            &lt;dataSource type=&quot;POOLED&quot;&gt;
+                &lt;property name=&quot;driver&quot; value=&quot;${jdbc.driverClass}&quot; /&gt;
+                &lt;property name=&quot;url&quot; value=&quot;${jdbc.jdbcUrl}&quot; /&gt;
+                &lt;property name=&quot;username&quot; value=&quot;${jdbc.user}&quot; /&gt;
+                &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot; /&gt;
+            &lt;/dataSource&gt;
+        &lt;/environment&gt;
+    &lt;/environments&gt;
+&lt;/configuration&gt;
+</code></pre></li>
+<li><p>创建jdbc.properties</p>
+<pre><code>jdbc.user=root
+jdbc.password=123456
+jdbc.driverClass=com.mysql.jdbc.Driver
+jdbc.jdbcUrl=jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true
+</code></pre></li>
+<li><p>log4j.properties</p>
+<pre><code>log4j.rootLogger=DEBUG, stdout
+
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d %p [%c] - %m %n
+
+# General Apache libraries
+log4j.logger.org.apache=WARN
+
+# Disable verbose logging
+log4j.java.sql=DEBUG
+log4j.category.org.apache.ibatis=DEBUG
+</code></pre></li>
+<li><p>为了方便提示</p>
+<pre><code>下载:
+    http://mybatis.org/dtd/mybatis-3-mapper.dtd
+    http://mybatis.org/dtd/mybatis-3-config.dtd
+
+Eclise -&gt; 偏好设置 -&gt; XML -&gt; XML Catalog -&gt; add
+</code></pre><p>  <img src="http://7xj3i5.com1.z0.glb.clouddn.com/mybatisConfig.png" alt="mybatis-config">
+  <img src="http://7xj3i5.com1.z0.glb.clouddn.com/mybatisMapper.png" alt="mybatis-mapper"></p>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/10/MySQL-快速复制数据库/" itemprop="url">
                   MySQL-快速复制数据库
                 </a>
@@ -335,7 +564,7 @@
       
         
           
-            <h1 id="mysql__u5FEB_u901F_u590D_u5236_u6570_u636E_u5E93"><a href="#mysql__u5FEB_u901F_u590D_u5236_u6570_u636E_u5E93" class="headerlink" title="mysql 快速复制数据库"></a>mysql 快速复制数据库</h1><ul>
+            <h1 id="mysql-快速复制数据库"><a href="#mysql-快速复制数据库" class="headerlink" title="mysql 快速复制数据库"></a>mysql 快速复制数据库</h1><ul>
 <li><p>从shopimport 复制到 shopimport2</p>
 <pre><code>./mysqldump shopimport -uroot -p123456 --add-drop-table | ./mysql shopimport2 -uroot -p123456
 </code></pre></li>
@@ -453,13 +682,13 @@
 
       
         
-          <h1 id="mysql__u5B9A_u65F6_u4EFB_u52A1"><a href="#mysql__u5B9A_u65F6_u4EFB_u52A1" class="headerlink" title="mysql 定时任务"></a>mysql 定时任务</h1><blockquote>
+          <h1 id="mysql-定时任务"><a href="#mysql-定时任务" class="headerlink" title="mysql 定时任务"></a>mysql 定时任务</h1><blockquote>
 <p><code>[on completion [not] preserve]</code>可以设置这个事件是执行一次还是持久执行,默认为<code>not preserve。</code>
 <code>[enable | disenable]</code>可是设置该事件创建后状态是否开启或关闭,默认为<code>enable</code>。
 <code>[commet &#39;commet&#39;]</code>可以给该事件加上注释。</p>
 </blockquote>
-<h2 id="u67E5_u770B_u5B9A_u65F6_u4EFB_u52A1"><a href="#u67E5_u770B_u5B9A_u65F6_u4EFB_u52A1" class="headerlink" title="查看定时任务"></a>查看定时任务</h2><pre><code>show events;
-</code></pre><h2 id="u67E5_u770B_u662F_u5426_u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1"><a href="#u67E5_u770B_u662F_u5426_u5F00_u542F_u5B9A_u65F6_u4EFB_u52A1" class="headerlink" title="查看是否开启定时任务"></a>查看是否开启定时任务</h2><pre><code>SHOW VARIABLES LIKE &apos;event_scheduler&apos;;
+<h2 id="查看定时任务"><a href="#查看定时任务" class="headerlink" title="查看定时任务"></a>查看定时任务</h2><pre><code>show events;
+</code></pre><h2 id="查看是否开启定时任务"><a href="#查看是否开启定时任务" class="headerlink" title="查看是否开启定时任务"></a>查看是否开启定时任务</h2><pre><code>SHOW VARIABLES LIKE &apos;event_scheduler&apos;;
 </code></pre>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/11/10/MySQL-定时任务/#more" rel="contents">
@@ -578,7 +807,7 @@
       
         
           
-            <h1 id="Chrome_u6D4F_u89C8_u5668_u5982_u4F55_u9759_u97F3"><a href="#Chrome_u6D4F_u89C8_u5668_u5982_u4F55_u9759_u97F3" class="headerlink" title="Chrome浏览器如何静音"></a>Chrome浏览器如何静音</h1><ul>
+            <h1 id="Chrome浏览器如何静音"><a href="#Chrome浏览器如何静音" class="headerlink" title="Chrome浏览器如何静音"></a>Chrome浏览器如何静音</h1><ul>
 <li>在浏览器输入<code>chrome://flags/#enable-tab-audio-muting</code>
 <img src="http://7xj3i5.com1.z0.glb.clouddn.com/837D6910-25E7-4F61-A58A-6EAD12C4E74C.png" alt=""></li>
 <li>点击启用
@@ -712,7 +941,7 @@
 
       
         
-          <h1 id="Druid_+_Springboot_u914D_u7F6E"><a href="#Druid_+_Springboot_u914D_u7F6E" class="headerlink" title="Druid + Springboot配置"></a>Druid + Springboot配置</h1><ul>
+          <h1 id="Druid-Springboot配置"><a href="#Druid-Springboot配置" class="headerlink" title="Druid + Springboot配置"></a>Druid + Springboot配置</h1><ul>
 <li><p>pom.xml配置</p>
 <pre><code>&lt;dependency&gt;
     &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
@@ -836,7 +1065,7 @@
 
       
         
-          <h1 id="PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210"><a href="#PHP_u751F_u6210_u5706_u89D2_u56FE_u7247+_u56FE_u7247_u5408_u6210" class="headerlink" title="PHP生成圆角图片+图片合成"></a>PHP生成圆角图片+图片合成</h1><h1 id="u4F7F_u7528_u65B9_u6CD5"><a href="#u4F7F_u7528_u65B9_u6CD5" class="headerlink" title="使用方法"></a>使用方法</h1><pre><code>&lt;?php
+          <h1 id="PHP生成圆角图片-图片合成"><a href="#PHP生成圆角图片-图片合成" class="headerlink" title="PHP生成圆角图片+图片合成"></a>PHP生成圆角图片+图片合成</h1><h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><pre><code>&lt;?php
     create_qrcode(&apos;images/head_290_00a4e60499ffb5c3.jpg&apos;, &apos;images/WechatIMG12.png&apos;, &apos;测试数据测试数据&apos;, &apos;images/create.jpg&apos;, &apos;images/test.jpg&apos;, &apos;simhei.ttf&apos;);
 
     echo &quot;&lt;img src=&apos;images/test.jpg&apos;/&gt;&quot;;
@@ -959,7 +1188,7 @@
       
         
           
-            <h1 id="Tigase__u7528_u6237_u5BC6_u7801_u52A0_u5BC6"><a href="#Tigase__u7528_u6237_u5BC6_u7801_u52A0_u5BC6" class="headerlink" title="Tigase 用户密码加密"></a>Tigase 用户密码加密</h1><pre><code>call TigPutDBProperty(&apos;password-encoding&apos;, &apos;MD5-PASSWORD&apos;);
+            <h1 id="Tigase-用户密码加密"><a href="#Tigase-用户密码加密" class="headerlink" title="Tigase 用户密码加密"></a>Tigase 用户密码加密</h1><pre><code>call TigPutDBProperty(&apos;password-encoding&apos;, &apos;MD5-PASSWORD&apos;);
 </code></pre>
           
         
@@ -1074,7 +1303,7 @@
       
         
           
-            <h1 id="u4E00_u952E_u751F_u6210Android_u548CIOS_u56FE_u6807_u548C_u542F_u52A8_u753B_u9762"><a href="#u4E00_u952E_u751F_u6210Android_u548CIOS_u56FE_u6807_u548C_u542F_u52A8_u753B_u9762" class="headerlink" title="一键生成Android和IOS图标和启动画面"></a>一键生成Android和IOS图标和启动画面</h1><ul>
+            <h1 id="一键生成Android和IOS图标和启动画面"><a href="#一键生成Android和IOS图标和启动画面" class="headerlink" title="一键生成Android和IOS图标和启动画面"></a>一键生成Android和IOS图标和启动画面</h1><ul>
 <li><p>操作步骤</p>
 <pre><code>npm install -g ionic
 ionic start myapp
@@ -1202,7 +1431,7 @@ ionic resources // 生成android和ios所需图片
 
       
         
-          <h1 id="Ectouch2-0__u6570_u636E_u5E93_u7ED3_u6784"><a href="#Ectouch2-0__u6570_u636E_u5E93_u7ED3_u6784" class="headerlink" title="Ectouch2.0 数据库结构"></a>Ectouch2.0 数据库结构</h1><h2 id="u7528_u6237_u8D26_u76EE_u65E5_u5FD7_u8868ecs_account_log"><a href="#u7528_u6237_u8D26_u76EE_u65E5_u5FD7_u8868ecs_account_log" class="headerlink" title="用户账目日志表<code>ecs_account_log</code>"></a>用户账目日志表<code>ecs_account_log</code></h2><table>
+          <h1 id="Ectouch2-0-数据库结构"><a href="#Ectouch2-0-数据库结构" class="headerlink" title="Ectouch2.0 数据库结构"></a>Ectouch2.0 数据库结构</h1><h2 id="用户账目日志表ecs-account-log"><a href="#用户账目日志表ecs-account-log" class="headerlink" title="用户账目日志表ecs_account_log"></a>用户账目日志表<code>ecs_account_log</code></h2><table>
 <thead>
 <tr>
 <th>字段名称</th>
@@ -1374,7 +1603,7 @@ ionic resources // 生成android和ios所需图片
 
       
         
-          <h1 id="u5D4C_u5957_u96C6_u6A21_u578B"><a href="#u5D4C_u5957_u96C6_u6A21_u578B" class="headerlink" title="嵌套集模型"></a>嵌套集模型</h1><h2 id="u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002"><a href="#u5728_u5206_u7C7B_u8868_u4E2D_uFF0C_u901A_u8FC7_u5DE6_u548C_u53F3_u503C_u6765_u4EE3_u8868_u6211_u4EEC_u7684_u5D4C_u5957_u8282_u70B9_u3002" class="headerlink" title="在分类表中，通过左和右值来代表我们的嵌套节点。"></a>在分类表中，通过左和右值来代表我们的嵌套节点。</h2><ul>
+          <h1 id="嵌套集模型"><a href="#嵌套集模型" class="headerlink" title="嵌套集模型"></a>嵌套集模型</h1><h2 id="在分类表中，通过左和右值来代表我们的嵌套节点。"><a href="#在分类表中，通过左和右值来代表我们的嵌套节点。" class="headerlink" title="在分类表中，通过左和右值来代表我们的嵌套节点。"></a>在分类表中，通过左和右值来代表我们的嵌套节点。</h2><ul>
 <li><p>创建表并添加测试数据</p>
 <pre><code>CREATE TABLE category (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -1416,129 +1645,6 @@ MariaDB [work]&gt; select * from category;
               阅读全文 &raquo;
             </a>
           </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/15/nuclide编辑器安装/" itemprop="url">
-                  nuclide编辑器安装
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-15T17:13:50+08:00" content="2016-07-15">
-              2016-07-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/React-native/" itemprop="url" rel="index">
-                    <span itemprop="name">React-native</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/15/nuclide编辑器安装/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/nuclide编辑器安装/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="nuclide_u7F16_u8F91_u5668_u5B89_u88C5"><a href="#nuclide_u7F16_u8F91_u5668_u5B89_u88C5" class="headerlink" title="nuclide编辑器安装"></a>nuclide编辑器安装</h1><ul>
-<li>nuclide是基于atom构建的开发环境</li>
-<li><p><code>install atom</code></p>
-<pre><code>brew install Caskroom/cask/atom
-</code></pre></li>
-<li><p><code>install nuclide</code></p>
-<pre><code>apm install nuclide
-</code></pre></li>
-</ul>
-
-          
         
       
     </div>
@@ -1606,7 +1712,7 @@ MariaDB [work]&gt; select * from category;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1614,7 +1720,7 @@ MariaDB [work]&gt; select * from category;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1623,7 +1729,7 @@ MariaDB [work]&gt; select * from category;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1724,8 +1830,8 @@ MariaDB [work]&gt; select * from category;
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

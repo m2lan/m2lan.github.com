@@ -266,6 +266,197 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/SpringMVC-学习02/" itemprop="url">
+                  SpringMVC-学习02
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T01:21:56+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Spring-MVC/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring-MVC</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/SpringMVC-学习02/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/SpringMVC-学习02/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="传值和接受传值"><a href="#传值和接受传值" class="headerlink" title="传值和接受传值"></a>传值和接受传值</h2><pre><code>package com.demo.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class HelloController {
+
+@RequestMapping(&quot;/&quot;)
+public String hello() {
+    return &quot;hello&quot;;
+}
+
+/**
+ * @param username
+ * @requestParam 表示参数username为必须
+ * request http://localhost:8080/demo?username=aaa
+ * @return
+ */
+@RequestMapping(&quot;/say&quot;)
+public String say(@RequestParam(&quot;username&quot;) String username) {
+    System.out.println(username);
+    return &quot;say&quot;;
+}
+
+/**
+ * @param username
+ * username参数可传可不传，不传就为null
+ * @return
+ */
+@RequestMapping(&quot;/say1&quot;)
+public String say1(String username) { 
+    System.out.println(username);
+    return &quot;say&quot;;
+}
+
+/**
+ * @param username
+ * @param context
+ * 传值给视图 01: 使用map方式
+ * 视图使用${username}
+ * @return
+ */
+@RequestMapping(&quot;/say2&quot;)
+public String say2(String username, Map&lt;String, Object&gt; context) {
+    context.put(&quot;username&quot;, username);
+    return &quot;say2&quot;;
+}
+
+/**
+ * @param username
+ * @param context
+ * 传值给视图 02: 使用model方式
+ * 视图使用${username}
+ * @return
+ */
+@RequestMapping(&quot;/say3&quot;)
+public String say3(String username, Model model) {
+
+//        01
+//        model.addAttribute(&quot;username&quot;, username);
+
+//        02
+//        Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
+//        map.put(&quot;username&quot;, username);
+//        model.addAllAttributes(map);
+
+//        03(key为参数的类型，username是String类型，则视图${string})
+//        model.addAttribute(username);
+        return &quot;say2&quot;;
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/SpringMVC-学习01/" itemprop="url">
                   SpringMVC-学习01
                 </a>
@@ -335,7 +526,7 @@
       
         
           <ul>
-<li>下载<a href="http://maven.springframework.org/release/org/springframework/spring/">springframework</a></li>
+<li>下载<a href="http://maven.springframework.org/release/org/springframework/spring/" target="_blank" rel="external">springframework</a></li>
 <li>新建web项目，拷贝<code>spring-framework-4.1.2.RELEASE/libs</code>下面所有的<code>*.RELEASE.jar</code>到<code>lib</code>目录下。
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/12/10/SpringMVC-学习01/#more" rel="contents">
@@ -454,7 +645,7 @@
       
         
           <ul>
-<li>下载配色方案<a href="https://github.com/tomasr/molokai">molokai</a></li>
+<li>下载配色方案<a href="https://github.com/tomasr/molokai" target="_blank" rel="external">molokai</a></li>
 <li>在当前用户根目录下的<code>~/.vim</code>创建<code>colors</code>目录，将下载的配色方案中的<code>molokai.vim</code>移动到<code>~/.vim/colors</code>中</li>
 <li>在当前用户根目录下新建<code>.vimrc</code>，添加<code>colorscheme molokai</code><ul>
 <li><code>vimrc</code>可以把<code>/usr/share/vim/vimrc</code>拷贝过来
@@ -574,9 +765,9 @@
 
       
         
-          <h3 id="Tigase_u64CD_u4F5C"><a href="#Tigase_u64CD_u4F5C" class="headerlink" title="Tigase操作"></a>Tigase操作</h3><hr>
-<h4 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h4><ul>
-<li>在<a href="https://projects.tigase.org/projects/tigase-server/repository">Tigase-server</a>下载<code>Tigase</code>源码</li>
+          <h3 id="Tigase操作"><a href="#Tigase操作" class="headerlink" title="Tigase操作"></a>Tigase操作</h3><hr>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><ul>
+<li>在<a href="https://projects.tigase.org/projects/tigase-server/repository" target="_blank" rel="external">Tigase-server</a>下载<code>Tigase</code>源码</li>
 <li><code>git clone https://repository.tigase.org/git/tigase-server.git</code>默认下载的时最新版本</li>
 <li>如果要下载其他版本，在本机创建目录，在目录下<ul>
 <li><code>git init</code></li>
@@ -587,7 +778,7 @@
 <li>由于是源码要在<code>eclipse</code>中运行，运行<code>mvn eclipse:eclipse</code>先转成<code>eclipse</code>项目</li>
 <li>打开<code>eclipse</code>导入<code>tigase</code>项目</li>
 <li>下载下来后进入，修改<code>etc/tigase.conf</code>，修改<code>JAVA_HOME</code></li>
-<li>修改<code>etc/init.properties</code>,详细配置参数请见:<a href="http://golearns.org/topic/view/28">config</a></li>
+<li>修改<code>etc/init.properties</code>,详细配置参数请见:<a href="http://golearns.org/topic/view/28" target="_blank" rel="external">config</a></li>
 <li>这时就可以启动项目了，入口文件是<code>XMPPServer.java</code>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/12/10/Tigase-操作/#more" rel="contents">
@@ -954,25 +1145,25 @@ muc#roomconfig_roomsecret(密码)
       
         
           
-            <h1 id="u521B_u5EFA_u9ED8_u8BA4_u7684_u914D_u7F6E_u6587_u4EF6_2C_u5305_u542B_u5728_u914D_u7F6E_u7EC4_u4EF6_u5305_u62EC_uFF1A_u4F1A_u8BDD_u7BA1_u7406_u5668_uFF0C_u5BA2_u6237_u7AEF_-__u670D_u52A1_u5668_u8FDE_u63A5_u7BA1_u7406_u5668_u548C_u670D_u52A1_u5668_u5230_u670D_u52A1_u5668_u7684_u8FDE_u63A5_u7BA1_u7406_u5668_u3002"><a href="#u521B_u5EFA_u9ED8_u8BA4_u7684_u914D_u7F6E_u6587_u4EF6_2C_u5305_u542B_u5728_u914D_u7F6E_u7EC4_u4EF6_u5305_u62EC_uFF1A_u4F1A_u8BDD_u7BA1_u7406_u5668_uFF0C_u5BA2_u6237_u7AEF_-__u670D_u52A1_u5668_u8FDE_u63A5_u7BA1_u7406_u5668_u548C_u670D_u52A1_u5668_u5230_u670D_u52A1_u5668_u7684_u8FDE_u63A5_u7BA1_u7406_u5668_u3002" class="headerlink" title="创建默认的配置文件,包含在配置组件包括：会话管理器，客户端 - 服务器连接管理器和服务器到服务器的连接管理器。"></a>创建默认的配置文件,包含在配置组件包括：会话管理器，客户端 - 服务器连接管理器和服务器到服务器的连接管理器。</h1><pre><code>config-type=--gen-config-def
-</code></pre><h1 id="u914D_u7F6E_u7BA1_u7406_u5458_u8D26_u53F7"><a href="#u914D_u7F6E_u7BA1_u7406_u5458_u8D26_u53F7" class="headerlink" title="配置管理员账号"></a>配置管理员账号</h1><pre><code>--admins=admin@192.168.0.50
-</code></pre><h1 id="u914D_u7F6E_u57DF_u540D"><a href="#u914D_u7F6E_u57DF_u540D" class="headerlink" title="配置域名"></a>配置域名</h1><pre><code>--virt-hosts = 192.168.0.50
-</code></pre><h1 id="u8C03_u8BD5_u8F93_u51FA_u4FE1_u606F"><a href="#u8C03_u8BD5_u8F93_u51FA_u4FE1_u606F" class="headerlink" title="调试输出信息"></a>调试输出信息</h1><pre><code>--debug=server,message-archive,muc
-</code></pre><h1 id="u4F7F_u7528_u7684_u6570_u636E_u5E93"><a href="#u4F7F_u7528_u7684_u6570_u636E_u5E93" class="headerlink" title="使用的数据库"></a>使用的数据库</h1><pre><code>--user-db=mysql
+            <h1 id="创建默认的配置文件-包含在配置组件包括：会话管理器，客户端-服务器连接管理器和服务器到服务器的连接管理器。"><a href="#创建默认的配置文件-包含在配置组件包括：会话管理器，客户端-服务器连接管理器和服务器到服务器的连接管理器。" class="headerlink" title="创建默认的配置文件,包含在配置组件包括：会话管理器，客户端 - 服务器连接管理器和服务器到服务器的连接管理器。"></a>创建默认的配置文件,包含在配置组件包括：会话管理器，客户端 - 服务器连接管理器和服务器到服务器的连接管理器。</h1><pre><code>config-type=--gen-config-def
+</code></pre><h1 id="配置管理员账号"><a href="#配置管理员账号" class="headerlink" title="配置管理员账号"></a>配置管理员账号</h1><pre><code>--admins=admin@192.168.0.50
+</code></pre><h1 id="配置域名"><a href="#配置域名" class="headerlink" title="配置域名"></a>配置域名</h1><pre><code>--virt-hosts = 192.168.0.50
+</code></pre><h1 id="调试输出信息"><a href="#调试输出信息" class="headerlink" title="调试输出信息"></a>调试输出信息</h1><pre><code>--debug=server,message-archive,muc
+</code></pre><h1 id="使用的数据库"><a href="#使用的数据库" class="headerlink" title="使用的数据库"></a>使用的数据库</h1><pre><code>--user-db=mysql
 --user-db-uri=jdbc:mysql://127.0.0.1:3306/mytigase?user=root&amp;password=feng&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoCreateUser=true
-</code></pre><h1 id="u52A0_u8F7D_u63D2_u4EF6"><a href="#u52A0_u8F7D_u63D2_u4EF6" class="headerlink" title="加载插件"></a>加载插件</h1><pre><code>--sm-plugins=-starttls,message-archive-xep-0136,offlinemessage
-</code></pre><h1 id="u6700_u5927_u7684_u79BB_u7EBF_u6D88_u606F_u914D_u7F6E"><a href="#u6700_u5927_u7684_u79BB_u7EBF_u6D88_u606F_u914D_u7F6E" class="headerlink" title="最大的离线消息配置"></a>最大的离线消息配置</h1><pre><code>sess-man/plugins-conf/amp/store-limit=1000
-</code></pre><h1 id="u9ED8_u8BA4_u623F_u95F4_u662F_u9501_u4F4F_u7684_uFF0C_u5176_u4ED6_u7528_u6237_u5C31_u65E0_u6CD5_u8FDB_u5165_u8BE5_u623F_u95F4"><a href="#u9ED8_u8BA4_u623F_u95F4_u662F_u9501_u4F4F_u7684_uFF0C_u5176_u4ED6_u7528_u6237_u5C31_u65E0_u6CD5_u8FDB_u5165_u8BE5_u623F_u95F4" class="headerlink" title="默认房间是锁住的，其他用户就无法进入该房间"></a>默认房间是锁住的，其他用户就无法进入该房间</h1><pre><code>muc/muc-lock-new-room[B]=false
-</code></pre><h1 id="u6D88_u606F_u8FC7_u6EE4"><a href="#u6D88_u606F_u8FC7_u6EE4" class="headerlink" title="消息过滤"></a>消息过滤</h1><pre><code>muc/message-filter-enabled[B]=false
-</code></pre><h1 id="u5141_u8BB8_u804A_u5929_u72B6_u6001"><a href="#u5141_u8BB8_u804A_u5929_u72B6_u6001" class="headerlink" title="允许聊天状态"></a>允许聊天状态</h1><pre><code>muc/muc-allow-chat-states[B]=true
-</code></pre><h1 id="u9ED8_u8BA4_u60C5_u51B5_u4E0B_2Ctigase_u8BBE_u7F6E_u53D6_u51B3_u4E8E_u6700_u5927_u53EF_u7528_u5185_u5B58_u4E3Atigase_u670D_u52A1_u5668_u8FDB_u7A0B_u961F_u5217_u7684_u5927_u5C0F"><a href="#u9ED8_u8BA4_u60C5_u51B5_u4E0B_2Ctigase_u8BBE_u7F6E_u53D6_u51B3_u4E8E_u6700_u5927_u53EF_u7528_u5185_u5B58_u4E3Atigase_u670D_u52A1_u5668_u8FDB_u7A0B_u961F_u5217_u7684_u5927_u5C0F" class="headerlink" title="默认情况下,tigase设置取决于最大可用内存为tigase服务器进程队列的大小"></a>默认情况下,tigase设置取决于最大可用内存为tigase服务器进程队列的大小</h1><pre><code>--max-queue-size = 10000
-</code></pre><h1 id="u52A0_u8F7D_u7EC4_u4EF6"><a href="#u52A0_u8F7D_u7EC4_u4EF6" class="headerlink" title="加载组件"></a>加载组件</h1><pre><code>--comp-name-1 = muc
+</code></pre><h1 id="加载插件"><a href="#加载插件" class="headerlink" title="加载插件"></a>加载插件</h1><pre><code>--sm-plugins=-starttls,message-archive-xep-0136,offlinemessage
+</code></pre><h1 id="最大的离线消息配置"><a href="#最大的离线消息配置" class="headerlink" title="最大的离线消息配置"></a>最大的离线消息配置</h1><pre><code>sess-man/plugins-conf/amp/store-limit=1000
+</code></pre><h1 id="默认房间是锁住的，其他用户就无法进入该房间"><a href="#默认房间是锁住的，其他用户就无法进入该房间" class="headerlink" title="默认房间是锁住的，其他用户就无法进入该房间"></a>默认房间是锁住的，其他用户就无法进入该房间</h1><pre><code>muc/muc-lock-new-room[B]=false
+</code></pre><h1 id="消息过滤"><a href="#消息过滤" class="headerlink" title="消息过滤"></a>消息过滤</h1><pre><code>muc/message-filter-enabled[B]=false
+</code></pre><h1 id="允许聊天状态"><a href="#允许聊天状态" class="headerlink" title="允许聊天状态"></a>允许聊天状态</h1><pre><code>muc/muc-allow-chat-states[B]=true
+</code></pre><h1 id="默认情况下-tigase设置取决于最大可用内存为tigase服务器进程队列的大小"><a href="#默认情况下-tigase设置取决于最大可用内存为tigase服务器进程队列的大小" class="headerlink" title="默认情况下,tigase设置取决于最大可用内存为tigase服务器进程队列的大小"></a>默认情况下,tigase设置取决于最大可用内存为tigase服务器进程队列的大小</h1><pre><code>--max-queue-size = 10000
+</code></pre><h1 id="加载组件"><a href="#加载组件" class="headerlink" title="加载组件"></a>加载组件</h1><pre><code>--comp-name-1 = muc
 --comp-class-1 = tigase.muc.MUCComponent
 --comp-name-2=message-archive
 --comp-class-2=tigase.archive.MessageArchiveComponent
 --comp-name-3 = pubsub
 --comp-class-3 = tigase.pubsub.PubSubComponent
-</code></pre><h1 id="u5B58_u50A8_u7528_u6237_u7684_u804A_u5929_u8BB0_u5F55"><a href="#u5B58_u50A8_u7528_u6237_u7684_u804A_u5929_u8BB0_u5F55" class="headerlink" title="存储用户的聊天记录"></a>存储用户的聊天记录</h1><pre><code>message-archive/archive-repo-uri=jdbc:mysql://127.0.0.1:3306/mytigase?user=root&amp;password=feng&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoCreateUser=true
+</code></pre><h1 id="存储用户的聊天记录"><a href="#存储用户的聊天记录" class="headerlink" title="存储用户的聊天记录"></a>存储用户的聊天记录</h1><pre><code>message-archive/archive-repo-uri=jdbc:mysql://127.0.0.1:3306/mytigase?user=root&amp;password=feng&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoCreateUser=true
 sess-man/plugins-conf/message-archive-xep-0136/component-jid=message-archive@192.168.0.50
 sess-man/plugins-conf/message-archive-xep-0136/default-store-method=body
 sess-man/plugins-conf/message-archive-xep-0136/required-store-method=body
@@ -1096,10 +1287,10 @@ c2s/net-buffer-limit[I]=4194304
 
       
         
-          <h2 id="u83B7_u53D6_u955C_u50CF"><a href="#u83B7_u53D6_u955C_u50CF" class="headerlink" title="获取镜像"></a>获取镜像</h2><pre><code>docker pull ubuntu:14.04
+          <h2 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h2><pre><code>docker pull ubuntu:14.04
 相当于docker pull registry.hub.docker.com/ubuntu:14.04
 可以从国内镜像网站下载docker pull dl.dockerpool.com:5000/ubuntu:14.04
-</code></pre><h2 id="u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF"><a href="#u5217_u51FA_u672C_u5730_u5DF2_u6709_u7684_u955C_u50CF" class="headerlink" title="列出本地已有的镜像"></a>列出本地已有的镜像</h2><pre><code>docker images
+</code></pre><h2 id="列出本地已有的镜像"><a href="#列出本地已有的镜像" class="headerlink" title="列出本地已有的镜像"></a>列出本地已有的镜像</h2><pre><code>docker images
 </code></pre>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/12/09/Docker-详细操作/#more" rel="contents">
@@ -1218,7 +1409,7 @@ c2s/net-buffer-limit[I]=4194304
       
         
           
-            <h2 id="u5F00_u59CB_u4F7F_u7528Docker_Hub"><a href="#u5F00_u59CB_u4F7F_u7528Docker_Hub" class="headerlink" title="开始使用Docker Hub"></a>开始使用Docker Hub</h2><h3 id="Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub"><a href="#Docker_Hub_u662Fdocker_u7684_u4E2D_u5FC3_u4ED3_u5E93_u3002_u5B83_u91CC_u8FB9_u7684_u516C_u5171docker_u955C_u50CF_u5E76_u4E14_u5E2E_u52A9_u60A8_u6784_u5EFA_u548C_u7BA1_u7406docker_u955C_u50CF_u3002_u4E86_u89E3_u66F4_u591A_u3002_u9605_u8BFB_u66F4_u591ADocker_Hub" class="headerlink" title="Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub"></a>Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub</h3><ul>
+            <h2 id="开始使用Docker-Hub"><a href="#开始使用Docker-Hub" class="headerlink" title="开始使用Docker Hub"></a>开始使用Docker Hub</h2><h3 id="Docker-Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker-Hub"><a href="#Docker-Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker-Hub" class="headerlink" title="Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub"></a>Docker Hub是docker的中心仓库。它里边的公共docker镜像并且帮助您构建和管理docker镜像。了解更多。阅读更多Docker Hub</h3><ul>
 <li>展示如何创建一个账户。</li>
 <li>Docker Hub和docker及其组件一起工作。Docker Hub会帮助你和你的同事协作，并获取功能最全的docker。要做到这一点，它提供的服务有：<ul>
 <li>Docker镜像主机</li>
@@ -1229,7 +1420,7 @@ c2s/net-buffer-limit[I]=4194304
 </li>
 <li>为了使用Docker Hub,首先需要注册创建一个账户。别担心，创建一个账户很简单并且是免费的。</li>
 </ul>
-<h2 id="u521B_u5EFADocker_Hub_u8D26_u6237"><a href="#u521B_u5EFADocker_Hub_u8D26_u6237" class="headerlink" title="创建Docker Hub账户"></a>创建Docker Hub账户</h2><ul>
+<h2 id="创建Docker-Hub账户"><a href="#创建Docker-Hub账户" class="headerlink" title="创建Docker Hub账户"></a>创建Docker Hub账户</h2><ul>
 <li><p>这里有两种访问可以创建和注册一个Docker Hub账户：</p>
 <ul>
 <li>通过网站创建
@@ -1394,150 +1585,6 @@ c2s/net-buffer-limit[I]=4194304
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/09/Mongodb-部署复制集/" itemprop="url">
-                  Mongodb-部署复制集
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-09T23:37:09+08:00" content="2015-12-09">
-              2015-12-09
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Mongodb/" itemprop="url" rel="index">
-                    <span itemprop="name">Mongodb</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/09/Mongodb-部署复制集/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/09/Mongodb-部署复制集/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6"><a href="#u90E8_u7F723_u4E2A_u8282_u70B9_u7EC4_u6210_u7684_u590D_u5236_u96C6" class="headerlink" title="部署3个节点组成的复制集"></a>部署3个节点组成的复制集</h2><ul>
-<li>3台IP为<ul>
-<li>192.168.0.139 主机名：mongoname1</li>
-<li>192.168.0.140 主机名：mongoname2</li>
-<li>192.168.0.141 主机名：mongoname3</li>
-</ul>
-</li>
-<li>修改<code>/etc/mongodb.conf</code>，添加<code>replSet = rs0</code>(3个节点保持一致)</li>
-<li>启动<code>mongodb</code></li>
-<li><p>在其中一个节点上执行<code>rs.initiate()</code>,用来初始化复制集</p>
-<pre><code>rs.initiate(&quot;mongoname1&quot;)
-</code></pre></li>
-<li><p>查看当前配置信息</p>
-<pre><code>rs.conf()
-</code></pre></li>
-<li><p>将其他节点加入复制集</p>
-<pre><code>rs.add(&quot;mongoname2&quot;);
-rs.add(&quot;mongoname3&quot;);
-</code></pre></li>
-<li><p>查看配置</p>
-<pre><code>rs.conf()
-</code></pre></li>
-<li><p>查看复制集状态</p>
-<pre><code>rs.status()
-</code></pre></li>
-<li><p>如果在多个节点上执行了rs.initate(),可以做以下操作后重启mongodb</p>
-<pre><code>use local
-db.dropDatabase()
-</code></pre></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1583,7 +1630,7 @@ db.dropDatabase()
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1591,7 +1638,7 @@ db.dropDatabase()
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1600,7 +1647,7 @@ db.dropDatabase()
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1701,8 +1748,8 @@ db.dropDatabase()
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

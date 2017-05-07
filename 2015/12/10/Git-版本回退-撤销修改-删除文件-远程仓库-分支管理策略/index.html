@@ -57,28 +57,17 @@
 
 
 
-<meta name="description" content="版本回退
-如果信息显示过多的话,可以使用git log --pretty=oneline
-dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
-9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
-2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.">
+<meta name="description" content="版本回退 如果信息显示过多的话,可以使用git log --pretty=oneline dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt 9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt 2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.">
+<meta name="keywords" content="Git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略">
 <meta property="og:url" content="http://blog.golearns.org/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="版本回退
-如果信息显示过多的话,可以使用git log --pretty=oneline
-dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
-9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
-2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.">
+<meta property="og:description" content="版本回退 如果信息显示过多的话,可以使用git log --pretty=oneline dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt 9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt 2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.">
 <meta property="og:updated_time" content="2016-07-15T02:30:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略">
-<meta name="twitter:description" content="版本回退
-如果信息显示过多的话,可以使用git log --pretty=oneline
-dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
-9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
-2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.">
+<meta name="twitter:description" content="版本回退 如果信息显示过多的话,可以使用git log --pretty=oneline dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt 9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt 2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.">
 
 
 
@@ -341,7 +330,7 @@ dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
       
 
       
-        <h2 id="u7248_u672C_u56DE_u9000"><a href="#u7248_u672C_u56DE_u9000" class="headerlink" title="版本回退"></a>版本回退</h2><ul>
+        <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><ul>
 <li><p>如果信息显示过多的话,可以使用<code>git log --pretty=oneline</code></p>
 <pre><code>dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
 9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
@@ -358,7 +347,7 @@ dfffd94 HEAD@{4}: commit: update a.txt
 2a474cb HEAD@{6}: commit (initial): add a.txt
 </code></pre></li>
 <li>执行<code>git reset --hard 9bdf0e5</code><a id="more"></a>
-<h2 id="u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6"><a href="#u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6" class="headerlink" title="撤销修改和删除文件"></a>撤销修改和删除文件</h2><h3 id="u64A4_u9500_u4FEE_u6539"><a href="#u64A4_u9500_u4FEE_u6539" class="headerlink" title="撤销修改"></a>撤销修改</h3></li>
+<h2 id="撤销修改和删除文件"><a href="#撤销修改和删除文件" class="headerlink" title="撤销修改和删除文件"></a>撤销修改和删除文件</h2><h3 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h3></li>
 <li>在我未提交之前，我发现添加的内容有误，所以我得马上恢复以前的版本，现在我可以有如下几种方法可以做修改：<ul>
 <li>第一：如果我知道要删掉那些内容的话，直接手动更改去掉那些需要的文件，然后add添加到暂存区，最后commit掉。</li>
 <li>第二：我可以按以前的方法直接恢复到上一个版本。使用 <code>git reset –hard HEAD^</code></li>
@@ -415,7 +404,7 @@ bbbbbbbbbbbbbbb
 ccccccccccccccc
 ddddddddddddddd
 eeeeeeeeeeeeeee
-</code></pre><h3 id="u5220_u9664_u6587_u4EF6"><a href="#u5220_u9664_u6587_u4EF6" class="headerlink" title="删除文件"></a>删除文件</h3></li>
+</code></pre><h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3></li>
 <li><p>假如我现在版本库目录添加一个文件<code>c.txt</code>,然后提交。如下：</p>
 <pre><code>AndytekiMacBook-Air:demo1 yonglang$ git add c.txt
 AndytekiMacBook-Air:demo1 yonglang$ git commit -m &apos;添加c.txt&apos;
@@ -452,7 +441,7 @@ drwxr-xr-x  13 yonglang  staff  442 11  5 18:18 .git
 -rw-r--r--   1 yonglang  staff   80 11  5 18:09 a.txt
 -rw-r--r--   1 yonglang  staff    6 11  5 17:56 b.txt
 -rw-r--r--   1 yonglang  staff    0 11  5 18:18 c.txt
-</code></pre><h2 id="u8FDC_u7A0B_u4ED3_u5E93"><a href="#u8FDC_u7A0B_u4ED3_u5E93" class="headerlink" title="远程仓库"></a>远程仓库</h2></li>
+</code></pre><h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2></li>
 <li>在<code>github</code>上创建一个<code>git</code>库，本地执行<code>git remote add origin http://xxxx.git</code></li>
 <li>将本地代码推动到远程仓库的master分支<code>git push -u origin master</code>，加<code>-u</code>首次会和远程<code>master</code>分支关联，后面再使用就不用加了。</li>
 <li>创建本地分支<code>git checkout -b dev == git branch dev,git checkout dev</code>,并切换到<code>dev</code>分支,这时添加文件<code>p.txt</code>后<code>git add p.txt,git commit -m &#39;add p.txt in dev&#39;</code>,切换到<code>master</code>分支再看，发现没有<code>p.txt</code></li>
@@ -462,7 +451,7 @@ drwxr-xr-x  13 yonglang  staff  442 11  5 18:18 .git
 <li>创建分支<code>git branch name</code></li>
 <li>切换分支<code>git checkout name</code></li>
 <li>创建+切换分支<code>git checkout –b name</code></li>
-<li>合并某分支到当前分支<code>git merge name</code><h2 id="u5206_u652F_u7BA1_u7406_u7B56_u7565"><a href="#u5206_u652F_u7BA1_u7406_u7B56_u7565" class="headerlink" title="分支管理策略"></a>分支管理策略</h2></li>
+<li>合并某分支到当前分支<code>git merge name</code><h2 id="分支管理策略"><a href="#分支管理策略" class="headerlink" title="分支管理策略"></a>分支管理策略</h2></li>
 <li><p>通常合并分支时，<code>git</code>一般使用<code>Fast forward</code>模式，在这种模式下，删除分支后，会丢掉分支信息，现在我们来使用带参数<code>–no-ff</code>来禁用<code>Fast forward</code>模式。首先我们来做<code>demo</code>演示下:</p>
 <ul>
 <li>创建一个<code>dev</code>分支。</li>
@@ -503,7 +492,7 @@ AndytekiMacBook-Air:git-test yonglang$ git log --graph --pretty=oneline --abbrev
 * 33a4fad add a.txt
 </code></pre></li>
 <li>我们会发现被删除的分支信息还存在。</li>
-<li>分支策略：首先master主分支应该是非常稳定的，也就是用来发布新版本，一般情况下不允许在上面干活，干活一般情况下在新建的dev分支上干活，干完后，比如上要发布，或者说dev分支代码稳定后可以合并到主分支master上来。<h2 id="bug_u5206_u652F"><a href="#bug_u5206_u652F" class="headerlink" title="bug分支"></a>bug分支</h2></li>
+<li>分支策略：首先master主分支应该是非常稳定的，也就是用来发布新版本，一般情况下不允许在上面干活，干活一般情况下在新建的dev分支上干活，干完后，比如上要发布，或者说dev分支代码稳定后可以合并到主分支master上来。<h2 id="bug分支"><a href="#bug分支" class="headerlink" title="bug分支"></a>bug分支</h2></li>
 </ul>
 </li>
 <li>在开发中，会经常碰到<code>bug</code>问题，那么有了<code>bug</code>就需要修复，在<code>Git</code>中，分支是很强大的，每个<code>bug</code>都可以通过一个临时分支来修复，修复完成后，合并分支，然后将临时的分支删除掉。</li>
@@ -610,9 +599,9 @@ AndytekiMacBook-Air:git-test yonglang$ git stash drop
 Dropped refs/stash@{0} (8f8712bf68de241eca322f99e00a00219accc089)
 AndytekiMacBook-Air:git-test yonglang$ git stash list
 AndytekiMacBook-Air:git-test yonglang$
-</code></pre><h2 id="u66F4_u6539_u8FDC_u7A0B_u4ED3_u5E93_u5730_u5740"><a href="#u66F4_u6539_u8FDC_u7A0B_u4ED3_u5E93_u5730_u5740" class="headerlink" title="更改远程仓库地址"></a>更改远程仓库地址</h2><pre><code>git remote set-url origin remote_git_address
-</code></pre><h2 id="u67E5_u770B_u6587_u4EF6_u6BCF_u4E00_u884C_u7684_u4F5C_u8005_u662Fwho"><a href="#u67E5_u770B_u6587_u4EF6_u6BCF_u4E00_u884C_u7684_u4F5C_u8005_u662Fwho" class="headerlink" title="查看文件每一行的作者是who"></a>查看文件每一行的作者是who</h2><pre><code>git blame [file_name]
-</code></pre><h2 id="u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4"><a href="#u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4" class="headerlink" title="检查丢失的提交"></a>检查丢失的提交</h2></li>
+</code></pre><h2 id="更改远程仓库地址"><a href="#更改远程仓库地址" class="headerlink" title="更改远程仓库地址"></a>更改远程仓库地址</h2><pre><code>git remote set-url origin remote_git_address
+</code></pre><h2 id="查看文件每一行的作者是who"><a href="#查看文件每一行的作者是who" class="headerlink" title="查看文件每一行的作者是who"></a>查看文件每一行的作者是who</h2><pre><code>git blame [file_name]
+</code></pre><h2 id="检查丢失的提交"><a href="#检查丢失的提交" class="headerlink" title="检查丢失的提交"></a>检查丢失的提交</h2></li>
 </ul>
 </li>
 <li><code>git fsck --lost-found</code>这里你可以看到一个丢失的提交。你可以通过<code>git show [commit_hash]</code>查看提交的更改或者通过运行<code>git merge[commit_hash]</code>命令进行恢复。</li>
@@ -729,7 +718,7 @@ AndytekiMacBook-Air:git-test yonglang$
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -737,7 +726,7 @@ AndytekiMacBook-Air:git-test yonglang$
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -746,7 +735,7 @@ AndytekiMacBook-Air:git-test yonglang$
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -840,7 +829,7 @@ AndytekiMacBook-Air:git-test yonglang$
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7248_u672C_u56DE_u9000"><span class="nav-number">1.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u64A4_u9500_u4FEE_u6539_u548C_u5220_u9664_u6587_u4EF6"><span class="nav-number">2.</span> <span class="nav-text">撤销修改和删除文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u64A4_u9500_u4FEE_u6539"><span class="nav-number">2.1.</span> <span class="nav-text">撤销修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5220_u9664_u6587_u4EF6"><span class="nav-number">2.2.</span> <span class="nav-text">删除文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8FDC_u7A0B_u4ED3_u5E93"><span class="nav-number">3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5206_u652F_u7BA1_u7406_u7B56_u7565"><span class="nav-number">4.</span> <span class="nav-text">分支管理策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bug_u5206_u652F"><span class="nav-number">5.</span> <span class="nav-text">bug分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u66F4_u6539_u8FDC_u7A0B_u4ED3_u5E93_u5730_u5740"><span class="nav-number">6.</span> <span class="nav-text">更改远程仓库地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u67E5_u770B_u6587_u4EF6_u6BCF_u4E00_u884C_u7684_u4F5C_u8005_u662Fwho"><span class="nav-number">7.</span> <span class="nav-text">查看文件每一行的作者是who</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u68C0_u67E5_u4E22_u5931_u7684_u63D0_u4EA4"><span class="nav-number">8.</span> <span class="nav-text">检查丢失的提交</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本回退"><span class="nav-number">1.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销修改和删除文件"><span class="nav-number">2.</span> <span class="nav-text">撤销修改和删除文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销修改"><span class="nav-number">2.1.</span> <span class="nav-text">撤销修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件"><span class="nav-number">2.2.</span> <span class="nav-text">删除文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理策略"><span class="nav-number">4.</span> <span class="nav-text">分支管理策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bug分支"><span class="nav-number">5.</span> <span class="nav-text">bug分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改远程仓库地址"><span class="nav-number">6.</span> <span class="nav-text">更改远程仓库地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件每一行的作者是who"><span class="nav-number">7.</span> <span class="nav-text">查看文件每一行的作者是who</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查丢失的提交"><span class="nav-number">8.</span> <span class="nav-text">检查丢失的提交</span></a></li></ol></div>
             
           </div>
         </section>
@@ -858,8 +847,8 @@ AndytekiMacBook-Air:git-test yonglang$
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

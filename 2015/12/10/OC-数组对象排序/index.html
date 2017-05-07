@@ -57,22 +57,17 @@
 
 
 
-<meta name="description" content="Comparator排序NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-
-    HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1">
+<meta name="description" content="Comparator排序NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {      HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1">
+<meta name="keywords" content="Objective-c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OC-数组对象排序">
 <meta property="og:url" content="http://blog.golearns.org/2015/12/10/OC-数组对象排序/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Comparator排序NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-
-    HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1">
+<meta property="og:description" content="Comparator排序NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {      HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1">
 <meta property="og:updated_time" content="2016-07-15T01:47:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OC-数组对象排序">
-<meta name="twitter:description" content="Comparator排序NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-
-    HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1">
+<meta name="twitter:description" content="Comparator排序NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {      HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1">
 
 
 
@@ -335,7 +330,7 @@
       
 
       
-        <h2 id="Comparator_u6392_u5E8F"><a href="#Comparator_u6392_u5E8F" class="headerlink" title="Comparator排序"></a>Comparator排序</h2><pre><code>NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        <h2 id="Comparator排序"><a href="#Comparator排序" class="headerlink" title="Comparator排序"></a>Comparator排序</h2><pre><code>NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
 
     HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1];
     HLMessage *msg2 = [[NSClassFromString([obj2 messageClassName]) alloc]initWithManagedObject:obj2];
@@ -354,7 +349,7 @@
     }
 }];
 return arr;
-</code></pre><h2 id="SortDescriptor_u6392_u5E8F"><a href="#SortDescriptor_u6392_u5E8F" class="headerlink" title="SortDescriptor排序"></a>SortDescriptor排序</h2><pre><code>NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@&quot;timestamp&quot; ascending:YES];
+</code></pre><h2 id="SortDescriptor排序"><a href="#SortDescriptor排序" class="headerlink" title="SortDescriptor排序"></a>SortDescriptor排序</h2><pre><code>NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@&quot;timestamp&quot; ascending:YES];
 NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
 NSArray *sortArray = [array sortedArrayUsingDescriptors:sortDescriptors];
 
@@ -470,7 +465,7 @@ return sortArray;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -478,7 +473,7 @@ return sortArray;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -487,7 +482,7 @@ return sortArray;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -581,7 +576,7 @@ return sortArray;
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparator_u6392_u5E8F"><span class="nav-number">1.</span> <span class="nav-text">Comparator排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SortDescriptor_u6392_u5E8F"><span class="nav-number">2.</span> <span class="nav-text">SortDescriptor排序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparator排序"><span class="nav-number">1.</span> <span class="nav-text">Comparator排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SortDescriptor排序"><span class="nav-number">2.</span> <span class="nav-text">SortDescriptor排序</span></a></li></ol></div>
             
           </div>
         </section>
@@ -599,8 +594,8 @@ return sortArray;
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

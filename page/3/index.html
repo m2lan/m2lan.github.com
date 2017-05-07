@@ -266,6 +266,123 @@
             
               
                 
+                <a class="post-title-link" href="/2016/02/26/centos-开启mysql外部访问/" itemprop="url">
+                  centos-开启mysql外部访问
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-26T00:09:43+08:00" content="2016-02-26">
+              2016-02-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/26/centos-开启mysql外部访问/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/centos-开启mysql外部访问/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Centos开启mysql外部访问"><a href="#Centos开启mysql外部访问" class="headerlink" title="Centos开启mysql外部访问"></a>Centos开启mysql外部访问</h1><pre><code>grant all privileges on *.* to &apos;root&apos;@&apos;%&apos; identified by &apos;password&apos; with grant option;
+
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT //开启3306端口
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/02/26/centos7-mysql-php-nginx安装/" itemprop="url">
                   centos7-mysql+php+nginx安装
                 </a>
@@ -334,7 +451,7 @@
 
       
         
-          <h1 id="Centos7-Mysql+PHP+nginx_u5B89_u88C5"><a href="#Centos7-Mysql+PHP+nginx_u5B89_u88C5" class="headerlink" title="Centos7-Mysql+PHP+nginx安装"></a>Centos7-Mysql+PHP+nginx安装</h1><h2 id="u5B89_u88C5nginx"><a href="#u5B89_u88C5nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><pre><code>rpm --import http://nginx.org/keys/nginx_signing.key
+          <h1 id="Centos7-Mysql-PHP-nginx安装"><a href="#Centos7-Mysql-PHP-nginx安装" class="headerlink" title="Centos7-Mysql+PHP+nginx安装"></a>Centos7-Mysql+PHP+nginx安装</h1><h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><pre><code>rpm --import http://nginx.org/keys/nginx_signing.key
 rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
 yum install nginx
 systemctl start nginx
@@ -458,7 +575,7 @@ systemctl enable nginx
 
       
         
-          <h1 id="Centos7-_u4FEE_u6539_u7F51_u5361_u3001_u914D_u7F6E_u7F51_u7EDC"><a href="#Centos7-_u4FEE_u6539_u7F51_u5361_u3001_u914D_u7F6E_u7F51_u7EDC" class="headerlink" title="Centos7-修改网卡、配置网络"></a>Centos7-修改网卡、配置网络</h1><h2 id="u6211_u662F_u5728vmware_u4E2D_u5B89_u88C5_u7684"><a href="#u6211_u662F_u5728vmware_u4E2D_u5B89_u88C5_u7684" class="headerlink" title="我是在vmware中安装的"></a>我是在vmware中安装的</h2><ul>
+          <h1 id="Centos7-修改网卡、配置网络"><a href="#Centos7-修改网卡、配置网络" class="headerlink" title="Centos7-修改网卡、配置网络"></a>Centos7-修改网卡、配置网络</h1><h2 id="我是在vmware中安装的"><a href="#我是在vmware中安装的" class="headerlink" title="我是在vmware中安装的"></a>我是在vmware中安装的</h2><ul>
 <li>网络适配器调为桥接模式</li>
 <li>修改<code>/etc/sysconfig/network-scripts/ifcfg-xxxx</code>里面的<code>Name</code>和<code>Dev</code>为<code>eth0</code>
 <img src="http://7xj3i5.com1.z0.glb.clouddn.com/8C6D5903-85B6-44BD-811C-5F0ADDD9E356.png" alt="x">  </li>
@@ -579,7 +696,7 @@ systemctl enable nginx
 
       
         
-          <h1 id="u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861"><a href="#u57FA_u4E8EKeepalived+haproxy_u5B9E_u73B0_u9AD8_u53EF_u7528_u8D1F_u8F7D_u5747_u8861" class="headerlink" title="基于Keepalived+haproxy实现高可用负载均衡"></a>基于Keepalived+haproxy实现高可用负载均衡</h1><h2 id="Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668"><a href="#Centos7_u96C6_u7FA4_u914D_u7F6E_uFF0C_u91C7_u7528Keepalived+haproxy_u6765_u505A_u3002_u4E24_u53F0_u8D1F_u8F7D_u5747_u8861_u670D_u52A1_u5668_u505A_u4E3B_u3001_u5907_u5207_u6362-3_u53F0web_u670D_u52A1_u5668" class="headerlink" title="Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器"></a>Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器</h2><pre><code>* VIP：192.168.0.185
+          <h1 id="基于Keepalived-haproxy实现高可用负载均衡"><a href="#基于Keepalived-haproxy实现高可用负载均衡" class="headerlink" title="基于Keepalived+haproxy实现高可用负载均衡"></a>基于Keepalived+haproxy实现高可用负载均衡</h1><h2 id="Centos7集群配置，采用Keepalived-haproxy来做。两台负载均衡服务器做主、备切换-3台web服务器"><a href="#Centos7集群配置，采用Keepalived-haproxy来做。两台负载均衡服务器做主、备切换-3台web服务器" class="headerlink" title="Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器"></a>Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器</h2><pre><code>* VIP：192.168.0.185
 * h1：192.168.0.137
 * h2：192.168.0.138
 * web1：192.168.0.130
@@ -703,7 +820,7 @@ systemctl enable nginx
       
         
           
-            <h1 id="u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D"><a href="#u5404_u786C_u4EF6_u8BBE_u5907_u5728Linux_u4E2D_u7684_u6587_u4EF6_u540D" class="headerlink" title="各硬件设备在Linux中的文件名"></a>各硬件设备在Linux中的文件名</h1><table>
+            <h1 id="各硬件设备在Linux中的文件名"><a href="#各硬件设备在Linux中的文件名" class="headerlink" title="各硬件设备在Linux中的文件名"></a>各硬件设备在Linux中的文件名</h1><table>
 <thead>
 <tr>
 <th>名称</th>
@@ -862,7 +979,7 @@ systemctl enable nginx
 
       
         
-          <h1 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h1><h2 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h2><pre><code>wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+          <h1 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
 tar xvf zookeeper-3.4.8.tar.gz
 cd zookeeper-3.4.8
 cd conf
@@ -1474,143 +1591,6 @@ fi
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Shell-数组/" itemprop="url">
-                  Shell-数组
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:18:38+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-数组/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-数组/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>#!/bin/bash
-# 数组 不支持多维数组
-# 通过index访问数组元素 arr[1]
-
-arr=(
-    xxxx
-    yyyy
-    wwww
-    &quot;hello world&quot;
-)
-
-# 使用下标定义
-arr1[0]=aaaa
-arr1[1]=bbb
-arr1[2]=cccc
-arr1[5]=dddd
-
-# 获取arr1所有值
-echo ${arr1[@]}
-
-# 获取arr1数组中值
-echo ${arr1[0]}
-echo ${arr1[1]}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1656,7 +1636,7 @@ echo ${arr1[1]}
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1664,7 +1644,7 @@ echo ${arr1[1]}
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1673,7 +1653,7 @@ echo ${arr1[1]}
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1774,8 +1754,8 @@ echo ${arr1[1]}
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
