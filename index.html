@@ -266,6 +266,166 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/07/jsonp/" itemprop="url">
+                  jsonp
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-07T15:34:55+08:00" content="2017-05-07">
+              2017-05-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/jsonp/" itemprop="url" rel="index">
+                    <span itemprop="name">jsonp</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/07/jsonp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/jsonp/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h1><h2 id="新建一个web客户端"><a href="#新建一个web客户端" class="headerlink" title="新建一个web客户端"></a>新建一个web客户端</h2><ul>
+<li><p>index.jsp</p>
+<pre><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;script src=&quot;https://cdn.staticfile.org/jquery/2.1.1/jquery.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+        $(function() {
+            $.ajax({
+                url: &apos;http://192.168.0.1:8080/spring_mybatis/getUser?callback=?&apos;,
+                dataType: &apos;jsonp&apos;,
+                success: function(data) {
+                    console.log(data)
+                }
+            });
+        });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></li>
+</ul>
+<h2 id="web服务端"><a href="#web服务端" class="headerlink" title="web服务端"></a>web服务端</h2><ul>
+<li><p>新建JsonpAdvice.java</p>
+<pre><code>@ControllerAdvice
+public class JsonpAdvice extends AbstractJsonpResponseBodyAdvice {
+
+    public JsonpAdvice() {
+        super(&quot;callback&quot;);
+    }
+}
+</code></pre></li>
+<li><p>UserController.java</p>
+<pre><code>@Controller
+public class UserController {
+    @RequestMapping(value=&quot;getUser&quot;, produces=MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Map&lt;String, String&gt; getUser() {
+        Map&lt;String, String&gt; maps = new HashMap&lt;&gt;();
+        maps.put(&quot;username&quot;, &quot;zhangsan&quot;);
+        maps.put(&quot;password&quot;, &quot;123456&quot;);
+        return maps;
+    }
+}
+</code></pre></li>
+<li><p>返回</p>
+<pre><code>Object {password: &quot;123456&quot;, username: &quot;zhangsan&quot;}
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/07/mybatis逆向工程/" itemprop="url">
                   mybatis逆向工程
                 </a>
@@ -1525,134 +1685,11 @@ CREATE TABLE `idCard` (
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/09/Chrome浏览器如何静音/" itemprop="url">
-                  Chrome浏览器如何静音
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-09T14:18:47+08:00" content="2016-10-09">
-              2016-10-09
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Chrome/" itemprop="url" rel="index">
-                    <span itemprop="name">Chrome</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/09/Chrome浏览器如何静音/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/09/Chrome浏览器如何静音/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Chrome浏览器如何静音"><a href="#Chrome浏览器如何静音" class="headerlink" title="Chrome浏览器如何静音"></a>Chrome浏览器如何静音</h1><ul>
-<li>在浏览器输入<code>chrome://flags/#enable-tab-audio-muting</code>
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/837D6910-25E7-4F61-A58A-6EAD12C4E74C.png" alt=""></li>
-<li>点击启用
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/1E686FEE-3542-486C-8E19-AA0AEF8F484A.png" alt=""></li>
-<li>重新启动
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/547E1019-6B59-40CA-A793-825006856A72.png" alt=""></li>
-<li>点击声音可以开启和静音,也可以在标签上通过右键来设置。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1693,7 +1730,7 @@ CREATE TABLE `idCard` (
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">70</span>
+              <span class="site-state-item-count">71</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1701,7 +1738,7 @@ CREATE TABLE `idCard` (
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1710,7 +1747,7 @@ CREATE TABLE `idCard` (
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

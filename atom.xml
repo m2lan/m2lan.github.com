@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-07T06:24:44.000Z</updated>
+  <updated>2017-05-07T07:38:28.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,76 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>jsonp</title>
+    <link href="http://blog.golearns.org/2017/05/07/jsonp/"/>
+    <id>http://blog.golearns.org/2017/05/07/jsonp/</id>
+    <published>2017-05-07T07:34:55.000Z</published>
+    <updated>2017-05-07T07:38:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h1><h2 id="新建一个web客户端"><a href="#新建一个web客户端" class="headerlink" title="新建一个web客户端"></a>新建一个web客户端</h2><ul>
+<li><p>index.jsp</p>
+<pre><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;script src=&quot;https://cdn.staticfile.org/jquery/2.1.1/jquery.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+        $(function() {
+            $.ajax({
+                url: &apos;http://192.168.0.1:8080/spring_mybatis/getUser?callback=?&apos;,
+                dataType: &apos;jsonp&apos;,
+                success: function(data) {
+                    console.log(data)
+                }
+            });
+        });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></li>
+</ul>
+<h2 id="web服务端"><a href="#web服务端" class="headerlink" title="web服务端"></a>web服务端</h2><ul>
+<li><p>新建JsonpAdvice.java</p>
+<pre><code>@ControllerAdvice
+public class JsonpAdvice extends AbstractJsonpResponseBodyAdvice {
+
+    public JsonpAdvice() {
+        super(&quot;callback&quot;);
+    }
+}
+</code></pre></li>
+<li><p>UserController.java</p>
+<pre><code>@Controller
+public class UserController {
+    @RequestMapping(value=&quot;getUser&quot;, produces=MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Map&lt;String, String&gt; getUser() {
+        Map&lt;String, String&gt; maps = new HashMap&lt;&gt;();
+        maps.put(&quot;username&quot;, &quot;zhangsan&quot;);
+        maps.put(&quot;password&quot;, &quot;123456&quot;);
+        return maps;
+    }
+}
+</code></pre></li>
+<li><p>返回</p>
+<pre><code>Object {password: &quot;123456&quot;, username: &quot;zhangsan&quot;}
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;jsonp&quot;&gt;&lt;a href=&quot;#jsonp&quot; class=&quot;headerlink&quot; title=&quot;jsonp&quot;&gt;&lt;/a&gt;jsonp&lt;/h1&gt;&lt;h2 id=&quot;新建一个web客户端&quot;&gt;&lt;a href=&quot;#新建一个web客户端&quot; class=&quot;headerlink&quot; 
+    
+    </summary>
+    
+      <category term="jsonp" scheme="http://blog.golearns.org/categories/jsonp/"/>
+    
+    
+      <category term="jsonp" scheme="http://blog.golearns.org/tags/jsonp/"/>
+    
+      <category term="springmvc" scheme="http://blog.golearns.org/tags/springmvc/"/>
+    
+  </entry>
   
   <entry>
     <title>mybatis逆向工程</title>
@@ -556,11 +626,11 @@ public class UserController {
       <category term="mybatis" scheme="http://blog.golearns.org/categories/mybatis/"/>
     
     
+      <category term="springmvc" scheme="http://blog.golearns.org/tags/springmvc/"/>
+    
       <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
     
       <category term="spring" scheme="http://blog.golearns.org/tags/spring/"/>
-    
-      <category term="springmvc" scheme="http://blog.golearns.org/tags/springmvc/"/>
     
   </entry>
   
@@ -9393,496 +9463,6 @@ bin/plugin install marvel-agent
     
     
       <category term="Hexo" scheme="http://blog.golearns.org/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>php+sphinx使用</title>
-    <link href="http://blog.golearns.org/2016/07/15/php-sphinx%E4%BD%BF%E7%94%A8/"/>
-    <id>http://blog.golearns.org/2016/07/15/php-sphinx使用/</id>
-    <published>2016-07-15T01:17:15.000Z</published>
-    <updated>2016-07-15T02:32:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Centos7-Sphinx-install"><a href="#Centos7-Sphinx-install" class="headerlink" title="Centos7 Sphinx install"></a>Centos7 Sphinx install</h1><ul>
-<li><p>安装依赖库</p>
-<pre><code>yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel expat-devel
-cd /usr/local/src
-
-// https://share.weiyun.com/2da811898545e0043a00c4129fea95c0
-// download coreseek-3.2.14
-tar xvzf coreseek-3.2.14.tar.gz
-cd coreseek-3.2.14
-cd mmseg-3.2.14
-./bootstrap
-./configure --prefix=/usr/local/mmseg3
-make &amp;&amp; make install
-cd /usr/local/src/coreseek-3.2.14/csft-3.2.14
-
-#这里我们要修改 src/sphinxexpr.cpp 文件，将该文件中的 1013、1047、1080 行的 ExprEval 改为 this-&gt;ExprEval
-sh buildconf.sh
-
-#修改configure文件,找到“#define USE_LIBICONV 1”，将注释去掉，并将1改成0。
-make &amp;&amp; make install
-
-cd ..
-cd testpack
-cat var/test/test.xml   #此时应该正确显示中文
-/usr/local/mmseg3/bin/mmseg -d /usr/local/mmseg3/etc var/test/test.xml  #整篇文章进行分词
-/usr/local/coreseek/bin/indexer -c etc/csft.conf --all  #创建索引
-/usr/local/coreseek/bin/search -c etc/csft.conf 网络搜索    #搜索关键字 网络搜索
-/usr/local/coreseek/bin/searchd -c etc/csft.conf    #正常开启搜索服务
-/usr/local/coreseek/bin/searchd -c etc/csft.conf --stop #如要停止搜索服务
-/usr/local/coreseek/bin/indexer -c etc/csft.conf --all --rotate #如要已启动服务，要更新索引
-</code></pre><a id="more"></a></li>
-<li><p>安装PHP扩展</p>
-<pre><code>cd /usr/local/src/coreseek-3.2.14/csft-3.2.14/api/libsphinxclient
-./configure --prefix=/usr/local/sphinxclient
-make &amp;&amp; make install
-
-cd /usr/local/src
-wget http://pecl.php.net/get/sphinx-1.1.0.tgz
-tar -xzvf sphinx-1.1.0.tgz
-cd sphinx-1.1.0
-/usr/bin/phpize
-./configure --with-php-config=/usr/local/php/bin/php-config --with-sphinx=/usr/local/sphinxclient
-
-make &amp;&amp; make install
-
-#注意，如果你的php版本是5.4，那么在这一步中会出现错误，提示在 sphinx.c:105:2，可以按下面方式修改：
-
-#vim sphinx.c，找到105行
-
-#把 retval = std_hnd-&gt;read_property(object, member, type TSRMLS_CC); 修改成 retval = std_hnd-&gt;read_property(object, member, type TSRMLS_CC, NULL);
-
-# 重新编译
-./configure --with-php-config=/usr/local/php/bin/php-config --with-sphinx=/usr/local/sphinxclient
-make &amp;&amp; make install
-
-# 修改php.ini文件
-vim /usr/local/php/etc/php.ini
-# 在最后一行加上
-extension=&quot;sphinx.so&quot;
-# 重启
-/etc/init.d/php-fpm restart
-/etc/init.d/nginx restart
-</code></pre></li>
-<li><p>Sphinx配置文件</p>
-<ul>
-<li><p>首先建立Sphinx配置文件</p>
-<pre><code>cd /usr/local/coreseek/etc/
-cp sphinx.conf.dist sphinx.conf
-
-# 删除空格
-sed -i &quot;/^\s*$/d&quot; sphinx.conf
-</code></pre></li>
-<li><p>Sphinx.conf文件</p>
-<pre><code>source src1
-{
-    # data source type. mandatory, no default value
-    # known types are mysql, pgsql, mssql, xmlpipe, xmlpipe2, odbc
-    type                    = mysql
-    #####################################################################
-    ## SQL settings (for &apos;mysql&apos; and &apos;pgsql&apos; types)
-    #####################################################################
-    # some straightforward parameters for SQL source types
-    sql_host                = localhost
-    sql_user                = root
-    sql_pass                = 123456
-    sql_db                    = test
-    sql_port                = 3306    # optional, default is 3306
-    sql_query_pre                           = SET NAMES UTF8  # mysql检索字符集
-    sql_query                = \
-        SELECT id, group_id, UNIX_TIMESTAMP(date_added) AS date_added, title, content \
-        FROM documents
-    sql_ranged_throttle = 0
-    sql_query_info        = SELECT * FROM documents WHERE id=$id  # 这里的id对应于数据表的主键
-}
-index test1
-{
-    source            = src1
-    path            = /usr/local/coreseek/var/data/test1
-    docinfo            = extern
-    mlock            = 0
-    morphology        = none
-    #wordforms            = G:\data\wordforms.txt
-    #exceptions        = /data/exceptions.txt
-    min_word_len        = 1
-    charset_type        = utf-8
-    html_strip                = 0
-}
-indexer
-{
-    mem_limit            = 32M
-}
-searchd
-{
-    log                    = /usr/local/coreseek/var/log/searchd.log
-    query_log            = /usr/local/coreseek/var/log/query.log
-    read_timeout        = 5
-    client_timeout        = 300
-    max_children        = 30
-    pid_file            = /usr/local/coreseek/var/log/searchd.pid
-    max_matches            = 1000
-    seamless_rotate        = 1
-    preopen_indexes        = 0
-    unlink_old            = 1
-    mva_updates_pool    = 1M
-    max_packet_size        = 8M
-    max_filters            = 256
-    max_filter_values    = 4096
-}
-</code></pre></li>
-</ul>
-</li>
-<li><p>创建数据库，导入测试数据</p>
-<blockquote>
-<p>在主数据源设置中，sql_query和sql_query_info字段都是From document，这是安装coreseek时提供的测试表，位于/usr/local/coreseek/etc/example.sql</p>
-</blockquote>
-<pre><code>mysql -uroot -p123456
-create database test;
-use test;
-source /usr/local/coreseek/etc/example.sql
-</code></pre></li>
-<li><p>搜索测试</p>
-<ul>
-<li>创建索引，每次新增数据后，都要重新索引一次</li>
-<li><p>创建索引命令<code>indexer</code></p>
-<ul>
-<li>-c 指定配置文件</li>
-<li>–all 对所有索引重新编制索引</li>
-<li>–rotate 用于轮换索引，主要是在不停止服务的时候增加索引</li>
-<li>–merge 合并索引</li>
-<li><p>针对test:documents创建索引</p>
-<pre><code>cd /usr/local/coreseek/bin
-./indexer -c /usr/local/coreseek/etc/sphinx.conf --all
-</code></pre></li>
-</ul>
-</li>
-<li><p>查询关键字</p>
-<ul>
-<li>查询命令<code>search</code><ul>
-<li>-c 指定配置文件</li>
-</ul>
-</li>
-<li><p>查关键字<code>test</code></p>
-<pre><code>cd /usr/local/coreseek/bin
-./search -c /usr/local/coreseek/etc/sphinx.conf test
-</code></pre></li>
-<li><p>查询关键字<code>group</code></p>
-<pre><code>./search -c /usr/local/coreseek/etc/sphinx.conf group
-</code></pre></li>
-<li><p>插入一条数据并检索</p>
-<pre><code>mysql -uroot -p123456 test
-insert into documents(group_id, group_id2, date_added, title, content) values(3,9,now(),&apos;zhangsan&apos;, &apos;zhangsan is a student&apos;);
-</code></pre></li>
-<li>查询关键字<code>zhangsan</code><blockquote>
-<p>检索结果为0，因为每次新增数据都需要重新添加索引</p>
-</blockquote>
-</li>
-<li><p>插入一条中文书籍并检索</p>
-<pre><code>mysql -uroot -p123456 test
-insert into documents(group_id, group_id2, date_added, title, content) values(3,9,now(),&apos;zhangsan张三&apos;, &apos;张三是一名学生&apos;);
-
-# 重新建立索引
-./indexer -c /usr/local/coreseek/etc/sphinx.conf --all
-</code></pre></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="coreseek中文搜索测试"><a href="#coreseek中文搜索测试" class="headerlink" title="coreseek中文搜索测试"></a>coreseek中文搜索测试</h1><ul>
-<li><p>创建coreseek配置文件</p>
-<pre><code>cd /usr/local/coreseek/etc/
-cp sphinx.conf csft.conf
-</code></pre></li>
-<li><p><code>csft.conf</code>配置文件</p>
-<pre><code>source src1
-{
-    # data source type. mandatory, no default value
-    # known types are mysql, pgsql, mssql, xmlpipe, xmlpipe2, odbc
-    type                    = mysql
-    #####################################################################
-    ## SQL settings (for &apos;mysql&apos; and &apos;pgsql&apos; types)
-    #####################################################################
-    # some straightforward parameters for SQL source types
-    sql_host                = localhost
-    sql_user                = root
-    sql_pass                = 123456
-    sql_db                    = test
-    sql_port                = 3306    # optional, default is 3306
-    sql_query_pre                           = SET NAMES UTF8  # mysql检索字符集
-        #sql_query_pre                           = SET SESSION query_cache_type=1  # 关闭缓存
-    sql_query                = \
-        SELECT id, group_id, UNIX_TIMESTAMP(date_added) AS date_added, title, content \
-        FROM documents
-    sql_ranged_throttle = 0
-    sql_query_info        = SELECT * FROM documents WHERE id=$id  # 这里的id对应于数据表的主键
-}
-index test1
-{
-    source            = src1
-    path            = /usr/local/coreseek/var/data/test1
-    docinfo            = extern
-    mlock            = 0
-    morphology        = none
-    #wordforms            = G:\data\wordforms.txt
-    #exceptions        = /data/exceptions.txt
-    min_word_len        = 1
-    charset_type        = zh_cn.utf-8
-    charset_dictpath    = /usr/local/mmseg3/etc/
-    html_strip                = 0
-}
-indexer
-{
-    mem_limit            = 32M
-}
-searchd
-{
-    log                    = /usr/local/coreseek/var/log/searchd.log
-    query_log            = /usr/local/coreseek/var/log/query.log
-    read_timeout        = 5
-    client_timeout        = 300
-    max_children        = 30
-    pid_file            = /usr/local/coreseek/var/log/searchd.pid
-    max_matches            = 1000
-    seamless_rotate        = 1
-    preopen_indexes        = 0
-    unlink_old            = 1
-    mva_updates_pool    = 1M
-    max_packet_size        = 8M
-    max_filters            = 256
-    max_filter_values    = 4096
-}
-</code></pre></li>
-<li><p>重新测试中文搜索</p>
-<pre><code>cd /usr/local/coreseek/bin
-
-# 用sphinx搜索显示结果是
-[root@localhost bin]# ./search -c /usr/local/coreseek/etc/sphinx.conf zhangsan张三
-Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
-Copyright (c) 2007-2011,
-Beijing Choice Software Technologies Inc (http://www.coreseek.com)
-
- using config file &apos;/usr/local/coreseek/etc/sphinx.conf&apos;...
-index &apos;test1&apos;: query &apos;zhangsan张三 &apos;: returned 2 matches of 2 total in 0.000 sec
-
-displaying matches:
-1. document=5, weight=2
-    id=5
-    group_id=3
-    group_id2=9
-    date_added=2016-07-10 13:39:02
-    title=zhangsan
-    content=zhangsan is a student
-2. document=6, weight=1
-    id=6
-    group_id=3
-    group_id2=9
-    date_added=2016-07-10 13:42:27
-    title=zhangsan张三
-    content=张三是一名学生
-
-words:
-1. &apos;zhangsan&apos;: 2 documents, 3 hits
-
-# 基于coreseek搜索
-# 创建索引
-./indexer -c /usr/local/coreseek/etc/csft.conf --all
-# 搜索结果
-[root@localhost bin]# ./search -c /usr/local/coreseek/etc/csft.conf zhangsan张三
-Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
-Copyright (c) 2007-2011,
-Beijing Choice Software Technologies Inc (http://www.coreseek.com)
-
- using config file &apos;/usr/local/coreseek/etc/csft.conf&apos;...
-index &apos;test1&apos;: query &apos;zhangsan张三 &apos;: returned 1 matches of 1 total in 0.001 sec
-
-displaying matches:
-1. document=6, weight=5
-    id=6
-    group_id=3
-    group_id2=9
-    date_added=2016-07-10 13:42:27
-    title=zhangsan张三
-    content=张三是一名学生
-
-words:
-1. &apos;zhangsan&apos;: 2 documents, 3 hits
-2. &apos;张&apos;: 1 documents, 2 hits
-3. &apos;三&apos;: 1 documents, 2 hits
-</code></pre></li>
-<li><p>重新添加一条数据</p>
-<pre><code>mysql -uroot -p123456 test
-insert into documents(group_id, group_id2, date_added, title, content) values(3, 9, now(), &apos;北京清华大学&apos;, &apos;张三在 北京清华大学上学&apos;);
-
-./indexer -c /usr/local/coreseek/etc/csft.conf --all
-
-# 搜索北京清华大学
-[root@localhost bin]# ./search -c /usr/local/coreseek/etc/csft.conf 北京清华大学
-Coreseek Fulltext 3.2 [ Sphinx 0.9.9-release (r2117)]
-Copyright (c) 2007-2011,
-Beijing Choice Software Technologies Inc (http://www.coreseek.com)
-
- using config file &apos;/usr/local/coreseek/etc/csft.conf&apos;...
-index &apos;test1&apos;: query &apos;北京清华大学 &apos;: returned 1 matches of 1 total in 0.001 sec
-
-displaying matches:
-1. document=7, weight=4
-    id=7
-    group_id=3
-    group_id2=9
-    date_added=2016-07-10 14:08:06
-    title=北京清华大学
-    content=张三在北京清华大学上学
-
-words:
-1. &apos;北京&apos;: 1 documents, 2 hits
-2. &apos;清华大学&apos;: 1 documents, 2 hits
-</code></pre></li>
-</ul>
-<h1 id="在PHP中使用Sphinx"><a href="#在PHP中使用Sphinx" class="headerlink" title="在PHP中使用Sphinx"></a>在PHP中使用Sphinx</h1><ul>
-<li>在php中使用sphinx步骤<ul>
-<li>建立sphinx配置文件</li>
-<li>生成索引</li>
-<li>启动sphinx服务进程(searchd)</li>
-<li>安装PHP的sphinx扩展</li>
-<li>使用php客户端连接sphinx服务器</li>
-</ul>
-</li>
-<li>启动sphinx服务命令<code>searchd</code><ul>
-<li>-c 指定配置文件</li>
-<li>–stop 停止服务</li>
-<li>–pidfile 显式指定一个PID文件</li>
-<li>-p 指定端口</li>
-</ul>
-</li>
-<li><p>启动sphinx服务进程(searchd)，并开启端口9312</p>
-<pre><code>cd /usr/local/coreseek/bin
-./searchd(或者 ./searchd -c /usr/local/coreseek/etc/csft.conf) # 这里默认会加载csft.conf文件，如果配置文件不叫csft.conf可以使用-c命令指定配置文件名称
-</code></pre></li>
-<li><p>查看searchd状态</p>
-<pre><code>[root@localhost bin]# ps aux|grep searchd
-root      10424  0.0  0.0  31696   824 pts/0    S    14:15   0:00 ./searchd
-root      10436  0.0  0.0 112664   992 pts/0    R+   14:17   0:00 grep --color=auto searchd
-[root@localhost bin]# netstat -tunpl | grep 9312
-tcp        0      0 0.0.0.0:9312            0.0.0.0:*               LISTEN      10424/./searchd
-</code></pre></li>
-<li><p>简单的PHP检索示例</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;?php
-
-    if (empty($_GET[&apos;key&apos;]) &amp;&amp; !isset($_GET[&apos;key&apos;])) {
-            echo &apos;请输入搜索内容&apos;;
-            exit();
-    }
-
-    define(&apos;INDEX&apos;, &apos;test1&apos;);
-
-    $sphinx = new SphinxClient();
-
-    // 设置主机名和端口号(默认9312)
-    $sphinx-&gt;SetServer(&apos;localhost&apos;, 9312);
-
-    /**
-     * 设置匹配方式
-     * 1. SPH_MATCH_ANY表示所有结果
-     * 2. SPH_MATCH_ALL表示包涵关键词的结果
-     */
-    $sphinx-&gt;SetMatchMode(SPH_MATCH_ANY);
-
-    // query(&apos;a&apos;, &apos;b&apos;)在索引中搜索关键字a, query(&apos;a&apos;, &apos;*&apos;)在所有索引中搜索a
-    $result = $sphinx-&gt;query($_GET[&apos;key&apos;], INDEX);
-
-    echo &apos;&lt;pre&gt;&apos;;
-    print_r($result);
-    echo &apos;&lt;/pre&gt;&apos;;
-
-    $ids = join(&apos;,&apos;, array_keys($result[&apos;matches&apos;]));
-    $mysql = new mysqli(&apos;localhost&apos;, &apos;root&apos;, &apos;123456&apos;, &apos;test&apos;);
-    $mysql-&gt;query(&apos;SET NAMES utf8&apos;);
-    $sql = &quot;select * from documents where id in({$ids})&quot;;
-
-    $opts = array(
-        &apos;before_match&apos; =&gt; &quot;&lt;font style=&apos;font-weight: bold; color: #f00;&apos;&gt;&quot;,
-        &apos;after_match&apos;  =&gt; &apos;&lt;/font&gt;&apos;
-    );
-
-    $res = $mysql-&gt;query($sql);
-
-    $count = $res-&gt;num_rows;
-
-    if ($count &gt; 0) {
-        while ($list = $res-&gt;fetch_assoc()) {
-            $row = $sphinx-&gt;buildExcerpts($list, INDEX, $_GET[&apos;key&apos;], $opts);
-
-            echo &quot;标题：{$row[4]}&lt;br/&gt;&quot;;
-            echo &quot;内容：{$row[5]}&quot;;
-
-            echo &apos;&lt;hr&gt;&apos;;
-        }
-
-        echo &quot;总共搜索到${count}条&quot;;
-    } else {
-        echo &apos;没有搜索到&apos;;
-    }
-?&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Centos7-Sphinx-install&quot;&gt;&lt;a href=&quot;#Centos7-Sphinx-install&quot; class=&quot;headerlink&quot; title=&quot;Centos7 Sphinx install&quot;&gt;&lt;/a&gt;Centos7 Sphinx install&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;安装依赖库&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel expat-devel
-cd /usr/local/src
-
-// https://share.weiyun.com/2da811898545e0043a00c4129fea95c0
-// download coreseek-3.2.14
-tar xvzf coreseek-3.2.14.tar.gz
-cd coreseek-3.2.14
-cd mmseg-3.2.14
-./bootstrap
-./configure --prefix=/usr/local/mmseg3
-make &amp;amp;&amp;amp; make install
-cd /usr/local/src/coreseek-3.2.14/csft-3.2.14
-
-#这里我们要修改 src/sphinxexpr.cpp 文件，将该文件中的 1013、1047、1080 行的 ExprEval 改为 this-&amp;gt;ExprEval
-sh buildconf.sh
-
-#修改configure文件,找到“#define USE_LIBICONV 1”，将注释去掉，并将1改成0。
-make &amp;amp;&amp;amp; make install
-
-cd ..
-cd testpack
-cat var/test/test.xml   #此时应该正确显示中文
-/usr/local/mmseg3/bin/mmseg -d /usr/local/mmseg3/etc var/test/test.xml  #整篇文章进行分词
-/usr/local/coreseek/bin/indexer -c etc/csft.conf --all  #创建索引
-/usr/local/coreseek/bin/search -c etc/csft.conf 网络搜索    #搜索关键字 网络搜索
-/usr/local/coreseek/bin/searchd -c etc/csft.conf    #正常开启搜索服务
-/usr/local/coreseek/bin/searchd -c etc/csft.conf --stop #如要停止搜索服务
-/usr/local/coreseek/bin/indexer -c etc/csft.conf --all --rotate #如要已启动服务，要更新索引
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="PHP" scheme="http://blog.golearns.org/categories/PHP/"/>
-    
-    
-      <category term="PHP" scheme="http://blog.golearns.org/tags/PHP/"/>
-    
-      <category term="Sphinx" scheme="http://blog.golearns.org/tags/Sphinx/"/>
-    
-      <category term="Coreseek" scheme="http://blog.golearns.org/tags/Coreseek/"/>
     
   </entry>
   
