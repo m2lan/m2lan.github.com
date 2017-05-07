@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-07T05:09:55.000Z</updated>
+  <updated>2017-05-07T06:18:17.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,507 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mybatis-spring-springmvc</title>
+    <link href="http://blog.golearns.org/2017/05/07/mybatis-spring-springmvc/"/>
+    <id>http://blog.golearns.org/2017/05/07/mybatis-spring-springmvc/</id>
+    <published>2017-05-07T06:09:37.000Z</published>
+    <updated>2017-05-07T06:18:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mybatis整合spring和springmvc"><a href="#mybatis整合spring和springmvc" class="headerlink" title="mybatis整合spring和springmvc"></a>mybatis整合spring和springmvc</h1><h2 id="新建Maven-webapps"><a href="#新建Maven-webapps" class="headerlink" title="新建Maven webapps"></a>新建Maven webapps</h2><ul>
+<li><p>pom.xml</p>
+<pre><code>&lt;profiles&gt;
+    &lt;profile&gt;
+        &lt;activation&gt;
+            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+            &lt;jdk&gt;1.8&lt;/jdk&gt;
+        &lt;/activation&gt;
+        &lt;properties&gt;
+            &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+            &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+            &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+            &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+            &lt;maven.compiler.compilerVersion&gt;1.8&lt;/maven.compiler.compilerVersion&gt;
+            &lt;java.version&gt;1.8&lt;/java.version&gt;
+            &lt;mybatis.version&gt;3.4.1&lt;/mybatis.version&gt;
+            &lt;mysql.version&gt;5.1.40&lt;/mysql.version&gt;
+            &lt;log4j.version&gt;1.2.17&lt;/log4j.version&gt;
+            &lt;junit.version&gt;4.12&lt;/junit.version&gt;
+            &lt;mybatis.ehcache.version&gt;1.1.0&lt;/mybatis.ehcache.version&gt;
+            &lt;spring.version&gt;4.3.7.RELEASE&lt;/spring.version&gt;
+            &lt;servlet.api.version&gt;3.1.0&lt;/servlet.api.version&gt;
+            &lt;jstl.version&gt;1.2&lt;/jstl.version&gt;
+            &lt;jackson.version&gt;2.8.7&lt;/jackson.version&gt;
+            &lt;c3p0.version&gt;0.9.5.2&lt;/c3p0.version&gt;
+            &lt;mybatis.spring.version&gt;1.3.1&lt;/mybatis.spring.version&gt;
+        &lt;/properties&gt;
+    &lt;/profile&gt;
+&lt;/profiles&gt;
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+        &lt;version&gt;${servlet.api.version}&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+        &lt;version&gt;${jstl.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+        &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+        &lt;version&gt;${jackson.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;${mysql.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.mchange&lt;/groupId&gt;
+        &lt;artifactId&gt;c3p0&lt;/artifactId&gt;
+        &lt;version&gt;${c3p0.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+        &lt;version&gt;${mybatis.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;log4j&lt;/groupId&gt;
+        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;version&gt;${log4j.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis.caches&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-ehcache&lt;/artifactId&gt;
+        &lt;version&gt;${mybatis.ehcache.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+        &lt;version&gt;${mybatis.spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;${junit.version}&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre></li>
+<li>Maven -&gt; Update project</li>
+</ul>
+<a id="more"></a>
+<h2 id="Web-xml"><a href="#Web-xml" class="headerlink" title="Web.xml"></a>Web.xml</h2><pre><code>&lt;web-app xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee 
+      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;
+version=&quot;3.0&quot;&gt;
+
+    &lt;filter&gt;
+        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;encoding&lt;/param-name&gt;
+            &lt;param-value&gt;UTF-8&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/filter-mapping&gt;
+
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath:springmvc.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+&lt;/web-app&gt;
+</code></pre><h2 id="新建springmvc-xml"><a href="#新建springmvc-xml" class="headerlink" title="新建springmvc.xml"></a>新建springmvc.xml</h2><pre><code>&lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;
+
+&lt;context:component-scan base-package=&quot;com.example.springAndMybatis&quot;&gt;&lt;/context:component-scan&gt;
+
+&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+    &lt;property name=&quot;user&quot; value=&quot;${jdbc.user}&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;driverClass&quot; value=&quot;${jdbc.driverClass}&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;jdbcUrl&quot; value=&quot;${jdbc.jdbcUrl}&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;initialPoolSize&quot; value=&quot;${jdbc.initPoolSize}&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;maxPoolSize&quot; value=&quot;${jdbc.maxPoolSize}&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;com.example.springAndMybatis.mybatis&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis.xml&quot;&gt;&lt;/property&gt;
+    &lt;!-- 扫描类路径下mapper下的所有xml --&gt;
+    &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/*.xml&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;constructor-arg name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/constructor-arg&gt;
+&lt;/bean&gt;
+
+&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+    &lt;property name=&quot;basePackage&quot; value=&quot;com.example.springAndMybatis.mybatis&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
+&lt;mvc:annotation-driven  /&gt;
+&lt;mvc:default-servlet-handler/&gt;
+</code></pre><h2 id="jdbc-properties"><a href="#jdbc-properties" class="headerlink" title="jdbc.properties"></a>jdbc.properties</h2><pre><code>jdbc.user=root
+jdbc.password=123456
+jdbc.driverClass=com.mysql.jdbc.Driver
+jdbc.jdbcUrl=jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true
+jdbc.initPoolSize=5
+jdbc.maxPoolSize=10
+</code></pre><h2 id="mybatis-xml"><a href="#mybatis-xml" class="headerlink" title="mybatis.xml"></a>mybatis.xml</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE configuration
+  PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+  &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+&lt;/configuration&gt;
+</code></pre><h2 id="UserMapper-xml"><a href="#UserMapper-xml" class="headerlink" title="UserMapper.xml"></a>UserMapper.xml</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.example.springAndMybatis.mybatis.UserMapper&quot;&gt;
+    &lt;select id=&quot;getUser&quot; parameterType=&quot;Integer&quot; resultType=&quot;com.example.springAndMybatis.model.User&quot;&gt;
+        select id, username, password, email from user where id = #{id}
+    &lt;/select&gt;
+
+    &lt;insert id=&quot;addUser&quot; parameterType=&quot;com.example.springAndMybatis.model.User&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;
+        insert into user(username, password, email) value(#{username}, #{password}, #{email})
+    &lt;/insert&gt;
+&lt;/mapper&gt;
+</code></pre><h2 id="UserMapper-java"><a href="#UserMapper-java" class="headerlink" title="UserMapper.java"></a>UserMapper.java</h2><pre><code>public interface UserMapper {
+
+    public User getUser(Integer id);
+
+    public void addUser(User user);
+}
+</code></pre><h2 id="UserService-java"><a href="#UserService-java" class="headerlink" title="UserService.java"></a>UserService.java</h2><pre><code>@Service
+@Transactional(readOnly=true)
+public class UserService {
+
+    @Autowired
+    private UserMapper userMapper;
+
+    public User getUser(Integer id) {
+        return userMapper.getUser(id);
+    }
+
+    @Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false, rollbackFor=Exception.class)
+    public void addUser(User user) {
+        userMapper.addUser(user);
+    }
+}
+</code></pre><h2 id="UserController-java"><a href="#UserController-java" class="headerlink" title="UserController.java"></a>UserController.java</h2><pre><code>@Controller
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(&quot;user&quot;)
+    public String user(@RequestParam(&quot;username&quot;) String username) {
+        System.out.println(&quot;username: &quot; + username);
+
+        User user = userService.getUser(1);
+        System.out.println(&quot;user: &quot; + user);
+
+        user = new User();
+        user.setUsername(&quot;zhaoliuxxx&quot;);
+        user.setPassword(&quot;123456&quot;);
+        user.setEmail(&quot;zhaoliu@qq.com&quot;);
+        userService.addUser(user);
+        System.out.println(&quot;result: &quot; + user.getId());
+
+        return &quot;user&quot;;
+    }
+}
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;mybatis整合spring和springmvc&quot;&gt;&lt;a href=&quot;#mybatis整合spring和springmvc&quot; class=&quot;headerlink&quot; title=&quot;mybatis整合spring和springmvc&quot;&gt;&lt;/a&gt;mybatis整合spring和springmvc&lt;/h1&gt;&lt;h2 id=&quot;新建Maven-webapps&quot;&gt;&lt;a href=&quot;#新建Maven-webapps&quot; class=&quot;headerlink&quot; title=&quot;新建Maven webapps&quot;&gt;&lt;/a&gt;新建Maven webapps&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;pom.xml&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;profiles&amp;gt;
+    &amp;lt;profile&amp;gt;
+        &amp;lt;activation&amp;gt;
+            &amp;lt;activeByDefault&amp;gt;true&amp;lt;/activeByDefault&amp;gt;
+            &amp;lt;jdk&amp;gt;1.8&amp;lt;/jdk&amp;gt;
+        &amp;lt;/activation&amp;gt;
+        &amp;lt;properties&amp;gt;
+            &amp;lt;project.build.sourceEncoding&amp;gt;UTF-8&amp;lt;/project.build.sourceEncoding&amp;gt;
+            &amp;lt;project.reporting.outputEncoding&amp;gt;UTF-8&amp;lt;/project.reporting.outputEncoding&amp;gt;
+            &amp;lt;maven.compiler.source&amp;gt;1.8&amp;lt;/maven.compiler.source&amp;gt;
+            &amp;lt;maven.compiler.target&amp;gt;1.8&amp;lt;/maven.compiler.target&amp;gt;
+            &amp;lt;maven.compiler.compilerVersion&amp;gt;1.8&amp;lt;/maven.compiler.compilerVersion&amp;gt;
+            &amp;lt;java.version&amp;gt;1.8&amp;lt;/java.version&amp;gt;
+            &amp;lt;mybatis.version&amp;gt;3.4.1&amp;lt;/mybatis.version&amp;gt;
+            &amp;lt;mysql.version&amp;gt;5.1.40&amp;lt;/mysql.version&amp;gt;
+            &amp;lt;log4j.version&amp;gt;1.2.17&amp;lt;/log4j.version&amp;gt;
+            &amp;lt;junit.version&amp;gt;4.12&amp;lt;/junit.version&amp;gt;
+            &amp;lt;mybatis.ehcache.version&amp;gt;1.1.0&amp;lt;/mybatis.ehcache.version&amp;gt;
+            &amp;lt;spring.version&amp;gt;4.3.7.RELEASE&amp;lt;/spring.version&amp;gt;
+            &amp;lt;servlet.api.version&amp;gt;3.1.0&amp;lt;/servlet.api.version&amp;gt;
+            &amp;lt;jstl.version&amp;gt;1.2&amp;lt;/jstl.version&amp;gt;
+            &amp;lt;jackson.version&amp;gt;2.8.7&amp;lt;/jackson.version&amp;gt;
+            &amp;lt;c3p0.version&amp;gt;0.9.5.2&amp;lt;/c3p0.version&amp;gt;
+            &amp;lt;mybatis.spring.version&amp;gt;1.3.1&amp;lt;/mybatis.spring.version&amp;gt;
+        &amp;lt;/properties&amp;gt;
+    &amp;lt;/profile&amp;gt;
+&amp;lt;/profiles&amp;gt;
+&amp;lt;dependencies&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;spring-context&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;spring-aspects&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;spring-web&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;spring-webmvc&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;javax.servlet&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;javax.servlet-api&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${servlet.api.version}&amp;lt;/version&amp;gt;
+        &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;javax.servlet&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;jstl&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${jstl.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;com.fasterxml.jackson.core&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;jackson-databind&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${jackson.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${mysql.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;spring-jdbc&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;com.mchange&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;c3p0&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${c3p0.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${mybatis.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;log4j&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${log4j.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.mybatis.caches&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;mybatis-ehcache&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${mybatis.ehcache.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;mybatis-spring&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${mybatis.spring.version}&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;${junit.version}&amp;lt;/version&amp;gt;
+        &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+&amp;lt;/dependencies&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;Maven -&amp;gt; Update project&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/categories/mybatis/"/>
+    
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
+    
+      <category term="spring" scheme="http://blog.golearns.org/tags/spring/"/>
+    
+      <category term="springmvc" scheme="http://blog.golearns.org/tags/springmvc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mybatis-cache</title>
+    <link href="http://blog.golearns.org/2017/05/07/mybatis-cache/"/>
+    <id>http://blog.golearns.org/2017/05/07/mybatis-cache/</id>
+    <published>2017-05-07T05:54:46.000Z</published>
+    <updated>2017-05-07T06:18:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mybatis-cache"><a href="#mybatis-cache" class="headerlink" title="mybatis cache"></a>mybatis cache</h1><blockquote>
+<p>mybatis提供一级缓存和二级缓存</p>
+</blockquote>
+<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><ul>
+<li><p>sqlSession级别的缓存，会话缓存，当sqlSession关闭会话结束，缓存失效。</p>
+<pre><code>@Test
+public void findUser() {
+    try (SqlSession session = sqlSessionFactory.openSession();
+            SqlSession session2 = sqlSessionFactory.openSession()) {
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        User user = userMapper.getUserById(1);
+        System.out.println(user);
+        session.close();
+
+        UserMapper userMapper1 = session2.getMapper(UserMapper.class);
+        User user1 = userMapper1.getUserById(1);
+        System.out.println(user1);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre></li>
+<li>第一次查询用户信息，如果缓存中不存在，去数据库中查询。然后把用户信息保存在一级缓存中。</li>
+<li>默认所有的select语句都会被缓存<code>useCache=&quot;true&quot;</code></li>
+<li>当操作insert,update 和 delete 语句会刷新缓存。<code>flushCache=&quot;true&quot;</code></li>
+</ul>
+<a id="more"></a>
+<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><ul>
+<li>二级缓存的范围更大，多个sqlSession可以共享二级缓存。</li>
+<li><p>开启二级缓存</p>
+<pre><code>&lt;settings&gt;
+    &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;
+&lt;/settings&gt;
+</code></pre></li>
+<li>JavaBean文件实现<code>Serializable</code>序列化接口</li>
+<li><p>在Mapper映射文件中加入</p>
+<pre><code>&lt;!-- 
+    eviction缓存策略：FIFO，先进先出，按对象进入缓存的顺序移除
+    flushInterval: 每隔60s刷新缓存
+    缓存列表大小为512个并且是只读的
+--&gt;
+&lt;cache
+  eviction=&quot;FIFO&quot;
+  flushInterval=&quot;60000&quot;
+  size=&quot;512&quot;
+  readOnly=&quot;true&quot;/&gt;
+</code></pre><h2 id="使用EhCache缓存"><a href="#使用EhCache缓存" class="headerlink" title="使用EhCache缓存"></a>使用EhCache缓存</h2></li>
+<li><p>添加ehcache.xml</p>
+<pre><code>&lt;ehcache&gt;
+    &lt;diskStore path=&quot;java.io.tmpdir/mybatis-ehcache&quot;/&gt;
+    &lt;defaultCache
+        maxElementsInMemory=&quot;1000&quot;
+        maxElementsOnDisk=&quot;10000000&quot;
+        eternal=&quot;false&quot;
+        timeToIdleSeconds=&quot;120&quot;
+        timeToLiveSeconds=&quot;120&quot;
+        overflowToDisk=&quot;false&quot;
+        diskPersistent=&quot;false&quot;
+        diskExpiryThreadIntervalSeconds=&quot;120&quot;
+        memoryStoreEvictionPolicy=&quot;LRU&quot;
+    /&gt;
+&lt;/ehcache&gt;
+</code></pre></li>
+<li><p>在Mapper映射文件中配置</p>
+<pre><code>&lt;cache type=&quot;org.mybatis.caches.ehcache.EhcacheCache&quot;&gt;&lt;/cache&gt;
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;mybatis-cache&quot;&gt;&lt;a href=&quot;#mybatis-cache&quot; class=&quot;headerlink&quot; title=&quot;mybatis cache&quot;&gt;&lt;/a&gt;mybatis cache&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;mybatis提供一级缓存和二级缓存&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;一级缓存&quot;&gt;&lt;a href=&quot;#一级缓存&quot; class=&quot;headerlink&quot; title=&quot;一级缓存&quot;&gt;&lt;/a&gt;一级缓存&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;sqlSession级别的缓存，会话缓存，当sqlSession关闭会话结束，缓存失效。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@Test
+public void findUser() {
+    try (SqlSession session = sqlSessionFactory.openSession();
+            SqlSession session2 = sqlSessionFactory.openSession()) {
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        User user = userMapper.getUserById(1);
+        System.out.println(user);
+        session.close();
+
+        UserMapper userMapper1 = session2.getMapper(UserMapper.class);
+        User user1 = userMapper1.getUserById(1);
+        System.out.println(user1);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;第一次查询用户信息，如果缓存中不存在，去数据库中查询。然后把用户信息保存在一级缓存中。&lt;/li&gt;
+&lt;li&gt;默认所有的select语句都会被缓存&lt;code&gt;useCache=&amp;quot;true&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;当操作insert,update 和 delete 语句会刷新缓存。&lt;code&gt;flushCache=&amp;quot;true&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/categories/mybatis/"/>
+    
+    
+      <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
+    
+  </entry>
   
   <entry>
     <title>mybatis-多表关联操作</title>
@@ -9324,137 +9825,6 @@ make install
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     
       <category term="Tsung" scheme="http://blog.golearns.org/tags/Tsung/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos-升级mysql</title>
-    <link href="http://blog.golearns.org/2016/02/26/centos-%E5%8D%87%E7%BA%A7mysql/"/>
-    <id>http://blog.golearns.org/2016/02/26/centos-升级mysql/</id>
-    <published>2016-02-25T16:18:12.000Z</published>
-    <updated>2016-07-15T02:29:32.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Centos-升级mysql"><a href="#Centos-升级mysql" class="headerlink" title="Centos 升级mysql"></a>Centos 升级mysql</h1><ul>
-<li><p>Centos默认mysql版本是5.1，但是高版本的mysql对性能有很大的提升。并且支持的字符最多有4个字节，支持emoji表情。查看Centos内核版本，下载对应的<a href="http://dev.mysql.com/downloads/repo/yum/" target="_blank" rel="external">yum源</a></p>
-<pre><code>rpm -Uvh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
-yum -y upgrade mysql mysql_upgrade
-
-// 配置/etc/my.cnf
-[mysqld]
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
-user=mysql
-# Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=0
-character-set-server = utf8mb4
-collation-server = utf8mb4_unicode_ci
-init_connect=&apos;SET NAMES utf8mb4&apos;
-character-set-client-handshake = FALSE
-[mysql]
-default-character-set=utf8mb4
-[mysqld_safe]
-log-error=/var/log/mysqld.log
-pid-file=/var/run/mysqld/mysqld.pid
-
-[client]
-default-character-set=utf8mb4
-</code></pre>  <a id="more"></a></li>
-<li><p>启动mysql查看编码</p>
-<pre><code>SHOW VARIABLES WHERE Variable_name LIKE &apos;character\_set\_%&apos; OR Variable_name LIKE &apos;collation%&apos;;
-</code></pre></li>
-<li><p>在连接数据看的时候会出现<code>Cannot load from mysql.proc. The table is probably corrupted</code>,原因是<code>mysql.proc</code>在升级的时候有个字段没有生成成功。在5.1中<code>mysql.proc</code>的<code>comment</code>字段是<code>varcahr(64)</code>,但在5.6中应该是text执行下面的语句修改就可以了。</p>
-<pre><code>ALTER TABLE `proc` MODIFY COLUMN `comment` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL AFTER `sql_mode`;
-</code></pre></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Centos-升级mysql&quot;&gt;&lt;a href=&quot;#Centos-升级mysql&quot; class=&quot;headerlink&quot; title=&quot;Centos 升级mysql&quot;&gt;&lt;/a&gt;Centos 升级mysql&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Centos默认mysql版本是5.1，但是高版本的mysql对性能有很大的提升。并且支持的字符最多有4个字节，支持emoji表情。查看Centos内核版本，下载对应的&lt;a href=&quot;http://dev.mysql.com/downloads/repo/yum/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;yum源&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rpm -Uvh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
-yum -y upgrade mysql mysql_upgrade
-
-// 配置/etc/my.cnf
-[mysqld]
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
-user=mysql
-# Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=0
-character-set-server = utf8mb4
-collation-server = utf8mb4_unicode_ci
-init_connect=&amp;apos;SET NAMES utf8mb4&amp;apos;
-character-set-client-handshake = FALSE
-[mysql]
-default-character-set=utf8mb4
-[mysqld_safe]
-log-error=/var/log/mysqld.log
-pid-file=/var/run/mysqld/mysqld.pid
-
-[client]
-default-character-set=utf8mb4
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
-      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
-    
-      <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos-安装nginx</title>
-    <link href="http://blog.golearns.org/2016/02/26/centos-%E5%AE%89%E8%A3%85nginx/"/>
-    <id>http://blog.golearns.org/2016/02/26/centos-安装nginx/</id>
-    <published>2016-02-25T16:17:11.000Z</published>
-    <updated>2016-07-15T03:41:33.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Centos-安装Nginx"><a href="#Centos-安装Nginx" class="headerlink" title="Centos 安装Nginx"></a>Centos 安装Nginx</h1><pre><code>yum install gcc-c++
-
-yum -y install zlib zlib-devel openssl openssl--devel pcre pcre-devel
-
-wget http://nginx.org/download/nginx-1.6.2.tar.gz
-
-tar xvzf nginx-1.6.2.tar.gz
-
-cd ./nginx-1.6.2
-
-./configure
-
-make &amp;&amp; make install
-
-// 修改配置防火墙
--A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
-
-service iptables restart
-
-// 启动nginx
-cd /usr/local/nginx/sbin/
-
-./nginx
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Centos-安装Nginx&quot;&gt;&lt;a href=&quot;#Centos-安装Nginx&quot; class=&quot;headerlink&quot; title=&quot;Centos 安装Nginx&quot;&gt;&lt;/a&gt;Centos 安装Nginx&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;yum install gc
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
-      <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
-    
-      <category term="Nginx" scheme="http://blog.golearns.org/tags/Nginx/"/>
     
   </entry>
   
