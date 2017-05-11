@@ -1,0 +1,773 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="集群，分布式，读写分离，CND，反向代理," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="大型网站架构演化初始阶段的网站架构 小型网站最开始没有多少人访问，只需要一台服务器就绰绰有余 应用程序、数据库、文件等所有的资源都放在一台服务器上">
+<meta name="keywords" content="集群，分布式，读写分离，CND，反向代理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大型网站架构演化">
+<meta property="og:url" content="http://blog.golearns.org/2017/05/11/大型网站架构演化/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="大型网站架构演化初始阶段的网站架构 小型网站最开始没有多少人访问，只需要一台服务器就绰绰有余 应用程序、数据库、文件等所有的资源都放在一台服务器上">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/server1.png">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/server2.png">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/server3.png">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/server4.png">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/server5.png">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/server6.png">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/server7.png">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/server8.png">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/server9.png">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/server10.png">
+<meta property="og:updated_time" content="2017-05-11T13:57:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大型网站架构演化">
+<meta name="twitter:description" content="大型网站架构演化初始阶段的网站架构 小型网站最开始没有多少人访问，只需要一台服务器就绰绰有余 应用程序、数据库、文件等所有的资源都放在一台服务器上">
+<meta name="twitter:image" content="http://opsi4gg7g.bkt.clouddn.com/server1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 2746085,
+      author: 'M2'
+    }
+  };
+</script>
+
+  <title> 大型网站架构演化 | 知识记录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a7aab4bc8347eb54375043cf003b2c21";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知识记录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'b2cFpoExgUMZu3--zQzE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                大型网站架构演化
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-11T21:11:23+08:00" content="2017-05-11">
+              2017-05-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/架构/" itemprop="url" rel="index">
+                    <span itemprop="name">架构</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/11/大型网站架构演化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/11/大型网站架构演化/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="大型网站架构演化"><a href="#大型网站架构演化" class="headerlink" title="大型网站架构演化"></a>大型网站架构演化</h1><h2 id="初始阶段的网站架构"><a href="#初始阶段的网站架构" class="headerlink" title="初始阶段的网站架构"></a>初始阶段的网站架构</h2><ul>
+<li>小型网站最开始没有多少人访问，只需要一台服务器就绰绰有余</li>
+<li>应用程序、数据库、文件等所有的资源都放在一台服务器上</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server1.png" alt=""></p>
+<a id="more"></a>
+<h2 id="应用服务和数据服务分离"><a href="#应用服务和数据服务分离" class="headerlink" title="应用服务和数据服务分离"></a>应用服务和数据服务分离</h2><ul>
+<li>随着网站业务发展，越来越多的用户访问导致性能越来越差，越来越多的数据导致存储空间不足。这时就需要应用和数据分离。</li>
+<li>应用服务器、文件服务器和数据库服务器<ul>
+<li>应用服务器：<strong>处理大量的业务逻辑，需要更快更强大的CPU</strong></li>
+<li>文件服务器：<strong>存储大量用户上传的文件，需要更大的硬盘</strong></li>
+<li>数据库服务器：<strong>快速磁盘检索和数据缓存，需要更快的硬盘和更大的内存</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server2.png" alt=""></p>
+<h2 id="使用缓存改变网站性能"><a href="#使用缓存改变网站性能" class="headerlink" title="使用缓存改变网站性能"></a>使用缓存改变网站性能</h2><ul>
+<li>网站访问特点：<strong>80%的业务访问集中在20%的数据上</strong></li>
+<li>把集中访问的一小部分数据缓存在内存中就可以减少数据库的访问压力，提高整个网站的数据访问速度，改善数据库写入性能</li>
+<li>网站缓存分为两种：缓存在应用服务器的<strong>本地缓存</strong>和缓存在专门<strong>分布式缓存服务器上的远程缓存</strong><ul>
+<li>本地缓存：<strong>访问速度更快，但是受应用服务器内存限制，缓存数据量有限，而且会出现和应用服务器争用内存的情况</strong></li>
+<li>远程缓存：<strong>可以使用集群的方式，部署大内存的服务器作为专门的缓存服务器，理论上做到不受内存容量限制的缓存服务</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server3.png" alt=""> </p>
+<h2 id="使用应用服务器集群改善网站的并发处理能力"><a href="#使用应用服务器集群改善网站的并发处理能力" class="headerlink" title="使用应用服务器集群改善网站的并发处理能力"></a>使用应用服务器集群改善网站的并发处理能力</h2><ul>
+<li>通过增加服务器分担原有服务器的访问及存储压力，从而实现系统的可伸缩性</li>
+<li>通过负载均衡调度服务器，可将来自用户浏览器的访问请求转发到应用服务器集群中的任何一台服务器上，如果有个更多的用户，就在集群中加入更多的应用服务器，使应用服务器的负载压力不在成为整个网站的瓶颈</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server4.png" alt=""></p>
+<h2 id="数据库读写分离"><a href="#数据库读写分离" class="headerlink" title="数据库读写分离"></a>数据库读写分离</h2><ul>
+<li>网站使用缓存后，使绝大部分数据读操作访问都可以不通过数据库就能完成，但是仍有一部分读操作<strong>(缓存访问不命中、缓存过期)</strong>和全部的写操作需要访问数据库，在网站的用户达到一定规模后，数据库因为负载压力过高而成为网站的瓶颈</li>
+<li>目前大部分主流数据库提供<strong>主从热备</strong>，通过配置两台数据库主从关系，可以将一台服务器数据库的数据更新同步到另外一台服务器上。网站利用数据库读写分离改善数据库的负载压力</li>
+<li>应用服务器在写数据的时候，<strong>访问主数据库，主数据库通过主从复制机制将数据更新同步到从数据库，这样当应用服务器读数据的时候，就可以通过从数据库获取数据</strong></li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server5.png" alt=""></p>
+<h2 id="使用反向代理和CND加速网站响应"><a href="#使用反向代理和CND加速网站响应" class="headerlink" title="使用反向代理和CND加速网站响应"></a>使用反向代理和CND加速网站响应</h2><ul>
+<li>随着网站业务不断发展，用户规模越来愈大，由于中国复杂的网络环境，不同地区的用户访问网站时，速度差别较大。</li>
+<li>网站加速手段有<strong>CDN</strong>和<strong>反向代理</strong></li>
+<li>CDN和反向代理的基本原理都是缓存。<ul>
+<li>CDN部署在网络提供山的机房，使用户在请求网站服务时，可以从距离自己最近的网络提供商机房获取数据</li>
+<li>反向代理部署在网站的中心机房，当用户请求到达中心机房后，首先访问的服务器是反向代理服务器，如果反向代理服务器中缓存着用户请求的资源，就将其直接返回给用户</li>
+</ul>
+</li>
+<li>使用CDN和反向代理一方面加快用户访问速度，另一方面也减轻后端服务器的负载压力 </li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server6.png" alt=""></p>
+<h2 id="使用分布式文件系统和分布式数据库系统"><a href="#使用分布式文件系统和分布式数据库系统" class="headerlink" title="使用分布式文件系统和分布式数据库系统"></a>使用分布式文件系统和分布式数据库系统</h2><ul>
+<li>分布式数据库是网站数据库拆分的最后手段，只有在单表数据规模非常庞大的时候才使用。不到不得已时，网站更常用的数据库拆分手段是业务拆分，<strong>将不同的业务的数据库部署在不同的物理服务器上</strong></li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server7.png" alt=""></p>
+<h2 id="使用NoSQL和搜索引擎"><a href="#使用NoSQL和搜索引擎" class="headerlink" title="使用NoSQL和搜索引擎"></a>使用NoSQL和搜索引擎</h2><ul>
+<li>随着网站业务越来越复杂，对数据存储的检索需求也越来越复杂，网站需要采用一些非关系型数据库如NoSQL和非数据库查询技术如搜索引擎</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server8.png" alt=""></p>
+<h2 id="业务拆分"><a href="#业务拆分" class="headerlink" title="业务拆分"></a>业务拆分</h2><ul>
+<li>大型网站为了应对复杂的业务场景，通过将整个网站业务分成不同的产品线，如大型购物交易网站就会将首页、商铺、订单、买家、卖家等拆分成不同的产品线</li>
+<li>具体到技术：将一个网站拆分成许多不同的应用，每个应用独立部署维护</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server9.png" alt=""></p>
+<h2 id="分布式服务"><a href="#分布式服务" class="headerlink" title="分布式服务"></a>分布式服务</h2><ul>
+<li>既然每一个应用系统都需要执行许多相同的业务操作，比如用户管理、商品管理等，那么可以将这些共用的业务提取出来，独立部署。由这些可复用的业务连接数据库，提供共用业务服务，而应用系统只需要管理用户界面，通过分布式服务调用共用业务服务完成具体业务操作</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server10.png" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/集群，分布式，读写分离，CND，反向代理/" rel="tag">#集群，分布式，读写分离，CND，反向代理</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/07/jsonp/" rel="next" title="jsonp">
+                <i class="fa fa-chevron-left"></i> jsonp
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/05/11/大型网站架构演化/"
+           data-title="大型网站架构演化" data-url="http://blog.golearns.org/2017/05/11/大型网站架构演化/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M2" />
+          <p class="site-author-name" itemprop="name">M2</p>
+          <p class="site-description motion-element" itemprop="description">记录知识，分享知识</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/m2lan" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/763960267" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/100006504108865" target="_blank">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1877167031" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:763960267@qq.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站架构演化"><span class="nav-number">1.</span> <span class="nav-text">大型网站架构演化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始阶段的网站架构"><span class="nav-number">1.1.</span> <span class="nav-text">初始阶段的网站架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用服务和数据服务分离"><span class="nav-number">1.2.</span> <span class="nav-text">应用服务和数据服务分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用缓存改变网站性能"><span class="nav-number">1.3.</span> <span class="nav-text">使用缓存改变网站性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用应用服务器集群改善网站的并发处理能力"><span class="nav-number">1.4.</span> <span class="nav-text">使用应用服务器集群改善网站的并发处理能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库读写分离"><span class="nav-number">1.5.</span> <span class="nav-text">数据库读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用反向代理和CND加速网站响应"><span class="nav-number">1.6.</span> <span class="nav-text">使用反向代理和CND加速网站响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用分布式文件系统和分布式数据库系统"><span class="nav-number">1.7.</span> <span class="nav-text">使用分布式文件系统和分布式数据库系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用NoSQL和搜索引擎"><span class="nav-number">1.8.</span> <span class="nav-text">使用NoSQL和搜索引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#业务拆分"><span class="nav-number">1.9.</span> <span class="nav-text">业务拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式服务"><span class="nav-number">1.10.</span> <span class="nav-text">分布式服务</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M2</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"m2langithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

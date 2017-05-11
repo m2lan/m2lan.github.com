@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-07T07:43:02.000Z</updated>
+  <updated>2017-05-11T13:57:06.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,97 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>大型网站架构演化</title>
+    <link href="http://blog.golearns.org/2017/05/11/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8C%96/"/>
+    <id>http://blog.golearns.org/2017/05/11/大型网站架构演化/</id>
+    <published>2017-05-11T13:11:23.000Z</published>
+    <updated>2017-05-11T13:57:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="大型网站架构演化"><a href="#大型网站架构演化" class="headerlink" title="大型网站架构演化"></a>大型网站架构演化</h1><h2 id="初始阶段的网站架构"><a href="#初始阶段的网站架构" class="headerlink" title="初始阶段的网站架构"></a>初始阶段的网站架构</h2><ul>
+<li>小型网站最开始没有多少人访问，只需要一台服务器就绰绰有余</li>
+<li>应用程序、数据库、文件等所有的资源都放在一台服务器上</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server1.png" alt=""></p>
+<a id="more"></a>
+<h2 id="应用服务和数据服务分离"><a href="#应用服务和数据服务分离" class="headerlink" title="应用服务和数据服务分离"></a>应用服务和数据服务分离</h2><ul>
+<li>随着网站业务发展，越来越多的用户访问导致性能越来越差，越来越多的数据导致存储空间不足。这时就需要应用和数据分离。</li>
+<li>应用服务器、文件服务器和数据库服务器<ul>
+<li>应用服务器：<strong>处理大量的业务逻辑，需要更快更强大的CPU</strong></li>
+<li>文件服务器：<strong>存储大量用户上传的文件，需要更大的硬盘</strong></li>
+<li>数据库服务器：<strong>快速磁盘检索和数据缓存，需要更快的硬盘和更大的内存</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server2.png" alt=""></p>
+<h2 id="使用缓存改变网站性能"><a href="#使用缓存改变网站性能" class="headerlink" title="使用缓存改变网站性能"></a>使用缓存改变网站性能</h2><ul>
+<li>网站访问特点：<strong>80%的业务访问集中在20%的数据上</strong></li>
+<li>把集中访问的一小部分数据缓存在内存中就可以减少数据库的访问压力，提高整个网站的数据访问速度，改善数据库写入性能</li>
+<li>网站缓存分为两种：缓存在应用服务器的<strong>本地缓存</strong>和缓存在专门<strong>分布式缓存服务器上的远程缓存</strong><ul>
+<li>本地缓存：<strong>访问速度更快，但是受应用服务器内存限制，缓存数据量有限，而且会出现和应用服务器争用内存的情况</strong></li>
+<li>远程缓存：<strong>可以使用集群的方式，部署大内存的服务器作为专门的缓存服务器，理论上做到不受内存容量限制的缓存服务</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server3.png" alt=""> </p>
+<h2 id="使用应用服务器集群改善网站的并发处理能力"><a href="#使用应用服务器集群改善网站的并发处理能力" class="headerlink" title="使用应用服务器集群改善网站的并发处理能力"></a>使用应用服务器集群改善网站的并发处理能力</h2><ul>
+<li>通过增加服务器分担原有服务器的访问及存储压力，从而实现系统的可伸缩性</li>
+<li>通过负载均衡调度服务器，可将来自用户浏览器的访问请求转发到应用服务器集群中的任何一台服务器上，如果有个更多的用户，就在集群中加入更多的应用服务器，使应用服务器的负载压力不在成为整个网站的瓶颈</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server4.png" alt=""></p>
+<h2 id="数据库读写分离"><a href="#数据库读写分离" class="headerlink" title="数据库读写分离"></a>数据库读写分离</h2><ul>
+<li>网站使用缓存后，使绝大部分数据读操作访问都可以不通过数据库就能完成，但是仍有一部分读操作<strong>(缓存访问不命中、缓存过期)</strong>和全部的写操作需要访问数据库，在网站的用户达到一定规模后，数据库因为负载压力过高而成为网站的瓶颈</li>
+<li>目前大部分主流数据库提供<strong>主从热备</strong>，通过配置两台数据库主从关系，可以将一台服务器数据库的数据更新同步到另外一台服务器上。网站利用数据库读写分离改善数据库的负载压力</li>
+<li>应用服务器在写数据的时候，<strong>访问主数据库，主数据库通过主从复制机制将数据更新同步到从数据库，这样当应用服务器读数据的时候，就可以通过从数据库获取数据</strong></li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server5.png" alt=""></p>
+<h2 id="使用反向代理和CND加速网站响应"><a href="#使用反向代理和CND加速网站响应" class="headerlink" title="使用反向代理和CND加速网站响应"></a>使用反向代理和CND加速网站响应</h2><ul>
+<li>随着网站业务不断发展，用户规模越来愈大，由于中国复杂的网络环境，不同地区的用户访问网站时，速度差别较大。</li>
+<li>网站加速手段有<strong>CDN</strong>和<strong>反向代理</strong></li>
+<li>CDN和反向代理的基本原理都是缓存。<ul>
+<li>CDN部署在网络提供山的机房，使用户在请求网站服务时，可以从距离自己最近的网络提供商机房获取数据</li>
+<li>反向代理部署在网站的中心机房，当用户请求到达中心机房后，首先访问的服务器是反向代理服务器，如果反向代理服务器中缓存着用户请求的资源，就将其直接返回给用户</li>
+</ul>
+</li>
+<li>使用CDN和反向代理一方面加快用户访问速度，另一方面也减轻后端服务器的负载压力 </li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server6.png" alt=""></p>
+<h2 id="使用分布式文件系统和分布式数据库系统"><a href="#使用分布式文件系统和分布式数据库系统" class="headerlink" title="使用分布式文件系统和分布式数据库系统"></a>使用分布式文件系统和分布式数据库系统</h2><ul>
+<li>分布式数据库是网站数据库拆分的最后手段，只有在单表数据规模非常庞大的时候才使用。不到不得已时，网站更常用的数据库拆分手段是业务拆分，<strong>将不同的业务的数据库部署在不同的物理服务器上</strong></li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server7.png" alt=""></p>
+<h2 id="使用NoSQL和搜索引擎"><a href="#使用NoSQL和搜索引擎" class="headerlink" title="使用NoSQL和搜索引擎"></a>使用NoSQL和搜索引擎</h2><ul>
+<li>随着网站业务越来越复杂，对数据存储的检索需求也越来越复杂，网站需要采用一些非关系型数据库如NoSQL和非数据库查询技术如搜索引擎</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server8.png" alt=""></p>
+<h2 id="业务拆分"><a href="#业务拆分" class="headerlink" title="业务拆分"></a>业务拆分</h2><ul>
+<li>大型网站为了应对复杂的业务场景，通过将整个网站业务分成不同的产品线，如大型购物交易网站就会将首页、商铺、订单、买家、卖家等拆分成不同的产品线</li>
+<li>具体到技术：将一个网站拆分成许多不同的应用，每个应用独立部署维护</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server9.png" alt=""></p>
+<h2 id="分布式服务"><a href="#分布式服务" class="headerlink" title="分布式服务"></a>分布式服务</h2><ul>
+<li>既然每一个应用系统都需要执行许多相同的业务操作，比如用户管理、商品管理等，那么可以将这些共用的业务提取出来，独立部署。由这些可复用的业务连接数据库，提供共用业务服务，而应用系统只需要管理用户界面，通过分布式服务调用共用业务服务完成具体业务操作</li>
+</ul>
+<p><img src="http://opsi4gg7g.bkt.clouddn.com/server10.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;大型网站架构演化&quot;&gt;&lt;a href=&quot;#大型网站架构演化&quot; class=&quot;headerlink&quot; title=&quot;大型网站架构演化&quot;&gt;&lt;/a&gt;大型网站架构演化&lt;/h1&gt;&lt;h2 id=&quot;初始阶段的网站架构&quot;&gt;&lt;a href=&quot;#初始阶段的网站架构&quot; class=&quot;headerlink&quot; title=&quot;初始阶段的网站架构&quot;&gt;&lt;/a&gt;初始阶段的网站架构&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;小型网站最开始没有多少人访问，只需要一台服务器就绰绰有余&lt;/li&gt;
+&lt;li&gt;应用程序、数据库、文件等所有的资源都放在一台服务器上&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;http://opsi4gg7g.bkt.clouddn.com/server1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="架构" scheme="http://blog.golearns.org/categories/%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="集群，分布式，读写分离，CND，反向代理" scheme="http://blog.golearns.org/tags/%E9%9B%86%E7%BE%A4%EF%BC%8C%E5%88%86%E5%B8%83%E5%BC%8F%EF%BC%8C%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%8CCND%EF%BC%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
+    
+  </entry>
   
   <entry>
     <title>jsonp</title>
@@ -9449,40 +9540,6 @@ bin/plugin install marvel-agent
     
     
       <category term="Elasticasearch" scheme="http://blog.golearns.org/tags/Elasticasearch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hexo运行报错</title>
-    <link href="http://blog.golearns.org/2016/07/15/hexo%E8%BF%90%E8%A1%8C%E6%8A%A5%E9%94%99/"/>
-    <id>http://blog.golearns.org/2016/07/15/hexo运行报错/</id>
-    <published>2016-07-15T01:22:02.000Z</published>
-    <updated>2016-07-15T01:40:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="hexo运行报错"><a href="#hexo运行报错" class="headerlink" title="hexo运行报错"></a>hexo运行报错</h1><ul>
-<li><p>运行hexo命令出现以下错误</p>
-<pre><code>[Error: Module did not self-register.]
-{ [Error: Cannot find module &apos;./build/default/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; }
-{ [Error: Cannot find module &apos;./build/Debug/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; }
-</code></pre></li>
-<li><p>解决方法</p>
-<pre><code>npm install hexo --no-optional
-</code></pre></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;hexo运行报错&quot;&gt;&lt;a href=&quot;#hexo运行报错&quot; class=&quot;headerlink&quot; title=&quot;hexo运行报错&quot;&gt;&lt;/a&gt;hexo运行报错&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;运行hexo命令出现以下错误&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[Error:
-    
-    </summary>
-    
-      <category term="Hexo" scheme="http://blog.golearns.org/categories/Hexo/"/>
-    
-    
-      <category term="Hexo" scheme="http://blog.golearns.org/tags/Hexo/"/>
     
   </entry>
   

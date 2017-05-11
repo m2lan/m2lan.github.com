@@ -266,6 +266,143 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/Shell-转义替换/" itemprop="url">
+                  Shell-转义替换
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:17:29+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-转义替换/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-转义替换/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# 转义替换
+# -e 对转义字符进行替换
+
+echo -e &quot;hello world \n hahahah&quot;
+
+# 将命令执行的结果保存到变量中
+DATE=`date`
+echo $DATE
+
+# ${var:-message} 如果var为空或已被删除，则返回message，不会改变var的值
+# ${var:=message} 如果var为空或已被删除，则返回message，并将var的值设置为message
+# ${var:?message} 如果var为空或已被删除，则把message做为错误消息输出，脚本停止运行
+# ${var:+message} 如果var已被定义，则返回message，不会改变var的值
+
+echo ${var:-&quot;a---hahahahha&quot;}
+echo ${var:=&quot;b---hahhahaha&quot;}
+echo ${var}
+
+unset var
+echo ${var:?&quot;c---hahahahha&quot;} # 程序运行此处将停止
+
+echo ${var:+&quot;d---hahahhaha&quot;}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/Shell-case/" itemprop="url">
                   Shell-case
                 </a>
@@ -1561,196 +1698,6 @@ return sortArray;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/IOS-点击按钮触发UIRefreshControl/" itemprop="url">
-                  IOS-点击按钮触发UIRefreshControl
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:05:15+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/IOS-点击按钮触发UIRefreshControl/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/IOS-点击按钮触发UIRefreshControl/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>//
-//  ViewController.m
-//  chat-view
-//
-//  Created by yonglang on 14/12/4.
-//  Copyright (c) 2014年 yonglang. All rights reserved.
-//
-
-#import &quot;ViewController.h&quot;
-
-@interface ViewController ()
-
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@&quot;刷新&quot; style:UIBarButtonItemStyleDone target:self action:@selector(refreshButton: )];
-
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.tintColor = [UIColor blueColor];
-    [self.refreshControl addTarget:self
-                            action:@selector(controlEventValueChanged:)
-                  forControlEvents:UIControlEventValueChanged];
-}
-
-- (void)controlEventValueChanged:(id)sender {
-    if (self.refreshControl.refreshing) {
-        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@&quot;刷新中&quot;];
-
-        [self performSelector:@selector(refreshData) withObject:nil afterDelay:0.5];
-    }
-}
-
-- (void)refreshButton: (id)sender {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1.0];
-    self.tableView.contentOffset = CGPointMake(0.0, -200.0);
-    [UIView commitAnimations];
-
-    [self.refreshControl beginRefreshing];
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@&quot;刷新中&quot;];
-
-    [self performSelector:@selector(refreshData) withObject:nil afterDelay:2.0];
-}
-
-- (void)refreshData {
-    [self.refreshControl endRefreshing];
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@&quot;下拉刷新&quot;];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *str = @&quot;MyCell&quot;;
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
-
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
-    }
-
-    cell.textLabel.text = @&quot;sdfsdfds&quot;;
-    cell.imageView.image = [UIImage imageNamed:@&quot;w.jpg&quot;];
-    cell.detailTextLabel.text = @&quot;23432432&quot;;
-
-    return cell;
-}
-
-@end
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1796,7 +1743,7 @@ return sortArray;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">71</span>
+              <span class="site-state-item-count">72</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1804,7 +1751,7 @@ return sortArray;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1813,7 +1760,7 @@ return sortArray;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
