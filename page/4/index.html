@@ -266,6 +266,130 @@
             
               
                 
+                <a class="post-title-link" href="/2016/02/26/centos7-mysql-php-nginx安装/" itemprop="url">
+                  centos7-mysql+php+nginx安装
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-26T00:04:01+08:00" content="2016-02-26">
+              2016-02-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/26/centos7-mysql-php-nginx安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/centos7-mysql-php-nginx安装/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Centos7-Mysql-PHP-nginx安装"><a href="#Centos7-Mysql-PHP-nginx安装" class="headerlink" title="Centos7-Mysql+PHP+nginx安装"></a>Centos7-Mysql+PHP+nginx安装</h1><h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><pre><code>rpm --import http://nginx.org/keys/nginx_signing.key
+rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+yum install nginx
+systemctl start nginx
+systemctl enable nginx
+</code></pre><ul>
+<li>nginx 的默认文档要目录是 <code>/usr/share/nginx/html</code>，里面有<code>index.html</code>，访问<code>http://ip</code>入显示<code>welcome</code>则表示安装成功</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/26/centos7-mysql-php-nginx安装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/02/25/centos7-修改网卡、配置网络/" itemprop="url">
                   centos7-修改网卡、配置网络
                 </a>
@@ -1487,171 +1611,6 @@ echo ${arr1[1]}
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Shell-函数/" itemprop="url">
-                  Shell-函数
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:18:03+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-函数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-函数/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>#!/bin/bash
-# function --
-# 函数返回值只能是整数，用来表示函数执行是否成功，0表示执行成功，其他表示失败
-# 如果返回非整数，则error
-# 函数名前面的function可加可不加
-# 函数可以使用return，return的返回值可以通过$?来接收
-# 
-# 也可以对函数进行删除，使用unset，后面加上.f
-# 如要删除function1函数：unset .f function1
-# 
-
-# 无参函数
-function function1 {
-    echo function1.
-}
-
-# 带参函数
-function function2 {
-    echo $1
-}
-
-# 多个参数
-function function3 {
-    echo $1 --- $2
-}
-
-function4() {
-    echo &quot;function4&quot;
-
-    return $((10 + 20))
-}
-
-# 函数嵌套调用
-function5() {
-    echo &quot;function5&quot;
-
-    function1
-}
-
-# 函数调用
-function1
-
-# 外部参数传入
-function2 $1
-function3 &quot;hello &quot; &quot;world!&quot;
-function4
-
-# 用来接收function4的返回值
-echo $?
-
-function5
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1697,7 +1656,7 @@ function5
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-count">73</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
