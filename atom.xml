@@ -87,7 +87,7 @@
     <link href="http://blog.golearns.org/2017/05/11/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/"/>
     <id>http://blog.golearns.org/2017/05/11/大型网站架构模式/</id>
     <published>2017-05-11T14:18:57.000Z</published>
-    <updated>2017-05-11T15:14:21.000Z</updated>
+    <updated>2017-05-11T15:47:03.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="大型网站架构模式"><a href="#大型网站架构模式" class="headerlink" title="大型网站架构模式"></a>大型网站架构模式</h1><h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><ul>
 <li>分层是：将系统在横向维度上切分成几个部分，每个部分负责一部分相对比较单一的职责，然后通过上层对下层的依赖和调用组成一个完整的系统</li>
@@ -203,7 +203,15 @@
       <category term="架构" scheme="http://blog.golearns.org/categories/%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="集群，分布式，读写分离，CND，反向代理" scheme="http://blog.golearns.org/tags/%E9%9B%86%E7%BE%A4%EF%BC%8C%E5%88%86%E5%B8%83%E5%BC%8F%EF%BC%8C%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%8CCND%EF%BC%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
+      <category term="集群" scheme="http://blog.golearns.org/tags/%E9%9B%86%E7%BE%A4/"/>
+    
+      <category term="分布式" scheme="http://blog.golearns.org/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+      <category term="读写分离" scheme="http://blog.golearns.org/tags/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/"/>
+    
+      <category term="CND" scheme="http://blog.golearns.org/tags/CND/"/>
+    
+      <category term="反向代理" scheme="http://blog.golearns.org/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
     
   </entry>
   
@@ -212,7 +220,7 @@
     <link href="http://blog.golearns.org/2017/05/11/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8C%96/"/>
     <id>http://blog.golearns.org/2017/05/11/大型网站架构演化/</id>
     <published>2017-05-11T13:11:23.000Z</published>
-    <updated>2017-05-11T13:57:06.000Z</updated>
+    <updated>2017-05-11T15:47:12.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="大型网站架构演化"><a href="#大型网站架构演化" class="headerlink" title="大型网站架构演化"></a>大型网站架构演化</h1><h2 id="初始阶段的网站架构"><a href="#初始阶段的网站架构" class="headerlink" title="初始阶段的网站架构"></a>初始阶段的网站架构</h2><ul>
 <li>小型网站最开始没有多少人访问，只需要一台服务器就绰绰有余</li>
@@ -294,7 +302,15 @@
       <category term="架构" scheme="http://blog.golearns.org/categories/%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="集群，分布式，读写分离，CND，反向代理" scheme="http://blog.golearns.org/tags/%E9%9B%86%E7%BE%A4%EF%BC%8C%E5%88%86%E5%B8%83%E5%BC%8F%EF%BC%8C%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%8CCND%EF%BC%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
+      <category term="集群" scheme="http://blog.golearns.org/tags/%E9%9B%86%E7%BE%A4/"/>
+    
+      <category term="分布式" scheme="http://blog.golearns.org/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+      <category term="读写分离" scheme="http://blog.golearns.org/tags/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/"/>
+    
+      <category term="CND" scheme="http://blog.golearns.org/tags/CND/"/>
+    
+      <category term="反向代理" scheme="http://blog.golearns.org/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
     
   </entry>
   
