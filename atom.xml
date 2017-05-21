@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-21T08:48:28.000Z</updated>
+  <updated>2017-05-21T08:56:00.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://blog.golearns.org/2017/05/21/Exchanger/"/>
     <id>http://blog.golearns.org/2017/05/21/Exchanger/</id>
     <published>2017-05-21T08:44:47.000Z</published>
-    <updated>2017-05-21T08:48:28.000Z</updated>
+    <updated>2017-05-21T08:56:00.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Java并发编程类Exchanger"><a href="#Java并发编程类Exchanger" class="headerlink" title="Java并发编程类Exchanger"></a>Java并发编程类Exchanger</h1><pre><code>/**
  * Exchanger用于两个线程之间的数据交换
@@ -76,12 +76,10 @@ public class ExchangerDemo1 {
     
     </summary>
     
-      <category term="Exchanger" scheme="http://blog.golearns.org/categories/Exchanger/"/>
+      <category term="并发" scheme="http://blog.golearns.org/categories/%E5%B9%B6%E5%8F%91/"/>
     
     
       <category term="并发" scheme="http://blog.golearns.org/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-      <category term="Exchanger" scheme="http://blog.golearns.org/tags/Exchanger/"/>
     
   </entry>
   
@@ -90,7 +88,7 @@ public class ExchangerDemo1 {
     <link href="http://blog.golearns.org/2017/05/21/Semaphore/"/>
     <id>http://blog.golearns.org/2017/05/21/Semaphore/</id>
     <published>2017-05-21T08:03:20.000Z</published>
-    <updated>2017-05-21T08:18:10.000Z</updated>
+    <updated>2017-05-21T08:56:21.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Java并发编程类Semaphore"><a href="#Java并发编程类Semaphore" class="headerlink" title="Java并发编程类Semaphore"></a>Java并发编程类Semaphore</h1><pre><code>/**
  * 限制可以访问资源的线程数
@@ -178,12 +176,10 @@ public class SemaphoreDemo1 {
     
     </summary>
     
-      <category term="Semaphore" scheme="http://blog.golearns.org/categories/Semaphore/"/>
+      <category term="并发" scheme="http://blog.golearns.org/categories/%E5%B9%B6%E5%8F%91/"/>
     
     
       <category term="并发" scheme="http://blog.golearns.org/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-      <category term="Semaphore" scheme="http://blog.golearns.org/tags/Semaphore/"/>
     
   </entry>
   
@@ -192,7 +188,7 @@ public class SemaphoreDemo1 {
     <link href="http://blog.golearns.org/2017/05/21/CyclicBarrier/"/>
     <id>http://blog.golearns.org/2017/05/21/CyclicBarrier/</id>
     <published>2017-05-21T07:53:54.000Z</published>
-    <updated>2017-05-21T07:54:41.000Z</updated>
+    <updated>2017-05-21T08:55:53.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Java并发编程类CyclicBarrier"><a href="#Java并发编程类CyclicBarrier" class="headerlink" title="Java并发编程类CyclicBarrier"></a>Java并发编程类CyclicBarrier</h1><pre><code>/**
  * CyclicBarrier协同多个线程
@@ -236,12 +232,10 @@ public class CyclicBarrierDemo1 {
     
     </summary>
     
-      <category term="CyclicBarrier" scheme="http://blog.golearns.org/categories/CyclicBarrier/"/>
+      <category term="并发" scheme="http://blog.golearns.org/categories/%E5%B9%B6%E5%8F%91/"/>
     
     
       <category term="并发" scheme="http://blog.golearns.org/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-      <category term="CyclicBarrier" scheme="http://blog.golearns.org/tags/CyclicBarrier/"/>
     
   </entry>
   
@@ -250,7 +244,7 @@ public class CyclicBarrierDemo1 {
     <link href="http://blog.golearns.org/2017/05/21/Atomics/"/>
     <id>http://blog.golearns.org/2017/05/21/Atomics/</id>
     <published>2017-05-21T07:39:22.000Z</published>
-    <updated>2017-05-21T07:40:38.000Z</updated>
+    <updated>2017-05-21T08:55:35.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Java并发编程类Atomics"><a href="#Java并发编程类Atomics" class="headerlink" title="Java并发编程类Atomics"></a>Java并发编程类Atomics</h1><pre><code>// 使用synchronized
 public class Counter1 {
@@ -314,12 +308,10 @@ public class Counter2 {
     
     </summary>
     
-      <category term="Atomics" scheme="http://blog.golearns.org/categories/Atomics/"/>
+      <category term="并发" scheme="http://blog.golearns.org/categories/%E5%B9%B6%E5%8F%91/"/>
     
     
       <category term="并发" scheme="http://blog.golearns.org/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-      <category term="Atomics" scheme="http://blog.golearns.org/tags/Atomics/"/>
     
   </entry>
   
@@ -328,7 +320,7 @@ public class Counter2 {
     <link href="http://blog.golearns.org/2017/05/21/ReentrantLock/"/>
     <id>http://blog.golearns.org/2017/05/21/ReentrantLock/</id>
     <published>2017-05-21T07:35:56.000Z</published>
-    <updated>2017-05-21T07:38:09.000Z</updated>
+    <updated>2017-05-21T08:56:14.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Java并发编程类ReentrantLock"><a href="#Java并发编程类ReentrantLock" class="headerlink" title="Java并发编程类ReentrantLock"></a>Java并发编程类ReentrantLock</h1><pre><code>public class ReentrantLockDemo1 {
 
@@ -398,12 +390,10 @@ public class Counter2 {
     
     </summary>
     
-      <category term="ReentrantLock" scheme="http://blog.golearns.org/categories/ReentrantLock/"/>
+      <category term="并发" scheme="http://blog.golearns.org/categories/%E5%B9%B6%E5%8F%91/"/>
     
     
       <category term="并发" scheme="http://blog.golearns.org/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-      <category term="ReentrantLock" scheme="http://blog.golearns.org/tags/ReentrantLock/"/>
     
   </entry>
   
@@ -412,7 +402,7 @@ public class Counter2 {
     <link href="http://blog.golearns.org/2017/05/21/CountDownLatch/"/>
     <id>http://blog.golearns.org/2017/05/21/CountDownLatch/</id>
     <published>2017-05-21T07:32:28.000Z</published>
-    <updated>2017-05-21T07:34:05.000Z</updated>
+    <updated>2017-05-21T08:55:43.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Java并发编程类CountDownLatch"><a href="#Java并发编程类CountDownLatch" class="headerlink" title="Java并发编程类CountDownLatch"></a>Java并发编程类CountDownLatch</h1><pre><code>public class CountDownLatchDemo1 {
 
@@ -449,12 +439,10 @@ public class Counter2 {
     
     </summary>
     
-      <category term="CountDownLatch" scheme="http://blog.golearns.org/categories/CountDownLatch/"/>
+      <category term="并发" scheme="http://blog.golearns.org/categories/%E5%B9%B6%E5%8F%91/"/>
     
     
       <category term="并发" scheme="http://blog.golearns.org/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-      <category term="CountDownLatch" scheme="http://blog.golearns.org/tags/CountDownLatch/"/>
     
   </entry>
   
