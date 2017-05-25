@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-21T08:56:00.000Z</updated>
+  <updated>2017-05-25T15:20:26.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,436 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cut</title>
+    <link href="http://blog.golearns.org/2017/05/25/cut/"/>
+    <id>http://blog.golearns.org/2017/05/25/cut/</id>
+    <published>2017-05-25T15:20:06.000Z</published>
+    <updated>2017-05-25T15:20:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux下的cut使用"><a href="#Linux下的cut使用" class="headerlink" title="Linux下的cut使用"></a>Linux下的cut使用</h1><blockquote>
+<p>cut是一个选取命令，通过将一段数据分析，取出想要的。选取数据一般通过行的方式</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-b</td>
+<td>以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非指定了-n标志</td>
+</tr>
+<tr>
+<td style="text-align:center">-c</td>
+<td>以字符为单位进行分割</td>
+</tr>
+<tr>
+<td style="text-align:center">-d</td>
+<td>自定义分隔符，默认为制表符</td>
+</tr>
+<tr>
+<td style="text-align:center">-f</td>
+<td>与-d一起使用，指定显示哪个区域</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b参数"><a href="#b参数" class="headerlink" title="-b参数"></a>-b参数</h3><ul>
+<li><p>以字节为单位分割</p>
+<pre><code># tail显示passwd文件最后5行，cut以字节分割，获取1位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1
+s
+t
+m
+z
+Z
+
+# tail显示passwd文件最后5行，cut以字节分割，获取1-5位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1-5
+sshd:
+tcpdu
+mysql
+zhang
+Zhang
+
+# tail显示passwd文件最后5行，cut以字节分割，获取1-5和8-10位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1-5,8-10
+sshd:74:
+tcpdu:x:
+mysql:27
+zhangn:x
+Zhangn:x
+</code></pre></li>
+</ul>
+<h3 id="c参数"><a href="#c参数" class="headerlink" title="-c参数"></a>-c参数</h3><ul>
+<li><p>以字符为单位分割，在中文文件中提取</p>
+<pre><code>[root@m2 ~]# cat c.txt 
+你好地方司机浪费觉得算了发动机素
+
+[root@m2 ~]# tail -n 5 c.txt | cut -c 1-5
+你好地方司
+</code></pre></li>
+</ul>
+<h3 id="d和-f参数结合使用自定义分隔符"><a href="#d和-f参数结合使用自定义分隔符" class="headerlink" title="-d和-f参数结合使用自定义分隔符"></a>-d和-f参数结合使用自定义分隔符</h3><ul>
+<li><p>显示passwd文件最后5行，通过自定义分隔符:冒号分割，提取1和3位置的内容</p>
+<pre><code>[root@m2 ~]# tail -n 5 passwd | cut -d : -f 1,3
+sshd:74
+tcpdump:72
+mysql:27
+zhangsan:500
+Zhangsan:500
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Linux下的cut使用&quot;&gt;&lt;a href=&quot;#Linux下的cut使用&quot; class=&quot;headerlink&quot; title=&quot;Linux下的cut使用&quot;&gt;&lt;/a&gt;Linux下的cut使用&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;cut是一个选取命令，通过将一段数
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>awk</title>
+    <link href="http://blog.golearns.org/2017/05/25/awk/"/>
+    <id>http://blog.golearns.org/2017/05/25/awk/</id>
+    <published>2017-05-25T15:19:04.000Z</published>
+    <updated>2017-05-25T15:19:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux下的awk使用"><a href="#Linux下的awk使用" class="headerlink" title="Linux下的awk使用"></a>Linux下的awk使用</h1><blockquote>
+<p>awk分析文件数据，根据分隔符对一行一行的数据进行拆分，获取某一列
+分隔符默认是空格，可以使用-F;以分号为分隔符,-F:以冒号为分隔符</p>
+</blockquote>
+<ul>
+<li><p>获取当前主机指定网卡的IP地址</p>
+<pre><code>[root@m2 ~]# ifconfig eth0
+eth0      Link encap:Ethernet  HWaddr 00:0C:29:C6:3D:D5  
+inet addr:192.168.0.150  Bcast:192.168.0.255  Mask:255.255.255.0
+inet6 addr: fe80::20c:29ff:fec6:3dd5/64 Scope:Link
+UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+RX packets:11240 errors:0 dropped:0 overruns:0 frame:0
+TX packets:2747 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:1000 
+RX bytes:1389465 (1.3 MiB)  TX bytes:207415 (202.5 KiB)
+
+[root@m2 ~]# ifconfig eth0 | grep &quot;inet addr:&quot; | awk &apos;{print $2}&apos; | awk -F : &apos;{print $2}&apos;
+192.168.0.150
+</code></pre></li>
+<li><p>获取/etc/passwd中用户UID大于500的用户名和用户登陆的shell</p>
+<pre><code>[root@m2 ~]# cat passwd | awk -F  : &apos;$3&gt;500{print $1,$7}&apos;
+nfsnobody /sbin/nologin
+
+# 使用\t制表符隔开
+[root@m2 ~]# cat passwd | awk -F : &apos;$3&gt;500{print $1 &quot;\t&quot; $7}&apos;
+nfsnobody    /sbin/nologin
+</code></pre></li>
+<li><p>获取/etc/passwd中用户UID&gt;=500并且登陆shell为/bin/bash的用户名和登陆shell</p>
+<pre><code>[root@m2 ~]# cat passwd | awk -F : &apos;$3&gt;=500 &amp;&amp; $7==&quot;/bin/bash&quot;{print $1,$7}&apos;
+zhangsan /bin/bash
+Zhangsan /bin/bash
+
+# 显示行号
+[root@m2 ~]# nl passwd | awk -F : &apos;$3&gt;=500 &amp;&amp; $7==&quot;/bin/bash&quot;{print $1,$7}&apos;
+35    zhangsan /bin/bash
+36    Zhangsan /bin/bash
+</code></pre></li>
+<li><p>使用BEGIN和END，在筛选前和筛选后分别输出一些内容</p>
+<pre><code>[root@m2 ~]# cat passwd | awk -F : &apos;BEGIN {print &quot;用户名 \t 使用的shell&quot;} $3&gt;500 {print $1 &quot;\t&quot; $7} END {print &quot;end&quot;}&apos;
+用户名      使用的shell
+nfsnobody    /sbin/nologin
+end
+</code></pre></li>
+<li><p>获取指定目录下所有文件总大小,定义size变量用来统计</p>
+<pre><code>[root@m2 ~]# ls -l /etc/ | awk &apos;BEGIN {size=0;} {size+=$5;} END {print &quot;总大小：&quot;,size/1024/1024,&quot;Mb&quot;}&apos;
+总大小： 1.84909 Mb
+</code></pre></li>
+<li><p>统计当前电脑内存使用百分比</p>
+<pre><code>[root@m2 sh]# vim example19.sh
+#!/bin/bash
+echo &apos;显示内存使用百分比：&apos;
+use=`free -m | grep &apos;cache:&apos; | awk &apos;{print $3}&apos;`
+total=`free -m | grep &apos;Mem:&apos; | awk &apos;{print $2}&apos;`
+result=`expr $use \* 100 / $total`
+echo &quot;使用百分比为：$result%&quot;
+
+[root@m2 sh]# chmod +x example19.sh
+[root@m2 sh]# ./example19.sh 
+显示内存使用百分比：
+使用百分比为：20%
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Linux下的awk使用&quot;&gt;&lt;a href=&quot;#Linux下的awk使用&quot; class=&quot;headerlink&quot; title=&quot;Linux下的awk使用&quot;&gt;&lt;/a&gt;Linux下的awk使用&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;awk分析文件数据，根据分隔符对一
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sed</title>
+    <link href="http://blog.golearns.org/2017/05/25/sed/"/>
+    <id>http://blog.golearns.org/2017/05/25/sed/</id>
+    <published>2017-05-25T15:15:24.000Z</published>
+    <updated>2017-05-25T15:18:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux下的sed使用"><a href="#Linux下的sed使用" class="headerlink" title="Linux下的sed使用"></a>Linux下的sed使用</h1><blockquote>
+<p>流编辑器，sed编辑器是一行一行处理文件内容。正在处理的内容放入缓冲区内
+处理完成后根据选项进行输出或文件修改</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-n</td>
+<td>抑制自动(默认)输出，读取下一个输入行</td>
+</tr>
+<tr>
+<td style="text-align:center">-i</td>
+<td>编辑文件内容</td>
+</tr>
+<tr>
+<td style="text-align:center">-e</td>
+<td>执行多次</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td>在匹配后追加</td>
+</tr>
+<tr>
+<td style="text-align:center">i</td>
+<td>在匹配后插入</td>
+</tr>
+<tr>
+<td style="text-align:center">p</td>
+<td>打印</td>
+</tr>
+<tr>
+<td style="text-align:center">d</td>
+<td>删除</td>
+</tr>
+<tr>
+<td style="text-align:center">w</td>
+<td>另存</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td>替换</td>
+</tr>
+<tr>
+<td style="text-align:center">s</td>
+<td>查找</td>
+</tr>
+<tr>
+<td style="text-align:center">h/H</td>
+<td>复制copy</td>
+</tr>
+<tr>
+<td style="text-align:center">g/G</td>
+<td>粘贴</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s命令"><a href="#s命令" class="headerlink" title="s命令"></a>s命令</h3><ul>
+<li><p>查找替换</p>
+<pre><code># 将root替换为boot
+[root@m2 ~]# sed &apos;s/root/boot/&apos; passwd | grep boot --color
+boot:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+
+# 将所有root替换为boot,g表示替换所有
+[root@m2 ~]# sed &apos;s/root/boot/g&apos; passwd | grep boot --color
+boot:x:0:0:boot:/boot:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+
+# 给查找的目标内容添加括号,&amp;表示查找的内容
+[root@m2 ~]# sed &apos;s/root/(&amp;)/&apos; passwd | grep &apos;(root)&apos; --color
+(root):x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/(root):/sbin/nologin
+
+# 给所有行添加注释
+[root@m2 ~]# sed &apos;s/^[a-zA-Z]/#&amp;/&apos; passwd 
+#root:x:0:0:root:/root:/bin/bash
+#bin:x:1:1:bin:/bin:/sbin/nologin
+
+# 多次替换,-e
+[root@m2 ~]# sed -e &apos;s/root/boot/&apos; -e &apos;s/message/messages/&apos; passwd | grep &quot;\&lt;boot\|messages\&gt;&quot; --color
+boot:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+dbus:x:81:81:System messages bus:/:/sbin/nologin
+
+# 替换指定行
+[root@m2 ~]# sed &apos;1,5s/root/boot/&apos; passwd | grep boot --color -n
+1:boot:x:0:0:root:/root:/bin/bash
+</code></pre></li>
+</ul>
+<h3 id="n-p命令"><a href="#n-p命令" class="headerlink" title="n,p命令"></a>n,p命令</h3><ul>
+<li><p>显示指定行</p>
+<pre><code># 显示第5行
+[root@m2 ~]# sed -n &apos;5p&apos; passwd 
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+
+# 显示前五行的内容
+[root@m2 ~]# sed -n &apos;1,5p&apos; passwd 
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+
+# 显示除前五行之外的其他行,使用!号
+[root@m2 ~]# sed -n &apos;1,5!p&apos; passwd 
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+
+# 显示第五行和第五行之后的三行
+[root@m2 ~]# sed -n &apos;5,+3p&apos; passwd 
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+
+# 显示文件总行数
+[root@m2 ~]# sed -n &apos;$=&apos; passwd 
+36
+</code></pre></li>
+</ul>
+<h3 id="i-a命令"><a href="#i-a命令" class="headerlink" title="i,a命令"></a>i,a命令</h3><ul>
+<li><p>在行前和行尾插入</p>
+<pre><code># 在第一行前面插入一行
+[root@m2 ~]# sed &apos;1ihello world one line&apos; passwd 
+hello world one line
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+
+# 在最后一行后面插入一行
+[root@m2 ~]# sed &apos;$a插入最后一行&apos; passwd
+Zhangsan:x:500:500::/home/zhangsan:/bin/bash
+插入最后一行
+
+# 在第一行后面插入多行,使用反斜杠(\)进行断行操作
+[root@m2 ~]# sed &apos;1ahello \
+&gt; world&apos; passwd
+root:x:0:0:root:/root:/bin/bash
+hello 
+world
+bin:x:1:1:bin:/bin:/sbin/nologin
+</code></pre></li>
+</ul>
+<h3 id="c命令"><a href="#c命令" class="headerlink" title="c命令"></a>c命令</h3><ul>
+<li><p>内容替换</p>
+<pre><code># 将第二行内容全部替换为Hello world
+[root@m2 ~]# sed &apos;2cHello world&apos; passwd 
+root:x:0:0:root:/root:/bin/bash
+Hello world
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+</code></pre></li>
+</ul>
+<h3 id="nl命令"><a href="#nl命令" class="headerlink" title="nl命令"></a>nl命令</h3><ul>
+<li><p>显示文件行号</p>
+<pre><code># 显示第三行-第五行内容，并显示行号
+[root@m2 ~]# nl passwd | sed -n &apos;3,5p&apos;
+ 3    daemon:x:2:2:daemon:/sbin:/sbin/nologin
+ 4    adm:x:3:4:adm:/var/adm:/sbin/nologin
+ 5    lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+
+# 在第二行后插入多行，并显示行号
+[root@m2 ~]# nl passwd | sed &apos;2a hahhaha \
+&gt; hehehehhe &apos;
+     1    root:x:0:0:root:/root:/bin/bash
+     2    bin:x:1:1:bin:/bin:/sbin/nologin
+hahhaha 
+hehehehhe 
+     3    daemon:x:2:2:daemon:/sbin:/sbin/nologin
+     4    adm:x:3:4:adm:/var/adm:/sbin/nologin
+
+# 直接显示文件内容和行号
+[root@m2 ~]# nl passwd 
+ 1    root:x:0:0:root:/root:/bin/bash
+ 2    bin:x:1:1:bin:/bin:/sbin/nologin
+ 3    daemon:x:2:2:daemon:/sbin:/sbin/nologin
+ 4    adm:x:3:4:adm:/var/adm:/sbin/nologin
+</code></pre></li>
+</ul>
+<h3 id="i命令"><a href="#i命令" class="headerlink" title="-i命令"></a>-i命令</h3><ul>
+<li><p>将修改的内容写入文件</p>
+<pre><code># 将修改的内容写入文件
+[root@m2 ~]# sed -i &apos;s/messagess/message/&apos; passwd
+</code></pre></li>
+</ul>
+<h3 id="H-G命令"><a href="#H-G命令" class="headerlink" title="H,G命令"></a>H,G命令</h3><ul>
+<li><p>复制粘贴</p>
+<pre><code># 将1-4行的内容复制到第四行后面
+[root@m2 ~]# nl passwd | sed &apos;1,4H;4G&apos;
+ 1    root:x:0:0:root:/root:/bin/bash
+ 2    bin:x:1:1:bin:/bin:/sbin/nologin
+ 3    daemon:x:2:2:daemon:/sbin:/sbin/nologin
+ 4    adm:x:3:4:adm:/var/adm:/sbin/nologin
+
+ 1    root:x:0:0:root:/root:/bin/bash
+ 2    bin:x:1:1:bin:/bin:/sbin/nologin
+ 3    daemon:x:2:2:daemon:/sbin:/sbin/nologin
+ 4    adm:x:3:4:adm:/var/adm:/sbin/nologin
+ 5    lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+</code></pre></li>
+</ul>
+<h3 id="d命令"><a href="#d命令" class="headerlink" title="d命令"></a>d命令</h3><ul>
+<li><p>删除</p>
+<pre><code># 将开头内容为Zhangsan的行删除
+[root@m2 ~]# sed &apos;/^Zhangsan/d&apos; passwd &gt; newpasswd
+[root@m2 ~]# vim newpasswd
+</code></pre></li>
+</ul>
+<h3 id="w命令"><a href="#w命令" class="headerlink" title="w命令"></a>w命令</h3><ul>
+<li><p>写入,过滤</p>
+<pre><code># 过滤含有root内容的行，写入到新文件newpasswd中
+# 可以用来过滤文件内容，并写入到新文件
+[root@m2 ~]# sed &apos;/root/w newpasswd&apos; passwd
+[root@m2 ~]# cat newpasswd 
+root:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/root:/sbin/nologin
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Linux下的sed使用&quot;&gt;&lt;a href=&quot;#Linux下的sed使用&quot; class=&quot;headerlink&quot; title=&quot;Linux下的sed使用&quot;&gt;&lt;/a&gt;Linux下的sed使用&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;流编辑器，sed编辑器是一行一行处
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>Exchanger</title>
@@ -2064,187 +2494,6 @@ Eclise -&gt; 偏好设置 -&gt; XML -&gt; XML Catalog -&gt; add
     
     
       <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL-快速复制数据库</title>
-    <link href="http://blog.golearns.org/2016/11/10/MySQL-%E5%BF%AB%E9%80%9F%E5%A4%8D%E5%88%B6%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    <id>http://blog.golearns.org/2016/11/10/MySQL-快速复制数据库/</id>
-    <published>2016-11-10T11:52:25.000Z</published>
-    <updated>2016-11-10T11:52:45.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="mysql-快速复制数据库"><a href="#mysql-快速复制数据库" class="headerlink" title="mysql 快速复制数据库"></a>mysql 快速复制数据库</h1><ul>
-<li><p>从shopimport 复制到 shopimport2</p>
-<pre><code>./mysqldump shopimport -uroot -p123456 --add-drop-table | ./mysql shopimport2 -uroot -p123456
-</code></pre></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;mysql-快速复制数据库&quot;&gt;&lt;a href=&quot;#mysql-快速复制数据库&quot; class=&quot;headerlink&quot; title=&quot;mysql 快速复制数据库&quot;&gt;&lt;/a&gt;mysql 快速复制数据库&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;从shopimport 复制到 s
-    
-    </summary>
-    
-      <category term="MySQL" scheme="http://blog.golearns.org/categories/MySQL/"/>
-    
-    
-      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql定时任务</title>
-    <link href="http://blog.golearns.org/2016/11/10/MySQL-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
-    <id>http://blog.golearns.org/2016/11/10/MySQL-定时任务/</id>
-    <published>2016-11-10T11:47:59.000Z</published>
-    <updated>2016-11-11T02:10:45.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="mysql-定时任务"><a href="#mysql-定时任务" class="headerlink" title="mysql 定时任务"></a>mysql 定时任务</h1><blockquote>
-<p><code>[on completion [not] preserve]</code>可以设置这个事件是执行一次还是持久执行,默认为<code>not preserve。</code>
-<code>[enable | disenable]</code>可是设置该事件创建后状态是否开启或关闭,默认为<code>enable</code>。
-<code>[commet &#39;commet&#39;]</code>可以给该事件加上注释。</p>
-</blockquote>
-<h2 id="查看定时任务"><a href="#查看定时任务" class="headerlink" title="查看定时任务"></a>查看定时任务</h2><pre><code>show events;
-</code></pre><h2 id="查看是否开启定时任务"><a href="#查看是否开启定时任务" class="headerlink" title="查看是否开启定时任务"></a>查看是否开启定时任务</h2><pre><code>SHOW VARIABLES LIKE &apos;event_scheduler&apos;;
-</code></pre><a id="more"></a>
-<h2 id="关闭定时任务"><a href="#关闭定时任务" class="headerlink" title="关闭定时任务"></a>关闭定时任务</h2><pre><code>alter event EVENT_NAME disable;
-</code></pre><h2 id="开启定时任务"><a href="#开启定时任务" class="headerlink" title="开启定时任务"></a>开启定时任务</h2><pre><code>alter event EVENT_NAME enable;
-</code></pre><h2 id="删除定时任务"><a href="#删除定时任务" class="headerlink" title="删除定时任务"></a>删除定时任务</h2><pre><code>drop event EVENT_NAME;
-</code></pre><h2 id="开启定时任务的几种方式"><a href="#开启定时任务的几种方式" class="headerlink" title="开启定时任务的几种方式"></a>开启定时任务的几种方式</h2><pre><code>SET GLOBAL event_scheduler = ON;
-SET @@global.event_scheduler = ON;
-SET GLOBAL event_scheduler = 1;
-SET @@global.event_scheduler = 1;
-</code></pre><h2 id="关闭定时任务的几种方式"><a href="#关闭定时任务的几种方式" class="headerlink" title="关闭定时任务的几种方式"></a>关闭定时任务的几种方式</h2><pre><code>SET GLOBAL event_scheduler = OFF;
-SET @@global.event_scheduler = OFF;
-SET GLOBAL event_scheduler = 0;
-SET @@global.event_scheduler = 0;
-</code></pre><h2 id="或者修改my-cnf-my-ini配置文件"><a href="#或者修改my-cnf-my-ini配置文件" class="headerlink" title="或者修改my.cnf || my.ini配置文件"></a>或者修改<code>my.cnf</code> || <code>my.ini</code>配置文件</h2><pre><code>event_scheduler=ENABLE
-event_scheduler=DISABLED
-</code></pre><h2 id="创建事件"><a href="#创建事件" class="headerlink" title="创建事件"></a>创建事件</h2><pre><code>create evnet  [if not exists] event_name
-on schedule schedule
-[on completion [not] preserve]
-[enable | disenable]
-[commet &apos;commet&apos;]
-do sql_statement;
-schedule:
-AT timestamp [+ interval interval] | every interval [starts timestamp] [ends timestamp]
-interval:
-quantity {year | quarter | month | day | hour | minute | week | sencond | year_month | day_hour | day_minute | day_sencond | hour_minute | hour_sencond | minute_sencond}
-</code></pre><h2 id="创建一个定时任务每隔1s向表中插入数据"><a href="#创建一个定时任务每隔1s向表中插入数据" class="headerlink" title="创建一个定时任务每隔1s向表中插入数据"></a>创建一个定时任务每隔1s向表中插入数据</h2><pre><code>create event event_table_insert
-on schedule every 1 sencond
-do insert into TABLE_NAME values(now());
-</code></pre><h2 id="10天后清空表"><a href="#10天后清空表" class="headerlink" title="10天后清空表"></a>10天后清空表</h2><pre><code>create event event_truct_table
-on schedule at current_timestamp + interal 10 day
-do truncate table TABLE_NAME;
-</code></pre><h2 id="2016年11月11号00-00-00清空表"><a href="#2016年11月11号00-00-00清空表" class="headerlink" title="2016年11月11号00:00:00清空表"></a>2016年11月11号00:00:00清空表</h2><pre><code>create event event_time_truct_table
-on schedule at timestamp &apos;2016-11-11 00:00:00&apos;
-do truncate table TABLE_NAME;
-</code></pre><h2 id="2天后开启每天定时清空表，一年后停止执行"><a href="#2天后开启每天定时清空表，一年后停止执行" class="headerlink" title="2天后开启每天定时清空表，一年后停止执行"></a>2天后开启每天定时清空表，一年后停止执行</h2><pre><code>create event event_time_year_truct_table
-on schedule every 1 day
-starts current_timestamp + interval  2 day
-ends   current_timestamp + interval 1 year
-do truncate table TABLE_NAME;
-</code></pre><h2 id="5天后开启每天定时清空表，一个月后停止执行"><a href="#5天后开启每天定时清空表，一个月后停止执行" class="headerlink" title="5天后开启每天定时清空表，一个月后停止执行"></a>5天后开启每天定时清空表，一个月后停止执行</h2><pre><code>CREATE EVENT e_test
-ON SCHEDULE EVERY 1 DAY
-STARTS CURRENT_TIMESTAMP + INTERVAL 5 DAY
-ENDS CURRENT_TIMESTAMP + INTERVAL 1 MONTH
-DO TRUNCATE TABLE TABLE_NAME;
-</code></pre><h2 id="每天定时清空表，只执行一次，任务完成后就终止该事件"><a href="#每天定时清空表，只执行一次，任务完成后就终止该事件" class="headerlink" title="每天定时清空表，只执行一次，任务完成后就终止该事件"></a>每天定时清空表，只执行一次，任务完成后就终止该事件</h2><pre><code>create evnet event_one_truct_table
-on schedule every 1 day
-on completion not preserve
-do truncate table TABLE_NAME;
-</code></pre><h2 id="从现在开始每隔9天定时执行"><a href="#从现在开始每隔9天定时执行" class="headerlink" title="从现在开始每隔9天定时执行"></a>从现在开始每隔9天定时执行</h2><pre><code>CREATE EVENT EVENT1
-ON SCHEDULE EVERY 9 DAY STARTS NOW()
-ON COMPLETION PRESERVE ENABLE
-DO
-BEGIN
-    CALL TOTAL();
-END  
-</code></pre><h2 id="每个月的一号凌晨1点执行"><a href="#每个月的一号凌晨1点执行" class="headerlink" title="每个月的一号凌晨1点执行"></a>每个月的一号凌晨1点执行</h2><pre><code>CREATE EVENT EVENT2
-ON SCHEDULE EVERY 1 MONTH STARTS 
-DATE_ADD(DATE_ADD(DATE_SUB(CURDATE(),INTERVAL DAY(CURDATE())-1 DAY), 
-INTERVAL 1 MONTH),INTERVAL 1 HOUR)
-ON COMPLETION PRESERVE ENABLE
-DO
-BEGIN
-    CALL STAT();
-END
-</code></pre><h2 id="每个季度一号的凌晨2点执行"><a href="#每个季度一号的凌晨2点执行" class="headerlink" title="每个季度一号的凌晨2点执行"></a>每个季度一号的凌晨2点执行</h2><pre><code>CREATE  EVENT TOTAL_SEASON_EVENT
-ON SCHEDULE EVERY 1 QUARTER STARTS 
-DATE_ADD(DATE_ADD(DATE( CONCAT(YEAR(CURDATE()),&apos;-&apos;,ELT(QUARTER(CURDATE()),1,4,7,10),&apos;-&apos;,1)),INTERVAL 1 QUARTER),INTERVAL 2 HOUR)  
-ON COMPLETION PRESERVE ENABLE  
-DO
-BEGIN
-    CALL SEASON_STAT();
-END
-</code></pre><h2 id="每年1月1号凌晨4点执行"><a href="#每年1月1号凌晨4点执行" class="headerlink" title="每年1月1号凌晨4点执行"></a>每年1月1号凌晨4点执行</h2><pre><code>CREATE  EVENT TOTAL_YEAR_EVENT  
-ON SCHEDULE EVERY 1 YEAR STARTS 
-DATE_ADD(DATE(CONCAT(YEAR(CURDATE()) + 1,&apos;-&apos;,1,&apos;-&apos;,1)),INTERVAL 4 HOUR)  
-ON COMPLETION PRESERVE ENABLE
-DO
-BEGIN
-    CALL YEAR_STAT();
-END
-</code></pre><h2 id="事件开启和关闭"><a href="#事件开启和关闭" class="headerlink" title="事件开启和关闭"></a>事件开启和关闭</h2><pre><code>开启：ALTER EVENT EVENT_NAME ON COMPLETION PRESERVE ENABLE;
-关闭：ALTER EVENT EVENT_NAME ON COMPLETION PRESERVE DISABLE;
-</code></pre><ul>
-<li><strong>对于主从架构的数据库要注意将从库的任务调度关闭，以防止在主库执行了之后，从库又重复在备库进行调度evnet。</strong></li>
-<li><strong>对于我们线上环境来说，使用event时，注意在主库上开启定时器，从库上关闭定时器，event触发所有操作均会记录binlog进行主从同步，从库上开启定时器很可能造成卡库。切换主库后之后记得将新主库上的定时器打开。</strong></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;mysql-定时任务&quot;&gt;&lt;a href=&quot;#mysql-定时任务&quot; class=&quot;headerlink&quot; title=&quot;mysql 定时任务&quot;&gt;&lt;/a&gt;mysql 定时任务&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;[on completion [not] preserve]&lt;/code&gt;可以设置这个事件是执行一次还是持久执行,默认为&lt;code&gt;not preserve。&lt;/code&gt;
-&lt;code&gt;[enable | disenable]&lt;/code&gt;可是设置该事件创建后状态是否开启或关闭,默认为&lt;code&gt;enable&lt;/code&gt;。
-&lt;code&gt;[commet &amp;#39;commet&amp;#39;]&lt;/code&gt;可以给该事件加上注释。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;查看定时任务&quot;&gt;&lt;a href=&quot;#查看定时任务&quot; class=&quot;headerlink&quot; title=&quot;查看定时任务&quot;&gt;&lt;/a&gt;查看定时任务&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;show events;
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;查看是否开启定时任务&quot;&gt;&lt;a href=&quot;#查看是否开启定时任务&quot; class=&quot;headerlink&quot; title=&quot;查看是否开启定时任务&quot;&gt;&lt;/a&gt;查看是否开启定时任务&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;SHOW VARIABLES LIKE &amp;apos;event_scheduler&amp;apos;;
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="MySQL" scheme="http://blog.golearns.org/categories/MySQL/"/>
-    
-    
-      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chrome浏览器如何静音</title>
-    <link href="http://blog.golearns.org/2016/10/09/Chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E9%9D%99%E9%9F%B3/"/>
-    <id>http://blog.golearns.org/2016/10/09/Chrome浏览器如何静音/</id>
-    <published>2016-10-09T06:18:47.000Z</published>
-    <updated>2016-10-09T06:19:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Chrome浏览器如何静音"><a href="#Chrome浏览器如何静音" class="headerlink" title="Chrome浏览器如何静音"></a>Chrome浏览器如何静音</h1><ul>
-<li>在浏览器输入<code>chrome://flags/#enable-tab-audio-muting</code>
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/837D6910-25E7-4F61-A58A-6EAD12C4E74C.png" alt=""></li>
-<li>点击启用
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/1E686FEE-3542-486C-8E19-AA0AEF8F484A.png" alt=""></li>
-<li>重新启动
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/547E1019-6B59-40CA-A793-825006856A72.png" alt=""></li>
-<li>点击声音可以开启和静音,也可以在标签上通过右键来设置。</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Chrome浏览器如何静音&quot;&gt;&lt;a href=&quot;#Chrome浏览器如何静音&quot; class=&quot;headerlink&quot; title=&quot;Chrome浏览器如何静音&quot;&gt;&lt;/a&gt;Chrome浏览器如何静音&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;在浏览器输入&lt;code&gt;chrome:/
-    
-    </summary>
-    
-      <category term="Chrome" scheme="http://blog.golearns.org/categories/Chrome/"/>
-    
-    
-      <category term="Chrome" scheme="http://blog.golearns.org/tags/Chrome/"/>
     
   </entry>
   

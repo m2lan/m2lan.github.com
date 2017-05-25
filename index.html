@@ -266,6 +266,709 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/25/cut/" itemprop="url">
+                  cut
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-25T23:20:06+08:00" content="2017-05-25">
+              2017-05-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/25/cut/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/cut/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Linux下的cut使用"><a href="#Linux下的cut使用" class="headerlink" title="Linux下的cut使用"></a>Linux下的cut使用</h1><blockquote>
+<p>cut是一个选取命令，通过将一段数据分析，取出想要的。选取数据一般通过行的方式</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-b</td>
+<td>以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非指定了-n标志</td>
+</tr>
+<tr>
+<td style="text-align:center">-c</td>
+<td>以字符为单位进行分割</td>
+</tr>
+<tr>
+<td style="text-align:center">-d</td>
+<td>自定义分隔符，默认为制表符</td>
+</tr>
+<tr>
+<td style="text-align:center">-f</td>
+<td>与-d一起使用，指定显示哪个区域</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b参数"><a href="#b参数" class="headerlink" title="-b参数"></a>-b参数</h3><ul>
+<li><p>以字节为单位分割</p>
+<pre><code># tail显示passwd文件最后5行，cut以字节分割，获取1位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1
+s
+t
+m
+z
+Z
+
+# tail显示passwd文件最后5行，cut以字节分割，获取1-5位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1-5
+sshd:
+tcpdu
+mysql
+zhang
+Zhang
+
+# tail显示passwd文件最后5行，cut以字节分割，获取1-5和8-10位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1-5,8-10
+sshd:74:
+tcpdu:x:
+mysql:27
+zhangn:x
+Zhangn:x
+</code></pre></li>
+</ul>
+<h3 id="c参数"><a href="#c参数" class="headerlink" title="-c参数"></a>-c参数</h3><ul>
+<li><p>以字符为单位分割，在中文文件中提取</p>
+<pre><code>[root@m2 ~]# cat c.txt 
+你好地方司机浪费觉得算了发动机素
+
+[root@m2 ~]# tail -n 5 c.txt | cut -c 1-5
+你好地方司
+</code></pre></li>
+</ul>
+<h3 id="d和-f参数结合使用自定义分隔符"><a href="#d和-f参数结合使用自定义分隔符" class="headerlink" title="-d和-f参数结合使用自定义分隔符"></a>-d和-f参数结合使用自定义分隔符</h3><ul>
+<li><p>显示passwd文件最后5行，通过自定义分隔符:冒号分割，提取1和3位置的内容</p>
+<pre><code>[root@m2 ~]# tail -n 5 passwd | cut -d : -f 1,3
+sshd:74
+tcpdump:72
+mysql:27
+zhangsan:500
+Zhangsan:500
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/25/awk/" itemprop="url">
+                  awk
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-25T23:19:04+08:00" content="2017-05-25">
+              2017-05-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/25/awk/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/awk/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Linux下的awk使用"><a href="#Linux下的awk使用" class="headerlink" title="Linux下的awk使用"></a>Linux下的awk使用</h1><blockquote>
+<p>awk分析文件数据，根据分隔符对一行一行的数据进行拆分，获取某一列
+分隔符默认是空格，可以使用-F;以分号为分隔符,-F:以冒号为分隔符</p>
+</blockquote>
+<ul>
+<li><p>获取当前主机指定网卡的IP地址</p>
+<pre><code>[root@m2 ~]# ifconfig eth0
+eth0      Link encap:Ethernet  HWaddr 00:0C:29:C6:3D:D5  
+inet addr:192.168.0.150  Bcast:192.168.0.255  Mask:255.255.255.0
+inet6 addr: fe80::20c:29ff:fec6:3dd5/64 Scope:Link
+UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+RX packets:11240 errors:0 dropped:0 overruns:0 frame:0
+TX packets:2747 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:1000 
+RX bytes:1389465 (1.3 MiB)  TX bytes:207415 (202.5 KiB)
+
+[root@m2 ~]# ifconfig eth0 | grep &quot;inet addr:&quot; | awk &apos;{print $2}&apos; | awk -F : &apos;{print $2}&apos;
+192.168.0.150
+</code></pre></li>
+<li><p>获取/etc/passwd中用户UID大于500的用户名和用户登陆的shell</p>
+<pre><code>[root@m2 ~]# cat passwd | awk -F  : &apos;$3&gt;500{print $1,$7}&apos;
+nfsnobody /sbin/nologin
+
+# 使用\t制表符隔开
+[root@m2 ~]# cat passwd | awk -F : &apos;$3&gt;500{print $1 &quot;\t&quot; $7}&apos;
+nfsnobody    /sbin/nologin
+</code></pre></li>
+<li><p>获取/etc/passwd中用户UID&gt;=500并且登陆shell为/bin/bash的用户名和登陆shell</p>
+<pre><code>[root@m2 ~]# cat passwd | awk -F : &apos;$3&gt;=500 &amp;&amp; $7==&quot;/bin/bash&quot;{print $1,$7}&apos;
+zhangsan /bin/bash
+Zhangsan /bin/bash
+
+# 显示行号
+[root@m2 ~]# nl passwd | awk -F : &apos;$3&gt;=500 &amp;&amp; $7==&quot;/bin/bash&quot;{print $1,$7}&apos;
+35    zhangsan /bin/bash
+36    Zhangsan /bin/bash
+</code></pre></li>
+<li><p>使用BEGIN和END，在筛选前和筛选后分别输出一些内容</p>
+<pre><code>[root@m2 ~]# cat passwd | awk -F : &apos;BEGIN {print &quot;用户名 \t 使用的shell&quot;} $3&gt;500 {print $1 &quot;\t&quot; $7} END {print &quot;end&quot;}&apos;
+用户名      使用的shell
+nfsnobody    /sbin/nologin
+end
+</code></pre></li>
+<li><p>获取指定目录下所有文件总大小,定义size变量用来统计</p>
+<pre><code>[root@m2 ~]# ls -l /etc/ | awk &apos;BEGIN {size=0;} {size+=$5;} END {print &quot;总大小：&quot;,size/1024/1024,&quot;Mb&quot;}&apos;
+总大小： 1.84909 Mb
+</code></pre></li>
+<li><p>统计当前电脑内存使用百分比</p>
+<pre><code>[root@m2 sh]# vim example19.sh
+#!/bin/bash
+echo &apos;显示内存使用百分比：&apos;
+use=`free -m | grep &apos;cache:&apos; | awk &apos;{print $3}&apos;`
+total=`free -m | grep &apos;Mem:&apos; | awk &apos;{print $2}&apos;`
+result=`expr $use \* 100 / $total`
+echo &quot;使用百分比为：$result%&quot;
+
+[root@m2 sh]# chmod +x example19.sh
+[root@m2 sh]# ./example19.sh 
+显示内存使用百分比：
+使用百分比为：20%
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/25/sed/" itemprop="url">
+                  sed
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-25T23:15:24+08:00" content="2017-05-25">
+              2017-05-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/25/sed/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/sed/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Linux下的sed使用"><a href="#Linux下的sed使用" class="headerlink" title="Linux下的sed使用"></a>Linux下的sed使用</h1><blockquote>
+<p>流编辑器，sed编辑器是一行一行处理文件内容。正在处理的内容放入缓冲区内
+处理完成后根据选项进行输出或文件修改</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-n</td>
+<td>抑制自动(默认)输出，读取下一个输入行</td>
+</tr>
+<tr>
+<td style="text-align:center">-i</td>
+<td>编辑文件内容</td>
+</tr>
+<tr>
+<td style="text-align:center">-e</td>
+<td>执行多次</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td>在匹配后追加</td>
+</tr>
+<tr>
+<td style="text-align:center">i</td>
+<td>在匹配后插入</td>
+</tr>
+<tr>
+<td style="text-align:center">p</td>
+<td>打印</td>
+</tr>
+<tr>
+<td style="text-align:center">d</td>
+<td>删除</td>
+</tr>
+<tr>
+<td style="text-align:center">w</td>
+<td>另存</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td>替换</td>
+</tr>
+<tr>
+<td style="text-align:center">s</td>
+<td>查找</td>
+</tr>
+<tr>
+<td style="text-align:center">h/H</td>
+<td>复制copy</td>
+</tr>
+<tr>
+<td style="text-align:center">g/G</td>
+<td>粘贴</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s命令"><a href="#s命令" class="headerlink" title="s命令"></a>s命令</h3><ul>
+<li><p>查找替换</p>
+<pre><code># 将root替换为boot
+[root@m2 ~]# sed &apos;s/root/boot/&apos; passwd | grep boot --color
+boot:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+
+# 将所有root替换为boot,g表示替换所有
+[root@m2 ~]# sed &apos;s/root/boot/g&apos; passwd | grep boot --color
+boot:x:0:0:boot:/boot:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+
+# 给查找的目标内容添加括号,&amp;表示查找的内容
+[root@m2 ~]# sed &apos;s/root/(&amp;)/&apos; passwd | grep &apos;(root)&apos; --color
+(root):x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/(root):/sbin/nologin
+
+# 给所有行添加注释
+[root@m2 ~]# sed &apos;s/^[a-zA-Z]/#&amp;/&apos; passwd 
+#root:x:0:0:root:/root:/bin/bash
+#bin:x:1:1:bin:/bin:/sbin/nologin
+
+# 多次替换,-e
+[root@m2 ~]# sed -e &apos;s/root/boot/&apos; -e &apos;s/message/messages/&apos; passwd | grep &quot;\&lt;boot\|messages\&gt;&quot; --color
+boot:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+dbus:x:81:81:System messages bus:/:/sbin/nologin
+
+# 替换指定行
+[root@m2 ~]# sed &apos;1,5s/root/boot/&apos; passwd | grep boot --color -n
+1:boot:x:0:0:root:/root:/bin/bash
+</code></pre></li>
+</ul>
+<h3 id="n-p命令"><a href="#n-p命令" class="headerlink" title="n,p命令"></a>n,p命令</h3><ul>
+<li><p>显示指定行</p>
+<pre><code># 显示第5行
+[root@m2 ~]# sed -n &apos;5p&apos; passwd 
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+
+# 显示前五行的内容
+[root@m2 ~]# sed -n &apos;1,5p&apos; passwd 
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+
+# 显示除前五行之外的其他行,使用!号
+[root@m2 ~]# sed -n &apos;1,5!p&apos; passwd 
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+
+# 显示第五行和第五行之后的三行
+[root@m2 ~]# sed -n &apos;5,+3p&apos; passwd 
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+
+# 显示文件总行数
+[root@m2 ~]# sed -n &apos;$=&apos; passwd 
+36
+</code></pre></li>
+</ul>
+<h3 id="i-a命令"><a href="#i-a命令" class="headerlink" title="i,a命令"></a>i,a命令</h3><ul>
+<li><p>在行前和行尾插入</p>
+<pre><code># 在第一行前面插入一行
+[root@m2 ~]# sed &apos;1ihello world one line&apos; passwd 
+hello world one line
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+
+# 在最后一行后面插入一行
+[root@m2 ~]# sed &apos;$a插入最后一行&apos; passwd
+Zhangsan:x:500:500::/home/zhangsan:/bin/bash
+插入最后一行
+
+# 在第一行后面插入多行,使用反斜杠(\)进行断行操作
+[root@m2 ~]# sed &apos;1ahello \
+&gt; world&apos; passwd
+root:x:0:0:root:/root:/bin/bash
+hello 
+world
+bin:x:1:1:bin:/bin:/sbin/nologin
+</code></pre></li>
+</ul>
+<h3 id="c命令"><a href="#c命令" class="headerlink" title="c命令"></a>c命令</h3><ul>
+<li><p>内容替换</p>
+<pre><code># 将第二行内容全部替换为Hello world
+[root@m2 ~]# sed &apos;2cHello world&apos; passwd 
+root:x:0:0:root:/root:/bin/bash
+Hello world
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+</code></pre></li>
+</ul>
+<h3 id="nl命令"><a href="#nl命令" class="headerlink" title="nl命令"></a>nl命令</h3><ul>
+<li><p>显示文件行号</p>
+<pre><code># 显示第三行-第五行内容，并显示行号
+[root@m2 ~]# nl passwd | sed -n &apos;3,5p&apos;
+ 3    daemon:x:2:2:daemon:/sbin:/sbin/nologin
+ 4    adm:x:3:4:adm:/var/adm:/sbin/nologin
+ 5    lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+
+# 在第二行后插入多行，并显示行号
+[root@m2 ~]# nl passwd | sed &apos;2a hahhaha \
+&gt; hehehehhe &apos;
+     1    root:x:0:0:root:/root:/bin/bash
+     2    bin:x:1:1:bin:/bin:/sbin/nologin
+hahhaha 
+hehehehhe 
+     3    daemon:x:2:2:daemon:/sbin:/sbin/nologin
+     4    adm:x:3:4:adm:/var/adm:/sbin/nologin
+
+# 直接显示文件内容和行号
+[root@m2 ~]# nl passwd 
+ 1    root:x:0:0:root:/root:/bin/bash
+ 2    bin:x:1:1:bin:/bin:/sbin/nologin
+ 3    daemon:x:2:2:daemon:/sbin:/sbin/nologin
+ 4    adm:x:3:4:adm:/var/adm:/sbin/nologin
+</code></pre></li>
+</ul>
+<h3 id="i命令"><a href="#i命令" class="headerlink" title="-i命令"></a>-i命令</h3><ul>
+<li><p>将修改的内容写入文件</p>
+<pre><code># 将修改的内容写入文件
+[root@m2 ~]# sed -i &apos;s/messagess/message/&apos; passwd
+</code></pre></li>
+</ul>
+<h3 id="H-G命令"><a href="#H-G命令" class="headerlink" title="H,G命令"></a>H,G命令</h3><ul>
+<li><p>复制粘贴</p>
+<pre><code># 将1-4行的内容复制到第四行后面
+[root@m2 ~]# nl passwd | sed &apos;1,4H;4G&apos;
+ 1    root:x:0:0:root:/root:/bin/bash
+ 2    bin:x:1:1:bin:/bin:/sbin/nologin
+ 3    daemon:x:2:2:daemon:/sbin:/sbin/nologin
+ 4    adm:x:3:4:adm:/var/adm:/sbin/nologin
+
+ 1    root:x:0:0:root:/root:/bin/bash
+ 2    bin:x:1:1:bin:/bin:/sbin/nologin
+ 3    daemon:x:2:2:daemon:/sbin:/sbin/nologin
+ 4    adm:x:3:4:adm:/var/adm:/sbin/nologin
+ 5    lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+</code></pre></li>
+</ul>
+<h3 id="d命令"><a href="#d命令" class="headerlink" title="d命令"></a>d命令</h3><ul>
+<li><p>删除</p>
+<pre><code># 将开头内容为Zhangsan的行删除
+[root@m2 ~]# sed &apos;/^Zhangsan/d&apos; passwd &gt; newpasswd
+[root@m2 ~]# vim newpasswd
+</code></pre></li>
+</ul>
+<h3 id="w命令"><a href="#w命令" class="headerlink" title="w命令"></a>w命令</h3><ul>
+<li><p>写入,过滤</p>
+<pre><code># 过滤含有root内容的行，写入到新文件newpasswd中
+# 可以用来过滤文件内容，并写入到新文件
+[root@m2 ~]# sed &apos;/root/w newpasswd&apos; passwd
+[root@m2 ~]# cat newpasswd 
+root:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/root:/sbin/nologin
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/21/Exchanger/" itemprop="url">
                   Exchanger
                 </a>
@@ -1355,410 +2058,11 @@ public class Counter2 {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/11/大型网站架构模式/" itemprop="url">
-                  大型网站架构模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-11T22:18:57+08:00" content="2017-05-11">
-              2017-05-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/架构/" itemprop="url" rel="index">
-                    <span itemprop="name">架构</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/11/大型网站架构模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/11/大型网站架构模式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="大型网站架构模式"><a href="#大型网站架构模式" class="headerlink" title="大型网站架构模式"></a>大型网站架构模式</h1><h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><ul>
-<li>分层是：将系统在横向维度上切分成几个部分，每个部分负责一部分相对比较单一的职责，然后通过上层对下层的依赖和调用组成一个完整的系统</li>
-<li>在大型网站分层架构中，将网站软件系统分为应用层、服务层和数据层</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>应用层</td>
-<td style="text-align:center">负责具体业务和试图展示，如网站首页及搜索输入和结果展示</td>
-</tr>
-<tr>
-<td>服务层</td>
-<td style="text-align:center">为应用层提供服务支持，如用户管理服务，购物车服务等</td>
-</tr>
-<tr>
-<td>数据层</td>
-<td style="text-align:center">提供数据存储访问服务，如数据库、缓存、文件、搜索引擎等</td>
-</tr>
-</tbody>
-</table>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/11/大型网站架构模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/11/大型网站架构演化/" itemprop="url">
-                  大型网站架构演化
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-11T21:11:23+08:00" content="2017-05-11">
-              2017-05-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/架构/" itemprop="url" rel="index">
-                    <span itemprop="name">架构</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/11/大型网站架构演化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/11/大型网站架构演化/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="大型网站架构演化"><a href="#大型网站架构演化" class="headerlink" title="大型网站架构演化"></a>大型网站架构演化</h1><h2 id="初始阶段的网站架构"><a href="#初始阶段的网站架构" class="headerlink" title="初始阶段的网站架构"></a>初始阶段的网站架构</h2><ul>
-<li>小型网站最开始没有多少人访问，只需要一台服务器就绰绰有余</li>
-<li>应用程序、数据库、文件等所有的资源都放在一台服务器上</li>
-</ul>
-<p><img src="http://opsi4gg7g.bkt.clouddn.com/server1.png" alt=""></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/11/大型网站架构演化/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/07/jsonp/" itemprop="url">
-                  jsonp
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-07T15:34:55+08:00" content="2017-05-07">
-              2017-05-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/jsonp/" itemprop="url" rel="index">
-                    <span itemprop="name">jsonp</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/07/jsonp/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/jsonp/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h1><h2 id="新建一个web客户端"><a href="#新建一个web客户端" class="headerlink" title="新建一个web客户端"></a>新建一个web客户端</h2><ul>
-<li><p>index.jsp</p>
-<pre><code>&lt;html&gt;
-    &lt;body&gt;
-        &lt;script src=&quot;https://cdn.staticfile.org/jquery/2.1.1/jquery.js&quot;&gt;&lt;/script&gt;
-        &lt;script&gt;
-        $(function() {
-            $.ajax({
-                url: &apos;http://192.168.0.1:8080/spring_mybatis/getUser?callback=?&apos;,
-                dataType: &apos;jsonp&apos;,
-                success: function(data) {
-                    console.log(data)
-                }
-            });
-        });
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/07/jsonp/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1799,7 +2103,7 @@ public class Counter2 {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">80</span>
+              <span class="site-state-item-count">83</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

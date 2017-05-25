@@ -266,6 +266,459 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/Shell-函数/" itemprop="url">
+                  Shell-函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:18:03+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-函数/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# function --
+# 函数返回值只能是整数，用来表示函数执行是否成功，0表示执行成功，其他表示失败
+# 如果返回非整数，则error
+# 函数名前面的function可加可不加
+# 函数可以使用return，return的返回值可以通过$?来接收
+# 
+# 也可以对函数进行删除，使用unset，后面加上.f
+# 如要删除function1函数：unset .f function1
+# 
+
+# 无参函数
+function function1 {
+    echo function1.
+}
+
+# 带参函数
+function function2 {
+    echo $1
+}
+
+# 多个参数
+function function3 {
+    echo $1 --- $2
+}
+
+function4() {
+    echo &quot;function4&quot;
+
+    return $((10 + 20))
+}
+
+# 函数嵌套调用
+function5() {
+    echo &quot;function5&quot;
+
+    function1
+}
+
+# 函数调用
+function1
+
+# 外部参数传入
+function2 $1
+function3 &quot;hello &quot; &quot;world!&quot;
+function4
+
+# 用来接收function4的返回值
+echo $?
+
+function5
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/Shell-转义替换/" itemprop="url">
+                  Shell-转义替换
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:17:29+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-转义替换/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-转义替换/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# 转义替换
+# -e 对转义字符进行替换
+
+echo -e &quot;hello world \n hahahah&quot;
+
+# 将命令执行的结果保存到变量中
+DATE=`date`
+echo $DATE
+
+# ${var:-message} 如果var为空或已被删除，则返回message，不会改变var的值
+# ${var:=message} 如果var为空或已被删除，则返回message，并将var的值设置为message
+# ${var:?message} 如果var为空或已被删除，则把message做为错误消息输出，脚本停止运行
+# ${var:+message} 如果var已被定义，则返回message，不会改变var的值
+
+echo ${var:-&quot;a---hahahahha&quot;}
+echo ${var:=&quot;b---hahhahaha&quot;}
+echo ${var}
+
+unset var
+echo ${var:?&quot;c---hahahahha&quot;} # 程序运行此处将停止
+
+echo ${var:+&quot;d---hahahhaha&quot;}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/Shell-case/" itemprop="url">
+                  Shell-case
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:16:58+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-case/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-case/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+#case
+
+NAME=&quot;john&quot;
+
+case ${NAME} in
+    &quot;john&quot; )
+        echo &quot;hahahha --- john&quot;
+        ;;
+    &quot;johnx&quot; )
+        echo &quot;huhuhuhu ---- johnx&quot;
+        ;;
+esac
+
+echo &quot;请输入1-3&quot;
+read INPUT
+case $INPUT in
+    1 )
+        echo &quot;你输入了1&quot;;;
+    2 )
+        echo &quot;你输入了2&quot;;;
+    3 )
+        echo &quot;你输入了3&quot;;;
+    * ) # 当以上条件不匹配，则会进入到这里
+        echo &quot;你的输出超出了范围&quot;;;
+esac
+
+option=&quot;${1}&quot;
+case $option in
+    -f ) FILE=&quot;${2}&quot;
+        echo &quot;file name is $FILE&quot;;;
+    -d ) DIR=&quot;${2}&quot;
+        echo &quot;dir name is $DIR&quot;;;
+    * )
+        echo &quot;`basename ${0}`: usage: [-f file] | [-d directory]&quot;
+        exit 1;; # 脚本运行的返回值 exit 0 表示成功， exit 1 表示失败
+esac
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/Shell-包含文件/" itemprop="url">
                   Shell-包含文件
                 </a>
@@ -1272,534 +1725,11 @@ static NSString *homeDir = nil;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/OC-数组对象排序/" itemprop="url">
-                  OC-数组对象排序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:06:15+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/OC-数组对象排序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-数组对象排序/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Comparator排序"><a href="#Comparator排序" class="headerlink" title="Comparator排序"></a>Comparator排序</h2><pre><code>NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-
-    HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1];
-    HLMessage *msg2 = [[NSClassFromString([obj2 messageClassName]) alloc]initWithManagedObject:obj2];
-
-    NSComparisonResult result = [[msg1 timestamp] compare:[msg2 timestamp]];
-
-    switch(result) {
-        case NSOrderedAscending:
-            return NSOrderedAscending;
-        case NSOrderedDescending:
-            return NSOrderedDescending;
-        case NSOrderedSame:
-            return NSOrderedSame;
-        default:
-            return NSOrderedSame;
-    }
-}];
-return arr;
-</code></pre><h2 id="SortDescriptor排序"><a href="#SortDescriptor排序" class="headerlink" title="SortDescriptor排序"></a>SortDescriptor排序</h2><pre><code>NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@&quot;timestamp&quot; ascending:YES];
-NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-NSArray *sortArray = [array sortedArrayUsingDescriptors:sortDescriptors];
-
-return sortArray;
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/IOS-点击按钮触发UIRefreshControl/" itemprop="url">
-                  IOS-点击按钮触发UIRefreshControl
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:05:15+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/IOS-点击按钮触发UIRefreshControl/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/IOS-点击按钮触发UIRefreshControl/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>//
-//  ViewController.m
-//  chat-view
-//
-//  Created by yonglang on 14/12/4.
-//  Copyright (c) 2014年 yonglang. All rights reserved.
-//
-
-#import &quot;ViewController.h&quot;
-
-@interface ViewController ()
-
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@&quot;刷新&quot; style:UIBarButtonItemStyleDone target:self action:@selector(refreshButton: )];
-
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.tintColor = [UIColor blueColor];
-    [self.refreshControl addTarget:self
-                            action:@selector(controlEventValueChanged:)
-                  forControlEvents:UIControlEventValueChanged];
-}
-
-- (void)controlEventValueChanged:(id)sender {
-    if (self.refreshControl.refreshing) {
-        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@&quot;刷新中&quot;];
-
-        [self performSelector:@selector(refreshData) withObject:nil afterDelay:0.5];
-    }
-}
-
-- (void)refreshButton: (id)sender {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1.0];
-    self.tableView.contentOffset = CGPointMake(0.0, -200.0);
-    [UIView commitAnimations];
-
-    [self.refreshControl beginRefreshing];
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@&quot;刷新中&quot;];
-
-    [self performSelector:@selector(refreshData) withObject:nil afterDelay:2.0];
-}
-
-- (void)refreshData {
-    [self.refreshControl endRefreshing];
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@&quot;下拉刷新&quot;];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *str = @&quot;MyCell&quot;;
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
-
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
-    }
-
-    cell.textLabel.text = @&quot;sdfsdfds&quot;;
-    cell.imageView.image = [UIImage imageNamed:@&quot;w.jpg&quot;];
-    cell.detailTextLabel.text = @&quot;23432432&quot;;
-
-    return cell;
-}
-
-@end
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/UITabBarController使用/" itemprop="url">
-                  UITabBarController使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:02:13+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/UITabBarController使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/UITabBarController使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>//
-//  ViewController.m
-//  ceshi
-//
-//  Created by yonglang on 14/11/6.
-//  Copyright (c) 2014年 yonglang. All rights reserved.
-//  图片资源 https://github.com/m2lan/Resource
-//
-
-#import &quot;ViewController.h&quot;
-#import &quot;OneViewController.h&quot;
-#import &quot;TwoViewController.h&quot;
-#import &quot;ThreeViewController.h&quot;
-
-@interface MainController () {
-    UITabBarController *_tabC;
-}
-
-@end
-
-@implementation MainController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    _tabC = [[UITabBarController alloc] init];
-    [_tabC.tabBar setBackgroundColor:[UIColor clearColor]];
-    [_tabC.view setFrame:self.view.frame];
-    [self.view addSubview:_tabC.view];
-
-    OneViewController *one = [[OneViewController alloc] init];
-    TwoViewController *two = [[TwoViewController alloc] init];
-    ThreeViewController *three = [[ThreeViewController alloc] init];
-    _tabC.viewControllers = @[one, two, three ];
-
-    [_tabC.tabBar setBackgroundColor:[UIColor whiteColor]];
-    NSArray *ar = _tabC.viewControllers;
-    NSMutableArray *arD = [NSMutableArray new];
-    [ar enumerateObjectsUsingBlock:^(UIViewController *viewController, NSUInteger idx, BOOL *stop)
-    {
-        UITabBarItem *item = nil;
-        switch (idx)
-        {
-           case 0:
-           {
-               item = [[UITabBarItem alloc] initWithTitle:@&quot;消息&quot; image:[[UIImage imageNamed:@&quot;tab_recent_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@&quot;tab_recent_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               break;
-           }
-           case 1:
-           {
-               item = [[UITabBarItem alloc] initWithTitle:@&quot;联系人&quot; image:nil tag:1];
-               [item setImage:[[UIImage imageNamed:@&quot;tab_buddy_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               [item setSelectedImage:[[UIImage imageNamed:@&quot;tab_buddy_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               break;
-           }
-           case 2:
-           {
-               item = [[UITabBarItem alloc]initWithTitle:@&quot;动态&quot; image:nil tag:1];
-               [item setImage:[[UIImage imageNamed:@&quot;tab_qworld_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               [item setSelectedImage:[[UIImage imageNamed:@&quot;tab_qworld_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               break;
-           }
-        }
-        viewController.tabBarItem = item;
-        [arD addObject:viewController];
-    }];
-    _tabC.viewControllers = arD;
-
-    [[UITabBarItem appearance] setTitleTextAttributes:
-    [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:96/255.f green:164/255.f blue:222/255.f alpha:1], UITextAttributeTextColor, nil]
-                                       forState:UIControlStateSelected];
-
-    [_tabC setSelectedIndex:1];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-@end
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1840,7 +1770,7 @@ return sortArray;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">80</span>
+              <span class="site-state-item-count">83</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
