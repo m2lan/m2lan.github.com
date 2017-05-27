@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Objective-c," />
+  <meta name="keywords" content="ssh,Linux," />
 
 
 
@@ -57,17 +57,17 @@
 
 
 
-<meta name="description" content="-(void) viewWillDisappear:(BOOL)animated {     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {        // back button was pressed.  We know this is true because self i">
-<meta name="keywords" content="Objective-c">
+<meta name="description" content="Linux下SSHD服务管理 sshd服务使用SSH协议进行远程控制，或在计算机之间传输文件  设置sshd端口 将170服务器的sshd端口修改为222 [root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep Port | grep -v &amp;apos;^#&amp;apos; Port 222   设置sshd访问IP地址 只允许192.168.0.170服">
+<meta name="keywords" content="ssh,Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OC-检测视图退出">
-<meta property="og:url" content="http://blog.golearns.org/2015/12/10/OC-检测视图退出/index.html">
+<meta property="og:title" content="sshd服务管理">
+<meta property="og:url" content="http://blog.golearns.org/2017/05/28/sshd服务管理/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="-(void) viewWillDisappear:(BOOL)animated {     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {        // back button was pressed.  We know this is true because self i">
-<meta property="og:updated_time" content="2016-07-15T01:47:04.000Z">
+<meta property="og:description" content="Linux下SSHD服务管理 sshd服务使用SSH协议进行远程控制，或在计算机之间传输文件  设置sshd端口 将170服务器的sshd端口修改为222 [root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep Port | grep -v &amp;apos;^#&amp;apos; Port 222   设置sshd访问IP地址 只允许192.168.0.170服">
+<meta property="og:updated_time" content="2017-05-27T17:04:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OC-检测视图退出">
-<meta name="twitter:description" content="-(void) viewWillDisappear:(BOOL)animated {     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {        // back button was pressed.  We know this is true because self i">
+<meta name="twitter:title" content="sshd服务管理">
+<meta name="twitter:description" content="Linux下SSHD服务管理 sshd服务使用SSH协议进行远程控制，或在计算机之间传输文件  设置sshd端口 将170服务器的sshd端口修改为222 [root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep Port | grep -v &amp;apos;^#&amp;apos; Port 222   设置sshd访问IP地址 只允许192.168.0.170服">
 
 
 
@@ -85,7 +85,7 @@
   };
 </script>
 
-  <title> OC-检测视图退出 | 知识记录 </title>
+  <title> sshd服务管理 | 知识记录 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +265,7 @@
             
             
               
-                OC-检测视图退出
+                sshd服务管理
               
             
           </h1>
@@ -277,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:10:15+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2017-05-28T01:03:56+08:00" content="2017-05-28">
+              2017-05-28
             </time>
           </span>
 
@@ -291,8 +291,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -307,8 +307,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/OC-检测视图退出/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-检测视图退出/" itemprop="commentsCount"></span>
+                <a href="/2017/05/28/sshd服务管理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/sshd服务管理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -330,14 +330,128 @@
       
 
       
-        <pre><code>-(void) viewWillDisappear:(BOOL)animated {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-       // back button was pressed.  We know this is true because self is no longer
-       // in the navigation stack.  
-    }
-    [super viewWillDisappear:animated];
-}
-</code></pre>
+        <h1 id="Linux下SSHD服务管理"><a href="#Linux下SSHD服务管理" class="headerlink" title="Linux下SSHD服务管理"></a>Linux下SSHD服务管理</h1><blockquote>
+<p>sshd服务使用SSH协议进行远程控制，或在计算机之间传输文件</p>
+</blockquote>
+<h3 id="设置sshd端口"><a href="#设置sshd端口" class="headerlink" title="设置sshd端口"></a>设置sshd端口</h3><ul>
+<li><p>将170服务器的sshd端口修改为222</p>
+<pre><code>[root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep Port | grep -v &apos;^#&apos;
+Port 222
+</code></pre></li>
+</ul>
+<h3 id="设置sshd访问IP地址"><a href="#设置sshd访问IP地址" class="headerlink" title="设置sshd访问IP地址"></a>设置sshd访问IP地址</h3><ul>
+<li><p>只允许192.168.0.170服务器登陆</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep ListenAddress | grep -v &apos;^#&apos;
+ListenAddress 192.168.0.170
+
+[root@m2lan150 ~]# /etc/init.d/sshd restart
+</code></pre></li>
+</ul>
+<h3 id="日志存放位置"><a href="#日志存放位置" class="headerlink" title="日志存放位置"></a>日志存放位置</h3><ul>
+<li><p>查看日志级别</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep Syslog | grep -v &apos;^#&apos;
+SyslogFacility AUTHPRIV
+</code></pre></li>
+<li><p>查看日志存放位置</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/rsyslog.conf | grep ^authpriv
+authpriv.*                                              /var/log/secure
+</code></pre></li>
+</ul>
+<h3 id="设置不允许root账户登陆"><a href="#设置不允许root账户登陆" class="headerlink" title="设置不允许root账户登陆"></a>设置不允许root账户登陆</h3><ul>
+<li><p>将PermitRootLogin设置为no</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep RootLogin | grep -v &apos;^#&apos;
+PermitRootLogin no
+</code></pre></li>
+</ul>
+<h3 id="如果用户不能在指定时间内登陆服务器，则断开"><a href="#如果用户不能在指定时间内登陆服务器，则断开" class="headerlink" title="如果用户不能在指定时间内登陆服务器，则断开"></a>如果用户不能在指定时间内登陆服务器，则断开</h3><ul>
+<li><p>表示在5s内不能成功登陆，就断开。LoginGraceTime单位默认为秒</p>
+<pre><code>[root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep LoginGrace | grep -v &apos;^#&apos;
+LoginGraceTime 5
+</code></pre></li>
+</ul>
+<h3 id="使用密钥登陆"><a href="#使用密钥登陆" class="headerlink" title="使用密钥登陆"></a>使用密钥登陆</h3><ul>
+<li><p>在170服务器生成密钥</p>
+<pre><code>[root@m2lan170 ~]# ssh-keygen 
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): 
+/root/.ssh/id_rsa already exists.
+Overwrite (y/n)? y
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+b2:26:0f:de:6e:c8:a1:b5:8e:e3:7b:5a:91:0e:22:83 root@m2lan170.com
+The key&apos;s randomart image is:
++--[ RSA 2048]----+
+|                 |
+|                 |
+|                 |
+|.    .           |
+|E . o . S        |
+|.o oo. o         |
+|   +=+o          |
+|  o+=*.          |
+| .=*oo+          |
++-----------------+
+</code></pre></li>
+<li><p>将170服务器上的公钥发布到150服务器上</p>
+<pre><code>[root@m2lan170 ~]# ssh-copy-id -i /root/.ssh/id_rsa.pub 192.168.0.150
+The authenticity of host &apos;192.168.0.150 (192.168.0.150)&apos; can&apos;t be established.
+RSA key fingerprint is e4:e9:2f:ca:75:1d:5a:38:5d:4d:49:66:8a:ca:1a:8c.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added &apos;192.168.0.150&apos; (RSA) to the list of known hosts.
+root@192.168.0.150&apos;s password: 
+Now try logging into the machine, with &quot;ssh &apos;192.168.0.150&apos;&quot;, and check in:
+
+  .ssh/authorized_keys
+
+to make sure we haven&apos;t added extra keys that you weren&apos;t expecting.
+
+[root@m2lan170 ~]# ssh root@192.168.0.150
+Last login: Tue Apr 19 20:41:13 2016 from 192.168.1.101
+</code></pre></li>
+<li><p>现在170服务器登陆150服务器不需要密码，150服务器登陆170服务器需要密码</p>
+</li>
+<li><p>170服务器给自己发布一个公钥</p>
+<pre><code>[root@m2lan170 ~]# ssh-copy-id 192.168.0.170
+The authenticity of host &apos;192.168.0.170 (192.168.0.170)&apos; can&apos;t be established.
+RSA key fingerprint is f1:37:53:b9:f2:7a:d0:35:4a:ee:f8:82:ed:1c:6a:18.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added &apos;192.168.0.170&apos; (RSA) to the list of known hosts.
+root@192.168.0.170&apos;s password: 
+Now try logging into the machine, with &quot;ssh &apos;192.168.0.170&apos;&quot;, and check in:
+
+  .ssh/authorized_keys
+
+to make sure we haven&apos;t added extra keys that you weren&apos;t expecting.
+</code></pre></li>
+<li><p>将170服务器的密钥发送给150服务器</p>
+<pre><code>[root@m2lan170 ~]# scp /root/.ssh/id_rsa root@192.168.0.150:/root/.ssh/
+id_rsa     100% 1675     1.6KB/s   00:00 
+</code></pre></li>
+<li><p>这时两台服务器互相登陆就不需要输入密码了</p>
+</li>
+</ul>
+<h3 id="通过ssh远程启动服务"><a href="#通过ssh远程启动服务" class="headerlink" title="通过ssh远程启动服务"></a>通过ssh远程启动服务</h3><ul>
+<li><p>在150服务器上启动170服务器上的apache</p>
+<pre><code>[root@m2lan150 ~]# ssh 192.168.0.170 /etc/init.d/httpd start
+正在启动 httpd：[确定]
+</code></pre></li>
+<li><p>在150服务器查看170服务器的apache状态</p>
+<pre><code>[root@m2lan150 ~]# ssh 192.168.0.170 /etc/init.d/httpd status
+httpd (pid  6667) 正在运行...
+</code></pre></li>
+<li><p>在170服务器上启动150服务器上的apache</p>
+<pre><code>[root@m2lan170 ~]# ssh 192.168.0.150 /etc/init.d/httpd start
+正在启动 httpd：[确定]
+</code></pre></li>
+<li><p>在170服务器查看150服务器的apache状态</p>
+<pre><code>[root@m2lan170 ~]# ssh 192.168.0.150 /etc/init.d/httpd status
+httpd (pid  3472) 正在运行...
+</code></pre></li>
+</ul>
+
       
     </div>
 
@@ -351,7 +465,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Objective-c/" rel="tag">#Objective-c</a>
+            <a href="/tags/ssh/" rel="tag">#ssh</a>
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -360,16 +476,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/10/OC-UIButton中设置image大小/" rel="next" title="OC-UIButton中设置image大小">
-                <i class="fa fa-chevron-left"></i> OC-UIButton中设置image大小
+              <a href="/2017/05/25/cut/" rel="next" title="cut">
+                <i class="fa fa-chevron-left"></i> cut
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/10/Shell-helloworld/" rel="prev" title="Shell-helloworld">
-                Shell-helloworld <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/28/Linux常用操作/" rel="prev" title="Linux常用操作">
+                Linux常用操作 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -402,8 +518,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/10/OC-检测视图退出/"
-           data-title="OC-检测视图退出" data-url="http://blog.golearns.org/2015/12/10/OC-检测视图退出/">
+      <div class="ds-thread" data-thread-key="2017/05/28/sshd服务管理/"
+           data-title="sshd服务管理" data-url="http://blog.golearns.org/2017/05/28/sshd服务管理/">
       </div>
     
   </div>
@@ -559,7 +675,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux下SSHD服务管理"><span class="nav-number">1.</span> <span class="nav-text">Linux下SSHD服务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置sshd端口"><span class="nav-number">1.0.1.</span> <span class="nav-text">设置sshd端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置sshd访问IP地址"><span class="nav-number">1.0.2.</span> <span class="nav-text">设置sshd访问IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志存放位置"><span class="nav-number">1.0.3.</span> <span class="nav-text">日志存放位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置不允许root账户登陆"><span class="nav-number">1.0.4.</span> <span class="nav-text">设置不允许root账户登陆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果用户不能在指定时间内登陆服务器，则断开"><span class="nav-number">1.0.5.</span> <span class="nav-text">如果用户不能在指定时间内登陆服务器，则断开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用密钥登陆"><span class="nav-number">1.0.6.</span> <span class="nav-text">使用密钥登陆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过ssh远程启动服务"><span class="nav-number">1.0.7.</span> <span class="nav-text">通过ssh远程启动服务</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>

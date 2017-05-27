@@ -266,6 +266,453 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/28/Linux常用操作/" itemprop="url">
+                  Linux常用操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-28T01:06:33+08:00" content="2017-05-28">
+              2017-05-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/28/Linux常用操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/Linux常用操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Linux常用操作"><a href="#Linux常用操作" class="headerlink" title="Linux常用操作"></a>Linux常用操作</h1><ul>
+<li><p>清空iptables</p>
+<pre><code>[root@m2 ~]# iptables -F
+[root@m2 ~]# /etc/init.d/iptables save
+iptables：将防火墙规则保存到 /etc/sysconfig/iptables：     [确定]
+</code></pre></li>
+<li><p>关闭selinux</p>
+<pre><code>[root@m2 ~]# vim /etc/selinux/config
+SELINUX=disabled
+</code></pre></li>
+<li><p>查看selinux是否关闭</p>
+<pre><code>[root@m2 ~]# getenforce
+Disabled
+</code></pre></li>
+<li><p>配置永久主机名</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/sysconfig/network
+NETWORKING=yes
+HOSTNAME=m2lan150.com
+</code></pre></li>
+<li><p>磁盘挂载</p>
+<pre><code>[root@m2lan150 ~]# mount /dev/cdrom /mnt/
+</code></pre></li>
+<li><p>磁盘开机自动挂载</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/fstab | grep /cdrom
+/dev/cdrom        /mnt            iso9660 defaults    0 0
+</code></pre></li>
+<li><p>配置yum源</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/yum.repos.d/rhel-source.repo
+[rhel-source]
+name=Red Hat Enterprise Linux $releasever - $basearch - Source
+baseurl=file:///mnt/
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+# 清除缓存
+[root@m2lan150 ~]# yum clean all
+
+# 重新生成
+[root@m2lan150 ~]# yum list
+</code></pre></li>
+<li><p>克隆虚拟机出现<code>设备 eth0 似乎不存在, 初始化操作将被延迟。</code>错误</p>
+<pre><code># 删除配置文件的HWADDR
+[root@m2lan150 ~]# cat !$
+cat /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+TYPE=Ethernet
+UUID=66cce682-8059-4f3e-b8e4-29a171e3bfaf
+ONBOOT=yes
+NM_CONTROLLED=yes
+BOOTPROTO=none
+IPADDR=192.168.0.150
+PREFIX=24
+GATEWAY=192.168.0.1
+DNS1=192.168.0.1
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=yes
+IPV6INIT=no
+NAME=&quot;System eth0&quot;
+# 删除/etc/udev/rules.d/70-persistent-net.rules文件
+[root@m2lan150 ~]# rm -f /etc/udev/rules.d/70-persistent-net.rules
+
+# 重启
+[root@m2lan150 ~]# reboot
+</code></pre></li>
+<li><p>开机启动</p>
+<pre><code># 设置sshd开机启动
+[root@m2lan150 ~]# chkconfig sshd on
+
+# 查看启动级别
+[root@m2lan150 ~]# chkconfig --list sshd
+sshd               0:关闭    1:关闭    2:启用    3:启用    4:启用    5:启用    6:关闭
+</code></pre></li>
+<li><p>服务器端口嗅探工具</p>
+<pre><code># 安装nmap
+[root@m2lan150 ~]# rpm -ivh /mnt/Packages/nmap-5.51-3.el6.x86_64.rpm
+
+# 将170服务器的sshd端口修改为222
+[root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep Port
+#Port 22
+Port 222
+#GatewayPorts no
+
+# 在150服务器上查看170服务器开放端口
+[root@m2lan150 ~]# nmap m2lan170.com
+
+Starting Nmap 5.51 ( http://nmap.org ) at 2017-05-27 23:30 CST
+Nmap scan report for m2lan170.com (192.168.0.170)
+Host is up (0.000093s latency).
+Not shown: 998 closed ports
+PORT    STATE SERVICE
+111/tcp open  rpcbind
+222/tcp open  rsh-spx
+MAC Address: 00:0C:29:09:2F:33 (VMware)
+
+Nmap done: 1 IP address (1 host up) scanned in 0.14 seconds
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/28/sshd服务管理/" itemprop="url">
+                  sshd服务管理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-28T01:03:56+08:00" content="2017-05-28">
+              2017-05-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/28/sshd服务管理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/sshd服务管理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Linux下SSHD服务管理"><a href="#Linux下SSHD服务管理" class="headerlink" title="Linux下SSHD服务管理"></a>Linux下SSHD服务管理</h1><blockquote>
+<p>sshd服务使用SSH协议进行远程控制，或在计算机之间传输文件</p>
+</blockquote>
+<h3 id="设置sshd端口"><a href="#设置sshd端口" class="headerlink" title="设置sshd端口"></a>设置sshd端口</h3><ul>
+<li><p>将170服务器的sshd端口修改为222</p>
+<pre><code>[root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep Port | grep -v &apos;^#&apos;
+Port 222
+</code></pre></li>
+</ul>
+<h3 id="设置sshd访问IP地址"><a href="#设置sshd访问IP地址" class="headerlink" title="设置sshd访问IP地址"></a>设置sshd访问IP地址</h3><ul>
+<li><p>只允许192.168.0.170服务器登陆</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep ListenAddress | grep -v &apos;^#&apos;
+ListenAddress 192.168.0.170
+
+[root@m2lan150 ~]# /etc/init.d/sshd restart
+</code></pre></li>
+</ul>
+<h3 id="日志存放位置"><a href="#日志存放位置" class="headerlink" title="日志存放位置"></a>日志存放位置</h3><ul>
+<li><p>查看日志级别</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep Syslog | grep -v &apos;^#&apos;
+SyslogFacility AUTHPRIV
+</code></pre></li>
+<li><p>查看日志存放位置</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/rsyslog.conf | grep ^authpriv
+authpriv.*                                              /var/log/secure
+</code></pre></li>
+</ul>
+<h3 id="设置不允许root账户登陆"><a href="#设置不允许root账户登陆" class="headerlink" title="设置不允许root账户登陆"></a>设置不允许root账户登陆</h3><ul>
+<li><p>将PermitRootLogin设置为no</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep RootLogin | grep -v &apos;^#&apos;
+PermitRootLogin no
+</code></pre></li>
+</ul>
+<h3 id="如果用户不能在指定时间内登陆服务器，则断开"><a href="#如果用户不能在指定时间内登陆服务器，则断开" class="headerlink" title="如果用户不能在指定时间内登陆服务器，则断开"></a>如果用户不能在指定时间内登陆服务器，则断开</h3><ul>
+<li><p>表示在5s内不能成功登陆，就断开。LoginGraceTime单位默认为秒</p>
+<pre><code>[root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep LoginGrace | grep -v &apos;^#&apos;
+LoginGraceTime 5
+</code></pre></li>
+</ul>
+<h3 id="使用密钥登陆"><a href="#使用密钥登陆" class="headerlink" title="使用密钥登陆"></a>使用密钥登陆</h3><ul>
+<li><p>在170服务器生成密钥</p>
+<pre><code>[root@m2lan170 ~]# ssh-keygen 
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): 
+/root/.ssh/id_rsa already exists.
+Overwrite (y/n)? y
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+b2:26:0f:de:6e:c8:a1:b5:8e:e3:7b:5a:91:0e:22:83 root@m2lan170.com
+The key&apos;s randomart image is:
++--[ RSA 2048]----+
+|                 |
+|                 |
+|                 |
+|.    .           |
+|E . o . S        |
+|.o oo. o         |
+|   +=+o          |
+|  o+=*.          |
+| .=*oo+          |
++-----------------+
+</code></pre></li>
+<li><p>将170服务器上的公钥发布到150服务器上</p>
+<pre><code>[root@m2lan170 ~]# ssh-copy-id -i /root/.ssh/id_rsa.pub 192.168.0.150
+The authenticity of host &apos;192.168.0.150 (192.168.0.150)&apos; can&apos;t be established.
+RSA key fingerprint is e4:e9:2f:ca:75:1d:5a:38:5d:4d:49:66:8a:ca:1a:8c.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added &apos;192.168.0.150&apos; (RSA) to the list of known hosts.
+root@192.168.0.150&apos;s password: 
+Now try logging into the machine, with &quot;ssh &apos;192.168.0.150&apos;&quot;, and check in:
+
+  .ssh/authorized_keys
+
+to make sure we haven&apos;t added extra keys that you weren&apos;t expecting.
+
+[root@m2lan170 ~]# ssh root@192.168.0.150
+Last login: Tue Apr 19 20:41:13 2016 from 192.168.1.101
+</code></pre></li>
+<li><p>现在170服务器登陆150服务器不需要密码，150服务器登陆170服务器需要密码</p>
+</li>
+<li><p>170服务器给自己发布一个公钥</p>
+<pre><code>[root@m2lan170 ~]# ssh-copy-id 192.168.0.170
+The authenticity of host &apos;192.168.0.170 (192.168.0.170)&apos; can&apos;t be established.
+RSA key fingerprint is f1:37:53:b9:f2:7a:d0:35:4a:ee:f8:82:ed:1c:6a:18.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added &apos;192.168.0.170&apos; (RSA) to the list of known hosts.
+root@192.168.0.170&apos;s password: 
+Now try logging into the machine, with &quot;ssh &apos;192.168.0.170&apos;&quot;, and check in:
+
+  .ssh/authorized_keys
+
+to make sure we haven&apos;t added extra keys that you weren&apos;t expecting.
+</code></pre></li>
+<li><p>将170服务器的密钥发送给150服务器</p>
+<pre><code>[root@m2lan170 ~]# scp /root/.ssh/id_rsa root@192.168.0.150:/root/.ssh/
+id_rsa     100% 1675     1.6KB/s   00:00 
+</code></pre></li>
+<li><p>这时两台服务器互相登陆就不需要输入密码了</p>
+</li>
+</ul>
+<h3 id="通过ssh远程启动服务"><a href="#通过ssh远程启动服务" class="headerlink" title="通过ssh远程启动服务"></a>通过ssh远程启动服务</h3><ul>
+<li><p>在150服务器上启动170服务器上的apache</p>
+<pre><code>[root@m2lan150 ~]# ssh 192.168.0.170 /etc/init.d/httpd start
+正在启动 httpd：[确定]
+</code></pre></li>
+<li><p>在150服务器查看170服务器的apache状态</p>
+<pre><code>[root@m2lan150 ~]# ssh 192.168.0.170 /etc/init.d/httpd status
+httpd (pid  6667) 正在运行...
+</code></pre></li>
+<li><p>在170服务器上启动150服务器上的apache</p>
+<pre><code>[root@m2lan170 ~]# ssh 192.168.0.150 /etc/init.d/httpd start
+正在启动 httpd：[确定]
+</code></pre></li>
+<li><p>在170服务器查看150服务器的apache状态</p>
+<pre><code>[root@m2lan170 ~]# ssh 192.168.0.150 /etc/init.d/httpd status
+httpd (pid  3472) 正在运行...
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/25/cut/" itemprop="url">
                   cut
                 </a>
@@ -1790,274 +2237,6 @@ public class Counter2 {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/21/CountDownLatch/" itemprop="url">
-                  CountDownLatch
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-21T15:32:28+08:00" content="2017-05-21">
-              2017-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/并发/" itemprop="url" rel="index">
-                    <span itemprop="name">并发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/21/CountDownLatch/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/CountDownLatch/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java并发编程类CountDownLatch"><a href="#Java并发编程类CountDownLatch" class="headerlink" title="Java并发编程类CountDownLatch"></a>Java并发编程类CountDownLatch</h1><pre><code>public class CountDownLatchDemo1 {
-
-    public static void main(String[] args) {
-        int count = 10;
-        final CountDownLatch downLatch = new CountDownLatch(count);
-        Runnable rannable = () -&gt; {
-            System.out.println(Thread.currentThread().getName() + &quot; : hahhahaha&quot;);
-            downLatch.countDown();
-        };
-
-        ExecutorService service = Executors.newFixedThreadPool(2);
-        for (int i = 0; i &lt; count; i++) {
-            service.execute(rannable);
-        }
-        service.shutdown();
-
-        // 当多个线程都达到了预期状态或完成预期工作时触发事件，其他线程可以等待这个事件来触发后续的工作
-        try {
-            downLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // 当上面当所有线程都完成了downLatch.countDown调用后，会从downLatch.await返回后执行以下操作
-        System.out.println(&quot;执行完毕&quot;);
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/11/大型网站核心架构要素/" itemprop="url">
-                  大型网站核心架构要素
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-11T23:15:54+08:00" content="2017-05-11">
-              2017-05-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/架构/" itemprop="url" rel="index">
-                    <span itemprop="name">架构</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/11/大型网站核心架构要素/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/11/大型网站核心架构要素/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="大型网站核心架构要素"><a href="#大型网站核心架构要素" class="headerlink" title="大型网站核心架构要素"></a>大型网站核心架构要素</h1><h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><ul>
-<li>从用户浏览器到数据库，影响用户请求的所有环节都可以进行性能优化</li>
-<li>在浏览器端，可以通过浏览器缓存、使用页面压缩、合理布局页面、减少cookie传输等手段改善性能</li>
-<li>还可以使用CDN，将网站静态内容分发至离用户最近的网络服务商机房，使用户通过最短访问路径获取数据。可以在网站机房部署反向代理服务器，缓存热点文件，加快请求响应速度，减轻应用服务器负载压力</li>
-<li>在应用服务器端，可以使用服务器本地缓存和分布式缓存，通过缓存在内存中的热点数据处理用户请求，加快请求处理过程，减轻数据库负载压力</li>
-<li>也可以通过异步操作将用户请求发送至消息队列等待后续任务处理，而当前请求直接返回响应给用户</li>
-<li>在网站有很多用户高并发请求的情况下，可以将多台应用服务器组成一个集群共同对外服务，提高整体处理能力，改善性能</li>
-<li>在代码层面，也可以通过使用多线程、改善内存管理等手段优化性能</li>
-<li>在数据库服务器端，索引、缓存、SQL优化等性能优化手段都已经比较成熟。而NoSQL数据库通过优化数据模型、存储结构、伸缩特性等手段在性能方面的优势也日趋明显</li>
-<li>衡量网站性能有一系列指标，重要的有响应时间、TPS、系统性能计数器等，通过测试这些指标以确定系统设计是否达到目标。这些指标也是网站监控的重要参数，通过监控这些指标可以分析系统瓶颈，预测网站容量，并对异常指标进行报警，保障系统可用性</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/11/大型网站核心架构要素/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2103,7 +2282,7 @@ public class Counter2 {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">83</span>
+              <span class="site-state-item-count">85</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

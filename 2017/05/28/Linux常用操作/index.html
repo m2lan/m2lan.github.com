@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Objective-c," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -57,17 +57,17 @@
 
 
 
-<meta name="description" content="-(void) viewWillDisappear:(BOOL)animated {     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {        // back button was pressed.  We know this is true because self i">
-<meta name="keywords" content="Objective-c">
+<meta name="description" content="Linux常用操作 清空iptables [root@m2 ~]# iptables -F [root@m2 ~]# /etc/init.d/iptables save iptables：将防火墙规则保存到 /etc/sysconfig/iptables：     [确定]  关闭selinux [root@m2 ~]# vim /etc/selinux/config SELINUX=disabl">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OC-检测视图退出">
-<meta property="og:url" content="http://blog.golearns.org/2015/12/10/OC-检测视图退出/index.html">
+<meta property="og:title" content="Linux常用操作">
+<meta property="og:url" content="http://blog.golearns.org/2017/05/28/Linux常用操作/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="-(void) viewWillDisappear:(BOOL)animated {     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {        // back button was pressed.  We know this is true because self i">
-<meta property="og:updated_time" content="2016-07-15T01:47:04.000Z">
+<meta property="og:description" content="Linux常用操作 清空iptables [root@m2 ~]# iptables -F [root@m2 ~]# /etc/init.d/iptables save iptables：将防火墙规则保存到 /etc/sysconfig/iptables：     [确定]  关闭selinux [root@m2 ~]# vim /etc/selinux/config SELINUX=disabl">
+<meta property="og:updated_time" content="2017-05-27T17:07:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OC-检测视图退出">
-<meta name="twitter:description" content="-(void) viewWillDisappear:(BOOL)animated {     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {        // back button was pressed.  We know this is true because self i">
+<meta name="twitter:title" content="Linux常用操作">
+<meta name="twitter:description" content="Linux常用操作 清空iptables [root@m2 ~]# iptables -F [root@m2 ~]# /etc/init.d/iptables save iptables：将防火墙规则保存到 /etc/sysconfig/iptables：     [确定]  关闭selinux [root@m2 ~]# vim /etc/selinux/config SELINUX=disabl">
 
 
 
@@ -85,7 +85,7 @@
   };
 </script>
 
-  <title> OC-检测视图退出 | 知识记录 </title>
+  <title> Linux常用操作 | 知识记录 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +265,7 @@
             
             
               
-                OC-检测视图退出
+                Linux常用操作
               
             
           </h1>
@@ -277,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:10:15+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2017-05-28T01:06:33+08:00" content="2017-05-28">
+              2017-05-28
             </time>
           </span>
 
@@ -291,8 +291,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -307,8 +307,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/OC-检测视图退出/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-检测视图退出/" itemprop="commentsCount"></span>
+                <a href="/2017/05/28/Linux常用操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/Linux常用操作/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -330,14 +330,105 @@
       
 
       
-        <pre><code>-(void) viewWillDisappear:(BOOL)animated {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-       // back button was pressed.  We know this is true because self is no longer
-       // in the navigation stack.  
-    }
-    [super viewWillDisappear:animated];
-}
-</code></pre>
+        <h1 id="Linux常用操作"><a href="#Linux常用操作" class="headerlink" title="Linux常用操作"></a>Linux常用操作</h1><ul>
+<li><p>清空iptables</p>
+<pre><code>[root@m2 ~]# iptables -F
+[root@m2 ~]# /etc/init.d/iptables save
+iptables：将防火墙规则保存到 /etc/sysconfig/iptables：     [确定]
+</code></pre></li>
+<li><p>关闭selinux</p>
+<pre><code>[root@m2 ~]# vim /etc/selinux/config
+SELINUX=disabled
+</code></pre></li>
+<li><p>查看selinux是否关闭</p>
+<pre><code>[root@m2 ~]# getenforce
+Disabled
+</code></pre></li>
+<li><p>配置永久主机名</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/sysconfig/network
+NETWORKING=yes
+HOSTNAME=m2lan150.com
+</code></pre></li>
+<li><p>磁盘挂载</p>
+<pre><code>[root@m2lan150 ~]# mount /dev/cdrom /mnt/
+</code></pre></li>
+<li><p>磁盘开机自动挂载</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/fstab | grep /cdrom
+/dev/cdrom        /mnt            iso9660 defaults    0 0
+</code></pre></li>
+<li><p>配置yum源</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/yum.repos.d/rhel-source.repo
+[rhel-source]
+name=Red Hat Enterprise Linux $releasever - $basearch - Source
+baseurl=file:///mnt/
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+# 清除缓存
+[root@m2lan150 ~]# yum clean all
+
+# 重新生成
+[root@m2lan150 ~]# yum list
+</code></pre></li>
+<li><p>克隆虚拟机出现<code>设备 eth0 似乎不存在, 初始化操作将被延迟。</code>错误</p>
+<pre><code># 删除配置文件的HWADDR
+[root@m2lan150 ~]# cat !$
+cat /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+TYPE=Ethernet
+UUID=66cce682-8059-4f3e-b8e4-29a171e3bfaf
+ONBOOT=yes
+NM_CONTROLLED=yes
+BOOTPROTO=none
+IPADDR=192.168.0.150
+PREFIX=24
+GATEWAY=192.168.0.1
+DNS1=192.168.0.1
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=yes
+IPV6INIT=no
+NAME=&quot;System eth0&quot;
+# 删除/etc/udev/rules.d/70-persistent-net.rules文件
+[root@m2lan150 ~]# rm -f /etc/udev/rules.d/70-persistent-net.rules
+
+# 重启
+[root@m2lan150 ~]# reboot
+</code></pre></li>
+<li><p>开机启动</p>
+<pre><code># 设置sshd开机启动
+[root@m2lan150 ~]# chkconfig sshd on
+
+# 查看启动级别
+[root@m2lan150 ~]# chkconfig --list sshd
+sshd               0:关闭    1:关闭    2:启用    3:启用    4:启用    5:启用    6:关闭
+</code></pre></li>
+<li><p>服务器端口嗅探工具</p>
+<pre><code># 安装nmap
+[root@m2lan150 ~]# rpm -ivh /mnt/Packages/nmap-5.51-3.el6.x86_64.rpm
+
+# 将170服务器的sshd端口修改为222
+[root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep Port
+#Port 22
+Port 222
+#GatewayPorts no
+
+# 在150服务器上查看170服务器开放端口
+[root@m2lan150 ~]# nmap m2lan170.com
+
+Starting Nmap 5.51 ( http://nmap.org ) at 2017-05-27 23:30 CST
+Nmap scan report for m2lan170.com (192.168.0.170)
+Host is up (0.000093s latency).
+Not shown: 998 closed ports
+PORT    STATE SERVICE
+111/tcp open  rpcbind
+222/tcp open  rsh-spx
+MAC Address: 00:0C:29:09:2F:33 (VMware)
+
+Nmap done: 1 IP address (1 host up) scanned in 0.14 seconds
+</code></pre></li>
+</ul>
+
       
     </div>
 
@@ -351,7 +442,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Objective-c/" rel="tag">#Objective-c</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -360,17 +451,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/10/OC-UIButton中设置image大小/" rel="next" title="OC-UIButton中设置image大小">
-                <i class="fa fa-chevron-left"></i> OC-UIButton中设置image大小
+              <a href="/2017/05/28/sshd服务管理/" rel="next" title="sshd服务管理">
+                <i class="fa fa-chevron-left"></i> sshd服务管理
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/10/Shell-helloworld/" rel="prev" title="Shell-helloworld">
-                Shell-helloworld <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -402,8 +489,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/10/OC-检测视图退出/"
-           data-title="OC-检测视图退出" data-url="http://blog.golearns.org/2015/12/10/OC-检测视图退出/">
+      <div class="ds-thread" data-thread-key="2017/05/28/Linux常用操作/"
+           data-title="Linux常用操作" data-url="http://blog.golearns.org/2017/05/28/Linux常用操作/">
       </div>
     
   </div>
@@ -559,7 +646,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux常用操作"><span class="nav-number">1.</span> <span class="nav-text">Linux常用操作</span></a></li></ol></div>
             
           </div>
         </section>
