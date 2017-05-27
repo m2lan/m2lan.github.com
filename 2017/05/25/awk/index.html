@@ -64,7 +64,7 @@
 <meta property="og:url" content="http://blog.golearns.org/2017/05/25/awk/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Linux下的awk使用 awk分析文件数据，根据分隔符对一行一行的数据进行拆分，获取某一列 分隔符默认是空格，可以使用-F;以分号为分隔符,-F:以冒号为分隔符   获取当前主机指定网卡的IP地址 [root@m2 ~]# ifconfig eth0 eth0      Link encap:Ethernet  HWaddr 00:0C:29:C6:3D:D5   inet addr:192.1">
-<meta property="og:updated_time" content="2017-05-25T15:19:50.000Z">
+<meta property="og:updated_time" content="2017-05-27T17:14:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="awk">
 <meta name="twitter:description" content="Linux下的awk使用 awk分析文件数据，根据分隔符对一行一行的数据进行拆分，获取某一列 分隔符默认是空格，可以使用-F;以分号为分隔符,-F:以冒号为分隔符   获取当前主机指定网卡的IP地址 [root@m2 ~]# ifconfig eth0 eth0      Link encap:Ethernet  HWaddr 00:0C:29:C6:3D:D5   inet addr:192.1">
@@ -357,6 +357,9 @@ nfsnobody /sbin/nologin
 [root@m2 ~]# cat passwd | awk -F : &apos;$3&gt;500{print $1 &quot;\t&quot; $7}&apos;
 nfsnobody    /sbin/nologin
 </code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><p>获取/etc/passwd中用户UID&gt;=500并且登陆shell为/bin/bash的用户名和登陆shell</p>
 <pre><code>[root@m2 ~]# cat passwd | awk -F : &apos;$3&gt;=500 &amp;&amp; $7==&quot;/bin/bash&quot;{print $1,$7}&apos;
 zhangsan /bin/bash

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-27T17:07:00.000Z</updated>
+  <updated>2017-05-27T17:13:53.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://blog.golearns.org/2017/05/28/Linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/"/>
     <id>http://blog.golearns.org/2017/05/28/Linux常用操作/</id>
     <published>2017-05-27T17:06:33.000Z</published>
-    <updated>2017-05-27T17:07:00.000Z</updated>
+    <updated>2017-05-27T17:13:53.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Linux常用操作"><a href="#Linux常用操作" class="headerlink" title="Linux常用操作"></a>Linux常用操作</h1><ul>
 <li><p>清空iptables</p>
@@ -40,7 +40,8 @@ Disabled
 <pre><code>[root@m2lan150 ~]# cat /etc/sysconfig/network
 NETWORKING=yes
 HOSTNAME=m2lan150.com
-</code></pre></li>
+</code></pre><a id="more"></a>
+</li>
 <li><p>磁盘挂载</p>
 <pre><code>[root@m2lan150 ~]# mount /dev/cdrom /mnt/
 </code></pre></li>
@@ -126,7 +127,23 @@ Nmap done: 1 IP address (1 host up) scanned in 0.14 seconds
     
       &lt;h1 id=&quot;Linux常用操作&quot;&gt;&lt;a href=&quot;#Linux常用操作&quot; class=&quot;headerlink&quot; title=&quot;Linux常用操作&quot;&gt;&lt;/a&gt;Linux常用操作&lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;清空iptables&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[root@m
+&lt;pre&gt;&lt;code&gt;[root@m2 ~]# iptables -F
+[root@m2 ~]# /etc/init.d/iptables save
+iptables：将防火墙规则保存到 /etc/sysconfig/iptables：     [确定]
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;关闭selinux&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2 ~]# vim /etc/selinux/config
+SELINUX=disabled
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看selinux是否关闭&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2 ~]# getenforce
+Disabled
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置永久主机名&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# cat /etc/sysconfig/network
+NETWORKING=yes
+HOSTNAME=m2lan150.com
+&lt;/code&gt;&lt;/pre&gt;
     
     </summary>
     
@@ -142,7 +159,7 @@ Nmap done: 1 IP address (1 host up) scanned in 0.14 seconds
     <link href="http://blog.golearns.org/2017/05/28/sshd%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/"/>
     <id>http://blog.golearns.org/2017/05/28/sshd服务管理/</id>
     <published>2017-05-27T17:03:56.000Z</published>
-    <updated>2017-05-27T17:04:44.000Z</updated>
+    <updated>2017-05-27T17:14:13.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Linux下SSHD服务管理"><a href="#Linux下SSHD服务管理" class="headerlink" title="Linux下SSHD服务管理"></a>Linux下SSHD服务管理</h1><blockquote>
 <p>sshd服务使用SSH协议进行远程控制，或在计算机之间传输文件</p>
@@ -171,6 +188,7 @@ SyslogFacility AUTHPRIV
 authpriv.*                                              /var/log/secure
 </code></pre></li>
 </ul>
+<a id="more"></a>
 <h3 id="设置不允许root账户登陆"><a href="#设置不允许root账户登陆" class="headerlink" title="设置不允许root账户登陆"></a>设置不允许root账户登陆</h3><ul>
 <li><p>将PermitRootLogin设置为no</p>
 <pre><code>[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep RootLogin | grep -v &apos;^#&apos;
@@ -270,7 +288,32 @@ httpd (pid  3472) 正在运行...
     <summary type="html">
     
       &lt;h1 id=&quot;Linux下SSHD服务管理&quot;&gt;&lt;a href=&quot;#Linux下SSHD服务管理&quot; class=&quot;headerlink&quot; title=&quot;Linux下SSHD服务管理&quot;&gt;&lt;/a&gt;Linux下SSHD服务管理&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;sshd服务使用S
+&lt;p&gt;sshd服务使用SSH协议进行远程控制，或在计算机之间传输文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;设置sshd端口&quot;&gt;&lt;a href=&quot;#设置sshd端口&quot; class=&quot;headerlink&quot; title=&quot;设置sshd端口&quot;&gt;&lt;/a&gt;设置sshd端口&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;将170服务器的sshd端口修改为222&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep Port | grep -v &amp;apos;^#&amp;apos;
+Port 222
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;设置sshd访问IP地址&quot;&gt;&lt;a href=&quot;#设置sshd访问IP地址&quot; class=&quot;headerlink&quot; title=&quot;设置sshd访问IP地址&quot;&gt;&lt;/a&gt;设置sshd访问IP地址&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;只允许192.168.0.170服务器登陆&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep ListenAddress | grep -v &amp;apos;^#&amp;apos;
+ListenAddress 192.168.0.170
+
+[root@m2lan150 ~]# /etc/init.d/sshd restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;日志存放位置&quot;&gt;&lt;a href=&quot;#日志存放位置&quot; class=&quot;headerlink&quot; title=&quot;日志存放位置&quot;&gt;&lt;/a&gt;日志存放位置&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;查看日志级别&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep Syslog | grep -v &amp;apos;^#&amp;apos;
+SyslogFacility AUTHPRIV
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看日志存放位置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# cat /etc/rsyslog.conf | grep ^authpriv
+authpriv.*                                              /var/log/secure
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -288,7 +331,7 @@ httpd (pid  3472) 正在运行...
     <link href="http://blog.golearns.org/2017/05/25/cut/"/>
     <id>http://blog.golearns.org/2017/05/25/cut/</id>
     <published>2017-05-25T15:20:06.000Z</published>
-    <updated>2017-05-25T15:20:26.000Z</updated>
+    <updated>2017-05-27T17:14:34.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Linux下的cut使用"><a href="#Linux下的cut使用" class="headerlink" title="Linux下的cut使用"></a>Linux下的cut使用</h1><blockquote>
 <p>cut是一个选取命令，通过将一段数据分析，取出想要的。选取数据一般通过行的方式</p>
@@ -346,6 +389,7 @@ zhangn:x
 Zhangn:x
 </code></pre></li>
 </ul>
+<a id="more"></a>
 <h3 id="c参数"><a href="#c参数" class="headerlink" title="-c参数"></a>-c参数</h3><ul>
 <li><p>以字符为单位分割，在中文文件中提取</p>
 <pre><code>[root@m2 ~]# cat c.txt 
@@ -370,7 +414,61 @@ Zhangsan:500
     <summary type="html">
     
       &lt;h1 id=&quot;Linux下的cut使用&quot;&gt;&lt;a href=&quot;#Linux下的cut使用&quot; class=&quot;headerlink&quot; title=&quot;Linux下的cut使用&quot;&gt;&lt;/a&gt;Linux下的cut使用&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;cut是一个选取命令，通过将一段数
+&lt;p&gt;cut是一个选取命令，通过将一段数据分析，取出想要的。选取数据一般通过行的方式&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;参数&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-b&lt;/td&gt;
+&lt;td&gt;以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非指定了-n标志&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-c&lt;/td&gt;
+&lt;td&gt;以字符为单位进行分割&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-d&lt;/td&gt;
+&lt;td&gt;自定义分隔符，默认为制表符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-f&lt;/td&gt;
+&lt;td&gt;与-d一起使用，指定显示哪个区域&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&quot;b参数&quot;&gt;&lt;a href=&quot;#b参数&quot; class=&quot;headerlink&quot; title=&quot;-b参数&quot;&gt;&lt;/a&gt;-b参数&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;以字节为单位分割&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# tail显示passwd文件最后5行，cut以字节分割，获取1位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1
+s
+t
+m
+z
+Z
+
+# tail显示passwd文件最后5行，cut以字节分割，获取1-5位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1-5
+sshd:
+tcpdu
+mysql
+zhang
+Zhang
+
+# tail显示passwd文件最后5行，cut以字节分割，获取1-5和8-10位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1-5,8-10
+sshd:74:
+tcpdu:x:
+mysql:27
+zhangn:x
+Zhangn:x
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -386,7 +484,7 @@ Zhangsan:500
     <link href="http://blog.golearns.org/2017/05/25/awk/"/>
     <id>http://blog.golearns.org/2017/05/25/awk/</id>
     <published>2017-05-25T15:19:04.000Z</published>
-    <updated>2017-05-25T15:19:50.000Z</updated>
+    <updated>2017-05-27T17:14:48.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Linux下的awk使用"><a href="#Linux下的awk使用" class="headerlink" title="Linux下的awk使用"></a>Linux下的awk使用</h1><blockquote>
 <p>awk分析文件数据，根据分隔符对一行一行的数据进行拆分，获取某一列
@@ -415,6 +513,9 @@ nfsnobody /sbin/nologin
 [root@m2 ~]# cat passwd | awk -F : &apos;$3&gt;500{print $1 &quot;\t&quot; $7}&apos;
 nfsnobody    /sbin/nologin
 </code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><p>获取/etc/passwd中用户UID&gt;=500并且登陆shell为/bin/bash的用户名和登陆shell</p>
 <pre><code>[root@m2 ~]# cat passwd | awk -F : &apos;$3&gt;=500 &amp;&amp; $7==&quot;/bin/bash&quot;{print $1,$7}&apos;
 zhangsan /bin/bash
@@ -455,7 +556,33 @@ echo &quot;使用百分比为：$result%&quot;
     <summary type="html">
     
       &lt;h1 id=&quot;Linux下的awk使用&quot;&gt;&lt;a href=&quot;#Linux下的awk使用&quot; class=&quot;headerlink&quot; title=&quot;Linux下的awk使用&quot;&gt;&lt;/a&gt;Linux下的awk使用&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;awk分析文件数据，根据分隔符对一
+&lt;p&gt;awk分析文件数据，根据分隔符对一行一行的数据进行拆分，获取某一列
+分隔符默认是空格，可以使用-F;以分号为分隔符,-F:以冒号为分隔符&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;获取当前主机指定网卡的IP地址&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2 ~]# ifconfig eth0
+eth0      Link encap:Ethernet  HWaddr 00:0C:29:C6:3D:D5  
+inet addr:192.168.0.150  Bcast:192.168.0.255  Mask:255.255.255.0
+inet6 addr: fe80::20c:29ff:fec6:3dd5/64 Scope:Link
+UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+RX packets:11240 errors:0 dropped:0 overruns:0 frame:0
+TX packets:2747 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:1000 
+RX bytes:1389465 (1.3 MiB)  TX bytes:207415 (202.5 KiB)
+
+[root@m2 ~]# ifconfig eth0 | grep &amp;quot;inet addr:&amp;quot; | awk &amp;apos;{print $2}&amp;apos; | awk -F : &amp;apos;{print $2}&amp;apos;
+192.168.0.150
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;获取/etc/passwd中用户UID大于500的用户名和用户登陆的shell&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2 ~]# cat passwd | awk -F  : &amp;apos;$3&amp;gt;500{print $1,$7}&amp;apos;
+nfsnobody /sbin/nologin
+
+# 使用\t制表符隔开
+[root@m2 ~]# cat passwd | awk -F : &amp;apos;$3&amp;gt;500{print $1 &amp;quot;\t&amp;quot; $7}&amp;apos;
+nfsnobody    /sbin/nologin
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -471,7 +598,7 @@ echo &quot;使用百分比为：$result%&quot;
     <link href="http://blog.golearns.org/2017/05/25/sed/"/>
     <id>http://blog.golearns.org/2017/05/25/sed/</id>
     <published>2017-05-25T15:15:24.000Z</published>
-    <updated>2017-05-25T15:18:44.000Z</updated>
+    <updated>2017-05-27T17:15:05.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Linux下的sed使用"><a href="#Linux下的sed使用" class="headerlink" title="Linux下的sed使用"></a>Linux下的sed使用</h1><blockquote>
 <p>流编辑器，sed编辑器是一行一行处理文件内容。正在处理的内容放入缓冲区内
@@ -568,6 +695,7 @@ dbus:x:81:81:System messages bus:/:/sbin/nologin
 1:boot:x:0:0:root:/root:/bin/bash
 </code></pre></li>
 </ul>
+<a id="more"></a>
 <h3 id="n-p命令"><a href="#n-p命令" class="headerlink" title="n,p命令"></a>n,p命令</h3><ul>
 <li><p>显示指定行</p>
 <pre><code># 显示第5行
@@ -702,7 +830,100 @@ operator:x:11:0:operator:/root:/sbin/nologin
     <summary type="html">
     
       &lt;h1 id=&quot;Linux下的sed使用&quot;&gt;&lt;a href=&quot;#Linux下的sed使用&quot; class=&quot;headerlink&quot; title=&quot;Linux下的sed使用&quot;&gt;&lt;/a&gt;Linux下的sed使用&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;流编辑器，sed编辑器是一行一行处
+&lt;p&gt;流编辑器，sed编辑器是一行一行处理文件内容。正在处理的内容放入缓冲区内
+处理完成后根据选项进行输出或文件修改&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;命令&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-n&lt;/td&gt;
+&lt;td&gt;抑制自动(默认)输出，读取下一个输入行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-i&lt;/td&gt;
+&lt;td&gt;编辑文件内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-e&lt;/td&gt;
+&lt;td&gt;执行多次&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;a&lt;/td&gt;
+&lt;td&gt;在匹配后追加&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;i&lt;/td&gt;
+&lt;td&gt;在匹配后插入&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;p&lt;/td&gt;
+&lt;td&gt;打印&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;d&lt;/td&gt;
+&lt;td&gt;删除&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;w&lt;/td&gt;
+&lt;td&gt;另存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;c&lt;/td&gt;
+&lt;td&gt;替换&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;s&lt;/td&gt;
+&lt;td&gt;查找&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;h/H&lt;/td&gt;
+&lt;td&gt;复制copy&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;g/G&lt;/td&gt;
+&lt;td&gt;粘贴&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&quot;s命令&quot;&gt;&lt;a href=&quot;#s命令&quot; class=&quot;headerlink&quot; title=&quot;s命令&quot;&gt;&lt;/a&gt;s命令&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;查找替换&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 将root替换为boot
+[root@m2 ~]# sed &amp;apos;s/root/boot/&amp;apos; passwd | grep boot --color
+boot:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+
+# 将所有root替换为boot,g表示替换所有
+[root@m2 ~]# sed &amp;apos;s/root/boot/g&amp;apos; passwd | grep boot --color
+boot:x:0:0:boot:/boot:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+
+# 给查找的目标内容添加括号,&amp;amp;表示查找的内容
+[root@m2 ~]# sed &amp;apos;s/root/(&amp;amp;)/&amp;apos; passwd | grep &amp;apos;(root)&amp;apos; --color
+(root):x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/(root):/sbin/nologin
+
+# 给所有行添加注释
+[root@m2 ~]# sed &amp;apos;s/^[a-zA-Z]/#&amp;amp;/&amp;apos; passwd 
+#root:x:0:0:root:/root:/bin/bash
+#bin:x:1:1:bin:/bin:/sbin/nologin
+
+# 多次替换,-e
+[root@m2 ~]# sed -e &amp;apos;s/root/boot/&amp;apos; -e &amp;apos;s/message/messages/&amp;apos; passwd | grep &amp;quot;\&amp;lt;boot\|messages\&amp;gt;&amp;quot; --color
+boot:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+dbus:x:81:81:System messages bus:/:/sbin/nologin
+
+# 替换指定行
+[root@m2 ~]# sed &amp;apos;1,5s/root/boot/&amp;apos; passwd | grep boot --color -n
+1:boot:x:0:0:root:/root:/bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     

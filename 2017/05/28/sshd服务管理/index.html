@@ -64,7 +64,7 @@
 <meta property="og:url" content="http://blog.golearns.org/2017/05/28/sshd服务管理/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Linux下SSHD服务管理 sshd服务使用SSH协议进行远程控制，或在计算机之间传输文件  设置sshd端口 将170服务器的sshd端口修改为222 [root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep Port | grep -v &amp;apos;^#&amp;apos; Port 222   设置sshd访问IP地址 只允许192.168.0.170服">
-<meta property="og:updated_time" content="2017-05-27T17:04:44.000Z">
+<meta property="og:updated_time" content="2017-05-27T17:14:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sshd服务管理">
 <meta name="twitter:description" content="Linux下SSHD服务管理 sshd服务使用SSH协议进行远程控制，或在计算机之间传输文件  设置sshd端口 将170服务器的sshd端口修改为222 [root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep Port | grep -v &amp;apos;^#&amp;apos; Port 222   设置sshd访问IP地址 只允许192.168.0.170服">
@@ -357,6 +357,7 @@ SyslogFacility AUTHPRIV
 authpriv.*                                              /var/log/secure
 </code></pre></li>
 </ul>
+<a id="more"></a>
 <h3 id="设置不允许root账户登陆"><a href="#设置不允许root账户登陆" class="headerlink" title="设置不允许root账户登陆"></a>设置不允许root账户登陆</h3><ul>
 <li><p>将PermitRootLogin设置为no</p>
 <pre><code>[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep RootLogin | grep -v &apos;^#&apos;
