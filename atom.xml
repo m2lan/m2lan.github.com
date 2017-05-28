@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-28T10:52:15.000Z</updated>
+  <updated>2017-05-28T16:49:12.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,244 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nfs服务配置</title>
+    <link href="http://blog.golearns.org/2017/05/29/nfs%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/"/>
+    <id>http://blog.golearns.org/2017/05/29/nfs服务配置/</id>
+    <published>2017-05-28T16:48:23.000Z</published>
+    <updated>2017-05-28T16:49:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux下nfs服务配置"><a href="#Linux下nfs服务配置" class="headerlink" title="Linux下nfs服务配置"></a>Linux下nfs服务配置</h1><blockquote>
+<p>NFS是网络文件系统，允许一个系统在网络上与其他机器共享目录和文件</p>
+<p>通过使用NFS，用户和程序可以像访问本地文件一样访问远程系统上的文件。 </p>
+</blockquote>
+<h3 id="启动150服务器的nfs服务"><a href="#启动150服务器的nfs服务" class="headerlink" title="启动150服务器的nfs服务"></a>启动150服务器的nfs服务</h3><pre><code>[root@m2lan150 ~]# service nfs start
+启动 NFS 服务：                                            [确定]
+关掉 NFS 配额：                                            [确定]
+启动 NFS mountd：                                          [确定]
+启动 NFS 守护进程：                                        [确定]
+正在启动 RPC idmapd：                                      [确定]
+</code></pre><h3 id="170服务器查看nfs服务器上所有共享目录"><a href="#170服务器查看nfs服务器上所有共享目录" class="headerlink" title="170服务器查看nfs服务器上所有共享目录"></a>170服务器查看nfs服务器上所有共享目录</h3><pre><code>[root@m2lan170 ~]# showmount -e 192.168.0.150
+Export list for 192.168.0.150:
+</code></pre><h3 id="150服务器共享-root-sh目录"><a href="#150服务器共享-root-sh目录" class="headerlink" title="150服务器共享/root/sh目录"></a>150服务器共享/root/sh目录</h3><pre><code># *表示所有客户端都可以访问，rw表示有读写权限
+[root@m2lan150 ~]# cat /etc/exports 
+/media *(rw)
+
+# 重启nfs服务
+[root@m2lan150 ~]# service nfs restart
+关闭 NFS 守护进程：                                        [确定]
+关闭 NFS mountd：                                          [确定]
+关闭 NFS quotas：                                          [确定]
+Shutting down RPC idmapd:                                  [确定]
+启动 NFS 服务：                                            [确定]
+关掉 NFS 配额：                                            [确定]
+启动 NFS mountd：                                          [确定]
+启动 NFS 守护进程：                                        [确定]
+正在启动 RPC idmapd：                                      [确定]
+</code></pre><a id="more"></a>
+<h3 id="170服务器查看共享目录"><a href="#170服务器查看共享目录" class="headerlink" title="170服务器查看共享目录"></a>170服务器查看共享目录</h3><pre><code>[root@m2lan170 ~]# showmount -e 192.168.0.150
+Export list for 192.168.0.150:
+/media *
+
+# 挂载
+[root@m2lan170 ~]# mount 192.168.0.150:/media /opt/
+# 在客户端创建文件，需要在服务端设置共享目录权限
+[root@m2lan150 media]# chmod 777 /media/
+# 客户端创建文件
+[root@m2lan170 ~]# cd /opt/
+[root@m2lan170 opt]# touch b.txt
+[root@m2lan170 opt]# ls
+a.txt  b.txt
+[root@m2lan170 opt]# touch c.txt
+[root@m2lan170 opt]# 
+[root@m2lan170 opt]# ll
+总用量 0
+-rw-r--r-- 1 root      root      0 5月  28 23:28 a.txt
+-rw-r--r-- 1 nfsnobody nfsnobody 0 5月  28 23:29 b.txt
+-rw-r--r-- 1 nfsnobody nfsnobody 0 5月  28 23:29 c.txt
+</code></pre><h3 id="开机自动挂在NFS文件系统"><a href="#开机自动挂在NFS文件系统" class="headerlink" title="开机自动挂在NFS文件系统"></a>开机自动挂在NFS文件系统</h3><pre><code>[root@m2lan170 opt]# cat /etc/fstab | grep media
+192.168.0.150:/media    /opt                    nfs     defaults        0 0
+
+# 取消挂载
+[root@m2lan170 /]# umount /opt/
+
+# 从/etc/fstab挂载所有内容
+[root@m2lan170 /]# mount -a
+
+# 查看
+[root@m2lan170 /]# cd /opt/
+[root@m2lan170 opt]# ls
+a.txt
+</code></pre><h3 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td>所有客户端都可以访问</td>
+</tr>
+<tr>
+<td style="text-align:center">rw</td>
+<td>具有读写权限</td>
+</tr>
+<tr>
+<td style="text-align:center">no_root_squash</td>
+<td>如果用root登录nfs，使其身份就是root</td>
+</tr>
+<tr>
+<td style="text-align:center">sync</td>
+<td>同步，数据同步写入磁盘</td>
+</tr>
+<tr>
+<td style="text-align:center">async</td>
+<td>异步，先写入内存，异步写入磁盘</td>
+</tr>
+<tr>
+<td style="text-align:center">ro</td>
+<td>只读</td>
+</tr>
+<tr>
+<td style="text-align:center">all_squash</td>
+<td>用户登录nfs时，指定身份为UID/GID的用户</td>
+</tr>
+<tr>
+<td style="text-align:center">root_squash</td>
+<td>如果用root登录nfs，使其身份自动换成nfsbody</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>示例</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*(rw)</td>
+<td>所有用户</td>
+</tr>
+<tr>
+<td>*(rw,root_squash)</td>
+<td>所有用户</td>
+</tr>
+<tr>
+<td>*(rw,no_root_squash)</td>
+<td>所有用户</td>
+</tr>
+<tr>
+<td>192.168.1.0/24(rw,sync)</td>
+<td>指定IP段</td>
+</tr>
+<tr>
+<td>192.168.1.150(ro)</td>
+<td>指定IP</td>
+</tr>
+<tr>
+<td>192.168.1.0/255.255.255.0(async)</td>
+<td>指定IP段</td>
+</tr>
+<tr>
+<td>192.168.1.0/255.255.255.0(rw) 192.168.2.0/255.255.255.0(rw)</td>
+<td>指定多个IP段</td>
+</tr>
+<tr>
+<td>*.m2lan.com(rw,all_squash,anonuid=500,anongid=500)</td>
+<td>指定域名</td>
+</tr>
+</tbody>
+</table>
+<h3 id="自动挂载"><a href="#自动挂载" class="headerlink" title="自动挂载"></a>自动挂载</h3><ul>
+<li><p>autofs软件包要实现自动挂载涉及到两个文件，auto.master和auto.misc</p>
+<ul>
+<li>/etc/auto.master定义本地挂载点</li>
+<li>/etc/auto.misc配置文件是用来设置需要挂载的文件系统类型和选项</li>
+</ul>
+</li>
+<li><p>配置</p>
+<pre><code># 添加/opt /etc/auto.nfs，设置挂载点为/opt
+# /etc/auto.nfs设置需要挂在的文件系统类型和选项
+# --timout=60 当超过60s没有访问则自动卸载
+[root@m2lan170 ~]# cat /etc/auto.master | grep -v &apos;^#&apos; | grep -v &apos;^$&apos;
+/misc    /etc/auto.misc
+/opt    /etc/auto.nfs --timeout=60
+/net    -hosts
++auto.master
+
+# 手动创建
+[root@m2lan170 ~]# vim /etc/auto.nfs
+
+# /etc/auto.nfs
+# nfs是触发的条件，当cd进入到/opt/nfs目录时系统会自动将远程的/media挂载
+# nfs目录不能提前创建，自动挂载的时候会自动创建
+# -fstype文件系统类型为nfs
+[root@m2lan170 ~]# cat /etc/auto.nfs
+nfs -fstype=nfs 192.168.0.150:/media
+
+# 重启autofs
+[root@m2lan170 ~]# service autofs restart
+停止 automount：                                           [确定]
+正在启动 automount：                                       [确定]
+
+# 当访问/opt/nfs路径的时候，会自动挂载上
+[root@m2lan170 ~]# cd /opt/nfs
+[root@m2lan170 nfs]# ls
+a.txt  b.txt  c.txt  d.txt
+
+# 查看挂载
+[root@m2lan170 nfs]# mount | grep /media
+192.168.0.150:/media on /opt/nfs type nfs (rw,vers=4,addr=192.168.0.150,clientaddr=192.168.0.170)
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Linux下nfs服务配置&quot;&gt;&lt;a href=&quot;#Linux下nfs服务配置&quot; class=&quot;headerlink&quot; title=&quot;Linux下nfs服务配置&quot;&gt;&lt;/a&gt;Linux下nfs服务配置&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;NFS是网络文件系统，允许一个系统在网络上与其他机器共享目录和文件&lt;/p&gt;
+&lt;p&gt;通过使用NFS，用户和程序可以像访问本地文件一样访问远程系统上的文件。 &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;启动150服务器的nfs服务&quot;&gt;&lt;a href=&quot;#启动150服务器的nfs服务&quot; class=&quot;headerlink&quot; title=&quot;启动150服务器的nfs服务&quot;&gt;&lt;/a&gt;启动150服务器的nfs服务&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# service nfs start
+启动 NFS 服务：                                            [确定]
+关掉 NFS 配额：                                            [确定]
+启动 NFS mountd：                                          [确定]
+启动 NFS 守护进程：                                        [确定]
+正在启动 RPC idmapd：                                      [确定]
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;170服务器查看nfs服务器上所有共享目录&quot;&gt;&lt;a href=&quot;#170服务器查看nfs服务器上所有共享目录&quot; class=&quot;headerlink&quot; title=&quot;170服务器查看nfs服务器上所有共享目录&quot;&gt;&lt;/a&gt;170服务器查看nfs服务器上所有共享目录&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;[root@m2lan170 ~]# showmount -e 192.168.0.150
+Export list for 192.168.0.150:
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;150服务器共享-root-sh目录&quot;&gt;&lt;a href=&quot;#150服务器共享-root-sh目录&quot; class=&quot;headerlink&quot; title=&quot;150服务器共享/root/sh目录&quot;&gt;&lt;/a&gt;150服务器共享/root/sh目录&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;# *表示所有客户端都可以访问，rw表示有读写权限
+[root@m2lan150 ~]# cat /etc/exports 
+/media *(rw)
+
+# 重启nfs服务
+[root@m2lan150 ~]# service nfs restart
+关闭 NFS 守护进程：                                        [确定]
+关闭 NFS mountd：                                          [确定]
+关闭 NFS quotas：                                          [确定]
+Shutting down RPC idmapd:                                  [确定]
+启动 NFS 服务：                                            [确定]
+关掉 NFS 配额：                                            [确定]
+启动 NFS mountd：                                          [确定]
+启动 NFS 守护进程：                                        [确定]
+正在启动 RPC idmapd：                                      [确定]
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+      <category term="NFS" scheme="http://blog.golearns.org/tags/NFS/"/>
+    
+  </entry>
   
   <entry>
     <title>dhcp服务动态分配IP地址</title>
@@ -2840,120 +3078,6 @@ public class UserController {
       <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
     
       <category term="spring" scheme="http://blog.golearns.org/tags/spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis-cache</title>
-    <link href="http://blog.golearns.org/2017/05/07/mybatis-cache/"/>
-    <id>http://blog.golearns.org/2017/05/07/mybatis-cache/</id>
-    <published>2017-05-07T05:54:46.000Z</published>
-    <updated>2017-05-07T06:18:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="mybatis-cache"><a href="#mybatis-cache" class="headerlink" title="mybatis cache"></a>mybatis cache</h1><blockquote>
-<p>mybatis提供一级缓存和二级缓存</p>
-</blockquote>
-<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><ul>
-<li><p>sqlSession级别的缓存，会话缓存，当sqlSession关闭会话结束，缓存失效。</p>
-<pre><code>@Test
-public void findUser() {
-    try (SqlSession session = sqlSessionFactory.openSession();
-            SqlSession session2 = sqlSessionFactory.openSession()) {
-        UserMapper userMapper = session.getMapper(UserMapper.class);
-        User user = userMapper.getUserById(1);
-        System.out.println(user);
-        session.close();
-
-        UserMapper userMapper1 = session2.getMapper(UserMapper.class);
-        User user1 = userMapper1.getUserById(1);
-        System.out.println(user1);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-</code></pre></li>
-<li>第一次查询用户信息，如果缓存中不存在，去数据库中查询。然后把用户信息保存在一级缓存中。</li>
-<li>默认所有的select语句都会被缓存<code>useCache=&quot;true&quot;</code></li>
-<li>当操作insert,update 和 delete 语句会刷新缓存。<code>flushCache=&quot;true&quot;</code></li>
-</ul>
-<a id="more"></a>
-<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><ul>
-<li>二级缓存的范围更大，多个sqlSession可以共享二级缓存。</li>
-<li><p>开启二级缓存</p>
-<pre><code>&lt;settings&gt;
-    &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;
-&lt;/settings&gt;
-</code></pre></li>
-<li>JavaBean文件实现<code>Serializable</code>序列化接口</li>
-<li><p>在Mapper映射文件中加入</p>
-<pre><code>&lt;!-- 
-    eviction缓存策略：FIFO，先进先出，按对象进入缓存的顺序移除
-    flushInterval: 每隔60s刷新缓存
-    缓存列表大小为512个并且是只读的
---&gt;
-&lt;cache
-  eviction=&quot;FIFO&quot;
-  flushInterval=&quot;60000&quot;
-  size=&quot;512&quot;
-  readOnly=&quot;true&quot;/&gt;
-</code></pre><h2 id="使用EhCache缓存"><a href="#使用EhCache缓存" class="headerlink" title="使用EhCache缓存"></a>使用EhCache缓存</h2></li>
-<li><p>添加ehcache.xml</p>
-<pre><code>&lt;ehcache&gt;
-    &lt;diskStore path=&quot;java.io.tmpdir/mybatis-ehcache&quot;/&gt;
-    &lt;defaultCache
-        maxElementsInMemory=&quot;1000&quot;
-        maxElementsOnDisk=&quot;10000000&quot;
-        eternal=&quot;false&quot;
-        timeToIdleSeconds=&quot;120&quot;
-        timeToLiveSeconds=&quot;120&quot;
-        overflowToDisk=&quot;false&quot;
-        diskPersistent=&quot;false&quot;
-        diskExpiryThreadIntervalSeconds=&quot;120&quot;
-        memoryStoreEvictionPolicy=&quot;LRU&quot;
-    /&gt;
-&lt;/ehcache&gt;
-</code></pre></li>
-<li><p>在Mapper映射文件中配置</p>
-<pre><code>&lt;cache type=&quot;org.mybatis.caches.ehcache.EhcacheCache&quot;&gt;&lt;/cache&gt;
-</code></pre></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;mybatis-cache&quot;&gt;&lt;a href=&quot;#mybatis-cache&quot; class=&quot;headerlink&quot; title=&quot;mybatis cache&quot;&gt;&lt;/a&gt;mybatis cache&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;mybatis提供一级缓存和二级缓存&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;一级缓存&quot;&gt;&lt;a href=&quot;#一级缓存&quot; class=&quot;headerlink&quot; title=&quot;一级缓存&quot;&gt;&lt;/a&gt;一级缓存&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;sqlSession级别的缓存，会话缓存，当sqlSession关闭会话结束，缓存失效。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;@Test
-public void findUser() {
-    try (SqlSession session = sqlSessionFactory.openSession();
-            SqlSession session2 = sqlSessionFactory.openSession()) {
-        UserMapper userMapper = session.getMapper(UserMapper.class);
-        User user = userMapper.getUserById(1);
-        System.out.println(user);
-        session.close();
-
-        UserMapper userMapper1 = session2.getMapper(UserMapper.class);
-        User user1 = userMapper1.getUserById(1);
-        System.out.println(user1);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;第一次查询用户信息，如果缓存中不存在，去数据库中查询。然后把用户信息保存在一级缓存中。&lt;/li&gt;
-&lt;li&gt;默认所有的select语句都会被缓存&lt;code&gt;useCache=&amp;quot;true&amp;quot;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;当操作insert,update 和 delete 语句会刷新缓存。&lt;code&gt;flushCache=&amp;quot;true&amp;quot;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="mybatis" scheme="http://blog.golearns.org/categories/mybatis/"/>
-    
-    
-      <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
     
   </entry>
   
