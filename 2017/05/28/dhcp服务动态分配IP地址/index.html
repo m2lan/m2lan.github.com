@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux," />
+  <meta name="keywords" content="Linux,dhcp," />
 
 
 
@@ -57,17 +57,19 @@
 
 
 
-<meta name="description" content="Linux下的cut使用 cut是一个选取命令，通过将一段数据分析，取出想要的。选取数据一般通过行的方式     参数 描述     -b 以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非指定了-n标志   -c 以字符为单位进行分割   -d 自定义分隔符，默认为制表符   -f 与-d一起使用，指定显示哪个区域    -b参数 以字节为单位分割 # tail显示passwd文件最后">
-<meta name="keywords" content="Linux">
+<meta name="description" content="Linux下使用dhcp服务动态分配IP地址 动态主机配置协议  install 使用yum安装 [root@m2lan150 ~]# yum install -y dhcp  查看包的安装路径 [root@m2lan150 ~]# rpm -pql /mnt/Packages/dhcp-4.1.1-38.P1.el6.x86_64.rpm | more  备份配置文件 [root@m2lan15">
+<meta name="keywords" content="Linux,dhcp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cut">
-<meta property="og:url" content="http://blog.golearns.org/2017/05/25/cut/index.html">
+<meta property="og:title" content="dhcp服务动态分配IP地址">
+<meta property="og:url" content="http://blog.golearns.org/2017/05/28/dhcp服务动态分配IP地址/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Linux下的cut使用 cut是一个选取命令，通过将一段数据分析，取出想要的。选取数据一般通过行的方式     参数 描述     -b 以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非指定了-n标志   -c 以字符为单位进行分割   -d 自定义分隔符，默认为制表符   -f 与-d一起使用，指定显示哪个区域    -b参数 以字节为单位分割 # tail显示passwd文件最后">
-<meta property="og:updated_time" content="2017-05-27T17:14:34.000Z">
+<meta property="og:description" content="Linux下使用dhcp服务动态分配IP地址 动态主机配置协议  install 使用yum安装 [root@m2lan150 ~]# yum install -y dhcp  查看包的安装路径 [root@m2lan150 ~]# rpm -pql /mnt/Packages/dhcp-4.1.1-38.P1.el6.x86_64.rpm | more  备份配置文件 [root@m2lan15">
+<meta property="og:image" content="http://oqnqa6hhs.bkt.clouddn.com/vmware-network.png">
+<meta property="og:updated_time" content="2017-05-28T10:47:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cut">
-<meta name="twitter:description" content="Linux下的cut使用 cut是一个选取命令，通过将一段数据分析，取出想要的。选取数据一般通过行的方式     参数 描述     -b 以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非指定了-n标志   -c 以字符为单位进行分割   -d 自定义分隔符，默认为制表符   -f 与-d一起使用，指定显示哪个区域    -b参数 以字节为单位分割 # tail显示passwd文件最后">
+<meta name="twitter:title" content="dhcp服务动态分配IP地址">
+<meta name="twitter:description" content="Linux下使用dhcp服务动态分配IP地址 动态主机配置协议  install 使用yum安装 [root@m2lan150 ~]# yum install -y dhcp  查看包的安装路径 [root@m2lan150 ~]# rpm -pql /mnt/Packages/dhcp-4.1.1-38.P1.el6.x86_64.rpm | more  备份配置文件 [root@m2lan15">
+<meta name="twitter:image" content="http://oqnqa6hhs.bkt.clouddn.com/vmware-network.png">
 
 
 
@@ -85,7 +87,7 @@
   };
 </script>
 
-  <title> cut | 知识记录 </title>
+  <title> dhcp服务动态分配IP地址 | 知识记录 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +267,7 @@
             
             
               
-                cut
+                dhcp服务动态分配IP地址
               
             
           </h1>
@@ -277,8 +279,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-25T23:20:06+08:00" content="2017-05-25">
-              2017-05-25
+            <time itemprop="dateCreated" datetime="2017-05-28T18:46:20+08:00" content="2017-05-28">
+              2017-05-28
             </time>
           </span>
 
@@ -307,8 +309,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/05/25/cut/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/cut/" itemprop="commentsCount"></span>
+                <a href="/2017/05/28/dhcp服务动态分配IP地址/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/dhcp服务动态分配IP地址/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -330,83 +332,215 @@
       
 
       
-        <h1 id="Linux下的cut使用"><a href="#Linux下的cut使用" class="headerlink" title="Linux下的cut使用"></a>Linux下的cut使用</h1><blockquote>
-<p>cut是一个选取命令，通过将一段数据分析，取出想要的。选取数据一般通过行的方式</p>
+        <h1 id="Linux下使用dhcp服务动态分配IP地址"><a href="#Linux下使用dhcp服务动态分配IP地址" class="headerlink" title="Linux下使用dhcp服务动态分配IP地址"></a>Linux下使用dhcp服务动态分配IP地址</h1><blockquote>
+<p>动态主机配置协议</p>
 </blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-b</td>
-<td>以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非指定了-n标志</td>
-</tr>
-<tr>
-<td style="text-align:center">-c</td>
-<td>以字符为单位进行分割</td>
-</tr>
-<tr>
-<td style="text-align:center">-d</td>
-<td>自定义分隔符，默认为制表符</td>
-</tr>
-<tr>
-<td style="text-align:center">-f</td>
-<td>与-d一起使用，指定显示哪个区域</td>
-</tr>
-</tbody>
-</table>
-<h3 id="b参数"><a href="#b参数" class="headerlink" title="-b参数"></a>-b参数</h3><ul>
-<li><p>以字节为单位分割</p>
-<pre><code># tail显示passwd文件最后5行，cut以字节分割，获取1位置的字节
-[root@m2 ~]# tail -n 5 passwd | cut -b 1
-s
-t
-m
-z
-Z
-
-# tail显示passwd文件最后5行，cut以字节分割，获取1-5位置的字节
-[root@m2 ~]# tail -n 5 passwd | cut -b 1-5
-sshd:
-tcpdu
-mysql
-zhang
-Zhang
-
-# tail显示passwd文件最后5行，cut以字节分割，获取1-5和8-10位置的字节
-[root@m2 ~]# tail -n 5 passwd | cut -b 1-5,8-10
-sshd:74:
-tcpdu:x:
-mysql:27
-zhangn:x
-Zhangn:x
+<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><ul>
+<li><p>使用yum安装</p>
+<pre><code>[root@m2lan150 ~]# yum install -y dhcp
+</code></pre></li>
+<li><p>查看包的安装路径</p>
+<pre><code>[root@m2lan150 ~]# rpm -pql /mnt/Packages/dhcp-4.1.1-38.P1.el6.x86_64.rpm | more
+</code></pre></li>
+<li><p>备份配置文件</p>
+<pre><code>[root@m2lan150 ~]# cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.bak
+</code></pre></li>
+<li><p>查看配置文件</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/dhcp/dhcpd.conf
+#
+# DHCP Server Configuration file.
+#   see /usr/share/doc/dhcp*/dhcpd.conf.sample
+#   see &apos;man 5 dhcpd.conf&apos;
+#
+</code></pre></li>
+<li><p>copy配置示例配置文件覆盖当前配置文件</p>
+<pre><code>[root@m2lan150 ~]# cp /usr/share/doc/dhcp-4.1.1/dhcpd.conf.sample /etc/dhcp/dhcpd.conf
 </code></pre></li>
 </ul>
 <a id="more"></a>
-<h3 id="c参数"><a href="#c参数" class="headerlink" title="-c参数"></a>-c参数</h3><ul>
-<li><p>以字符为单位分割，在中文文件中提取</p>
-<pre><code>[root@m2 ~]# cat c.txt 
-你好地方司机浪费觉得算了发动机素
-
-[root@m2 ~]# tail -n 5 c.txt | cut -c 1-5
-你好地方司
+<h3 id="修改vmware网络链接"><a href="#修改vmware网络链接" class="headerlink" title="修改vmware网络链接"></a>修改vmware网络链接</h3><ul>
+<li>设置150和170服务器
+<img src="http://oqnqa6hhs.bkt.clouddn.com/vmware-network.png" alt=""></li>
+</ul>
+<h3 id="dhcp配置"><a href="#dhcp配置" class="headerlink" title="dhcp配置"></a>dhcp配置</h3><ul>
+<li><p>150服务器配置，删除其他的subnet，只保留下面一个</p>
+<pre><code>subnet 192.168.1.0 netmask 255.255.255.0 {
+  # 可以分配网段的范围100-200
+  range 192.168.1.100 192.168.1.200;
+  # DNS为192.168.1.1
+  option domain-name-servers 192.168.1.1;
+  # 为客户端指定所属的域
+  option domain-name &quot;internal.example.org&quot;;
+  # 默认网关
+  option routers 192.168.1.1;
+  # 广播地址
+  option broadcast-address 192.168.1.255;
+  # 定义默认IP租约时间，以秒为单位
+  default-lease-time 600;
+  # 客户端租约时间最大值，当客户端超过租约时间，尚未更新IP地址时，所能使用该IP的最大时间
+  max-lease-time 7200;
+}
 </code></pre></li>
 </ul>
-<h3 id="d和-f参数结合使用自定义分隔符"><a href="#d和-f参数结合使用自定义分隔符" class="headerlink" title="-d和-f参数结合使用自定义分隔符"></a>-d和-f参数结合使用自定义分隔符</h3><ul>
-<li><p>显示passwd文件最后5行，通过自定义分隔符:冒号分割，提取1和3位置的内容</p>
-<pre><code>[root@m2 ~]# tail -n 5 passwd | cut -d : -f 1,3
-sshd:74
-tcpdump:72
-mysql:27
-zhangsan:500
-Zhangsan:500
+<h3 id="设置150服务器网络配置"><a href="#设置150服务器网络配置" class="headerlink" title="设置150服务器网络配置"></a>设置150服务器网络配置</h3><ul>
+<li><p>配置文件</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0 
+DEVICE=eth0
+TYPE=Ethernet
+UUID=66cce682-8059-4f3e-b8e4-29a171e3bfaf
+ONBOOT=yes
+NM_CONTROLLED=yes
+BOOTPROTO=none
+IPADDR=192.168.1.150
+PREFIX=24
+GATEWAY=192.168.1.1
+#DNS1=192.168.0.1
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=yes
+IPV6INIT=no
+NAME=&quot;System eth0&quot;
+</code></pre></li>
+<li><p>重启network</p>
+<pre><code>[root@m2lan150 ~]# service network restart
+正在关闭接口 eth0：                                        [确定]
+关闭环回接口：                                             [确定]
+弹出环回接口：                                             [确定]
+弹出界面 eth0： Determining if ip address 192.168.1.150 is already in use for device eth0...
+                                                           [确定]
 </code></pre></li>
 </ul>
+<h3 id="启动dhcp服务"><a href="#启动dhcp服务" class="headerlink" title="启动dhcp服务"></a>启动dhcp服务</h3><pre><code>[root@m2lan150 ~]# service dhcpd restart
+正在启动 dhcpd：                                           [确定]
+</code></pre><h3 id="查看dns"><a href="#查看dns" class="headerlink" title="查看dns"></a>查看dns</h3><pre><code>[root@m2lan150 ~]# cat /etc/resolv.conf 
+# Generated by NetworkManager
+search 192.168.0.1 com
+nameserver 192.168.0.1
+</code></pre><h3 id="设置170服务器网络链接方式为dhcp"><a href="#设置170服务器网络链接方式为dhcp" class="headerlink" title="设置170服务器网络链接方式为dhcp"></a>设置170服务器网络链接方式为dhcp</h3><ul>
+<li><p>配置文件</p>
+<pre><code>[root@m2lan170 ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0 
+DEVICE=eth0
+TYPE=Ethernet
+UUID=7f42e98a-1a5a-487f-aafc-f98566add268
+ONBOOT=yes
+NM_CONTROLLED=yes
+BOOTPROTO=dhcp
+PREFIX=24
+#DNS1=192.168.0.1
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=yes
+IPV6INIT=no
+NAME=&quot;System eth0&quot;
+HWADDR=00:0c:29:09:2f:33
+USERCTL=no
+PEERDNS=yes
+</code></pre></li>
+<li><p>重启network</p>
+<pre><code>[root@m2lan170 ~]# service network restart
+正在关闭接口 eth0： 设备状态：3 (断开连接)
+                                                           [确定]
+关闭环回接口：                                             [确定]
+弹出环回接口：                                             [确定]
+弹出界面 eth0： 活跃连接状态：激活中
+活跃连接路径：/org/freedesktop/NetworkManager/ActiveConnection/8
+状态：激活的
+连接被激活
+                                                           [确定]
+</code></pre></li>
+<li><p>查看IP地址</p>
+<pre><code>[root@m2lan170 ~]# ifconfig eth0
+  eth0      Link encap:Ethernet  HWaddr 00:0C:29:09:2F:33  
+  inet addr:192.168.1.100  Bcast:192.168.1.255  Mask:255.255.255.0
+  inet6 addr: fe80::20c:29ff:fe09:2f33/64 Scope:Link
+  UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+  RX packets:13590 errors:0 dropped:0 overruns:0 frame:0
+  TX packets:7691 errors:0 dropped:0 overruns:0 carrier:0
+  collisions:0 txqueuelen:1000 
+  RX bytes:1127345 (1.0 MiB)  TX bytes:674880 (659.0 KiB)
+</code></pre></li>
+</ul>
+<h3 id="使用150服务器连接"><a href="#使用150服务器连接" class="headerlink" title="使用150服务器连接"></a>使用150服务器连接</h3><pre><code>[root@m2lan150 ~]# ssh 192.168.1.100
+The authenticity of host &apos;192.168.1.100 (192.168.1.100)&apos; can&apos;t be established.
+RSA key fingerprint is f1:37:53:b9:f2:7a:d0:35:4a:ee:f8:82:ed:1c:6a:18.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added &apos;192.168.1.100&apos; (RSA) to the list of known hosts.
+Last login: Sun May 28 11:31:55 2017 from m2lan150.com
+[root@m2lan170 ~]# exit
+logout
+Connection to 192.168.1.100 closed.
+</code></pre><h3 id="使用dhcp为170服务器分配静态IP地址"><a href="#使用dhcp为170服务器分配静态IP地址" class="headerlink" title="使用dhcp为170服务器分配静态IP地址"></a>使用dhcp为170服务器分配静态IP地址</h3><ul>
+<li><p>获取170服务器的mac地址</p>
+<pre><code>[root@m2lan170 ~]# ip addr show
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 16436 qdisc noqueue state UNKNOWN 
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    link/ether 00:0c:29:09:2f:33 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.100/24 brd 192.168.1.255 scope global eth0
+    inet6 fe80::20c:29ff:fe09:2f33/64 scope link 
+       valid_lft forever preferred_lft forever
+</code></pre></li>
+<li><p>修改150服务器dhcp配置</p>
+<pre><code>subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.100 192.168.1.200;
+  option domain-name-servers 192.168.1.1;
+  option domain-name &quot;internal.example.org&quot;;
+  option routers 192.168.1.1;
+  option broadcast-address 192.168.1.255;
+  default-lease-time 600;
+  max-lease-time 7200;
 
+  host m2lan170 {
+     hardware ethernet 00:0c:29:09:2f:33;
+     fixed-address 192.168.1.170;
+  }
+}
+</code></pre></li>
+<li><p>重启dhcp</p>
+<pre><code>[root@m2lan150 ~]# service dhcpd restart
+关闭 dhcpd：                                               [确定]
+正在启动 dhcpd：                                           [确定]
+</code></pre></li>
+<li><p>重启170服务器network</p>
+</li>
+<li><p>查看170服务器的IP地址</p>
+<pre><code>[root@m2lan170 ~]# ifconfig eth0
+eth0      Link encap:Ethernet  HWaddr 00:0C:29:09:2F:33  
+          inet addr:192.168.1.170  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: fe80::20c:29ff:fe09:2f33/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:13964 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:7938 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:1164135 (1.1 MiB)  TX bytes:703980 (687.4 KiB)
+</code></pre></li>
+</ul>
+<h3 id="查看租约文件"><a href="#查看租约文件" class="headerlink" title="查看租约文件"></a>查看租约文件</h3><pre><code>[root@m2lan150 ~]# cat /var/lib/dhcpd/dhcpd.leases
+# The format of this file is documented in the dhcpd.leases(5) manual page.
+# This lease file was written by isc-dhcp-4.1.1-P1
+
+lease 192.168.1.100 {
+  starts 0 2017/05/28 10:23:22;
+  ends 0 2017/05/28 10:33:22;
+  tstp 0 2017/05/28 10:33:22;
+  cltt 0 2017/05/28 10:23:22;
+  binding state active;
+  next binding state free;
+  hardware ethernet 00:0c:29:09:2f:33;
+  client-hostname &quot;m2lan170.com&quot;;
+}
+server-duid &quot;\000\001\000\001 \275Z\263\000\014)%_\241&quot;;
+
+lease 192.168.1.100 {
+  starts 0 2017/05/28 10:23:22;
+  ends 0 2017/05/28 10:33:22;
+  tstp 0 2017/05/28 10:33:22;
+  cltt 0 2017/05/28 10:23:22;
+  binding state free;
+  hardware ethernet 00:0c:29:09:2f:33;
+}
+</code></pre>
       
     </div>
 
@@ -422,6 +556,8 @@ Zhangsan:500
           
             <a href="/tags/Linux/" rel="tag">#Linux</a>
           
+            <a href="/tags/dhcp/" rel="tag">#dhcp</a>
+          
         </div>
       
 
@@ -429,17 +565,13 @@ Zhangsan:500
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/25/awk/" rel="next" title="awk">
-                <i class="fa fa-chevron-left"></i> awk
+              <a href="/2017/05/28/sshd服务防暴力破解/" rel="next" title="sshd服务防暴力破解">
+                <i class="fa fa-chevron-left"></i> sshd服务防暴力破解
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/28/sshd服务管理/" rel="prev" title="sshd服务管理">
-                sshd服务管理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -471,8 +603,8 @@ Zhangsan:500
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/05/25/cut/"
-           data-title="cut" data-url="http://blog.golearns.org/2017/05/25/cut/">
+      <div class="ds-thread" data-thread-key="2017/05/28/dhcp服务动态分配IP地址/"
+           data-title="dhcp服务动态分配IP地址" data-url="http://blog.golearns.org/2017/05/28/dhcp服务动态分配IP地址/">
       </div>
     
   </div>
@@ -628,7 +760,7 @@ Zhangsan:500
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux下的cut使用"><span class="nav-number">1.</span> <span class="nav-text">Linux下的cut使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#b参数"><span class="nav-number">1.0.1.</span> <span class="nav-text">-b参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c参数"><span class="nav-number">1.0.2.</span> <span class="nav-text">-c参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d和-f参数结合使用自定义分隔符"><span class="nav-number">1.0.3.</span> <span class="nav-text">-d和-f参数结合使用自定义分隔符</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux下使用dhcp服务动态分配IP地址"><span class="nav-number">1.</span> <span class="nav-text">Linux下使用dhcp服务动态分配IP地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#install"><span class="nav-number">1.0.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改vmware网络链接"><span class="nav-number">1.0.2.</span> <span class="nav-text">修改vmware网络链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dhcp配置"><span class="nav-number">1.0.3.</span> <span class="nav-text">dhcp配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置150服务器网络配置"><span class="nav-number">1.0.4.</span> <span class="nav-text">设置150服务器网络配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动dhcp服务"><span class="nav-number">1.0.5.</span> <span class="nav-text">启动dhcp服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看dns"><span class="nav-number">1.0.6.</span> <span class="nav-text">查看dns</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置170服务器网络链接方式为dhcp"><span class="nav-number">1.0.7.</span> <span class="nav-text">设置170服务器网络链接方式为dhcp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用150服务器连接"><span class="nav-number">1.0.8.</span> <span class="nav-text">使用150服务器连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用dhcp为170服务器分配静态IP地址"><span class="nav-number">1.0.9.</span> <span class="nav-text">使用dhcp为170服务器分配静态IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看租约文件"><span class="nav-number">1.0.10.</span> <span class="nav-text">查看租约文件</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>

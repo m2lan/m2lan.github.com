@@ -266,6 +266,174 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/21/Atomics/" itemprop="url">
+                  Atomics
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-21T15:39:22+08:00" content="2017-05-21">
+              2017-05-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/并发/" itemprop="url" rel="index">
+                    <span itemprop="name">并发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/21/Atomics/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/Atomics/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java并发编程类Atomics"><a href="#Java并发编程类Atomics" class="headerlink" title="Java并发编程类Atomics"></a>Java并发编程类Atomics</h1><pre><code>// 使用synchronized
+public class Counter1 {
+
+    private int counter = 0;
+    public int increase() {
+        synchronized (this) {
+            counter += 1;
+            return counter;
+        }
+    }
+
+    public int decrease() {
+        synchronized (this) {
+            counter -= 1;
+            return counter;
+        }
+    }
+
+    public static void main(String[] args) {
+        Counter1 c1 = new Counter1();
+        ExecutorService service = Executors.newFixedThreadPool(5);
+        for (int i = 0; i &lt; 100; i++) {
+            service.execute(() -&gt; {
+                System.out.println(Thread.currentThread().getName() + &quot; : &quot; + c1.increase());
+            });
+        }
+        service.shutdown();
+    }
+}
+
+// 使用AtomicInteger
+public class Counter2 {
+
+    private AtomicInteger counter = new AtomicInteger(0);
+
+    public int increase() {
+        return counter.incrementAndGet();
+    }
+
+    public int descrease() {
+        return counter.decrementAndGet();
+    }
+
+    public static void main(String[] args) {
+        Counter2 c2 = new Counter2();
+        ExecutorService service = Executors.newFixedThreadPool(5);
+        for (int i = 0; i &lt; 100; i++) {
+            service.execute(() -&gt; {
+                System.out.println(Thread.currentThread().getName() + &quot; : &quot; + c2.increase());
+            });
+        }
+        service.shutdown();
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/21/ReentrantLock/" itemprop="url">
                   ReentrantLock
                 </a>
@@ -1604,141 +1772,6 @@ public void findUser() {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/07/mybatis-多表关联操作/" itemprop="url">
-                  mybatis-多表关联操作
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-07T12:38:44+08:00" content="2017-05-07">
-              2017-05-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/07/mybatis-多表关联操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-多表关联操作/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="mybatis多表关联"><a href="#mybatis多表关联" class="headerlink" title="mybatis多表关联"></a>mybatis多表关联</h1><ul>
-<li><p>表结构</p>
-<pre><code>CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `icard` int(11) NOT NULL DEFAULT &apos;0&apos;,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `idCard` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `card` char(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/07/mybatis-多表关联操作/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1784,7 +1817,7 @@ CREATE TABLE `idCard` (
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">86</span>
+              <span class="site-state-item-count">87</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1801,7 +1834,7 @@ CREATE TABLE `idCard` (
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
