@@ -266,6 +266,144 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/07/mybatis-注解操作/" itemprop="url">
+                  mybatis-注解操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-07T12:31:50+08:00" content="2017-05-07">
+              2017-05-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/07/mybatis-注解操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-注解操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="mybatis注解"><a href="#mybatis注解" class="headerlink" title="mybatis注解"></a>mybatis注解</h1><ul>
+<li><p>新建<code>UserMapperAnnotation.java</code>文件</p>
+<pre><code>public interface UserMapperAnnotation {
+
+    @Insert(&quot;insert into user(username, password, email) values(#{username}, #{password}, #{email})&quot;)
+    @Options(useGeneratedKeys=true, keyProperty=&quot;id&quot;)
+    public Integer addUser(User user);
+
+    @Delete(&quot;delete from user where id = #{id}&quot;)
+    public void delUser(Integer id);
+
+    @Update(&quot;update user set password = #{password} where id = #{id}&quot;)
+    public void updateUser(User user);
+
+    @Select(&quot;select id, username, password, email from user where id = #{id}&quot;)
+    public User getUserById(Integer id);
+
+    @Select(&quot;select id, username, password, email from user&quot;)
+    public List&lt;User&gt; getAll();
+}
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis-注解操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/07/mybatis-操作/" itemprop="url">
                   mybatis-操作
                 </a>
@@ -1359,178 +1497,6 @@ ionic resources // 生成android和ios所需图片
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/21/table/" itemprop="url">
-                  Ectouch数据库字典
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-21T13:52:10+08:00" content="2016-07-21">
-              2016-07-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ectouch/" itemprop="url" rel="index">
-                    <span itemprop="name">ectouch</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/21/table/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/21/table/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Ectouch2-0-数据库结构"><a href="#Ectouch2-0-数据库结构" class="headerlink" title="Ectouch2.0 数据库结构"></a>Ectouch2.0 数据库结构</h1><h2 id="用户账目日志表ecs-account-log"><a href="#用户账目日志表ecs-account-log" class="headerlink" title="用户账目日志表ecs_account_log"></a>用户账目日志表<code>ecs_account_log</code></h2><table>
-<thead>
-<tr>
-<th>字段名称</th>
-<th>字段类型</th>
-<th>字段说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>log_id</td>
-<td>mediumint(8)</td>
-<td>日志ID</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>mediumint(8)</td>
-<td>用户ID</td>
-</tr>
-<tr>
-<td>user_money</td>
-<td>decimal(10,2)</td>
-<td>用户该笔记录的余额</td>
-</tr>
-<tr>
-<td>frozen_money</td>
-<td>decimal(10,2)</td>
-<td>被冻结的资金</td>
-</tr>
-<tr>
-<td>rank_points</td>
-<td>mediumint(9)</td>
-<td>等级积分，跟消费积分是分开的</td>
-</tr>
-<tr>
-<td>pay_points</td>
-<td>mediumint(9)</td>
-<td>消费积分，跟等级积分是分开的</td>
-</tr>
-<tr>
-<td>change_time</td>
-<td>int(10)</td>
-<td>该笔操作发生的事件</td>
-</tr>
-<tr>
-<td>change_desc</td>
-<td>varchar(255)</td>
-<td>该笔操作的备注</td>
-</tr>
-<tr>
-<td>change_type</td>
-<td>tinyint(3)</td>
-<td>操作类型，0: 充值，1: 提现，2: 管理员调节，99: 其它类型</td>
-</tr>
-</tbody>
-</table>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/21/table/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1576,7 +1542,7 @@ ionic resources // 生成android和ios所需图片
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

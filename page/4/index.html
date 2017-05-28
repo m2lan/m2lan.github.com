@@ -266,6 +266,178 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/21/table/" itemprop="url">
+                  Ectouch数据库字典
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-21T13:52:10+08:00" content="2016-07-21">
+              2016-07-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ectouch/" itemprop="url" rel="index">
+                    <span itemprop="name">ectouch</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/21/table/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/21/table/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Ectouch2-0-数据库结构"><a href="#Ectouch2-0-数据库结构" class="headerlink" title="Ectouch2.0 数据库结构"></a>Ectouch2.0 数据库结构</h1><h2 id="用户账目日志表ecs-account-log"><a href="#用户账目日志表ecs-account-log" class="headerlink" title="用户账目日志表ecs_account_log"></a>用户账目日志表<code>ecs_account_log</code></h2><table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>字段类型</th>
+<th>字段说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>log_id</td>
+<td>mediumint(8)</td>
+<td>日志ID</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>mediumint(8)</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>user_money</td>
+<td>decimal(10,2)</td>
+<td>用户该笔记录的余额</td>
+</tr>
+<tr>
+<td>frozen_money</td>
+<td>decimal(10,2)</td>
+<td>被冻结的资金</td>
+</tr>
+<tr>
+<td>rank_points</td>
+<td>mediumint(9)</td>
+<td>等级积分，跟消费积分是分开的</td>
+</tr>
+<tr>
+<td>pay_points</td>
+<td>mediumint(9)</td>
+<td>消费积分，跟等级积分是分开的</td>
+</tr>
+<tr>
+<td>change_time</td>
+<td>int(10)</td>
+<td>该笔操作发生的事件</td>
+</tr>
+<tr>
+<td>change_desc</td>
+<td>varchar(255)</td>
+<td>该笔操作的备注</td>
+</tr>
+<tr>
+<td>change_type</td>
+<td>tinyint(3)</td>
+<td>操作类型，0: 充值，1: 提现，2: 管理员调节，99: 其它类型</td>
+</tr>
+</tbody>
+</table>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/21/table/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/19/MySQL-嵌套集模型/" itemprop="url">
                   mysql嵌套集模型
                 </a>
@@ -1455,137 +1627,6 @@ cd /usr/local/nginx/sbin/
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/26/centos-查看端口使用情况/" itemprop="url">
-                  centos-查看端口使用情况
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-26T00:12:23+08:00" content="2016-02-26">
-              2016-02-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/26/centos-查看端口使用情况/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/centos-查看端口使用情况/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Centos-查看端口使用情况"><a href="#Centos-查看端口使用情况" class="headerlink" title="Centos 查看端口使用情况"></a>Centos 查看端口使用情况</h1><ul>
-<li>通过测试感觉tsung每次进行压测,没进一个用户需要占用本机一个端口，所以系统默认的端口打开是从32768到65535,所以这里就只能进2W多个用户，于是修改默认打开端口数。 </li>
-<li><p>查看端口</p>
-<pre><code>sysctl net.ipv4.ip_local_port_range
-</code></pre></li>
-<li><p>修改该值</p>
-<pre><code>echo 1024 65535 &gt; /proc/sys/net/ipv4/ip_local_port_range  
-
-||
-
-sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
-
-||
-
-如果想一直生效，需要修改 /etc/sysctl.conf文件，加入net.ipv4.ip_local_port_range = 1024 65535,修改完成执行sysctl -p。
-</code></pre></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1631,7 +1672,7 @@ sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

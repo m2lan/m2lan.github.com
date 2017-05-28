@@ -64,7 +64,7 @@
 <meta property="og:url" content="http://blog.golearns.org/2017/05/28/Linux常用操作/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Linux常用操作 清空iptables [root@m2 ~]# iptables -F [root@m2 ~]# /etc/init.d/iptables save iptables：将防火墙规则保存到 /etc/sysconfig/iptables：     [确定]  关闭selinux [root@m2 ~]# vim /etc/selinux/config SELINUX=disabl">
-<meta property="og:updated_time" content="2017-05-27T17:13:53.000Z">
+<meta property="og:updated_time" content="2017-05-28T05:18:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用操作">
 <meta name="twitter:description" content="Linux常用操作 清空iptables [root@m2 ~]# iptables -F [root@m2 ~]# /etc/init.d/iptables save iptables：将防火墙规则保存到 /etc/sysconfig/iptables：     [确定]  关闭selinux [root@m2 ~]# vim /etc/selinux/config SELINUX=disabl">
@@ -348,8 +348,10 @@ Disabled
 <pre><code>[root@m2lan150 ~]# cat /etc/sysconfig/network
 NETWORKING=yes
 HOSTNAME=m2lan150.com
-</code></pre><a id="more"></a>
-</li>
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><p>磁盘挂载</p>
 <pre><code>[root@m2lan150 ~]# mount /dev/cdrom /mnt/
 </code></pre></li>
@@ -428,6 +430,15 @@ MAC Address: 00:0C:29:09:2F:33 (VMware)
 
 Nmap done: 1 IP address (1 host up) scanned in 0.14 seconds
 </code></pre></li>
+<li><p>查看服务端口</p>
+<pre><code>/etc/services
+# 查看rsync服务端口
+[root@m2lan150 ~]# cat /etc/services | grep rsync
+rsync           873/tcp                         # rsync
+rsync           873/udp                         # rsync
+airsync         2175/tcp                # Microsoft Desktop AirSync Protocol
+airsync         2175/udp                # Microsoft Desktop AirSync Protocol
+</code></pre></li>
 </ul>
 
       
@@ -459,6 +470,10 @@ Nmap done: 1 IP address (1 host up) scanned in 0.14 seconds
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/28/sshd服务防暴力破解/" rel="prev" title="sshd服务防暴力破解">
+                sshd服务防暴力破解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -536,7 +551,7 @@ Nmap done: 1 IP address (1 host up) scanned in 0.14 seconds
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-27T17:13:53.000Z</updated>
+  <updated>2017-05-28T05:17:59.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -16,11 +16,283 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>sshd服务防暴力破解</title>
+    <link href="http://blog.golearns.org/2017/05/28/sshd%E6%9C%8D%E5%8A%A1%E9%98%B2%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/"/>
+    <id>http://blog.golearns.org/2017/05/28/sshd服务防暴力破解/</id>
+    <published>2017-05-28T05:16:07.000Z</published>
+    <updated>2017-05-28T05:17:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux下sshd服务防暴力破解"><a href="#Linux下sshd服务防暴力破解" class="headerlink" title="Linux下sshd服务防暴力破解"></a>Linux下sshd服务防暴力破解</h1><blockquote>
+<p>网站被暴力破解sshd服务密码，虽然没有成功，但会导致系统负载很高。</p>
+<p>原因是在暴力破解的时候，系统会不断认证用户，增加了系统资源的开销，导致网站访问速度很慢。</p>
+<p>fail2ban可以监视系统日志，然后匹配日志的错误信息执行屏蔽动作。</p>
+</blockquote>
+<h3 id="lastb"><a href="#lastb" class="headerlink" title="lastb"></a>lastb</h3><ul>
+<li><p>使用lastb命令，可以列出登入系统失败的用户信息</p>
+<pre><code>[root@m2lan150 ~]# lastb
+M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+root     tty1         :0               Sat May 27 21:57 - 21:57  (00:00)    
+
+btmp begins Sat May 27 21:57:36 2017
+</code></pre></li>
+</ul>
+<h3 id="下载fail2ban"><a href="#下载fail2ban" class="headerlink" title="下载fail2ban"></a>下载fail2ban</h3><ul>
+<li><a href="https://github.com/fail2ban/fail2ban/archive/0.8.14.tar.gz" target="_blank" rel="external">fail2ban</a></li>
+<li><p>解压并安装</p>
+<pre><code>[root@m2lan150 ~]# tar -xzvf fail2ban-0.8.14.tar.gz
+[root@m2lan150 ~]# cd fail2ban-0.8.14
+[root@m2lan150 fail2ban-0.8.14]# python setup.py install
+# 查找启动文件
+[root@m2lan150 fail2ban-0.8.14]# grep chkconfig ./* -R --color
+./files/redhat-initd:# chkconfig: - 92 08
+# copy启动文件
+[root@m2lan150 fail2ban-0.8.14]# cp files/redhat-initd /etc/init.d/fail2ban
+# 设置开机启动
+[root@m2lan150 fail2ban-0.8.14]# chkconfig --add fail2ban
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>fail2ban文件说明<code>ll /etc/fail2ban/</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>action.d</td>
+<td>动作文件，内含默认文件。iptables以及mail等动作配置</td>
+</tr>
+<tr>
+<td>fail2ban.conf</td>
+<td>定义了fail2ban日志级别、日志位置及sock文件位置</td>
+</tr>
+<tr>
+<td>filter.d</td>
+<td>条件文件夹，内含默认文件。过滤日志关键内容设置</td>
+</tr>
+<tr>
+<td>jail.conf</td>
+<td>主要配置文件，模块化。主要设置启动ban动作的服务及动作阈值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="使用fail2ban限制用户登陆"><a href="#使用fail2ban限制用户登陆" class="headerlink" title="使用fail2ban限制用户登陆"></a>使用fail2ban限制用户登陆</h3><blockquote>
+<p>ssh远程登陆5分钟内3次密码验证失败，禁止用户IP访问主机1小时，1小时后限制解除，可以登陆主机。</p>
+</blockquote>
+<ul>
+<li><p>使用的配置文件</p>
+<pre><code>[root@m2lan150 fail2ban]# ll action.d/iptables.conf 
+-rw-rw-r-- 1 root root 1838 8月  20 2014 action.d/iptables.conf
+[root@m2lan150 fail2ban]# ll filter.d/sshd.conf 
+-rw-rw-r-- 1 root root 1816 8月  20 2014 filter.d/sshd.conf
+[root@m2lan150 fail2ban]# ll jail.conf 
+-rw-rw-r-- 1 root root 19316 8月  20 2014 jail.conf
+</code></pre></li>
+<li><p>jail.conf配置文件说明</p>
+<pre><code># 全局配置
+[DEFAULT]
+# 忽略的IP列表，不受限制
+ignoreip = 127.0.0.1/8
+# 屏蔽时间，秒
+bantime  = 600
+# 在findtime时间内超过maxretry次就会被屏蔽，屏蔽bantime秒
+findtime  = 600
+# 最大尝试次数
+maxretry = 3
+# 屏蔽时间过了后自动恢复登陆
+backend = auto
+
+# 单个服务配置，如果bantime、findtime、maxretry和全局配置冲突
+# 服务优先级大于全局配置
+[ssh-iptables]
+# 服务是否启用，设置为true
+enabled  = true
+# 过滤规则filter的名字，对应filter.d/sshd.conf
+filter   = sshd
+# 动作相关参数，对应action.d/iptables.conf
+# 触发报警的收件人
+action   = iptables[name=SSH, port=ssh, protocol=tcp]
+           sendmail-whois[name=SSH, dest=you@example.com, sender=fail2ban@example.com, sendername=&quot;Fail2Ban&quot;]
+# 日志存放位置，设置为sshd的日志文件/var/log/secure，默认为/var/log/sshd.log
+logpath  = /var/log/secure
+# 5分钟内3次密码验证失败，禁止用户IP访问主机1小时，配置：
+bantime  = 3600
+findtime  = 300
+maxretry = 3
+</code></pre></li>
+<li><p>启动服务</p>
+<pre><code># 清空日志文件
+[root@m2lan150 fail2ban]# &gt; /var/log/secure
+# 启动fail2ban
+[root@m2lan150 fail2ban]# /etc/init.d/fail2ban start
+启动fail2ban:                                              [确定]
+# iptables配置中会多出一个fail2ban-SSH
+[root@m2lan150 fail2ban]# iptables -L -n
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+fail2ban-SSH  tcp  --  0.0.0.0/0            0.0.0.0/0           tcp dpt:22 
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain fail2ban-SSH (1 references)
+target     prot opt source               destination         
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0
+
+# 使用其他机器登陆150服务器测试
+M2@zhuyongkangdeMacBook-Pro  ~  ssh 192.168.0.150
+The authenticity of host &apos;192.168.0.150 (192.168.0.150)&apos; can&apos;t be established. 
+RSA key fingerprint is SHA2560RjnF0jVdr3FnSdLx+OQzkzAmJ4xD8O9ZwzQL+Gp+E. 
+Are you sure you want to continue connecting (yes/no)? yes 
+Warning: Permanently added &apos;192.168.0.150&apos; (RSA) to the list of known hosts. M2@192.168.0.150&apos;s password: 
+Permission denied, please try again. 
+M2@192.168.0.150&apos;s password: 
+Permission denied, please try again. 
+M2@192.168.0.150&apos;s password: 
+Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password). 
+# 当尝试3次登陆失败后，再次登陆直接被拒绝
+M2@zhuyongkangdeMacBook-Pro  ~  ssh 192.168.0.150 
+ssh: connect to host 192.168.0.150 port 22: Connection refused
+# 查看iptables
+[root@m2lan150 fail2ban]# iptables -L -n
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+fail2ban-SSH  tcp  --  0.0.0.0/0            0.0.0.0/0           tcp dpt:22 
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain fail2ban-SSH (1 references)
+target     prot opt source               destination         
+REJECT     all  --  192.168.0.102        0.0.0.0/0           reject-with icmp-port-unreachable 
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0
+</code></pre></li>
+</ul>
+<h3 id="查看服务状态"><a href="#查看服务状态" class="headerlink" title="查看服务状态"></a>查看服务状态</h3><ul>
+<li><p>查看所有服务状态</p>
+<pre><code>[root@m2lan150 fail2ban]# fail2ban-client status
+Status
+|- Number of jail:    1
+`- Jail list:        ssh-iptables
+</code></pre></li>
+<li><p>查看指定服务状态</p>
+<ul>
+<li><code>Currently banned</code>: 当前拒绝的IP数</li>
+<li><p><code>Total banned</code>: 总共拒绝的IP数</p>
+<pre><code>[root@m2lan150 fail2ban]# fail2ban-client status ssh-iptables
+Status for the jail: ssh-iptables
+|- filter
+|  |- File list:    /var/log/secure 
+|  |- Currently failed:    1
+|  `- Total failed:    4
+`- action
+   |- Currently banned:    1
+   |  `- IP list:    192.168.0.102 
+   `- Total banned:    1
+</code></pre></li>
+</ul>
+</li>
+<li><p>查看fail2ban日志文件</p>
+<ul>
+<li>Ban锁定了192.168.0.102IP</li>
+<li><p>10分钟后解除锁定Unban </p>
+<pre><code>[root@m2lan150 fail2ban]# tail /var/log/fail2ban.log 
+2017-05-28 11:27:39,995 fail2ban.jail   [5280]: INFO    Creating new jail &apos;ssh-iptables&apos;
+2017-05-28 11:27:40,008 fail2ban.jail   [5280]: INFO    Jail &apos;ssh-iptables&apos; uses Gamin
+2017-05-28 11:27:40,076 fail2ban.jail   [5280]: INFO    Initiated &apos;gamin&apos; backend
+2017-05-28 11:27:40,102 fail2ban.filter [5280]: INFO    Added logfile = /var/log/secure
+2017-05-28 11:27:40,104 fail2ban.filter [5280]: INFO    Set maxRetry = 3
+2017-05-28 11:27:40,106 fail2ban.filter [5280]: INFO    Set findtime = 300
+2017-05-28 11:27:40,106 fail2ban.actions[5280]: INFO    Set banTime = 600
+2017-05-28 11:27:40,279 fail2ban.jail   [5280]: INFO    Jail &apos;ssh-iptables&apos; started
+2017-05-28 11:39:18,897 fail2ban.actions[5280]: WARNING [ssh-iptables] Ban 192.168.0.102
+2017-05-28 11:49:19,016 fail2ban.actions[5280]: WARNING [ssh-iptables] Unban 192.168.0.102
+</code></pre></li>
+</ul>
+</li>
+<li><p>解除屏蔽,清空日志文件</p>
+<pre><code># 清空日志文件
+[root@m2lan150 ~]# &gt; /var/log/secure
+# 重新启动后使用被屏蔽的IP再次登陆
+[root@m2lan150 ~]# /etc/init.d/fail2ban restart
+关闭fail2ban:                                              [确定]
+启动fail2ban:                                              [确定]
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Linux下sshd服务防暴力破解&quot;&gt;&lt;a href=&quot;#Linux下sshd服务防暴力破解&quot; class=&quot;headerlink&quot; title=&quot;Linux下sshd服务防暴力破解&quot;&gt;&lt;/a&gt;Linux下sshd服务防暴力破解&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;网站被暴力破解sshd服务密码，虽然没有成功，但会导致系统负载很高。&lt;/p&gt;
+&lt;p&gt;原因是在暴力破解的时候，系统会不断认证用户，增加了系统资源的开销，导致网站访问速度很慢。&lt;/p&gt;
+&lt;p&gt;fail2ban可以监视系统日志，然后匹配日志的错误信息执行屏蔽动作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;lastb&quot;&gt;&lt;a href=&quot;#lastb&quot; class=&quot;headerlink&quot; title=&quot;lastb&quot;&gt;&lt;/a&gt;lastb&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用lastb命令，可以列出登入系统失败的用户信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# lastb
+M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+root     tty1         :0               Sat May 27 21:57 - 21:57  (00:00)    
+
+btmp begins Sat May 27 21:57:36 2017
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;下载fail2ban&quot;&gt;&lt;a href=&quot;#下载fail2ban&quot; class=&quot;headerlink&quot; title=&quot;下载fail2ban&quot;&gt;&lt;/a&gt;下载fail2ban&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/fail2ban/fail2ban/archive/0.8.14.tar.gz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;fail2ban&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;解压并安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# tar -xzvf fail2ban-0.8.14.tar.gz
+[root@m2lan150 ~]# cd fail2ban-0.8.14
+[root@m2lan150 fail2ban-0.8.14]# python setup.py install
+# 查找启动文件
+[root@m2lan150 fail2ban-0.8.14]# grep chkconfig ./* -R --color
+./files/redhat-initd:# chkconfig: - 92 08
+# copy启动文件
+[root@m2lan150 fail2ban-0.8.14]# cp files/redhat-initd /etc/init.d/fail2ban
+# 设置开机启动
+[root@m2lan150 fail2ban-0.8.14]# chkconfig --add fail2ban
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
+    
+    
+      <category term="ssh" scheme="http://blog.golearns.org/tags/ssh/"/>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux常用操作</title>
     <link href="http://blog.golearns.org/2017/05/28/Linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/"/>
     <id>http://blog.golearns.org/2017/05/28/Linux常用操作/</id>
     <published>2017-05-27T17:06:33.000Z</published>
-    <updated>2017-05-27T17:13:53.000Z</updated>
+    <updated>2017-05-28T05:18:12.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Linux常用操作"><a href="#Linux常用操作" class="headerlink" title="Linux常用操作"></a>Linux常用操作</h1><ul>
 <li><p>清空iptables</p>
@@ -40,8 +312,10 @@ Disabled
 <pre><code>[root@m2lan150 ~]# cat /etc/sysconfig/network
 NETWORKING=yes
 HOSTNAME=m2lan150.com
-</code></pre><a id="more"></a>
-</li>
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><p>磁盘挂载</p>
 <pre><code>[root@m2lan150 ~]# mount /dev/cdrom /mnt/
 </code></pre></li>
@@ -120,6 +394,15 @@ MAC Address: 00:0C:29:09:2F:33 (VMware)
 
 Nmap done: 1 IP address (1 host up) scanned in 0.14 seconds
 </code></pre></li>
+<li><p>查看服务端口</p>
+<pre><code>/etc/services
+# 查看rsync服务端口
+[root@m2lan150 ~]# cat /etc/services | grep rsync
+rsync           873/tcp                         # rsync
+rsync           873/udp                         # rsync
+airsync         2175/tcp                # Microsoft Desktop AirSync Protocol
+airsync         2175/udp                # Microsoft Desktop AirSync Protocol
+</code></pre></li>
 </ul>
 ]]></content>
     
@@ -143,7 +426,8 @@ Disabled
 &lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# cat /etc/sysconfig/network
 NETWORKING=yes
 HOSTNAME=m2lan150.com
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -2580,103 +2864,6 @@ CREATE TABLE `idCard` (
   `card` char(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="mybatis" scheme="http://blog.golearns.org/categories/mybatis/"/>
-    
-    
-      <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis-注解操作</title>
-    <link href="http://blog.golearns.org/2017/05/07/mybatis-%E6%B3%A8%E8%A7%A3%E6%93%8D%E4%BD%9C/"/>
-    <id>http://blog.golearns.org/2017/05/07/mybatis-注解操作/</id>
-    <published>2017-05-07T04:31:50.000Z</published>
-    <updated>2017-05-07T05:10:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="mybatis注解"><a href="#mybatis注解" class="headerlink" title="mybatis注解"></a>mybatis注解</h1><ul>
-<li><p>新建<code>UserMapperAnnotation.java</code>文件</p>
-<pre><code>public interface UserMapperAnnotation {
-
-    @Insert(&quot;insert into user(username, password, email) values(#{username}, #{password}, #{email})&quot;)
-    @Options(useGeneratedKeys=true, keyProperty=&quot;id&quot;)
-    public Integer addUser(User user);
-
-    @Delete(&quot;delete from user where id = #{id}&quot;)
-    public void delUser(Integer id);
-
-    @Update(&quot;update user set password = #{password} where id = #{id}&quot;)
-    public void updateUser(User user);
-
-    @Select(&quot;select id, username, password, email from user where id = #{id}&quot;)
-    public User getUserById(Integer id);
-
-    @Select(&quot;select id, username, password, email from user&quot;)
-    public List&lt;User&gt; getAll();
-}
-</code></pre></li>
-</ul>
-<a id="more"></a>    
-<ul>
-<li><p>在mybatis-config.xml中添加</p>
-<pre><code>&lt;mappers&gt;
-    &lt;mapper resource=&quot;UserMapper.xml&quot;/&gt;
-    &lt;mapper class=&quot;com.example.mybatis.mapper.UserMapperAnnotation&quot;/&gt;
-&lt;/mappers&gt;
-</code></pre></li>
-<li><p>新建测试文件</p>
-<pre><code>public class TestUserMapperAnnotation {
-
-    private SqlSessionFactory sessionFactory;
-
-    @Before
-    public void init() throws IOException {
-        InputStream inputStream = Resources.getResourceAsStream(&quot;mybatis-config.xml&quot;);
-        sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    }
-
-    @Test
-    public void testGetAll() {
-        try (SqlSession session = sessionFactory.openSession()) {
-            UserMapperAnnotation mapper = session.getMapper(UserMapperAnnotation.class);
-            List&lt;User&gt; lists = mapper.getAll();
-            System.out.println(lists);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;mybatis注解&quot;&gt;&lt;a href=&quot;#mybatis注解&quot; class=&quot;headerlink&quot; title=&quot;mybatis注解&quot;&gt;&lt;/a&gt;mybatis注解&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;新建&lt;code&gt;UserMapperAnnotation.java&lt;/code&gt;文件&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;public interface UserMapperAnnotation {
-
-    @Insert(&amp;quot;insert into user(username, password, email) values(#{username}, #{password}, #{email})&amp;quot;)
-    @Options(useGeneratedKeys=true, keyProperty=&amp;quot;id&amp;quot;)
-    public Integer addUser(User user);
-
-    @Delete(&amp;quot;delete from user where id = #{id}&amp;quot;)
-    public void delUser(Integer id);
-
-    @Update(&amp;quot;update user set password = #{password} where id = #{id}&amp;quot;)
-    public void updateUser(User user);
-
-    @Select(&amp;quot;select id, username, password, email from user where id = #{id}&amp;quot;)
-    public User getUserById(Integer id);
-
-    @Select(&amp;quot;select id, username, password, email from user&amp;quot;)
-    public List&amp;lt;User&amp;gt; getAll();
-}
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
     

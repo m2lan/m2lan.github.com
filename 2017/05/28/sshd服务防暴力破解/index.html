@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Shell," />
+  <meta name="keywords" content="ssh,Linux," />
 
 
 
@@ -57,17 +57,17 @@
 
 
 
-<meta name="description" content="#!/bin/bash #算术运算符  A=10 B=$(($A+20)) echo ${B}  echo $((10+10))  # 表达式和运算符之间要存在空格,不能写成2+2 num=`expr 2 + 2` echo $num  echo $((10/10)) echo `expr 10 / 10` echo $((10*10))  # 乘法*号前面添加反斜杠才能进行运算 echo `ex">
-<meta name="keywords" content="Shell">
+<meta name="description" content="Linux下sshd服务防暴力破解 网站被暴力破解sshd服务密码，虽然没有成功，但会导致系统负载很高。 原因是在暴力破解的时候，系统会不断认证用户，增加了系统资源的开销，导致网站访问速度很慢。 fail2ban可以监视系统日志，然后匹配日志的错误信息执行屏蔽动作。  lastb 使用lastb命令，可以列出登入系统失败的用户信息 [root@m2lan150 ~]# lastb M2">
+<meta name="keywords" content="ssh,Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell-算术运算符+字符串操作">
-<meta property="og:url" content="http://blog.golearns.org/2015/12/10/Shell-算术运算符-字符串操作/index.html">
+<meta property="og:title" content="sshd服务防暴力破解">
+<meta property="og:url" content="http://blog.golearns.org/2017/05/28/sshd服务防暴力破解/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="#!/bin/bash #算术运算符  A=10 B=$(($A+20)) echo ${B}  echo $((10+10))  # 表达式和运算符之间要存在空格,不能写成2+2 num=`expr 2 + 2` echo $num  echo $((10/10)) echo `expr 10 / 10` echo $((10*10))  # 乘法*号前面添加反斜杠才能进行运算 echo `ex">
-<meta property="og:updated_time" content="2016-07-15T01:48:10.000Z">
+<meta property="og:description" content="Linux下sshd服务防暴力破解 网站被暴力破解sshd服务密码，虽然没有成功，但会导致系统负载很高。 原因是在暴力破解的时候，系统会不断认证用户，增加了系统资源的开销，导致网站访问速度很慢。 fail2ban可以监视系统日志，然后匹配日志的错误信息执行屏蔽动作。  lastb 使用lastb命令，可以列出登入系统失败的用户信息 [root@m2lan150 ~]# lastb M2">
+<meta property="og:updated_time" content="2017-05-28T05:17:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shell-算术运算符+字符串操作">
-<meta name="twitter:description" content="#!/bin/bash #算术运算符  A=10 B=$(($A+20)) echo ${B}  echo $((10+10))  # 表达式和运算符之间要存在空格,不能写成2+2 num=`expr 2 + 2` echo $num  echo $((10/10)) echo `expr 10 / 10` echo $((10*10))  # 乘法*号前面添加反斜杠才能进行运算 echo `ex">
+<meta name="twitter:title" content="sshd服务防暴力破解">
+<meta name="twitter:description" content="Linux下sshd服务防暴力破解 网站被暴力破解sshd服务密码，虽然没有成功，但会导致系统负载很高。 原因是在暴力破解的时候，系统会不断认证用户，增加了系统资源的开销，导致网站访问速度很慢。 fail2ban可以监视系统日志，然后匹配日志的错误信息执行屏蔽动作。  lastb 使用lastb命令，可以列出登入系统失败的用户信息 [root@m2lan150 ~]# lastb M2">
 
 
 
@@ -85,7 +85,7 @@
   };
 </script>
 
-  <title> Shell-算术运算符+字符串操作 | 知识记录 </title>
+  <title> sshd服务防暴力破解 | 知识记录 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +265,7 @@
             
             
               
-                Shell-算术运算符+字符串操作
+                sshd服务防暴力破解
               
             
           </h1>
@@ -277,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:15:16+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2017-05-28T13:16:07+08:00" content="2017-05-28">
+              2017-05-28
             </time>
           </span>
 
@@ -291,8 +291,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -307,8 +307,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-算术运算符-字符串操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-算术运算符-字符串操作/" itemprop="commentsCount"></span>
+                <a href="/2017/05/28/sshd服务防暴力破解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/sshd服务防暴力破解/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -330,57 +330,221 @@
       
 
       
-        <pre><code>#!/bin/bash
-#算术运算符
+        <h1 id="Linux下sshd服务防暴力破解"><a href="#Linux下sshd服务防暴力破解" class="headerlink" title="Linux下sshd服务防暴力破解"></a>Linux下sshd服务防暴力破解</h1><blockquote>
+<p>网站被暴力破解sshd服务密码，虽然没有成功，但会导致系统负载很高。</p>
+<p>原因是在暴力破解的时候，系统会不断认证用户，增加了系统资源的开销，导致网站访问速度很慢。</p>
+<p>fail2ban可以监视系统日志，然后匹配日志的错误信息执行屏蔽动作。</p>
+</blockquote>
+<h3 id="lastb"><a href="#lastb" class="headerlink" title="lastb"></a>lastb</h3><ul>
+<li><p>使用lastb命令，可以列出登入系统失败的用户信息</p>
+<pre><code>[root@m2lan150 ~]# lastb
+M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
+root     tty1         :0               Sat May 27 21:57 - 21:57  (00:00)    
 
-A=10
-B=$(($A+20))
-echo ${B}
+btmp begins Sat May 27 21:57:36 2017
+</code></pre></li>
+</ul>
+<h3 id="下载fail2ban"><a href="#下载fail2ban" class="headerlink" title="下载fail2ban"></a>下载fail2ban</h3><ul>
+<li><a href="https://github.com/fail2ban/fail2ban/archive/0.8.14.tar.gz" target="_blank" rel="external">fail2ban</a></li>
+<li><p>解压并安装</p>
+<pre><code>[root@m2lan150 ~]# tar -xzvf fail2ban-0.8.14.tar.gz
+[root@m2lan150 ~]# cd fail2ban-0.8.14
+[root@m2lan150 fail2ban-0.8.14]# python setup.py install
+# 查找启动文件
+[root@m2lan150 fail2ban-0.8.14]# grep chkconfig ./* -R --color
+./files/redhat-initd:# chkconfig: - 92 08
+# copy启动文件
+[root@m2lan150 fail2ban-0.8.14]# cp files/redhat-initd /etc/init.d/fail2ban
+# 设置开机启动
+[root@m2lan150 fail2ban-0.8.14]# chkconfig --add fail2ban
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>fail2ban文件说明<code>ll /etc/fail2ban/</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>action.d</td>
+<td>动作文件，内含默认文件。iptables以及mail等动作配置</td>
+</tr>
+<tr>
+<td>fail2ban.conf</td>
+<td>定义了fail2ban日志级别、日志位置及sock文件位置</td>
+</tr>
+<tr>
+<td>filter.d</td>
+<td>条件文件夹，内含默认文件。过滤日志关键内容设置</td>
+</tr>
+<tr>
+<td>jail.conf</td>
+<td>主要配置文件，模块化。主要设置启动ban动作的服务及动作阈值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="使用fail2ban限制用户登陆"><a href="#使用fail2ban限制用户登陆" class="headerlink" title="使用fail2ban限制用户登陆"></a>使用fail2ban限制用户登陆</h3><blockquote>
+<p>ssh远程登陆5分钟内3次密码验证失败，禁止用户IP访问主机1小时，1小时后限制解除，可以登陆主机。</p>
+</blockquote>
+<ul>
+<li><p>使用的配置文件</p>
+<pre><code>[root@m2lan150 fail2ban]# ll action.d/iptables.conf 
+-rw-rw-r-- 1 root root 1838 8月  20 2014 action.d/iptables.conf
+[root@m2lan150 fail2ban]# ll filter.d/sshd.conf 
+-rw-rw-r-- 1 root root 1816 8月  20 2014 filter.d/sshd.conf
+[root@m2lan150 fail2ban]# ll jail.conf 
+-rw-rw-r-- 1 root root 19316 8月  20 2014 jail.conf
+</code></pre></li>
+<li><p>jail.conf配置文件说明</p>
+<pre><code># 全局配置
+[DEFAULT]
+# 忽略的IP列表，不受限制
+ignoreip = 127.0.0.1/8
+# 屏蔽时间，秒
+bantime  = 600
+# 在findtime时间内超过maxretry次就会被屏蔽，屏蔽bantime秒
+findtime  = 600
+# 最大尝试次数
+maxretry = 3
+# 屏蔽时间过了后自动恢复登陆
+backend = auto
 
-echo $((10+10))
+# 单个服务配置，如果bantime、findtime、maxretry和全局配置冲突
+# 服务优先级大于全局配置
+[ssh-iptables]
+# 服务是否启用，设置为true
+enabled  = true
+# 过滤规则filter的名字，对应filter.d/sshd.conf
+filter   = sshd
+# 动作相关参数，对应action.d/iptables.conf
+# 触发报警的收件人
+action   = iptables[name=SSH, port=ssh, protocol=tcp]
+           sendmail-whois[name=SSH, dest=you@example.com, sender=fail2ban@example.com, sendername=&quot;Fail2Ban&quot;]
+# 日志存放位置，设置为sshd的日志文件/var/log/secure，默认为/var/log/sshd.log
+logpath  = /var/log/secure
+# 5分钟内3次密码验证失败，禁止用户IP访问主机1小时，配置：
+bantime  = 3600
+findtime  = 300
+maxretry = 3
+</code></pre></li>
+<li><p>启动服务</p>
+<pre><code># 清空日志文件
+[root@m2lan150 fail2ban]# &gt; /var/log/secure
+# 启动fail2ban
+[root@m2lan150 fail2ban]# /etc/init.d/fail2ban start
+启动fail2ban:                                              [确定]
+# iptables配置中会多出一个fail2ban-SSH
+[root@m2lan150 fail2ban]# iptables -L -n
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+fail2ban-SSH  tcp  --  0.0.0.0/0            0.0.0.0/0           tcp dpt:22 
 
-# 表达式和运算符之间要存在空格,不能写成2+2
-num=`expr 2 + 2`
-echo $num
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
 
-echo $((10/10))
-echo `expr 10 / 10`
-echo $((10*10))
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
 
-# 乘法*号前面添加反斜杠才能进行运算
-echo `expr 10 \* 10`
-</code></pre><p>==========</p>
-<pre><code>#!/bin/bash
-#string
+Chain fail2ban-SSH (1 references)
+target     prot opt source               destination         
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0
 
-STRING=&quot;hello world&quot;
-SUBSTRING=&quot;wqpeowqpeowq xxxworldxxxx world&quot;
-STRING2=&quot;QQQQQ WWWWWW BBBBBB EEEEEE&quot;
+# 使用其他机器登陆150服务器测试
+M2@zhuyongkangdeMacBook-Pro  ~  ssh 192.168.0.150
+The authenticity of host &apos;192.168.0.150 (192.168.0.150)&apos; can&apos;t be established. 
+RSA key fingerprint is SHA2560RjnF0jVdr3FnSdLx+OQzkzAmJ4xD8O9ZwzQL+Gp+E. 
+Are you sure you want to continue connecting (yes/no)? yes 
+Warning: Permanently added &apos;192.168.0.150&apos; (RSA) to the list of known hosts. M2@192.168.0.150&apos;s password: 
+Permission denied, please try again. 
+M2@192.168.0.150&apos;s password: 
+Permission denied, please try again. 
+M2@192.168.0.150&apos;s password: 
+Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password). 
+# 当尝试3次登陆失败后，再次登陆直接被拒绝
+M2@zhuyongkangdeMacBook-Pro  ~  ssh 192.168.0.150 
+ssh: connect to host 192.168.0.150 port 22: Connection refused
+# 查看iptables
+[root@m2lan150 fail2ban]# iptables -L -n
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+fail2ban-SSH  tcp  --  0.0.0.0/0            0.0.0.0/0           tcp dpt:22 
 
-#字符串替换
-echo ${STRING[@]/world/world!}
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
 
-#字符串替换所有
-echo ${SUBSTRING[@]//world/world!}
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
 
-#字符串截取 ${STRING:n} 从第N个位置到结尾
-echo ${STRING:2}
+Chain fail2ban-SSH (1 references)
+target     prot opt source               destination         
+REJECT     all  --  192.168.0.102        0.0.0.0/0           reject-with icmp-port-unreachable 
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0
+</code></pre></li>
+</ul>
+<h3 id="查看服务状态"><a href="#查看服务状态" class="headerlink" title="查看服务状态"></a>查看服务状态</h3><ul>
+<li><p>查看所有服务状态</p>
+<pre><code>[root@m2lan150 fail2ban]# fail2ban-client status
+Status
+|- Number of jail:    1
+`- Jail list:        ssh-iptables
+</code></pre></li>
+<li><p>查看指定服务状态</p>
+<ul>
+<li><code>Currently banned</code>: 当前拒绝的IP数</li>
+<li><p><code>Total banned</code>: 总共拒绝的IP数</p>
+<pre><code>[root@m2lan150 fail2ban]# fail2ban-client status ssh-iptables
+Status for the jail: ssh-iptables
+|- filter
+|  |- File list:    /var/log/secure 
+|  |- Currently failed:    1
+|  `- Total failed:    4
+`- action
+   |- Currently banned:    1
+   |  `- IP list:    192.168.0.102 
+   `- Total banned:    1
+</code></pre></li>
+</ul>
+</li>
+<li><p>查看fail2ban日志文件</p>
+<ul>
+<li>Ban锁定了192.168.0.102IP</li>
+<li><p>10分钟后解除锁定Unban </p>
+<pre><code>[root@m2lan150 fail2ban]# tail /var/log/fail2ban.log 
+2017-05-28 11:27:39,995 fail2ban.jail   [5280]: INFO    Creating new jail &apos;ssh-iptables&apos;
+2017-05-28 11:27:40,008 fail2ban.jail   [5280]: INFO    Jail &apos;ssh-iptables&apos; uses Gamin
+2017-05-28 11:27:40,076 fail2ban.jail   [5280]: INFO    Initiated &apos;gamin&apos; backend
+2017-05-28 11:27:40,102 fail2ban.filter [5280]: INFO    Added logfile = /var/log/secure
+2017-05-28 11:27:40,104 fail2ban.filter [5280]: INFO    Set maxRetry = 3
+2017-05-28 11:27:40,106 fail2ban.filter [5280]: INFO    Set findtime = 300
+2017-05-28 11:27:40,106 fail2ban.actions[5280]: INFO    Set banTime = 600
+2017-05-28 11:27:40,279 fail2ban.jail   [5280]: INFO    Jail &apos;ssh-iptables&apos; started
+2017-05-28 11:39:18,897 fail2ban.actions[5280]: WARNING [ssh-iptables] Ban 192.168.0.102
+2017-05-28 11:49:19,016 fail2ban.actions[5280]: WARNING [ssh-iptables] Unban 192.168.0.102
+</code></pre></li>
+</ul>
+</li>
+<li><p>解除屏蔽,清空日志文件</p>
+<pre><code># 清空日志文件
+[root@m2lan150 ~]# &gt; /var/log/secure
+# 重新启动后使用被屏蔽的IP再次登陆
+[root@m2lan150 ~]# /etc/init.d/fail2ban restart
+关闭fail2ban:                                              [确定]
+启动fail2ban:                                              [确定]
+</code></pre></li>
+</ul>
 
-#字符串截取 ${STRING:POS:LEN} 从从第POS位置开始截取LEN长度的字符
-echo ${STRING:2:5}
-
-#删除字符串中的字符，和空替换 
-echo ${STRING2[@]// WWWWWW}
-
-#将字符串开头的字符替换
-echo ${STRING2[@]/#QQQQQ/MMMMM}
-
-#将字符串结尾的字符替换
-echo ${STRING2[@]/%EEEEEE/PPPPP}
-
-#将字符串提出为shell命令
-echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
-</code></pre>
       
     </div>
 
@@ -394,7 +558,9 @@ echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
       
         <div class="post-tags">
           
-            <a href="/tags/Shell/" rel="tag">#Shell</a>
+            <a href="/tags/ssh/" rel="tag">#ssh</a>
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -403,17 +569,13 @@ echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/10/Shell-变量/" rel="next" title="Shell-变量">
-                <i class="fa fa-chevron-left"></i> Shell-变量
+              <a href="/2017/05/28/Linux常用操作/" rel="next" title="Linux常用操作">
+                <i class="fa fa-chevron-left"></i> Linux常用操作
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/10/Shell-包含文件/" rel="prev" title="Shell-包含文件">
-                Shell-包含文件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -445,8 +607,8 @@ echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/10/Shell-算术运算符-字符串操作/"
-           data-title="Shell-算术运算符+字符串操作" data-url="http://blog.golearns.org/2015/12/10/Shell-算术运算符-字符串操作/">
+      <div class="ds-thread" data-thread-key="2017/05/28/sshd服务防暴力破解/"
+           data-title="sshd服务防暴力破解" data-url="http://blog.golearns.org/2017/05/28/sshd服务防暴力破解/">
       </div>
     
   </div>
@@ -602,7 +764,7 @@ echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux下sshd服务防暴力破解"><span class="nav-number">1.</span> <span class="nav-text">Linux下sshd服务防暴力破解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lastb"><span class="nav-number">1.0.1.</span> <span class="nav-text">lastb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载fail2ban"><span class="nav-number">1.0.2.</span> <span class="nav-text">下载fail2ban</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用fail2ban限制用户登陆"><span class="nav-number">1.0.3.</span> <span class="nav-text">使用fail2ban限制用户登陆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看服务状态"><span class="nav-number">1.0.4.</span> <span class="nav-text">查看服务状态</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
