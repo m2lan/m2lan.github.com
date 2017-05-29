@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-28T16:49:12.000Z</updated>
+  <updated>2017-05-29T07:42:16.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,360 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>samba服务配置实现文件共享</title>
+    <link href="http://blog.golearns.org/2017/05/29/samba%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/"/>
+    <id>http://blog.golearns.org/2017/05/29/samba服务配置实现文件共享/</id>
+    <published>2017-05-29T07:40:49.000Z</published>
+    <updated>2017-05-29T07:42:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux下samba服务器配置实现文件共享"><a href="#Linux下samba服务器配置实现文件共享" class="headerlink" title="Linux下samba服务器配置实现文件共享"></a>Linux下samba服务器配置实现文件共享</h1><blockquote>
+<p>samba可以在Linux系统和Windows系统之间进行通信，实现不同操作系统之间的资源共享。</p>
+<p>samba服务器端口号为139和445。</p>
+</blockquote>
+<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><ul>
+<li><p>在150服务器上安装samba服务端</p>
+<pre><code>[root@m2lan150 ~]# rpm -ivh /mnt/Packages/samba-3.6.9-164.el6.x86_64.rpm
+</code></pre></li>
+<li><p>在170服务器上安装samba客户端</p>
+<pre><code>[root@m2lan170 ~]# rpm -ivh /mnt/Packages/samba-client-3.6.9-164.el6.x86_64.rpm
+</code></pre></li>
+</ul>
+<h3 id="服务启动和关闭"><a href="#服务启动和关闭" class="headerlink" title="服务启动和关闭"></a>服务启动和关闭</h3><ul>
+<li><p>samba服务器启动</p>
+<pre><code>[root@m2lan150 ~]# /etc/init.d/smb start
+||
+[root@m2lan150 ~]# /etc/init.d/smb restart
+</code></pre></li>
+<li><p>服务配置重新加载，在不重启服务的情况下，加载配置文件</p>
+<pre><code>[root@m2lan150 ~]# /etc/init.d/smb reload
+</code></pre></li>
+<li><p>设置开机自动启动</p>
+<pre><code>[root@m2lan150 ~]# chkconfig smb on
+</code></pre></li>
+</ul>
+<h3 id="查看端口号"><a href="#查看端口号" class="headerlink" title="查看端口号"></a>查看端口号</h3><pre><code>[root@m2lan150 ~]# netstat -antup | grep smb
+tcp        0      0 0.0.0.0:139                 0.0.0.0:*                   LISTEN      11677/smbd          
+tcp        0      0 0.0.0.0:445                 0.0.0.0:*                   LISTEN      11677/smbd          
+tcp        0      0 :::139                      :::*                        LISTEN      11677/smbd          
+tcp        0      0 :::445                      :::*                        LISTEN      11677/smbd
+</code></pre><a id="more"></a>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><ul>
+<li><p>配置文件配置步骤</p>
+<ul>
+<li>编辑主配置文件smb.conf,指定需要共享的目录，并为共享目录设置共享权限。</li>
+<li>在smb.conf文件中指定日志文件名称和路径。</li>
+<li>设置共享目录的本地系统权限和samba共享权限。</li>
+<li>重启smb服务。</li>
+</ul>
+</li>
+<li><p>[global]全局配置</p>
+</li>
+<li><p>samba服务器安全模式</p>
+<pre><code># user、share和server，其中share和server已被废弃
+# share安全模式不需要输入用户名和密码就可以访问samba服务器资源，匿名访问
+# user安全模式输入正确的用户名和密码后才能访问
+Scurity can be set to user, share(deprecated) or server(deprecated)
+</code></pre></li>
+<li><p>配置文件说明</p>
+<pre><code># 全局配置
+[global]
+# 定义允许访问的客户端
+hosts allow = 127. 192.168.12. 192.168.13.
+# 定义禁止访问的客户端
+# 当定义192.168.0.的时候表示禁止所有来自192.168.0.0/24网段的IP访问
+# 禁止单个IP访问192.168.0.111
+hosts deny = 192.168.0.
+# 当hosts allow和hosts deny同时存在的时候，hosts allow优先级高
+
+# 设置共享名
+[public]
+# 描述
+comment = Public Stuff
+# 共享的绝对路径
+path = /home/samba
+# 为yes可以匿名查看
+public = yes
+# 设置访问的用户名
+valid users = %S
+# 设置访问的用户组
+valid users = MYDOMAIN\%S
+# 为yes是只读，no是读写
+readonly=no
+# 设置目录可写，yes是读写，no是只读
+writable = yes
+printable = no
+# 设置可写的用户名或用户组@组名
+write list = +staff
+# 是否允许查看共享内容，如果为no，可以通过绝对路径查看
+browseable = no
+</code></pre></li>
+<li><p>备份配置文件</p>
+<pre><code>[root@m2lan150 ~]# cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
+</code></pre></li>
+<li><p>配置只允许指定的用户组的用户访问共享目录shares</p>
+<pre><code># 创建一个用户组shares
+[root@m2lan150 ~]# groupadd shares
+
+# 创建两个测试用户share1和share2
+[root@m2lan150 ~]# useradd -g shares share1    
+[root@m2lan150 ~]# useradd -g shares share2
+
+# 查看用户信息
+[root@m2lan150 ~]# id share1
+uid=501(share1) gid=501(shares) 组=501(shares)
+[root@m2lan150 ~]# id share2
+uid=502(share2) gid=501(shares) 组=501(shares)
+
+# 创建samba用户share1和share2
+# 第一次密码库文件不存在，会自动创建/etc/samba/smbpasswd
+[root@m2lan150 ~]# smbpasswd -a share1
+New SMB password:
+Retype new SMB password:
+startsmbfilepwent_internal: file /etc/samba/smbpasswd did not exist. File successfully created.
+Added user share1.
+
+[root@m2lan150 ~]# smbpasswd -a share2
+New SMB password:
+Retype new SMB password:
+Added user share2.
+
+# 配置
+# 全局配置文件
+[global]
+security = user
+passdb backend = smbpasswd
+smb passwd file = /etc/samba/smbpasswd
+
+[root@m2lan150 ~]# tail -n 5 /etc/samba/smb.conf
+;    write list = +staff
+[shares]
+comment = shares dir 
+path = /shares
+valid users = @shares
+
+# 创建/shares目录并cp一些文件
+[root@m2lan150 ~]# mkdir /shares
+[root@m2lan150 ~]# cp /etc/passwd !$
+cp /etc/passwd /shares
+[root@m2lan150 ~]# ls /shares/
+passwd
+
+# 重启samba服务
+[root@m2lan150 ~]# service smb restart
+关闭 SMB 服务：                                            [确定]
+启动 SMB 服务：                                            [确定]
+
+# 在windows下测试输入\\192.168.0.150输入用户名密码可以访问
+</code></pre></li>
+</ul>
+<h3 id="设置可写权限"><a href="#设置可写权限" class="headerlink" title="设置可写权限"></a>设置可写权限</h3><ul>
+<li><p>设置可写权限</p>
+<pre><code>[shares]
+comment = shares dir
+path = /shares
+valid users = @shares
+writable = yes
+</code></pre></li>
+<li><p>设置共享目录权限</p>
+<pre><code>[root@m2lan150 ~]# chmod 777 /shares
+[root@m2lan150 ~]# ll -d !$
+ll -d /shares
+drwxrwxrwx 2 root root 4096 5月  29 12:02 /shares
+</code></pre></li>
+<li><p>重启服务</p>
+<pre><code>[root@m2lan150 ~]# service smb restart
+关闭 SMB 服务：                                            [确定]
+启动 SMB 服务：                                            [确定]
+</code></pre></li>
+<li><p>现在windows再次访问就可以做写入操作</p>
+</li>
+</ul>
+<h3 id="如果允许zhangsan用户和shares组成员可以读写-shares共享目录配置"><a href="#如果允许zhangsan用户和shares组成员可以读写-shares共享目录配置" class="headerlink" title="如果允许zhangsan用户和shares组成员可以读写/shares共享目录配置"></a>如果允许zhangsan用户和shares组成员可以读写/shares共享目录配置</h3><pre><code>[shares]
+comment = shares dir
+path = /shares
+write list = zhangsan,@shares
+</code></pre><h3 id="配置只能share1用户能看见-datas共享目录"><a href="#配置只能share1用户能看见-datas共享目录" class="headerlink" title="配置只能share1用户能看见/datas共享目录"></a>配置只能share1用户能看见/datas共享目录</h3><pre><code># 配置/datas共享目录，对所有用户隐藏
+[root@m2lan150 ~]# tail -n 5 /etc/samba/smb.conf
+[datas]
+comment = datas dir
+path = /datas
+browseable = no
+
+# 在[global]中添加
+config file = /etc/samba/smb.conf.%U
+# 如下：[global]中配置
+workgroup = MYGROUP
+server string = Samba Server Version %v
+config file = /etc/samba/smb.conf.%U
+
+# 创建/etc/samba/smb.conf.share1文件
+[root@m2lan150 ~]# cp /etc/samba/smb.conf /etc/samba/smb.conf.share1
+# 修改配置,将smb.conf.share1文件的browseable设置为yes
+[datas]
+comment = datas dir
+path = /datas
+browseable = yes
+
+[root@m2lan150 ~]# mkdir /datas
+[root@m2lan150 ~]# cp /etc/passwd !$
+cp /etc/passwd /datas
+[root@m2lan150 ~]# service smb restart
+关闭 SMB 服务：                                            [确定]
+启动 SMB 服务：                                            [确定]
+
+# 使用share1和share2登陆发现share1可以看见，share2看不见
+</code></pre><h3 id="win10下映射网络驱动器"><a href="#win10下映射网络驱动器" class="headerlink" title="win10下映射网络驱动器"></a>win10下映射网络驱动器</h3><ul>
+<li><p>在网络上右键映射网络驱动器</p>
+<pre><code>\\192.168.0.150\datas
+</code></pre></li>
+</ul>
+<h3 id="在170服务器上查看"><a href="#在170服务器上查看" class="headerlink" title="在170服务器上查看"></a>在170服务器上查看</h3><ul>
+<li><p>使用匿名方式查看</p>
+<pre><code>[root@m2lan170 ~]# smbclient -L 192.168.0.150
+Enter root&apos;s password: 
+Anonymous login successful
+Domain=[MYGROUP] OS=[Unix] Server=[Samba 3.6.9-164.el6]
+
+    Sharename       Type      Comment
+    ---------       ----      -------
+    shares          Disk      shares dir
+    IPC$            IPC       IPC Service (Samba Server Version 3.6.9-164.el6)
+Anonymous login successful
+Domain=[MYGROUP] OS=[Unix] Server=[Samba 3.6.9-164.el6]
+
+    Server               Comment
+    ---------            -------
+
+    Workgroup            Master
+    ---------            -------
+</code></pre></li>
+<li><p>使用share1用户查看</p>
+<pre><code>[root@m2lan170 ~]# smbclient -L 192.168.0.150 -U share1%123456
+Domain=[MYGROUP] OS=[Unix] Server=[Samba 3.6.9-164.el6]
+
+    Sharename       Type      Comment
+    ---------       ----      -------
+    IPC$            IPC       IPC Service (Samba Server Version 3.6.9-164.el6)
+    datas           Disk      datas dir
+    shares          Disk      shares dir
+Domain=[MYGROUP] OS=[Unix] Server=[Samba 3.6.9-164.el6]
+
+    Server               Comment
+    ---------            -------
+
+    Workgroup            Master
+    ---------            -------
+</code></pre></li>
+<li><p>使用share2用户查看</p>
+<pre><code>[root@m2lan170 ~]# smbclient -L 192.168.0.150 -U share2%123456
+Domain=[MYGROUP] OS=[Unix] Server=[Samba 3.6.9-164.el6]
+
+    Sharename       Type      Comment
+    ---------       ----      -------
+    shares          Disk      shares dir
+    IPC$            IPC       IPC Service (Samba Server Version 3.6.9-164.el6)
+Domain=[MYGROUP] OS=[Unix] Server=[Samba 3.6.9-164.el6]
+
+    Server               Comment
+    ---------            -------
+
+    Workgroup            Master
+    ---------            -------
+</code></pre></li>
+<li><p>使用smbclient链接</p>
+<ul>
+<li>put上传</li>
+<li><p>get下载 </p>
+<pre><code>[root@m2lan170 ~]# smbclient //192.168.0.150/shares -U share2%123456
+Domain=[MYGROUP] OS=[Unix] Server=[Samba 3.6.9-164.el6]
+smb: \&gt; ls
+  .                                   D        0  Mon May 29 12:16:46 2017
+  ..                                 DR        0  Mon May 29 14:48:01 2017
+  xxx.txt                             A        0  Mon May 29 12:16:45 2017
+  passwd                                    1801  Mon May 29 12:02:13 2017
+
+        39371 blocks of size 262144. 19964 blocks available
+smb: \&gt; !ls
+anaconda-ks.cfg  install.log  install.log.syslog  公共的  模板    视频  图片  文档  下载    音乐  桌面
+smb: \&gt; put install.log
+putting file install.log as \install.log (8808.1 kb/s) (average 8808.3 kb/s)
+smb: \&gt; ls
+  .                                   D        0  Mon May 29 15:28:25 2017
+  ..                                 DR        0  Mon May 29 14:48:01 2017
+  xxx.txt                             A        0  Mon May 29 12:16:45 2017
+  install.log                         A    54118  Mon May 29 15:28:25 2017
+  passwd                                    1801  Mon May 29 12:02:13 2017
+
+        39371 blocks of size 262144. 19964 blocks available
+smb: \&gt; get xxx.txt 
+getting file \xxx.txt of size 0 as xxx.txt (0.0 KiloBytes/sec) (average 0.0 KiloBytes/sec)
+smb: \&gt; !ls
+anaconda-ks.cfg  install.log  install.log.syslog  xxx.txt  公共的  模板  视频  图片  文档  下载  音乐  桌面
+smb: \&gt; 
+</code></pre></li>
+</ul>
+</li>
+<li><p>使用mount挂载</p>
+<pre><code>[root@m2lan170 ~]# mount -t cifs //192.168.0.150/shares /opt/ -o username=share2%123456
+[root@m2lan170 ~]# mount | grep shares
+//192.168.0.150/shares on /opt type cifs (rw)
+
+[root@m2lan170 ~]# cd /opt/
+[root@m2lan170 opt]# ls
+install.log  passwd  test  xxx.txt
+[root@m2lan170 opt]# touch b.txt
+[root@m2lan170 opt]# ls
+b.txt  install.log  passwd  test  xxx.txt
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Linux下samba服务器配置实现文件共享&quot;&gt;&lt;a href=&quot;#Linux下samba服务器配置实现文件共享&quot; class=&quot;headerlink&quot; title=&quot;Linux下samba服务器配置实现文件共享&quot;&gt;&lt;/a&gt;Linux下samba服务器配置实现文件共享&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;samba可以在Linux系统和Windows系统之间进行通信，实现不同操作系统之间的资源共享。&lt;/p&gt;
+&lt;p&gt;samba服务器端口号为139和445。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;install&quot;&gt;&lt;a href=&quot;#install&quot; class=&quot;headerlink&quot; title=&quot;install&quot;&gt;&lt;/a&gt;install&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在150服务器上安装samba服务端&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# rpm -ivh /mnt/Packages/samba-3.6.9-164.el6.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在170服务器上安装samba客户端&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan170 ~]# rpm -ivh /mnt/Packages/samba-client-3.6.9-164.el6.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;服务启动和关闭&quot;&gt;&lt;a href=&quot;#服务启动和关闭&quot; class=&quot;headerlink&quot; title=&quot;服务启动和关闭&quot;&gt;&lt;/a&gt;服务启动和关闭&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;samba服务器启动&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# /etc/init.d/smb start
+||
+[root@m2lan150 ~]# /etc/init.d/smb restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;服务配置重新加载，在不重启服务的情况下，加载配置文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# /etc/init.d/smb reload
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;设置开机自动启动&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# chkconfig smb on
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;查看端口号&quot;&gt;&lt;a href=&quot;#查看端口号&quot; class=&quot;headerlink&quot; title=&quot;查看端口号&quot;&gt;&lt;/a&gt;查看端口号&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# netstat -antup | grep smb
+tcp        0      0 0.0.0.0:139                 0.0.0.0:*                   LISTEN      11677/smbd          
+tcp        0      0 0.0.0.0:445                 0.0.0.0:*                   LISTEN      11677/smbd          
+tcp        0      0 :::139                      :::*                        LISTEN      11677/smbd          
+tcp        0      0 :::445                      :::*                        LISTEN      11677/smbd
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+      <category term="samba" scheme="http://blog.golearns.org/tags/samba/"/>
+    
+  </entry>
   
   <entry>
     <title>nfs服务配置</title>
@@ -2691,393 +3045,6 @@ public class UserController {
     
     
       <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis-spring-springmvc</title>
-    <link href="http://blog.golearns.org/2017/05/07/mybatis-spring-springmvc/"/>
-    <id>http://blog.golearns.org/2017/05/07/mybatis-spring-springmvc/</id>
-    <published>2017-05-07T06:09:37.000Z</published>
-    <updated>2017-05-07T06:18:17.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="mybatis整合spring和springmvc"><a href="#mybatis整合spring和springmvc" class="headerlink" title="mybatis整合spring和springmvc"></a>mybatis整合spring和springmvc</h1><h2 id="新建Maven-webapps"><a href="#新建Maven-webapps" class="headerlink" title="新建Maven webapps"></a>新建Maven webapps</h2><ul>
-<li><p>pom.xml</p>
-<pre><code>&lt;profiles&gt;
-    &lt;profile&gt;
-        &lt;activation&gt;
-            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
-            &lt;jdk&gt;1.8&lt;/jdk&gt;
-        &lt;/activation&gt;
-        &lt;properties&gt;
-            &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-            &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
-            &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
-            &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
-            &lt;maven.compiler.compilerVersion&gt;1.8&lt;/maven.compiler.compilerVersion&gt;
-            &lt;java.version&gt;1.8&lt;/java.version&gt;
-            &lt;mybatis.version&gt;3.4.1&lt;/mybatis.version&gt;
-            &lt;mysql.version&gt;5.1.40&lt;/mysql.version&gt;
-            &lt;log4j.version&gt;1.2.17&lt;/log4j.version&gt;
-            &lt;junit.version&gt;4.12&lt;/junit.version&gt;
-            &lt;mybatis.ehcache.version&gt;1.1.0&lt;/mybatis.ehcache.version&gt;
-            &lt;spring.version&gt;4.3.7.RELEASE&lt;/spring.version&gt;
-            &lt;servlet.api.version&gt;3.1.0&lt;/servlet.api.version&gt;
-            &lt;jstl.version&gt;1.2&lt;/jstl.version&gt;
-            &lt;jackson.version&gt;2.8.7&lt;/jackson.version&gt;
-            &lt;c3p0.version&gt;0.9.5.2&lt;/c3p0.version&gt;
-            &lt;mybatis.spring.version&gt;1.3.1&lt;/mybatis.spring.version&gt;
-        &lt;/properties&gt;
-    &lt;/profile&gt;
-&lt;/profiles&gt;
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-        &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
-        &lt;version&gt;${servlet.api.version}&lt;/version&gt;
-        &lt;scope&gt;provided&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-        &lt;artifactId&gt;jstl&lt;/artifactId&gt;
-        &lt;version&gt;${jstl.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-        &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
-        &lt;version&gt;${jackson.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;mysql&lt;/groupId&gt;
-        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-        &lt;version&gt;${mysql.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.mchange&lt;/groupId&gt;
-        &lt;artifactId&gt;c3p0&lt;/artifactId&gt;
-        &lt;version&gt;${c3p0.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
-        &lt;version&gt;${mybatis.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;log4j&lt;/groupId&gt;
-        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
-        &lt;version&gt;${log4j.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.mybatis.caches&lt;/groupId&gt;
-        &lt;artifactId&gt;mybatis-ehcache&lt;/artifactId&gt;
-        &lt;version&gt;${mybatis.ehcache.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-        &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
-        &lt;version&gt;${mybatis.spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;junit&lt;/groupId&gt;
-        &lt;artifactId&gt;junit&lt;/artifactId&gt;
-        &lt;version&gt;${junit.version}&lt;/version&gt;
-        &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</code></pre></li>
-<li>Maven -&gt; Update project</li>
-</ul>
-<a id="more"></a>
-<h2 id="Web-xml"><a href="#Web-xml" class="headerlink" title="Web.xml"></a>Web.xml</h2><pre><code>&lt;web-app xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee 
-      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;
-version=&quot;3.0&quot;&gt;
-
-    &lt;filter&gt;
-        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
-        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
-        &lt;init-param&gt;
-            &lt;param-name&gt;encoding&lt;/param-name&gt;
-            &lt;param-value&gt;UTF-8&lt;/param-value&gt;
-        &lt;/init-param&gt;
-    &lt;/filter&gt;
-    &lt;filter-mapping&gt;
-        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
-        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-    &lt;/filter-mapping&gt;
-
-    &lt;servlet&gt;
-        &lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;
-        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
-        &lt;init-param&gt;
-            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
-            &lt;param-value&gt;classpath:springmvc.xml&lt;/param-value&gt;
-        &lt;/init-param&gt;
-        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
-    &lt;/servlet&gt;
-
-    &lt;servlet-mapping&gt;
-        &lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;
-        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
-    &lt;/servlet-mapping&gt;
-
-&lt;/web-app&gt;
-</code></pre><h2 id="新建springmvc-xml"><a href="#新建springmvc-xml" class="headerlink" title="新建springmvc.xml"></a>新建springmvc.xml</h2><pre><code>&lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;
-
-&lt;context:component-scan base-package=&quot;com.example.springAndMybatis&quot;&gt;&lt;/context:component-scan&gt;
-
-&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
-    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;&gt;&lt;/property&gt;
-    &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;
-&lt;/bean&gt;
-
-&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
-    &lt;property name=&quot;user&quot; value=&quot;${jdbc.user}&quot;&gt;&lt;/property&gt;
-    &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;&gt;&lt;/property&gt;
-    &lt;property name=&quot;driverClass&quot; value=&quot;${jdbc.driverClass}&quot;&gt;&lt;/property&gt;
-    &lt;property name=&quot;jdbcUrl&quot; value=&quot;${jdbc.jdbcUrl}&quot;&gt;&lt;/property&gt;
-    &lt;property name=&quot;initialPoolSize&quot; value=&quot;${jdbc.initPoolSize}&quot;&gt;&lt;/property&gt;
-    &lt;property name=&quot;maxPoolSize&quot; value=&quot;${jdbc.maxPoolSize}&quot;&gt;&lt;/property&gt;
-&lt;/bean&gt;
-
-&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
-    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
-    &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;com.example.springAndMybatis.mybatis&quot;&gt;&lt;/property&gt;
-    &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis.xml&quot;&gt;&lt;/property&gt;
-    &lt;!-- 扫描类路径下mapper下的所有xml --&gt;
-    &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/*.xml&quot;&gt;&lt;/property&gt;
-&lt;/bean&gt;
-
-&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
-    &lt;constructor-arg name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/constructor-arg&gt;
-&lt;/bean&gt;
-
-&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
-    &lt;property name=&quot;basePackage&quot; value=&quot;com.example.springAndMybatis.mybatis&quot;&gt;&lt;/property&gt;
-&lt;/bean&gt;
-
-&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
-&lt;mvc:annotation-driven  /&gt;
-&lt;mvc:default-servlet-handler/&gt;
-</code></pre><h2 id="jdbc-properties"><a href="#jdbc-properties" class="headerlink" title="jdbc.properties"></a>jdbc.properties</h2><pre><code>jdbc.user=root
-jdbc.password=123456
-jdbc.driverClass=com.mysql.jdbc.Driver
-jdbc.jdbcUrl=jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true
-jdbc.initPoolSize=5
-jdbc.maxPoolSize=10
-</code></pre><h2 id="mybatis-xml"><a href="#mybatis-xml" class="headerlink" title="mybatis.xml"></a>mybatis.xml</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE configuration
-  PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
-  &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
-&lt;configuration&gt;
-&lt;/configuration&gt;
-</code></pre><h2 id="UserMapper-xml"><a href="#UserMapper-xml" class="headerlink" title="UserMapper.xml"></a>UserMapper.xml</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
-&lt;mapper namespace=&quot;com.example.springAndMybatis.mybatis.UserMapper&quot;&gt;
-    &lt;select id=&quot;getUser&quot; parameterType=&quot;Integer&quot; resultType=&quot;com.example.springAndMybatis.model.User&quot;&gt;
-        select id, username, password, email from user where id = #{id}
-    &lt;/select&gt;
-
-    &lt;insert id=&quot;addUser&quot; parameterType=&quot;com.example.springAndMybatis.model.User&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;
-        insert into user(username, password, email) value(#{username}, #{password}, #{email})
-    &lt;/insert&gt;
-&lt;/mapper&gt;
-</code></pre><h2 id="UserMapper-java"><a href="#UserMapper-java" class="headerlink" title="UserMapper.java"></a>UserMapper.java</h2><pre><code>public interface UserMapper {
-
-    public User getUser(Integer id);
-
-    public void addUser(User user);
-}
-</code></pre><h2 id="UserService-java"><a href="#UserService-java" class="headerlink" title="UserService.java"></a>UserService.java</h2><pre><code>@Service
-@Transactional(readOnly=true)
-public class UserService {
-
-    @Autowired
-    private UserMapper userMapper;
-
-    public User getUser(Integer id) {
-        return userMapper.getUser(id);
-    }
-
-    @Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false, rollbackFor=Exception.class)
-    public void addUser(User user) {
-        userMapper.addUser(user);
-    }
-}
-</code></pre><h2 id="UserController-java"><a href="#UserController-java" class="headerlink" title="UserController.java"></a>UserController.java</h2><pre><code>@Controller
-public class UserController {
-
-    @Autowired
-    private UserService userService;
-
-    @RequestMapping(&quot;user&quot;)
-    public String user(@RequestParam(&quot;username&quot;) String username) {
-        System.out.println(&quot;username: &quot; + username);
-
-        User user = userService.getUser(1);
-        System.out.println(&quot;user: &quot; + user);
-
-        user = new User();
-        user.setUsername(&quot;zhaoliuxxx&quot;);
-        user.setPassword(&quot;123456&quot;);
-        user.setEmail(&quot;zhaoliu@qq.com&quot;);
-        userService.addUser(user);
-        System.out.println(&quot;result: &quot; + user.getId());
-
-        return &quot;user&quot;;
-    }
-}
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;mybatis整合spring和springmvc&quot;&gt;&lt;a href=&quot;#mybatis整合spring和springmvc&quot; class=&quot;headerlink&quot; title=&quot;mybatis整合spring和springmvc&quot;&gt;&lt;/a&gt;mybatis整合spring和springmvc&lt;/h1&gt;&lt;h2 id=&quot;新建Maven-webapps&quot;&gt;&lt;a href=&quot;#新建Maven-webapps&quot; class=&quot;headerlink&quot; title=&quot;新建Maven webapps&quot;&gt;&lt;/a&gt;新建Maven webapps&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;pom.xml&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;profiles&amp;gt;
-    &amp;lt;profile&amp;gt;
-        &amp;lt;activation&amp;gt;
-            &amp;lt;activeByDefault&amp;gt;true&amp;lt;/activeByDefault&amp;gt;
-            &amp;lt;jdk&amp;gt;1.8&amp;lt;/jdk&amp;gt;
-        &amp;lt;/activation&amp;gt;
-        &amp;lt;properties&amp;gt;
-            &amp;lt;project.build.sourceEncoding&amp;gt;UTF-8&amp;lt;/project.build.sourceEncoding&amp;gt;
-            &amp;lt;project.reporting.outputEncoding&amp;gt;UTF-8&amp;lt;/project.reporting.outputEncoding&amp;gt;
-            &amp;lt;maven.compiler.source&amp;gt;1.8&amp;lt;/maven.compiler.source&amp;gt;
-            &amp;lt;maven.compiler.target&amp;gt;1.8&amp;lt;/maven.compiler.target&amp;gt;
-            &amp;lt;maven.compiler.compilerVersion&amp;gt;1.8&amp;lt;/maven.compiler.compilerVersion&amp;gt;
-            &amp;lt;java.version&amp;gt;1.8&amp;lt;/java.version&amp;gt;
-            &amp;lt;mybatis.version&amp;gt;3.4.1&amp;lt;/mybatis.version&amp;gt;
-            &amp;lt;mysql.version&amp;gt;5.1.40&amp;lt;/mysql.version&amp;gt;
-            &amp;lt;log4j.version&amp;gt;1.2.17&amp;lt;/log4j.version&amp;gt;
-            &amp;lt;junit.version&amp;gt;4.12&amp;lt;/junit.version&amp;gt;
-            &amp;lt;mybatis.ehcache.version&amp;gt;1.1.0&amp;lt;/mybatis.ehcache.version&amp;gt;
-            &amp;lt;spring.version&amp;gt;4.3.7.RELEASE&amp;lt;/spring.version&amp;gt;
-            &amp;lt;servlet.api.version&amp;gt;3.1.0&amp;lt;/servlet.api.version&amp;gt;
-            &amp;lt;jstl.version&amp;gt;1.2&amp;lt;/jstl.version&amp;gt;
-            &amp;lt;jackson.version&amp;gt;2.8.7&amp;lt;/jackson.version&amp;gt;
-            &amp;lt;c3p0.version&amp;gt;0.9.5.2&amp;lt;/c3p0.version&amp;gt;
-            &amp;lt;mybatis.spring.version&amp;gt;1.3.1&amp;lt;/mybatis.spring.version&amp;gt;
-        &amp;lt;/properties&amp;gt;
-    &amp;lt;/profile&amp;gt;
-&amp;lt;/profiles&amp;gt;
-&amp;lt;dependencies&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;spring-context&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;spring-aspects&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;spring-web&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;spring-webmvc&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;javax.servlet&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;javax.servlet-api&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${servlet.api.version}&amp;lt;/version&amp;gt;
-        &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;javax.servlet&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;jstl&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${jstl.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;com.fasterxml.jackson.core&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;jackson-databind&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${jackson.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${mysql.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;spring-jdbc&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;com.mchange&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;c3p0&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${c3p0.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${mybatis.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;log4j&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${log4j.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;org.mybatis.caches&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;mybatis-ehcache&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${mybatis.ehcache.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;mybatis-spring&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${mybatis.spring.version}&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;${junit.version}&amp;lt;/version&amp;gt;
-        &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-&amp;lt;/dependencies&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;Maven -&amp;gt; Update project&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="mybatis" scheme="http://blog.golearns.org/categories/mybatis/"/>
-    
-    
-      <category term="springmvc" scheme="http://blog.golearns.org/tags/springmvc/"/>
-    
-      <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
-    
-      <category term="spring" scheme="http://blog.golearns.org/tags/spring/"/>
     
   </entry>
   
