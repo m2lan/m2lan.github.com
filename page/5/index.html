@@ -266,6 +266,133 @@
             
               
                 
+                <a class="post-title-link" href="/2016/02/26/centos-安装tsung压力测试工具/" itemprop="url">
+                  centos-安装tsung压力测试工具
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-26T00:20:51+08:00" content="2016-02-26">
+              2016-02-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/26/centos-安装tsung压力测试工具/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/centos-安装tsung压力测试工具/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Centos-安装Tsung压力测试工具"><a href="#Centos-安装Tsung压力测试工具" class="headerlink" title="Centos 安装Tsung压力测试工具"></a>Centos 安装Tsung压力测试工具</h1><h2 id="Tsung安装包、erlang安装包、Perl-生成报告所需模块-、图形库gnuplot等"><a href="#Tsung安装包、erlang安装包、Perl-生成报告所需模块-、图形库gnuplot等" class="headerlink" title="Tsung安装包、erlang安装包、Perl ( 生成报告所需模块)、图形库gnuplot等"></a>Tsung安装包、erlang安装包、Perl ( 生成报告所需模块)、图形库gnuplot等</h2><pre><code>yum install gd libpng zlib
+</code></pre><h2 id="安装erlang"><a href="#安装erlang" class="headerlink" title="安装erlang"></a>安装erlang</h2><pre><code>wget http://www.erlang.org/download/otp_src_R15B02.tar.gz
+tar xvzf otp_src_R15B02.tar.gz
+cd otp_src_R15B02
+./configure  
+// 这一步如果出现configure: error: /bin/sh &apos;/root/otp_src_R15B02/erts/configure&apos; failed for erts
+yum install ncurses-devel
+
+make
+make install
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/26/centos-安装tsung压力测试工具/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/02/26/centos-升级mysql/" itemprop="url">
                   centos-升级mysql
                 </a>
@@ -1392,166 +1519,6 @@ systemctl enable nginx
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/25/Linux-设备文件名/" itemprop="url">
-                  Linux-设备文件名
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-25T23:34:08+08:00" content="2016-02-25">
-              2016-02-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/25/Linux-设备文件名/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/Linux-设备文件名/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="各硬件设备在Linux中的文件名"><a href="#各硬件设备在Linux中的文件名" class="headerlink" title="各硬件设备在Linux中的文件名"></a>各硬件设备在Linux中的文件名</h1><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>目录</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>IDE硬盘</td>
-<td>/dev/hd[a-d]</td>
-</tr>
-<tr>
-<td>SCSI/SATA/USB硬盘</td>
-<td>/dev/sd[a-p]</td>
-</tr>
-<tr>
-<td>U盘</td>
-<td>/dev/sd[a-p]</td>
-</tr>
-<tr>
-<td>软驱</td>
-<td>/dev/fd[0-1]</td>
-</tr>
-<tr>
-<td>打印机</td>
-<td>25针:/dev/Ip[0-2],USB:/dev/usb/Ip[0-15]</td>
-</tr>
-<tr>
-<td>鼠标</td>
-<td>USB:/dev/usb/mouse[0-15],PS2:/dev/psaux</td>
-</tr>
-<tr>
-<td>当前CD ROM/DVD ROM</td>
-<td>/dev/cdrom</td>
-</tr>
-<tr>
-<td>当前鼠标</td>
-<td>/dev/mouse</td>
-</tr>
-<tr>
-<td>磁带机</td>
-<td>IDE:/dev/ht0,SCSI:/dev/st0</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1597,7 +1564,7 @@ systemctl enable nginx
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-count">90</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1614,7 +1581,7 @@ systemctl enable nginx
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

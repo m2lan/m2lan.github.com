@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-29T07:42:16.000Z</updated>
+  <updated>2017-05-29T14:34:23.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,341 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>搭建FTP服务器实现文件共享</title>
+    <link href="http://blog.golearns.org/2017/05/29/%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/"/>
+    <id>http://blog.golearns.org/2017/05/29/搭建FTP服务器实现文件共享/</id>
+    <published>2017-05-29T14:33:24.000Z</published>
+    <updated>2017-05-29T14:34:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux下搭建FTP服务器实现文件共享"><a href="#Linux下搭建FTP服务器实现文件共享" class="headerlink" title="Linux下搭建FTP服务器实现文件共享"></a>Linux下搭建FTP服务器实现文件共享</h1><blockquote>
+<p>文件传输协议</p>
+</blockquote>
+<h3 id="安装vsftp"><a href="#安装vsftp" class="headerlink" title="安装vsftp"></a>安装vsftp</h3><ul>
+<li><p>install</p>
+<pre><code>[root@m2lan150 ~]# rpm -ivh /mnt/Packages/vsftpd-2.2.2-11.el6_4.1.x86_64.rpm
+</code></pre></li>
+<li><p>配置文件</p>
+<pre><code>[root@m2lan150 ~]# ll /etc/vsftpd/vsftpd.conf
+</code></pre></li>
+<li><p>启动服务</p>
+<pre><code>[root@m2lan150 ~]# /etc/init.d/vsftpd start
+为 vsftpd 启动 vsftpd：                                    [确定]
+</code></pre></li>
+<li><p>设置开机启动</p>
+<pre><code>[root@m2lan150 ~]# chkconfig vsftpd on
+</code></pre></li>
+<li><p>查看端口</p>
+<pre><code>[root@m2lan150 ~]# netstat -antup | grep vsftpd
+tcp        0      0 0.0.0.0:21                  0.0.0.0:*                   LISTEN      15539/vsftpd
+</code></pre></li>
+<li><p>默认的共享路径</p>
+<pre><code>[root@m2lan150 ~]# ls /var/ftp/
+pub
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>windows下访问</p>
+<pre><code>ftp://192.168.0.150
+</code></pre></li>
+<li><p>170服务器安装lftp并访问</p>
+<pre><code>[root@m2lan170 ~]# rpm -ivh /mnt/Packages/lftp-4.0.9-1.el6.x86_64.rpm 
+warning: /mnt/Packages/lftp-4.0.9-1.el6.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID fd431d51: NOKEY
+Preparing...                ########################################### [100%]
+   1:lftp                   ########################################### [100%]
+
+[root@m2lan170 ~]# lftp 192.168.0.150
+lftp 192.168.0.150:~&gt; ls
+drwxr-xr-x    2 0        0            4096 Feb 12  2013 pub
+lftp 192.168.0.150:/&gt; exit
+</code></pre></li>
+</ul>
+<h3 id="部分配置文件说明"><a href="#部分配置文件说明" class="headerlink" title="部分配置文件说明"></a>部分配置文件说明</h3><ul>
+<li><p>/etc/vsftp/vsftp.conf</p>
+<pre><code># 是否允许匿名用户访问
+anonymous_enable=YES
+# 是否允许本机用户登陆
+local_enable=YES
+# 是否允许上传
+write_enable=YES
+# 是否允许匿名用户上传
+anon_upload_enable=YES
+# 是否允许匿名用户创建新的目录
+anon_mkdir_write_enable=YES
+</code></pre></li>
+</ul>
+<h3 id="允许匿名用户上传和下载"><a href="#允许匿名用户上传和下载" class="headerlink" title="允许匿名用户上传和下载"></a>允许匿名用户上传和下载</h3><ul>
+<li><p>备份配置文件</p>
+<pre><code>[root@m2lan150 ~]# cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak
+</code></pre></li>
+<li><p>配置</p>
+<pre><code>anonymous_enable=YES
+local_enable=YES
+write_enable=YES
+local_umask=022
+anon_upload_enable=YES
+anon_mkdir_write_enable=YES
+</code></pre></li>
+<li><p>创建datas目录</p>
+<pre><code>[root@m2lan150 ~]# mkdir /var/ftp/datas
+</code></pre></li>
+<li><p>修改datas目录所有者</p>
+<pre><code>[root@m2lan150 ~]# chown ftp /var/ftp/datas
+</code></pre></li>
+</ul>
+<h3 id="创建两个ftp账户ftpuser1和ftpuser2进行登陆验证并禁止匿名登陆"><a href="#创建两个ftp账户ftpuser1和ftpuser2进行登陆验证并禁止匿名登陆" class="headerlink" title="创建两个ftp账户ftpuser1和ftpuser2进行登陆验证并禁止匿名登陆"></a>创建两个ftp账户ftpuser1和ftpuser2进行登陆验证并禁止匿名登陆</h3><pre><code>[root@m2lan150 ~]# useradd -s /sbin/nologin ftpuser1
+[root@m2lan150 ~]# useradd -s /sbin/nologin ftpuser2
+
+[root@m2lan150 ~]# echo &apos;123456&apos; | passwd --stdin ftpuser1
+[root@m2lan150 ~]# echo &apos;123456&apos; | passwd --stdin ftpuser2
+</code></pre><ul>
+<li><p>配置</p>
+<pre><code># 禁止匿名登陆
+anonymous_enable=NO
+
+# 设置本地用户的根目录为/vsftp/html
+local_root=/vsftp/html
+# 开启chroot功能
+chroot_list_enable=YES
+# 设置锁定用户的列表文件，存放要锁定的用户名
+chroot_list_file=/etc/vsftpd/chroot_list
+</code></pre></li>
+<li><p>创建chroot_list</p>
+<pre><code>[root@m2lan150 ~]# touch /etc/vsftpd/chroot_list
+
+[root@m2lan150 ~]# cat !$
+cat /etc/vsftpd/chroot_list
+ftpuser1
+ftpuser2
+</code></pre></li>
+<li><p>创建/vsftp/html并修改权限</p>
+<pre><code>[root@m2lan150 ~]# mkdir -p /vsftp/html
+[root@m2lan150 ~]# ll -d /vsftp/html
+drwxr-xr-x 2 root root 4096 5月  29 17:47 /vsftp/html
+[root@m2lan150 ~]# chmod -R 0757 /vsftp/html/
+</code></pre></li>
+<li><p>重启服务</p>
+<pre><code>[root@m2lan150 ~]# service vsftpd restart
+关闭 vsftpd：                                              [确定]
+为 vsftpd 启动 vsftpd：                                    [确定]
+</code></pre></li>
+</ul>
+<h3 id="使用虚拟用户"><a href="#使用虚拟用户" class="headerlink" title="使用虚拟用户"></a>使用虚拟用户</h3><ul>
+<li>创建ftp和vip用户，根据不同等级限速<ul>
+<li>公共账户ftp用户只允许下载</li>
+<li>客户账户vip用户允许上传和下载</li>
+</ul>
+</li>
+<li><p>创建虚拟用户文件</p>
+<pre><code>[root@m2lan150 ~]# cat !$
+cat /etc/vsftpd/vvuser.txt
+ftp
+123456
+vip
+123456
+</code></pre></li>
+<li><p>生成数据库文件</p>
+<ul>
+<li>-T 转换</li>
+<li>-t hash加密</li>
+<li><p>-f 指定转换文件 </p>
+<p>  [root@m2lan150 ~]# db_load -T -t hash -f /etc/vsftpd/vvuser.txt /etc/vsftpd/vvuser.db</p>
+</li>
+</ul>
+</li>
+<li><p>修改数据库文件访问权限</p>
+<pre><code>[root@m2lan150 vsftpd]# chmod 600 vvuser.db
+</code></pre></li>
+<li><p>配置PAM文件</p>
+<ul>
+<li><p>为了使服务器能够使用数据库文件，对客户端进行身份验证，需要调用系统的PAM模块</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/pam.d/vsftpd 
+auth required /lib64/security/pam_userdb.so db=/etc/vsftpd/vvuser
+account required /lib64/security/pam_userdb.so db=/etc/vsftpd/vvuse
+</code></pre></li>
+</ul>
+</li>
+<li><p>创建虚拟账号对应的系统用户和ftp共享的目录</p>
+<ul>
+<li>对于公共账号和客户账号，因为需要配置不同的权限，所以可以将两个账号的目录进行隔离，控制用户的文件访问。</li>
+<li>公共账号<strong>ftp</strong>对应系统账户<strong>ftpuser</strong>，并将其主目录设置为/vsftp/ftp</li>
+<li><p>客户账号<strong>vip</strong>对应系统账户<strong>vipuser</strong>，并将其主目录设置为/vsftp/vip</p>
+<pre><code>[root@m2lan150 ~]# useradd -d /vsftp/ftp ftpuser
+[root@m2lan150 ~]# useradd -d /vsftp/vip vipuser
+
+# 设置权限
+# 设置ftp目录只有读权限
+[root@m2lan150 ~]# chmod -R 500 /vsftp/ftp/
+[root@m2lan150 ~]# ll -d !$
+ll -d /vsftp/ftp/
+dr-x------ 4 ftpuser ftpuser 4096 5月  29 18:33 /vsftp/ftp/
+
+# 设置vip目录有读写权限
+[root@m2lan150 ~]# chmod -R 700 /vsftp/vip/
+[root@m2lan150 ~]# ll -d !$
+ll -d /vsftp/vip/
+drwx------ 4 vipuser vipuser 4096 5月  29 18:33 /vsftp/vip/
+</code></pre></li>
+</ul>
+</li>
+<li><p>建立配置文件</p>
+<ul>
+<li><p>修改vsftpd.conf配置文件</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/vsftpd/vsftpd.conf | grep -v &apos;^$&apos; | grep -v &apos;^#&apos;
+anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+local_umask=022
+dirmessage_enable=YES
+xferlog_enable=YES
+connect_from_port_20=YES
+xferlog_std_format=YES
+listen=YES
+pam_service_name=vsftpd
+# 设置用户的配置文件目录
+user_config_dir=/etc/vsftpd/userconfig
+# 设置FTP服务器最大接入客户端为300个
+max_clients=300
+# 设置每个IP地址最大连接数为10个
+max_per_ip=10
+userlist_enable=YES
+tcp_wrappers=YES
+</code></pre></li>
+<li><p>在<code>user_config_dir</code>目录下为每个虚拟账号建立独立的配置文件</p>
+<pre><code># 创建目录
+[root@m2lan150 ~]# mkdir /etc/vsftpd/userconfig
+
+# 为两个账号创建配置文件
+[root@m2lan150 ~]# touch /etc/vsftpd/userconfig/ftp
+[root@m2lan150 ~]# touch /etc/vsftpd/userconfig/vip
+</code></pre></li>
+<li><p>公共账户ftp配置文件</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/vsftpd/userconfig/ftp
+# 开启虚拟账号登陆
+guest_enable=yes
+# 对应的系统账号
+guest_username=ftpuser
+# 不允许匿名账户浏览整个文件系统
+anon_world_readable_only=no
+# 最大传输速度，50kb/s
+anon_max_rate=50000
+</code></pre></li>
+<li><p>客户账户vip配置文件</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/vsftpd/userconfig/vip
+# 开启虚拟账号登陆
+guest_enable=yes
+# 对应的系统账号
+guest_username=vipuser
+# 不允许匿名账户浏览整个文件系统
+anon_world_readable_only=no
+# 允许在文件系统的写入权限
+write_enable=yes
+# 允许创建文件夹
+anon_mkdir_write_enable=yes
+# 开启匿名账号的上传功能
+anon_upload_enable=yes
+# 开启删除修改
+anon_other_write_enable=yes
+# 最大传输速度，100kb/s
+anon_max_rate=100000
+</code></pre></li>
+<li><p>重启服务</p>
+<pre><code>[root@m2lan150 ~]# service vsftpd restart
+关闭 vsftpd：                                              [确定]
+为 vsftpd 启动 vsftpd：                                    [确定]
+</code></pre></li>
+<li><p>windows测试，使用ftp工具</p>
+</li>
+<li><p>linux测试,使用lftp</p>
+<ul>
+<li>get下载文件</li>
+<li>mirror下载文件夹</li>
+<li>mirror -R 上传文件夹</li>
+<li>rm 删除文件或文件夹</li>
+<li><p>使用ftp用户登陆</p>
+<pre><code>[root@m2lan170 ~]# lftp 192.168.0.150 -u ftp,123456
+lftp ftp@192.168.0.150:~&gt; ls
+-rw-r--r--    1 0        0            1979 May 29 11:03 passwd
+drwxr-xr-x    2 0        0            4096 May 29 11:03 sh
+lftp ftp@192.168.0.150:/&gt; get passwd 
+1979 bytes transferred
+lftp ftp@192.168.0.150:/&gt; !ls
+anaconda-ks.cfg  install.log  install.log.syslog  passwd  xxx.txt  公共的  模板  视频  图片  文档  下载  音乐  桌面
+lftp ftp@192.168.0.150:/&gt; mirror sh/
+Total: 1 directory, 21 files, 0 symlinks              
+New: 21 files, 0 symlinks
+3872 bytes transferred
+lftp ftp@192.168.0.150:/&gt; !ls
+anaconda-ks.cfg  install.log  install.log.syslog  passwd  sh  xxx.txt  公共的  模板  视频  图片  文档  下载  音乐  桌面
+</code></pre></li>
+<li><p>使用vip用户登陆</p>
+<pre><code>[root@m2lan170 ~]# lftp 192.168.0.150 -u vip,123456
+lftp vip@192.168.0.150:~&gt; !ls
+anaconda-ks.cfg  install.log  install.log.syslog  passwd  sh  xxx.txt  公共的  模板  视频  图片  文档  下载  音乐  桌面
+lftp vip@192.168.0.150:~&gt; put install.log
+54118 bytes transferred                          
+lftp vip@192.168.0.150:/&gt; ls
+-rw-------    1 506      506         54118 May 29 14:22 install.log
+lftp vip@192.168.0.150:/&gt; mirror -R sh/
+Total: 1 directory, 21 files, 0 symlinks 
+New: 21 files, 0 symlinks
+3872 bytes transferred
+lftp vip@192.168.0.150:/&gt; ls
+-rw-------    1 506      506         54118 May 29 14:22 install.log
+drwx------    2 506      506          4096 May 29 14:25 sh
+lftp vip@192.168.0.150:/&gt; rm -f install.log 
+rm 成功, 删除 `install.log&apos;
+lftp vip@192.168.0.150:/&gt; ls
+drwx------    2 506      506          4096 May 29 14:25 sh
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Linux下搭建FTP服务器实现文件共享&quot;&gt;&lt;a href=&quot;#Linux下搭建FTP服务器实现文件共享&quot; class=&quot;headerlink&quot; title=&quot;Linux下搭建FTP服务器实现文件共享&quot;&gt;&lt;/a&gt;Linux下搭建FTP服务器实现文件共享&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;文件传输协议&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;安装vsftp&quot;&gt;&lt;a href=&quot;#安装vsftp&quot; class=&quot;headerlink&quot; title=&quot;安装vsftp&quot;&gt;&lt;/a&gt;安装vsftp&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;install&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# rpm -ivh /mnt/Packages/vsftpd-2.2.2-11.el6_4.1.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# ll /etc/vsftpd/vsftpd.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;启动服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# /etc/init.d/vsftpd start
+为 vsftpd 启动 vsftpd：                                    [确定]
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;设置开机启动&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# chkconfig vsftpd on
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看端口&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# netstat -antup | grep vsftpd
+tcp        0      0 0.0.0.0:21                  0.0.0.0:*                   LISTEN      15539/vsftpd
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;默认的共享路径&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# ls /var/ftp/
+pub
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+      <category term="FTP" scheme="http://blog.golearns.org/tags/FTP/"/>
+    
+  </entry>
   
   <entry>
     <title>samba服务配置实现文件共享</title>
@@ -2883,168 +3218,6 @@ public class UserController {
       <category term="jsonp" scheme="http://blog.golearns.org/tags/jsonp/"/>
     
       <category term="springmvc" scheme="http://blog.golearns.org/tags/springmvc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis逆向工程</title>
-    <link href="http://blog.golearns.org/2017/05/07/mybatis%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
-    <id>http://blog.golearns.org/2017/05/07/mybatis逆向工程/</id>
-    <published>2017-05-07T06:20:42.000Z</published>
-    <updated>2017-05-07T06:24:44.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="mybatis-逆向工程"><a href="#mybatis-逆向工程" class="headerlink" title="mybatis 逆向工程"></a>mybatis 逆向工程</h1><ul>
-<li>新建maven simple project</li>
-<li><p>pom.xml </p>
-<pre><code>&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;mysql&lt;/groupId&gt;
-        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-        &lt;version&gt;5.1.40&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
-        &lt;version&gt;3.4.1&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;log4j&lt;/groupId&gt;
-        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
-        &lt;version&gt;1.2.17&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;
-        &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;
-        &lt;version&gt;1.3.5&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;junit&lt;/groupId&gt;
-        &lt;artifactId&gt;junit&lt;/artifactId&gt;
-        &lt;version&gt;4.12&lt;/version&gt;
-        &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</code></pre></li>
-</ul>
-<a id="more"></a>    
-<ul>
-<li><p>创建generatorConfig.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE generatorConfiguration
-  PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;
-  &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;
-
-&lt;generatorConfiguration&gt;
-    &lt;!-- 无Example查询条件内容 --&gt;
-    &lt;context id=&quot;DB2Tables&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;
-    &lt;!-- 有Example查询条件内容 --&gt;
-    &lt;!-- &lt;context id=&quot;DB2Tables&quot; targetRuntime=&quot;MyBatis3&quot;&gt; --&gt;
-        &lt;commentGenerator&gt;
-            &lt;!-- 是否去除自动生成的注释 --&gt;
-            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot; /&gt;
-        &lt;/commentGenerator&gt;
-
-        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;
-            connectionURL=&quot;jdbc:mysql://localhost:3306/test&quot; userId=&quot;root&quot; password=&quot;123456&quot;&gt;
-        &lt;/jdbcConnection&gt;
-
-        &lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为Integer，
-            为true时把 JDBC DECIMAL 和 NUMERIC 解析为 java.math.BigDecimal--&gt;
-        &lt;javaTypeResolver&gt;
-            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot; /&gt;
-        &lt;/javaTypeResolver&gt;
-
-        &lt;!-- targetPackage: 生成Entity类的路径 --&gt;
-        &lt;javaModelGenerator targetPackage=&quot;com.example.mybatis.entity&quot;
-            targetProject=&quot;src&quot;&gt;
-            &lt;!-- 是否让schema作为包的后缀 --&gt;
-            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
-            &lt;!-- 从数据库返回的值被清理前后的空格 --&gt;
-            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;
-        &lt;/javaModelGenerator&gt;
-
-        &lt;!-- 映射文件生成的路径 --&gt;
-        &lt;sqlMapGenerator targetPackage=&quot;com.example.mybatis.mapper&quot;
-            targetProject=&quot;src&quot;&gt;
-            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
-        &lt;/sqlMapGenerator&gt;
-
-        &lt;!-- mapper接口生成的路径 --&gt;
-        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot;
-            targetPackage=&quot;com.example.mybatis.mapper&quot; targetProject=&quot;src&quot;&gt;
-            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
-        &lt;/javaClientGenerator&gt;
-
-        &lt;!-- 数据库表名字和entity类映射 --&gt;
-        &lt;table tableName=&quot;user&quot; domainObjectName=&quot;User&quot;&gt;&lt;/table&gt;
-        &lt;!-- &lt;table tableName=&quot;user&quot; domainObjectName=&quot;User&quot;&gt;&lt;/table&gt;
-        &lt;table tableName=&quot;user&quot; domainObjectName=&quot;User&quot;&gt;&lt;/table&gt;
-        &lt;table tableName=&quot;user&quot; domainObjectName=&quot;User&quot;&gt;&lt;/table&gt;
-        &lt;table tableName=&quot;user&quot; domainObjectName=&quot;User&quot;&gt;&lt;/table&gt; --&gt;
-
-    &lt;/context&gt;
-&lt;/generatorConfiguration&gt;
-</code></pre><ul>
-<li><p>新建Main.java</p>
-<pre><code>public static void main(String[] args) throws Exception {
-    List&lt;String&gt; warnings = new ArrayList&lt;String&gt;();
-    boolean overwrite = true;
-    URL url = ClassLoader.getSystemResource(&quot;generatorConfig.xml&quot;);
-    File configFile = new File(url.toURI());
-    ConfigurationParser cp = new ConfigurationParser(warnings);
-    Configuration config = cp.parseConfiguration(configFile);
-    DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-    MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
-    myBatisGenerator.generate(null);
-}
-</code></pre></li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;mybatis-逆向工程&quot;&gt;&lt;a href=&quot;#mybatis-逆向工程&quot; class=&quot;headerlink&quot; title=&quot;mybatis 逆向工程&quot;&gt;&lt;/a&gt;mybatis 逆向工程&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;新建maven simple project&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;pom.xml &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;dependencies&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;5.1.40&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;3.4.1&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;log4j&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;1.2.17&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;org.mybatis.generator&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;mybatis-generator-core&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;1.3.5&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;4.12&amp;lt;/version&amp;gt;
-        &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
-    &amp;lt;/dependency&amp;gt;
-&amp;lt;/dependencies&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="mybatis" scheme="http://blog.golearns.org/categories/mybatis/"/>
-    
-    
-      <category term="mybatis" scheme="http://blog.golearns.org/tags/mybatis/"/>
     
   </entry>
   

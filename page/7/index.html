@@ -266,6 +266,135 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/Shell-包含文件/" itemprop="url">
+                  Shell-包含文件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:16:28+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-包含文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-包含文件/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code># shell 中包含外部脚本，可以使用
+# 1. . filename
+# 2. source filename
+# 现在新建一个脚本test.sh，内容如下
+
+USERNAME=&quot;john&quot;
+PASSWORD=&quot;123456&quot;
+
+# 再新建一个include.sh，内容如下
+
+#!/bin/bash
+
+. ./test.sh
+
+echo $USERNAME  # 输出john
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/Shell-算术运算符-字符串操作/" itemprop="url">
                   Shell-算术运算符+字符串操作
                 </a>
@@ -1666,127 +1795,6 @@ return sortArray;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/redis优化/" itemprop="url">
-                  redis优化
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:00:33+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/redis优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/redis优化/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="redis优化"><a href="#redis优化" class="headerlink" title="redis优化"></a>redis优化</h2><ul>
-<li>在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。</li>
-<li>客户端请求服务器一次就发送一个报文 -&gt; 等待服务端的返回 -&gt; 关闭连接</li>
-<li>如果是100个请求、1000个请求，那就得请求100次、1000次</li>
-<li>所以使用多个请求的时候使用管道来操作(<code>如果管道打包的命令太多占用的内存也会越大，适量</code>)
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/10/redis优化/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1832,7 +1840,7 @@ return sortArray;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-count">90</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1849,7 +1857,7 @@ return sortArray;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

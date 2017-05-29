@@ -266,6 +266,148 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/29/搭建FTP服务器实现文件共享/" itemprop="url">
+                  搭建FTP服务器实现文件共享
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-29T22:33:24+08:00" content="2017-05-29">
+              2017-05-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/29/搭建FTP服务器实现文件共享/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/29/搭建FTP服务器实现文件共享/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Linux下搭建FTP服务器实现文件共享"><a href="#Linux下搭建FTP服务器实现文件共享" class="headerlink" title="Linux下搭建FTP服务器实现文件共享"></a>Linux下搭建FTP服务器实现文件共享</h1><blockquote>
+<p>文件传输协议</p>
+</blockquote>
+<h3 id="安装vsftp"><a href="#安装vsftp" class="headerlink" title="安装vsftp"></a>安装vsftp</h3><ul>
+<li><p>install</p>
+<pre><code>[root@m2lan150 ~]# rpm -ivh /mnt/Packages/vsftpd-2.2.2-11.el6_4.1.x86_64.rpm
+</code></pre></li>
+<li><p>配置文件</p>
+<pre><code>[root@m2lan150 ~]# ll /etc/vsftpd/vsftpd.conf
+</code></pre></li>
+<li><p>启动服务</p>
+<pre><code>[root@m2lan150 ~]# /etc/init.d/vsftpd start
+为 vsftpd 启动 vsftpd：                                    [确定]
+</code></pre></li>
+<li><p>设置开机启动</p>
+<pre><code>[root@m2lan150 ~]# chkconfig vsftpd on
+</code></pre></li>
+<li><p>查看端口</p>
+<pre><code>[root@m2lan150 ~]# netstat -antup | grep vsftpd
+tcp        0      0 0.0.0.0:21                  0.0.0.0:*                   LISTEN      15539/vsftpd
+</code></pre></li>
+<li><p>默认的共享路径</p>
+<pre><code>[root@m2lan150 ~]# ls /var/ftp/
+pub
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/29/搭建FTP服务器实现文件共享/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/29/samba服务配置实现文件共享/" itemprop="url">
                   samba服务配置实现文件共享
                 </a>
@@ -1634,166 +1776,6 @@ dbus:x:81:81:System messages bus:/:/sbin/nologin
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/21/Exchanger/" itemprop="url">
-                  Exchanger
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-21T16:44:47+08:00" content="2017-05-21">
-              2017-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/并发/" itemprop="url" rel="index">
-                    <span itemprop="name">并发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/21/Exchanger/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/Exchanger/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java并发编程类Exchanger"><a href="#Java并发编程类Exchanger" class="headerlink" title="Java并发编程类Exchanger"></a>Java并发编程类Exchanger</h1><pre><code>/**
- * Exchanger用于两个线程之间的数据交换
- * 线程会阻塞在Exchanger的exchange方法上
- * 直到另外一个线程也到达同一个Exchanger的exchange方法上
- * 二者进行交换
- * 无论谁先到达Exchanger的exchange方法，都会等待另外一个线程也到达，然后交换数据
- */
-public class ExchangerDemo1 {
-
-    public static void main(String[] args) {
-        final Exchanger&lt;List&lt;Integer&gt;&gt; exchanger = new Exchanger&lt;&gt;();
-
-        Runnable runnable1 = () -&gt; {
-            List&lt;Integer&gt; lists = new ArrayList&lt;&gt;();
-            lists.add(1);
-            lists.add(2);
-
-            try {
-                lists = exchanger.exchange(lists);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println(&quot;aa[1, 2] &quot; + lists);
-        };
-
-        Runnable runnable2 = () -&gt; {
-            List&lt;Integer&gt; lists = new ArrayList&lt;&gt;();
-            lists.add(3);
-            lists.add(4);
-
-            try {
-                lists = exchanger.exchange(lists);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println(&quot;bb[3, 4] &quot; + lists);
-        };
-
-        ExecutorService service = Executors.newFixedThreadPool(3);
-        service.execute(runnable1);
-        service.execute(runnable2);
-        service.shutdown();
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1839,7 +1821,7 @@ public class ExchangerDemo1 {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-count">90</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1856,7 +1838,7 @@ public class ExchangerDemo1 {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
