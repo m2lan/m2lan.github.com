@@ -64,7 +64,7 @@
 <meta property="og:url" content="http://blog.golearns.org/2017/05/30/搭建DNS服务器实现域名解析/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Linux搭建DNS服务器实现域名解析 域名系统，可以提供域名与IP地址的解析服务。  BIND实现DNS服务器搭建 install # 主程序 [root@m2lan150 ~]# rpm -ivh /mnt/Packages/bind-9.8.2-0.17.rc1.el6_4.6.x86_64.rpm # 提高安全性 [root@m2lan150 ~]# rpm -ivh /mnt/Packa">
-<meta property="og:updated_time" content="2017-05-30T05:54:36.000Z">
+<meta property="og:updated_time" content="2017-05-30T07:12:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建DNS服务器实现域名解析">
 <meta name="twitter:description" content="Linux搭建DNS服务器实现域名解析 域名系统，可以提供域名与IP地址的解析服务。  BIND实现DNS服务器搭建 install # 主程序 [root@m2lan150 ~]# rpm -ivh /mnt/Packages/bind-9.8.2-0.17.rc1.el6_4.6.x86_64.rpm # 提高安全性 [root@m2lan150 ~]# rpm -ivh /mnt/Packa">
@@ -436,8 +436,7 @@ include &quot;/etc/named.root.key&quot;;
 <pre><code>[root@m2lan150 ~]# cd /var/named/chroot/var/named/
 [root@m2lan150 named]# cp -p named.localhost m2lan.org.zone
 </code></pre></li>
-<li><p>配置m2lan.org.zone文件</p>
-<ul>
+<li>配置m2lan.org.zone文件<ul>
 <li>$TTL 1D: 设置有效地址解析记录的默认缓存时间，默认为1天1D</li>
 <li>@表示当前的域m2lan.org.</li>
 <li>设置SOA记录为: dns.m2lan.org.</li>
@@ -447,42 +446,70 @@ include &quot;/etc/named.root.key&quot;;
 <li>1H ; retry: 重试延时，从域名服务器更新地址数据库失败以后，等待多长时间，默认为1小时</li>
 <li>1W ; expire: 到期，失效时间，超过该时间仍无法更新地址数据库，则不再尝试，默认为一周</li>
 <li>3H ) ; minimum: 设置无效地址解析记录(该数据库中不存在的地址)默认缓存时间。设置无效记录，最少缓存时间为3小时</li>
-<li><p>资源记录参数</p>
-<p>|参数|描述|
-|:—-:|—-|
-|SOA|区域授权起始记录，区域文件第一条记录，而且一个区域文件只能有一条|
-|NS|域的授权名称服务器|
-|MX|域的邮件交换器，要跟着一个优先级值，越小越高|
-|A|IPV4主机地址|
-|AAAA|IPV6主机地址|
-|PTR|解析IP的指针|
-|CNAME|权威(正式)名称，定义别名记录|</p>
-<p>  [root@m2lan150 named]# cat !$
-  cat m2lan.org.zone
-  $TTL 1D
-  m2lan.org.    IN SOA    dns.m2lan.org. root.m2lan.org. (</p>
-<pre><code>0    ; serial
-1D    ; refresh
-1H    ; retry
-1W    ; expire
-3H )    ; minimum
-</code></pre><p>  m2lan.org.    NS    dns.m2lan.org.
-  dns.m2lan.org.    A    192.168.0.150
-  www.m2lan.org.   A       192.168.0.150
-  www1.m2lan.org.  CNAME       www.m2lan.org.</p>
-</li>
+<li>资源记录参数</li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">SOA</td>
+<td>区域授权起始记录，区域文件第一条记录，而且一个区域文件只能有一条</td>
+</tr>
+<tr>
+<td style="text-align:center">NS</td>
+<td>域的授权名称服务器</td>
+</tr>
+<tr>
+<td style="text-align:center">MX</td>
+<td>域的邮件交换器，要跟着一个优先级值，越小越高</td>
+</tr>
+<tr>
+<td style="text-align:center">A</td>
+<td>IPV4主机地址</td>
+</tr>
+<tr>
+<td style="text-align:center">AAAA</td>
+<td>IPV6主机地址</td>
+</tr>
+<tr>
+<td style="text-align:center">PTR</td>
+<td>解析IP的指针</td>
+</tr>
+<tr>
+<td style="text-align:center">CNAME</td>
+<td>权威(正式)名称，定义别名记录</td>
+</tr>
+</tbody>
+</table>
+<pre><code>[root@m2lan150 named]# cat m2lan.org.zone
+$TTL 1D
+m2lan.org.    IN SOA    dns.m2lan.org. root.m2lan.org. (
+                    0    ; serial
+                    1D    ; refresh
+                    1H    ; retry
+                    1W    ; expire
+                    3H )    ; minimum
+m2lan.org.    NS    dns.m2lan.org.
+dns.m2lan.org.    A    192.168.0.150
+www.m2lan.org.   A       192.168.0.150
+www1.m2lan.org.  CNAME       www.m2lan.org.
+</code></pre><ul>
 <li><p>重启named服务</p>
 <pre><code>[root@m2lan150 ~]# service named restart
 停止 named：.                                              [确定]
 启动 named：                                               [确定]
 </code></pre></li>
 <li><p>修改本机的dns地址</p>
-<pre><code>[root@m2lan150 ~]# cat !$
-cat /etc/sysconfig/network-scripts/ifcfg-eth0
+<pre><code>[root@m2lan150 ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 TYPE=Ethernet
 UUID=66cce682-8059-4f3e-b8e4-29a171e3bfaf
