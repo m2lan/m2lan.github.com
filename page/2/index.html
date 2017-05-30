@@ -266,6 +266,217 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/25/sed/" itemprop="url">
+                  sed
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-25T23:15:24+08:00" content="2017-05-25">
+              2017-05-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/25/sed/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/sed/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Linux下的sed使用"><a href="#Linux下的sed使用" class="headerlink" title="Linux下的sed使用"></a>Linux下的sed使用</h1><blockquote>
+<p>流编辑器，sed编辑器是一行一行处理文件内容。正在处理的内容放入缓冲区内
+处理完成后根据选项进行输出或文件修改</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-n</td>
+<td>抑制自动(默认)输出，读取下一个输入行</td>
+</tr>
+<tr>
+<td style="text-align:center">-i</td>
+<td>编辑文件内容</td>
+</tr>
+<tr>
+<td style="text-align:center">-e</td>
+<td>执行多次</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td>在匹配后追加</td>
+</tr>
+<tr>
+<td style="text-align:center">i</td>
+<td>在匹配后插入</td>
+</tr>
+<tr>
+<td style="text-align:center">p</td>
+<td>打印</td>
+</tr>
+<tr>
+<td style="text-align:center">d</td>
+<td>删除</td>
+</tr>
+<tr>
+<td style="text-align:center">w</td>
+<td>另存</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td>替换</td>
+</tr>
+<tr>
+<td style="text-align:center">s</td>
+<td>查找</td>
+</tr>
+<tr>
+<td style="text-align:center">h/H</td>
+<td>复制copy</td>
+</tr>
+<tr>
+<td style="text-align:center">g/G</td>
+<td>粘贴</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s命令"><a href="#s命令" class="headerlink" title="s命令"></a>s命令</h3><ul>
+<li><p>查找替换</p>
+<pre><code># 将root替换为boot
+[root@m2 ~]# sed &apos;s/root/boot/&apos; passwd | grep boot --color
+boot:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+
+# 将所有root替换为boot,g表示替换所有
+[root@m2 ~]# sed &apos;s/root/boot/g&apos; passwd | grep boot --color
+boot:x:0:0:boot:/boot:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+
+# 给查找的目标内容添加括号,&amp;表示查找的内容
+[root@m2 ~]# sed &apos;s/root/(&amp;)/&apos; passwd | grep &apos;(root)&apos; --color
+(root):x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/(root):/sbin/nologin
+
+# 给所有行添加注释
+[root@m2 ~]# sed &apos;s/^[a-zA-Z]/#&amp;/&apos; passwd 
+#root:x:0:0:root:/root:/bin/bash
+#bin:x:1:1:bin:/bin:/sbin/nologin
+
+# 多次替换,-e
+[root@m2 ~]# sed -e &apos;s/root/boot/&apos; -e &apos;s/message/messages/&apos; passwd | grep &quot;\&lt;boot\|messages\&gt;&quot; --color
+boot:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/boot:/sbin/nologin
+dbus:x:81:81:System messages bus:/:/sbin/nologin
+
+# 替换指定行
+[root@m2 ~]# sed &apos;1,5s/root/boot/&apos; passwd | grep boot --color -n
+1:boot:x:0:0:root:/root:/bin/bash
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/25/sed/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/21/Exchanger/" itemprop="url">
                   Exchanger
                 </a>
@@ -1618,147 +1829,11 @@ public class Counter2 {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/07/jsonp/" itemprop="url">
-                  jsonp
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-07T15:34:55+08:00" content="2017-05-07">
-              2017-05-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/jsonp/" itemprop="url" rel="index">
-                    <span itemprop="name">jsonp</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/07/jsonp/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/jsonp/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h1><h2 id="新建一个web客户端"><a href="#新建一个web客户端" class="headerlink" title="新建一个web客户端"></a>新建一个web客户端</h2><ul>
-<li><p>index.jsp</p>
-<pre><code>&lt;html&gt;
-    &lt;body&gt;
-        &lt;script src=&quot;https://cdn.staticfile.org/jquery/2.1.1/jquery.js&quot;&gt;&lt;/script&gt;
-        &lt;script&gt;
-        $(function() {
-            $.ajax({
-                url: &apos;http://192.168.0.1:8080/spring_mybatis/getUser?callback=?&apos;,
-                dataType: &apos;jsonp&apos;,
-                success: function(data) {
-                    console.log(data)
-                }
-            });
-        });
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/07/jsonp/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1799,7 +1874,7 @@ public class Counter2 {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">90</span>
+              <span class="site-state-item-count">91</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1816,7 +1891,7 @@ public class Counter2 {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

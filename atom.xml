@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-05-29T14:34:23.000Z</updated>
+  <updated>2017-05-30T05:54:36.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -14,6 +14,583 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>搭建DNS服务器实现域名解析</title>
+    <link href="http://blog.golearns.org/2017/05/30/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/"/>
+    <id>http://blog.golearns.org/2017/05/30/搭建DNS服务器实现域名解析/</id>
+    <published>2017-05-30T05:53:40.000Z</published>
+    <updated>2017-05-30T05:54:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux搭建DNS服务器实现域名解析"><a href="#Linux搭建DNS服务器实现域名解析" class="headerlink" title="Linux搭建DNS服务器实现域名解析"></a>Linux搭建DNS服务器实现域名解析</h1><blockquote>
+<p>域名系统，可以提供域名与IP地址的解析服务。</p>
+</blockquote>
+<h3 id="BIND实现DNS服务器搭建"><a href="#BIND实现DNS服务器搭建" class="headerlink" title="BIND实现DNS服务器搭建"></a>BIND实现DNS服务器搭建</h3><ul>
+<li><p>install</p>
+<pre><code># 主程序
+[root@m2lan150 ~]# rpm -ivh /mnt/Packages/bind-9.8.2-0.17.rc1.el6_4.6.x86_64.rpm
+# 提高安全性
+[root@m2lan150 ~]# rpm -ivh /mnt/Packages/bind-chroot-9.8.2-0.17.rc1.el6_4.6.x86_64.rpm
+</code></pre></li>
+<li><p>配置文件</p>
+<pre><code># 包含bind的基本配置
+[root@m2lan150 ~]# ls /etc/named.conf 
+/etc/named.conf
+</code></pre></li>
+<li><p>启动服务</p>
+<pre><code># 启动的时候卡在这个地方
+[root@m2lan150 ~]# /etc/init.d/named start
+Generating /etc/rndc.key:
+
+# 启动bind时，需要生产rndc.key，使用手动生成
+[root@m2lan150 ~]# rndc-confgen -r /dev/urandom -a
+wrote key file &quot;/etc/rndc.key&quot;
+
+# 再次启动
+[root@m2lan150 ~]# /etc/init.d/named start
+启动 named：                                               [确定]
+</code></pre></li>
+<li><p>启动后查看挂载，开启named服务后，会自动挂载，调用chroot功能切换根</p>
+<pre><code>[root@m2lan150 ~]# mount | grep named
+/etc/named on /var/named/chroot/etc/named type none (rw,bind)
+/var/named on /var/named/chroot/var/named type none (rw,bind)
+/etc/named.conf on /var/named/chroot/etc/named.conf type none (rw,bind)
+/etc/named.rfc1912.zones on /var/named/chroot/etc/named.rfc1912.zones type none (rw,bind)
+/etc/rndc.key on /var/named/chroot/etc/rndc.key type none (rw,bind)
+/usr/lib64/bind on /var/named/chroot/usr/lib64/bind type none (rw,bind)
+/etc/named.iscdlv.key on /var/named/chroot/etc/named.iscdlv.key type none (rw,bind)
+/etc/named.root.key on /var/named/chroot/etc/named.root.key type none (rw,bind)
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<h3 id="修改配置，解析m2lan-org"><a href="#修改配置，解析m2lan-org" class="headerlink" title="修改配置，解析m2lan.org"></a>修改配置，解析m2lan.org</h3><ul>
+<li>配置文件<code>/var/named/chroot/etc/named.conf</code></li>
+<li><p>named.conf分为三段</p>
+<ul>
+<li>options: 对全局生效</li>
+<li>logging: 日志的配置</li>
+<li>zone: 针对某个区域生效</li>
+</ul>
+</li>
+<li><p>配置正向解析区域</p>
+<ul>
+<li>授权DNS服务器管理m2lan.org区域，并把该区域的区域文件命名为m2lan.org.zone</li>
+<li><p>修改</p>
+<pre><code>[root@m2lan150 named]# cat /var/named/chroot/etc/named.conf
+
+options {
+    # any监听任意端口、任意IP地址
+    listen-on port 53 { any; };
+    listen-on-v6 port 53 { any; };
+    directory     &quot;/var/named&quot;;
+    dump-file     &quot;/var/named/data/cache_dump.db&quot;;
+        statistics-file &quot;/var/named/data/named_stats.txt&quot;;
+        memstatistics-file &quot;/var/named/data/named_mem_stats.txt&quot;;
+    # 允许所有人都可以查询
+    allow-query     { any; };
+    # 是否支持递归查询，默认是支持递归的，公网一般修改为no
+    recursion yes;
+
+    # DNS查询的时候是否支持安全的方式查询，如果允许的话，需要通过密钥的方式
+    dnssec-enable yes;
+    dnssec-validation yes;
+    dnssec-lookaside auto;
+
+    /* Path to ISC DLV key */
+    bindkeys-file &quot;/etc/named.iscdlv.key&quot;;
+
+    managed-keys-directory &quot;/var/named/dynamic&quot;;
+};
+
+logging {
+        channel default_debug {
+                file &quot;data/named.run&quot;;
+                severity dynamic;
+        };
+};
+
+zone &quot;.&quot; IN {
+    type hint;
+    file &quot;named.ca&quot;;
+};
+
+# 指定一个区域管理，管理m2lan.org
+zone &quot;m2lan.org&quot; IN {
+    # master表示主域名服务器, slave表示从域名服务器
+    type master;
+    # 指定区域文件
+    file &quot;m2lan.org.zone&quot;;
+};
+include &quot;/etc/named.rfc1912.zones&quot;;
+include &quot;/etc/named.root.key&quot;;
+</code></pre></li>
+<li><p>copy配置文件为m2lan.org.zone，并保持源文件权限-p</p>
+<pre><code>[root@m2lan150 ~]# cd /var/named/chroot/var/named/
+[root@m2lan150 named]# cp -p named.localhost m2lan.org.zone
+</code></pre></li>
+<li><p>配置m2lan.org.zone文件</p>
+<ul>
+<li>$TTL 1D: 设置有效地址解析记录的默认缓存时间，默认为1天1D</li>
+<li>@表示当前的域m2lan.org.</li>
+<li>设置SOA记录为: dns.m2lan.org.</li>
+<li>域管理邮箱root.m2lan.org., 由于@有其他含义，所以用”.”代替@</li>
+<li>0 ; serial: 更新序列号，用于标识数据库的变换，可以在10位以内，如果存在辅助DNS区域，建议每次更新玩数据库，手动加1.</li>
+<li>1D ; refresh: 刷新时间，从域名服务器更新该地址数据库文件的间隔时间，默认为1天</li>
+<li>1H ; retry: 重试延时，从域名服务器更新地址数据库失败以后，等待多长时间，默认为1小时</li>
+<li>1W ; expire: 到期，失效时间，超过该时间仍无法更新地址数据库，则不再尝试，默认为一周</li>
+<li>3H ) ; minimum: 设置无效地址解析记录(该数据库中不存在的地址)默认缓存时间。设置无效记录，最少缓存时间为3小时</li>
+<li><p>资源记录参数</p>
+<p>|参数|描述|
+|:—-:|—-|
+|SOA|区域授权起始记录，区域文件第一条记录，而且一个区域文件只能有一条|
+|NS|域的授权名称服务器|
+|MX|域的邮件交换器，要跟着一个优先级值，越小越高|
+|A|IPV4主机地址|
+|AAAA|IPV6主机地址|
+|PTR|解析IP的指针|
+|CNAME|权威(正式)名称，定义别名记录|</p>
+<p>  [root@m2lan150 named]# cat !$
+  cat m2lan.org.zone
+  $TTL 1D
+  m2lan.org.    IN SOA    dns.m2lan.org. root.m2lan.org. (</p>
+<pre><code>0    ; serial
+1D    ; refresh
+1H    ; retry
+1W    ; expire
+3H )    ; minimum
+</code></pre><p>  m2lan.org.    NS    dns.m2lan.org.
+  dns.m2lan.org.    A    192.168.0.150
+  www.m2lan.org.   A       192.168.0.150
+  www1.m2lan.org.  CNAME       www.m2lan.org.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>重启named服务</p>
+<pre><code>[root@m2lan150 ~]# service named restart
+停止 named：.                                              [确定]
+启动 named：                                               [确定]
+</code></pre></li>
+<li><p>修改本机的dns地址</p>
+<pre><code>[root@m2lan150 ~]# cat !$
+cat /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+TYPE=Ethernet
+UUID=66cce682-8059-4f3e-b8e4-29a171e3bfaf
+ONBOOT=yes
+NM_CONTROLLED=yes
+BOOTPROTO=none
+IPADDR=192.168.0.150
+PREFIX=24
+GATEWAY=192.168.0.1
+#DNS1=192.168.0.1
+DNS1=192.168.0.150
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=yes
+IPV6INIT=no
+NAME=&quot;System eth0&quot;
+HWADDR=00:0c:29:25:5f:a1
+NETMASK=255.255.255.0
+USERCTL=no
+</code></pre></li>
+<li><p>重启network</p>
+<pre><code>[root@m2lan150 ~]# service network restart
+</code></pre></li>
+<li><p>ping www.m2lan.org</p>
+<pre><code>[root@m2lan150 ~]# ping -c 3 www.m2lan.org
+PING www.m2lan.org (192.168.0.150) 56(84) bytes of data.
+64 bytes from m2lan150.com (192.168.0.150): icmp_seq=1 ttl=64 time=0.016 ms
+64 bytes from m2lan150.com (192.168.0.150): icmp_seq=2 ttl=64 time=0.034 ms
+64 bytes from m2lan150.com (192.168.0.150): icmp_seq=3 ttl=64 time=0.038 ms
+
+--- www.m2lan.org ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 1998ms
+rtt min/avg/max/mdev = 0.016/0.029/0.038/0.010 ms
+</code></pre></li>
+</ul>
+<h3 id="使DNS支持递归查询"><a href="#使DNS支持递归查询" class="headerlink" title="使DNS支持递归查询"></a>使DNS支持递归查询</h3><ul>
+<li><p>配置<code>/var/named/chroot/etc/named.conf</code></p>
+<pre><code># 是否支持递归查询，默认是支持递归的，公网一般修改为no
+recursion yes;
+# DNS查询的时候是否支持安全的方式查询，如果允许的话，需要通过密钥的方式
+# 需要将一下三条注释，这样客户端才能通过这个DNS进行递归查询。
+#dnssec-enable yes;
+#dnssec-validation yes;
+#dnssec-lookaside auto;
+</code></pre></li>
+<li><p>重启named服务</p>
+<pre><code>[root@m2lan150 ~]# service named restart
+</code></pre></li>
+<li><p>将170服务器的DNS修改为192.168.0.150</p>
+<pre><code>[root@m2lan170 ~]# vim /etc/sysconfig/network-scripts/ifcfg-eth0
+DNS1=192.168.0.150
+</code></pre></li>
+<li><p>重启network</p>
+<pre><code>[root@m2lan170 ~]# service network restart
+</code></pre></li>
+<li><p>ping www.m2lan.org</p>
+<pre><code>[root@m2lan170 ~]# ping www.m2lan.org
+</code></pre></li>
+</ul>
+<h3 id="搭建DNS转发服务器"><a href="#搭建DNS转发服务器" class="headerlink" title="搭建DNS转发服务器"></a>搭建DNS转发服务器</h3><ul>
+<li><p>配置</p>
+<pre><code>[root@m2lan150 ~]# cat /var/named/chroot/etc/named.conf | grep -v &apos;$#&apos; | grep -v &apos;^$&apos;
+options {
+    listen-on port 53 { any; };
+    listen-on-v6 port 53 { any; };
+    directory     &quot;/var/named&quot;;
+    dump-file     &quot;/var/named/data/cache_dump.db&quot;;
+        statistics-file &quot;/var/named/data/named_stats.txt&quot;;
+        memstatistics-file &quot;/var/named/data/named_mem_stats.txt&quot;;
+    allow-query     { any; };
+    recursion yes;
+    #dnssec-enable yes;
+    #dnssec-validation yes;
+    #dnssec-lookaside auto;
+
+    # 增加两行
+    # 仅支持转发操作。only: 仅转发，first: 先查找本地zone再转发
+    forward only;
+    # 将所有请求过来的地址转发到8.8.8.8
+    forwarders {8.8.8.8;};
+    /* Path to ISC DLV key */
+    bindkeys-file &quot;/etc/named.iscdlv.key&quot;;
+    managed-keys-directory &quot;/var/named/dynamic&quot;;
+};
+logging {
+        channel default_debug {
+                file &quot;data/named.run&quot;;
+                severity dynamic;
+        };
+};
+zone &quot;.&quot; IN {
+    type hint;
+    file &quot;named.ca&quot;;
+};
+
+include &quot;/etc/named.rfc1912.zones&quot;;
+include &quot;/etc/named.root.key&quot;;
+</code></pre></li>
+<li><p>重启服务后在170服务器测试</p>
+</li>
+</ul>
+<h3 id="搭建DNS主从服务器"><a href="#搭建DNS主从服务器" class="headerlink" title="搭建DNS主从服务器"></a>搭建DNS主从服务器</h3><blockquote>
+<p><strong>150服务器为主DNS服务器，170服务器为从DNS服务器</strong></p>
+</blockquote>
+<ul>
+<li><p>主服务器的配置</p>
+<pre><code>[root@m2lan150 etc]# cat /var/named/chroot/etc/named.conf | grep -v &apos;^#&apos; | grep -v &apos;^$&apos;
+options {
+    listen-on port 53 { any; };
+    listen-on-v6 port 53 { any; };
+    directory     &quot;/var/named&quot;;
+    dump-file     &quot;/var/named/data/cache_dump.db&quot;;
+        statistics-file &quot;/var/named/data/named_stats.txt&quot;;
+        memstatistics-file &quot;/var/named/data/named_mem_stats.txt&quot;;
+    allow-query     { any; };
+    recursion yes;
+    #dnssec-enable yes;
+    #dnssec-validation yes;
+    #dnssec-lookaside auto;
+    /* Path to ISC DLV key */
+    bindkeys-file &quot;/etc/named.iscdlv.key&quot;;
+    managed-keys-directory &quot;/var/named/dynamic&quot;;
+};
+logging {
+        channel default_debug {
+                file &quot;data/named.run&quot;;
+                severity dynamic;
+        };
+};
+zone &quot;.&quot; IN {
+    type hint;
+    file &quot;named.ca&quot;;
+};
+zone &quot;m2lan.org&quot; IN {
+    type master;
+    file &quot;m2lan.org.zone&quot;;
+    # 指定允许哪个网段可以从DNS同步主DNS服务器zone文件，不写默认为所有。
+    allow-transfer { 192.168.0.1/24; };
+};
+include &quot;/etc/named.rfc1912.zones&quot;;
+include &quot;/etc/named.root.key&quot;;
+</code></pre></li>
+<li><p>启动主服务器</p>
+</li>
+<li><p>从服务器的配置</p>
+<pre><code>[root@m2lan170 ~]# cat /var/named/chroot/etc/named.conf | grep -v &apos;^#&apos; | grep -v &apos;^$&apos;
+options {
+    listen-on port 53 { any; };
+    listen-on-v6 port 53 { any; };
+    directory     &quot;/var/named&quot;;
+    dump-file     &quot;/var/named/data/cache_dump.db&quot;;
+        statistics-file &quot;/var/named/data/named_stats.txt&quot;;
+        memstatistics-file &quot;/var/named/data/named_mem_stats.txt&quot;;
+    allow-query     { any; };
+    recursion yes;
+    #dnssec-enable yes;
+    #dnssec-validation yes;
+    #dnssec-lookaside auto;
+    /* Path to ISC DLV key */
+    bindkeys-file &quot;/etc/named.iscdlv.key&quot;;
+    managed-keys-directory &quot;/var/named/dynamic&quot;;
+};
+logging {
+        channel default_debug {
+                file &quot;data/named.run&quot;;
+                severity dynamic;
+        };
+};
+zone &quot;.&quot; IN {
+    type hint;
+    file &quot;named.ca&quot;;
+};
+zone &quot;m2lan.org&quot; IN {
+    # 设置为slave从DNS服务器
+    type slave;
+    # 本机是存在/var/named/chroot/var/named/slaves/目录的
+    # 当启动从DNS服务器时会自动在/var/named/chroot/var/named/slaves/目录下创建名为m2lan.org.zone.file文件
+    # 这个文件是从主DNS服务器获取的数据
+    file &quot;slaves/m2lan.org.zone.file&quot;;
+    # 指定主服务器的IP地址
+    masters { 192.168.0.150; };
+};
+include &quot;/etc/named.rfc1912.zones&quot;;
+include &quot;/etc/named.root.key&quot;;
+</code></pre></li>
+<li><p>启动从服务器</p>
+<pre><code>[root@m2lan170 ~]# service named restart
+停止 named：.                                              [确定]
+启动 named：                                               [确定]
+[root@m2lan170 ~]# ll /var/named/chroot/var/named/slaves/
+总用量 4
+-rw-r--r-- 1 named named 344 5月  29 16:28 m2lan.org.zone.file
+</code></pre></li>
+<li><p>修改主服务器的m2lan.org.zone配置文件</p>
+<pre><code>[root@m2lan150 ~]# cat /var/named/chroot/var/named/m2lan.org.zone 
+$TTL 1D
+m2lan.org.    IN SOA    dns.m2lan.org. root.m2lan.org. (
+                    # 每次修改后，将此处数值+1
+                    1    ; serial
+                    1D    ; refresh
+                    1H    ; retry
+                    1W    ; expire
+                    3H )    ; minimum
+m2lan.org.    NS    dns.m2lan.org.
+dns.m2lan.org.    A    192.168.0.150
+
+# 下面两行配置DNS负载均衡，1表示在客户端此记录保存为1s钟
+www.m2lan.org.   1 A       192.168.0.150
+www.m2lan.org.   1 A       192.168.0.170
+
+www1.m2lan.org.  CNAME       www.m2lan.org.
+</code></pre></li>
+<li><p>重启主DNS服务器从服务器会自动同步配置，如果想手动同步就手动启动从服务器</p>
+</li>
+<li><p>测试</p>
+<pre><code>[root@m2lan170 ~]# ping www.m2lan.org
+PING www.m2lan.org (192.168.0.150) 56(84) bytes of data.
+
+[root@m2lan170 ~]# ping www.m2lan.org
+PING www.m2lan.org (192.168.0.170) 56(84) bytes of data.
+</code></pre></li>
+</ul>
+<h3 id="DNS主从密钥认证"><a href="#DNS主从密钥认证" class="headerlink" title="DNS主从密钥认证"></a>DNS主从密钥认证</h3><ul>
+<li><p>首先同步两台服务器的时间</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/ntp.conf | grep server
+[root@m2lan150 ~]# ntpdate 0.rhel.pool.ntp.org
+</code></pre></li>
+<li><p>生成密钥，进行主从认证。在主DNS服务器上操作</p>
+<ul>
+<li>-a hmac-md5: 采用hmac-md5加密算法</li>
+<li>-b 128: 生成的密钥长度为128位</li>
+<li>-n 密钥类型，使用主机类型：HOST</li>
+<li>-n <nametype>: ZONE | HOST | ENTITY | USER | OTHER
+  (DNSKEY generation defaults to ZONE)</nametype></li>
+<li><p>m2lan: 生成密钥的名称</p>
+<pre><code>[root@m2lan150 chroot]# pwd
+/var/named/chroot
+[root@m2lan150 chroot]# dnssec-keygen -a hmac-md5 -b 128 -n HOST m2lan
+Km2lan.+157+02765
+[root@m2lan150 chroot]# ls
+dev  etc  Km2lan.+157+02765.key  Km2lan.+157+02765.private  usr  var
+</code></pre></li>
+</ul>
+</li>
+<li><p>查看公钥，就是<code>buTZoOVOQgKtTpvLG/wwQw==</code></p>
+<pre><code>[root@m2lan150 ~]# cat /var/named/chroot/Km2lan.+157+02765.key 
+m2lan. IN KEY 512 3 157 buTZoOVOQgKtTpvLG/wwQw==
+</code></pre></li>
+<li><p>修改主服务器配置文件</p>
+<pre><code>[root@m2lan150 ~]# cat /var/named/chroot/etc/named.conf | grep -v &apos;^#&apos; | grep -v &apos;^$&apos;
+options {
+    listen-on port 53 { any; };
+    listen-on-v6 port 53 { any; };
+    directory     &quot;/var/named&quot;;
+    dump-file     &quot;/var/named/data/cache_dump.db&quot;;
+        statistics-file &quot;/var/named/data/named_stats.txt&quot;;
+        memstatistics-file &quot;/var/named/data/named_mem_stats.txt&quot;;
+    allow-query     { any; };
+    recursion yes;
+    #dnssec-enable yes;
+    #dnssec-validation yes;
+    #dnssec-lookaside auto;
+    /* Path to ISC DLV key */
+    bindkeys-file &quot;/etc/named.iscdlv.key&quot;;
+    managed-keys-directory &quot;/var/named/dynamic&quot;;
+};
+logging {
+        channel default_debug {
+                file &quot;data/named.run&quot;;
+                severity dynamic;
+        };
+};
+zone &quot;.&quot; IN {
+    type hint;
+    file &quot;named.ca&quot;;
+};
+# 定义一个key
+key m2lankey {
+    # 加密算法使用hmac-md5，和生成密钥采用的加密算法一致
+    algorithm hmac-md5;
+    # 密钥
+    secret &quot;buTZoOVOQgKtTpvLG/wwQw==&quot;;
+};
+zone &quot;m2lan.org&quot; IN {
+    type master;
+    file &quot;m2lan.org.zone&quot;;
+    # 使用密钥进行同步
+    allow-transfer { key m2lankey; };
+};
+include &quot;/etc/named.rfc1912.zones&quot;;
+include &quot;/etc/named.root.key&quot;;
+</code></pre></li>
+<li><p>修改从服务器配置文件</p>
+<pre><code>[root@m2lan170 ~]# cat /var/named/chroot/etc/named.conf | grep -v &apos;^$&apos; | grep -v &apos;^#&apos;
+options {
+    listen-on port 53 { any; };
+    listen-on-v6 port 53 { any; };
+    directory     &quot;/var/named&quot;;
+    dump-file     &quot;/var/named/data/cache_dump.db&quot;;
+        statistics-file &quot;/var/named/data/named_stats.txt&quot;;
+        memstatistics-file &quot;/var/named/data/named_mem_stats.txt&quot;;
+    allow-query     { any; };
+    recursion yes;
+    #dnssec-enable yes;
+    #dnssec-validation yes;
+    #dnssec-lookaside auto;
+    /* Path to ISC DLV key */
+    bindkeys-file &quot;/etc/named.iscdlv.key&quot;;
+    managed-keys-directory &quot;/var/named/dynamic&quot;;
+};
+logging {
+        channel default_debug {
+                file &quot;data/named.run&quot;;
+                severity dynamic;
+        };
+};
+zone &quot;.&quot; IN {
+    type hint;
+    file &quot;named.ca&quot;;
+};
+# 创建和主服务器一样的key
+key m2lankey {
+        algorithm hmac-md5;
+        secret &quot;buTZoOVOQgKtTpvLG/wwQw==&quot;;
+}
+zone &quot;m2lan.org&quot; IN {
+    type slave;
+    file &quot;slaves/m2lan.org.zone.file&quot;;
+    # 使用密钥和主服务器同步
+    masters { 192.168.0.150 key m2lankey; };
+};
+include &quot;/etc/named.rfc1912.zones&quot;;
+include &quot;/etc/named.root.key&quot;;
+</code></pre></li>
+<li><p>重启主从服务器</p>
+<pre><code># 从服务器下先把同步文件删除
+[root@m2lan170 ~]# rm -f /var/named/chroot/var/named/slaves/m2lan.org.zone.file
+[root@m2lan170 ~]# ls /var/named/chroot/var/named/slaves/
+[root@m2lan170 ~]# 
+
+# 查看文件是否生成
+[root@m2lan170 ~]# service named restart
+停止 named：.                                              [确定]
+启动 named：                                               [确定]
+[root@m2lan170 ~]# ls /var/named/chroot/var/named/slaves/
+m2lan.org.zone.file
+</code></pre></li>
+<li><p>使用nslookup测试</p>
+<pre><code>[root@m2lan150 ~]# nslookup www.m2lan.org
+Server:        192.168.0.150
+Address:    192.168.0.150#53
+
+Name:    www.m2lan.org
+Address: 192.168.0.150
+Name:    www.m2lan.org
+Address: 192.168.0.170
+</code></pre></li>
+<li><p>使用dig测试</p>
+<pre><code># 指定dns解析
+[root@m2lan150 ~]# dig @8.8.8.8 www.m2lan.org
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Linux搭建DNS服务器实现域名解析&quot;&gt;&lt;a href=&quot;#Linux搭建DNS服务器实现域名解析&quot; class=&quot;headerlink&quot; title=&quot;Linux搭建DNS服务器实现域名解析&quot;&gt;&lt;/a&gt;Linux搭建DNS服务器实现域名解析&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;域名系统，可以提供域名与IP地址的解析服务。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;BIND实现DNS服务器搭建&quot;&gt;&lt;a href=&quot;#BIND实现DNS服务器搭建&quot; class=&quot;headerlink&quot; title=&quot;BIND实现DNS服务器搭建&quot;&gt;&lt;/a&gt;BIND实现DNS服务器搭建&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;install&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 主程序
+[root@m2lan150 ~]# rpm -ivh /mnt/Packages/bind-9.8.2-0.17.rc1.el6_4.6.x86_64.rpm
+# 提高安全性
+[root@m2lan150 ~]# rpm -ivh /mnt/Packages/bind-chroot-9.8.2-0.17.rc1.el6_4.6.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 包含bind的基本配置
+[root@m2lan150 ~]# ls /etc/named.conf 
+/etc/named.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;启动服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 启动的时候卡在这个地方
+[root@m2lan150 ~]# /etc/init.d/named start
+Generating /etc/rndc.key:
+
+# 启动bind时，需要生产rndc.key，使用手动生成
+[root@m2lan150 ~]# rndc-confgen -r /dev/urandom -a
+wrote key file &amp;quot;/etc/rndc.key&amp;quot;
+
+# 再次启动
+[root@m2lan150 ~]# /etc/init.d/named start
+启动 named：                                               [确定]
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;启动后查看挂载，开启named服务后，会自动挂载，调用chroot功能切换根&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# mount | grep named
+/etc/named on /var/named/chroot/etc/named type none (rw,bind)
+/var/named on /var/named/chroot/var/named type none (rw,bind)
+/etc/named.conf on /var/named/chroot/etc/named.conf type none (rw,bind)
+/etc/named.rfc1912.zones on /var/named/chroot/etc/named.rfc1912.zones type none (rw,bind)
+/etc/rndc.key on /var/named/chroot/etc/rndc.key type none (rw,bind)
+/usr/lib64/bind on /var/named/chroot/usr/lib64/bind type none (rw,bind)
+/etc/named.iscdlv.key on /var/named/chroot/etc/named.iscdlv.key type none (rw,bind)
+/etc/named.root.key on /var/named/chroot/etc/named.root.key type none (rw,bind)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+      <category term="DNS" scheme="http://blog.golearns.org/tags/DNS/"/>
+    
+  </entry>
   
   <entry>
     <title>搭建FTP服务器实现文件共享</title>
@@ -3128,96 +3705,6 @@ public class Counter2 {
       <category term="CND" scheme="http://blog.golearns.org/tags/CND/"/>
     
       <category term="反向代理" scheme="http://blog.golearns.org/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>jsonp</title>
-    <link href="http://blog.golearns.org/2017/05/07/jsonp/"/>
-    <id>http://blog.golearns.org/2017/05/07/jsonp/</id>
-    <published>2017-05-07T07:34:55.000Z</published>
-    <updated>2017-05-07T07:43:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h1><h2 id="新建一个web客户端"><a href="#新建一个web客户端" class="headerlink" title="新建一个web客户端"></a>新建一个web客户端</h2><ul>
-<li><p>index.jsp</p>
-<pre><code>&lt;html&gt;
-    &lt;body&gt;
-        &lt;script src=&quot;https://cdn.staticfile.org/jquery/2.1.1/jquery.js&quot;&gt;&lt;/script&gt;
-        &lt;script&gt;
-        $(function() {
-            $.ajax({
-                url: &apos;http://192.168.0.1:8080/spring_mybatis/getUser?callback=?&apos;,
-                dataType: &apos;jsonp&apos;,
-                success: function(data) {
-                    console.log(data)
-                }
-            });
-        });
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre></li>
-</ul>
-<a id="more"></a>
-<h2 id="web服务端"><a href="#web服务端" class="headerlink" title="web服务端"></a>web服务端</h2><ul>
-<li><p>新建JsonpAdvice.java</p>
-<pre><code>@ControllerAdvice
-public class JsonpAdvice extends AbstractJsonpResponseBodyAdvice {
-
-    public JsonpAdvice() {
-        super(&quot;callback&quot;);
-    }
-}
-</code></pre></li>
-<li><p>UserController.java</p>
-<pre><code>@Controller
-public class UserController {
-    @RequestMapping(value=&quot;getUser&quot;, produces=MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Map&lt;String, String&gt; getUser() {
-        Map&lt;String, String&gt; maps = new HashMap&lt;&gt;();
-        maps.put(&quot;username&quot;, &quot;zhangsan&quot;);
-        maps.put(&quot;password&quot;, &quot;123456&quot;);
-        return maps;
-    }
-}
-</code></pre></li>
-<li><p>返回</p>
-<pre><code>Object {password: &quot;123456&quot;, username: &quot;zhangsan&quot;}
-</code></pre></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;jsonp&quot;&gt;&lt;a href=&quot;#jsonp&quot; class=&quot;headerlink&quot; title=&quot;jsonp&quot;&gt;&lt;/a&gt;jsonp&lt;/h1&gt;&lt;h2 id=&quot;新建一个web客户端&quot;&gt;&lt;a href=&quot;#新建一个web客户端&quot; class=&quot;headerlink&quot; title=&quot;新建一个web客户端&quot;&gt;&lt;/a&gt;新建一个web客户端&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;index.jsp&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
-    &amp;lt;body&amp;gt;
-        &amp;lt;script src=&amp;quot;https://cdn.staticfile.org/jquery/2.1.1/jquery.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-        &amp;lt;script&amp;gt;
-        $(function() {
-            $.ajax({
-                url: &amp;apos;http://192.168.0.1:8080/spring_mybatis/getUser?callback=?&amp;apos;,
-                dataType: &amp;apos;jsonp&amp;apos;,
-                success: function(data) {
-                    console.log(data)
-                }
-            });
-        });
-        &amp;lt;/script&amp;gt;
-    &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="jsonp" scheme="http://blog.golearns.org/categories/jsonp/"/>
-    
-    
-      <category term="jsonp" scheme="http://blog.golearns.org/tags/jsonp/"/>
-    
-      <category term="springmvc" scheme="http://blog.golearns.org/tags/springmvc/"/>
     
   </entry>
   

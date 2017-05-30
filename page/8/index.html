@@ -266,6 +266,201 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/UITabBarController使用/" itemprop="url">
+                  UITabBarController使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:02:13+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
+                    <span itemprop="name">Objective-c</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/UITabBarController使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/UITabBarController使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>//
+//  ViewController.m
+//  ceshi
+//
+//  Created by yonglang on 14/11/6.
+//  Copyright (c) 2014年 yonglang. All rights reserved.
+//  图片资源 https://github.com/m2lan/Resource
+//
+
+#import &quot;ViewController.h&quot;
+#import &quot;OneViewController.h&quot;
+#import &quot;TwoViewController.h&quot;
+#import &quot;ThreeViewController.h&quot;
+
+@interface MainController () {
+    UITabBarController *_tabC;
+}
+
+@end
+
+@implementation MainController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    _tabC = [[UITabBarController alloc] init];
+    [_tabC.tabBar setBackgroundColor:[UIColor clearColor]];
+    [_tabC.view setFrame:self.view.frame];
+    [self.view addSubview:_tabC.view];
+
+    OneViewController *one = [[OneViewController alloc] init];
+    TwoViewController *two = [[TwoViewController alloc] init];
+    ThreeViewController *three = [[ThreeViewController alloc] init];
+    _tabC.viewControllers = @[one, two, three ];
+
+    [_tabC.tabBar setBackgroundColor:[UIColor whiteColor]];
+    NSArray *ar = _tabC.viewControllers;
+    NSMutableArray *arD = [NSMutableArray new];
+    [ar enumerateObjectsUsingBlock:^(UIViewController *viewController, NSUInteger idx, BOOL *stop)
+    {
+        UITabBarItem *item = nil;
+        switch (idx)
+        {
+           case 0:
+           {
+               item = [[UITabBarItem alloc] initWithTitle:@&quot;消息&quot; image:[[UIImage imageNamed:@&quot;tab_recent_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@&quot;tab_recent_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+               break;
+           }
+           case 1:
+           {
+               item = [[UITabBarItem alloc] initWithTitle:@&quot;联系人&quot; image:nil tag:1];
+               [item setImage:[[UIImage imageNamed:@&quot;tab_buddy_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+               [item setSelectedImage:[[UIImage imageNamed:@&quot;tab_buddy_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+               break;
+           }
+           case 2:
+           {
+               item = [[UITabBarItem alloc]initWithTitle:@&quot;动态&quot; image:nil tag:1];
+               [item setImage:[[UIImage imageNamed:@&quot;tab_qworld_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+               [item setSelectedImage:[[UIImage imageNamed:@&quot;tab_qworld_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+               break;
+           }
+        }
+        viewController.tabBarItem = item;
+        [arD addObject:viewController];
+    }];
+    _tabC.viewControllers = arD;
+
+    [[UITabBarItem appearance] setTitleTextAttributes:
+    [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:96/255.f green:164/255.f blue:222/255.f alpha:1], UITextAttributeTextColor, nil]
+                                       forState:UIControlStateSelected];
+
+    [_tabC setSelectedIndex:1];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/redis优化/" itemprop="url">
                   redis优化
                 </a>
@@ -1431,142 +1626,11 @@ public String say3(String username, Model model) {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Tigase-操作/" itemprop="url">
-                  Tigase-操作
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T00:14:17+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Tigase/" itemprop="url" rel="index">
-                    <span itemprop="name">Tigase</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Tigase-操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Tigase-操作/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Tigase操作"><a href="#Tigase操作" class="headerlink" title="Tigase操作"></a>Tigase操作</h3><hr>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><ul>
-<li>在<a href="https://projects.tigase.org/projects/tigase-server/repository" target="_blank" rel="external">Tigase-server</a>下载<code>Tigase</code>源码</li>
-<li><code>git clone https://repository.tigase.org/git/tigase-server.git</code>默认下载的时最新版本</li>
-<li>如果要下载其他版本，在本机创建目录，在目录下<ul>
-<li><code>git init</code></li>
-<li><code>git remote add origin https://repository.tigase.org/git/tigase-server.git</code></li>
-<li>如果要下载比如说<code>5.2.0</code>,<code>git pull origin tigase-server-5.2.0</code></li>
-</ul>
-</li>
-<li>由于是源码要在<code>eclipse</code>中运行，运行<code>mvn eclipse:eclipse</code>先转成<code>eclipse</code>项目</li>
-<li>打开<code>eclipse</code>导入<code>tigase</code>项目</li>
-<li>下载下来后进入，修改<code>etc/tigase.conf</code>，修改<code>JAVA_HOME</code></li>
-<li>修改<code>etc/init.properties</code>,详细配置参数请见:<a href="http://golearns.org/topic/view/28" target="_blank" rel="external">config</a></li>
-<li>这时就可以启动项目了，入口文件是<code>XMPPServer.java</code>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/10/Tigase-操作/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1607,7 +1671,7 @@ public String say3(String username, Model model) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">90</span>
+              <span class="site-state-item-count">91</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1624,7 +1688,7 @@ public String say3(String username, Model model) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

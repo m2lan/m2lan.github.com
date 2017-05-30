@@ -266,6 +266,153 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/15/php-sphinx使用/" itemprop="url">
+                  php+sphinx使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-15T09:17:15+08:00" content="2016-07-15">
+              2016-07-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/15/php-sphinx使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/php-sphinx使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Centos7-Sphinx-install"><a href="#Centos7-Sphinx-install" class="headerlink" title="Centos7 Sphinx install"></a>Centos7 Sphinx install</h1><ul>
+<li><p>安装依赖库</p>
+<pre><code>yum install make gcc gcc++ gcc-c++ libtool autoconf automake imake libxml2-devel expat-devel
+cd /usr/local/src
+
+// https://share.weiyun.com/2da811898545e0043a00c4129fea95c0
+// download coreseek-3.2.14
+tar xvzf coreseek-3.2.14.tar.gz
+cd coreseek-3.2.14
+cd mmseg-3.2.14
+./bootstrap
+./configure --prefix=/usr/local/mmseg3
+make &amp;&amp; make install
+cd /usr/local/src/coreseek-3.2.14/csft-3.2.14
+
+#这里我们要修改 src/sphinxexpr.cpp 文件，将该文件中的 1013、1047、1080 行的 ExprEval 改为 this-&gt;ExprEval
+sh buildconf.sh
+
+#修改configure文件,找到“#define USE_LIBICONV 1”，将注释去掉，并将1改成0。
+make &amp;&amp; make install
+
+cd ..
+cd testpack
+cat var/test/test.xml   #此时应该正确显示中文
+/usr/local/mmseg3/bin/mmseg -d /usr/local/mmseg3/etc var/test/test.xml  #整篇文章进行分词
+/usr/local/coreseek/bin/indexer -c etc/csft.conf --all  #创建索引
+/usr/local/coreseek/bin/search -c etc/csft.conf 网络搜索    #搜索关键字 网络搜索
+/usr/local/coreseek/bin/searchd -c etc/csft.conf    #正常开启搜索服务
+/usr/local/coreseek/bin/searchd -c etc/csft.conf --stop #如要停止搜索服务
+/usr/local/coreseek/bin/indexer -c etc/csft.conf --all --rotate #如要已启动服务，要更新索引
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/15/php-sphinx使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/02/26/centos-安装tsung压力测试工具/" itemprop="url">
                   centos-安装tsung压力测试工具
                 </a>
@@ -1396,134 +1543,11 @@ systemctl enable nginx
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/25/keepalived-haproxy高可用负载均衡/" itemprop="url">
-                  keepalived+haproxy高可用负载均衡
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-25T23:45:11+08:00" content="2016-02-25">
-              2016-02-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Keepalived/" itemprop="url" rel="index">
-                    <span itemprop="name">Keepalived</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/25/keepalived-haproxy高可用负载均衡/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/keepalived-haproxy高可用负载均衡/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="基于Keepalived-haproxy实现高可用负载均衡"><a href="#基于Keepalived-haproxy实现高可用负载均衡" class="headerlink" title="基于Keepalived+haproxy实现高可用负载均衡"></a>基于Keepalived+haproxy实现高可用负载均衡</h1><h2 id="Centos7集群配置，采用Keepalived-haproxy来做。两台负载均衡服务器做主、备切换-3台web服务器"><a href="#Centos7集群配置，采用Keepalived-haproxy来做。两台负载均衡服务器做主、备切换-3台web服务器" class="headerlink" title="Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器"></a>Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器</h2><pre><code>* VIP：192.168.0.185
-* h1：192.168.0.137
-* h2：192.168.0.138
-* web1：192.168.0.130
-* web2：192.168.0.131
-* web3：192.168.0.132
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/25/keepalived-haproxy高可用负载均衡/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1564,7 +1588,7 @@ systemctl enable nginx
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">90</span>
+              <span class="site-state-item-count">91</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1581,7 +1605,7 @@ systemctl enable nginx
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
