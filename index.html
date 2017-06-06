@@ -266,6 +266,254 @@
             
               
                 
+                <a class="post-title-link" href="/2017/06/06/Spring自定义组件标签/" itemprop="url">
+                  Spring自定义组件标签
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-06T12:11:49+08:00" content="2017-06-06">
+              2017-06-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/06/Spring自定义组件标签/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/06/Spring自定义组件标签/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Spring自定义组件标签"><a href="#Spring自定义组件标签" class="headerlink" title="Spring自定义组件标签"></a>Spring自定义组件标签</h1><h3 id="spring自定义组件标签步骤"><a href="#spring自定义组件标签步骤" class="headerlink" title="spring自定义组件标签步骤"></a>spring自定义组件标签步骤</h3><ul>
+<li>采用XSD描述自定义标签的元素属性</li>
+<li>编写Bean定义的解析器</li>
+<li>注册自定义标签解析器</li>
+<li>绑定命名空间解析器</li>
+</ul>
+<h3 id="定义标签元素的XML结构，采用XSD描述自定义标签的元素属性"><a href="#定义标签元素的XML结构，采用XSD描述自定义标签的元素属性" class="headerlink" title="定义标签元素的XML结构，采用XSD描述自定义标签的元素属性"></a>定义标签元素的XML结构，采用XSD描述自定义标签的元素属性</h3><ul>
+<li><p>在<code>com.example.spring03.config</code>包下创建<code>userservice.xsd</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+    &lt;xsd:schema xmlns=&quot;http://www.m2lan.com/schema/service&quot;
+                xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
+                xmlns:beans=&quot;http://www.springframework.org/schema/beans&quot;
+                &lt;!-- 指定一个自定义标签的命名空间 --&gt;
+                targetNamespace=&quot;http://www.m2lan.com/schema/service&quot;
+                elementFormDefault=&quot;qualified&quot;
+                attributeFormDefault=&quot;unqualified&quot;&gt;
+
+        &lt;!-- 导入Spring本身的beans命名空间 --&gt;
+        &lt;xsd:import namespace=&quot;http://www.springframework.org/schema/beans&quot;/&gt;
+
+        &lt;!-- 定义一个user-service标签 --&gt;
+        &lt;xsd:element name=&quot;user-service&quot;&gt;
+            &lt;xsd:complexType&gt;
+                &lt;xsd:complexContent&gt;
+                    &lt;xsd:extension base=&quot;beans:identifiedType&quot;&gt;
+
+                        &lt;!-- 扩展属性dao --&gt;
+                        &lt;xsd:attribute name=&quot;dao&quot; type=&quot;xsd:string&quot; use=&quot;required&quot;/&gt;
+                    &lt;/xsd:extension&gt;
+                &lt;/xsd:complexContent&gt;
+            &lt;/xsd:complexType&gt;
+        &lt;/xsd:element&gt;
+
+    &lt;/xsd:schema&gt;
+</code></pre></li>
+<li><p>添加<code>UserDao</code>和<code>UserService.java</code></p>
+<pre><code>public class UserDao {
+
+    public void say() {
+        System.out.println(&quot;UserDao&quot;);
+    }
+}
+
+public class UserService {
+
+    private UserDao userDao;
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public void sayUserService() {
+        userDao.say();
+    }
+}
+</code></pre></li>
+</ul>
+<h3 id="编写标签解析类"><a href="#编写标签解析类" class="headerlink" title="编写标签解析类"></a>编写标签解析类</h3><pre><code>public class UserServiceDefinitionParser implements BeanDefinitionParser {
+
+    @Override
+    public BeanDefinition parse(Element element, ParserContext parserContext) {
+
+        // 通过BeanDefinitionBuilder创建UserService的定义
+        BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(UserService.class);
+
+        // 获取自定义标签属性dao
+        String dao = element.getAttribute(&quot;dao&quot;);
+
+        // 将已定义的userDao以引用的方式动态注入到UserService中
+        beanDefinitionBuilder.addPropertyReference(&quot;userDao&quot;, dao);
+        AbstractBeanDefinition beanDefinition = beanDefinitionBuilder.getBeanDefinition();
+
+        // 通过parserContext注册UserService定义
+        parserContext.registerBeanComponent(new BeanComponentDefinition(beanDefinition, &quot;userService&quot;));
+
+        return null;
+    }
+}
+</code></pre><h3 id="编写命名空间解析器"><a href="#编写命名空间解析器" class="headerlink" title="编写命名空间解析器"></a>编写命名空间解析器</h3><ul>
+<li><p>将<code>UserServiceDefinitionParser</code>解析器注册到Spring命名空间解析器</p>
+<pre><code>public class UserServiceNamespaceHandler extends NamespaceHandlerSupport {
+
+    @Override
+    public void init() {
+        registerBeanDefinitionParser(&quot;user-service&quot;, new UserServiceDefinitionParser());
+    }
+}
+</code></pre></li>
+</ul>
+<h3 id="绑定命名空间解析器"><a href="#绑定命名空间解析器" class="headerlink" title="绑定命名空间解析器"></a>绑定命名空间解析器</h3><ul>
+<li><p>告诉Spring如何解析自定义标签</p>
+<ul>
+<li>在<code>resources</code>目录创建<code>META-INF</code>文件夹，在文件夹下创建<code>spring.handlers</code>和<code>spring.schemas</code>文件，告诉Spring自定义标签的文档结构及解析他的类</li>
+<li><p><code>spring.schemas</code>文件，告诉Spring描述自定义标签的文档结构文件所在的位置</p>
+<pre><code>http\://www.m2lan.com/schema/service.xsd=com/example/spring03/config/userservice.xsd
+</code></pre></li>
+<li><p><code>spring.handlers</code>文件，告诉Spring自定义命名空间所对应的解析器</p>
+<pre><code>http\://www.m2lan.com/schema/service=com.example.spring03.UserServiceNamespaceHandler
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="引用自定义标签"><a href="#引用自定义标签" class="headerlink" title="引用自定义标签"></a>引用自定义标签</h3><ul>
+<li><p>创建<code>customConfig.xml</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:us=&quot;http://www.m2lan.com/schema/service&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.m2lan.com/schema/service http://www.m2lan.com/schema/service.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd&quot;&gt;
+
+    &lt;context:component-scan base-package=&quot;com.example.spring03&quot;/&gt;
+
+    &lt;bean id=&quot;userDao&quot; class=&quot;com.example.spring03.UserDao&quot;/&gt;
+
+    &lt;us:user-service dao=&quot;userDao&quot;/&gt;
+
+&lt;/beans&gt;
+</code></pre></li>
+</ul>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
+<li><p>创建<code>Main.java</code></p>
+<pre><code>public class Main {
+
+    public static void main(String[] args) {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;customConfig.xml&quot;);
+        UserService service = ctx.getBean(&quot;userService&quot;, UserService.class);
+        service.sayUserService(); // output: UserDao
+    }
+}
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/30/搭建DNS服务器实现域名解析/" itemprop="url">
                   搭建DNS服务器实现域名解析
                 </a>
@@ -1577,150 +1825,6 @@ Zhangn:x
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/25/awk/" itemprop="url">
-                  awk
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-25T23:19:04+08:00" content="2017-05-25">
-              2017-05-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/25/awk/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/awk/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Linux下的awk使用"><a href="#Linux下的awk使用" class="headerlink" title="Linux下的awk使用"></a>Linux下的awk使用</h1><blockquote>
-<p>awk分析文件数据，根据分隔符对一行一行的数据进行拆分，获取某一列
-分隔符默认是空格，可以使用-F;以分号为分隔符,-F:以冒号为分隔符</p>
-</blockquote>
-<ul>
-<li><p>获取当前主机指定网卡的IP地址</p>
-<pre><code>[root@m2 ~]# ifconfig eth0
-eth0      Link encap:Ethernet  HWaddr 00:0C:29:C6:3D:D5  
-inet addr:192.168.0.150  Bcast:192.168.0.255  Mask:255.255.255.0
-inet6 addr: fe80::20c:29ff:fec6:3dd5/64 Scope:Link
-UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-RX packets:11240 errors:0 dropped:0 overruns:0 frame:0
-TX packets:2747 errors:0 dropped:0 overruns:0 carrier:0
-collisions:0 txqueuelen:1000 
-RX bytes:1389465 (1.3 MiB)  TX bytes:207415 (202.5 KiB)
-
-[root@m2 ~]# ifconfig eth0 | grep &quot;inet addr:&quot; | awk &apos;{print $2}&apos; | awk -F : &apos;{print $2}&apos;
-192.168.0.150
-</code></pre></li>
-<li><p>获取/etc/passwd中用户UID大于500的用户名和用户登陆的shell</p>
-<pre><code>[root@m2 ~]# cat passwd | awk -F  : &apos;$3&gt;500{print $1,$7}&apos;
-nfsnobody /sbin/nologin
-
-# 使用\t制表符隔开
-[root@m2 ~]# cat passwd | awk -F : &apos;$3&gt;500{print $1 &quot;\t&quot; $7}&apos;
-nfsnobody    /sbin/nologin
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/25/awk/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1766,7 +1870,7 @@ nfsnobody    /sbin/nologin
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-count">92</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1774,7 +1878,7 @@ nfsnobody    /sbin/nologin
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1783,7 +1887,7 @@ nfsnobody    /sbin/nologin
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">56</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
