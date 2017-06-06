@@ -334,8 +334,7 @@
 
       
         
-          
-            <h1 id="Spring自定义组件标签"><a href="#Spring自定义组件标签" class="headerlink" title="Spring自定义组件标签"></a>Spring自定义组件标签</h1><h3 id="spring自定义组件标签步骤"><a href="#spring自定义组件标签步骤" class="headerlink" title="spring自定义组件标签步骤"></a>spring自定义组件标签步骤</h3><ul>
+          <h1 id="Spring自定义组件标签"><a href="#Spring自定义组件标签" class="headerlink" title="Spring自定义组件标签"></a>Spring自定义组件标签</h1><h3 id="spring自定义组件标签步骤"><a href="#spring自定义组件标签步骤" class="headerlink" title="spring自定义组件标签步骤"></a>spring自定义组件标签步骤</h3><ul>
 <li>采用XSD描述自定义标签的元素属性</li>
 <li>编写Bean定义的解析器</li>
 <li>注册自定义标签解析器</li>
@@ -370,107 +369,12 @@
 
     &lt;/xsd:schema&gt;
 </code></pre></li>
-<li><p>添加<code>UserDao</code>和<code>UserService.java</code></p>
-<pre><code>public class UserDao {
-
-    public void say() {
-        System.out.println(&quot;UserDao&quot;);
-    }
-}
-
-public class UserService {
-
-    private UserDao userDao;
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
-    public void sayUserService() {
-        userDao.say();
-    }
-}
-</code></pre></li>
 </ul>
-<h3 id="编写标签解析类"><a href="#编写标签解析类" class="headerlink" title="编写标签解析类"></a>编写标签解析类</h3><pre><code>public class UserServiceDefinitionParser implements BeanDefinitionParser {
-
-    @Override
-    public BeanDefinition parse(Element element, ParserContext parserContext) {
-
-        // 通过BeanDefinitionBuilder创建UserService的定义
-        BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(UserService.class);
-
-        // 获取自定义标签属性dao
-        String dao = element.getAttribute(&quot;dao&quot;);
-
-        // 将已定义的userDao以引用的方式动态注入到UserService中
-        beanDefinitionBuilder.addPropertyReference(&quot;userDao&quot;, dao);
-        AbstractBeanDefinition beanDefinition = beanDefinitionBuilder.getBeanDefinition();
-
-        // 通过parserContext注册UserService定义
-        parserContext.registerBeanComponent(new BeanComponentDefinition(beanDefinition, &quot;userService&quot;));
-
-        return null;
-    }
-}
-</code></pre><h3 id="编写命名空间解析器"><a href="#编写命名空间解析器" class="headerlink" title="编写命名空间解析器"></a>编写命名空间解析器</h3><ul>
-<li><p>将<code>UserServiceDefinitionParser</code>解析器注册到Spring命名空间解析器</p>
-<pre><code>public class UserServiceNamespaceHandler extends NamespaceHandlerSupport {
-
-    @Override
-    public void init() {
-        registerBeanDefinitionParser(&quot;user-service&quot;, new UserServiceDefinitionParser());
-    }
-}
-</code></pre></li>
-</ul>
-<h3 id="绑定命名空间解析器"><a href="#绑定命名空间解析器" class="headerlink" title="绑定命名空间解析器"></a>绑定命名空间解析器</h3><ul>
-<li><p>告诉Spring如何解析自定义标签</p>
-<ul>
-<li>在<code>resources</code>目录创建<code>META-INF</code>文件夹，在文件夹下创建<code>spring.handlers</code>和<code>spring.schemas</code>文件，告诉Spring自定义标签的文档结构及解析他的类</li>
-<li><p><code>spring.schemas</code>文件，告诉Spring描述自定义标签的文档结构文件所在的位置</p>
-<pre><code>http\://www.m2lan.com/schema/service.xsd=com/example/spring03/config/userservice.xsd
-</code></pre></li>
-<li><p><code>spring.handlers</code>文件，告诉Spring自定义命名空间所对应的解析器</p>
-<pre><code>http\://www.m2lan.com/schema/service=com.example.spring03.UserServiceNamespaceHandler
-</code></pre></li>
-</ul>
-</li>
-</ul>
-<h3 id="引用自定义标签"><a href="#引用自定义标签" class="headerlink" title="引用自定义标签"></a>引用自定义标签</h3><ul>
-<li><p>创建<code>customConfig.xml</code></p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xmlns:us=&quot;http://www.m2lan.com/schema/service&quot;
-    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.m2lan.com/schema/service http://www.m2lan.com/schema/service.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd&quot;&gt;
-
-    &lt;context:component-scan base-package=&quot;com.example.spring03&quot;/&gt;
-
-    &lt;bean id=&quot;userDao&quot; class=&quot;com.example.spring03.UserDao&quot;/&gt;
-
-    &lt;us:user-service dao=&quot;userDao&quot;/&gt;
-
-&lt;/beans&gt;
-</code></pre></li>
-</ul>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
-<li><p>创建<code>Main.java</code></p>
-<pre><code>public class Main {
-
-    public static void main(String[] args) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;customConfig.xml&quot;);
-        UserService service = ctx.getBean(&quot;userService&quot;, UserService.class);
-        service.sayUserService(); // output: UserDao
-    }
-}
-</code></pre></li>
-</ul>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/06/06/Spring自定义组件标签/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

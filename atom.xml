@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2017-06-06T04:12:45.000Z</updated>
+  <updated>2017-06-06T04:13:28.000Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://blog.golearns.org/2017/06/06/Spring%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E6%A0%87%E7%AD%BE/"/>
     <id>http://blog.golearns.org/2017/06/06/Spring自定义组件标签/</id>
     <published>2017-06-06T04:11:49.000Z</published>
-    <updated>2017-06-06T04:12:45.000Z</updated>
+    <updated>2017-06-06T04:13:28.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Spring自定义组件标签"><a href="#Spring自定义组件标签" class="headerlink" title="Spring自定义组件标签"></a>Spring自定义组件标签</h1><h3 id="spring自定义组件标签步骤"><a href="#spring自定义组件标签步骤" class="headerlink" title="spring自定义组件标签步骤"></a>spring自定义组件标签步骤</h3><ul>
 <li>采用XSD描述自定义标签的元素属性</li>
@@ -57,6 +57,9 @@
 
     &lt;/xsd:schema&gt;
 </code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><p>添加<code>UserDao</code>和<code>UserService.java</code></p>
 <pre><code>public class UserDao {
 
@@ -160,7 +163,42 @@ public class UserService {
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Spring自定义组件标签&quot;&gt;&lt;a href=&quot;#Spring自定义组件标签&quot; class=&quot;headerlink&quot; title=&quot;Spring自定义组件标签&quot;&gt;&lt;/a&gt;Spring自定义组件标签&lt;/h1&gt;&lt;h3 id=&quot;spring自定义组件标签步骤&quot;&gt;&lt;a h
+      &lt;h1 id=&quot;Spring自定义组件标签&quot;&gt;&lt;a href=&quot;#Spring自定义组件标签&quot; class=&quot;headerlink&quot; title=&quot;Spring自定义组件标签&quot;&gt;&lt;/a&gt;Spring自定义组件标签&lt;/h1&gt;&lt;h3 id=&quot;spring自定义组件标签步骤&quot;&gt;&lt;a href=&quot;#spring自定义组件标签步骤&quot; class=&quot;headerlink&quot; title=&quot;spring自定义组件标签步骤&quot;&gt;&lt;/a&gt;spring自定义组件标签步骤&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;采用XSD描述自定义标签的元素属性&lt;/li&gt;
+&lt;li&gt;编写Bean定义的解析器&lt;/li&gt;
+&lt;li&gt;注册自定义标签解析器&lt;/li&gt;
+&lt;li&gt;绑定命名空间解析器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;定义标签元素的XML结构，采用XSD描述自定义标签的元素属性&quot;&gt;&lt;a href=&quot;#定义标签元素的XML结构，采用XSD描述自定义标签的元素属性&quot; class=&quot;headerlink&quot; title=&quot;定义标签元素的XML结构，采用XSD描述自定义标签的元素属性&quot;&gt;&lt;/a&gt;定义标签元素的XML结构，采用XSD描述自定义标签的元素属性&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在&lt;code&gt;com.example.spring03.config&lt;/code&gt;包下创建&lt;code&gt;userservice.xsd&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+    &amp;lt;xsd:schema xmlns=&amp;quot;http://www.m2lan.com/schema/service&amp;quot;
+                xmlns:xsd=&amp;quot;http://www.w3.org/2001/XMLSchema&amp;quot;
+                xmlns:beans=&amp;quot;http://www.springframework.org/schema/beans&amp;quot;
+                &amp;lt;!-- 指定一个自定义标签的命名空间 --&amp;gt;
+                targetNamespace=&amp;quot;http://www.m2lan.com/schema/service&amp;quot;
+                elementFormDefault=&amp;quot;qualified&amp;quot;
+                attributeFormDefault=&amp;quot;unqualified&amp;quot;&amp;gt;
+
+        &amp;lt;!-- 导入Spring本身的beans命名空间 --&amp;gt;
+        &amp;lt;xsd:import namespace=&amp;quot;http://www.springframework.org/schema/beans&amp;quot;/&amp;gt;
+
+        &amp;lt;!-- 定义一个user-service标签 --&amp;gt;
+        &amp;lt;xsd:element name=&amp;quot;user-service&amp;quot;&amp;gt;
+            &amp;lt;xsd:complexType&amp;gt;
+                &amp;lt;xsd:complexContent&amp;gt;
+                    &amp;lt;xsd:extension base=&amp;quot;beans:identifiedType&amp;quot;&amp;gt;
+
+                        &amp;lt;!-- 扩展属性dao --&amp;gt;
+                        &amp;lt;xsd:attribute name=&amp;quot;dao&amp;quot; type=&amp;quot;xsd:string&amp;quot; use=&amp;quot;required&amp;quot;/&amp;gt;
+                    &amp;lt;/xsd:extension&amp;gt;
+                &amp;lt;/xsd:complexContent&amp;gt;
+            &amp;lt;/xsd:complexType&amp;gt;
+        &amp;lt;/xsd:element&amp;gt;
+
+    &amp;lt;/xsd:schema&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
