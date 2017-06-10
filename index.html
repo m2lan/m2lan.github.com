@@ -266,6 +266,151 @@
             
               
                 
+                <a class="post-title-link" href="/2017/06/10/Spring自定义属性编辑器/" itemprop="url">
+                  Spring自定义属性编辑器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-10T11:06:09+08:00" content="2017-06-10">
+              2017-06-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/10/Spring自定义属性编辑器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/10/Spring自定义属性编辑器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Spring自定义属性编辑器"><a href="#Spring自定义属性编辑器" class="headerlink" title="Spring自定义属性编辑器"></a>Spring自定义属性编辑器</h1><blockquote>
+<p>在Spring配置文件中，通过字面值为Bean各种类型的属性提供设置值</p>
+<p>属性编辑器实际就是一个类型转换器，主要功能是将歪脖的设置值转换为JVM内部的对应类型</p>
+<p>任何实现了<code>java.beans.PropertyEditor</code>接口的类都是属性编辑器</p>
+<p>Spring大部分默认属性编辑器都直接扩展于<code>java.beans.PropertyEditorSupport</code>类</p>
+</blockquote>
+<h3 id="自定义Person的属性编辑器"><a href="#自定义Person的属性编辑器" class="headerlink" title="自定义Person的属性编辑器"></a>自定义Person的属性编辑器</h3><ul>
+<li><p>创建<code>Person</code>和<code>Student</code></p>
+<pre><code>public class Person {
+
+    private Integer age;
+
+    private String name;
+
+    private String email;
+
+    // getter/setter/toString
+}
+
+public class Student {
+
+    private Integer stuNo;
+
+    private Person person;
+
+    // getter/setter/toString
+}
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/06/10/Spring自定义属性编辑器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/06/06/Spring自定义组件标签/" itemprop="url">
                   Spring自定义组件标签
                 </a>
@@ -1557,178 +1702,6 @@ authpriv.*                                              /var/log/secure
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/25/cut/" itemprop="url">
-                  cut
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-25T23:20:06+08:00" content="2017-05-25">
-              2017-05-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/25/cut/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/cut/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Linux下的cut使用"><a href="#Linux下的cut使用" class="headerlink" title="Linux下的cut使用"></a>Linux下的cut使用</h1><blockquote>
-<p>cut是一个选取命令，通过将一段数据分析，取出想要的。选取数据一般通过行的方式</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-b</td>
-<td>以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非指定了-n标志</td>
-</tr>
-<tr>
-<td style="text-align:center">-c</td>
-<td>以字符为单位进行分割</td>
-</tr>
-<tr>
-<td style="text-align:center">-d</td>
-<td>自定义分隔符，默认为制表符</td>
-</tr>
-<tr>
-<td style="text-align:center">-f</td>
-<td>与-d一起使用，指定显示哪个区域</td>
-</tr>
-</tbody>
-</table>
-<h3 id="b参数"><a href="#b参数" class="headerlink" title="-b参数"></a>-b参数</h3><ul>
-<li><p>以字节为单位分割</p>
-<pre><code># tail显示passwd文件最后5行，cut以字节分割，获取1位置的字节
-[root@m2 ~]# tail -n 5 passwd | cut -b 1
-s
-t
-m
-z
-Z
-
-# tail显示passwd文件最后5行，cut以字节分割，获取1-5位置的字节
-[root@m2 ~]# tail -n 5 passwd | cut -b 1-5
-sshd:
-tcpdu
-mysql
-zhang
-Zhang
-
-# tail显示passwd文件最后5行，cut以字节分割，获取1-5和8-10位置的字节
-[root@m2 ~]# tail -n 5 passwd | cut -b 1-5,8-10
-sshd:74:
-tcpdu:x:
-mysql:27
-zhangn:x
-Zhangn:x
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/25/cut/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1774,7 +1747,7 @@ Zhangn:x
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">92</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

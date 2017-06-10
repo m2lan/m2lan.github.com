@@ -266,6 +266,125 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/10/MySQL-快速复制数据库/" itemprop="url">
+                  MySQL-快速复制数据库
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-10T19:52:25+08:00" content="2016-11-10">
+              2016-11-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/10/MySQL-快速复制数据库/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/MySQL-快速复制数据库/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="mysql-快速复制数据库"><a href="#mysql-快速复制数据库" class="headerlink" title="mysql 快速复制数据库"></a>mysql 快速复制数据库</h1><ul>
+<li><p>从shopimport 复制到 shopimport2</p>
+<pre><code>./mysqldump shopimport -uroot -p123456 --add-drop-table | ./mysql shopimport2 -uroot -p123456
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/10/MySQL-定时任务/" itemprop="url">
                   mysql定时任务
                 </a>
@@ -1442,134 +1561,6 @@ MariaDB [work]&gt; select * from category;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/15/Elasticasearch安装和使用/" itemprop="url">
-                  Elasticasearch安装和使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-15T10:00:43+08:00" content="2016-07-15">
-              2016-07-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Elasticasearch/" itemprop="url" rel="index">
-                    <span itemprop="name">Elasticasearch</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/15/Elasticasearch安装和使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/Elasticasearch安装和使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Elasticasearch安装和使用"><a href="#Elasticasearch安装和使用" class="headerlink" title="Elasticasearch安装和使用"></a>Elasticasearch安装和使用</h1><h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><ul>
-<li><a href="https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/2.2.0/elasticsearch-2.2.0.zip" target="_blank" rel="external">download</a></li>
-<li><code>unzip elasticsearch-2.2.0.zip</code></li>
-</ul>
-<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><pre><code>vim config/elasticsearch.yml
-
-path.data: app_data
-path.logs: app_logs
-network.host: 0.0.0.0
-</code></pre><h2 id="install-Marvel-agent-plugin"><a href="#install-Marvel-agent-plugin" class="headerlink" title="install Marvel agent plugin"></a>install Marvel agent plugin</h2><pre><code>bin/plugin install licens
-bin/plugin install marvel-agent
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/15/Elasticasearch安装和使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1615,7 +1606,7 @@ bin/plugin install marvel-agent
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">92</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

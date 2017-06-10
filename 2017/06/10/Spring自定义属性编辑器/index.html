@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Spring," />
 
 
 
@@ -57,16 +57,17 @@
 
 
 
-<meta name="description" content="Tigase安装、部署、插件编写及其它">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://blog.golearns.org/categories/index.html">
+<meta name="description" content="Spring自定义属性编辑器 在Spring配置文件中，通过字面值为Bean各种类型的属性提供设置值 属性编辑器实际就是一个类型转换器，主要功能是将歪脖的设置值转换为JVM内部的对应类型 任何实现了java.beans.PropertyEditor接口的类都是属性编辑器 Spring大部分默认属性编辑器都直接扩展于java.beans.PropertyEditorSupport类  自定义Pers">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring自定义属性编辑器">
+<meta property="og:url" content="http://blog.golearns.org/2017/06/10/Spring自定义属性编辑器/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Tigase安装、部署、插件编写及其它">
-<meta property="og:updated_time" content="2016-07-15T03:44:14.000Z">
+<meta property="og:description" content="Spring自定义属性编辑器 在Spring配置文件中，通过字面值为Bean各种类型的属性提供设置值 属性编辑器实际就是一个类型转换器，主要功能是将歪脖的设置值转换为JVM内部的对应类型 任何实现了java.beans.PropertyEditor接口的类都是属性编辑器 Spring大部分默认属性编辑器都直接扩展于java.beans.PropertyEditorSupport类  自定义Pers">
+<meta property="og:updated_time" content="2017-06-10T03:25:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="Tigase安装、部署、插件编写及其它">
+<meta name="twitter:title" content="Spring自定义属性编辑器">
+<meta name="twitter:description" content="Spring自定义属性编辑器 在Spring配置文件中，通过字面值为Bean各种类型的属性提供设置值 属性编辑器实际就是一个类型转换器，主要功能是将歪脖的设置值转换为JVM内部的对应类型 任何实现了java.beans.PropertyEditor接口的类都是属性编辑器 Spring大部分默认属性编辑器都直接扩展于java.beans.PropertyEditorSupport类  自定义Pers">
 
 
 
@@ -84,13 +85,7 @@
   };
 </script>
 
-  <title>
-  
-
-  
-    分类 | 知识记录
-  
-</title>
+  <title> Spring自定义属性编辑器 | 知识记录 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -121,7 +116,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -251,16 +246,237 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <div class="category-all-page">
-        <div class="category-all-title">
-            目前共计 29 个分类
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring自定义属性编辑器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-10T11:06:09+08:00" content="2017-06-10">
+              2017-06-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/10/Spring自定义属性编辑器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/10/Spring自定义属性编辑器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
         </div>
-        <div class="category-all">
-          <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Druid/">Druid</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Druid/Springboot/">Springboot</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Elasticasearch/">Elasticasearch</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kafka/">Kafka</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Keepalived/">Keepalived</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mongodb/">Mongodb</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Objective-c/">Objective-c</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-native/">React-native</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-MVC/">Spring-MVC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tigase/">Tigase</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ectouch/">ectouch</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ionic/">ionic</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jsonp/">jsonp</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatis/">mybatis</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li></ul>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Spring自定义属性编辑器"><a href="#Spring自定义属性编辑器" class="headerlink" title="Spring自定义属性编辑器"></a>Spring自定义属性编辑器</h1><blockquote>
+<p>在Spring配置文件中，通过字面值为Bean各种类型的属性提供设置值</p>
+<p>属性编辑器实际就是一个类型转换器，主要功能是将歪脖的设置值转换为JVM内部的对应类型</p>
+<p>任何实现了<code>java.beans.PropertyEditor</code>接口的类都是属性编辑器</p>
+<p>Spring大部分默认属性编辑器都直接扩展于<code>java.beans.PropertyEditorSupport</code>类</p>
+</blockquote>
+<h3 id="自定义Person的属性编辑器"><a href="#自定义Person的属性编辑器" class="headerlink" title="自定义Person的属性编辑器"></a>自定义Person的属性编辑器</h3><ul>
+<li><p>创建<code>Person</code>和<code>Student</code></p>
+<pre><code>public class Person {
+
+    private Integer age;
+
+    private String name;
+
+    private String email;
+
+    // getter/setter/toString
+}
+
+public class Student {
+
+    private Integer stuNo;
+
+    private Person person;
+
+    // getter/setter/toString
+}
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>创建Person的自定义属性编辑器</p>
+<pre><code>public class CustomPersonEditor extends PropertyEditorSupport {
+
+    @Override
+    public void setAsText(String text) throws IllegalArgumentException {
+        if (null == text || text.indexOf(&quot;,&quot;) == -1) {
+            throw new IllegalArgumentException(&quot;格式不正确&quot;);
+        }
+
+        String[] stus = text.split(&quot;,&quot;);
+        Person person = new Person();
+        person.setAge(Integer.parseInt(stus[0]));
+        person.setName(stus[1]);
+        person.setEmail(stus[2]);
+
+        setValue(person);
+    }
+}
+</code></pre></li>
+<li><p>注册自定义属性编辑器<code>customEditor.xml</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+    &lt;!-- 
+         配置自动注册属性编辑器CustomEditorConfigurer, Spring容器通过反射机制自动调用这个Bean.
+         CustomEditorConfigurer通过一个Map属性定义需要自动注册的自定义属性编辑器
+    --&gt;
+    &lt;bean class=&quot;org.springframework.beans.factory.config.CustomEditorConfigurer&quot;&gt;
+        &lt;property name=&quot;customEditors&quot;&gt;
+            &lt;map&gt;
+                &lt;!-- 
+                    为Person类型指定了对应的属性编辑器CustomPersonEditor,
+                    key为属性类型
+                    value为属性编辑器的类名
+                 --&gt;
+                &lt;entry key=&quot;com.example.spring04.Person&quot; value=&quot;com.example.spring04.CustomPersonEditor&quot;/&gt;
+            &lt;/map&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id=&quot;student&quot; class=&quot;com.example.spring04.Student&quot;&gt;
+        &lt;property name=&quot;stuNo&quot; value=&quot;1&quot;/&gt;
+        &lt;!-- 
+            直接通过value为person属性提供配置
+            BeanWrapper在设置Student的person属性时，将检索自定义属性编辑器的注册表，
+            当发现Person属性类型拥有对应的属性编辑器CustomPersonEditor时
+            会通过CustomPersonEditor将&quot;20,zhangsan,1111@qq.com&quot;转换为Person对象
+         --&gt;
+        &lt;property name=&quot;person&quot; value=&quot;20,zhangsan,1111@qq.com&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre></li>
+<li><p>测试</p>
+<pre><code>public class Main {
+
+    public static void main(String[] args) {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;customEditor.xml&quot;);
+        Student student = ctx.getBean(Student.class);
+        System.out.println(student); // output:Student [stuNo=1, person=Person [age=20, name=zhangsan, email=1111@qq.com]]
+    }
+}
+</code></pre></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag">#Spring</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/06/Spring自定义组件标签/" rel="next" title="Spring自定义组件标签">
+                <i class="fa fa-chevron-left"></i> Spring自定义组件标签
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
   </div>
 
 
@@ -269,6 +485,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/06/10/Spring自定义属性编辑器/"
+           data-title="Spring自定义属性编辑器" data-url="http://blog.golearns.org/2017/06/10/Spring自定义属性编辑器/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -288,8 +512,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -405,6 +638,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring自定义属性编辑器"><span class="nav-number">1.</span> <span class="nav-text">Spring自定义属性编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义Person的属性编辑器"><span class="nav-number">1.0.1.</span> <span class="nav-text">自定义Person的属性编辑器</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -495,6 +739,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
 
   
 

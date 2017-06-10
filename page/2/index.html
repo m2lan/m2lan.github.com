@@ -266,6 +266,178 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/25/cut/" itemprop="url">
+                  cut
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-25T23:20:06+08:00" content="2017-05-25">
+              2017-05-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/25/cut/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/cut/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Linux下的cut使用"><a href="#Linux下的cut使用" class="headerlink" title="Linux下的cut使用"></a>Linux下的cut使用</h1><blockquote>
+<p>cut是一个选取命令，通过将一段数据分析，取出想要的。选取数据一般通过行的方式</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-b</td>
+<td>以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非指定了-n标志</td>
+</tr>
+<tr>
+<td style="text-align:center">-c</td>
+<td>以字符为单位进行分割</td>
+</tr>
+<tr>
+<td style="text-align:center">-d</td>
+<td>自定义分隔符，默认为制表符</td>
+</tr>
+<tr>
+<td style="text-align:center">-f</td>
+<td>与-d一起使用，指定显示哪个区域</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b参数"><a href="#b参数" class="headerlink" title="-b参数"></a>-b参数</h3><ul>
+<li><p>以字节为单位分割</p>
+<pre><code># tail显示passwd文件最后5行，cut以字节分割，获取1位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1
+s
+t
+m
+z
+Z
+
+# tail显示passwd文件最后5行，cut以字节分割，获取1-5位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1-5
+sshd:
+tcpdu
+mysql
+zhang
+Zhang
+
+# tail显示passwd文件最后5行，cut以字节分割，获取1-5和8-10位置的字节
+[root@m2 ~]# tail -n 5 passwd | cut -b 1-5,8-10
+sshd:74:
+tcpdu:x:
+mysql:27
+zhangn:x
+Zhangn:x
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/25/cut/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/25/awk/" itemprop="url">
                   awk
                 </a>
@@ -1710,148 +1882,6 @@ public class Counter2 {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/11/大型网站架构模式/" itemprop="url">
-                  大型网站架构模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-11T22:18:57+08:00" content="2017-05-11">
-              2017-05-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/架构/" itemprop="url" rel="index">
-                    <span itemprop="name">架构</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/11/大型网站架构模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/11/大型网站架构模式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="大型网站架构模式"><a href="#大型网站架构模式" class="headerlink" title="大型网站架构模式"></a>大型网站架构模式</h1><h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><ul>
-<li>分层是：将系统在横向维度上切分成几个部分，每个部分负责一部分相对比较单一的职责，然后通过上层对下层的依赖和调用组成一个完整的系统</li>
-<li>在大型网站分层架构中，将网站软件系统分为应用层、服务层和数据层</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>应用层</td>
-<td style="text-align:center">负责具体业务和试图展示，如网站首页及搜索输入和结果展示</td>
-</tr>
-<tr>
-<td>服务层</td>
-<td style="text-align:center">为应用层提供服务支持，如用户管理服务，购物车服务等</td>
-</tr>
-<tr>
-<td>数据层</td>
-<td style="text-align:center">提供数据存储访问服务，如数据库、缓存、文件、搜索引擎等</td>
-</tr>
-</tbody>
-</table>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/11/大型网站架构模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1897,7 +1927,7 @@ public class Counter2 {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">92</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
