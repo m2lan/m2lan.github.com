@@ -63,6 +63,7 @@
 <meta property="og:url" content="http://blog.golearns.org/page/7/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Tigase安装、部署、插件编写及其它">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识记录">
 <meta name="twitter:description" content="Tigase安装、部署、插件编写及其它">
@@ -266,8 +267,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/Shell-函数/" itemprop="url">
-                  Shell-函数
+                <a class="post-title-link" href="/2017/05/07/jsonp/" itemprop="url">
+                  jsonp
                 </a>
               
             
@@ -280,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:18:03+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2017-05-07T15:34:55+08:00" content="2017-05-07">
+              2017-05-07
             </time>
           </span>
 
@@ -294,8 +295,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
+                  <a href="/categories/jsonp/" itemprop="url" rel="index">
+                    <span itemprop="name">jsonp</span>
                   </a>
                 </span>
 
@@ -310,8 +311,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-函数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-函数/" itemprop="commentsCount"></span>
+                <a href="/2017/05/07/jsonp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/jsonp/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -334,60 +335,31 @@
 
       
         
-          
-            <pre><code>#!/bin/bash
-# function --
-# 函数返回值只能是整数，用来表示函数执行是否成功，0表示执行成功，其他表示失败
-# 如果返回非整数，则error
-# 函数名前面的function可加可不加
-# 函数可以使用return，return的返回值可以通过$?来接收
-# 
-# 也可以对函数进行删除，使用unset，后面加上.f
-# 如要删除function1函数：unset .f function1
-# 
-
-# 无参函数
-function function1 {
-    echo function1.
-}
-
-# 带参函数
-function function2 {
-    echo $1
-}
-
-# 多个参数
-function function3 {
-    echo $1 --- $2
-}
-
-function4() {
-    echo &quot;function4&quot;
-
-    return $((10 + 20))
-}
-
-# 函数嵌套调用
-function5() {
-    echo &quot;function5&quot;
-
-    function1
-}
-
-# 函数调用
-function1
-
-# 外部参数传入
-function2 $1
-function3 &quot;hello &quot; &quot;world!&quot;
-function4
-
-# 用来接收function4的返回值
-echo $?
-
-function5
-</code></pre>
-          
+          <h1 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h1><h2 id="新建一个web客户端"><a href="#新建一个web客户端" class="headerlink" title="新建一个web客户端"></a>新建一个web客户端</h2><ul>
+<li><p>index.jsp</p>
+<pre><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;script src=&quot;https://cdn.staticfile.org/jquery/2.1.1/jquery.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+        $(function() {
+            $.ajax({
+                url: &apos;http://192.168.0.1:8080/spring_mybatis/getUser?callback=?&apos;,
+                dataType: &apos;jsonp&apos;,
+                success: function(data) {
+                    console.log(data)
+                }
+            });
+        });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/jsonp/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -431,8 +403,8 @@ function5
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/Shell-转义替换/" itemprop="url">
-                  Shell-转义替换
+                <a class="post-title-link" href="/2017/05/07/mybatis逆向工程/" itemprop="url">
+                  mybatis逆向工程
                 </a>
               
             
@@ -445,8 +417,8 @@ function5
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:17:29+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2017-05-07T14:20:42+08:00" content="2017-05-07">
+              2017-05-07
             </time>
           </span>
 
@@ -459,8 +431,8 @@ function5
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
                   </a>
                 </span>
 
@@ -475,8 +447,8 @@ function5
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-转义替换/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-转义替换/" itemprop="commentsCount"></span>
+                <a href="/2017/05/07/mybatis逆向工程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis逆向工程/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -499,32 +471,44 @@ function5
 
       
         
-          
-            <pre><code>#!/bin/bash
-# 转义替换
-# -e 对转义字符进行替换
-
-echo -e &quot;hello world \n hahahah&quot;
-
-# 将命令执行的结果保存到变量中
-DATE=`date`
-echo $DATE
-
-# ${var:-message} 如果var为空或已被删除，则返回message，不会改变var的值
-# ${var:=message} 如果var为空或已被删除，则返回message，并将var的值设置为message
-# ${var:?message} 如果var为空或已被删除，则把message做为错误消息输出，脚本停止运行
-# ${var:+message} 如果var已被定义，则返回message，不会改变var的值
-
-echo ${var:-&quot;a---hahahahha&quot;}
-echo ${var:=&quot;b---hahhahaha&quot;}
-echo ${var}
-
-unset var
-echo ${var:?&quot;c---hahahahha&quot;} # 程序运行此处将停止
-
-echo ${var:+&quot;d---hahahhaha&quot;}
-</code></pre>
-          
+          <h1 id="mybatis-逆向工程"><a href="#mybatis-逆向工程" class="headerlink" title="mybatis 逆向工程"></a>mybatis 逆向工程</h1><ul>
+<li>新建maven simple project</li>
+<li><p>pom.xml </p>
+<pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;5.1.40&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+        &lt;version&gt;3.4.1&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;log4j&lt;/groupId&gt;
+        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;version&gt;1.2.17&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;
+        &lt;version&gt;1.3.5&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.12&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis逆向工程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -568,8 +552,8 @@ echo ${var:+&quot;d---hahahhaha&quot;}
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/Shell-case/" itemprop="url">
-                  Shell-case
+                <a class="post-title-link" href="/2017/05/07/mybatis-spring-springmvc/" itemprop="url">
+                  mybatis-spring-springmvc
                 </a>
               
             
@@ -582,8 +566,8 @@ echo ${var:+&quot;d---hahahhaha&quot;}
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:16:58+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2017-05-07T14:09:37+08:00" content="2017-05-07">
+              2017-05-07
             </time>
           </span>
 
@@ -596,8 +580,8 @@ echo ${var:+&quot;d---hahahhaha&quot;}
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
                   </a>
                 </span>
 
@@ -612,8 +596,8 @@ echo ${var:+&quot;d---hahahhaha&quot;}
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-case/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-case/" itemprop="commentsCount"></span>
+                <a href="/2017/05/07/mybatis-spring-springmvc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-spring-springmvc/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -636,46 +620,122 @@ echo ${var:+&quot;d---hahahhaha&quot;}
 
       
         
-          
-            <pre><code>#!/bin/bash
-#case
-
-NAME=&quot;john&quot;
-
-case ${NAME} in
-    &quot;john&quot; )
-        echo &quot;hahahha --- john&quot;
-        ;;
-    &quot;johnx&quot; )
-        echo &quot;huhuhuhu ---- johnx&quot;
-        ;;
-esac
-
-echo &quot;请输入1-3&quot;
-read INPUT
-case $INPUT in
-    1 )
-        echo &quot;你输入了1&quot;;;
-    2 )
-        echo &quot;你输入了2&quot;;;
-    3 )
-        echo &quot;你输入了3&quot;;;
-    * ) # 当以上条件不匹配，则会进入到这里
-        echo &quot;你的输出超出了范围&quot;;;
-esac
-
-option=&quot;${1}&quot;
-case $option in
-    -f ) FILE=&quot;${2}&quot;
-        echo &quot;file name is $FILE&quot;;;
-    -d ) DIR=&quot;${2}&quot;
-        echo &quot;dir name is $DIR&quot;;;
-    * )
-        echo &quot;`basename ${0}`: usage: [-f file] | [-d directory]&quot;
-        exit 1;; # 脚本运行的返回值 exit 0 表示成功， exit 1 表示失败
-esac
-</code></pre>
-          
+          <h1 id="mybatis整合spring和springmvc"><a href="#mybatis整合spring和springmvc" class="headerlink" title="mybatis整合spring和springmvc"></a>mybatis整合spring和springmvc</h1><h2 id="新建Maven-webapps"><a href="#新建Maven-webapps" class="headerlink" title="新建Maven webapps"></a>新建Maven webapps</h2><ul>
+<li><p>pom.xml</p>
+<pre><code>&lt;profiles&gt;
+    &lt;profile&gt;
+        &lt;activation&gt;
+            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+            &lt;jdk&gt;1.8&lt;/jdk&gt;
+        &lt;/activation&gt;
+        &lt;properties&gt;
+            &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+            &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+            &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+            &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+            &lt;maven.compiler.compilerVersion&gt;1.8&lt;/maven.compiler.compilerVersion&gt;
+            &lt;java.version&gt;1.8&lt;/java.version&gt;
+            &lt;mybatis.version&gt;3.4.1&lt;/mybatis.version&gt;
+            &lt;mysql.version&gt;5.1.40&lt;/mysql.version&gt;
+            &lt;log4j.version&gt;1.2.17&lt;/log4j.version&gt;
+            &lt;junit.version&gt;4.12&lt;/junit.version&gt;
+            &lt;mybatis.ehcache.version&gt;1.1.0&lt;/mybatis.ehcache.version&gt;
+            &lt;spring.version&gt;4.3.7.RELEASE&lt;/spring.version&gt;
+            &lt;servlet.api.version&gt;3.1.0&lt;/servlet.api.version&gt;
+            &lt;jstl.version&gt;1.2&lt;/jstl.version&gt;
+            &lt;jackson.version&gt;2.8.7&lt;/jackson.version&gt;
+            &lt;c3p0.version&gt;0.9.5.2&lt;/c3p0.version&gt;
+            &lt;mybatis.spring.version&gt;1.3.1&lt;/mybatis.spring.version&gt;
+        &lt;/properties&gt;
+    &lt;/profile&gt;
+&lt;/profiles&gt;
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+        &lt;version&gt;${servlet.api.version}&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+        &lt;version&gt;${jstl.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+        &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+        &lt;version&gt;${jackson.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;${mysql.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.mchange&lt;/groupId&gt;
+        &lt;artifactId&gt;c3p0&lt;/artifactId&gt;
+        &lt;version&gt;${c3p0.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+        &lt;version&gt;${mybatis.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;log4j&lt;/groupId&gt;
+        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;version&gt;${log4j.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis.caches&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-ehcache&lt;/artifactId&gt;
+        &lt;version&gt;${mybatis.ehcache.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+        &lt;version&gt;${mybatis.spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;${junit.version}&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre></li>
+<li>Maven -&gt; Update project</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis-spring-springmvc/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -719,8 +779,8 @@ esac
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/Shell-包含文件/" itemprop="url">
-                  Shell-包含文件
+                <a class="post-title-link" href="/2017/05/07/mybatis-cache/" itemprop="url">
+                  mybatis-cache
                 </a>
               
             
@@ -733,8 +793,8 @@ esac
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:16:28+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2017-05-07T13:54:46+08:00" content="2017-05-07">
+              2017-05-07
             </time>
           </span>
 
@@ -747,8 +807,8 @@ esac
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
                   </a>
                 </span>
 
@@ -763,8 +823,8 @@ esac
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-包含文件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-包含文件/" itemprop="commentsCount"></span>
+                <a href="/2017/05/07/mybatis-cache/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-cache/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -787,613 +847,674 @@ esac
 
       
         
-          
-            <pre><code># shell 中包含外部脚本，可以使用
-# 1. . filename
-# 2. source filename
-# 现在新建一个脚本test.sh，内容如下
-
-USERNAME=&quot;john&quot;
-PASSWORD=&quot;123456&quot;
-
-# 再新建一个include.sh，内容如下
-
-#!/bin/bash
-
-. ./test.sh
-
-echo $USERNAME  # 输出john
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Shell-算术运算符-字符串操作/" itemprop="url">
-                  Shell-算术运算符+字符串操作
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:15:16+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-算术运算符-字符串操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-算术运算符-字符串操作/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>#!/bin/bash
-#算术运算符
-
-A=10
-B=$(($A+20))
-echo ${B}
-
-echo $((10+10))
-
-# 表达式和运算符之间要存在空格,不能写成2+2
-num=`expr 2 + 2`
-echo $num
-
-echo $((10/10))
-echo `expr 10 / 10`
-echo $((10*10))
-
-# 乘法*号前面添加反斜杠才能进行运算
-echo `expr 10 \* 10`
-</code></pre><p>==========</p>
-<pre><code>#!/bin/bash
-#string
-
-STRING=&quot;hello world&quot;
-SUBSTRING=&quot;wqpeowqpeowq xxxworldxxxx world&quot;
-STRING2=&quot;QQQQQ WWWWWW BBBBBB EEEEEE&quot;
-
-#字符串替换
-echo ${STRING[@]/world/world!}
-
-#字符串替换所有
-echo ${SUBSTRING[@]//world/world!}
-
-#字符串截取 ${STRING:n} 从第N个位置到结尾
-echo ${STRING:2}
-
-#字符串截取 ${STRING:POS:LEN} 从从第POS位置开始截取LEN长度的字符
-echo ${STRING:2:5}
-
-#删除字符串中的字符，和空替换 
-echo ${STRING2[@]// WWWWWW}
-
-#将字符串开头的字符替换
-echo ${STRING2[@]/#QQQQQ/MMMMM}
-
-#将字符串结尾的字符替换
-echo ${STRING2[@]/%EEEEEE/PPPPP}
-
-#将字符串提出为shell命令
-echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Shell-变量/" itemprop="url">
-                  Shell-变量
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:11:37+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-变量/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-变量/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>#!/bin/bash
-
-# 变量 if---else---fi
-# 变量赋值不能有空格
-# USERNAME = &quot;zhangsan&quot; error
-# 使用定义过的变量 前面加上美元符$
-USERNAME=&quot;zhangsan&quot;
-
-# 重新定义变量
-# USERNAME=&quot;hahhahaha&quot;
-# 
-# 变量可以定义为只读的 如下：
-# 
-# URL=&quot;http://www.baidu.com&quot;
-# readonly URL
-# URL=&quot;http://www.google.com.hk&quot; --- error 
-# echo $URL
-# 
-# 删除变量 使用unset，不能删除只读变量
-# unset USERNAME
-# echo ${USERNAME} --- 输出为空
-# 
-if [ $USERNAME == &quot;zhangsan&quot; ]; then
-    echo &quot;ok $USERNAME&quot;
-    echo ${USERNAME}  # 返回变量值，更可观
-    echo $USERNAME    # 返回变量值
-else
-    echo &quot;buok&quot;
-fi
-
-# 特殊变量
-# $ 表示当前shell的进程ID，即PID
-# 
-echo $$
-echo $?
-</code></pre><table>
-<thead>
-<tr>
-<th>变量</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$0</td>
-<td>当前脚本文件名</td>
-</tr>
-<tr>
-<td>$n</td>
-<td>传递给脚本或者函数的参数，n表示一个数字，如：第一个参数$1,第二个参数$2</td>
-</tr>
-<tr>
-<td>$#</td>
-<td>传递给脚本的参数个数</td>
-</tr>
-<tr>
-<td>$*</td>
-<td>传递给脚本或者函数的所有参数</td>
-</tr>
-<tr>
-<td>$@</td>
-<td>传递给脚本或者函数的所有参数</td>
-</tr>
-<tr>
-<td>$?</td>
-<td>上个命令的退出状态，或函数的返回值</td>
-</tr>
-<tr>
-<td>$$</td>
-<td>当前shell的进程ID，即PID</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Shell-helloworld/" itemprop="url">
-                  Shell-helloworld
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:11:03+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-helloworld/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-helloworld/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>#!/bin/bash
-# &quot;#!&quot;是一个约定的标记，用来告诉系统这个脚本需要使用什么解释器来执行，使用哪一种shell
-# 
-echo &quot;hello world!&quot;;
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/OC-检测视图退出/" itemprop="url">
-                  OC-检测视图退出
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:10:15+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/OC-检测视图退出/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-检测视图退出/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>-(void) viewWillDisappear:(BOOL)animated {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-       // back button was pressed.  We know this is true because self is no longer
-       // in the navigation stack.  
+          <h1 id="mybatis-cache"><a href="#mybatis-cache" class="headerlink" title="mybatis cache"></a>mybatis cache</h1><blockquote>
+<p>mybatis提供一级缓存和二级缓存</p>
+</blockquote>
+<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><ul>
+<li><p>sqlSession级别的缓存，会话缓存，当sqlSession关闭会话结束，缓存失效。</p>
+<pre><code>@Test
+public void findUser() {
+    try (SqlSession session = sqlSessionFactory.openSession();
+            SqlSession session2 = sqlSessionFactory.openSession()) {
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        User user = userMapper.getUserById(1);
+        System.out.println(user);
+        session.close();
+
+        UserMapper userMapper1 = session2.getMapper(UserMapper.class);
+        User user1 = userMapper1.getUserById(1);
+        System.out.println(user1);
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-    [super viewWillDisappear:animated];
 }
+</code></pre></li>
+<li>第一次查询用户信息，如果缓存中不存在，去数据库中查询。然后把用户信息保存在一级缓存中。</li>
+<li>默认所有的select语句都会被缓存<code>useCache=&quot;true&quot;</code></li>
+<li>当操作insert,update 和 delete 语句会刷新缓存。<code>flushCache=&quot;true&quot;</code></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis-cache/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/07/mybatis-多表关联操作/" itemprop="url">
+                  mybatis-多表关联操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-07T12:38:44+08:00" content="2017-05-07">
+              2017-05-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/07/mybatis-多表关联操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-多表关联操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="mybatis多表关联"><a href="#mybatis多表关联" class="headerlink" title="mybatis多表关联"></a>mybatis多表关联</h1><ul>
+<li><p>表结构</p>
+<pre><code>CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `icard` int(11) NOT NULL DEFAULT &apos;0&apos;,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `idCard` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `card` char(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis-多表关联操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/07/mybatis-注解操作/" itemprop="url">
+                  mybatis-注解操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-07T12:31:50+08:00" content="2017-05-07">
+              2017-05-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/07/mybatis-注解操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-注解操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="mybatis注解"><a href="#mybatis注解" class="headerlink" title="mybatis注解"></a>mybatis注解</h1><ul>
+<li><p>新建<code>UserMapperAnnotation.java</code>文件</p>
+<pre><code>public interface UserMapperAnnotation {
+
+    @Insert(&quot;insert into user(username, password, email) values(#{username}, #{password}, #{email})&quot;)
+    @Options(useGeneratedKeys=true, keyProperty=&quot;id&quot;)
+    public Integer addUser(User user);
+
+    @Delete(&quot;delete from user where id = #{id}&quot;)
+    public void delUser(Integer id);
+
+    @Update(&quot;update user set password = #{password} where id = #{id}&quot;)
+    public void updateUser(User user);
+
+    @Select(&quot;select id, username, password, email from user where id = #{id}&quot;)
+    public User getUserById(Integer id);
+
+    @Select(&quot;select id, username, password, email from user&quot;)
+    public List&lt;User&gt; getAll();
+}
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis-注解操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/07/mybatis-操作/" itemprop="url">
+                  mybatis-操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-07T12:09:39+08:00" content="2017-05-07">
+              2017-05-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/07/mybatis-操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="mybatis操作"><a href="#mybatis操作" class="headerlink" title="mybatis操作"></a>mybatis操作</h1><ul>
+<li><p>表结构</p>
+<pre><code>CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis-操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/07/mybatis环境安装/" itemprop="url">
+                  mybatis环境安装
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-07T10:08:54+08:00" content="2017-05-07">
+              2017-05-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/07/mybatis环境安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis环境安装/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="mybatis环境安装"><a href="#mybatis环境安装" class="headerlink" title="mybatis环境安装"></a>mybatis环境安装</h1><h2 id="Eclipse插件安装"><a href="#Eclipse插件安装" class="headerlink" title="Eclipse插件安装"></a>Eclipse插件安装</h2><pre><code>Help -&gt; Eclipse Marketplace -&gt; Search -&gt; MyBatipse -&gt; install
 </code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis环境安装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/10/MySQL-快速复制数据库/" itemprop="url">
+                  MySQL-快速复制数据库
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-10T19:52:25+08:00" content="2016-11-10">
+              2016-11-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/10/MySQL-快速复制数据库/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/MySQL-快速复制数据库/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="mysql-快速复制数据库"><a href="#mysql-快速复制数据库" class="headerlink" title="mysql 快速复制数据库"></a>mysql 快速复制数据库</h1><ul>
+<li><p>从shopimport 复制到 shopimport2</p>
+<pre><code>./mysqldump shopimport -uroot -p123456 --add-drop-table | ./mysql shopimport2 -uroot -p123456
+</code></pre></li>
+</ul>
+
           
         
       
@@ -1438,8 +1559,8 @@ echo &quot;hello world!&quot;;
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/OC-UIButton中设置image大小/" itemprop="url">
-                  OC-UIButton中设置image大小
+                <a class="post-title-link" href="/2016/11/10/MySQL-定时任务/" itemprop="url">
+                  mysql定时任务
                 </a>
               
             
@@ -1452,8 +1573,8 @@ echo &quot;hello world!&quot;;
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:08:49+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2016-11-10T19:47:59+08:00" content="2016-11-10">
+              2016-11-10
             </time>
           </span>
 
@@ -1466,8 +1587,8 @@ echo &quot;hello world!&quot;;
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
                   </a>
                 </span>
 
@@ -1482,8 +1603,8 @@ echo &quot;hello world!&quot;;
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/OC-UIButton中设置image大小/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-UIButton中设置image大小/" itemprop="commentsCount"></span>
+                <a href="/2016/11/10/MySQL-定时任务/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/MySQL-定时任务/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1506,203 +1627,19 @@ echo &quot;hello world!&quot;;
 
       
         
-          
-            <pre><code>#import &lt;UIKit/UIKit.h&gt;
-
-@interface UIImage (Category)
-
-- (UIImage*)transformWidth:(CGFloat)width
-                    height:(CGFloat)height;
-
-@end
-
-
-#import &quot;UIImage+Category.h&quot;
-
-@implementation UIImage (Category)
-
-- (UIImage*)transformWidth:(CGFloat)width
-               height:(CGFloat)height {
-
-    CGFloat destW = width;
-    CGFloat destH = height;
-    CGFloat sourceW = width;
-    CGFloat sourceH = height;
-
-    CGImageRef imageRef = self.CGImage;
-    CGContextRef bitmap = CGBitmapContextCreate(NULL,
-                                               destW,
-                                               destH,
-                                               CGImageGetBitsPerComponent(imageRef),
-                                               4*destW,
-                                               CGImageGetColorSpace(imageRef),
-                                               (kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst));
-
-    CGContextDrawImage(bitmap, CGRectMake(0, 0, sourceW, sourceH), imageRef);
-
-    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
-    UIImage *resultImage = [UIImage imageWithCGImage:ref];
-    CGContextRelease(bitmap);
-    CGImageRelease(ref);
-
-    return resultImage;
-}
-
-@end
+          <h1 id="mysql-定时任务"><a href="#mysql-定时任务" class="headerlink" title="mysql 定时任务"></a>mysql 定时任务</h1><blockquote>
+<p><code>[on completion [not] preserve]</code>可以设置这个事件是执行一次还是持久执行,默认为<code>not preserve。</code>
+<code>[enable | disenable]</code>可是设置该事件创建后状态是否开启或关闭,默认为<code>enable</code>。
+<code>[commet &#39;commet&#39;]</code>可以给该事件加上注释。</p>
+</blockquote>
+<h2 id="查看定时任务"><a href="#查看定时任务" class="headerlink" title="查看定时任务"></a>查看定时任务</h2><pre><code>show events;
+</code></pre><h2 id="查看是否开启定时任务"><a href="#查看是否开启定时任务" class="headerlink" title="查看是否开启定时任务"></a>查看是否开启定时任务</h2><pre><code>SHOW VARIABLES LIKE &apos;event_scheduler&apos;;
 </code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/IOS-创建文件目录/" itemprop="url">
-                  IOS-创建文件目录
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:07:32+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/IOS-创建文件目录/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/IOS-创建文件目录/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>//
-//  ViewController.m
-//  chat-view
-//
-//  Created by yonglang on 14/12/4.
-//  Copyright (c) 2014年 yonglang. All rights reserved.
-//
-
-#import &quot;ViewController.h&quot;
-
-static NSString *homeDir = nil;
-
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    NSLog(@&quot;audioDir: %@&quot;, [self createFileDirectory]);
-}
-
-- (NSString *)createFileDirectory {
-    if (!homeDir) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        homeDir = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;1321312321/home&quot;]];
-
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if (![fileManager fileExistsAtPath:homeDir]) {
-            [fileManager createDirectoryAtPath:homeDir withIntermediateDirectories:YES attributes:nil error:nil];
-        }
-    }
-    return homeDir;
-}
-
-@end
-</code></pre>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/10/MySQL-定时任务/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1729,7 +1666,7 @@ static NSString *homeDir = nil;
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1770,7 +1707,7 @@ static NSString *homeDir = nil;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-count">131</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1778,7 +1715,7 @@ static NSString *homeDir = nil;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1787,7 +1724,7 @@ static NSString *homeDir = nil;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1889,7 +1826,7 @@ static NSString *homeDir = nil;
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

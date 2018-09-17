@@ -63,6 +63,7 @@
 <meta property="og:url" content="http://blog.golearns.org/page/10/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Tigase安装、部署、插件编写及其它">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识记录">
 <meta name="twitter:description" content="Tigase安装、部署、插件编写及其它">
@@ -266,8 +267,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/09/MongoDB-3-0-3用户认证/" itemprop="url">
-                  MongoDB-3.0.3用户认证
+                <a class="post-title-link" href="/2016/02/25/keepalived-haproxy高可用负载均衡/" itemprop="url">
+                  keepalived+haproxy高可用负载均衡
                 </a>
               
             
@@ -280,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-09T23:32:12+08:00" content="2015-12-09">
-              2015-12-09
+            <time itemprop="dateCreated" datetime="2016-02-25T23:45:11+08:00" content="2016-02-25">
+              2016-02-25
             </time>
           </span>
 
@@ -294,8 +295,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Mongodb/" itemprop="url" rel="index">
-                    <span itemprop="name">Mongodb</span>
+                  <a href="/categories/Keepalived/" itemprop="url" rel="index">
+                    <span itemprop="name">Keepalived</span>
                   </a>
                 </span>
 
@@ -310,8 +311,131 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/09/MongoDB-3-0-3用户认证/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/09/MongoDB-3-0-3用户认证/" itemprop="commentsCount"></span>
+                <a href="/2016/02/25/keepalived-haproxy高可用负载均衡/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/keepalived-haproxy高可用负载均衡/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="基于Keepalived-haproxy实现高可用负载均衡"><a href="#基于Keepalived-haproxy实现高可用负载均衡" class="headerlink" title="基于Keepalived+haproxy实现高可用负载均衡"></a>基于Keepalived+haproxy实现高可用负载均衡</h1><h2 id="Centos7集群配置，采用Keepalived-haproxy来做。两台负载均衡服务器做主、备切换-3台web服务器"><a href="#Centos7集群配置，采用Keepalived-haproxy来做。两台负载均衡服务器做主、备切换-3台web服务器" class="headerlink" title="Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器"></a>Centos7集群配置，采用Keepalived+haproxy来做。两台负载均衡服务器做主、备切换.3台web服务器</h2><pre><code>* VIP：192.168.0.185
+* h1：192.168.0.137
+* h2：192.168.0.138
+* web1：192.168.0.130
+* web2：192.168.0.131
+* web3：192.168.0.132
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/25/keepalived-haproxy高可用负载均衡/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/25/Linux-设备文件名/" itemprop="url">
+                  Linux-设备文件名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-25T23:34:08+08:00" content="2016-02-25">
+              2016-02-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/25/Linux-设备文件名/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/Linux-设备文件名/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -335,27 +459,52 @@
       
         
           
-            <h2 id="在Mongodb3-0-3中创建User进行权限验证"><a href="#在Mongodb3-0-3中创建User进行权限验证" class="headerlink" title="在Mongodb3.0.3中创建User进行权限验证"></a>在Mongodb3.0.3中创建User进行权限验证</h2><ul>
-<li><p>启动mongodb，切换db为admin</p>
-<pre><code>use admin
-db.system.version.find()
-db.system.version.update({&quot;_id&quot;: &quot;authSchema&quot;}, {&quot;$set&quot;: {&quot;currentVersion&quot;: 3}})
-</code></pre></li>
-<li><p>为数据库创建用户，这里使用的mydb数据库</p>
-<pre><code>use mydb
-db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;123456&quot;, roles: [{role: &quot;dbOwner&quot;, db: &quot;mydb&quot;}]})
-</code></pre></li>
-<li><p>在mongodb.conf中添加authorization: enabled</p>
-<pre><code>security:
-  authorization: enabled
-</code></pre></li>
-<li>完毕！重启mongodb验证。</li>
-<li>参考:<ol>
-<li><a href="http://docs.mongodb.org/manual/reference/configuration-options/" target="_blank" rel="external">配置文件操作</a></li>
-<li><a href="http://docs.mongodb.org/manual/reference/built-in-roles/" target="_blank" rel="external">权限</a></li>
-</ol>
-</li>
-</ul>
+            <h1 id="各硬件设备在Linux中的文件名"><a href="#各硬件设备在Linux中的文件名" class="headerlink" title="各硬件设备在Linux中的文件名"></a>各硬件设备在Linux中的文件名</h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IDE硬盘</td>
+<td>/dev/hd[a-d]</td>
+</tr>
+<tr>
+<td>SCSI/SATA/USB硬盘</td>
+<td>/dev/sd[a-p]</td>
+</tr>
+<tr>
+<td>U盘</td>
+<td>/dev/sd[a-p]</td>
+</tr>
+<tr>
+<td>软驱</td>
+<td>/dev/fd[0-1]</td>
+</tr>
+<tr>
+<td>打印机</td>
+<td>25针:/dev/Ip[0-2],USB:/dev/usb/Ip[0-15]</td>
+</tr>
+<tr>
+<td>鼠标</td>
+<td>USB:/dev/usb/mouse[0-15],PS2:/dev/psaux</td>
+</tr>
+<tr>
+<td>当前CD ROM/DVD ROM</td>
+<td>/dev/cdrom</td>
+</tr>
+<tr>
+<td>当前鼠标</td>
+<td>/dev/mouse</td>
+</tr>
+<tr>
+<td>磁带机</td>
+<td>IDE:/dev/ht0,SCSI:/dev/st0</td>
+</tr>
+</tbody>
+</table>
 
           
         
@@ -401,8 +550,8 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
             
               
                 
-                <a class="post-title-link" href="/2015/12/09/Mongodb-启动/" itemprop="url">
-                  Mongodb-启动
+                <a class="post-title-link" href="/2016/02/25/zookeeper/" itemprop="url">
+                  zookeeper
                 </a>
               
             
@@ -415,8 +564,8 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-09T23:26:15+08:00" content="2015-12-09">
-              2015-12-09
+            <time itemprop="dateCreated" datetime="2016-02-25T23:03:14+08:00" content="2016-02-25">
+              2016-02-25
             </time>
           </span>
 
@@ -429,8 +578,8 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Mongodb/" itemprop="url" rel="index">
-                    <span itemprop="name">Mongodb</span>
+                  <a href="/categories/Zookeeper/" itemprop="url" rel="index">
+                    <span itemprop="name">Zookeeper</span>
                   </a>
                 </span>
 
@@ -445,8 +594,265 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/09/Mongodb-启动/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/09/Mongodb-启动/" itemprop="commentsCount"></span>
+                <a href="/2016/02/25/zookeeper/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/zookeeper/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+tar xvf zookeeper-3.4.8.tar.gz
+cd zookeeper-3.4.8
+cd conf
+cp zoo_sample.cfg zoo.cfg
+
+// zoo.cfg配置
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/tmp/zookeeper
+clientPort=2181
+autopurge.purgeInterval=1
+server.1=localhost:2888:3888
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/25/zookeeper/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/25/kafka/" itemprop="url">
+                  kafka
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-25T23:01:53+08:00" content="2016-02-25">
+              2016-02-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">Kafka</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/25/kafka/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/kafka/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h1><blockquote>
+<p>kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
+通过zookeeper实现集群
+kafka集群由多个kafka实例组成，每个实例称为broker</p>
+</blockquote>
+<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><pre><code>wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
+tar xzf kafka_2.11-0.9.0.0.tgz
+export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
+cd kafka_2.11-0.9.0.0
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/25/kafka/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/Shell-redirect/" itemprop="url">
+                  Shell-redirect
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:20:35+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-redirect/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-redirect/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -470,21 +876,29 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
       
         
           
-            <h2 id="Mac下安装PHP的mongodb扩展"><a href="#Mac下安装PHP的mongodb扩展" class="headerlink" title="Mac下安装PHP的mongodb扩展"></a>Mac下安装PHP的mongodb扩展</h2><ul>
-<li><p><code>XAMPP/bin</code></p>
-<pre><code>sudo pecl install mongo
-</code></pre></li>
-<li><p><code>php.ini</code>添加</p>
-<pre><code>extension=mongo.so
-</code></pre></li>
-</ul>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><ul>
-<li>创建<code>/data/db</code>目录<code>sudo mkdir -p /data/db</code></li>
-<li>设置<code>/data/db</code>目录权限<code>sudo chown -R 你的系统登录用户名 /data</code></li>
-<li>终端执行<code>mongod</code></li>
-<li>输入<code>mongo</code>便可连结到默认的数据库</li>
-</ul>
+            <pre><code>#!/bin/bash
+# 输出重定向
+#  将输出到终端的结果重定向到文件中
 
+# 加上双引号 可以对输出结果换行
+# &gt; 会将已存在的结果覆盖
+# 如果不想覆盖 则使用 &gt;&gt; 如果文件存在，结果将会追加
+echo &quot;$(ls -la)&quot; &gt; file
+
+echo &quot;$(who)&quot; &gt;&gt; file1
+
+
+# 输入结果重定向
+cat &lt; file
+wc -l &lt; file
+
+# 文档嵌入
+wc -l &lt;&lt;EOF
+    hahahhdfdslfjdslfjsdlfjsdlfsd
+    werjewlrjewlrjewlrjewlrjwer
+    werjwelrjwlejrewljrew
+EOF
+</code></pre>
           
         
       
@@ -529,8 +943,8 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
             
               
                 
-                <a class="post-title-link" href="/2015/12/09/MySQL-修改数据库和表的编码/" itemprop="url">
-                  MySQL-修改数据库和表的编码
+                <a class="post-title-link" href="/2015/12/10/Shell-for-while/" itemprop="url">
+                  Shell-for-while
                 </a>
               
             
@@ -543,8 +957,8 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-09T23:23:13+08:00" content="2015-12-09">
-              2015-12-09
+            <time itemprop="dateCreated" datetime="2015-12-10T02:19:59+08:00" content="2015-12-10">
+              2015-12-10
             </time>
           </span>
 
@@ -557,8 +971,8 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
                   </a>
                 </span>
 
@@ -573,8 +987,8 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/09/MySQL-修改数据库和表的编码/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/09/MySQL-修改数据库和表的编码/" itemprop="commentsCount"></span>
+                <a href="/2015/12/10/Shell-for-while/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-for-while/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -598,24 +1012,640 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
       
         
           
-            <ul>
-<li><p>查看数据库编码 </p>
-<pre><code>show variables like &apos;char%&apos;;
-</code></pre></li>
-<li><p>修改表编码 </p>
-<pre><code>ALTER TABLE &apos;table&apos; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
-</code></pre></li>
-<li><p>修改表字段编码 </p>
-<pre><code>ALTER TABLE &apos;test&apos; CHANGE &apos;name&apos; &apos;name&apos; VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
-</code></pre></li>
-<li><p>查看表编码 </p>
-<pre><code>show create table mytable
-</code></pre></li>
-<li><p>修改mysql默认编码</p>
-<pre><code>[mysqld]和[client]后添加character_set_server=utf8
-</code></pre></li>
-</ul>
+            <pre><code>#!/bin/bash
+# for 
 
+arr=(111 2222 3333 4444 5555)
+num=5
+count=5
+
+# for--in--
+for m in ${arr[@]}; do
+    echo $m
+done
+
+echo &quot;------------------------------------------&quot;
+
+for n in $( ls /usr/local ); do
+    echo $n
+done
+
+echo &quot;------------------------------------------&quot;
+
+# while
+while [[ $num -gt 0 ]]; do
+    echo &quot;num: ${num}&quot;
+    num=$(($num - 1))
+done
+
+num=5
+
+echo &quot;------------------------------------------&quot;
+# while --- continue
+while [[ $num -gt 0 ]]; do
+    num=$(($num - 1))
+    if [[ $num -eq 3 ]]; then
+        continue
+    fi
+    echo &quot;num: ${num}&quot;
+done
+
+echo &quot;------------------------------------------&quot;
+# while --- break
+while [[ $count -gt 0 ]]; do
+    count=$(($count - 1))
+    if [[ $count -eq 3 ]]; then
+        break;
+    fi
+    echo &quot;count: ${count}&quot;
+done
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/Shell-ifelse/" itemprop="url">
+                  Shell-ifelse
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:19:16+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-ifelse/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-ifelse/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+#if--else
+
+NAME=&quot;john&quot;
+
+# 注意if条件两边的空格
+if [ ${NAME} == &quot;john&quot; ]; then
+    echo &quot;hahhahahha&quot;
+else
+    echo &quot;huhuhuhuhu&quot;
+fi
+
+if [ ${NAME} == &quot;john&quot; ]; then
+    echo &quot;hahhahahha&quot;
+elif [ ${NAME} == &quot;johnx&quot; ]; then
+    echo &quot;huhuhuhuhu&quot;
+else
+    echo &quot;xxxxxxxxxx&quot;
+fi
+
+# 数值类型比较
+# $a -lt $b    $a &lt; $b
+# $a -gt $b    $a &gt; $b
+# $a -le $b    $a &lt;= $b
+# $a -ge $b    $a &gt;= $b
+# $a -eq $b    $a is equal to $b
+# $a -ne $b    $a is not equal to $b
+
+# 字符串类型比较
+# &quot;$a&quot; = &quot;$b&quot;     $a 和 $b 相等
+# &quot;$a&quot; == &quot;$b&quot;    $a 和 $b 相等
+# &quot;$a&quot; != &quot;$b&quot;    $a 和 $b 不相等
+# -z &quot;$a&quot;         $a 是空的
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/Shell-数组/" itemprop="url">
+                  Shell-数组
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:18:38+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-数组/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-数组/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# 数组 不支持多维数组
+# 通过index访问数组元素 arr[1]
+
+arr=(
+    xxxx
+    yyyy
+    wwww
+    &quot;hello world&quot;
+)
+
+# 使用下标定义
+arr1[0]=aaaa
+arr1[1]=bbb
+arr1[2]=cccc
+arr1[5]=dddd
+
+# 获取arr1所有值
+echo ${arr1[@]}
+
+# 获取arr1数组中值
+echo ${arr1[0]}
+echo ${arr1[1]}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/Shell-函数/" itemprop="url">
+                  Shell-函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:18:03+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-函数/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# function --
+# 函数返回值只能是整数，用来表示函数执行是否成功，0表示执行成功，其他表示失败
+# 如果返回非整数，则error
+# 函数名前面的function可加可不加
+# 函数可以使用return，return的返回值可以通过$?来接收
+# 
+# 也可以对函数进行删除，使用unset，后面加上.f
+# 如要删除function1函数：unset .f function1
+# 
+
+# 无参函数
+function function1 {
+    echo function1.
+}
+
+# 带参函数
+function function2 {
+    echo $1
+}
+
+# 多个参数
+function function3 {
+    echo $1 --- $2
+}
+
+function4() {
+    echo &quot;function4&quot;
+
+    return $((10 + 20))
+}
+
+# 函数嵌套调用
+function5() {
+    echo &quot;function5&quot;
+
+    function1
+}
+
+# 函数调用
+function1
+
+# 外部参数传入
+function2 $1
+function3 &quot;hello &quot; &quot;world!&quot;
+function4
+
+# 用来接收function4的返回值
+echo $?
+
+function5
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/Shell-转义替换/" itemprop="url">
+                  Shell-转义替换
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:17:29+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-转义替换/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-转义替换/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# 转义替换
+# -e 对转义字符进行替换
+
+echo -e &quot;hello world \n hahahah&quot;
+
+# 将命令执行的结果保存到变量中
+DATE=`date`
+echo $DATE
+
+# ${var:-message} 如果var为空或已被删除，则返回message，不会改变var的值
+# ${var:=message} 如果var为空或已被删除，则返回message，并将var的值设置为message
+# ${var:?message} 如果var为空或已被删除，则把message做为错误消息输出，脚本停止运行
+# ${var:+message} 如果var已被定义，则返回message，不会改变var的值
+
+echo ${var:-&quot;a---hahahahha&quot;}
+echo ${var:=&quot;b---hahhahaha&quot;}
+echo ${var}
+
+unset var
+echo ${var:?&quot;c---hahahahha&quot;} # 程序运行此处将停止
+
+echo ${var:+&quot;d---hahahhaha&quot;}
+</code></pre>
           
         
       
@@ -643,7 +1673,7 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -684,7 +1714,7 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-count">131</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -692,7 +1722,7 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -701,7 +1731,7 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -803,7 +1833,7 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

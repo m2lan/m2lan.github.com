@@ -64,6 +64,7 @@
 <meta property="og:url" content="http://blog.golearns.org/2016/02/26/centos-查看端口使用情况/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Centos 查看端口使用情况 通过测试感觉tsung每次进行压测,没进一个用户需要占用本机一个端口，所以系统默认的端口打开是从32768到65535,所以这里就只能进2W多个用户，于是修改默认打开端口数。  查看端口 sysctl net.ipv4.ip_local_port_range  修改该值 echo 1024 65535 &amp;gt; /proc/sys/net/ipv4/ip_local">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-07-15T03:41:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos-查看端口使用情况">
@@ -460,7 +461,7 @@ sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-count">131</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -468,7 +469,7 @@ sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -477,7 +478,7 @@ sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -590,7 +591,7 @@ sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

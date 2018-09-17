@@ -63,6 +63,7 @@
 <meta property="og:url" content="http://blog.golearns.org/page/8/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Tigase安装、部署、插件编写及其它">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识记录">
 <meta name="twitter:description" content="Tigase安装、部署、插件编写及其它">
@@ -266,8 +267,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/OC-数组对象排序/" itemprop="url">
-                  OC-数组对象排序
+                <a class="post-title-link" href="/2016/10/09/Chrome浏览器如何静音/" itemprop="url">
+                  Chrome浏览器如何静音
                 </a>
               
             
@@ -280,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:06:15+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2016-10-09T14:18:47+08:00" content="2016-10-09">
+              2016-10-09
             </time>
           </span>
 
@@ -294,8 +295,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
+                  <a href="/categories/Chrome/" itemprop="url" rel="index">
+                    <span itemprop="name">Chrome</span>
                   </a>
                 </span>
 
@@ -310,8 +311,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/OC-数组对象排序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-数组对象排序/" itemprop="commentsCount"></span>
+                <a href="/2016/10/09/Chrome浏览器如何静音/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/09/Chrome浏览器如何静音/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -335,785 +336,14 @@
       
         
           
-            <h2 id="Comparator排序"><a href="#Comparator排序" class="headerlink" title="Comparator排序"></a>Comparator排序</h2><pre><code>NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-
-    HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1];
-    HLMessage *msg2 = [[NSClassFromString([obj2 messageClassName]) alloc]initWithManagedObject:obj2];
-
-    NSComparisonResult result = [[msg1 timestamp] compare:[msg2 timestamp]];
-
-    switch(result) {
-        case NSOrderedAscending:
-            return NSOrderedAscending;
-        case NSOrderedDescending:
-            return NSOrderedDescending;
-        case NSOrderedSame:
-            return NSOrderedSame;
-        default:
-            return NSOrderedSame;
-    }
-}];
-return arr;
-</code></pre><h2 id="SortDescriptor排序"><a href="#SortDescriptor排序" class="headerlink" title="SortDescriptor排序"></a>SortDescriptor排序</h2><pre><code>NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@&quot;timestamp&quot; ascending:YES];
-NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-NSArray *sortArray = [array sortedArrayUsingDescriptors:sortDescriptors];
-
-return sortArray;
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/IOS-点击按钮触发UIRefreshControl/" itemprop="url">
-                  IOS-点击按钮触发UIRefreshControl
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:05:15+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/IOS-点击按钮触发UIRefreshControl/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/IOS-点击按钮触发UIRefreshControl/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>//
-//  ViewController.m
-//  chat-view
-//
-//  Created by yonglang on 14/12/4.
-//  Copyright (c) 2014年 yonglang. All rights reserved.
-//
-
-#import &quot;ViewController.h&quot;
-
-@interface ViewController ()
-
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@&quot;刷新&quot; style:UIBarButtonItemStyleDone target:self action:@selector(refreshButton: )];
-
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.tintColor = [UIColor blueColor];
-    [self.refreshControl addTarget:self
-                            action:@selector(controlEventValueChanged:)
-                  forControlEvents:UIControlEventValueChanged];
-}
-
-- (void)controlEventValueChanged:(id)sender {
-    if (self.refreshControl.refreshing) {
-        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@&quot;刷新中&quot;];
-
-        [self performSelector:@selector(refreshData) withObject:nil afterDelay:0.5];
-    }
-}
-
-- (void)refreshButton: (id)sender {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1.0];
-    self.tableView.contentOffset = CGPointMake(0.0, -200.0);
-    [UIView commitAnimations];
-
-    [self.refreshControl beginRefreshing];
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@&quot;刷新中&quot;];
-
-    [self performSelector:@selector(refreshData) withObject:nil afterDelay:2.0];
-}
-
-- (void)refreshData {
-    [self.refreshControl endRefreshing];
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@&quot;下拉刷新&quot;];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *str = @&quot;MyCell&quot;;
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
-
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
-    }
-
-    cell.textLabel.text = @&quot;sdfsdfds&quot;;
-    cell.imageView.image = [UIImage imageNamed:@&quot;w.jpg&quot;];
-    cell.detailTextLabel.text = @&quot;23432432&quot;;
-
-    return cell;
-}
-
-@end
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/UITabBarController使用/" itemprop="url">
-                  UITabBarController使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:02:13+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/UITabBarController使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/UITabBarController使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>//
-//  ViewController.m
-//  ceshi
-//
-//  Created by yonglang on 14/11/6.
-//  Copyright (c) 2014年 yonglang. All rights reserved.
-//  图片资源 https://github.com/m2lan/Resource
-//
-
-#import &quot;ViewController.h&quot;
-#import &quot;OneViewController.h&quot;
-#import &quot;TwoViewController.h&quot;
-#import &quot;ThreeViewController.h&quot;
-
-@interface MainController () {
-    UITabBarController *_tabC;
-}
-
-@end
-
-@implementation MainController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    _tabC = [[UITabBarController alloc] init];
-    [_tabC.tabBar setBackgroundColor:[UIColor clearColor]];
-    [_tabC.view setFrame:self.view.frame];
-    [self.view addSubview:_tabC.view];
-
-    OneViewController *one = [[OneViewController alloc] init];
-    TwoViewController *two = [[TwoViewController alloc] init];
-    ThreeViewController *three = [[ThreeViewController alloc] init];
-    _tabC.viewControllers = @[one, two, three ];
-
-    [_tabC.tabBar setBackgroundColor:[UIColor whiteColor]];
-    NSArray *ar = _tabC.viewControllers;
-    NSMutableArray *arD = [NSMutableArray new];
-    [ar enumerateObjectsUsingBlock:^(UIViewController *viewController, NSUInteger idx, BOOL *stop)
-    {
-        UITabBarItem *item = nil;
-        switch (idx)
-        {
-           case 0:
-           {
-               item = [[UITabBarItem alloc] initWithTitle:@&quot;消息&quot; image:[[UIImage imageNamed:@&quot;tab_recent_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@&quot;tab_recent_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               break;
-           }
-           case 1:
-           {
-               item = [[UITabBarItem alloc] initWithTitle:@&quot;联系人&quot; image:nil tag:1];
-               [item setImage:[[UIImage imageNamed:@&quot;tab_buddy_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               [item setSelectedImage:[[UIImage imageNamed:@&quot;tab_buddy_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               break;
-           }
-           case 2:
-           {
-               item = [[UITabBarItem alloc]initWithTitle:@&quot;动态&quot; image:nil tag:1];
-               [item setImage:[[UIImage imageNamed:@&quot;tab_qworld_nor.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               [item setSelectedImage:[[UIImage imageNamed:@&quot;tab_qworld_press.png&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-               break;
-           }
-        }
-        viewController.tabBarItem = item;
-        [arD addObject:viewController];
-    }];
-    _tabC.viewControllers = arD;
-
-    [[UITabBarItem appearance] setTitleTextAttributes:
-    [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:96/255.f green:164/255.f blue:222/255.f alpha:1], UITextAttributeTextColor, nil]
-                                       forState:UIControlStateSelected];
-
-    [_tabC setSelectedIndex:1];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-@end
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/redis优化/" itemprop="url">
-                  redis优化
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:00:33+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/redis优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/redis优化/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="redis优化"><a href="#redis优化" class="headerlink" title="redis优化"></a>redis优化</h2><ul>
-<li>在使用redis的时候，客户端通过socket向redis服务端发起请求后，等待服务端的返回结果。</li>
-<li>客户端请求服务器一次就发送一个报文 -&gt; 等待服务端的返回 -&gt; 关闭连接</li>
-<li>如果是100个请求、1000个请求，那就得请求100次、1000次</li>
-<li>所以使用多个请求的时候使用管道来操作(<code>如果管道打包的命令太多占用的内存也会越大，适量</code>)
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/10/redis优化/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" itemprop="url">
-                  Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T01:39:28+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><ul>
-<li><p>如果信息显示过多的话,可以使用<code>git log --pretty=oneline</code></p>
-<pre><code>dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
-9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
-2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.txt
-</code></pre></li>
-<li>如果想回退到上个版本,可以使用<code>git reset --hard HEAD^</code>,如果想回退前2个版本<code>git reset --hard HEAD^^</code>,多个版本添加多个^。如果回退前100个版本,可以使用<code>git reset --hard HEAD~100</code></li>
-<li><p>如果想回退到最新版本<code>git reset –hard</code>版本号,查看最新版本版本号<code>git reflog</code></p>
-<pre><code>9bdf0e5 HEAD@{0}: reset: moving to HEAD~2
-5b95f49 HEAD@{1}: commit: a.txt
-28cb7d2 HEAD@{2}: commit: a.txt
-9bdf0e5 HEAD@{3}: reset: moving to HEAD^
-dfffd94 HEAD@{4}: commit: update a.txt
-9bdf0e5 HEAD@{5}: commit: update a.txt
-2a474cb HEAD@{6}: commit (initial): add a.txt
-</code></pre></li>
-<li>执行<code>git reset --hard 9bdf0e5</code>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Git-ssh连接/" itemprop="url">
-                  Git-ssh连接
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T01:38:26+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Git-ssh连接/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Git-ssh连接/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><code>git ssh</code>连接，运行<code>ssh-keygen</code>一路回车，在当前用户目录<code>~/.ssh/</code>生成两个文件<code>id_rsa</code>和<code>id_rsa.pub</code>，将<code>id_rsa.pub</code>内容添加到<code>git</code>服务器。</li>
+            <h1 id="Chrome浏览器如何静音"><a href="#Chrome浏览器如何静音" class="headerlink" title="Chrome浏览器如何静音"></a>Chrome浏览器如何静音</h1><ul>
+<li>在浏览器输入<code>chrome://flags/#enable-tab-audio-muting</code>
+<img src="http://7xj3i5.com1.z0.glb.clouddn.com/837D6910-25E7-4F61-A58A-6EAD12C4E74C.png" alt=""></li>
+<li>点击启用
+<img src="http://7xj3i5.com1.z0.glb.clouddn.com/1E686FEE-3542-486C-8E19-AA0AEF8F484A.png" alt=""></li>
+<li>重新启动
+<img src="http://7xj3i5.com1.z0.glb.clouddn.com/547E1019-6B59-40CA-A793-825006856A72.png" alt=""></li>
+<li>点击声音可以开启和静音,也可以在标签上通过右键来设置。</li>
 </ul>
 
           
@@ -1160,8 +390,8 @@ dfffd94 HEAD@{4}: commit: update a.txt
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/Git-抓取分支/" itemprop="url">
-                  Git-抓取分支
+                <a class="post-title-link" href="/2016/09/28/Druid-Springboot配置/" itemprop="url">
+                  Druid+Springboot配置
                 </a>
               
             
@@ -1174,8 +404,8 @@ dfffd94 HEAD@{4}: commit: update a.txt
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T01:31:11+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2016-09-28T11:20:30+08:00" content="2016-09-28">
+              2016-09-28
             </time>
           </span>
 
@@ -1188,8 +418,20 @@ dfffd94 HEAD@{4}: commit: update a.txt
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
+                  <a href="/categories/Druid/" itemprop="url" rel="index">
+                    <span itemprop="name">Druid</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Druid/Springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">Springboot</span>
                   </a>
                 </span>
 
@@ -1204,8 +446,8 @@ dfffd94 HEAD@{4}: commit: update a.txt
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/Git-抓取分支/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Git-抓取分支/" itemprop="commentsCount"></span>
+                <a href="/2016/09/28/Druid-Springboot配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/28/Druid-Springboot配置/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1228,23 +470,16 @@ dfffd94 HEAD@{4}: commit: update a.txt
 
       
         
-          <ul>
-<li>现在，你的小伙伴要在<code>dev</code>分支上开发，就必须创建远程<code>origin</code>的<code>dev</code>分支到本地，于是他用这个命令创建本地<code>dev</code>分支：<code>$ git checkout -b dev origin/dev</code></li>
-<li><p>现在，他就可以在<code>dev</code>上继续修改，然后，时不时地把<code>dev</code>分支<code>push</code>到远程：</p>
-<pre><code>$ git commit -m &quot;add /usr/bin/env&quot;
-   [dev 291bea8] add /usr/bin/env
-   1 file changed, 1 insertion(+)
-$ git push origin dev
-   Counting objects: 5, done.
-   Delta compression using up to 4 threads.
-   Compressing objects: 100% (2/2), done.
-   Writing objects: 100% (3/3), 349 bytes, done.
-   Total 3 (delta 0), reused 0 (delta 0)
-   To git@github.com:michaelliao/learngit.git
-   fc38031..291bea8  dev -&gt; dev
+          <h1 id="Druid-Springboot配置"><a href="#Druid-Springboot配置" class="headerlink" title="Druid + Springboot配置"></a>Druid + Springboot配置</h1><ul>
+<li><p>pom.xml配置</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;druid&lt;/artifactId&gt;
+    &lt;version&gt;1.0.24&lt;/version&gt;
+&lt;/dependency&gt;
 </code></pre>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/10/Git-抓取分支/#more" rel="contents">
+            <a class="btn" href="/2016/09/28/Druid-Springboot配置/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1291,8 +526,8 @@ $ git push origin dev
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/Git-cherry-pick使用/" itemprop="url">
-                  Git-cherry-pick使用
+                <a class="post-title-link" href="/2016/09/23/PHP生成圆角图片-图片合成/" itemprop="url">
+                  PHP生成圆角图片+图片合成
                 </a>
               
             
@@ -1305,8 +540,8 @@ $ git push origin dev
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T01:29:15+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2016-09-23T10:58:47+08:00" content="2016-09-23">
+              2016-09-23
             </time>
           </span>
 
@@ -1319,8 +554,8 @@ $ git push origin dev
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -1335,8 +570,130 @@ $ git push origin dev
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/Git-cherry-pick使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Git-cherry-pick使用/" itemprop="commentsCount"></span>
+                <a href="/2016/09/23/PHP生成圆角图片-图片合成/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/23/PHP生成圆角图片-图片合成/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="PHP生成圆角图片-图片合成"><a href="#PHP生成圆角图片-图片合成" class="headerlink" title="PHP生成圆角图片+图片合成"></a>PHP生成圆角图片+图片合成</h1><h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><pre><code>&lt;?php
+    create_qrcode(&apos;images/head_290_00a4e60499ffb5c3.jpg&apos;, &apos;images/WechatIMG12.png&apos;, &apos;测试数据测试数据&apos;, &apos;images/create.jpg&apos;, &apos;images/test.jpg&apos;, &apos;simhei.ttf&apos;);
+
+    echo &quot;&lt;img src=&apos;images/test.jpg&apos;/&gt;&quot;;
+?&gt;
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/23/PHP生成圆角图片-图片合成/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/03/tigase用户密码加密/" itemprop="url">
+                  tigase用户密码加密
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-03T15:36:11+08:00" content="2016-08-03">
+              2016-08-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Tigase/" itemprop="url" rel="index">
+                    <span itemprop="name">Tigase</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/03/tigase用户密码加密/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/03/tigase用户密码加密/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1360,15 +717,134 @@ $ git push origin dev
       
         
           
-            <ul>
-<li><code>git cherry-pick</code>用于把另一个本地分支的<code>commit</code>修改应用到当前分支。</li>
-<li>在本地 <code>master</code> 分支上做了一个<code>commit( 38361a68138140827b31b72f8bbfd88b3705d77a )</code>,如何把它放到 本地 <code>old_cc</code> 分支上？</li>
-<li>办法之一： 使用 <code>cherry-pick</code>. 根据git 文档： <code>Apply the changes introduced by some existing commits</code></li>
-<li>就是对已经存在的<code>commit</code>进行<code>apply</code>(可以理解为再次提交)</li>
-<li>简单用法：<code>git cherry-pick &lt;commit id&gt;</code></li>
-<li><p>例如：</p>
-<pre><code>$ git checkout old_cc
-$ git cherry-pick 38361a68
+            <h1 id="Tigase-用户密码加密"><a href="#Tigase-用户密码加密" class="headerlink" title="Tigase 用户密码加密"></a>Tigase 用户密码加密</h1><pre><code>call TigPutDBProperty(&apos;password-encoding&apos;, &apos;MD5-PASSWORD&apos;);
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/22/createIcon/" itemprop="url">
+                  一键生成Android和IOS平台图标和启动页
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-22T10:53:33+08:00" content="2016-07-22">
+              2016-07-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ionic/" itemprop="url" rel="index">
+                    <span itemprop="name">ionic</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/22/createIcon/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/22/createIcon/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一键生成Android和IOS图标和启动画面"><a href="#一键生成Android和IOS图标和启动画面" class="headerlink" title="一键生成Android和IOS图标和启动画面"></a>一键生成Android和IOS图标和启动画面</h1><ul>
+<li><p>操作步骤</p>
+<pre><code>npm install -g ionic
+ionic start myapp
+
+cd myapp
+ionic platform android ios
+
+mkdir resources
+
+// 拷贝高清图片到resources，命名为icon.png和splash.png
+// 运行
+ionic resources // 生成android和ios所需图片
 </code></pre></li>
 </ul>
 
@@ -1416,8 +892,8 @@ $ git cherry-pick 38361a68
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/Maven-聚合和继承/" itemprop="url">
-                  Maven-聚合和继承
+                <a class="post-title-link" href="/2016/07/21/table/" itemprop="url">
+                  Ectouch数据库字典
                 </a>
               
             
@@ -1430,8 +906,8 @@ $ git cherry-pick 38361a68
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T01:23:02+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2016-07-21T13:52:10+08:00" content="2016-07-21">
+              2016-07-21
             </time>
           </span>
 
@@ -1444,8 +920,8 @@ $ git cherry-pick 38361a68
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Maven/" itemprop="url" rel="index">
-                    <span itemprop="name">Maven</span>
+                  <a href="/categories/ectouch/" itemprop="url" rel="index">
+                    <span itemprop="name">ectouch</span>
                   </a>
                 </span>
 
@@ -1460,8 +936,8 @@ $ git cherry-pick 38361a68
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/Maven-聚合和继承/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Maven-聚合和继承/" itemprop="commentsCount"></span>
+                <a href="/2016/07/21/table/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/21/table/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1484,20 +960,64 @@ $ git cherry-pick 38361a68
 
       
         
-          <h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><ul>
-<li>如果一个项目依赖数十个模块，那么要一个一个编译起来是非常浪费时间的，所以就需要把所需模块聚合在一起，一起编译。</li>
-<li>比如当前有User有两个模块：1.user-dao, 2.user-service，在eclipse中创建一个<code>create a simple project(skip archetype selection)</code>,</li>
-<li>填入：Group Id, Artifact Id(这里为user-parent), Version, Packaging(这里选择pom),然后创建。</li>
-<li><p>在<code>user-parent/pom.xml</code>中添加如下代码：</p>
-<pre><code>&lt;modules&gt;
-  &lt;module&gt;../user-dao&lt;/module&gt;
-  &lt;module&gt;../user-service&lt;/module&gt;
-&lt;/modules&gt;
-</code></pre></li>
-<li>接下来就可以直接在<code>user-parent/pom.xml</code>编译了。</li>
-</ul>
+          <h1 id="Ectouch2-0-数据库结构"><a href="#Ectouch2-0-数据库结构" class="headerlink" title="Ectouch2.0 数据库结构"></a>Ectouch2.0 数据库结构</h1><h2 id="用户账目日志表ecs-account-log"><a href="#用户账目日志表ecs-account-log" class="headerlink" title="用户账目日志表ecs_account_log"></a>用户账目日志表<code>ecs_account_log</code></h2><table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>字段类型</th>
+<th>字段说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>log_id</td>
+<td>mediumint(8)</td>
+<td>日志ID</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>mediumint(8)</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>user_money</td>
+<td>decimal(10,2)</td>
+<td>用户该笔记录的余额</td>
+</tr>
+<tr>
+<td>frozen_money</td>
+<td>decimal(10,2)</td>
+<td>被冻结的资金</td>
+</tr>
+<tr>
+<td>rank_points</td>
+<td>mediumint(9)</td>
+<td>等级积分，跟消费积分是分开的</td>
+</tr>
+<tr>
+<td>pay_points</td>
+<td>mediumint(9)</td>
+<td>消费积分，跟等级积分是分开的</td>
+</tr>
+<tr>
+<td>change_time</td>
+<td>int(10)</td>
+<td>该笔操作发生的事件</td>
+</tr>
+<tr>
+<td>change_desc</td>
+<td>varchar(255)</td>
+<td>该笔操作的备注</td>
+</tr>
+<tr>
+<td>change_type</td>
+<td>tinyint(3)</td>
+<td>操作类型，0: 充值，1: 提现，2: 管理员调节，99: 其它类型</td>
+</tr>
+</tbody>
+</table>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/10/Maven-聚合和继承/#more" rel="contents">
+            <a class="btn" href="/2016/07/21/table/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1544,8 +1064,8 @@ $ git cherry-pick 38361a68
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/SpringMVC-学习02/" itemprop="url">
-                  SpringMVC-学习02
+                <a class="post-title-link" href="/2016/07/19/MySQL-嵌套集模型/" itemprop="url">
+                  mysql嵌套集模型
                 </a>
               
             
@@ -1558,8 +1078,8 @@ $ git cherry-pick 38361a68
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T01:21:56+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2016-07-19T18:38:03+08:00" content="2016-07-19">
+              2016-07-19
             </time>
           </span>
 
@@ -1572,8 +1092,8 @@ $ git cherry-pick 38361a68
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Spring-MVC/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring-MVC</span>
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
                   </a>
                 </span>
 
@@ -1588,8 +1108,161 @@ $ git cherry-pick 38361a68
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/SpringMVC-学习02/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/SpringMVC-学习02/" itemprop="commentsCount"></span>
+                <a href="/2016/07/19/MySQL-嵌套集模型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/19/MySQL-嵌套集模型/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="嵌套集模型"><a href="#嵌套集模型" class="headerlink" title="嵌套集模型"></a>嵌套集模型</h1><h2 id="在分类表中，通过左和右值来代表我们的嵌套节点。"><a href="#在分类表中，通过左和右值来代表我们的嵌套节点。" class="headerlink" title="在分类表中，通过左和右值来代表我们的嵌套节点。"></a>在分类表中，通过左和右值来代表我们的嵌套节点。</h2><ul>
+<li><p>创建表并添加测试数据</p>
+<pre><code>CREATE TABLE category (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    lft INT NOT NULL,
+    rgt INT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO category VALUES
+                            (1,&apos;ELECTRONICS&apos;,1,20),
+                            (2,&apos;TELEVISIONS&apos;,2,9),
+                            (3,&apos;TUBE&apos;,3,4),
+                            (4,&apos;LCD&apos;,5,6),
+                            (5,&apos;PLASMA&apos;,7,8),
+                            (6,&apos;PORTABLE ELECTRONICS&apos;,10,19),
+                            (7,&apos;MP3 PLAYERS&apos;,11,14),
+                            (8,&apos;FLASH&apos;,12,13),
+                            (9,&apos;CD PLAYERS&apos;,15,16),
+                            (10,&apos;2 WAY RADIOS&apos;,17,18);
+
+MariaDB [work]&gt; select * from category;
++-------------+----------------------+-----+-----+
+| category_id | name                 | lft | rgt |
++-------------+----------------------+-----+-----+
+|           1 | ELECTRONICS          |   1 |  20 |
+|           2 | TELEVISIONS          |   2 |   9 |
+|           3 | TUBE                 |   3 |   4 |
+|           4 | LCD                  |   5 |   6 |
+|           5 | PLASMA               |   7 |   8 |
+|           6 | PORTABLE ELECTRONICS |  10 |  19 |
+|           7 | MP3 PLAYERS          |  11 |  14 |
+|           8 | FLASH                |  12 |  13 |
+|           9 | CD PLAYERS           |  15 |  16 |
+|          10 | 2 WAY RADIOS         |  17 |  18 |
++-------------+----------------------+-----+-----+
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/19/MySQL-嵌套集模型/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/15/nuclide编辑器安装/" itemprop="url">
+                  nuclide编辑器安装
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-15T17:13:50+08:00" content="2016-07-15">
+              2016-07-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/React-native/" itemprop="url" rel="index">
+                    <span itemprop="name">React-native</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/15/nuclide编辑器安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/nuclide编辑器安装/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1613,84 +1286,268 @@ $ git cherry-pick 38361a68
       
         
           
-            <h2 id="传值和接受传值"><a href="#传值和接受传值" class="headerlink" title="传值和接受传值"></a>传值和接受传值</h2><pre><code>package com.demo.controller;
+            <h1 id="nuclide编辑器安装"><a href="#nuclide编辑器安装" class="headerlink" title="nuclide编辑器安装"></a>nuclide编辑器安装</h1><ul>
+<li>nuclide是基于atom构建的开发环境</li>
+<li><p><code>install atom</code></p>
+<pre><code>brew install Caskroom/cask/atom
+</code></pre></li>
+<li><p><code>install nuclide</code></p>
+<pre><code>apm install nuclide
+</code></pre></li>
+</ul>
 
-import java.util.HashMap;
-import java.util.Map;
+          
+        
+      
+    </div>
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+    <div>
+      
+    </div>
 
-@Controller
-public class HelloController {
+    <footer class="post-footer">
+      
 
-@RequestMapping(&quot;/&quot;)
-public String hello() {
-    return &quot;hello&quot;;
-}
+      
 
-/**
- * @param username
- * @requestParam 表示参数username为必须
- * request http://localhost:8080/demo?username=aaa
- * @return
- */
-@RequestMapping(&quot;/say&quot;)
-public String say(@RequestParam(&quot;username&quot;) String username) {
-    System.out.println(username);
-    return &quot;say&quot;;
-}
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
-/**
- * @param username
- * username参数可传可不传，不传就为null
- * @return
- */
-@RequestMapping(&quot;/say1&quot;)
-public String say1(String username) { 
-    System.out.println(username);
-    return &quot;say&quot;;
-}
 
-/**
- * @param username
- * @param context
- * 传值给视图 01: 使用map方式
- * 视图使用${username}
- * @return
- */
-@RequestMapping(&quot;/say2&quot;)
-public String say2(String username, Map&lt;String, Object&gt; context) {
-    context.put(&quot;username&quot;, username);
-    return &quot;say2&quot;;
-}
+    
+      
 
-/**
- * @param username
- * @param context
- * 传值给视图 02: 使用model方式
- * 视图使用${username}
- * @return
- */
-@RequestMapping(&quot;/say3&quot;)
-public String say3(String username, Model model) {
+  
+  
 
-//        01
-//        model.addAttribute(&quot;username&quot;, username);
+  
+  
+  
 
-//        02
-//        Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
-//        map.put(&quot;username&quot;, username);
-//        model.addAllAttributes(map);
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
-//        03(key为参数的类型，username是String类型，则视图${string})
-//        model.addAttribute(username);
-        return &quot;say2&quot;;
-    }
-}
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/15/Elasticasearch安装和使用/" itemprop="url">
+                  Elasticasearch安装和使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-15T10:00:43+08:00" content="2016-07-15">
+              2016-07-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Elasticasearch/" itemprop="url" rel="index">
+                    <span itemprop="name">Elasticasearch</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/15/Elasticasearch安装和使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/Elasticasearch安装和使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Elasticasearch安装和使用"><a href="#Elasticasearch安装和使用" class="headerlink" title="Elasticasearch安装和使用"></a>Elasticasearch安装和使用</h1><h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><ul>
+<li><a href="https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/2.2.0/elasticsearch-2.2.0.zip" target="_blank" rel="noopener">download</a></li>
+<li><code>unzip elasticsearch-2.2.0.zip</code></li>
+</ul>
+<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><pre><code>vim config/elasticsearch.yml
+
+path.data: app_data
+path.logs: app_logs
+network.host: 0.0.0.0
+</code></pre><h2 id="install-Marvel-agent-plugin"><a href="#install-Marvel-agent-plugin" class="headerlink" title="install Marvel agent plugin"></a>install Marvel agent plugin</h2><pre><code>bin/plugin install licens
+bin/plugin install marvel-agent
 </code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/15/Elasticasearch安装和使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/15/hexo运行报错/" itemprop="url">
+                  hexo运行报错
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-15T09:22:02+08:00" content="2016-07-15">
+              2016-07-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/15/hexo运行报错/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/hexo运行报错/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="hexo运行报错"><a href="#hexo运行报错" class="headerlink" title="hexo运行报错"></a>hexo运行报错</h1><ul>
+<li><p>运行hexo命令出现以下错误</p>
+<pre><code>[Error: Module did not self-register.]
+{ [Error: Cannot find module &apos;./build/default/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; }
+{ [Error: Cannot find module &apos;./build/Debug/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; }
+</code></pre></li>
+<li><p>解决方法</p>
+<pre><code>npm install hexo --no-optional
+</code></pre></li>
+</ul>
+
           
         
       
@@ -1718,7 +1575,7 @@ public String say3(String username, Model model) {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1759,7 +1616,7 @@ public String say3(String username, Model model) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-count">131</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1767,7 +1624,7 @@ public String say3(String username, Model model) {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1776,7 +1633,7 @@ public String say3(String username, Model model) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1878,7 +1735,7 @@ public String say3(String username, Model model) {
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -1,0 +1,986 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="thinkphp5,oauth2," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="OAuth2 Server PHPoauth2-server-php-docs 获取OAuth2composer require bshaffer/oauth2-server-php &amp;quot;^1.10&amp;quot; Authorized认证方式 http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;amp;cli">
+<meta name="keywords" content="thinkphp5,oauth2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="thinkphp-oauth2">
+<meta property="og:url" content="http://blog.golearns.org/2018/09/17/thinkphp-oauth2/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="OAuth2 Server PHPoauth2-server-php-docs 获取OAuth2composer require bshaffer/oauth2-server-php &amp;quot;^1.10&amp;quot; Authorized认证方式 http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;amp;cli">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-17T15:25:01.494Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="thinkphp-oauth2">
+<meta name="twitter:description" content="OAuth2 Server PHPoauth2-server-php-docs 获取OAuth2composer require bshaffer/oauth2-server-php &amp;quot;^1.10&amp;quot; Authorized认证方式 http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;amp;cli">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 2746085,
+      author: 'M2'
+    }
+  };
+</script>
+
+  <title> thinkphp-oauth2 | 知识记录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a7aab4bc8347eb54375043cf003b2c21";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知识记录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'b2cFpoExgUMZu3--zQzE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                thinkphp-oauth2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T23:05:45+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/thinkphp5/" itemprop="url" rel="index">
+                    <span itemprop="name">thinkphp5</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/thinkphp-oauth2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/thinkphp-oauth2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="OAuth2-Server-PHP"><a href="#OAuth2-Server-PHP" class="headerlink" title="OAuth2 Server PHP"></a>OAuth2 Server PHP</h1><p><a href="http://bshaffer.github.io/oauth2-server-php-docs" target="_blank" rel="noopener">oauth2-server-php-docs</a></p>
+<h3 id="获取OAuth2"><a href="#获取OAuth2" class="headerlink" title="获取OAuth2"></a>获取OAuth2</h3><pre><code>composer require bshaffer/oauth2-server-php &quot;^1.10&quot;
+</code></pre><h3 id="Authorized认证方式"><a href="#Authorized认证方式" class="headerlink" title="Authorized认证方式"></a>Authorized认证方式</h3><blockquote>
+<p><a href="http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;client_id=phpweb&amp;state=xyz" target="_blank" rel="noopener">http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;client_id=phpweb&amp;state=xyz</a></p>
+<p><a href="http://swoole-chat.com/index/index/testToken" target="_blank" rel="noopener">http://swoole-chat.com/index/index/testToken</a> form-data: [grant_type: authorization_code, code: authorizedCode]</p>
+</blockquote>
+<pre><code>use utils\Crypt;
+use OAuth2\Autoloader;
+use OAuth2\Server;
+use OAuth2\GrantType\AuthorizationCode;
+use OAuth2\GrantType\ClientCredentials;
+use OAuth2\GrantType\UserCredentials;
+use OAuth2\Request;
+use OAuth2\Response;
+use OAuth2\Storage\Redis as StorageRedis;
+use cache\Redis;
+
+header(&apos;Access-Control-Allow-Origin:*&apos;);
+
+class Index {
+
+    protected $server;
+
+    public function __construct() {
+
+        // 使用PDO方式存储
+        // $storage = new Pdo([&apos;dsn&apos; =&gt; &apos;mysql:dbname=oauth;host=192.168.3.188&apos;, &apos;username&apos; =&gt; &apos;root&apos;, &apos;password&apos; =&gt; &apos;123456&apos;]);
+
+        // 使用Redis方式存储
+        $redis = new Redis(config(&apos;redis&apos;));
+
+        $storage = new StorageRedis($redis);
+
+        // Authorized example: http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;client_id=phpweb&amp;state=xyz
+        $storage-&gt;setClientDetails(&apos;ios&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password&apos;, &apos;read write&apos;);
+        $storage-&gt;setClientDetails(&apos;android&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password&apos;, &apos;read write&apos;);
+        $storage-&gt;setClientDetails(&apos;phpweb&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password&apos;, &apos;read write&apos;);
+
+        $server = new Server($storage);
+
+        // 授权码
+        $server-&gt;addGrantType(new AuthorizationCode($storage));
+
+        $this-&gt;server = $server;
+    }
+
+    /**
+     * Authorized认证
+     * example: http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;client_id=phpweb&amp;state=xyz
+     * @return bool|string
+     */
+    public function testAuthorize() {
+        $request = Request::createFromGlobals();
+        $response = new Response();
+
+        if (!$this-&gt;server-&gt;validateAuthorizeRequest($request, $response)) {
+            $response-&gt;send();
+            die;
+        }
+
+        if (empty($_POST)) {
+            return &apos;
+                &lt;form method=&quot;post&quot;&gt;
+                  &lt;label&gt;是否对testclient用户授权?&lt;/label&gt;&lt;br /&gt;
+                  &lt;input type=&quot;submit&quot; name=&quot;authorized&quot; value=&quot;yes&quot;&gt;
+                  &lt;input type=&quot;submit&quot; name=&quot;authorized&quot; value=&quot;no&quot;&gt;
+                &lt;/form&gt;
+            &apos;;
+        }
+
+        $is_authorized = ($_POST[&apos;authorized&apos;] === &apos;yes&apos;);
+        $this-&gt;server-&gt;handleAuthorizeRequest($request, $response, $is_authorized, 1);
+
+        if ($is_authorized) {
+            $code = substr($response-&gt;getHttpHeader(&apos;Location&apos;), strpos($response-&gt;getHttpHeader(&apos;Location&apos;), &apos;code=&apos;) + 5, 40);
+            return $code;
+        }
+
+        return &apos;授权失败&apos;;
+    }
+
+    /**
+     * 获取token
+     * @return [type] [description]
+     */
+    public function testToken() {
+        return $this-&gt;server-&gt;handleTokenRequest(Request::createFromGlobals())-&gt;send();
+    }
+
+    /**
+     * 请求API
+     * @return [type] [description]
+     */
+    public function testApi() {
+        $request = Request::createFromGlobals();
+
+        if (!$this-&gt;server-&gt;verifyResourceRequest($request)) {
+            return $this-&gt;server-&gt;getResponse()-&gt;send();
+        }
+
+        $result = $this-&gt;server-&gt;getAccessTokenData($request);
+
+        return json_encode([&apos;success&apos; =&gt; true, &apos;message&apos; =&gt; &apos;你可以访问API了&apos;, &apos;userId&apos; =&gt; $result[&apos;user_id&apos;]]);
+    }
+}
+</code></pre><a id="more"></a>
+<h3 id="Password认证方式"><a href="#Password认证方式" class="headerlink" title="Password认证方式"></a>Password认证方式</h3><blockquote>
+<p>curl -u phpweb:123456 <a href="http://swoole-chat.com/token" target="_blank" rel="noopener">http://swoole-chat.com/token</a> -d ‘grant_type=password&amp;username=zhangsan&amp;password=123456</p>
+</blockquote>
+<pre><code>use utils\Crypt;
+use OAuth2\Autoloader;
+use OAuth2\Server;
+use OAuth2\GrantType\AuthorizationCode;
+use OAuth2\GrantType\ClientCredentials;
+use OAuth2\GrantType\UserCredentials;
+use OAuth2\Request;
+use OAuth2\Response;
+use OAuth2\Storage\Redis as StorageRedis;
+use cache\Redis;
+
+header(&apos;Access-Control-Allow-Origin:*&apos;);
+
+class Index {
+
+    protected $server;
+
+    public function __construct() {
+
+        // 使用PDO方式存储
+        // $storage = new Pdo([&apos;dsn&apos; =&gt; &apos;mysql:dbname=oauth;host=192.168.3.188&apos;, &apos;username&apos; =&gt; &apos;root&apos;, &apos;password&apos; =&gt; &apos;123456&apos;]);
+
+        // 使用Redis方式存储
+        $redis = new Redis(config(&apos;redis&apos;));
+
+        $storage = new StorageRedis($redis);
+
+        // Authorized example: http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;client_id=phpweb&amp;state=xyz
+        $storage-&gt;setClientDetails(&apos;ios&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password&apos;, &apos;read write&apos;);
+        $storage-&gt;setClientDetails(&apos;android&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password&apos;, &apos;read write&apos;);
+        $storage-&gt;setClientDetails(&apos;phpweb&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password&apos;, &apos;read write&apos;);
+
+        // Password example: curl -u phpweb:123456 http://swoole-chat.com/token -d &apos;grant_type=password&amp;username=zhangsan&amp;password=123456
+
+        $server = new Server($storage);
+
+        // 用户凭据
+        $server-&gt;addGrantType(new UserCredentials($storage));
+
+        $this-&gt;server = $server;
+    }
+
+    /**
+     * 获取token
+     * @return [type] [description]
+     */
+    public function testToken() {
+        $_POST[&apos;username&apos;] = 3;
+
+        $request = Request::createFromGlobals();
+        return $this-&gt;server-&gt;handleTokenRequest($request)-&gt;send();
+    }
+
+    /**
+     * 请求API
+     * @return [type] [description]
+     */
+    public function testApi() {
+        $request = Request::createFromGlobals();
+
+        if (!$this-&gt;server-&gt;verifyResourceRequest($request)) {
+            return $this-&gt;server-&gt;getResponse()-&gt;send();
+        }
+
+        $result = $this-&gt;server-&gt;getAccessTokenData($request);
+
+        return json_encode([&apos;success&apos; =&gt; true, &apos;message&apos; =&gt; &apos;你可以访问API了&apos;, &apos;userId&apos; =&gt; $result[&apos;user_id&apos;]]);
+    }
+}
+</code></pre><h3 id="令牌刷新"><a href="#令牌刷新" class="headerlink" title="令牌刷新"></a>令牌刷新</h3><ul>
+<li><p>controller</p>
+<pre><code>use OAuth2\GrantType\RefreshToken;
+use OAuth2\Scope;
+use OAuth2\ScopeTest;
+use utils\Crypt;
+use OAuth2\Server;
+use OAuth2\GrantType\AuthorizationCode;
+use OAuth2\GrantType\ClientCredentials;
+use OAuth2\GrantType\UserCredentials;
+use OAuth2\Request;
+use OAuth2\Response;
+use OAuth2\Storage\Redis as StorageRedis;
+use cache\Redis;
+
+header(&apos;Access-Control-Allow-Origin:*&apos;);
+
+class Index {
+
+    protected $server;
+
+    public function __construct() {
+        // Autoloader::register();
+
+        // $storage = new Pdo([&apos;dsn&apos; =&gt; &apos;mysql:dbname=oauth;host=192.168.3.188&apos;, &apos;username&apos; =&gt; &apos;root&apos;, &apos;password&apos; =&gt; &apos;123456&apos;]);
+
+        $redis = new Redis(config(&apos;redis&apos;));
+
+        $storage = new StorageRedis($redis);
+
+        $storage-&gt;setClientDetails(&apos;ios&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password refresh_token&apos;, &apos;read write&apos;);
+        $storage-&gt;setClientDetails(&apos;android&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password refresh_token&apos;, &apos;read write&apos;);
+        $storage-&gt;setClientDetails(&apos;phpweb&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password refresh_token&apos;, &apos;read write&apos;);
+
+        // 刷新令牌 example: curl -u phpweb:123456 http://swoole-chat.com/index/index/testToken -d &apos;grant_type=refresh_token&amp;refresh_token=xxxxxx&apos;
+
+        $server = new Server($storage, [
+            &apos;always_issue_new_refresh_token&apos; =&gt; true,
+            &apos;refresh_token_lifetime&apos; =&gt; 1209600 // 14天
+        ]);
+
+        // 用户凭据
+        $server-&gt;addGrantType(new UserCredentials($storage));
+
+        // 令牌刷新
+        $server-&gt;addGrantType(new RefreshToken($storage));
+
+        $this-&gt;server = $server;
+    }
+
+    /**
+     * 获取token
+     * @return [type] [description]
+     */
+    public function testToken() {
+
+        // 校验用户登录信息是否正确，更改username为用户ID来验证请求信息
+        $_POST[&apos;username&apos;] = 3;
+
+        $request = Request::createFromGlobals();
+        return $this-&gt;server-&gt;handleTokenRequest($request)-&gt;send();
+    }
+
+    /**
+     * 请求API
+     * @return [type] [description]
+     */
+    public function testApi() {
+        $request = Request::createFromGlobals();
+
+        if (!$this-&gt;server-&gt;verifyResourceRequest($request)) {
+            return $this-&gt;server-&gt;getResponse()-&gt;send();
+        }
+
+        $result = $this-&gt;server-&gt;getAccessTokenData($request);
+
+        return json_encode([&apos;success&apos; =&gt; true, &apos;message&apos; =&gt; &apos;你可以访问API了&apos;, &apos;userId&apos; =&gt; $result[&apos;user_id&apos;]]);
+    }
+}
+</code></pre></li>
+<li><p>获取访问令牌</p>
+<pre><code>curl -u phpweb:123456 http://swoole-chat.com/index/index/testToken -d &apos;grant_type=password&amp;username=tianqi&amp;password=123456&apos;
+
+// result:
+{
+    &quot;access_token&quot;:&quot;2fc621cf037d7906a2bf037d62f2fe286c83bdab&quot;,
+    &quot;expires_in&quot;:3600,
+    &quot;token_type&quot;:&quot;Bearer&quot;,
+    &quot;scope&quot;:null,
+    &quot;refresh_token&quot;:&quot;745e6207af4b5ec88c44f411ff736c631ffd59ed&quot;
+}
+</code></pre></li>
+<li><p>拿到上面的refresh_token,请求刷新令牌</p>
+<pre><code>curl -u phpweb:123456 http://swoole-chat.com/index/index/testToken -d &apos;grant_type=refresh_token&amp;refresh_token=745e6207af4b5ec88c44f411ff736c631ffd59ed&apos;
+
+// result:
+{
+     &quot;access_token&quot;:&quot;73c5382acdc41220f1b40a660a2531f40153f5d8&quot;,
+     &quot;expires_in&quot;:3600,
+     &quot;token_type&quot;:&quot;Bearer&quot;,
+     &quot;scope&quot;:null
+}
+</code></pre></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/thinkphp5/" rel="tag">#thinkphp5</a>
+          
+            <a href="/tags/oauth2/" rel="tag">#oauth2</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/17/nginx-thinkphp5配置/" rel="next" title="nginx thinkphp5配置">
+                <i class="fa fa-chevron-left"></i> nginx thinkphp5配置
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/17/swoole集群消息分发/" rel="prev" title="swoole集群消息分发">
+                swoole集群消息分发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/09/17/thinkphp-oauth2/"
+           data-title="thinkphp-oauth2" data-url="http://blog.golearns.org/2018/09/17/thinkphp-oauth2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M2" />
+          <p class="site-author-name" itemprop="name">M2</p>
+          <p class="site-description motion-element" itemprop="description">记录知识，分享知识</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/m2lan" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/763960267" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/100006504108865" target="_blank">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1877167031" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:763960267@qq.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth2-Server-PHP"><span class="nav-number">1.</span> <span class="nav-text">OAuth2 Server PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取OAuth2"><span class="nav-number">1.0.1.</span> <span class="nav-text">获取OAuth2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Authorized认证方式"><span class="nav-number">1.0.2.</span> <span class="nav-text">Authorized认证方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Password认证方式"><span class="nav-number">1.0.3.</span> <span class="nav-text">Password认证方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#令牌刷新"><span class="nav-number">1.0.4.</span> <span class="nav-text">令牌刷新</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M2</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"m2langithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

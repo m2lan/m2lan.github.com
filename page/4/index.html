@@ -63,6 +63,7 @@
 <meta property="og:url" content="http://blog.golearns.org/page/4/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Tigase安装、部署、插件编写及其它">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识记录">
 <meta name="twitter:description" content="Tigase安装、部署、插件编写及其它">
@@ -266,8 +267,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/10/MySQL-快速复制数据库/" itemprop="url">
-                  MySQL-快速复制数据库
+                <a class="post-title-link" href="/2018/09/17/使用jemalloc优化swoole/" itemprop="url">
+                  使用jemalloc优化swoole
                 </a>
               
             
@@ -280,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-10T19:52:25+08:00" content="2016-11-10">
-              2016-11-10
+            <time itemprop="dateCreated" datetime="2018-09-17T22:43:49+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -294,8 +295,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
+                  <a href="/categories/swoole/" itemprop="url" rel="index">
+                    <span itemprop="name">swoole</span>
                   </a>
                 </span>
 
@@ -310,8 +311,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/10/MySQL-快速复制数据库/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/MySQL-快速复制数据库/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/使用jemalloc优化swoole/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/使用jemalloc优化swoole/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -334,14 +335,20 @@
 
       
         
-          
-            <h1 id="mysql-快速复制数据库"><a href="#mysql-快速复制数据库" class="headerlink" title="mysql 快速复制数据库"></a>mysql 快速复制数据库</h1><ul>
-<li><p>从shopimport 复制到 shopimport2</p>
-<pre><code>./mysqldump shopimport -uroot -p123456 --add-drop-table | ./mysql shopimport2 -uroot -p123456
-</code></pre></li>
-</ul>
+          <h1 id="使用jemalloc优化swoole"><a href="#使用jemalloc优化swoole" class="headerlink" title="使用jemalloc优化swoole"></a>使用jemalloc优化swoole</h1><pre><code>// download jemalloc
+wget https://github.com/jemalloc/jemalloc/archive/4.0.4.zip
 
-          
+unzip unzip 4.0.4.zip
+cd jemalloc-4.0.4/
+./autogen.sh
+./configure --with-jemalloc-prefix=je_
+make -j 4
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/09/17/使用jemalloc优化swoole/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -385,8 +392,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/10/MySQL-定时任务/" itemprop="url">
-                  mysql定时任务
+                <a class="post-title-link" href="/2018/09/17/搭建jenkins持续构建环境-tomcat/" itemprop="url">
+                  搭建jenkins持续构建环境-tomcat
                 </a>
               
             
@@ -399,8 +406,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-10T19:47:59+08:00" content="2016-11-10">
-              2016-11-10
+            <time itemprop="dateCreated" datetime="2018-09-17T22:42:30+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -413,8 +420,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
+                  <a href="/categories/jenkins/" itemprop="url" rel="index">
+                    <span itemprop="name">jenkins</span>
                   </a>
                 </span>
 
@@ -429,8 +436,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/10/MySQL-定时任务/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/MySQL-定时任务/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/搭建jenkins持续构建环境-tomcat/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/搭建jenkins持续构建环境-tomcat/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -453,642 +460,419 @@
 
       
         
-          <h1 id="mysql-定时任务"><a href="#mysql-定时任务" class="headerlink" title="mysql 定时任务"></a>mysql 定时任务</h1><blockquote>
-<p><code>[on completion [not] preserve]</code>可以设置这个事件是执行一次还是持久执行,默认为<code>not preserve。</code>
-<code>[enable | disenable]</code>可是设置该事件创建后状态是否开启或关闭,默认为<code>enable</code>。
-<code>[commet &#39;commet&#39;]</code>可以给该事件加上注释。</p>
+          <h1 id="搭建Jenkins持续构建环境-tomcat"><a href="#搭建Jenkins持续构建环境-tomcat" class="headerlink" title="搭建Jenkins持续构建环境-tomcat"></a>搭建Jenkins持续构建环境-tomcat</h1><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
+<li>gitlab环境服务器<ul>
+<li>gitlab</li>
+</ul>
+</li>
+<li>jenkins环境服务器(192.168.3.213)<ul>
+<li>maven</li>
+<li>jdk</li>
+<li>tomcat</li>
+<li>jenkins</li>
+</ul>
+</li>
+<li>tomcat环境服务器<ul>
+<li>jdk</li>
+<li>tomcat</li>
+</ul>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/09/17/搭建jenkins持续构建环境-tomcat/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/搭建jenkins持续构建环境-springboot/" itemprop="url">
+                  搭建jenkins持续构建环境-springboot
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T22:39:39+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/jenkins/" itemprop="url" rel="index">
+                    <span itemprop="name">jenkins</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/搭建jenkins持续构建环境-springboot/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/搭建jenkins持续构建环境-springboot/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="搭建Jenkins持续构建环境-springboot"><a href="#搭建Jenkins持续构建环境-springboot" class="headerlink" title="搭建Jenkins持续构建环境-springboot"></a>搭建Jenkins持续构建环境-springboot</h1><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
+<li>gitlab环境服务器(192.168.3.152)<ul>
+<li>gitlab</li>
+</ul>
+</li>
+<li>jenkins环境服务器(192.168.3.213)<ul>
+<li>maven</li>
+<li>jdk</li>
+<li>tomcat</li>
+<li>jenkins</li>
+</ul>
+</li>
+<li>tomcat环境服务器(192.168.3.214)<ul>
+<li>jdk</li>
+<li>tomcat</li>
+</ul>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/09/17/搭建jenkins持续构建环境-springboot/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/创建think5自定义命令行/" itemprop="url">
+                  创建think5自定义命令行
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T22:37:50+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Thinkphp5/" itemprop="url" rel="index">
+                    <span itemprop="name">Thinkphp5</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/创建think5自定义命令行/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/创建think5自定义命令行/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="创建think5自定义命令行"><a href="#创建think5自定义命令行" class="headerlink" title="创建think5自定义命令行"></a>创建think5自定义命令行</h1><blockquote>
+<p>ThinkPHP5.0支持Console应用，通过命令行的方式执行一些URL访问不方便或者安全性较高的操作</p>
 </blockquote>
-<h2 id="查看定时任务"><a href="#查看定时任务" class="headerlink" title="查看定时任务"></a>查看定时任务</h2><pre><code>show events;
-</code></pre><h2 id="查看是否开启定时任务"><a href="#查看是否开启定时任务" class="headerlink" title="查看是否开启定时任务"></a>查看是否开启定时任务</h2><pre><code>SHOW VARIABLES LIKE &apos;event_scheduler&apos;;
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/10/MySQL-定时任务/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/09/Chrome浏览器如何静音/" itemprop="url">
-                  Chrome浏览器如何静音
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-09T14:18:47+08:00" content="2016-10-09">
-              2016-10-09
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Chrome/" itemprop="url" rel="index">
-                    <span itemprop="name">Chrome</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/09/Chrome浏览器如何静音/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/09/Chrome浏览器如何静音/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Chrome浏览器如何静音"><a href="#Chrome浏览器如何静音" class="headerlink" title="Chrome浏览器如何静音"></a>Chrome浏览器如何静音</h1><ul>
-<li>在浏览器输入<code>chrome://flags/#enable-tab-audio-muting</code>
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/837D6910-25E7-4F61-A58A-6EAD12C4E74C.png" alt=""></li>
-<li>点击启用
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/1E686FEE-3542-486C-8E19-AA0AEF8F484A.png" alt=""></li>
-<li>重新启动
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/547E1019-6B59-40CA-A793-825006856A72.png" alt=""></li>
-<li>点击声音可以开启和静音,也可以在标签上通过右键来设置。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/28/Druid-Springboot配置/" itemprop="url">
-                  Druid+Springboot配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-28T11:20:30+08:00" content="2016-09-28">
-              2016-09-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Druid/" itemprop="url" rel="index">
-                    <span itemprop="name">Druid</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Druid/Springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">Springboot</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/28/Druid-Springboot配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/28/Druid-Springboot配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Druid-Springboot配置"><a href="#Druid-Springboot配置" class="headerlink" title="Druid + Springboot配置"></a>Druid + Springboot配置</h1><ul>
-<li><p>pom.xml配置</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
-    &lt;artifactId&gt;druid&lt;/artifactId&gt;
-    &lt;version&gt;1.0.24&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/28/Druid-Springboot配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/23/PHP生成圆角图片-图片合成/" itemprop="url">
-                  PHP生成圆角图片+图片合成
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-23T10:58:47+08:00" content="2016-09-23">
-              2016-09-23
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/23/PHP生成圆角图片-图片合成/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/23/PHP生成圆角图片-图片合成/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="PHP生成圆角图片-图片合成"><a href="#PHP生成圆角图片-图片合成" class="headerlink" title="PHP生成圆角图片+图片合成"></a>PHP生成圆角图片+图片合成</h1><h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><pre><code>&lt;?php
-    create_qrcode(&apos;images/head_290_00a4e60499ffb5c3.jpg&apos;, &apos;images/WechatIMG12.png&apos;, &apos;测试数据测试数据&apos;, &apos;images/create.jpg&apos;, &apos;images/test.jpg&apos;, &apos;simhei.ttf&apos;);
-
-    echo &quot;&lt;img src=&apos;images/test.jpg&apos;/&gt;&quot;;
-?&gt;
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/23/PHP生成圆角图片-图片合成/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/03/tigase用户密码加密/" itemprop="url">
-                  tigase用户密码加密
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-03T15:36:11+08:00" content="2016-08-03">
-              2016-08-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Tigase/" itemprop="url" rel="index">
-                    <span itemprop="name">Tigase</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/03/tigase用户密码加密/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/03/tigase用户密码加密/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Tigase-用户密码加密"><a href="#Tigase-用户密码加密" class="headerlink" title="Tigase 用户密码加密"></a>Tigase 用户密码加密</h1><pre><code>call TigPutDBProperty(&apos;password-encoding&apos;, &apos;MD5-PASSWORD&apos;);
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/22/createIcon/" itemprop="url">
-                  一键生成Android和IOS平台图标和启动页
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-22T10:53:33+08:00" content="2016-07-22">
-              2016-07-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ionic/" itemprop="url" rel="index">
-                    <span itemprop="name">ionic</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/22/createIcon/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/22/createIcon/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="一键生成Android和IOS图标和启动画面"><a href="#一键生成Android和IOS图标和启动画面" class="headerlink" title="一键生成Android和IOS图标和启动画面"></a>一键生成Android和IOS图标和启动画面</h1><ul>
-<li><p>操作步骤</p>
-<pre><code>npm install -g ionic
-ionic start myapp
-
-cd myapp
-ionic platform android ios
-
-mkdir resources
-
-// 拷贝高清图片到resources，命名为icon.png和splash.png
-// 运行
-ionic resources // 生成android和ios所需图片
+<h3 id="创建命令行类"><a href="#创建命令行类" class="headerlink" title="创建命令行类"></a>创建命令行类</h3><ul>
+<li><p>创建<code>application/console/WebSocket.php</code></p>
+<pre><code>namespace app\console;
+
+use think\console\Command;
+use think\console\Input;
+use think\console\Output;
+
+class WebSocket extends Command {
+
+    // 命令行配置函数
+    protected function configure() {
+        // setName: 设置命令行名称
+        // setDescription: 设置命令行描述
+        $this-&gt;setName(&apos;websocket:start&apos;)-&gt;setDescription(&apos;启动WebSocket服务器.&apos;);
+    }
+
+    // 设置命令行返回信息
+    protected function execute(Input $input, Output $output) {
+        $output-&gt;writeln(&quot;WebSocket: 启动.\n&quot;);
+    }
+}
 </code></pre></li>
 </ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/09/17/创建think5自定义命令行/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/阿里云升级内核/" itemprop="url">
+                  阿里云升级内核
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T22:28:16+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/阿里云升级内核/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/阿里云升级内核/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="阿里云升级内核"><a href="#阿里云升级内核" class="headerlink" title="阿里云升级内核"></a>阿里云升级内核</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">yum remove kernel-headers</span><br><span class="line">sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</span><br><span class="line">sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm</span><br><span class="line">sudo yum --enablerepo=elrepo-kernel install kernel-ml -y</span><br><span class="line">rpm -qa | grep kernel</span><br><span class="line">sudo egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'</span><br><span class="line">sudo grub2-set-default 0</span><br><span class="line">sudo shutdown -r now</span><br><span class="line">uname -r</span><br><span class="line">echo 'net.core.default_qdisc=fq' | sudo tee -a /etc/sysctl.conf</span><br><span class="line">echo 'net.ipv4.tcp_congestion_control=bbr' | sudo tee -a /etc/sysctl.conf</span><br><span class="line">sysctl -p</span><br><span class="line">sysctl net.ipv4.tcp_available_congestion_control</span><br><span class="line">sysctl -n net.ipv4.tcp_congestion_control</span><br><span class="line">lsmod | grep bbr</span><br><span class="line">netstat -antlup</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1134,8 +918,8 @@ ionic resources // 生成android和ios所需图片
             
               
                 
-                <a class="post-title-link" href="/2016/07/21/table/" itemprop="url">
-                  Ectouch数据库字典
+                <a class="post-title-link" href="/2017/12/07/DNS解析过程/" itemprop="url">
+                  DNS解析过程
                 </a>
               
             
@@ -1148,8 +932,8 @@ ionic resources // 生成android和ios所需图片
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-21T13:52:10+08:00" content="2016-07-21">
-              2016-07-21
+            <time itemprop="dateCreated" datetime="2017-12-07T17:10:25+08:00" content="2017-12-07">
+              2017-12-07
             </time>
           </span>
 
@@ -1162,8 +946,8 @@ ionic resources // 生成android和ios所需图片
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ectouch/" itemprop="url" rel="index">
-                    <span itemprop="name">ectouch</span>
+                  <a href="/categories/DNS/" itemprop="url" rel="index">
+                    <span itemprop="name">DNS</span>
                   </a>
                 </span>
 
@@ -1178,8 +962,8 @@ ionic resources // 生成android和ios所需图片
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/21/table/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/21/table/" itemprop="commentsCount"></span>
+                <a href="/2017/12/07/DNS解析过程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/07/DNS解析过程/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1202,343 +986,762 @@ ionic resources // 生成android和ios所需图片
 
       
         
-          <h1 id="Ectouch2-0-数据库结构"><a href="#Ectouch2-0-数据库结构" class="headerlink" title="Ectouch2.0 数据库结构"></a>Ectouch2.0 数据库结构</h1><h2 id="用户账目日志表ecs-account-log"><a href="#用户账目日志表ecs-account-log" class="headerlink" title="用户账目日志表ecs_account_log"></a>用户账目日志表<code>ecs_account_log</code></h2><table>
+          
+            <h1 id="DNS解析过程"><a href="#DNS解析过程" class="headerlink" title="DNS解析过程"></a>DNS解析过程</h1><h3 id="跟踪域名解析过程"><a href="#跟踪域名解析过程" class="headerlink" title="跟踪域名解析过程"></a>跟踪域名解析过程</h3><ul>
+<li><p>在Linux和Windows下可以用<code>nslookup</code>命令来查询域名解析结果</p>
+<pre><code>M2@zhuyongkangdeMacBook-Pro  ~  nslookup
+&gt; www.m2lan.com
+Server:        114.114.114.114
+Address:    114.114.114.114#53
+
+Non-authoritative answer:
+Name:    www.m2lan.com
+Address: 39.108.217.213
+</code></pre></li>
+<li><p>在Linux中还可以用<code>dig</code>命令(可以增加+trace参数跟踪解析过程)</p>
+<pre><code>M2@zhuyongkangdeMacBook-Pro  ~  dig www.m2lan.com
+
+; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; www.m2lan.com
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 28841
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;www.m2lan.com.            IN    A
+
+;; ANSWER SECTION:
+www.m2lan.com.        37    IN    A    39.108.217.213
+
+;; Query time: 28 msec
+;; SERVER: 114.114.114.114#53(114.114.114.114)
+;; WHEN: Thu Dec  7 17:12:41 2017
+;; MSG SIZE  rcvd: 47
+</code></pre></li>
+</ul>
+<h3 id="清除缓存的域名"><a href="#清除缓存的域名" class="headerlink" title="清除缓存的域名"></a>清除缓存的域名</h3><ul>
+<li>Windows下使用<code>ipconfig /flushdns</code></li>
+<li>Linux下使用<code>/etc/init.d/nscd restart</code></li>
+</ul>
+<h3 id="域名解析方式"><a href="#域名解析方式" class="headerlink" title="域名解析方式"></a>域名解析方式</h3><ul>
+<li>A记录<ul>
+<li>A代表的是Address，用来指定域名对应的IP地址。A记录可以将多个域名解析到一个IP地址。</li>
+</ul>
+</li>
+<li>MX记录<ul>
+<li>表示<code>Mail Exchange</code>，可以将某个域名下的邮件服务器指向自己的<code>Mail Server</code>，如<code>m2lan.com</code>域名的A记录IP地址是<code>39.108.217.213</code>，如果将MX记录设置为<code>39.108.217.213</code>，即<code>xxx@m2lan.com</code>的邮件路由，DNS会将邮件发送到<code>39.108.217.213</code>所在到服务器，而正常通过WEB请求到话仍然解析到A记录到IP地址</li>
+</ul>
+</li>
+<li>CNAME记录<ul>
+<li>别名解析，可以为一个域名设置一个或多个别名</li>
+</ul>
+</li>
+<li>NS记录<ul>
+<li>为某个域名指定DNS解析服务器，也就是这个域名有指定的IP地址的DNS服务器去解析</li>
+</ul>
+</li>
+<li>TXT记录<ul>
+<li>为某个主机名或域名设置说明，如可以为<code>m2lan.com</code>设置TXT记录为<code>hello,world</code>这样的说明   </li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/12/06/HTTP-Headers/" itemprop="url">
+                  HTTP Headers
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-12-06T20:11:07+08:00" content="2017-12-06">
+              2017-12-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/HTTP/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/12/06/HTTP-Headers/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/06/HTTP-Headers/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="HTTP-Headers"><a href="#HTTP-Headers" class="headerlink" title="HTTP Headers"></a>HTTP Headers</h1><h3 id="常见的HTTP请求头"><a href="#常见的HTTP请求头" class="headerlink" title="常见的HTTP请求头"></a>常见的HTTP请求头</h3><table>
 <thead>
 <tr>
-<th>字段名称</th>
-<th>字段类型</th>
-<th>字段说明</th>
+<th>请求头</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>log_id</td>
-<td>mediumint(8)</td>
-<td>日志ID</td>
+<td>Accept-Charset</td>
+<td>用于指定客户端接受的字符集</td>
 </tr>
 <tr>
-<td>user_id</td>
-<td>mediumint(8)</td>
-<td>用户ID</td>
+<td>Accept-Encoding</td>
+<td>用于指定可接受的内容编码，如Accept-Encoding:gzip.deflate</td>
 </tr>
 <tr>
-<td>user_money</td>
-<td>decimal(10,2)</td>
-<td>用户该笔记录的余额</td>
+<td>Accept-Language</td>
+<td>用于指定一种自然语言，如Accept-Language:zh-cn</td>
 </tr>
 <tr>
-<td>frozen_money</td>
-<td>decimal(10,2)</td>
-<td>被冻结的资金</td>
+<td>Host</td>
+<td>用于指定被请求资源的Internet主机和端口号，如Host:www.m2lan.com</td>
 </tr>
 <tr>
-<td>rank_points</td>
-<td>mediumint(9)</td>
-<td>等级积分，跟消费积分是分开的</td>
+<td>User-Agent</td>
+<td>客户端将它的操作系统、浏览器和其他属性告诉服务器</td>
 </tr>
 <tr>
-<td>pay_points</td>
-<td>mediumint(9)</td>
-<td>消费积分，跟等级积分是分开的</td>
-</tr>
-<tr>
-<td>change_time</td>
-<td>int(10)</td>
-<td>该笔操作发生的事件</td>
-</tr>
-<tr>
-<td>change_desc</td>
-<td>varchar(255)</td>
-<td>该笔操作的备注</td>
-</tr>
-<tr>
-<td>change_type</td>
-<td>tinyint(3)</td>
-<td>操作类型，0: 充值，1: 提现，2: 管理员调节，99: 其它类型</td>
+<td>Connection</td>
+<td>当前连接是否保持，如Connection:Keep-Alive</td>
 </tr>
 </tbody>
 </table>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/21/table/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/19/MySQL-嵌套集模型/" itemprop="url">
-                  mysql嵌套集模型
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-19T18:38:03+08:00" content="2016-07-19">
-              2016-07-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/19/MySQL-嵌套集模型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/19/MySQL-嵌套集模型/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="嵌套集模型"><a href="#嵌套集模型" class="headerlink" title="嵌套集模型"></a>嵌套集模型</h1><h2 id="在分类表中，通过左和右值来代表我们的嵌套节点。"><a href="#在分类表中，通过左和右值来代表我们的嵌套节点。" class="headerlink" title="在分类表中，通过左和右值来代表我们的嵌套节点。"></a>在分类表中，通过左和右值来代表我们的嵌套节点。</h2><ul>
-<li><p>创建表并添加测试数据</p>
-<pre><code>CREATE TABLE category (
-    category_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(20) NOT NULL,
-    lft INT NOT NULL,
-    rgt INT NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO category VALUES
-                            (1,&apos;ELECTRONICS&apos;,1,20),
-                            (2,&apos;TELEVISIONS&apos;,2,9),
-                            (3,&apos;TUBE&apos;,3,4),
-                            (4,&apos;LCD&apos;,5,6),
-                            (5,&apos;PLASMA&apos;,7,8),
-                            (6,&apos;PORTABLE ELECTRONICS&apos;,10,19),
-                            (7,&apos;MP3 PLAYERS&apos;,11,14),
-                            (8,&apos;FLASH&apos;,12,13),
-                            (9,&apos;CD PLAYERS&apos;,15,16),
-                            (10,&apos;2 WAY RADIOS&apos;,17,18);
-
-MariaDB [work]&gt; select * from category;
-+-------------+----------------------+-----+-----+
-| category_id | name                 | lft | rgt |
-+-------------+----------------------+-----+-----+
-|           1 | ELECTRONICS          |   1 |  20 |
-|           2 | TELEVISIONS          |   2 |   9 |
-|           3 | TUBE                 |   3 |   4 |
-|           4 | LCD                  |   5 |   6 |
-|           5 | PLASMA               |   7 |   8 |
-|           6 | PORTABLE ELECTRONICS |  10 |  19 |
-|           7 | MP3 PLAYERS          |  11 |  14 |
-|           8 | FLASH                |  12 |  13 |
-|           9 | CD PLAYERS           |  15 |  16 |
-|          10 | 2 WAY RADIOS         |  17 |  18 |
-+-------------+----------------------+-----+-----+
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/19/MySQL-嵌套集模型/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/15/nuclide编辑器安装/" itemprop="url">
-                  nuclide编辑器安装
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-15T17:13:50+08:00" content="2016-07-15">
-              2016-07-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/React-native/" itemprop="url" rel="index">
-                    <span itemprop="name">React-native</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/15/nuclide编辑器安装/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/nuclide编辑器安装/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="nuclide编辑器安装"><a href="#nuclide编辑器安装" class="headerlink" title="nuclide编辑器安装"></a>nuclide编辑器安装</h1><ul>
-<li>nuclide是基于atom构建的开发环境</li>
-<li><p><code>install atom</code></p>
-<pre><code>brew install Caskroom/cask/atom
-</code></pre></li>
-<li><p><code>install nuclide</code></p>
-<pre><code>apm install nuclide
-</code></pre></li>
+<h3 id="常见的HTTP响应头"><a href="#常见的HTTP响应头" class="headerlink" title="常见的HTTP响应头"></a>常见的HTTP响应头</h3><table>
+<thead>
+<tr>
+<th>请求头</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server</td>
+<td>使用的服务器名称，如Server:nginx/1.10.2</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>用来指明发送给接收者的实体正文的媒体类型，如Content-Type:text/html; charset=utf-8</td>
+</tr>
+<tr>
+<td>Content-Encoding</td>
+<td>与请求报头Accept-Encoding对应，告诉浏览器服务端采用的是什么压缩编码</td>
+</tr>
+<tr>
+<td>Content-Language</td>
+<td>描述了资源所用的自然语言，与Accept-Language对应</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>指明实体正文的长度，用以字节方式存储的十进制数字来表示</td>
+</tr>
+<tr>
+<td>Keep-Alive</td>
+<td>保持连接的时间，如Keep-Alive: timeout=5,max=120</td>
+</tr>
+</tbody>
+</table>
+<h3 id="常见的HTTP状态码"><a href="#常见的HTTP状态码" class="headerlink" title="常见的HTTP状态码"></a>常见的HTTP状态码</h3><table>
+<thead>
+<tr>
+<th>请求头</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>客户端请求成功</td>
+</tr>
+<tr>
+<td>302</td>
+<td>临时跳转，跳转的地址通过Location指定</td>
+</tr>
+<tr>
+<td>400</td>
+<td>客户端请求有语法错误，不能被服务器识别</td>
+</tr>
+<tr>
+<td>403</td>
+<td>服务器收到请求，但是拒绝提供服务</td>
+</tr>
+<tr>
+<td>404</td>
+<td>请求的资源不存在</td>
+</tr>
+<tr>
+<td>500</td>
+<td>服务器发生不可预期的错误</td>
+</tr>
+</tbody>
+</table>
+<h3 id="浏览器缓存机制"><a href="#浏览器缓存机制" class="headerlink" title="浏览器缓存机制"></a>浏览器缓存机制</h3><ul>
+<li><code>Cache-Control/Pragma</code> HTTP Head字段的可选值</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>可选值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public</td>
+<td>所有内容都将被缓存，在响应头中设置</td>
+</tr>
+<tr>
+<td>Private</td>
+<td>内容只缓存到私有缓存中，在响应头中设置</td>
+</tr>
+<tr>
+<td>no-cache</td>
+<td>所有内容都不会被缓存，在请求头和响应头中设置</td>
+</tr>
+<tr>
+<td>no-store</td>
+<td>所有内容都不会被缓存到缓存或Internet临时文件中，在响应头中设置</td>
+</tr>
+<tr>
+<td>must-revalidation/proxy-revalidation</td>
+<td>如果缓存的内容失效，请求必须发送到服务器/代理以进行重新验证，在请求头中设置</td>
+</tr>
+<tr>
+<td>max-age=xxx</td>
+<td>缓存的内容将在xxx秒后失效，这个选项只在HTTP1.1中可用，和Last-Modified一起使用时优先级较高，在响应头中设置</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><code>Expires</code></p>
+<ul>
+<li>使用格式是<code>Expires:Thu, 07 Dec 2017 08:23:13 GMT</code>，超过这个时间值后，缓存的内容将失效。</li>
+</ul>
+</li>
+<li><p><code>Last-Modified/Etag</code></p>
+<ul>
+<li>表示一个服务器上的资源的最后修改时间</li>
+<li>资源可以是静态(静态内容自动加上<code>Last-Modified</code>字段)或者动态(如servlet提供了一个getLastModified方法用于检查某个动态内容是否已经更新)，通过这个最后修改时间可以判断当前请求的资源是否是最新的</li>
+<li>一般服务器在响应头中返回一个<code>Last-Modified</code>字段，告诉浏览器这个页面的最后修改时间<code>Last-Modified:Thu, 07 Dec 2017 08:31:01 GMT</code>，浏览器再次请求时在请求头中增加一个<code>If-Modified-Since:Thu, 07 Dec 2017 08:31:01 GMT</code>字段，询问当前缓存的页面是否是最新的，如果是最新的就返回304状态码，告诉浏览器是最新的，服务器也不会传输新的书籍</li>
+<li>与<code>Last-Modified</code>字段有类似功能的Etag字段，这个字段的作用是让服务器给每个页面分配一个唯一的编号，然后通过这个编号来区分当前这个页面是否是最新的     </li>
+</ul>
+</li>
 </ul>
 
           
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/02/tomcat错误/" itemprop="url">
+                  tomcat错误
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-02T10:37:22+08:00" content="2017-07-02">
+              2017-07-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/tomcat/" itemprop="url" rel="index">
+                    <span itemprop="name">tomcat</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/02/tomcat错误/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/02/tomcat错误/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="tomcat错误"><a href="#tomcat错误" class="headerlink" title="tomcat错误"></a>tomcat错误</h1><ul>
+<li><p><code>The Apache Tomcat installation at this directory is version 8.5.5. A Tomcat 8.0 installation is expected.</code></p>
+<pre><code>$ cd tomcat-8.5.13/lib
+$ mkdir catalina
+$ cd catalina/
+$ unzip ../catalina.jar
+$ vim org/apache/catalina/util/ServerInfo.properties
+$ jar uf ../catalina.jar org/apache/catalina/util/ServerInfo.properties
+$ cd..
+$ rm -rf catalina
+</code></pre></li>
+</ul>
+<pre><code>// ServerInfo.properties
+server.info=Apache Tomcat/8.0.0
+server.number=8.5.13.0
+server.built=Mar 27 2017 14:25:04 UTC
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/10/Spring自定义属性编辑器/" itemprop="url">
+                  Spring自定义属性编辑器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-10T11:06:09+08:00" content="2017-06-10">
+              2017-06-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/10/Spring自定义属性编辑器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/10/Spring自定义属性编辑器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Spring自定义属性编辑器"><a href="#Spring自定义属性编辑器" class="headerlink" title="Spring自定义属性编辑器"></a>Spring自定义属性编辑器</h1><blockquote>
+<p>在Spring配置文件中，通过字面值为Bean各种类型的属性提供设置值</p>
+<p>属性编辑器实际就是一个类型转换器，主要功能是将歪脖的设置值转换为JVM内部的对应类型</p>
+<p>任何实现了<code>java.beans.PropertyEditor</code>接口的类都是属性编辑器</p>
+<p>Spring大部分默认属性编辑器都直接扩展于<code>java.beans.PropertyEditorSupport</code>类</p>
+</blockquote>
+<h3 id="自定义Person的属性编辑器"><a href="#自定义Person的属性编辑器" class="headerlink" title="自定义Person的属性编辑器"></a>自定义Person的属性编辑器</h3><ul>
+<li><p>创建<code>Person</code>和<code>Student</code></p>
+<pre><code>public class Person {
+
+    private Integer age;
+
+    private String name;
+
+    private String email;
+
+    // getter/setter/toString
+}
+
+public class Student {
+
+    private Integer stuNo;
+
+    private Person person;
+
+    // getter/setter/toString
+}
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/06/10/Spring自定义属性编辑器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/06/Spring自定义组件标签/" itemprop="url">
+                  Spring自定义组件标签
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-06T12:11:49+08:00" content="2017-06-06">
+              2017-06-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/06/Spring自定义组件标签/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/06/Spring自定义组件标签/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Spring自定义组件标签"><a href="#Spring自定义组件标签" class="headerlink" title="Spring自定义组件标签"></a>Spring自定义组件标签</h1><h3 id="spring自定义组件标签步骤"><a href="#spring自定义组件标签步骤" class="headerlink" title="spring自定义组件标签步骤"></a>spring自定义组件标签步骤</h3><ul>
+<li>采用XSD描述自定义标签的元素属性</li>
+<li>编写Bean定义的解析器</li>
+<li>注册自定义标签解析器</li>
+<li>绑定命名空间解析器</li>
+</ul>
+<h3 id="定义标签元素的XML结构，采用XSD描述自定义标签的元素属性"><a href="#定义标签元素的XML结构，采用XSD描述自定义标签的元素属性" class="headerlink" title="定义标签元素的XML结构，采用XSD描述自定义标签的元素属性"></a>定义标签元素的XML结构，采用XSD描述自定义标签的元素属性</h3><ul>
+<li><p>在<code>com.example.spring03.config</code>包下创建<code>userservice.xsd</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+    &lt;xsd:schema xmlns=&quot;http://www.m2lan.com/schema/service&quot;
+                xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
+                xmlns:beans=&quot;http://www.springframework.org/schema/beans&quot;
+                &lt;!-- 指定一个自定义标签的命名空间 --&gt;
+                targetNamespace=&quot;http://www.m2lan.com/schema/service&quot;
+                elementFormDefault=&quot;qualified&quot;
+                attributeFormDefault=&quot;unqualified&quot;&gt;
+
+        &lt;!-- 导入Spring本身的beans命名空间 --&gt;
+        &lt;xsd:import namespace=&quot;http://www.springframework.org/schema/beans&quot;/&gt;
+
+        &lt;!-- 定义一个user-service标签 --&gt;
+        &lt;xsd:element name=&quot;user-service&quot;&gt;
+            &lt;xsd:complexType&gt;
+                &lt;xsd:complexContent&gt;
+                    &lt;xsd:extension base=&quot;beans:identifiedType&quot;&gt;
+
+                        &lt;!-- 扩展属性dao --&gt;
+                        &lt;xsd:attribute name=&quot;dao&quot; type=&quot;xsd:string&quot; use=&quot;required&quot;/&gt;
+                    &lt;/xsd:extension&gt;
+                &lt;/xsd:complexContent&gt;
+            &lt;/xsd:complexType&gt;
+        &lt;/xsd:element&gt;
+
+    &lt;/xsd:schema&gt;
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/06/06/Spring自定义组件标签/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1565,7 +1768,7 @@ MariaDB [work]&gt; select * from category;
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1606,7 +1809,7 @@ MariaDB [work]&gt; select * from category;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-count">131</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1614,7 +1817,7 @@ MariaDB [work]&gt; select * from category;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1623,7 +1826,7 @@ MariaDB [work]&gt; select * from category;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1725,7 +1928,7 @@ MariaDB [work]&gt; select * from category;
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

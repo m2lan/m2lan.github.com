@@ -63,6 +63,7 @@
 <meta property="og:url" content="http://blog.golearns.org/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Tigase安装、部署、插件编写及其它">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识记录">
 <meta name="twitter:description" content="Tigase安装、部署、插件编写及其它">
@@ -266,8 +267,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/10/Spring自定义属性编辑器/" itemprop="url">
-                  Spring自定义属性编辑器
+                <a class="post-title-link" href="/2018/09/17/php-elsearch-autocomplete/" itemprop="url">
+                  php elsearch autocomplete
                 </a>
               
             
@@ -280,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-10T11:06:09+08:00" content="2017-06-10">
-              2017-06-10
+            <time itemprop="dateCreated" datetime="2018-09-17T23:13:08+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -294,8 +295,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
+                  <a href="/categories/thinkphp5/" itemprop="url" rel="index">
+                    <span itemprop="name">thinkphp5</span>
                   </a>
                 </span>
 
@@ -310,8 +311,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/06/10/Spring自定义属性编辑器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/10/Spring自定义属性编辑器/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/php-elsearch-autocomplete/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/php-elsearch-autocomplete/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -334,37 +335,9 @@
 
       
         
-          <h1 id="Spring自定义属性编辑器"><a href="#Spring自定义属性编辑器" class="headerlink" title="Spring自定义属性编辑器"></a>Spring自定义属性编辑器</h1><blockquote>
-<p>在Spring配置文件中，通过字面值为Bean各种类型的属性提供设置值</p>
-<p>属性编辑器实际就是一个类型转换器，主要功能是将歪脖的设置值转换为JVM内部的对应类型</p>
-<p>任何实现了<code>java.beans.PropertyEditor</code>接口的类都是属性编辑器</p>
-<p>Spring大部分默认属性编辑器都直接扩展于<code>java.beans.PropertyEditorSupport</code>类</p>
-</blockquote>
-<h3 id="自定义Person的属性编辑器"><a href="#自定义Person的属性编辑器" class="headerlink" title="自定义Person的属性编辑器"></a>自定义Person的属性编辑器</h3><ul>
-<li><p>创建<code>Person</code>和<code>Student</code></p>
-<pre><code>public class Person {
-
-    private Integer age;
-
-    private String name;
-
-    private String email;
-
-    // getter/setter/toString
-}
-
-public class Student {
-
-    private Integer stuNo;
-
-    private Person person;
-
-    // getter/setter/toString
-}
-</code></pre></li>
-</ul>
+          <h1 id="PHP-Eleasticsearch-实现自动补全"><a href="#PHP-Eleasticsearch-实现自动补全" class="headerlink" title="PHP+Eleasticsearch 实现自动补全"></a>PHP+Eleasticsearch 实现自动补全</h1><h2 id="1-创建索引"><a href="#1-创建索引" class="headerlink" title="1. 创建索引"></a>1. 创建索引</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    $params = [</span><br><span class="line">        <span class="string">'index'</span> =&gt; <span class="string">'auto_complete_shop'</span>,</span><br><span class="line">        <span class="string">'body'</span> =&gt; [</span><br><span class="line">            <span class="string">'settings'</span> =&gt; [</span><br><span class="line">                <span class="string">'number_of_shards'</span> =&gt; <span class="number">1</span>,</span><br><span class="line">                <span class="string">'analysis'</span> =&gt; [</span><br><span class="line">                    <span class="string">'filter'</span> =&gt; [</span><br><span class="line">                        <span class="string">'autocomplete_filter'</span> =&gt; [</span><br><span class="line">                            <span class="string">'type'</span> =&gt; <span class="string">'edge_ngram'</span>,</span><br><span class="line">                            <span class="string">'min_gram'</span> =&gt; <span class="number">1</span>,</span><br><span class="line">                            <span class="string">'max_gram'</span> =&gt; <span class="number">20</span></span><br><span class="line">                        ]</span><br><span class="line">                    ],</span><br><span class="line">                    <span class="string">'analyzer'</span> =&gt; [</span><br><span class="line">                        <span class="string">'autocomplete'</span> =&gt; [</span><br><span class="line">                            <span class="string">'type'</span> =&gt; <span class="string">'custom'</span>,</span><br><span class="line">                            <span class="string">'tokenizer'</span> =&gt; <span class="string">'standard'</span>,</span><br><span class="line">                            <span class="string">'filter'</span> =&gt; [</span><br><span class="line">                                <span class="string">'lowercase'</span>, <span class="string">'autocomplete_filter'</span></span><br><span class="line">                            ]</span><br><span class="line">                        ]</span><br><span class="line">                    ]</span><br><span class="line">                ]</span><br><span class="line">            ],</span><br><span class="line">            <span class="string">'mappings'</span> =&gt; [</span><br><span class="line">                <span class="string">'goods'</span> =&gt; [</span><br><span class="line">                    <span class="string">'_source'</span> =&gt; [</span><br><span class="line">                        <span class="string">'enabled'</span> =&gt; <span class="keyword">true</span></span><br><span class="line">                    ],</span><br><span class="line">                    <span class="string">'properties'</span> =&gt; [</span><br><span class="line">                        <span class="string">'name'</span> =&gt; [</span><br><span class="line">                            <span class="string">'type'</span> =&gt; <span class="string">'string'</span>,</span><br><span class="line">                            <span class="string">'analyzer'</span> =&gt; <span class="string">'autocomplete'</span>,</span><br><span class="line">                            <span class="string">'search_analyzer'</span> =&gt; <span class="string">'standard'</span></span><br><span class="line">                        ]</span><br><span class="line">                    ]</span><br><span class="line">                ]</span><br><span class="line">            ]</span><br><span class="line">        ]</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    $result = <span class="keyword">$this</span>-&gt;client-&gt;indices()-&gt;create($params);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> json_encode($result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/10/Spring自定义属性编辑器/#more" rel="contents">
+            <a class="btn" href="/2018/09/17/php-elsearch-autocomplete/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -411,8 +384,8 @@ public class Student {
             
               
                 
-                <a class="post-title-link" href="/2017/06/06/Spring自定义组件标签/" itemprop="url">
-                  Spring自定义组件标签
+                <a class="post-title-link" href="/2018/09/17/Logstash安装/" itemprop="url">
+                  Logstash安装
                 </a>
               
             
@@ -425,8 +398,8 @@ public class Student {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-06T12:11:49+08:00" content="2017-06-06">
-              2017-06-06
+            <time itemprop="dateCreated" datetime="2018-09-17T23:12:24+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -439,8 +412,8 @@ public class Student {
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
+                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">Elasticsearch</span>
                   </a>
                 </span>
 
@@ -455,8 +428,8 @@ public class Student {
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/06/06/Spring自定义组件标签/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/06/Spring自定义组件标签/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/Logstash安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/Logstash安装/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -479,47 +452,25 @@ public class Student {
 
       
         
-          <h1 id="Spring自定义组件标签"><a href="#Spring自定义组件标签" class="headerlink" title="Spring自定义组件标签"></a>Spring自定义组件标签</h1><h3 id="spring自定义组件标签步骤"><a href="#spring自定义组件标签步骤" class="headerlink" title="spring自定义组件标签步骤"></a>spring自定义组件标签步骤</h3><ul>
-<li>采用XSD描述自定义标签的元素属性</li>
-<li>编写Bean定义的解析器</li>
-<li>注册自定义标签解析器</li>
-<li>绑定命名空间解析器</li>
-</ul>
-<h3 id="定义标签元素的XML结构，采用XSD描述自定义标签的元素属性"><a href="#定义标签元素的XML结构，采用XSD描述自定义标签的元素属性" class="headerlink" title="定义标签元素的XML结构，采用XSD描述自定义标签的元素属性"></a>定义标签元素的XML结构，采用XSD描述自定义标签的元素属性</h3><ul>
-<li><p>在<code>com.example.spring03.config</code>包下创建<code>userservice.xsd</code></p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-    &lt;xsd:schema xmlns=&quot;http://www.m2lan.com/schema/service&quot;
-                xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
-                xmlns:beans=&quot;http://www.springframework.org/schema/beans&quot;
-                &lt;!-- 指定一个自定义标签的命名空间 --&gt;
-                targetNamespace=&quot;http://www.m2lan.com/schema/service&quot;
-                elementFormDefault=&quot;qualified&quot;
-                attributeFormDefault=&quot;unqualified&quot;&gt;
+          
+            <h1 id="Logstash-install"><a href="#Logstash-install" class="headerlink" title="Logstash install"></a>Logstash install</h1><h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><pre><code>rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+cd /etc/yum.repos.d/
+touch logstash.repo
 
-        &lt;!-- 导入Spring本身的beans命名空间 --&gt;
-        &lt;xsd:import namespace=&quot;http://www.springframework.org/schema/beans&quot;/&gt;
+cat logstash.repo
+[logstash-5.x]
+name=Elastic repository for 5.x packages
+baseurl=https://artifacts.elastic.co/packages/5.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
 
-        &lt;!-- 定义一个user-service标签 --&gt;
-        &lt;xsd:element name=&quot;user-service&quot;&gt;
-            &lt;xsd:complexType&gt;
-                &lt;xsd:complexContent&gt;
-                    &lt;xsd:extension base=&quot;beans:identifiedType&quot;&gt;
-
-                        &lt;!-- 扩展属性dao --&gt;
-                        &lt;xsd:attribute name=&quot;dao&quot; type=&quot;xsd:string&quot; use=&quot;required&quot;/&gt;
-                    &lt;/xsd:extension&gt;
-                &lt;/xsd:complexContent&gt;
-            &lt;/xsd:complexType&gt;
-        &lt;/xsd:element&gt;
-
-    &lt;/xsd:schema&gt;
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/06/Spring自定义组件标签/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+yum install -y logstash
+</code></pre><h3 id="start"><a href="#start" class="headerlink" title="start"></a>start</h3><pre><code>systemctl start logstash.service
+</code></pre>
+          
         
       
     </div>
@@ -563,8 +514,8 @@ public class Student {
             
               
                 
-                <a class="post-title-link" href="/2017/05/30/搭建DNS服务器实现域名解析/" itemprop="url">
-                  搭建DNS服务器实现域名解析
+                <a class="post-title-link" href="/2018/09/17/kibana安装/" itemprop="url">
+                  kibana安装
                 </a>
               
             
@@ -577,8 +528,8 @@ public class Student {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-30T13:53:40+08:00" content="2017-05-30">
-              2017-05-30
+            <time itemprop="dateCreated" datetime="2018-09-17T23:11:39+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -591,8 +542,8 @@ public class Student {
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">Elasticsearch</span>
                   </a>
                 </span>
 
@@ -607,8 +558,8 @@ public class Student {
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/05/30/搭建DNS服务器实现域名解析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/30/搭建DNS服务器实现域名解析/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/kibana安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/kibana安装/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -631,337 +582,15 @@ public class Student {
 
       
         
-          <h1 id="Linux搭建DNS服务器实现域名解析"><a href="#Linux搭建DNS服务器实现域名解析" class="headerlink" title="Linux搭建DNS服务器实现域名解析"></a>Linux搭建DNS服务器实现域名解析</h1><blockquote>
-<p>域名系统，可以提供域名与IP地址的解析服务。</p>
+          <h1 id="Kibana-install"><a href="#Kibana-install" class="headerlink" title="Kibana install"></a>Kibana install</h1><blockquote>
+<p>数据可视化和实时数据</p>
 </blockquote>
-<h3 id="BIND实现DNS服务器搭建"><a href="#BIND实现DNS服务器搭建" class="headerlink" title="BIND实现DNS服务器搭建"></a>BIND实现DNS服务器搭建</h3><ul>
-<li><p>install</p>
-<pre><code># 主程序
-[root@m2lan150 ~]# rpm -ivh /mnt/Packages/bind-9.8.2-0.17.rc1.el6_4.6.x86_64.rpm
-# 提高安全性
-[root@m2lan150 ~]# rpm -ivh /mnt/Packages/bind-chroot-9.8.2-0.17.rc1.el6_4.6.x86_64.rpm
-</code></pre></li>
-<li><p>配置文件</p>
-<pre><code># 包含bind的基本配置
-[root@m2lan150 ~]# ls /etc/named.conf 
-/etc/named.conf
-</code></pre></li>
-<li><p>启动服务</p>
-<pre><code># 启动的时候卡在这个地方
-[root@m2lan150 ~]# /etc/init.d/named start
-Generating /etc/rndc.key:
-
-# 启动bind时，需要生产rndc.key，使用手动生成
-[root@m2lan150 ~]# rndc-confgen -r /dev/urandom -a
-wrote key file &quot;/etc/rndc.key&quot;
-
-# 再次启动
-[root@m2lan150 ~]# /etc/init.d/named start
-启动 named：                                               [确定]
-</code></pre></li>
-<li><p>启动后查看挂载，开启named服务后，会自动挂载，调用chroot功能切换根</p>
-<pre><code>[root@m2lan150 ~]# mount | grep named
-/etc/named on /var/named/chroot/etc/named type none (rw,bind)
-/var/named on /var/named/chroot/var/named type none (rw,bind)
-/etc/named.conf on /var/named/chroot/etc/named.conf type none (rw,bind)
-/etc/named.rfc1912.zones on /var/named/chroot/etc/named.rfc1912.zones type none (rw,bind)
-/etc/rndc.key on /var/named/chroot/etc/rndc.key type none (rw,bind)
-/usr/lib64/bind on /var/named/chroot/usr/lib64/bind type none (rw,bind)
-/etc/named.iscdlv.key on /var/named/chroot/etc/named.iscdlv.key type none (rw,bind)
-/etc/named.root.key on /var/named/chroot/etc/named.root.key type none (rw,bind)
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/30/搭建DNS服务器实现域名解析/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/29/搭建FTP服务器实现文件共享/" itemprop="url">
-                  搭建FTP服务器实现文件共享
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-29T22:33:24+08:00" content="2017-05-29">
-              2017-05-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/29/搭建FTP服务器实现文件共享/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/29/搭建FTP服务器实现文件共享/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Linux下搭建FTP服务器实现文件共享"><a href="#Linux下搭建FTP服务器实现文件共享" class="headerlink" title="Linux下搭建FTP服务器实现文件共享"></a>Linux下搭建FTP服务器实现文件共享</h1><blockquote>
-<p>文件传输协议</p>
-</blockquote>
-<h3 id="安装vsftp"><a href="#安装vsftp" class="headerlink" title="安装vsftp"></a>安装vsftp</h3><ul>
-<li><p>install</p>
-<pre><code>[root@m2lan150 ~]# rpm -ivh /mnt/Packages/vsftpd-2.2.2-11.el6_4.1.x86_64.rpm
-</code></pre></li>
-<li><p>配置文件</p>
-<pre><code>[root@m2lan150 ~]# ll /etc/vsftpd/vsftpd.conf
-</code></pre></li>
-<li><p>启动服务</p>
-<pre><code>[root@m2lan150 ~]# /etc/init.d/vsftpd start
-为 vsftpd 启动 vsftpd：                                    [确定]
-</code></pre></li>
-<li><p>设置开机启动</p>
-<pre><code>[root@m2lan150 ~]# chkconfig vsftpd on
-</code></pre></li>
-<li><p>查看端口</p>
-<pre><code>[root@m2lan150 ~]# netstat -antup | grep vsftpd
-tcp        0      0 0.0.0.0:21                  0.0.0.0:*                   LISTEN      15539/vsftpd
-</code></pre></li>
-<li><p>默认的共享路径</p>
-<pre><code>[root@m2lan150 ~]# ls /var/ftp/
-pub
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/29/搭建FTP服务器实现文件共享/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/29/samba服务配置实现文件共享/" itemprop="url">
-                  samba服务配置实现文件共享
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-29T15:40:49+08:00" content="2017-05-29">
-              2017-05-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/29/samba服务配置实现文件共享/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/29/samba服务配置实现文件共享/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Linux下samba服务器配置实现文件共享"><a href="#Linux下samba服务器配置实现文件共享" class="headerlink" title="Linux下samba服务器配置实现文件共享"></a>Linux下samba服务器配置实现文件共享</h1><blockquote>
-<p>samba可以在Linux系统和Windows系统之间进行通信，实现不同操作系统之间的资源共享。</p>
-<p>samba服务器端口号为139和445。</p>
-</blockquote>
-<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><ul>
-<li><p>在150服务器上安装samba服务端</p>
-<pre><code>[root@m2lan150 ~]# rpm -ivh /mnt/Packages/samba-3.6.9-164.el6.x86_64.rpm
-</code></pre></li>
-<li><p>在170服务器上安装samba客户端</p>
-<pre><code>[root@m2lan170 ~]# rpm -ivh /mnt/Packages/samba-client-3.6.9-164.el6.x86_64.rpm
-</code></pre></li>
-</ul>
-<h3 id="服务启动和关闭"><a href="#服务启动和关闭" class="headerlink" title="服务启动和关闭"></a>服务启动和关闭</h3><ul>
-<li><p>samba服务器启动</p>
-<pre><code>[root@m2lan150 ~]# /etc/init.d/smb start
-||
-[root@m2lan150 ~]# /etc/init.d/smb restart
-</code></pre></li>
-<li><p>服务配置重新加载，在不重启服务的情况下，加载配置文件</p>
-<pre><code>[root@m2lan150 ~]# /etc/init.d/smb reload
-</code></pre></li>
-<li><p>设置开机自动启动</p>
-<pre><code>[root@m2lan150 ~]# chkconfig smb on
-</code></pre></li>
-</ul>
-<h3 id="查看端口号"><a href="#查看端口号" class="headerlink" title="查看端口号"></a>查看端口号</h3><pre><code>[root@m2lan150 ~]# netstat -antup | grep smb
-tcp        0      0 0.0.0.0:139                 0.0.0.0:*                   LISTEN      11677/smbd          
-tcp        0      0 0.0.0.0:445                 0.0.0.0:*                   LISTEN      11677/smbd          
-tcp        0      0 :::139                      :::*                        LISTEN      11677/smbd          
-tcp        0      0 :::445                      :::*                        LISTEN      11677/smbd
+<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><pre><code>wget https://artifacts.elastic.co/downloads/kibana/kibana-5.5.1-linux-x86_64.tar.gz
+sha1sum kibana-5.5.1-linux-x86_64.tar.gz
+tar -xzf kibana-5.5.1-linux-x86_64.tar.gz
 </code></pre>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/29/samba服务配置实现文件共享/#more" rel="contents">
+            <a class="btn" href="/2018/09/17/kibana安装/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1008,8 +637,8 @@ tcp        0      0 :::445                      :::*                        LIST
             
               
                 
-                <a class="post-title-link" href="/2017/05/29/nfs服务配置/" itemprop="url">
-                  nfs服务配置
+                <a class="post-title-link" href="/2018/09/17/elsearch安装/" itemprop="url">
+                  elsearch安装
                 </a>
               
             
@@ -1022,8 +651,8 @@ tcp        0      0 :::445                      :::*                        LIST
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-29T00:48:23+08:00" content="2017-05-29">
-              2017-05-29
+            <time itemprop="dateCreated" datetime="2018-09-17T23:10:59+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -1036,8 +665,8 @@ tcp        0      0 :::445                      :::*                        LIST
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">Elasticsearch</span>
                   </a>
                 </span>
 
@@ -1052,8 +681,8 @@ tcp        0      0 :::445                      :::*                        LIST
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/05/29/nfs服务配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/29/nfs服务配置/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/elsearch安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/elsearch安装/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1076,36 +705,16 @@ tcp        0      0 :::445                      :::*                        LIST
 
       
         
-          <h1 id="Linux下nfs服务配置"><a href="#Linux下nfs服务配置" class="headerlink" title="Linux下nfs服务配置"></a>Linux下nfs服务配置</h1><blockquote>
-<p>NFS是网络文件系统，允许一个系统在网络上与其他机器共享目录和文件</p>
-<p>通过使用NFS，用户和程序可以像访问本地文件一样访问远程系统上的文件。 </p>
-</blockquote>
-<h3 id="启动150服务器的nfs服务"><a href="#启动150服务器的nfs服务" class="headerlink" title="启动150服务器的nfs服务"></a>启动150服务器的nfs服务</h3><pre><code>[root@m2lan150 ~]# service nfs start
-启动 NFS 服务：                                            [确定]
-关掉 NFS 配额：                                            [确定]
-启动 NFS mountd：                                          [确定]
-启动 NFS 守护进程：                                        [确定]
-正在启动 RPC idmapd：                                      [确定]
-</code></pre><h3 id="170服务器查看nfs服务器上所有共享目录"><a href="#170服务器查看nfs服务器上所有共享目录" class="headerlink" title="170服务器查看nfs服务器上所有共享目录"></a>170服务器查看nfs服务器上所有共享目录</h3><pre><code>[root@m2lan170 ~]# showmount -e 192.168.0.150
-Export list for 192.168.0.150:
-</code></pre><h3 id="150服务器共享-root-sh目录"><a href="#150服务器共享-root-sh目录" class="headerlink" title="150服务器共享/root/sh目录"></a>150服务器共享/root/sh目录</h3><pre><code># *表示所有客户端都可以访问，rw表示有读写权限
-[root@m2lan150 ~]# cat /etc/exports 
-/media *(rw)
-
-# 重启nfs服务
-[root@m2lan150 ~]# service nfs restart
-关闭 NFS 守护进程：                                        [确定]
-关闭 NFS mountd：                                          [确定]
-关闭 NFS quotas：                                          [确定]
-Shutting down RPC idmapd:                                  [确定]
-启动 NFS 服务：                                            [确定]
-关掉 NFS 配额：                                            [确定]
-启动 NFS mountd：                                          [确定]
-启动 NFS 守护进程：                                        [确定]
-正在启动 RPC idmapd：                                      [确定]
+          <h1 id="elasticsearch-install"><a href="#elasticsearch-install" class="headerlink" title="elasticsearch install"></a>elasticsearch install</h1><h3 id="新建用户组和用户"><a href="#新建用户组和用户" class="headerlink" title="新建用户组和用户"></a>新建用户组和用户</h3><pre><code>groupadd elsearch
+useradd elsearch -g elsearch
+# 切换用户
+su elsearch
+</code></pre><h3 id="下载启动"><a href="#下载启动" class="headerlink" title="下载启动"></a>下载启动</h3><pre><code>wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.1.zip
+unzip elasticsearch-5.5.1.zip
+cd elasticsearch-5.5.1/
 </code></pre>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/29/nfs服务配置/#more" rel="contents">
+            <a class="btn" href="/2018/09/17/elsearch安装/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1152,8 +761,8 @@ Shutting down RPC idmapd:                                  [确定]
             
               
                 
-                <a class="post-title-link" href="/2017/05/28/dhcp服务动态分配IP地址/" itemprop="url">
-                  dhcp服务动态分配IP地址
+                <a class="post-title-link" href="/2018/09/17/elsearch-autocomplete/" itemprop="url">
+                  elsearch autocomplete
                 </a>
               
             
@@ -1166,8 +775,8 @@ Shutting down RPC idmapd:                                  [确定]
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-28T18:46:20+08:00" content="2017-05-28">
-              2017-05-28
+            <time itemprop="dateCreated" datetime="2018-09-17T23:10:30+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -1180,8 +789,8 @@ Shutting down RPC idmapd:                                  [确定]
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">Elasticsearch</span>
                   </a>
                 </span>
 
@@ -1196,8 +805,8 @@ Shutting down RPC idmapd:                                  [确定]
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/05/28/dhcp服务动态分配IP地址/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/dhcp服务动态分配IP地址/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/elsearch-autocomplete/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/elsearch-autocomplete/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1220,33 +829,9 @@ Shutting down RPC idmapd:                                  [确定]
 
       
         
-          <h1 id="Linux下使用dhcp服务动态分配IP地址"><a href="#Linux下使用dhcp服务动态分配IP地址" class="headerlink" title="Linux下使用dhcp服务动态分配IP地址"></a>Linux下使用dhcp服务动态分配IP地址</h1><blockquote>
-<p>动态主机配置协议</p>
-</blockquote>
-<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><ul>
-<li><p>使用yum安装</p>
-<pre><code>[root@m2lan150 ~]# yum install -y dhcp
-</code></pre></li>
-<li><p>查看包的安装路径</p>
-<pre><code>[root@m2lan150 ~]# rpm -pql /mnt/Packages/dhcp-4.1.1-38.P1.el6.x86_64.rpm | more
-</code></pre></li>
-<li><p>备份配置文件</p>
-<pre><code>[root@m2lan150 ~]# cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.bak
-</code></pre></li>
-<li><p>查看配置文件</p>
-<pre><code>[root@m2lan150 ~]# cat /etc/dhcp/dhcpd.conf
-#
-# DHCP Server Configuration file.
-#   see /usr/share/doc/dhcp*/dhcpd.conf.sample
-#   see &apos;man 5 dhcpd.conf&apos;
-#
-</code></pre></li>
-<li><p>copy配置示例配置文件覆盖当前配置文件</p>
-<pre><code>[root@m2lan150 ~]# cp /usr/share/doc/dhcp-4.1.1/dhcpd.conf.sample /etc/dhcp/dhcpd.conf
-</code></pre></li>
-</ul>
+          <h1 id="Elsearch自动补全"><a href="#Elsearch自动补全" class="headerlink" title="Elsearch自动补全"></a>Elsearch自动补全</h1><h2 id="1-创建索引、实例化token过滤器和分析器"><a href="#1-创建索引、实例化token过滤器和分析器" class="headerlink" title="1. 创建索引、实例化token过滤器和分析器"></a>1. 创建索引、实例化token过滤器和分析器</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">curl -XPUT localhost:9200/autosuggest -d '</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"number_of_shards"</span>: <span class="number">1</span>, </span><br><span class="line">        <span class="attr">"analysis"</span>: &#123;</span><br><span class="line">            <span class="attr">"filter"</span>: &#123;</span><br><span class="line">                <span class="attr">"autocomplete_filter"</span>: &#123; </span><br><span class="line">                    <span class="attr">"type"</span>:     <span class="string">"edge_ngram"</span>,</span><br><span class="line">                    <span class="attr">"min_gram"</span>: <span class="number">1</span>,</span><br><span class="line">                    <span class="attr">"max_gram"</span>: <span class="number">20</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"analyzer"</span>: &#123;</span><br><span class="line">                <span class="attr">"autocomplete"</span>: &#123;</span><br><span class="line">                    <span class="attr">"type"</span>:      <span class="string">"custom"</span>,</span><br><span class="line">                    <span class="attr">"tokenizer"</span>: <span class="string">"standard"</span>,</span><br><span class="line">                    <span class="attr">"filter"</span>: [</span><br><span class="line">                        <span class="string">"lowercase"</span>,</span><br><span class="line">                        <span class="string">"autocomplete_filter"</span> </span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">'</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/28/dhcp服务动态分配IP地址/#more" rel="contents">
+            <a class="btn" href="/2018/09/17/elsearch-autocomplete/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1293,8 +878,8 @@ Shutting down RPC idmapd:                                  [确定]
             
               
                 
-                <a class="post-title-link" href="/2017/05/28/sshd服务防暴力破解/" itemprop="url">
-                  sshd服务防暴力破解
+                <a class="post-title-link" href="/2018/09/17/elsearch-关键配置/" itemprop="url">
+                  elsearch 关键配置
                 </a>
               
             
@@ -1307,8 +892,8 @@ Shutting down RPC idmapd:                                  [确定]
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-28T13:16:07+08:00" content="2017-05-28">
-              2017-05-28
+            <time itemprop="dateCreated" datetime="2018-09-17T23:10:02+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -1321,8 +906,8 @@ Shutting down RPC idmapd:                                  [确定]
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">Elasticsearch</span>
                   </a>
                 </span>
 
@@ -1337,8 +922,8 @@ Shutting down RPC idmapd:                                  [确定]
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/05/28/sshd服务防暴力破解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/sshd服务防暴力破解/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/elsearch-关键配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/elsearch-关键配置/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1361,43 +946,12 @@ Shutting down RPC idmapd:                                  [确定]
 
       
         
-          <h1 id="Linux下sshd服务防暴力破解"><a href="#Linux下sshd服务防暴力破解" class="headerlink" title="Linux下sshd服务防暴力破解"></a>Linux下sshd服务防暴力破解</h1><blockquote>
-<p>网站被暴力破解sshd服务密码，虽然没有成功，但会导致系统负载很高。</p>
-<p>原因是在暴力破解的时候，系统会不断认证用户，增加了系统资源的开销，导致网站访问速度很慢。</p>
-<p>fail2ban可以监视系统日志，然后匹配日志的错误信息执行屏蔽动作。</p>
-</blockquote>
-<h3 id="lastb"><a href="#lastb" class="headerlink" title="lastb"></a>lastb</h3><ul>
-<li><p>使用lastb命令，可以列出登入系统失败的用户信息</p>
-<pre><code>[root@m2lan150 ~]# lastb
-M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
-M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
-M2       ssh:notty    192.168.0.102    Sun May 28 12:17 - 12:17  (00:00)    
-M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
-M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
-M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
-M2       ssh:notty    192.168.0.102    Sun May 28 11:39 - 11:39  (00:00)    
-root     tty1         :0               Sat May 27 21:57 - 21:57  (00:00)    
-
-btmp begins Sat May 27 21:57:36 2017
-</code></pre></li>
-</ul>
-<h3 id="下载fail2ban"><a href="#下载fail2ban" class="headerlink" title="下载fail2ban"></a>下载fail2ban</h3><ul>
-<li><a href="https://github.com/fail2ban/fail2ban/archive/0.8.14.tar.gz" target="_blank" rel="external">fail2ban</a></li>
-<li><p>解压并安装</p>
-<pre><code>[root@m2lan150 ~]# tar -xzvf fail2ban-0.8.14.tar.gz
-[root@m2lan150 ~]# cd fail2ban-0.8.14
-[root@m2lan150 fail2ban-0.8.14]# python setup.py install
-# 查找启动文件
-[root@m2lan150 fail2ban-0.8.14]# grep chkconfig ./* -R --color
-./files/redhat-initd:# chkconfig: - 92 08
-# copy启动文件
-[root@m2lan150 fail2ban-0.8.14]# cp files/redhat-initd /etc/init.d/fail2ban
-# 设置开机启动
-[root@m2lan150 fail2ban-0.8.14]# chkconfig --add fail2ban
-</code></pre></li>
-</ul>
+          <h1 id="Elsearch-关键配置"><a href="#Elsearch-关键配置" class="headerlink" title="Elsearch 关键配置"></a>Elsearch 关键配置</h1><h2 id="关键配置项"><a href="#关键配置项" class="headerlink" title="关键配置项"></a>关键配置项</h2><p><strong>1、索引的shards个数:</strong></p>
+<p>shards的个数，最好是和节点数相关的。理论上对同一个索引，单机上的shards个数最好不要超过两个，这样每个查询尽可能并行。但因为ES中shards的个数是确定了就没办法再调整的，所以如果考虑到数据会高速增长，一开始分配多些也可以。另一个常见思路是按时间纬度（如月）去定义ES索引——因为可以动态调整新加的索引的shards个数。其他的一些情况，比如下面举到的Wetest聚合的例子，因为需要数据尽量地按照渠道切分开，所以定义了很多个shards（200个），但太多的shards通常是不推荐的，ES管理起来也有开销。</p>
+<p><strong>2、heap内存:</strong></p>
+<p>官方建议是可用内存的一半，是通过启动ES的环境中，定义环境变量的方式完成的。如<code>export ES_HEAP_SIZE=10g</code></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/28/sshd服务防暴力破解/#more" rel="contents">
+            <a class="btn" href="/2018/09/17/elsearch-关键配置/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1444,8 +998,8 @@ btmp begins Sat May 27 21:57:36 2017
             
               
                 
-                <a class="post-title-link" href="/2017/05/28/Linux常用操作/" itemprop="url">
-                  Linux常用操作
+                <a class="post-title-link" href="/2018/09/17/elsearch-安装sql插件/" itemprop="url">
+                  elsearch 安装sql插件
                 </a>
               
             
@@ -1458,8 +1012,8 @@ btmp begins Sat May 27 21:57:36 2017
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-28T01:06:33+08:00" content="2017-05-28">
-              2017-05-28
+            <time itemprop="dateCreated" datetime="2018-09-17T23:09:23+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -1472,8 +1026,8 @@ btmp begins Sat May 27 21:57:36 2017
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">Elasticsearch</span>
                   </a>
                 </span>
 
@@ -1488,8 +1042,8 @@ btmp begins Sat May 27 21:57:36 2017
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/05/28/Linux常用操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/Linux常用操作/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/elsearch-安装sql插件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/elsearch-安装sql插件/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1512,28 +1066,16 @@ btmp begins Sat May 27 21:57:36 2017
 
       
         
-          <h1 id="Linux常用操作"><a href="#Linux常用操作" class="headerlink" title="Linux常用操作"></a>Linux常用操作</h1><ul>
-<li><p>清空iptables</p>
-<pre><code>[root@m2 ~]# iptables -F
-[root@m2 ~]# /etc/init.d/iptables save
-iptables：将防火墙规则保存到 /etc/sysconfig/iptables：     [确定]
-</code></pre></li>
-<li><p>关闭selinux</p>
-<pre><code>[root@m2 ~]# vim /etc/selinux/config
-SELINUX=disabled
-</code></pre></li>
-<li><p>查看selinux是否关闭</p>
-<pre><code>[root@m2 ~]# getenforce
-Disabled
-</code></pre></li>
-<li><p>配置永久主机名</p>
-<pre><code>[root@m2lan150 ~]# cat /etc/sysconfig/network
-NETWORKING=yes
-HOSTNAME=m2lan150.com
-</code></pre></li>
+          <h1 id="elsearch安装sql插件"><a href="#elsearch安装sql插件" class="headerlink" title="elsearch安装sql插件"></a>elsearch安装sql插件</h1><ul>
+<li><p>install</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/elasticsearch-plugin install https://github.com/NLPchina/elasticsearch-sql/releases/download/5.5.1.0/elasticsearch-sql-5.5.1.0.zip</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>install ui web front-end</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/NLPchina/elasticsearch-sql/releases/download/5.4.1.0/es-sql-site-standalone.zip</span><br><span class="line"></span><br><span class="line">cd site-server</span><br><span class="line">npm install express --save</span><br><span class="line">node node-server.js &amp;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/28/Linux常用操作/#more" rel="contents">
+            <a class="btn" href="/2018/09/17/elsearch-安装sql插件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1580,8 +1122,8 @@ HOSTNAME=m2lan150.com
             
               
                 
-                <a class="post-title-link" href="/2017/05/28/sshd服务管理/" itemprop="url">
-                  sshd服务管理
+                <a class="post-title-link" href="/2018/09/17/centos7-install-elasticHD/" itemprop="url">
+                  centos7 install elasticHD
                 </a>
               
             
@@ -1594,8 +1136,8 @@ HOSTNAME=m2lan150.com
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-28T01:03:56+08:00" content="2017-05-28">
-              2017-05-28
+            <time itemprop="dateCreated" datetime="2018-09-17T23:08:32+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -1608,8 +1150,8 @@ HOSTNAME=m2lan150.com
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">Elasticsearch</span>
                   </a>
                 </span>
 
@@ -1624,8 +1166,8 @@ HOSTNAME=m2lan150.com
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/05/28/sshd服务管理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/sshd服务管理/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/centos7-install-elasticHD/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7-install-elasticHD/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1648,35 +1190,257 @@ HOSTNAME=m2lan150.com
 
       
         
-          <h1 id="Linux下SSHD服务管理"><a href="#Linux下SSHD服务管理" class="headerlink" title="Linux下SSHD服务管理"></a>Linux下SSHD服务管理</h1><blockquote>
-<p>sshd服务使用SSH协议进行远程控制，或在计算机之间传输文件</p>
-</blockquote>
-<h3 id="设置sshd端口"><a href="#设置sshd端口" class="headerlink" title="设置sshd端口"></a>设置sshd端口</h3><ul>
-<li><p>将170服务器的sshd端口修改为222</p>
-<pre><code>[root@m2lan170 ~]# cat /etc/ssh/sshd_config | grep Port | grep -v &apos;^#&apos;
-Port 222
-</code></pre></li>
+          
+            <h1 id="centos7-install-elasticHD"><a href="#centos7-install-elasticHD" class="headerlink" title="centos7 install elasticHD"></a>centos7 install elasticHD</h1><ul>
+<li>下载ElasticHD
+<a href="https://github.com/360EntSecGroup-Skylar/ElasticHD/releases/download/1.4/elasticHD_linux_amd64.zip" target="_blank" rel="noopener">elasticHD_linux_amd64.zip</a></li>
 </ul>
-<h3 id="设置sshd访问IP地址"><a href="#设置sshd访问IP地址" class="headerlink" title="设置sshd访问IP地址"></a>设置sshd访问IP地址</h3><ul>
-<li><p>只允许192.168.0.170服务器登陆</p>
-<pre><code>[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep ListenAddress | grep -v &apos;^#&apos;
-ListenAddress 192.168.0.170
+<h3 id="config"><a href="#config" class="headerlink" title="config"></a>config</h3><pre><code>chmod 0777 elasticHD_linux_amd64.zip
+unzip elasticHD_linux_amd64.zip
 
-[root@m2lan150 ~]# /etc/init.d/sshd restart
-</code></pre></li>
-</ul>
-<h3 id="日志存放位置"><a href="#日志存放位置" class="headerlink" title="日志存放位置"></a>日志存放位置</h3><ul>
-<li><p>查看日志级别</p>
-<pre><code>[root@m2lan150 ~]# cat /etc/ssh/sshd_config | grep Syslog | grep -v &apos;^#&apos;
-SyslogFacility AUTHPRIV
-</code></pre></li>
-<li><p>查看日志存放位置</p>
-<pre><code>[root@m2lan150 ~]# cat /etc/rsyslog.conf | grep ^authpriv
-authpriv.*                                              /var/log/secure
-</code></pre></li>
+# 开启端口9800
+
+# 启动
+./ElasticHD -p 0.0.0.0:9800 &amp;
+
+# 访问http://site:9800
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/webrtc服务端搭建/" itemprop="url">
+                  webrtc服务端搭建
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T23:07:37+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/webrtc/" itemprop="url" rel="index">
+                    <span itemprop="name">webrtc</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/webrtc服务端搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/webrtc服务端搭建/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="webrtc服务端"><a href="#webrtc服务端" class="headerlink" title="webrtc服务端"></a>webrtc服务端</h1><h2 id="搭建房间服务器"><a href="#搭建房间服务器" class="headerlink" title="搭建房间服务器"></a>搭建房间服务器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br><span class="line">yum install -y nodejs</span><br><span class="line">yum install python</span><br><span class="line">yum install python-test</span><br><span class="line">git clone  https://github.com/webrtc/apprtc.git</span><br><span class="line">cd apprtc</span><br><span class="line">npm install</span><br><span class="line">npm -g install grunt</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/09/17/webrtc服务端搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/swoole集群消息分发/" itemprop="url">
+                  swoole集群消息分发
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T23:07:03+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swoole/" itemprop="url" rel="index">
+                    <span itemprop="name">swoole</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/swoole集群消息分发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/swoole集群消息分发/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="swoole集群消息分发"><a href="#swoole集群消息分发" class="headerlink" title="swoole集群消息分发"></a>swoole集群消息分发</h1><ul>
+<li><p>配置文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IM 配置</span></span><br><span class="line">    <span class="string">'im'</span> =&gt; [</span><br><span class="line">        <span class="string">'ack_time'</span> =&gt; <span class="number">300</span>,</span><br><span class="line">        <span class="string">'daemonize_enable'</span> =&gt; <span class="keyword">false</span>, <span class="comment">// 是否后台运行</span></span><br><span class="line">        <span class="string">'host'</span> =&gt; <span class="string">'0.0.0.0'</span>, <span class="comment">// 监听的host</span></span><br><span class="line">        <span class="string">'port'</span> =&gt; <span class="number">9999</span>, <span class="comment">// 监听的端口</span></span><br><span class="line">        <span class="string">'heartbeat_idle_time'</span> =&gt; <span class="number">300</span>, <span class="comment">// 连接最大允许空闲的时间</span></span><br><span class="line">        <span class="string">'heartbeat_check_interval'</span> =&gt; <span class="number">60</span>, <span class="comment">// 心跳检测，每个多久轮询一次</span></span><br><span class="line">        <span class="string">'enable_ssl'</span> =&gt; <span class="keyword">false</span>, <span class="comment">// 是否启用ssl</span></span><br><span class="line">        <span class="string">'pid_file'</span> =&gt; ROOT_PATH . <span class="string">'groupchat.pid'</span>,</span><br><span class="line">        <span class="string">'log_file'</span> =&gt; LOG_PATH . <span class="string">'swoole'</span> . DS . date(<span class="string">'Ymd'</span>) . <span class="string">'.log'</span>,</span><br><span class="line">        <span class="string">'ssl_cert_file'</span> =&gt; <span class="string">'/etc/letsencrypt/live/test.im.movie952.net/fullchain.pem'</span>, <span class="comment">// cert证书</span></span><br><span class="line">        <span class="string">'ssl_key_file'</span> =&gt; <span class="string">'/etc/letsencrypt/live/test.im.movie952.net/privkey.pem'</span>, <span class="comment">// key私钥</span></span><br><span class="line">        <span class="string">'message_base_uri'</span> =&gt; <span class="string">'http://192.168.3.8:8083/api/'</span>,</span><br><span class="line">        <span class="string">'movie_base_uri'</span> =&gt; <span class="string">'http://movie.api.com/api/'</span>,</span><br><span class="line">        <span class="string">'enable_push'</span> =&gt; <span class="keyword">false</span>,</span><br><span class="line">        <span class="string">'push_accessKey'</span> =&gt; <span class="string">'LTAIq0MVVNyZiUz5'</span>,</span><br><span class="line">        <span class="string">'push_accessKeySecret'</span> =&gt; <span class="string">'qVhQhdIxn8dWiebROKO8hybn1T3mXq'</span>,</span><br><span class="line">        <span class="string">'push_ios_appkey'</span> =&gt; <span class="string">'24913838'</span>,</span><br><span class="line">        <span class="string">'push_android_appkey'</span> =&gt; <span class="string">''</span>,</span><br><span class="line">        <span class="string">'serverNode'</span> =&gt; <span class="string">'node1'</span></span><br><span class="line">    ],</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/28/sshd服务管理/#more" rel="contents">
+            <a class="btn" href="/2018/09/17/swoole集群消息分发/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1706,7 +1470,7 @@ authpriv.*                                              /var/log/secure
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1747,7 +1511,7 @@ authpriv.*                                              /var/log/secure
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-count">131</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1755,7 +1519,7 @@ authpriv.*                                              /var/log/secure
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1764,7 +1528,7 @@ authpriv.*                                              /var/log/secure
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1866,7 +1630,7 @@ authpriv.*                                              /var/log/secure
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

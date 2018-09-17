@@ -1,0 +1,726 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,Centos7,webrtc," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="webrtc服务端搭建房间服务器12345678yum install -y java-1.8.0-openjdkyum install -y nodejsyum install pythonyum install python-testgit clone  https://github.com/webrtc/apprtc.gitcd apprtcnpm installnpm -g install">
+<meta name="keywords" content="Linux,Centos7,webrtc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webrtc服务端搭建">
+<meta property="og:url" content="http://blog.golearns.org/2018/09/17/webrtc服务端搭建/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="webrtc服务端搭建房间服务器12345678yum install -y java-1.8.0-openjdkyum install -y nodejsyum install pythonyum install python-testgit clone  https://github.com/webrtc/apprtc.gitcd apprtcnpm installnpm -g install">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-17T15:17:02.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webrtc服务端搭建">
+<meta name="twitter:description" content="webrtc服务端搭建房间服务器12345678yum install -y java-1.8.0-openjdkyum install -y nodejsyum install pythonyum install python-testgit clone  https://github.com/webrtc/apprtc.gitcd apprtcnpm installnpm -g install">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 2746085,
+      author: 'M2'
+    }
+  };
+</script>
+
+  <title> webrtc服务端搭建 | 知识记录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a7aab4bc8347eb54375043cf003b2c21";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知识记录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'b2cFpoExgUMZu3--zQzE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                webrtc服务端搭建
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T23:07:37+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/webrtc/" itemprop="url" rel="index">
+                    <span itemprop="name">webrtc</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/webrtc服务端搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/webrtc服务端搭建/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="webrtc服务端"><a href="#webrtc服务端" class="headerlink" title="webrtc服务端"></a>webrtc服务端</h1><h2 id="搭建房间服务器"><a href="#搭建房间服务器" class="headerlink" title="搭建房间服务器"></a>搭建房间服务器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br><span class="line">yum install -y nodejs</span><br><span class="line">yum install python</span><br><span class="line">yum install python-test</span><br><span class="line">git clone  https://github.com/webrtc/apprtc.git</span><br><span class="line">cd apprtc</span><br><span class="line">npm install</span><br><span class="line">npm -g install grunt</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 修改</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz apprtc]# cat src/app_engine/constants.py</span><br><span class="line"><span class="meta">#</span> Copyright 2015 Google Inc. All Rights Reserved.</span><br><span class="line"></span><br><span class="line">"""AppRTC Constants.</span><br><span class="line"></span><br><span class="line">This module contains the constants used in AppRTC Python modules.</span><br><span class="line">"""</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Deprecated domains which we should to redirect to REDIRECT_URL.</span><br><span class="line">REDIRECT_DOMAINS =  [</span><br><span class="line">  'apprtc.appspot.com', 'apprtc.webrtc.org', 'www.appr.tc'</span><br><span class="line">]</span><br><span class="line"><span class="meta">#</span> URL which we should redirect to if matching in REDIRECT_DOMAINS.</span><br><span class="line">REDIRECT_URL = 'https://appr.tc'</span><br><span class="line"></span><br><span class="line">ROOM_MEMCACHE_EXPIRATION_SEC = 60 * 60 * 24</span><br><span class="line">MEMCACHE_RETRY_LIMIT = 100</span><br><span class="line"></span><br><span class="line">LOOPBACK_CLIENT_ID = 'LOOPBACK_CLIENT_ID'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Turn/Stun server override. This allows AppRTC to connect to turn servers</span><br><span class="line"><span class="meta">#</span> directly rather than retrieving them from an ICE server provider.</span><br><span class="line">ICE_SERVER_OVERRIDE = None</span><br><span class="line"><span class="meta">#</span> Enable by uncomment below and comment out above, then specify turn and stun</span><br><span class="line"><span class="meta">#</span> ICE_SERVER_OVERRIDE  = [</span><br><span class="line"><span class="meta">#</span>   &#123;</span><br><span class="line"><span class="meta">#</span>     "urls": [</span><br><span class="line"><span class="meta">#</span>       "turn:hostname/IpToTurnServer:19305?transport=udp",</span><br><span class="line"><span class="meta">#</span>       "turn:hostname/IpToTurnServer:19305?transport=tcp"</span><br><span class="line"><span class="meta">#</span>     ],</span><br><span class="line"><span class="meta">#</span>     "username": "TurnServerUsername",</span><br><span class="line"><span class="meta">#</span>     "credential": "TurnServerCredentials"</span><br><span class="line"><span class="meta">#</span>   &#125;,</span><br><span class="line"><span class="meta">#</span>   &#123;</span><br><span class="line"><span class="meta">#</span>     "urls": [</span><br><span class="line"><span class="meta">#</span>       "stun:hostname/IpToStunServer:19302"</span><br><span class="line"><span class="meta">#</span>     ]</span><br><span class="line"><span class="meta">#</span>   &#125;</span><br><span class="line"><span class="meta">#</span> ]</span><br><span class="line"></span><br><span class="line">TURN_BASE_URL = 'https://webrtc.m2lan.com'</span><br><span class="line">TURN_URL_TEMPLATE = '%s/turn.php?username=%s&amp;key=%s'</span><br><span class="line">CODE_KEY = 'zhangsan'</span><br><span class="line"></span><br><span class="line">ICE_SERVER_BASE_URL = 'https://webrtc.m2lan.com'</span><br><span class="line">ICE_SERVER_URL_TEMPLATE = '%s/iceconfig.php?key=%s'</span><br><span class="line">ICE_SERVER_API_KEY = os.environ.get('ICE_SERVER_API_KEY')</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Dictionary keys in the collider instance info constant.</span><br><span class="line">WSS_INSTANCE_HOST_KEY = 'webrtc.m2lan.com:8089'</span><br><span class="line">WSS_INSTANCE_NAME_KEY = 'vm_name'</span><br><span class="line">WSS_INSTANCE_ZONE_KEY = 'zone'</span><br><span class="line">WSS_INSTANCES = [&#123;</span><br><span class="line">    WSS_INSTANCE_HOST_KEY: 'webrtc.m2lan.com:8089',</span><br><span class="line">    WSS_INSTANCE_NAME_KEY: 'wsserver-std',</span><br><span class="line">    WSS_INSTANCE_ZONE_KEY: 'us-central1-a'</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    WSS_INSTANCE_HOST_KEY: 'webrtc.m2lan.com:8089',</span><br><span class="line">    WSS_INSTANCE_NAME_KEY: 'wsserver-std-2',</span><br><span class="line">    WSS_INSTANCE_ZONE_KEY: 'us-central1-f'</span><br><span class="line">&#125;]</span><br><span class="line"></span><br><span class="line">WSS_HOST_PORT_PAIRS = [ins[WSS_INSTANCE_HOST_KEY] for ins in WSS_INSTANCES]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> memcache key for the active collider host.</span><br><span class="line">WSS_HOST_ACTIVE_HOST_KEY = 'wss_host_active_host'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Dictionary keys in the collider probing result.</span><br><span class="line">WSS_HOST_IS_UP_KEY = 'is_up'</span><br><span class="line">WSS_HOST_STATUS_CODE_KEY = 'status_code'</span><br><span class="line">WSS_HOST_ERROR_MESSAGE_KEY = 'error_message'</span><br><span class="line"></span><br><span class="line">RESPONSE_ERROR = 'ERROR'</span><br><span class="line">RESPONSE_ROOM_FULL = 'FULL'</span><br><span class="line">RESPONSE_UNKNOWN_ROOM = 'UNKNOWN_ROOM'</span><br><span class="line">RESPONSE_UNKNOWN_CLIENT = 'UNKNOWN_CLIENT'</span><br><span class="line">RESPONSE_DUPLICATE_CLIENT = 'DUPLICATE_CLIENT'</span><br><span class="line">RESPONSE_SUCCESS = 'SUCCESS'</span><br><span class="line">RESPONSE_INVALID_REQUEST = 'INVALID_REQUEST'</span><br><span class="line"></span><br><span class="line">IS_DEV_SERVER = os.environ.get('APPLICATION_ID', '').startswith('dev')</span><br><span class="line"></span><br><span class="line">BIGQUERY_URL = 'https://www.googleapis.com/auth/bigquery'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Dataset used in production.</span><br><span class="line">BIGQUERY_DATASET_PROD = 'prod'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Dataset used when running locally.</span><br><span class="line">BIGQUERY_DATASET_LOCAL = 'dev'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> BigQuery table within the dataset.</span><br><span class="line">BIGQUERY_TABLE = 'analytics'</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>编译</span><br><span class="line">grunt build</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>安装和配置google app engine</span><br><span class="line">wget https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.50.zip</span><br><span class="line">unzip google_appengine_1.9.50.zip</span><br><span class="line"><span class="meta">#</span>编辑/etc/profile</span><br><span class="line">export PATH="$PATH:/root/google_appengine/"</span><br><span class="line">source /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>运行房间服务器</span><br><span class="line">cd google_appengine/</span><br><span class="line">nohup ./dev_appserver.py /root/apprtc/out/app_engine &amp;</span><br></pre></td></tr></table></figure>
+<h2 id="搭建信令服务器"><a href="#搭建信令服务器" class="headerlink" title="搭建信令服务器"></a>搭建信令服务器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>安装golang环境</span><br><span class="line">mkdir -p /root/go/src</span><br><span class="line"><span class="meta">#</span>编辑/etc/profile</span><br><span class="line">export GOPATH=$HOME/go</span><br><span class="line">export GOROOT=/usr/local/go</span><br><span class="line">export PATH=$PATH:$GOROOT/bin</span><br><span class="line">export PATH=$PATH:/$GOPATH/bin</span><br><span class="line">source /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>拷贝/root/apprtc/src/collider/目录下的三个目录（collider、collidermain、collidertest）复制到/root/goWorkspace/src/目录下</span><br><span class="line">cp -rf /root/apprtc/src/collider/* /root/goWorkspace/src</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>编辑修改房间服务器地址</span><br><span class="line">vim /root/go/src/collidermain/main.go</span><br><span class="line">var roomSrv = flag.String("room-server", "https://webrtc.m2lan.com", "The origin of the room server")</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>编辑修改ssl</span><br><span class="line">vim /root/go/src/collider/collider.go</span><br><span class="line"><span class="meta">#</span>将</span><br><span class="line">e = server.ListenAndServeTLS("/cert/cert.pem", "/cert/key.pem")</span><br><span class="line"><span class="meta">#</span>改为</span><br><span class="line">e = server.ListenAndServeTLS("/etc/letsencrypt/live/webrtc.m2lan.com/fullchain.pem", "/etc/letsencrypt/live/webrtc.m2lan.com/privkey.pem")</span><br></pre></td></tr></table></figure>
+<h3 id="编译信令服务器"><a href="#编译信令服务器" class="headerlink" title="编译信令服务器"></a>编译信令服务器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd /root/go/src/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz src]# go get collidermain</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz src]# go install collidermain</span><br></pre></td></tr></table></figure>
+<h3 id="运行信令服务器"><a href="#运行信令服务器" class="headerlink" title="运行信令服务器"></a>运行信令服务器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd go/bin</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz bin]# nohup ./collidermain -port=8089 -tls=true &amp;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 使用systemd管理</span><br><span class="line"><span class="meta">#</span> 添加/collider/start.sh文件</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# mkdir /collider</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd /collider/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz collider]# vim start.sh</span><br><span class="line"><span class="meta">#</span>!/bin/sh -</span><br><span class="line">/root/go/bin/collidermain -port=8089 -tls=true 2&gt;&gt; /collider/collider.log</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz collider]# chmod 744 start.sh</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd /lib/systemd/system/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz system]# vim collider.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=AppRTC signalling server (Collider)</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart=/collider/start.sh</span><br><span class="line">StandardOutput=null</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">Alias=collider.service</span><br><span class="line"><span class="meta">#</span> 启用服务</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# systemctl enable collider.service</span><br><span class="line"><span class="meta">#</span> 运行</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# systemctl start collider.service</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 记录运行时日志</span><br><span class="line"><span class="meta">#</span> 日志每天轮换，10天后删除，日志存放在/collider目录</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd /etc/logrotate.d/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz logrotate.d]# vim collider</span><br><span class="line">/collider/collider.log &#123;</span><br><span class="line">    daily</span><br><span class="line">    compress</span><br><span class="line">    copytruncate</span><br><span class="line">    dateext</span><br><span class="line">    missingok</span><br><span class="line">    notifempty</span><br><span class="line">    rotate 10</span><br><span class="line">    sharedscripts</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="搭建STUN-TURN服务器"><a href="#搭建STUN-TURN服务器" class="headerlink" title="搭建STUN/TURN服务器"></a>搭建STUN/TURN服务器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# wget http://coturn.net/turnserver/v4.5.0.7/turnserver-4.5.0.7-CentOS7.4-x86_64.tar.gz</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# tar xvfz turnserver-4.5.0.7-CentOS7.4-x86_64.tar.gz</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd turnserver-4.5.0.7</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz turnserver-4.5.0.7]# ./install.sh</span><br><span class="line"><span class="meta">#</span>编辑turnserver.conf</span><br><span class="line"><span class="meta">#</span>key码生成</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz turnserver-4.5.0.7]# turnadmin -k -u zhangsan -r north.gov -p zhangsan</span><br><span class="line"><span class="meta">#</span>证书生成</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz etc]# openssl req -x509 -newkey rsa:2048 -keyout /usr/local/etc/turn_server_pkey.pem -out /usr/local/etc/turn_server_cert.pem -days 9999 -nodes</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# vim /etc/turnserver/turnserver.conf</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz etc]# cat /etc/turnserver/turnserver.conf | grep -v "^#" | grep -v '^$'</span><br><span class="line">listening-device=eth0</span><br><span class="line">listening-port=3478	</span><br><span class="line">relay-device=eth0</span><br><span class="line">min-port=49152</span><br><span class="line">max-port=65535</span><br><span class="line">Verbose</span><br><span class="line">fingerprint</span><br><span class="line">lt-cred-mech</span><br><span class="line">use-auth-secret</span><br><span class="line">static-auth-secret=zhangsan #此处要和房间服务器配置时constants.py文件中的CODE_KEY保持一致。</span><br><span class="line">user=zhangsan:0x934893f0ea44d4355cbfd48a40ae023c</span><br><span class="line">user=zhangsan:zhangsan</span><br><span class="line">stale-nonce=600</span><br><span class="line">cert=/usr/local/etc/turn_server_cert.pem</span><br><span class="line">pkey=/usr/local/etc/turn_server_pkey.pem</span><br><span class="line">no-stdout-log</span><br><span class="line">syslog	</span><br><span class="line">no-loopback-peers</span><br><span class="line">no-multicast-peers</span><br><span class="line">pidfile="/var/run/turnserver/turnserver.pid"</span><br><span class="line">mobility</span><br><span class="line">no-cli</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>运行-r: 外部服务器地址</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# turnserver -V -r 47.88.159.236:3478 -a -o -c /etc/turnserver/turnserver.conf</span><br></pre></td></tr></table></figure>
+<h3 id="创建turn-php和iceconfig-php"><a href="#创建turn-php和iceconfig-php" class="headerlink" title="创建turn.php和iceconfig.php"></a>创建turn.php和iceconfig.php</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#/usr/share/nginx/html/turn.php </span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $request_username = $_GET[<span class="string">"username"</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($request_username)) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"username == null"</span>;</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $request_key = $_GET[<span class="string">"key"</span>];</span><br><span class="line">    $time_to_live = <span class="number">600</span>;</span><br><span class="line">    $timestamp = time() + $time_to_live;<span class="comment">//失效时间</span></span><br><span class="line">    $response_username = $timestamp.<span class="string">":"</span>.$_GET[<span class="string">"username"</span>];</span><br><span class="line">    $response_key = $request_key;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($response_key)) &#123;</span><br><span class="line">        $response_key = <span class="string">"zhangsan"</span>; <span class="comment">//constants.py中CEOD_KEY  </span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $response_password = getSignature($response_username, $response_key);  </span><br><span class="line"></span><br><span class="line">    $jsonObj = <span class="keyword">new</span> Response();</span><br><span class="line">    $jsonObj-&gt;username = $response_username;</span><br><span class="line">    $jsonObj-&gt;password = $response_password;</span><br><span class="line">    $jsonObj-&gt;ttl = <span class="number">86400</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//此处需配置自己的服务器</span></span><br><span class="line">    $jsonObj-&gt;uris= <span class="keyword">array</span>(<span class="string">"stun:webrtc.m2lan.com:3478"</span>,<span class="string">"turn:webrtc.m2lan.com:3478?transport=udp"</span>,<span class="string">"turn:webrtc.m2lan.com?transport=tcp"</span>);</span><br><span class="line">    <span class="keyword">echo</span> json_encode($jsonObj);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 使用HMAC-SHA1算法生成签名值</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $str 源串</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $key 密钥</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 签名值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getSignature</span><span class="params">($str, $key)</span> </span>&#123;</span><br><span class="line">        $signature = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span> (function_exists(<span class="string">'hash_hmac'</span>)) &#123;</span><br><span class="line">            $signature = base64_encode(hash_hmac(<span class="string">"sha1"</span>, $str, $key, <span class="keyword">true</span>));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $blocksize = <span class="number">64</span>;</span><br><span class="line">            $hashfunc = <span class="string">'sha1'</span>;</span><br><span class="line">            <span class="keyword">if</span> (strlen($key) &gt; $blocksize) &#123;</span><br><span class="line">                $key = pack(<span class="string">'H*'</span>, $hashfunc($key));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $key = str_pad($key, $blocksize, chr(<span class="number">0x00</span>));</span><br><span class="line">            $ipad = str_repeat(chr(<span class="number">0x36</span>), $blocksize);</span><br><span class="line">            $opad = str_repeat(chr(<span class="number">0x5c</span>), $blocksize);</span><br><span class="line">            $hmac = pack(</span><br><span class="line">                <span class="string">'H*'</span>, $hashfunc(($key ^ $opad). pack(<span class="string">'H*'</span>, $hashfunc(($key ^ $ipad) . $str)))</span><br><span class="line">            );</span><br><span class="line">            $signature = base64_encode($hmac);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> $signature;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Response</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> $username = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">public</span> $password = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">public</span> $ttl = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">public</span> $uris = <span class="keyword">array</span>(<span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#/usr/share/nginx/html/iceconfig.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line">    $request_username = <span class="string">"zhangsan"</span>;  <span class="comment">//配置成自己的turn服务器用户名</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($request_username)) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"username == null"</span>;</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;  </span><br><span class="line">    $request_key = <span class="string">"zhangsan"</span>;  <span class="comment">//配置成自己的turn服务器密码</span></span><br><span class="line">    $time_to_live = <span class="number">600</span>;</span><br><span class="line">    $timestamp = time() + $time_to_live;<span class="comment">//失效时间</span></span><br><span class="line">    $response_username = $timestamp.<span class="string">":"</span>.$_GET[<span class="string">"username"</span>];</span><br><span class="line">    $response_key = $request_key;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($response_key)) &#123;</span><br><span class="line">        $response_key = <span class="string">"zhangsan"</span>;<span class="comment">//constants.py中CEOD_KEY</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $response_password = getSignature($response_username, $response_key);</span><br><span class="line"></span><br><span class="line">    $arrayObj = <span class="keyword">array</span>();</span><br><span class="line">    $arrayObj[<span class="number">0</span>][<span class="string">'username'</span>] = $response_username;</span><br><span class="line">    $arrayObj[<span class="number">0</span>][<span class="string">'credential'</span>] = $response_password;</span><br><span class="line">    <span class="comment">//配置成自己的stun/turn服务器</span></span><br><span class="line">    $arrayObj[<span class="number">0</span>][<span class="string">'urls'</span>][<span class="number">0</span>] = <span class="string">"stun:webrtc.m2lan.com:3478"</span>;</span><br><span class="line">    $arrayObj[<span class="number">0</span>][<span class="string">'urls'</span>][<span class="number">1</span>] = <span class="string">"turn:webrtc.m2lan.com:3478?transport=tcp"</span>;</span><br><span class="line">    $arrayObj[<span class="number">0</span>][<span class="string">'uris'</span>][<span class="number">0</span>] = <span class="string">"stun:webrtc.m2lan.com:3478"</span>;</span><br><span class="line">    $arrayObj[<span class="number">0</span>][<span class="string">'uris'</span>][<span class="number">1</span>] = <span class="string">"turn:webrtc.m2lan.com:3478?transport=tcp"</span>;</span><br><span class="line">    $jsonObj = <span class="keyword">new</span> Response();</span><br><span class="line">    $jsonObj-&gt;lifetimeDuration = <span class="string">"300.000s"</span>;</span><br><span class="line">    $jsonObj-&gt;iceServers = $arrayObj;</span><br><span class="line">    <span class="keyword">echo</span> json_encode($jsonObj);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 使用HMAC-SHA1算法生成签名值</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> $str 源串</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> $key 密钥</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 签名值</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getSignature</span><span class="params">($str, $key)</span> </span>&#123;</span><br><span class="line">        $signature = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span> (function_exists(<span class="string">'hash_hmac'</span>)) &#123;</span><br><span class="line">            $signature = base64_encode(hash_hmac(<span class="string">"sha1"</span>, $str, $key, <span class="keyword">true</span>));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $blocksize = <span class="number">64</span>;</span><br><span class="line">            hashfunc = <span class="string">'sha1'</span>;</span><br><span class="line">            <span class="keyword">if</span> (strlen($key) &gt; $blocksize) &#123;</span><br><span class="line">                $key = pack(<span class="string">'H*'</span>, $hashfunc($key));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $key = str_pad($key, $blocksize, chr(<span class="number">0x00</span>));</span><br><span class="line">            $ipad = str_repeat(chr(<span class="number">0x36</span>), $blocksize);</span><br><span class="line">            $opad = str_repeat(chr(<span class="number">0x5c</span>), $blocksize);</span><br><span class="line">            $hmac = pack(<span class="string">'H*'</span>, $hashfunc(($key ^ $opad) . pack(<span class="string">'H*'</span>, $hashfunc(($key ^ $ipad) . $str))));</span><br><span class="line">            $signature = base64_encode($hmac);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> $signature;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Response</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> $lifetimeDuration = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">public</span> $iceServers = <span class="keyword">array</span>(<span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="运行过程中的问题"><a href="#运行过程中的问题" class="headerlink" title="运行过程中的问题"></a>运行过程中的问题</h2><ul>
+<li>Failed to start signaling: Failed to execute ‘pushState’ on ‘History’: A history state object with URL ‘<a href="http://192.168.6.54/r/198676628" target="_blank" rel="noopener">http://192.168.6.54/r/198676628</a>’ cannot be created in a document with origin ‘<a href="https://192.168.6.54/" target="_blank" rel="noopener">https://192.168.6.54</a>’ and URL ‘<a href="https://192.168.6.54/" target="_blank" rel="noopener">https://192.168.6.54/</a></li>
+</ul>
+<blockquote>
+<p><strong>解决方法1：</strong> 
+房间服务器编译完成后，在/root/apprtc/out/app_engine/js/apprtc.debug.js文件中找到window.history.pushState({‘roomId’: roomId, ‘roomLink’: roomLink}, roomId, roomLink)，把这句话注释掉，重新运行即可。（如果重新编译，需要重新修改）</p>
+<p><strong>解决方法2：</strong> 
+在/root/apprtc/src/web_app/js/appcontroller.js文件中找到window.history.pushState({‘roomId’: roomId, ‘roomLink’: roomLink}, roomId, roomLink)，把这句话注释掉，然后重新编译，重新运行房间服务器即可。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/Centos7/" rel="tag">#Centos7</a>
+          
+            <a href="/tags/webrtc/" rel="tag">#webrtc</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/17/swoole集群消息分发/" rel="next" title="swoole集群消息分发">
+                <i class="fa fa-chevron-left"></i> swoole集群消息分发
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/17/centos7-install-elasticHD/" rel="prev" title="centos7 install elasticHD">
+                centos7 install elasticHD <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/09/17/webrtc服务端搭建/"
+           data-title="webrtc服务端搭建" data-url="http://blog.golearns.org/2018/09/17/webrtc服务端搭建/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M2" />
+          <p class="site-author-name" itemprop="name">M2</p>
+          <p class="site-description motion-element" itemprop="description">记录知识，分享知识</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/m2lan" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/763960267" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/100006504108865" target="_blank">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1877167031" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:763960267@qq.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#webrtc服务端"><span class="nav-number">1.</span> <span class="nav-text">webrtc服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建房间服务器"><span class="nav-number">1.1.</span> <span class="nav-text">搭建房间服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建信令服务器"><span class="nav-number">1.2.</span> <span class="nav-text">搭建信令服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译信令服务器"><span class="nav-number">1.2.1.</span> <span class="nav-text">编译信令服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行信令服务器"><span class="nav-number">1.2.2.</span> <span class="nav-text">运行信令服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建STUN-TURN服务器"><span class="nav-number">1.3.</span> <span class="nav-text">搭建STUN/TURN服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建turn-php和iceconfig-php"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建turn.php和iceconfig.php</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行过程中的问题"><span class="nav-number">1.4.</span> <span class="nav-text">运行过程中的问题</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M2</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"m2langithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

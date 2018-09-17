@@ -63,6 +63,7 @@
 <meta property="og:url" content="http://blog.golearns.org/page/2/index.html">
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Tigase安装、部署、插件编写及其它">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识记录">
 <meta name="twitter:description" content="Tigase安装、部署、插件编写及其它">
@@ -266,8 +267,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/25/cut/" itemprop="url">
-                  cut
+                <a class="post-title-link" href="/2018/09/17/thinkphp-oauth2/" itemprop="url">
+                  thinkphp-oauth2
                 </a>
               
             
@@ -280,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-25T23:20:06+08:00" content="2017-05-25">
-              2017-05-25
+            <time itemprop="dateCreated" datetime="2018-09-17T23:05:45+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -294,8 +295,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/thinkphp5/" itemprop="url" rel="index">
+                    <span itemprop="name">thinkphp5</span>
                   </a>
                 </span>
 
@@ -310,8 +311,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/05/25/cut/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/cut/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/thinkphp-oauth2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/thinkphp-oauth2/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -334,64 +335,114 @@
 
       
         
-          <h1 id="Linux下的cut使用"><a href="#Linux下的cut使用" class="headerlink" title="Linux下的cut使用"></a>Linux下的cut使用</h1><blockquote>
-<p>cut是一个选取命令，通过将一段数据分析，取出想要的。选取数据一般通过行的方式</p>
+          <h1 id="OAuth2-Server-PHP"><a href="#OAuth2-Server-PHP" class="headerlink" title="OAuth2 Server PHP"></a>OAuth2 Server PHP</h1><p><a href="http://bshaffer.github.io/oauth2-server-php-docs" target="_blank" rel="noopener">oauth2-server-php-docs</a></p>
+<h3 id="获取OAuth2"><a href="#获取OAuth2" class="headerlink" title="获取OAuth2"></a>获取OAuth2</h3><pre><code>composer require bshaffer/oauth2-server-php &quot;^1.10&quot;
+</code></pre><h3 id="Authorized认证方式"><a href="#Authorized认证方式" class="headerlink" title="Authorized认证方式"></a>Authorized认证方式</h3><blockquote>
+<p><a href="http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;client_id=phpweb&amp;state=xyz" target="_blank" rel="noopener">http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;client_id=phpweb&amp;state=xyz</a></p>
+<p><a href="http://swoole-chat.com/index/index/testToken" target="_blank" rel="noopener">http://swoole-chat.com/index/index/testToken</a> form-data: [grant_type: authorization_code, code: authorizedCode]</p>
 </blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-b</td>
-<td>以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非指定了-n标志</td>
-</tr>
-<tr>
-<td style="text-align:center">-c</td>
-<td>以字符为单位进行分割</td>
-</tr>
-<tr>
-<td style="text-align:center">-d</td>
-<td>自定义分隔符，默认为制表符</td>
-</tr>
-<tr>
-<td style="text-align:center">-f</td>
-<td>与-d一起使用，指定显示哪个区域</td>
-</tr>
-</tbody>
-</table>
-<h3 id="b参数"><a href="#b参数" class="headerlink" title="-b参数"></a>-b参数</h3><ul>
-<li><p>以字节为单位分割</p>
-<pre><code># tail显示passwd文件最后5行，cut以字节分割，获取1位置的字节
-[root@m2 ~]# tail -n 5 passwd | cut -b 1
-s
-t
-m
-z
-Z
+<pre><code>use utils\Crypt;
+use OAuth2\Autoloader;
+use OAuth2\Server;
+use OAuth2\GrantType\AuthorizationCode;
+use OAuth2\GrantType\ClientCredentials;
+use OAuth2\GrantType\UserCredentials;
+use OAuth2\Request;
+use OAuth2\Response;
+use OAuth2\Storage\Redis as StorageRedis;
+use cache\Redis;
 
-# tail显示passwd文件最后5行，cut以字节分割，获取1-5位置的字节
-[root@m2 ~]# tail -n 5 passwd | cut -b 1-5
-sshd:
-tcpdu
-mysql
-zhang
-Zhang
+header(&apos;Access-Control-Allow-Origin:*&apos;);
 
-# tail显示passwd文件最后5行，cut以字节分割，获取1-5和8-10位置的字节
-[root@m2 ~]# tail -n 5 passwd | cut -b 1-5,8-10
-sshd:74:
-tcpdu:x:
-mysql:27
-zhangn:x
-Zhangn:x
-</code></pre></li>
-</ul>
+class Index {
+
+    protected $server;
+
+    public function __construct() {
+
+        // 使用PDO方式存储
+        // $storage = new Pdo([&apos;dsn&apos; =&gt; &apos;mysql:dbname=oauth;host=192.168.3.188&apos;, &apos;username&apos; =&gt; &apos;root&apos;, &apos;password&apos; =&gt; &apos;123456&apos;]);
+
+        // 使用Redis方式存储
+        $redis = new Redis(config(&apos;redis&apos;));
+
+        $storage = new StorageRedis($redis);
+
+        // Authorized example: http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;client_id=phpweb&amp;state=xyz
+        $storage-&gt;setClientDetails(&apos;ios&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password&apos;, &apos;read write&apos;);
+        $storage-&gt;setClientDetails(&apos;android&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password&apos;, &apos;read write&apos;);
+        $storage-&gt;setClientDetails(&apos;phpweb&apos;, &apos;123456&apos;, &apos;http://swoole-chat.com&apos;, &apos;authorization_code password&apos;, &apos;read write&apos;);
+
+        $server = new Server($storage);
+
+        // 授权码
+        $server-&gt;addGrantType(new AuthorizationCode($storage));
+
+        $this-&gt;server = $server;
+    }
+
+    /**
+     * Authorized认证
+     * example: http://swoole-chat.com/index/index/testAuthorize?response_type=code&amp;client_id=phpweb&amp;state=xyz
+     * @return bool|string
+     */
+    public function testAuthorize() {
+        $request = Request::createFromGlobals();
+        $response = new Response();
+
+        if (!$this-&gt;server-&gt;validateAuthorizeRequest($request, $response)) {
+            $response-&gt;send();
+            die;
+        }
+
+        if (empty($_POST)) {
+            return &apos;
+                &lt;form method=&quot;post&quot;&gt;
+                  &lt;label&gt;是否对testclient用户授权?&lt;/label&gt;&lt;br /&gt;
+                  &lt;input type=&quot;submit&quot; name=&quot;authorized&quot; value=&quot;yes&quot;&gt;
+                  &lt;input type=&quot;submit&quot; name=&quot;authorized&quot; value=&quot;no&quot;&gt;
+                &lt;/form&gt;
+            &apos;;
+        }
+
+        $is_authorized = ($_POST[&apos;authorized&apos;] === &apos;yes&apos;);
+        $this-&gt;server-&gt;handleAuthorizeRequest($request, $response, $is_authorized, 1);
+
+        if ($is_authorized) {
+            $code = substr($response-&gt;getHttpHeader(&apos;Location&apos;), strpos($response-&gt;getHttpHeader(&apos;Location&apos;), &apos;code=&apos;) + 5, 40);
+            return $code;
+        }
+
+        return &apos;授权失败&apos;;
+    }
+
+    /**
+     * 获取token
+     * @return [type] [description]
+     */
+    public function testToken() {
+        return $this-&gt;server-&gt;handleTokenRequest(Request::createFromGlobals())-&gt;send();
+    }
+
+    /**
+     * 请求API
+     * @return [type] [description]
+     */
+    public function testApi() {
+        $request = Request::createFromGlobals();
+
+        if (!$this-&gt;server-&gt;verifyResourceRequest($request)) {
+            return $this-&gt;server-&gt;getResponse()-&gt;send();
+        }
+
+        $result = $this-&gt;server-&gt;getAccessTokenData($request);
+
+        return json_encode([&apos;success&apos; =&gt; true, &apos;message&apos; =&gt; &apos;你可以访问API了&apos;, &apos;userId&apos; =&gt; $result[&apos;user_id&apos;]]);
+    }
+}
+</code></pre>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/25/cut/#more" rel="contents">
+            <a class="btn" href="/2018/09/17/thinkphp-oauth2/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -438,8 +489,8 @@ Zhangn:x
             
               
                 
-                <a class="post-title-link" href="/2017/05/25/awk/" itemprop="url">
-                  awk
+                <a class="post-title-link" href="/2018/09/17/nginx-thinkphp5配置/" itemprop="url">
+                  nginx thinkphp5配置
                 </a>
               
             
@@ -452,8 +503,8 @@ Zhangn:x
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-25T23:19:04+08:00" content="2017-05-25">
-              2017-05-25
+            <time itemprop="dateCreated" datetime="2018-09-17T23:04:22+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -466,8 +517,8 @@ Zhangn:x
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/thinkphp5/" itemprop="url" rel="index">
+                    <span itemprop="name">thinkphp5</span>
                   </a>
                 </span>
 
@@ -482,8 +533,8 @@ Zhangn:x
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/05/25/awk/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/awk/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/nginx-thinkphp5配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/nginx-thinkphp5配置/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -506,36 +557,515 @@ Zhangn:x
 
       
         
-          <h1 id="Linux下的awk使用"><a href="#Linux下的awk使用" class="headerlink" title="Linux下的awk使用"></a>Linux下的awk使用</h1><blockquote>
-<p>awk分析文件数据，根据分隔符对一行一行的数据进行拆分，获取某一列
-分隔符默认是空格，可以使用-F;以分号为分隔符,-F:以冒号为分隔符</p>
-</blockquote>
+          <h1 id="nginx-thinkphp5-config"><a href="#nginx-thinkphp5-config" class="headerlink" title="nginx thinkphp5 config"></a>nginx thinkphp5 config</h1><h3 id="新建think5-conf"><a href="#新建think5-conf" class="headerlink" title="新建think5.conf"></a>新建think5.conf</h3><pre><code>server {
+    listen       80;
+    server_name  think5.com;
+    index index.html index.php;
+    root /usr/share/nginx/html/think5/public;
+
+    set $basedir &quot;open_basedir=/usr/share/nginx/html/think5/:/tmp/:/proc/&quot;;
+
+    #charset koi8-r;
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    location / {
+    if (!-e $request_filename) {
+        rewrite ^(.*)$ /index.php?s=/$1 last;
+        break;
+    }
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    #error_page   500 502 503 504  /50x.html;
+    #location = /50x.html {
+    #    root   /usr/share/nginx/html;
+    #}
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }   
+}
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/09/17/nginx-thinkphp5配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/jks转pem/" itemprop="url">
+                  jks转pem
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T23:02:45+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/jks/" itemprop="url" rel="index">
+                    <span itemprop="name">jks</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/jks转pem/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/jks转pem/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="jks转pem"><a href="#jks转pem" class="headerlink" title="jks转pem"></a>jks转pem</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">keytool -importkeystore -srckeystore test.jks -destkeystore test.p12 -srcstoretype jks -deststoretype pkcs12</span><br><span class="line"></span><br><span class="line">openssl pkcs12 -in test.p12 -out test.pem</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/janus-webrtc网关/" itemprop="url">
+                  janus webrtc网关
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T23:02:07+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/webrtc/" itemprop="url" rel="index">
+                    <span itemprop="name">webrtc</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/janus-webrtc网关/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/janus-webrtc网关/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="janus-webrtc-网关服务器"><a href="#janus-webrtc-网关服务器" class="headerlink" title="janus webrtc 网关服务器"></a>janus webrtc 网关服务器</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum install libmicrohttpd-devel jansson-devel libnice-devel \</span><br><span class="line">   openssl-devel libsrtp-devel sofia-sip-devel glib-devel \</span><br><span class="line">   opus-devel libogg-devel libcurl-devel lua-devel \</span><br><span class="line">   pkgconfig gengetopt libtool autoconf automake</span><br><span class="line">   </span><br><span class="line"><span class="meta">#</span>如果出现No package sofia-sip-devel available</span><br><span class="line"><span class="meta">#</span>下载地址</span><br><span class="line">https://sourceforge.net/projects/sofia-sip/files/sofia-sip/1.12.11/</span><br><span class="line">wget https://sourceforge.net/projects/sofia-sip/files/sofia-sip/1.12.11/sofia-sip-1.12.11.tar.gz/download</span><br><span class="line"></span><br><span class="line">tar xzvf download</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/09/17/janus-webrtc网关/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/install-shadowsocks/" itemprop="url">
+                  install shadowsocks
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T23:01:37+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/shadowsocks/" itemprop="url" rel="index">
+                    <span itemprop="name">shadowsocks</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/install-shadowsocks/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/install-shadowsocks/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="install-shadowsocks"><a href="#install-shadowsocks" class="headerlink" title="install shadowsocks"></a>install shadowsocks</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-libev.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev.sh</span><br><span class="line">chmod +x shadowsocks-libev.sh</span><br><span class="line">./shadowsocks-libev.sh 2&gt;&amp;1 | tee shadowsocks-libev.log</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/install-consul/" itemprop="url">
+                  install consul
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T23:01:03+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/consul/" itemprop="url" rel="index">
+                    <span itemprop="name">consul</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/install-consul/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/install-consul/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="install-consul"><a href="#install-consul" class="headerlink" title="install consul"></a>install consul</h1><ul>
+<li>下载</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://releases.hashicorp.com/consul/1.1.0/consul_1.1.0_linux_amd64.zip</span><br><span class="line">unzip consul_1.1.0_linux_amd64.zip</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>获取当前主机指定网卡的IP地址</p>
-<pre><code>[root@m2 ~]# ifconfig eth0
-eth0      Link encap:Ethernet  HWaddr 00:0C:29:C6:3D:D5  
-inet addr:192.168.0.150  Bcast:192.168.0.255  Mask:255.255.255.0
-inet6 addr: fe80::20c:29ff:fec6:3dd5/64 Scope:Link
-UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-RX packets:11240 errors:0 dropped:0 overruns:0 frame:0
-TX packets:2747 errors:0 dropped:0 overruns:0 carrier:0
-collisions:0 txqueuelen:1000 
-RX bytes:1389465 (1.3 MiB)  TX bytes:207415 (202.5 KiB)
-
-[root@m2 ~]# ifconfig eth0 | grep &quot;inet addr:&quot; | awk &apos;{print $2}&apos; | awk -F : &apos;{print $2}&apos;
-192.168.0.150
-</code></pre></li>
-<li><p>获取/etc/passwd中用户UID大于500的用户名和用户登陆的shell</p>
-<pre><code>[root@m2 ~]# cat passwd | awk -F  : &apos;$3&gt;500{print $1,$7}&apos;
-nfsnobody /sbin/nologin
-
-# 使用\t制表符隔开
-[root@m2 ~]# cat passwd | awk -F : &apos;$3&gt;500{print $1 &quot;\t&quot; $7}&apos;
-nfsnobody    /sbin/nologin
-</code></pre></li>
+<li>验证安装</li>
 </ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@common ~]# consul</span><br><span class="line">Usage: consul [--version] [--help] &lt;command&gt; [&lt;args&gt;]</span><br><span class="line"></span><br><span class="line">Available commands are:</span><br><span class="line">    agent          Runs a Consul agent</span><br><span class="line">    catalog        Interact with the catalog</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/25/awk/#more" rel="contents">
+            <a class="btn" href="/2018/09/17/install-consul/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -582,8 +1112,8 @@ nfsnobody    /sbin/nologin
             
               
                 
-                <a class="post-title-link" href="/2017/05/25/sed/" itemprop="url">
-                  sed
+                <a class="post-title-link" href="/2018/09/17/centos7安装php56/" itemprop="url">
+                  centos7安装php56
                 </a>
               
             
@@ -596,8 +1126,8 @@ nfsnobody    /sbin/nologin
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-25T23:15:24+08:00" content="2017-05-25">
-              2017-05-25
+            <time itemprop="dateCreated" datetime="2018-09-17T22:59:47+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -626,8 +1156,8 @@ nfsnobody    /sbin/nologin
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/05/25/sed/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/sed/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/centos7安装php56/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7安装php56/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -650,103 +1180,14 @@ nfsnobody    /sbin/nologin
 
       
         
-          <h1 id="Linux下的sed使用"><a href="#Linux下的sed使用" class="headerlink" title="Linux下的sed使用"></a>Linux下的sed使用</h1><blockquote>
-<p>流编辑器，sed编辑器是一行一行处理文件内容。正在处理的内容放入缓冲区内
-处理完成后根据选项进行输出或文件修改</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">命令</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-n</td>
-<td>抑制自动(默认)输出，读取下一个输入行</td>
-</tr>
-<tr>
-<td style="text-align:center">-i</td>
-<td>编辑文件内容</td>
-</tr>
-<tr>
-<td style="text-align:center">-e</td>
-<td>执行多次</td>
-</tr>
-<tr>
-<td style="text-align:center">a</td>
-<td>在匹配后追加</td>
-</tr>
-<tr>
-<td style="text-align:center">i</td>
-<td>在匹配后插入</td>
-</tr>
-<tr>
-<td style="text-align:center">p</td>
-<td>打印</td>
-</tr>
-<tr>
-<td style="text-align:center">d</td>
-<td>删除</td>
-</tr>
-<tr>
-<td style="text-align:center">w</td>
-<td>另存</td>
-</tr>
-<tr>
-<td style="text-align:center">c</td>
-<td>替换</td>
-</tr>
-<tr>
-<td style="text-align:center">s</td>
-<td>查找</td>
-</tr>
-<tr>
-<td style="text-align:center">h/H</td>
-<td>复制copy</td>
-</tr>
-<tr>
-<td style="text-align:center">g/G</td>
-<td>粘贴</td>
-</tr>
-</tbody>
-</table>
-<h3 id="s命令"><a href="#s命令" class="headerlink" title="s命令"></a>s命令</h3><ul>
-<li><p>查找替换</p>
-<pre><code># 将root替换为boot
-[root@m2 ~]# sed &apos;s/root/boot/&apos; passwd | grep boot --color
-boot:x:0:0:root:/root:/bin/bash
-operator:x:11:0:operator:/boot:/sbin/nologin
-
-# 将所有root替换为boot,g表示替换所有
-[root@m2 ~]# sed &apos;s/root/boot/g&apos; passwd | grep boot --color
-boot:x:0:0:boot:/boot:/bin/bash
-operator:x:11:0:operator:/boot:/sbin/nologin
-
-# 给查找的目标内容添加括号,&amp;表示查找的内容
-[root@m2 ~]# sed &apos;s/root/(&amp;)/&apos; passwd | grep &apos;(root)&apos; --color
-(root):x:0:0:root:/root:/bin/bash
-operator:x:11:0:operator:/(root):/sbin/nologin
-
-# 给所有行添加注释
-[root@m2 ~]# sed &apos;s/^[a-zA-Z]/#&amp;/&apos; passwd 
-#root:x:0:0:root:/root:/bin/bash
-#bin:x:1:1:bin:/bin:/sbin/nologin
-
-# 多次替换,-e
-[root@m2 ~]# sed -e &apos;s/root/boot/&apos; -e &apos;s/message/messages/&apos; passwd | grep &quot;\&lt;boot\|messages\&gt;&quot; --color
-boot:x:0:0:root:/root:/bin/bash
-operator:x:11:0:operator:/boot:/sbin/nologin
-dbus:x:81:81:System messages bus:/:/sbin/nologin
-
-# 替换指定行
-[root@m2 ~]# sed &apos;1,5s/root/boot/&apos; passwd | grep boot --color -n
-1:boot:x:0:0:root:/root:/bin/bash
-</code></pre></li>
-</ul>
+          <h1 id="centos7-install-php56"><a href="#centos7-install-php56" class="headerlink" title="centos7 install php56"></a>centos7 install php56</h1><pre><code>yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum install yum-utils
+yum install php56
+</code></pre><h3 id="检查已安装版本的扩展命令"><a href="#检查已安装版本的扩展命令" class="headerlink" title="检查已安装版本的扩展命令"></a>检查已安装版本的扩展命令</h3><pre><code>php56 --version
+php56 --modules
+</code></pre>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/25/sed/#more" rel="contents">
+            <a class="btn" href="/2018/09/17/centos7安装php56/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -793,8 +1234,8 @@ dbus:x:81:81:System messages bus:/:/sbin/nologin
             
               
                 
-                <a class="post-title-link" href="/2017/05/21/Exchanger/" itemprop="url">
-                  Exchanger
+                <a class="post-title-link" href="/2018/09/17/centos7安装Alfresco/" itemprop="url">
+                  centos7安装Alfresco
                 </a>
               
             
@@ -807,8 +1248,8 @@ dbus:x:81:81:System messages bus:/:/sbin/nologin
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-21T16:44:47+08:00" content="2017-05-21">
-              2017-05-21
+            <time itemprop="dateCreated" datetime="2018-09-17T22:59:01+08:00" content="2018-09-17">
+              2018-09-17
             </time>
           </span>
 
@@ -821,8 +1262,8 @@ dbus:x:81:81:System messages bus:/:/sbin/nologin
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/并发/" itemprop="url" rel="index">
-                    <span itemprop="name">并发</span>
+                  <a href="/categories/Alfresco/" itemprop="url" rel="index">
+                    <span itemprop="name">Alfresco</span>
                   </a>
                 </span>
 
@@ -837,8 +1278,8 @@ dbus:x:81:81:System messages bus:/:/sbin/nologin
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/05/21/Exchanger/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/Exchanger/" itemprop="commentsCount"></span>
+                <a href="/2018/09/17/centos7安装Alfresco/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7安装Alfresco/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -862,1004 +1303,254 @@ dbus:x:81:81:System messages bus:/:/sbin/nologin
       
         
           
-            <h1 id="Java并发编程类Exchanger"><a href="#Java并发编程类Exchanger" class="headerlink" title="Java并发编程类Exchanger"></a>Java并发编程类Exchanger</h1><pre><code>/**
- * Exchanger用于两个线程之间的数据交换
- * 线程会阻塞在Exchanger的exchange方法上
- * 直到另外一个线程也到达同一个Exchanger的exchange方法上
- * 二者进行交换
- * 无论谁先到达Exchanger的exchange方法，都会等待另外一个线程也到达，然后交换数据
- */
-public class ExchangerDemo1 {
-
-    public static void main(String[] args) {
-        final Exchanger&lt;List&lt;Integer&gt;&gt; exchanger = new Exchanger&lt;&gt;();
-
-        Runnable runnable1 = () -&gt; {
-            List&lt;Integer&gt; lists = new ArrayList&lt;&gt;();
-            lists.add(1);
-            lists.add(2);
-
-            try {
-                lists = exchanger.exchange(lists);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println(&quot;aa[1, 2] &quot; + lists);
-        };
-
-        Runnable runnable2 = () -&gt; {
-            List&lt;Integer&gt; lists = new ArrayList&lt;&gt;();
-            lists.add(3);
-            lists.add(4);
-
-            try {
-                lists = exchanger.exchange(lists);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println(&quot;bb[3, 4] &quot; + lists);
-        };
-
-        ExecutorService service = Executors.newFixedThreadPool(3);
-        service.execute(runnable1);
-        service.execute(runnable2);
-        service.shutdown();
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/21/Semaphore/" itemprop="url">
-                  Semaphore
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-21T16:03:20+08:00" content="2017-05-21">
-              2017-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/并发/" itemprop="url" rel="index">
-                    <span itemprop="name">并发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/21/Semaphore/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/Semaphore/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java并发编程类Semaphore"><a href="#Java并发编程类Semaphore" class="headerlink" title="Java并发编程类Semaphore"></a>Java并发编程类Semaphore</h1><pre><code>/**
- * 限制可以访问资源的线程数
- */
-public class SemaphoreDemo1 {
-
-    public static void main(String[] args) {
-        final Semaphore semaphore = new Semaphore(3);
-
-        Runnable runnable = () -&gt; {
-            System.out.println(Thread.currentThread().getName() + &quot; 可用的Semaphore permits: &quot; + semaphore.availablePermits());
-            try {
-
-                // 获取Semaphore permits
-                semaphore.acquire();
-
-                try {
-                    for (int i = 0; i &lt; 5; i++) {
-                        System.out.println(Thread.currentThread().getName() + &quot; : &quot; + i + &quot; : 可用的Semaphore permits: &quot; + semaphore.availablePermits());
-                        Thread.sleep(1000);
-                    }
-                } finally {
-                    System.out.println(Thread.currentThread().getName() + &quot;释放锁&quot;);
-                    // 释放锁
-                    semaphore.release();
-                    System.out.println(Thread.currentThread().getName() + &quot;可用的Semaphore permits: &quot; + semaphore.availablePermits());
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        };
-
-        ExecutorService service = Executors.newFixedThreadPool(3);
-        for (int i = 0; i &lt; 5; i++) {
-            service.execute(runnable);
-        }
-        service.shutdown();
-    }
-}
-
-/**
- * 限制可以访问资源的线程数，一次只有一个线程可以访问资源
- */
-public class SemaphoreDemo1 {
-
-    public static void main(String[] args) {
-        // 互斥锁，Semaphore为1
-        final Semaphore semaphore = new Semaphore(1);
-
-        Runnable runnable = () -&gt; {
-            System.out.println(Thread.currentThread().getName() + &quot; 可用的Semaphore permits: &quot; + semaphore.availablePermits());
-            try {
-
-                // 获取Semaphore permits
-                semaphore.acquire();
-
-                try {
-                    for (int i = 0; i &lt; 5; i++) {
-                        System.out.println(Thread.currentThread().getName() + &quot; : &quot; + i + &quot; : 可用的Semaphore permits: &quot; + semaphore.availablePermits());
-                        Thread.sleep(1000);
-                    }
-                } finally {
-                    System.out.println(Thread.currentThread().getName() + &quot;释放锁&quot;);
-                    // 释放锁
-                    semaphore.release();
-                    System.out.println(Thread.currentThread().getName() + &quot;可用的Semaphore permits: &quot; + semaphore.availablePermits());
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        };
-
-        ExecutorService service = Executors.newFixedThreadPool(3);
-        for (int i = 0; i &lt; 5; i++) {
-            service.execute(runnable);
-        }
-        service.shutdown();
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/21/CyclicBarrier/" itemprop="url">
-                  CyclicBarrier
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-21T15:53:54+08:00" content="2017-05-21">
-              2017-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/并发/" itemprop="url" rel="index">
-                    <span itemprop="name">并发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/21/CyclicBarrier/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/CyclicBarrier/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java并发编程类CyclicBarrier"><a href="#Java并发编程类CyclicBarrier" class="headerlink" title="Java并发编程类CyclicBarrier"></a>Java并发编程类CyclicBarrier</h1><pre><code>/**
- * CyclicBarrier协同多个线程
- * 用于同步所有调用await方法的线程，并且等所有线程都到了await方法时
- * 这些线程才一起返回继续各自的工作
- */
-public class CyclicBarrierDemo1 {
-
-    public static void main(String[] args) {
-        int count = 10;
-        final CyclicBarrier barrier = new CyclicBarrier(count + 1);
-        Runnable rannable = () -&gt; {
-            System.out.println(Thread.currentThread().getName() + &quot; : hahhahaha&quot;);
-            try {
-                barrier.await();
-            } catch (InterruptedException | BrokenBarrierException e) {
-                e.printStackTrace();
-            }
-        };
-
-        ExecutorService service = Executors.newFixedThreadPool(count);
-        for (int i = 0; i &lt; count; i++) {
-            service.execute(rannable);
-        }
-
-        try {
-            barrier.await();
-        } catch (InterruptedException | BrokenBarrierException e) {
-            e.printStackTrace();
-        }
-
-        service.shutdown();
-        System.out.println(&quot;执行完毕&quot;);
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/21/Atomics/" itemprop="url">
-                  Atomics
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-21T15:39:22+08:00" content="2017-05-21">
-              2017-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/并发/" itemprop="url" rel="index">
-                    <span itemprop="name">并发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/21/Atomics/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/Atomics/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java并发编程类Atomics"><a href="#Java并发编程类Atomics" class="headerlink" title="Java并发编程类Atomics"></a>Java并发编程类Atomics</h1><pre><code>// 使用synchronized
-public class Counter1 {
-
-    private int counter = 0;
-    public int increase() {
-        synchronized (this) {
-            counter += 1;
-            return counter;
-        }
-    }
-
-    public int decrease() {
-        synchronized (this) {
-            counter -= 1;
-            return counter;
-        }
-    }
-
-    public static void main(String[] args) {
-        Counter1 c1 = new Counter1();
-        ExecutorService service = Executors.newFixedThreadPool(5);
-        for (int i = 0; i &lt; 100; i++) {
-            service.execute(() -&gt; {
-                System.out.println(Thread.currentThread().getName() + &quot; : &quot; + c1.increase());
-            });
-        }
-        service.shutdown();
-    }
-}
-
-// 使用AtomicInteger
-public class Counter2 {
-
-    private AtomicInteger counter = new AtomicInteger(0);
-
-    public int increase() {
-        return counter.incrementAndGet();
-    }
-
-    public int descrease() {
-        return counter.decrementAndGet();
-    }
-
-    public static void main(String[] args) {
-        Counter2 c2 = new Counter2();
-        ExecutorService service = Executors.newFixedThreadPool(5);
-        for (int i = 0; i &lt; 100; i++) {
-            service.execute(() -&gt; {
-                System.out.println(Thread.currentThread().getName() + &quot; : &quot; + c2.increase());
-            });
-        }
-        service.shutdown();
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/21/ReentrantLock/" itemprop="url">
-                  ReentrantLock
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-21T15:35:56+08:00" content="2017-05-21">
-              2017-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/并发/" itemprop="url" rel="index">
-                    <span itemprop="name">并发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/21/ReentrantLock/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/ReentrantLock/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java并发编程类ReentrantLock"><a href="#Java并发编程类ReentrantLock" class="headerlink" title="Java并发编程类ReentrantLock"></a>Java并发编程类ReentrantLock</h1><pre><code>public class ReentrantLockDemo1 {
-
-    private final ReentrantLock lock = new ReentrantLock();
-    private final Map&lt;String, String&gt; maps = new HashMap&lt;&gt;();
-
-    public void add(String key, String value) {
-        final ReentrantLock lock = this.lock;
-        lock.lock();
-
-        try {
-            if (null == maps.get(key)) {
-                maps.put(key, value);
-            }
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    public void remove(String key) {
-        final ReentrantLock lock = this.lock;
-        lock.lock();
-
-        try {
-            if (null != maps.get(key)) {
-                maps.remove(key);
-            }
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    public void getMaps() {
-        maps.forEach((k, v) -&gt; {
-            System.out.println(&quot;key: &quot; + k + &quot;, value: &quot; + v);
-        });
-    }
-
-    public static void main(String[] args) throws Exception {
-        ReentrantLockDemo1 r1 = new ReentrantLockDemo1();
-        ExecutorService service = Executors.newFixedThreadPool(5);
-        final List&lt;Future&lt;?&gt;&gt; lists = new ArrayList&lt;&gt;();
-        for (int i = 0; i &lt; 20; i++) {
-            final Integer[] is = new Integer[1];
-            is[0] = i;
-            Future&lt;?&gt; submit = service.submit(() -&gt; {
-                r1.add(&quot;key &quot; + is[0], &quot;value &quot; + is[0]);
-            });
-            lists.add(submit);
-        }
-        service.shutdown();
-
-        for (Future&lt;?&gt; future : lists) {
-            while (!future.isDone()) {}
-
-            future.get();
-        }
-
-        r1.getMaps();
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/21/CountDownLatch/" itemprop="url">
-                  CountDownLatch
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-21T15:32:28+08:00" content="2017-05-21">
-              2017-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/并发/" itemprop="url" rel="index">
-                    <span itemprop="name">并发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/21/CountDownLatch/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/CountDownLatch/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java并发编程类CountDownLatch"><a href="#Java并发编程类CountDownLatch" class="headerlink" title="Java并发编程类CountDownLatch"></a>Java并发编程类CountDownLatch</h1><pre><code>public class CountDownLatchDemo1 {
-
-    public static void main(String[] args) {
-        int count = 10;
-        final CountDownLatch downLatch = new CountDownLatch(count);
-        Runnable rannable = () -&gt; {
-            System.out.println(Thread.currentThread().getName() + &quot; : hahhahaha&quot;);
-            downLatch.countDown();
-        };
-
-        ExecutorService service = Executors.newFixedThreadPool(2);
-        for (int i = 0; i &lt; count; i++) {
-            service.execute(rannable);
-        }
-        service.shutdown();
-
-        // 当多个线程都达到了预期状态或完成预期工作时触发事件，其他线程可以等待这个事件来触发后续的工作
-        try {
-            downLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // 当上面当所有线程都完成了downLatch.countDown调用后，会从downLatch.await返回后执行以下操作
-        System.out.println(&quot;执行完毕&quot;);
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/11/大型网站核心架构要素/" itemprop="url">
-                  大型网站核心架构要素
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-11T23:15:54+08:00" content="2017-05-11">
-              2017-05-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/架构/" itemprop="url" rel="index">
-                    <span itemprop="name">架构</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/11/大型网站核心架构要素/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/11/大型网站核心架构要素/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="大型网站核心架构要素"><a href="#大型网站核心架构要素" class="headerlink" title="大型网站核心架构要素"></a>大型网站核心架构要素</h1><h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><ul>
-<li>从用户浏览器到数据库，影响用户请求的所有环节都可以进行性能优化</li>
-<li>在浏览器端，可以通过浏览器缓存、使用页面压缩、合理布局页面、减少cookie传输等手段改善性能</li>
-<li>还可以使用CDN，将网站静态内容分发至离用户最近的网络服务商机房，使用户通过最短访问路径获取数据。可以在网站机房部署反向代理服务器，缓存热点文件，加快请求响应速度，减轻应用服务器负载压力</li>
-<li>在应用服务器端，可以使用服务器本地缓存和分布式缓存，通过缓存在内存中的热点数据处理用户请求，加快请求处理过程，减轻数据库负载压力</li>
-<li>也可以通过异步操作将用户请求发送至消息队列等待后续任务处理，而当前请求直接返回响应给用户</li>
-<li>在网站有很多用户高并发请求的情况下，可以将多台应用服务器组成一个集群共同对外服务，提高整体处理能力，改善性能</li>
-<li>在代码层面，也可以通过使用多线程、改善内存管理等手段优化性能</li>
-<li>在数据库服务器端，索引、缓存、SQL优化等性能优化手段都已经比较成熟。而NoSQL数据库通过优化数据模型、存储结构、伸缩特性等手段在性能方面的优势也日趋明显</li>
-<li>衡量网站性能有一系列指标，重要的有响应时间、TPS、系统性能计数器等，通过测试这些指标以确定系统设计是否达到目标。这些指标也是网站监控的重要参数，通过监控这些指标可以分析系统瓶颈，预测网站容量，并对异常指标进行报警，保障系统可用性</li>
+            <h1 id="centos7-install-Alfresco"><a href="#centos7-install-Alfresco" class="headerlink" title="centos7 install Alfresco"></a>centos7 install Alfresco</h1><h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h3><ul>
+<li><a href="https://www.alfresco.com/alfresco-community-download" target="_blank" rel="noopener">Alfresco</a></li>
 </ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/11/大型网站核心架构要素/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+<h3 id="设置可执行权限"><a href="#设置可执行权限" class="headerlink" title="设置可执行权限"></a>设置可执行权限</h3><pre><code>chmod +x alfresco-community-installer-201707-linux-x64.bin
+./alfresco-community-installer-201707-linux-x64.bin
+</code></pre><h3 id="配置-etc-hosts"><a href="#配置-etc-hosts" class="headerlink" title="配置/etc/hosts"></a>配置/etc/hosts</h3><pre><code>127.0.0.1              {hostname.output}
+{ipaddress.output}     {hostname.output}
+</code></pre><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><pre><code>./alfresco.sh start
+</code></pre><h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><pre><code>http://ip:8080/share
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/centos7安装桌面/" itemprop="url">
+                  centos7安装桌面
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T22:58:23+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/centos7安装桌面/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7安装桌面/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="centos7-install-gnome"><a href="#centos7-install-gnome" class="headerlink" title="centos7 install gnome"></a>centos7 install gnome</h1><h3 id="centos7-install"><a href="#centos7-install" class="headerlink" title="centos7 install"></a>centos7 install</h3><pre><code>yum group install &quot;GNOME Desktop&quot; &quot;Graphical Administration Tools&quot;
+</code></pre><h3 id="rhel7"><a href="#rhel7" class="headerlink" title="rhel7"></a>rhel7</h3><pre><code>yum groupinstall &quot;Server with GUI&quot;
+</code></pre><h3 id="在系统启动时启用GUI"><a href="#在系统启动时启用GUI" class="headerlink" title="在系统启动时启用GUI"></a>在系统启动时启用GUI</h3><pre><code>ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
+</code></pre><h3 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h3><pre><code>reboot
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/centos7-php集成rabbitmq/" itemprop="url">
+                  centos7 php集成rabbitmq
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T22:57:08+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/centos7-php集成rabbitmq/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7-php集成rabbitmq/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="centos7-php-rabbitmq"><a href="#centos7-php-rabbitmq" class="headerlink" title="centos7 php rabbitmq"></a>centos7 php rabbitmq</h1><h3 id="composer-json配置"><a href="#composer-json配置" class="headerlink" title="composer.json配置"></a>composer.json配置</h3><pre><code>&quot;require&quot;: {
+    &quot;php-amqplib/php-amqplib&quot;: &quot;&gt;=2.6.1&quot;
+}
+</code></pre><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code>yum install -y php56-php-bcmath
+composer update
+</code></pre>
+          
         
       
     </div>
@@ -1886,7 +1577,7 @@ public class Counter2 {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1927,7 +1618,7 @@ public class Counter2 {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-count">131</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1935,7 +1626,7 @@ public class Counter2 {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1944,7 +1635,7 @@ public class Counter2 {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2046,7 +1737,7 @@ public class Counter2 {
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
