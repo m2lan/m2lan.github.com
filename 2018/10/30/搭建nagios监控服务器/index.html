@@ -1,0 +1,983 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="nagios," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="搭建nagios安装nagiosyum install -y httpd gcc glibc glibc-common php gd gd-devel libpng libmng libjpeg zlib useradd nagios groupadd nagcmd usermod -G nagcmd nagios usermod -G nagcmd apache  tar xzvf nagios">
+<meta name="keywords" content="nagios">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建nagios监控服务器">
+<meta property="og:url" content="http://blog.golearns.org/2018/10/30/搭建nagios监控服务器/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="搭建nagios安装nagiosyum install -y httpd gcc glibc glibc-common php gd gd-devel libpng libmng libjpeg zlib useradd nagios groupadd nagcmd usermod -G nagcmd nagios usermod -G nagcmd apache  tar xzvf nagios">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/1540545509151.jpg">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/1540615926016.jpg">
+<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/1540630066544.jpg">
+<meta property="og:updated_time" content="2018-10-30T06:25:54.529Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建nagios监控服务器">
+<meta name="twitter:description" content="搭建nagios安装nagiosyum install -y httpd gcc glibc glibc-common php gd gd-devel libpng libmng libjpeg zlib useradd nagios groupadd nagcmd usermod -G nagcmd nagios usermod -G nagcmd apache  tar xzvf nagios">
+<meta name="twitter:image" content="http://opsi4gg7g.bkt.clouddn.com/1540545509151.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 2746085,
+      author: 'M2'
+    }
+  };
+</script>
+
+  <title> 搭建nagios监控服务器 | 知识记录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a7aab4bc8347eb54375043cf003b2c21";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知识记录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'b2cFpoExgUMZu3--zQzE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                搭建nagios监控服务器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-10-30T14:16:44+08:00" content="2018-10-30">
+              2018-10-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/nagios/" itemprop="url" rel="index">
+                    <span itemprop="name">nagios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/10/30/搭建nagios监控服务器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/30/搭建nagios监控服务器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="搭建nagios"><a href="#搭建nagios" class="headerlink" title="搭建nagios"></a>搭建nagios</h3><h1 id="安装nagios"><a href="#安装nagios" class="headerlink" title="安装nagios"></a>安装nagios</h1><pre><code>yum install -y httpd gcc glibc glibc-common php gd gd-devel libpng libmng libjpeg zlib
+useradd nagios
+groupadd nagcmd
+usermod -G nagcmd nagios
+usermod -G nagcmd apache
+
+tar xzvf nagios-3.5.1.tar.gz
+cd nagios
+./configure --with-command-group=nagcmd
+make all
+make install
+
+# 生成的nagios web访问目录
+ll /usr/local/nagios/share/
+
+# 生成启动脚本
+make install-init
+
+# 设置工作目录权限
+make install-commandmode
+
+# 生成配置文件
+make install-config
+# 配置文件目录
+ll /usr/local/nagios/etc/
+
+# 将nagios配置文件加入apache配置文件
+make install-webconf
+
+# 生成访问nagios web登录的用户名和密码
+htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+</code></pre><ul>
+<li><p>编译nagios插件</p>
+<pre><code># 安装插件之前先安装mysql服务
+yum install -y mysql-devel
+tar xzvf nagios-plugins-2.1.1.tar.gz
+cd nagios-plugins-2.1.1
+./configure --with-nagios-user=nagios --with-nagios-group=nagcmd
+make &amp;&amp; make install
+# 安装成功后会生成脚本文件
+ls -la /usr/local/nagios/libexec/
+</code></pre></li>
+<li><p>检查配置文件</p>
+<pre><code>/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+</code></pre></li>
+<li><p>启动nagios</p>
+<pre><code>systemctl start nagios
+</code></pre></li>
+<li><p>访问</p>
+<pre><code>http://192.168.1.240/nagios
+</code></pre></li>
+</ul>
+<h1 id="监控本机对象，监控NFS服务运行状态"><a href="#监控本机对象，监控NFS服务运行状态" class="headerlink" title="监控本机对象，监控NFS服务运行状态"></a>监控本机对象，监控NFS服务运行状态</h1><pre><code>cd /usr/local/nagios/etc/objects/
+cp localhost.cfg localhost.cfg.bak
+
+cat localhost.cfg
+define host {
+    use                     linux-server
+    host_name               localhost
+    alias                   localhost
+    address                 127.0.0.1
+  }
+
+define hostgroup{
+        hostgroup_name  linux-servers
+        alias           Linux Servers
+        members         localhost
+}
+
+define service {
+    use    local-service
+    host_name    localhost
+    service_description    NFS
+    check_command    check_tcp!2049 ;监听tcp端口2049
+}
+
+# 安装nfs服务
+yum install -y rpc-bind nfs-utils
+# 配置nfs
+cat /etc/exports
+/tmp    *(rw)
+# 启动nfs
+systemctl restart nfs
+# 检查nfs是否启动成功
+showmount -e 192.168.1.240
+# 重启nagios
+systemctl restart nagios
+# 访问http://192.168.1.240/nagios查看服务状态
+# 默认间隔5分钟检查一次，可以强制检查
+</code></pre><p><img src="http://opsi4gg7g.bkt.clouddn.com/1540545509151.jpg" alt=""></p>
+<pre><code># 如果出现Error: Could not stat() command file &apos;/usr/local/nagios/var/rw/nagios.cmd&apos;!错误，关闭防火墙
+</code></pre><h1 id="监控外部主机192-168-1-241上的mysql服务器运行状态"><a href="#监控外部主机192-168-1-241上的mysql服务器运行状态" class="headerlink" title="监控外部主机192.168.1.241上的mysql服务器运行状态"></a>监控外部主机192.168.1.241上的mysql服务器运行状态</h1><ul>
+<li><p>编辑主配置文件</p>
+<pre><code>vim /usr/local/nagios/etc/nagios.cfg
+# 添加以下两项配置
+cfg_file=/usr/local/nagios/etc/objects/mysql.cfg
+
+cat mysql.cfg
+define host{
+        use                     linux-server
+        host_name               nagios2
+        alias                   mysql服务器
+        address                 192.168.1.241
+    hostgroups        mysql-server
+}
+
+define service {
+        use     local-service
+        host_name       nagios2
+        service_description     mysql服务
+        check_command   check_mysql
+}
+
+define hostgroup {
+    hostgroup_name    mysql-server
+    alias    mysql服务器
+    members    nagios2
+}
+
+# check_command 命令必须在command.cfg中存在
+# 在command.cfg中添加以下内容
+define command {
+command_name    check_mysql
+command_line    $USER1$/check_mysql -H $HOSTADDRESS$ -u nagdb -d nagdb
+}
+
+# 在192.168.1.241服务器中安装mysql服务
+yum install -y mysql-server
+systemctl start mysqld
+# 创建nagdb数据库和用户
+create database nagdb;
+grant select on nagdb.* to nagdb@&apos;192.168.1.240&apos;;
+
+# 回到192.168.1.240服务器中测试连接
+/usr/local/nagios/libexec/check_mysql -H 192.168.1.241 -u nagdb -d nagdb
+# 返回以下内容表示连接成功
+Uptime: 846  Threads: 1  Questions: 49  Slow queries: 0  Opens: 67  Flush tables: 1  Open tables: 60  Queries per second avg: 0.057|Connections=19c;;; Open_files=16;;; Open_tables=60;;; Qcache_free_memory=1031352;;; Qcache_hits=0c;;; Qcache_inserts=0c;;; Qcache_lowmem_prunes=0c;;; Qcache_not_cached=11c;;; Qcache_queries_in_cache=0;;; Queries=50c;;; Questions=44c;;; Table_locks_waited=0c;;; Threads_connected=1;;; Threads_running=1;;; Uptime=846c;;;
+# 关闭192.168.1.241上的mysql服务，测试返回结果为
+Can&apos;t connect to MySQL server on &apos;192.168.1.241&apos; (111)
+
+# 访问http://192.168.1.240/nagios查看mysql服务是否正常
+</code></pre><p>  <img src="http://opsi4gg7g.bkt.clouddn.com/1540615926016.jpg" alt=""></p>
+</li>
+</ul>
+<h1 id="监听服务器上的私有信息"><a href="#监听服务器上的私有信息" class="headerlink" title="监听服务器上的私有信息"></a>监听服务器上的私有信息</h1><h2 id="监控192-168-1-241服务器上的私有信息-硬盘、。"><a href="#监控192-168-1-241服务器上的私有信息-硬盘、。" class="headerlink" title="监控192.168.1.241服务器上的私有信息(硬盘、。)"></a>监控192.168.1.241服务器上的私有信息(硬盘、。)</h2><ul>
+<li>正常情况下不能访问外部服务器的私有信息，需要通过nagios远程执行插件nrpe来获取</li>
+<li>两台机器通过ssl加密传输数据</li>
+<li><p>在两台机器上192.168.1.240和241服务器安装ssl</p>
+<pre><code>yum install -y openssl openssl-devel
+</code></pre></li>
+<li><p>两台服务器分别安装nrpe</p>
+<pre><code>tar xvzf nrpe-2.15.tar.gz
+cd nrpe-2.15
+yum install -y gcc
+./configure
+# 编译成功后显示
+General Options:
+ -------------------------
+ NRPE port:    5666
+ NRPE user:    nagios
+ NRPE group:   nagios
+ Nagios user:  nagios
+ Nagios group: nagios
+
+# 需要创建nagios用户
+useradd nagios
+groupadd nagcmd
+usermod -G nagcmd nagios
+
+make all
+make install
+
+# 插件安装后所在路径
+/usr/local/nagios/libexec/check_nrpe
+
+# 192.168.1.241服务器还需生成配置文件
+make install-daemon-config
+# 让xinetd服务可以管理nrep服务，生成xinetd下nrpe配置文件
+make install-xinetd
+yum install -y xinetd
+</code></pre></li>
+<li><p>在主配置文件添加配置文件</p>
+<pre><code># 在/usr/local/nagios/etc/nagios.cfg中添加
+cfg_file=/usr/local/nagios/etc/objects/hosts.cfg
+
+# 在/usr/local/nagios/etc/objects/hosts.cfg中添加
+define service {
+    use     local-service
+    host_name       nagios2
+    service_description     磁盘检查
+    check_command   check_nrpe!check_root ; 当磁盘空间小于80%警告，小于90%警告危急
+}
+
+define service {
+    use local-service
+    host_name       nagios2
+    service_description     统计总进程
+    check_command   check_nrpe!check_total_procs ; 总进程数大于250个警告，大于400个警告危急
+}
+
+define service {
+    use     local-service
+    host_name       nagios2
+    service_description     当前负载
+    check_command   check_nrpe!check_load ; 检查当前服务器负载
+}
+
+# 在/usr/local/nagios/etc/objects/command.cfg中添加
+define command {
+    command_name    check_nrpe
+    command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+}
+</code></pre></li>
+</ul>
+<h3 id="192-168-1-241配置"><a href="#192-168-1-241配置" class="headerlink" title="192.168.1.241配置"></a>192.168.1.241配置</h3><ul>
+<li>安装nagios-plugins</li>
+<li><p>编辑 /etc/xinetd.d/nrpe配置文件，添加only_from 192.168.1.240，允许240服务器连接nrpe</p>
+<pre><code>service nrpe
+{
+        flags           = REUSE
+        socket_type     = stream
+        port            = 5666
+        wait            = no
+        user            = nagios
+        group           = nagios
+        server          = /usr/local/nagios/bin/nrpe
+        server_args     = -c /usr/local/nagios/etc/nrpe.cfg --inetd
+        log_on_failure  += USERID
+        disable         = no
+        only_from       = 127.0.0.1 192.168.1.240
+}
+</code></pre></li>
+<li><p>在/etc/services文件中添加</p>
+<pre><code>nrpe            5666/tcp                # NRPE
+</code></pre></li>
+<li><p>/etc/services文件作用</p>
+<ul>
+<li>xinet.d来启动服务时会在/etc/services找相应的端口来启动服务。找不到对应端口，将不启动服务。</li>
+</ul>
+</li>
+<li><p>启动xinetd</p>
+<pre><code>systemctl start xinetd
+</code></pre></li>
+<li><p>查看5666端口是否启动成功</p>
+<pre><code>netstat -antlup | grep 5666
+</code></pre></li>
+<li><p>/usr/local/nagios/etc/nrpe.cfg添加，检查磁盘剩余空间，小于80%告警，小于90%告警危急</p>
+<pre><code>command[check_root]=/usr/local/nagios/libexec/check_disk -w 80% -c 90% -p /dev/mapper/centos-root
+</code></pre></li>
+<li><p>重启xinetd</p>
+<pre><code>systemctl restart xinetd
+</code></pre></li>
+<li><p>查看磁盘空间</p>
+<pre><code>[root@nagios2 etc]# df -h
+文件系统                 容量  已用  可用 已用% 挂载点
+/dev/mapper/centos-root   18G  2.0G   16G   11% /
+devtmpfs                 484M     0  484M    0% /dev
+tmpfs                    494M     0  494M    0% /dev/shm
+tmpfs                    494M   13M  481M    3% /run
+tmpfs                    494M     0  494M    0% /sys/fs/cgroup
+/dev/sda1                497M  154M  344M   31% /boot
+tmpfs                     99M     0   99M    0% /run/user/0
+</code></pre></li>
+<li>访问<a href="http://192.168.1.240/nagios" target="_blank" rel="noopener">http://192.168.1.240/nagios</a>
+<img src="http://opsi4gg7g.bkt.clouddn.com/1540630066544.jpg" alt=""></li>
+</ul>
+<h1 id="配置nagios邮件提醒"><a href="#配置nagios邮件提醒" class="headerlink" title="配置nagios邮件提醒"></a>配置nagios邮件提醒</h1><ul>
+<li><p>安装sendmail</p>
+<pre><code>yum install -y sendmail
+systemctl enable sendmail
+systemctl start sendmail
+</code></pre></li>
+<li><p>修改配置文件<code>/usr/local/nagios/etc/objects/contacts.cfg</code></p>
+<pre><code>define contact{
+    contact_name                    nagiosadmin
+    use                             generic-contact
+    alias                           Nagios Admin
+    email                           763960267@qq.com ; 多个联系人用空格分开
+}
+</code></pre></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nagios/" rel="tag">#nagios</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/17/php-elsearch-autocomplete/" rel="next" title="php elsearch autocomplete">
+                <i class="fa fa-chevron-left"></i> php elsearch autocomplete
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/10/30/搭建nagios监控服务器/"
+           data-title="搭建nagios监控服务器" data-url="http://blog.golearns.org/2018/10/30/搭建nagios监控服务器/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M2" />
+          <p class="site-author-name" itemprop="name">M2</p>
+          <p class="site-description motion-element" itemprop="description">记录知识，分享知识</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">132</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/m2lan" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/763960267" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/100006504108865" target="_blank">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1877167031" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:763960267@qq.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建nagios"><span class="nav-number">1.</span> <span class="nav-text">搭建nagios</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装nagios"><span class="nav-number"></span> <span class="nav-text">安装nagios</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#监控本机对象，监控NFS服务运行状态"><span class="nav-number"></span> <span class="nav-text">监控本机对象，监控NFS服务运行状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#监控外部主机192-168-1-241上的mysql服务器运行状态"><span class="nav-number"></span> <span class="nav-text">监控外部主机192.168.1.241上的mysql服务器运行状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#监听服务器上的私有信息"><span class="nav-number"></span> <span class="nav-text">监听服务器上的私有信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#监控192-168-1-241服务器上的私有信息-硬盘、。"><span class="nav-number"></span> <span class="nav-text">监控192.168.1.241服务器上的私有信息(硬盘、。)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#192-168-1-241配置"><span class="nav-number">1.</span> <span class="nav-text">192.168.1.241配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置nagios邮件提醒"><span class="nav-number"></span> <span class="nav-text">配置nagios邮件提醒</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M2</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"m2langithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

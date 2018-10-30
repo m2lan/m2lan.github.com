@@ -267,6 +267,150 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/25/awk/" itemprop="url">
+                  awk
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-25T23:19:04+08:00" content="2017-05-25">
+              2017-05-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/25/awk/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/awk/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Linux下的awk使用"><a href="#Linux下的awk使用" class="headerlink" title="Linux下的awk使用"></a>Linux下的awk使用</h1><blockquote>
+<p>awk分析文件数据，根据分隔符对一行一行的数据进行拆分，获取某一列
+分隔符默认是空格，可以使用-F;以分号为分隔符,-F:以冒号为分隔符</p>
+</blockquote>
+<ul>
+<li><p>获取当前主机指定网卡的IP地址</p>
+<pre><code>[root@m2 ~]# ifconfig eth0
+eth0      Link encap:Ethernet  HWaddr 00:0C:29:C6:3D:D5  
+inet addr:192.168.0.150  Bcast:192.168.0.255  Mask:255.255.255.0
+inet6 addr: fe80::20c:29ff:fec6:3dd5/64 Scope:Link
+UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+RX packets:11240 errors:0 dropped:0 overruns:0 frame:0
+TX packets:2747 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:1000 
+RX bytes:1389465 (1.3 MiB)  TX bytes:207415 (202.5 KiB)
+
+[root@m2 ~]# ifconfig eth0 | grep &quot;inet addr:&quot; | awk &apos;{print $2}&apos; | awk -F : &apos;{print $2}&apos;
+192.168.0.150
+</code></pre></li>
+<li><p>获取/etc/passwd中用户UID大于500的用户名和用户登陆的shell</p>
+<pre><code>[root@m2 ~]# cat passwd | awk -F  : &apos;$3&gt;500{print $1,$7}&apos;
+nfsnobody /sbin/nologin
+
+# 使用\t制表符隔开
+[root@m2 ~]# cat passwd | awk -F : &apos;$3&gt;500{print $1 &quot;\t&quot; $7}&apos;
+nfsnobody    /sbin/nologin
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/25/awk/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/25/sed/" itemprop="url">
                   sed
                 </a>
@@ -1709,127 +1853,6 @@ public class Counter2 {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/11/大型网站架构演化/" itemprop="url">
-                  大型网站架构演化
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-11T21:11:23+08:00" content="2017-05-11">
-              2017-05-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/架构/" itemprop="url" rel="index">
-                    <span itemprop="name">架构</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/11/大型网站架构演化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/11/大型网站架构演化/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="大型网站架构演化"><a href="#大型网站架构演化" class="headerlink" title="大型网站架构演化"></a>大型网站架构演化</h1><h2 id="初始阶段的网站架构"><a href="#初始阶段的网站架构" class="headerlink" title="初始阶段的网站架构"></a>初始阶段的网站架构</h2><ul>
-<li>小型网站最开始没有多少人访问，只需要一台服务器就绰绰有余</li>
-<li>应用程序、数据库、文件等所有的资源都放在一台服务器上</li>
-</ul>
-<p><img src="http://opsi4gg7g.bkt.clouddn.com/server1.png" alt=""></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/11/大型网站架构演化/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1875,7 +1898,7 @@ public class Counter2 {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">132</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1883,7 +1906,7 @@ public class Counter2 {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1892,7 +1915,7 @@ public class Counter2 {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

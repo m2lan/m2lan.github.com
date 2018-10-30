@@ -267,6 +267,401 @@
             
               
                 
+                <a class="post-title-link" href="/2018/10/30/搭建nagios监控服务器/" itemprop="url">
+                  搭建nagios监控服务器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-10-30T14:16:44+08:00" content="2018-10-30">
+              2018-10-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/nagios/" itemprop="url" rel="index">
+                    <span itemprop="name">nagios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/10/30/搭建nagios监控服务器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/30/搭建nagios监控服务器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="搭建nagios"><a href="#搭建nagios" class="headerlink" title="搭建nagios"></a>搭建nagios</h3><h1 id="安装nagios"><a href="#安装nagios" class="headerlink" title="安装nagios"></a>安装nagios</h1><pre><code>yum install -y httpd gcc glibc glibc-common php gd gd-devel libpng libmng libjpeg zlib
+useradd nagios
+groupadd nagcmd
+usermod -G nagcmd nagios
+usermod -G nagcmd apache
+
+tar xzvf nagios-3.5.1.tar.gz
+cd nagios
+./configure --with-command-group=nagcmd
+make all
+make install
+
+# 生成的nagios web访问目录
+ll /usr/local/nagios/share/
+
+# 生成启动脚本
+make install-init
+
+# 设置工作目录权限
+make install-commandmode
+
+# 生成配置文件
+make install-config
+# 配置文件目录
+ll /usr/local/nagios/etc/
+
+# 将nagios配置文件加入apache配置文件
+make install-webconf
+
+# 生成访问nagios web登录的用户名和密码
+htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+</code></pre><ul>
+<li><p>编译nagios插件</p>
+<pre><code># 安装插件之前先安装mysql服务
+yum install -y mysql-devel
+tar xzvf nagios-plugins-2.1.1.tar.gz
+cd nagios-plugins-2.1.1
+./configure --with-nagios-user=nagios --with-nagios-group=nagcmd
+make &amp;&amp; make install
+# 安装成功后会生成脚本文件
+ls -la /usr/local/nagios/libexec/
+</code></pre></li>
+<li><p>检查配置文件</p>
+<pre><code>/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+</code></pre></li>
+<li><p>启动nagios</p>
+<pre><code>systemctl start nagios
+</code></pre></li>
+<li><p>访问</p>
+<pre><code>http://192.168.1.240/nagios
+</code></pre></li>
+</ul>
+<h1 id="监控本机对象，监控NFS服务运行状态"><a href="#监控本机对象，监控NFS服务运行状态" class="headerlink" title="监控本机对象，监控NFS服务运行状态"></a>监控本机对象，监控NFS服务运行状态</h1><pre><code>cd /usr/local/nagios/etc/objects/
+cp localhost.cfg localhost.cfg.bak
+
+cat localhost.cfg
+define host {
+    use                     linux-server
+    host_name               localhost
+    alias                   localhost
+    address                 127.0.0.1
+  }
+
+define hostgroup{
+        hostgroup_name  linux-servers
+        alias           Linux Servers
+        members         localhost
+}
+
+define service {
+    use    local-service
+    host_name    localhost
+    service_description    NFS
+    check_command    check_tcp!2049 ;监听tcp端口2049
+}
+
+# 安装nfs服务
+yum install -y rpc-bind nfs-utils
+# 配置nfs
+cat /etc/exports
+/tmp    *(rw)
+# 启动nfs
+systemctl restart nfs
+# 检查nfs是否启动成功
+showmount -e 192.168.1.240
+# 重启nagios
+systemctl restart nagios
+# 访问http://192.168.1.240/nagios查看服务状态
+# 默认间隔5分钟检查一次，可以强制检查
+</code></pre><p><img src="http://opsi4gg7g.bkt.clouddn.com/1540545509151.jpg" alt=""></p>
+<pre><code># 如果出现Error: Could not stat() command file &apos;/usr/local/nagios/var/rw/nagios.cmd&apos;!错误，关闭防火墙
+</code></pre><h1 id="监控外部主机192-168-1-241上的mysql服务器运行状态"><a href="#监控外部主机192-168-1-241上的mysql服务器运行状态" class="headerlink" title="监控外部主机192.168.1.241上的mysql服务器运行状态"></a>监控外部主机192.168.1.241上的mysql服务器运行状态</h1><ul>
+<li><p>编辑主配置文件</p>
+<pre><code>vim /usr/local/nagios/etc/nagios.cfg
+# 添加以下两项配置
+cfg_file=/usr/local/nagios/etc/objects/mysql.cfg
+
+cat mysql.cfg
+define host{
+        use                     linux-server
+        host_name               nagios2
+        alias                   mysql服务器
+        address                 192.168.1.241
+    hostgroups        mysql-server
+}
+
+define service {
+        use     local-service
+        host_name       nagios2
+        service_description     mysql服务
+        check_command   check_mysql
+}
+
+define hostgroup {
+    hostgroup_name    mysql-server
+    alias    mysql服务器
+    members    nagios2
+}
+
+# check_command 命令必须在command.cfg中存在
+# 在command.cfg中添加以下内容
+define command {
+command_name    check_mysql
+command_line    $USER1$/check_mysql -H $HOSTADDRESS$ -u nagdb -d nagdb
+}
+
+# 在192.168.1.241服务器中安装mysql服务
+yum install -y mysql-server
+systemctl start mysqld
+# 创建nagdb数据库和用户
+create database nagdb;
+grant select on nagdb.* to nagdb@&apos;192.168.1.240&apos;;
+
+# 回到192.168.1.240服务器中测试连接
+/usr/local/nagios/libexec/check_mysql -H 192.168.1.241 -u nagdb -d nagdb
+# 返回以下内容表示连接成功
+Uptime: 846  Threads: 1  Questions: 49  Slow queries: 0  Opens: 67  Flush tables: 1  Open tables: 60  Queries per second avg: 0.057|Connections=19c;;; Open_files=16;;; Open_tables=60;;; Qcache_free_memory=1031352;;; Qcache_hits=0c;;; Qcache_inserts=0c;;; Qcache_lowmem_prunes=0c;;; Qcache_not_cached=11c;;; Qcache_queries_in_cache=0;;; Queries=50c;;; Questions=44c;;; Table_locks_waited=0c;;; Threads_connected=1;;; Threads_running=1;;; Uptime=846c;;;
+# 关闭192.168.1.241上的mysql服务，测试返回结果为
+Can&apos;t connect to MySQL server on &apos;192.168.1.241&apos; (111)
+
+# 访问http://192.168.1.240/nagios查看mysql服务是否正常
+</code></pre><p>  <img src="http://opsi4gg7g.bkt.clouddn.com/1540615926016.jpg" alt=""></p>
+</li>
+</ul>
+<h1 id="监听服务器上的私有信息"><a href="#监听服务器上的私有信息" class="headerlink" title="监听服务器上的私有信息"></a>监听服务器上的私有信息</h1><h2 id="监控192-168-1-241服务器上的私有信息-硬盘、。"><a href="#监控192-168-1-241服务器上的私有信息-硬盘、。" class="headerlink" title="监控192.168.1.241服务器上的私有信息(硬盘、。)"></a>监控192.168.1.241服务器上的私有信息(硬盘、。)</h2><ul>
+<li>正常情况下不能访问外部服务器的私有信息，需要通过nagios远程执行插件nrpe来获取</li>
+<li>两台机器通过ssl加密传输数据</li>
+<li><p>在两台机器上192.168.1.240和241服务器安装ssl</p>
+<pre><code>yum install -y openssl openssl-devel
+</code></pre></li>
+<li><p>两台服务器分别安装nrpe</p>
+<pre><code>tar xvzf nrpe-2.15.tar.gz
+cd nrpe-2.15
+yum install -y gcc
+./configure
+# 编译成功后显示
+General Options:
+ -------------------------
+ NRPE port:    5666
+ NRPE user:    nagios
+ NRPE group:   nagios
+ Nagios user:  nagios
+ Nagios group: nagios
+
+# 需要创建nagios用户
+useradd nagios
+groupadd nagcmd
+usermod -G nagcmd nagios
+
+make all
+make install
+
+# 插件安装后所在路径
+/usr/local/nagios/libexec/check_nrpe
+
+# 192.168.1.241服务器还需生成配置文件
+make install-daemon-config
+# 让xinetd服务可以管理nrep服务，生成xinetd下nrpe配置文件
+make install-xinetd
+yum install -y xinetd
+</code></pre></li>
+<li><p>在主配置文件添加配置文件</p>
+<pre><code># 在/usr/local/nagios/etc/nagios.cfg中添加
+cfg_file=/usr/local/nagios/etc/objects/hosts.cfg
+
+# 在/usr/local/nagios/etc/objects/hosts.cfg中添加
+define service {
+    use     local-service
+    host_name       nagios2
+    service_description     磁盘检查
+    check_command   check_nrpe!check_root ; 当磁盘空间小于80%警告，小于90%警告危急
+}
+
+define service {
+    use local-service
+    host_name       nagios2
+    service_description     统计总进程
+    check_command   check_nrpe!check_total_procs ; 总进程数大于250个警告，大于400个警告危急
+}
+
+define service {
+    use     local-service
+    host_name       nagios2
+    service_description     当前负载
+    check_command   check_nrpe!check_load ; 检查当前服务器负载
+}
+
+# 在/usr/local/nagios/etc/objects/command.cfg中添加
+define command {
+    command_name    check_nrpe
+    command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+}
+</code></pre></li>
+</ul>
+<h3 id="192-168-1-241配置"><a href="#192-168-1-241配置" class="headerlink" title="192.168.1.241配置"></a>192.168.1.241配置</h3><ul>
+<li>安装nagios-plugins</li>
+<li><p>编辑 /etc/xinetd.d/nrpe配置文件，添加only_from 192.168.1.240，允许240服务器连接nrpe</p>
+<pre><code>service nrpe
+{
+        flags           = REUSE
+        socket_type     = stream
+        port            = 5666
+        wait            = no
+        user            = nagios
+        group           = nagios
+        server          = /usr/local/nagios/bin/nrpe
+        server_args     = -c /usr/local/nagios/etc/nrpe.cfg --inetd
+        log_on_failure  += USERID
+        disable         = no
+        only_from       = 127.0.0.1 192.168.1.240
+}
+</code></pre></li>
+<li><p>在/etc/services文件中添加</p>
+<pre><code>nrpe            5666/tcp                # NRPE
+</code></pre></li>
+<li><p>/etc/services文件作用</p>
+<ul>
+<li>xinet.d来启动服务时会在/etc/services找相应的端口来启动服务。找不到对应端口，将不启动服务。</li>
+</ul>
+</li>
+<li><p>启动xinetd</p>
+<pre><code>systemctl start xinetd
+</code></pre></li>
+<li><p>查看5666端口是否启动成功</p>
+<pre><code>netstat -antlup | grep 5666
+</code></pre></li>
+<li><p>/usr/local/nagios/etc/nrpe.cfg添加，检查磁盘剩余空间，小于80%告警，小于90%告警危急</p>
+<pre><code>command[check_root]=/usr/local/nagios/libexec/check_disk -w 80% -c 90% -p /dev/mapper/centos-root
+</code></pre></li>
+<li><p>重启xinetd</p>
+<pre><code>systemctl restart xinetd
+</code></pre></li>
+<li><p>查看磁盘空间</p>
+<pre><code>[root@nagios2 etc]# df -h
+文件系统                 容量  已用  可用 已用% 挂载点
+/dev/mapper/centos-root   18G  2.0G   16G   11% /
+devtmpfs                 484M     0  484M    0% /dev
+tmpfs                    494M     0  494M    0% /dev/shm
+tmpfs                    494M   13M  481M    3% /run
+tmpfs                    494M     0  494M    0% /sys/fs/cgroup
+/dev/sda1                497M  154M  344M   31% /boot
+tmpfs                     99M     0   99M    0% /run/user/0
+</code></pre></li>
+<li>访问<a href="http://192.168.1.240/nagios" target="_blank" rel="noopener">http://192.168.1.240/nagios</a>
+<img src="http://opsi4gg7g.bkt.clouddn.com/1540630066544.jpg" alt=""></li>
+</ul>
+<h1 id="配置nagios邮件提醒"><a href="#配置nagios邮件提醒" class="headerlink" title="配置nagios邮件提醒"></a>配置nagios邮件提醒</h1><ul>
+<li><p>安装sendmail</p>
+<pre><code>yum install -y sendmail
+systemctl enable sendmail
+systemctl start sendmail
+</code></pre></li>
+<li><p>修改配置文件<code>/usr/local/nagios/etc/objects/contacts.cfg</code></p>
+<pre><code>define contact{
+    contact_name                    nagiosadmin
+    use                             generic-contact
+    alias                           Nagios Admin
+    email                           763960267@qq.com ; 多个联系人用空格分开
+}
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/09/17/php-elsearch-autocomplete/" itemprop="url">
                   php elsearch autocomplete
                 </a>
@@ -1345,127 +1740,6 @@ unzip elasticHD_linux_amd64.zip
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/swoole集群消息分发/" itemprop="url">
-                  swoole集群消息分发
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T23:07:03+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/swoole/" itemprop="url" rel="index">
-                    <span itemprop="name">swoole</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/swoole集群消息分发/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/swoole集群消息分发/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="swoole集群消息分发"><a href="#swoole集群消息分发" class="headerlink" title="swoole集群消息分发"></a>swoole集群消息分发</h1><ul>
-<li><p>配置文件</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IM 配置</span></span><br><span class="line">    <span class="string">'im'</span> =&gt; [</span><br><span class="line">        <span class="string">'ack_time'</span> =&gt; <span class="number">300</span>,</span><br><span class="line">        <span class="string">'daemonize_enable'</span> =&gt; <span class="keyword">false</span>, <span class="comment">// 是否后台运行</span></span><br><span class="line">        <span class="string">'host'</span> =&gt; <span class="string">'0.0.0.0'</span>, <span class="comment">// 监听的host</span></span><br><span class="line">        <span class="string">'port'</span> =&gt; <span class="number">9999</span>, <span class="comment">// 监听的端口</span></span><br><span class="line">        <span class="string">'heartbeat_idle_time'</span> =&gt; <span class="number">300</span>, <span class="comment">// 连接最大允许空闲的时间</span></span><br><span class="line">        <span class="string">'heartbeat_check_interval'</span> =&gt; <span class="number">60</span>, <span class="comment">// 心跳检测，每个多久轮询一次</span></span><br><span class="line">        <span class="string">'enable_ssl'</span> =&gt; <span class="keyword">false</span>, <span class="comment">// 是否启用ssl</span></span><br><span class="line">        <span class="string">'pid_file'</span> =&gt; ROOT_PATH . <span class="string">'groupchat.pid'</span>,</span><br><span class="line">        <span class="string">'log_file'</span> =&gt; LOG_PATH . <span class="string">'swoole'</span> . DS . date(<span class="string">'Ymd'</span>) . <span class="string">'.log'</span>,</span><br><span class="line">        <span class="string">'ssl_cert_file'</span> =&gt; <span class="string">'/etc/letsencrypt/live/test.im.movie952.net/fullchain.pem'</span>, <span class="comment">// cert证书</span></span><br><span class="line">        <span class="string">'ssl_key_file'</span> =&gt; <span class="string">'/etc/letsencrypt/live/test.im.movie952.net/privkey.pem'</span>, <span class="comment">// key私钥</span></span><br><span class="line">        <span class="string">'message_base_uri'</span> =&gt; <span class="string">'http://192.168.3.8:8083/api/'</span>,</span><br><span class="line">        <span class="string">'movie_base_uri'</span> =&gt; <span class="string">'http://movie.api.com/api/'</span>,</span><br><span class="line">        <span class="string">'enable_push'</span> =&gt; <span class="keyword">false</span>,</span><br><span class="line">        <span class="string">'push_accessKey'</span> =&gt; <span class="string">'LTAIq0MVVNyZiUz5'</span>,</span><br><span class="line">        <span class="string">'push_accessKeySecret'</span> =&gt; <span class="string">'qVhQhdIxn8dWiebROKO8hybn1T3mXq'</span>,</span><br><span class="line">        <span class="string">'push_ios_appkey'</span> =&gt; <span class="string">'24913838'</span>,</span><br><span class="line">        <span class="string">'push_android_appkey'</span> =&gt; <span class="string">''</span>,</span><br><span class="line">        <span class="string">'serverNode'</span> =&gt; <span class="string">'node1'</span></span><br><span class="line">    ],</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/swoole集群消息分发/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1511,7 +1785,7 @@ unzip elasticHD_linux_amd64.zip
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">132</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1519,7 +1793,7 @@ unzip elasticHD_linux_amd64.zip
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1528,7 +1802,7 @@ unzip elasticHD_linux_amd64.zip
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

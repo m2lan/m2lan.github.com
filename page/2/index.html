@@ -267,6 +267,127 @@
             
               
                 
+                <a class="post-title-link" href="/2018/09/17/swoole集群消息分发/" itemprop="url">
+                  swoole集群消息分发
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T23:07:03+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swoole/" itemprop="url" rel="index">
+                    <span itemprop="name">swoole</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/swoole集群消息分发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/swoole集群消息分发/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="swoole集群消息分发"><a href="#swoole集群消息分发" class="headerlink" title="swoole集群消息分发"></a>swoole集群消息分发</h1><ul>
+<li><p>配置文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IM 配置</span></span><br><span class="line">    <span class="string">'im'</span> =&gt; [</span><br><span class="line">        <span class="string">'ack_time'</span> =&gt; <span class="number">300</span>,</span><br><span class="line">        <span class="string">'daemonize_enable'</span> =&gt; <span class="keyword">false</span>, <span class="comment">// 是否后台运行</span></span><br><span class="line">        <span class="string">'host'</span> =&gt; <span class="string">'0.0.0.0'</span>, <span class="comment">// 监听的host</span></span><br><span class="line">        <span class="string">'port'</span> =&gt; <span class="number">9999</span>, <span class="comment">// 监听的端口</span></span><br><span class="line">        <span class="string">'heartbeat_idle_time'</span> =&gt; <span class="number">300</span>, <span class="comment">// 连接最大允许空闲的时间</span></span><br><span class="line">        <span class="string">'heartbeat_check_interval'</span> =&gt; <span class="number">60</span>, <span class="comment">// 心跳检测，每个多久轮询一次</span></span><br><span class="line">        <span class="string">'enable_ssl'</span> =&gt; <span class="keyword">false</span>, <span class="comment">// 是否启用ssl</span></span><br><span class="line">        <span class="string">'pid_file'</span> =&gt; ROOT_PATH . <span class="string">'groupchat.pid'</span>,</span><br><span class="line">        <span class="string">'log_file'</span> =&gt; LOG_PATH . <span class="string">'swoole'</span> . DS . date(<span class="string">'Ymd'</span>) . <span class="string">'.log'</span>,</span><br><span class="line">        <span class="string">'ssl_cert_file'</span> =&gt; <span class="string">'/etc/letsencrypt/live/test.im.movie952.net/fullchain.pem'</span>, <span class="comment">// cert证书</span></span><br><span class="line">        <span class="string">'ssl_key_file'</span> =&gt; <span class="string">'/etc/letsencrypt/live/test.im.movie952.net/privkey.pem'</span>, <span class="comment">// key私钥</span></span><br><span class="line">        <span class="string">'message_base_uri'</span> =&gt; <span class="string">'http://192.168.3.8:8083/api/'</span>,</span><br><span class="line">        <span class="string">'movie_base_uri'</span> =&gt; <span class="string">'http://movie.api.com/api/'</span>,</span><br><span class="line">        <span class="string">'enable_push'</span> =&gt; <span class="keyword">false</span>,</span><br><span class="line">        <span class="string">'push_accessKey'</span> =&gt; <span class="string">'LTAIq0MVVNyZiUz5'</span>,</span><br><span class="line">        <span class="string">'push_accessKeySecret'</span> =&gt; <span class="string">'qVhQhdIxn8dWiebROKO8hybn1T3mXq'</span>,</span><br><span class="line">        <span class="string">'push_ios_appkey'</span> =&gt; <span class="string">'24913838'</span>,</span><br><span class="line">        <span class="string">'push_android_appkey'</span> =&gt; <span class="string">''</span>,</span><br><span class="line">        <span class="string">'serverNode'</span> =&gt; <span class="string">'node1'</span></span><br><span class="line">    ],</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/09/17/swoole集群消息分发/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/09/17/thinkphp-oauth2/" itemprop="url">
                   thinkphp-oauth2
                 </a>
@@ -1454,125 +1575,6 @@ php56 --modules
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/centos7-php集成rabbitmq/" itemprop="url">
-                  centos7 php集成rabbitmq
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T22:57:08+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/centos7-php集成rabbitmq/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7-php集成rabbitmq/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="centos7-php-rabbitmq"><a href="#centos7-php-rabbitmq" class="headerlink" title="centos7 php rabbitmq"></a>centos7 php rabbitmq</h1><h3 id="composer-json配置"><a href="#composer-json配置" class="headerlink" title="composer.json配置"></a>composer.json配置</h3><pre><code>&quot;require&quot;: {
-    &quot;php-amqplib/php-amqplib&quot;: &quot;&gt;=2.6.1&quot;
-}
-</code></pre><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code>yum install -y php56-php-bcmath
-composer update
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1618,7 +1620,7 @@ composer update
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">132</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1626,7 +1628,7 @@ composer update
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1635,7 +1637,7 @@ composer update
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

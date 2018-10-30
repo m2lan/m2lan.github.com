@@ -267,6 +267,125 @@
             
               
                 
+                <a class="post-title-link" href="/2018/09/17/centos7-php集成rabbitmq/" itemprop="url">
+                  centos7 php集成rabbitmq
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T22:57:08+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/centos7-php集成rabbitmq/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7-php集成rabbitmq/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="centos7-php-rabbitmq"><a href="#centos7-php-rabbitmq" class="headerlink" title="centos7 php rabbitmq"></a>centos7 php rabbitmq</h1><h3 id="composer-json配置"><a href="#composer-json配置" class="headerlink" title="composer.json配置"></a>composer.json配置</h3><pre><code>&quot;require&quot;: {
+    &quot;php-amqplib/php-amqplib&quot;: &quot;&gt;=2.6.1&quot;
+}
+</code></pre><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code>yum install -y php56-php-bcmath
+composer update
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/09/17/centos7-php安装swoole扩展/" itemprop="url">
                   centos7 php安装swoole扩展
                 </a>
@@ -1362,134 +1481,6 @@ yum -y install python36u-devel
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/修改mysql编码为utf8mb4/" itemprop="url">
-                  修改mysql编码为utf8mb4
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T22:44:26+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/修改mysql编码为utf8mb4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/修改mysql编码为utf8mb4/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="修改mysql编码为utf8mb4"><a href="#修改mysql编码为utf8mb4" class="headerlink" title="修改mysql编码为utf8mb4"></a>修改mysql编码为utf8mb4</h1><h3 id="配置my-cnf"><a href="#配置my-cnf" class="headerlink" title="配置my.cnf"></a>配置<code>my.cnf</code></h3><pre><code>[client]
-default-character-set=utf8mb4
-
-[mysql]
-default-character-set=utf8mb4
-
-[mysqld]
-character-set-client-handshake=FALSE
-character-set-server=utf8mb4
-collation-server=utf8mb4_unicode_ci
-init_connect=&apos;SET NAMES utf8mb4&apos;
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/修改mysql编码为utf8mb4/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1535,7 +1526,7 @@ init_connect=&apos;SET NAMES utf8mb4&apos;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">132</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1543,7 +1534,7 @@ init_connect=&apos;SET NAMES utf8mb4&apos;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1552,7 +1543,7 @@ init_connect=&apos;SET NAMES utf8mb4&apos;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
