@@ -521,146 +521,23 @@ systemctl restart postfix
 
       
         
-          
-            <h1 id="基于redhat6-5搭建无人值守安装服务器"><a href="#基于redhat6-5搭建无人值守安装服务器" class="headerlink" title="基于redhat6.5搭建无人值守安装服务器"></a>基于redhat6.5搭建无人值守安装服务器</h1><blockquote>
-<p>基于FTP+TFTP+PXE+DHCP+Kickstart
-PXE协议使计算机可以通过网络启动，网卡中必须有PXE芯片
-运行PXE协议需要设置DHCP服务器和TFTP服务器。DHCP服务器来给PXE client分配一个IP地址
-由于是给PXE client分配IP地址，所以在配置DHCP服务器时需要增加相应的PXE设置
-客户端开机PXE网卡会获取一个DHCP服务器，DHCP服务器告诉客户端使用TFTP客户端下载TFTP服务器上的文件，然后通过FTP提供的ks.cfg文件会安装服务器</p>
+          <h1 id="基于redhat6-5搭建无人值守安装服务器"><a href="#基于redhat6-5搭建无人值守安装服务器" class="headerlink" title="基于redhat6.5搭建无人值守安装服务器"></a>基于redhat6.5搭建无人值守安装服务器</h1><blockquote>
+<p>基于FTP+TFTP+PXE+DHCP+Kickstart</p>
+<p>PXE协议使计算机可以通过网络启动，网卡中必须有PXE芯片</p>
+<p>运行PXE协议需要设置DHCP服务器和TFTP服务器。DHCP服务器来给PXE client分配一个IP地址</p>
+<p>由于是给PXE client分配IP地址，所以在配置DHCP服务器时需要增加相应的PXE设置</p>
+<p>客户端开机PXE网卡会获取一个DHCP服务器，DHCP服务器告诉客户端使用TFTP客户端下载TFTP服务器上的文件，然后通过FTP提供的ks.cfg文件会安装服务器</p>
 </blockquote>
 <h3 id="安装ftp"><a href="#安装ftp" class="headerlink" title="安装ftp"></a>安装ftp</h3><pre><code>yum install -y vsftpd
 service vsftpd start
 chkconfig vsftpd on
 </code></pre><h3 id="安装kickstart"><a href="#安装kickstart" class="headerlink" title="安装kickstart"></a>安装kickstart</h3><pre><code>yum install -y system-config-kickstart
-</code></pre><h3 id="安装TFTP"><a href="#安装TFTP" class="headerlink" title="安装TFTP"></a>安装TFTP</h3><pre><code>yum install -y tftp-server xinetd tftp
-
-# 配置tftp
-cat /etc/xinetd.d/tftp
-service tftp
-{
-    socket_type        = dgram
-    protocol        = udp
-    wait            = yes
-    user            = root
-    server            = /usr/sbin/in.tftpd
-    server_args        = -s /tftpboot
-    disable            = no
-    per_source        = 11
-    cps            = 100 2
-    flags            = IPv4
-}
-
-service xinetd restart
-mkdir /tftpboot
-mkdir /tftpboot/pxelinux.cfg
-cp /usr/share/syslinux/pxelinux.0 /tftpboot/
-cp /mnt/isolinux/isolinux.cfg /tftpboot/pxelinux.cfg/default
-# 虚拟到内存里的镜像，在内存里可以虚拟出来一个文件系统 
-cp /mnt/images/pxeboot/initrd.img /tftpboot/
-# 内核
-cp /mnt/images/pxeboot/vmlinuz /tftpboot/
-chmod 644 /tftpboot/pxelinux.cfg/default
-
-# 修改default文件，通过ftp服务器方式来访问kickstart文件
-cat /tftpboot/pxelinux.cfg/default
-default linux
-#prompt 1
-timeout 600
-
-display boot.msg
-
-menu background splash.jpg
-menu title Welcome to Red Hat Enterprise Linux 6.5!
-menu color border 0 #ffffffff #00000000
-menu color sel 7 #ffffffff #ff000000
-menu color title 0 #ffffffff #00000000
-menu color tabmsg 0 #ffffffff #00000000
-menu color unsel 0 #ffffffff #00000000
-menu color hotsel 0 #ff000000 #ffffffff
-menu color hotkey 7 #ffffffff #ff000000
-menu color scrollbar 0 #ffffffff #00000000
-
-label linux
-  menu label ^Install or upgrade an existing system
-  menu default
-  kernel vmlinuz
-  append initrd=initrd.img ks=ftp://192.168.1.10/ks.cfg
-label vesa
-  menu label Install system with ^basic video driver
-  kernel vmlinuz
-  append initrd=initrd.img xdriver=vesa nomodeset
-label rescue
-  menu label ^Rescue installed system
-  kernel vmlinuz
-  append initrd=initrd.img rescue
-label local
-  menu label Boot from ^local drive
-  localboot 0xffff
-label memtest86
-  menu label ^Memory test
-  kernel memtest
-  append -
-
-# 在图形界面下打开kickstart配置程序
-LANG=zh_CN.UTF-8
-执行system-config-kickstart
-</code></pre><p><img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG126.jpeg" alt="">
-<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG127.jpeg" alt="">
-<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG128.jpeg" alt=""></p>
-<ul>
-<li><p>创建一个boot分区
-<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG129.jpeg" alt=""></p>
-</li>
-<li><p>创建一个swap分区
-<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG130.jpeg" alt=""></p>
-</li>
-<li><p>创建根分区
-<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG131.jpeg" alt=""></p>
-</li>
-<li><p>网络配置
-<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG132.jpeg" alt=""></p>
-</li>
-<li><p>防火墙配置
-<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG133.jpeg" alt=""></p>
-</li>
-<li><p>安装后执行的脚本
-<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG134.jpeg" alt=""></p>
-</li>
-<li><p>保存ks.cfg到/root下
-<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG135.jpeg" alt=""></p>
-</li>
-<li><p>执行</p>
-<pre><code>cp /root/ks.cfg /var/ftp
-# 挂载镜像
-mount /dev/cdrom /var/ftp/pub/
-service vsftpd restart
-</code></pre></li>
-</ul>
-<h3 id="安装DHCP"><a href="#安装DHCP" class="headerlink" title="安装DHCP"></a>安装DHCP</h3><pre><code>yum install -y dhcp
-
-# vmware中添加一张vmnet4的网卡
-ifconfig eth1 192.168.1.10/24
-
-# 配置DHCP
-subnet 192.168.1.0 netmask 255.255.255.0 {
-  range 192.168.1.100 192.168.1.200;
-  option domain-name-servers 192.168.1.1;
-  option domain-name &quot;internal.example.org&quot;;
-  option routers 192.168.1.1;
-  option broadcast-address 192.168.1.255;
-  default-lease-time 600;
-  max-lease-time 7200;
-  # 告诉客户端要找的ftp地址和文件
-  # 需要添加一张vmnet4的网卡
-  next-server 192.168.1.10;
-  filename &quot;pxelinux.0&quot;;
-}
-
-service dhcpd restart
-chkconfig dhcpd on
 </code></pre>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/10/30/搭建无人值守安装服务器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

@@ -75,7 +75,7 @@
 <meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/WechatIMG133.jpeg">
 <meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/WechatIMG134.jpeg">
 <meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/WechatIMG135.jpeg">
-<meta property="og:updated_time" content="2018-10-30T16:16:42.193Z">
+<meta property="og:updated_time" content="2018-11-06T14:15:23.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建无人值守安装服务器">
 <meta name="twitter:description" content="基于redhat6.5搭建无人值守安装服务器 基于FTP+TFTP+PXE+DHCP+Kickstart PXE协议使计算机可以通过网络启动，网卡中必须有PXE芯片 运行PXE协议需要设置DHCP服务器和TFTP服务器。DHCP服务器来给PXE client分配一个IP地址 由于是给PXE client分配IP地址，所以在配置DHCP服务器时需要增加相应的PXE设置 客户端开机PXE网卡会获取一个">
@@ -391,17 +391,18 @@
 
       
         <h1 id="基于redhat6-5搭建无人值守安装服务器"><a href="#基于redhat6-5搭建无人值守安装服务器" class="headerlink" title="基于redhat6.5搭建无人值守安装服务器"></a>基于redhat6.5搭建无人值守安装服务器</h1><blockquote>
-<p>基于FTP+TFTP+PXE+DHCP+Kickstart
-PXE协议使计算机可以通过网络启动，网卡中必须有PXE芯片
-运行PXE协议需要设置DHCP服务器和TFTP服务器。DHCP服务器来给PXE client分配一个IP地址
-由于是给PXE client分配IP地址，所以在配置DHCP服务器时需要增加相应的PXE设置
-客户端开机PXE网卡会获取一个DHCP服务器，DHCP服务器告诉客户端使用TFTP客户端下载TFTP服务器上的文件，然后通过FTP提供的ks.cfg文件会安装服务器</p>
+<p>基于FTP+TFTP+PXE+DHCP+Kickstart</p>
+<p>PXE协议使计算机可以通过网络启动，网卡中必须有PXE芯片</p>
+<p>运行PXE协议需要设置DHCP服务器和TFTP服务器。DHCP服务器来给PXE client分配一个IP地址</p>
+<p>由于是给PXE client分配IP地址，所以在配置DHCP服务器时需要增加相应的PXE设置</p>
+<p>客户端开机PXE网卡会获取一个DHCP服务器，DHCP服务器告诉客户端使用TFTP客户端下载TFTP服务器上的文件，然后通过FTP提供的ks.cfg文件会安装服务器</p>
 </blockquote>
 <h3 id="安装ftp"><a href="#安装ftp" class="headerlink" title="安装ftp"></a>安装ftp</h3><pre><code>yum install -y vsftpd
 service vsftpd start
 chkconfig vsftpd on
 </code></pre><h3 id="安装kickstart"><a href="#安装kickstart" class="headerlink" title="安装kickstart"></a>安装kickstart</h3><pre><code>yum install -y system-config-kickstart
-</code></pre><h3 id="安装TFTP"><a href="#安装TFTP" class="headerlink" title="安装TFTP"></a>安装TFTP</h3><pre><code>yum install -y tftp-server xinetd tftp
+</code></pre><a id="more"></a>
+<h3 id="安装TFTP"><a href="#安装TFTP" class="headerlink" title="安装TFTP"></a>安装TFTP</h3><pre><code>yum install -y tftp-server xinetd tftp
 
 # 配置tftp
 cat /etc/xinetd.d/tftp
