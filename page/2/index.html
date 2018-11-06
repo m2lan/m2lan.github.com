@@ -267,6 +267,250 @@
             
               
                 
+                <a class="post-title-link" href="/2018/09/17/centos7-install-elasticHD/" itemprop="url">
+                  centos7 install elasticHD
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T23:08:32+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">Elasticsearch</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/centos7-install-elasticHD/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7-install-elasticHD/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="centos7-install-elasticHD"><a href="#centos7-install-elasticHD" class="headerlink" title="centos7 install elasticHD"></a>centos7 install elasticHD</h1><ul>
+<li>下载ElasticHD
+<a href="https://github.com/360EntSecGroup-Skylar/ElasticHD/releases/download/1.4/elasticHD_linux_amd64.zip" target="_blank" rel="noopener">elasticHD_linux_amd64.zip</a></li>
+</ul>
+<h3 id="config"><a href="#config" class="headerlink" title="config"></a>config</h3><pre><code>chmod 0777 elasticHD_linux_amd64.zip
+unzip elasticHD_linux_amd64.zip
+
+# 开启端口9800
+
+# 启动
+./ElasticHD -p 0.0.0.0:9800 &amp;
+
+# 访问http://site:9800
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/webrtc服务端搭建/" itemprop="url">
+                  webrtc服务端搭建
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T23:07:37+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/webrtc/" itemprop="url" rel="index">
+                    <span itemprop="name">webrtc</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/webrtc服务端搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/webrtc服务端搭建/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="webrtc服务端"><a href="#webrtc服务端" class="headerlink" title="webrtc服务端"></a>webrtc服务端</h1><h2 id="搭建房间服务器"><a href="#搭建房间服务器" class="headerlink" title="搭建房间服务器"></a>搭建房间服务器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br><span class="line">yum install -y nodejs</span><br><span class="line">yum install python</span><br><span class="line">yum install python-test</span><br><span class="line">git clone  https://github.com/webrtc/apprtc.git</span><br><span class="line">cd apprtc</span><br><span class="line">npm install</span><br><span class="line">npm -g install grunt</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/09/17/webrtc服务端搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/09/17/swoole集群消息分发/" itemprop="url">
                   swoole集群消息分发
                 </a>
@@ -1334,247 +1578,6 @@ php56 --modules
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/centos7安装Alfresco/" itemprop="url">
-                  centos7安装Alfresco
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T22:59:01+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Alfresco/" itemprop="url" rel="index">
-                    <span itemprop="name">Alfresco</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/centos7安装Alfresco/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7安装Alfresco/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="centos7-install-Alfresco"><a href="#centos7-install-Alfresco" class="headerlink" title="centos7 install Alfresco"></a>centos7 install Alfresco</h1><h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h3><ul>
-<li><a href="https://www.alfresco.com/alfresco-community-download" target="_blank" rel="noopener">Alfresco</a></li>
-</ul>
-<h3 id="设置可执行权限"><a href="#设置可执行权限" class="headerlink" title="设置可执行权限"></a>设置可执行权限</h3><pre><code>chmod +x alfresco-community-installer-201707-linux-x64.bin
-./alfresco-community-installer-201707-linux-x64.bin
-</code></pre><h3 id="配置-etc-hosts"><a href="#配置-etc-hosts" class="headerlink" title="配置/etc/hosts"></a>配置/etc/hosts</h3><pre><code>127.0.0.1              {hostname.output}
-{ipaddress.output}     {hostname.output}
-</code></pre><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><pre><code>./alfresco.sh start
-</code></pre><h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><pre><code>http://ip:8080/share
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/centos7安装桌面/" itemprop="url">
-                  centos7安装桌面
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T22:58:23+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/centos7安装桌面/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7安装桌面/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="centos7-install-gnome"><a href="#centos7-install-gnome" class="headerlink" title="centos7 install gnome"></a>centos7 install gnome</h1><h3 id="centos7-install"><a href="#centos7-install" class="headerlink" title="centos7 install"></a>centos7 install</h3><pre><code>yum group install &quot;GNOME Desktop&quot; &quot;Graphical Administration Tools&quot;
-</code></pre><h3 id="rhel7"><a href="#rhel7" class="headerlink" title="rhel7"></a>rhel7</h3><pre><code>yum groupinstall &quot;Server with GUI&quot;
-</code></pre><h3 id="在系统启动时启用GUI"><a href="#在系统启动时启用GUI" class="headerlink" title="在系统启动时启用GUI"></a>在系统启动时启用GUI</h3><pre><code>ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
-</code></pre><h3 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h3><pre><code>reboot
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1620,7 +1623,7 @@ php56 --modules
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">132</span>
+              <span class="site-state-item-count">134</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1628,7 +1631,7 @@ php56 --modules
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1637,7 +1640,7 @@ php56 --modules
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

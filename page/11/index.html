@@ -267,6 +267,308 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/Shell-数组/" itemprop="url">
+                  Shell-数组
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:18:38+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-数组/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-数组/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# 数组 不支持多维数组
+# 通过index访问数组元素 arr[1]
+
+arr=(
+    xxxx
+    yyyy
+    wwww
+    &quot;hello world&quot;
+)
+
+# 使用下标定义
+arr1[0]=aaaa
+arr1[1]=bbb
+arr1[2]=cccc
+arr1[5]=dddd
+
+# 获取arr1所有值
+echo ${arr1[@]}
+
+# 获取arr1数组中值
+echo ${arr1[0]}
+echo ${arr1[1]}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/Shell-函数/" itemprop="url">
+                  Shell-函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:18:03+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-函数/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+# function --
+# 函数返回值只能是整数，用来表示函数执行是否成功，0表示执行成功，其他表示失败
+# 如果返回非整数，则error
+# 函数名前面的function可加可不加
+# 函数可以使用return，return的返回值可以通过$?来接收
+# 
+# 也可以对函数进行删除，使用unset，后面加上.f
+# 如要删除function1函数：unset .f function1
+# 
+
+# 无参函数
+function function1 {
+    echo function1.
+}
+
+# 带参函数
+function function2 {
+    echo $1
+}
+
+# 多个参数
+function function3 {
+    echo $1 --- $2
+}
+
+function4() {
+    echo &quot;function4&quot;
+
+    return $((10 + 20))
+}
+
+# 函数嵌套调用
+function5() {
+    echo &quot;function5&quot;
+
+    function1
+}
+
+# 函数调用
+function1
+
+# 外部参数传入
+function2 $1
+function3 &quot;hello &quot; &quot;world!&quot;
+function4
+
+# 用来接收function4的返回值
+echo $?
+
+function5
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/Shell-转义替换/" itemprop="url">
                   Shell-转义替换
                 </a>
@@ -1409,296 +1711,6 @@ echo &quot;hello world!&quot;;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/IOS-创建文件目录/" itemprop="url">
-                  IOS-创建文件目录
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:07:32+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/IOS-创建文件目录/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/IOS-创建文件目录/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>//
-//  ViewController.m
-//  chat-view
-//
-//  Created by yonglang on 14/12/4.
-//  Copyright (c) 2014年 yonglang. All rights reserved.
-//
-
-#import &quot;ViewController.h&quot;
-
-static NSString *homeDir = nil;
-
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    NSLog(@&quot;audioDir: %@&quot;, [self createFileDirectory]);
-}
-
-- (NSString *)createFileDirectory {
-    if (!homeDir) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        homeDir = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;1321312321/home&quot;]];
-
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if (![fileManager fileExistsAtPath:homeDir]) {
-            [fileManager createDirectoryAtPath:homeDir withIntermediateDirectories:YES attributes:nil error:nil];
-        }
-    }
-    return homeDir;
-}
-
-@end
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/OC-数组对象排序/" itemprop="url">
-                  OC-数组对象排序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:06:15+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">Objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/OC-数组对象排序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-数组对象排序/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Comparator排序"><a href="#Comparator排序" class="headerlink" title="Comparator排序"></a>Comparator排序</h2><pre><code>NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-
-    HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1];
-    HLMessage *msg2 = [[NSClassFromString([obj2 messageClassName]) alloc]initWithManagedObject:obj2];
-
-    NSComparisonResult result = [[msg1 timestamp] compare:[msg2 timestamp]];
-
-    switch(result) {
-        case NSOrderedAscending:
-            return NSOrderedAscending;
-        case NSOrderedDescending:
-            return NSOrderedDescending;
-        case NSOrderedSame:
-            return NSOrderedSame;
-        default:
-            return NSOrderedSame;
-    }
-}];
-return arr;
-</code></pre><h2 id="SortDescriptor排序"><a href="#SortDescriptor排序" class="headerlink" title="SortDescriptor排序"></a>SortDescriptor排序</h2><pre><code>NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@&quot;timestamp&quot; ascending:YES];
-NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-NSArray *sortArray = [array sortedArrayUsingDescriptors:sortDescriptors];
-
-return sortArray;
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1744,7 +1756,7 @@ return sortArray;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">132</span>
+              <span class="site-state-item-count">134</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1752,7 +1764,7 @@ return sortArray;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1761,7 +1773,7 @@ return sortArray;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

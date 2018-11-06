@@ -267,6 +267,443 @@
             
               
                 
+                <a class="post-title-link" href="/2018/11/05/搭建Postfix邮件服务器/" itemprop="url">
+                  搭建Postfix邮件服务器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-11-05T22:15:11+08:00" content="2018-11-05">
+              2018-11-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Postfix/" itemprop="url" rel="index">
+                    <span itemprop="name">Postfix</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/11/05/搭建Postfix邮件服务器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/05/搭建Postfix邮件服务器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="搭建Postfix邮件服务器"><a href="#搭建Postfix邮件服务器" class="headerlink" title="搭建Postfix邮件服务器"></a>搭建Postfix邮件服务器</h1><ul>
+<li><p>安装邮件服务器发送端</p>
+<pre><code>yum install -y postfix
+# 在服务端用于测试接收邮件
+yum install -y dovecot
+</code></pre></li>
+<li><p>启动</p>
+<pre><code>systemctl restart postfix
+</code></pre></li>
+<li><p>修改postfix配置文件</p>
+<pre><code>[root@nagios2 ~]# cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.1.241 nagios2.com
+
+vim /etc/postfix/main.cf
+mydomain = nagios2.com
+mynetworks = 192.168.1.0/24,127.0.0.0/8
+# 重启
+systemctl restart postfix
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/11/05/搭建Postfix邮件服务器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/10/30/搭建无人值守安装服务器/" itemprop="url">
+                  搭建无人值守安装服务器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-10-30T21:02:39+08:00" content="2018-10-30">
+              2018-10-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/FTP/" itemprop="url" rel="index">
+                    <span itemprop="name">FTP</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/FTP/TFTP/" itemprop="url" rel="index">
+                    <span itemprop="name">TFTP</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/FTP/TFTP/PXE/" itemprop="url" rel="index">
+                    <span itemprop="name">PXE</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/FTP/TFTP/PXE/dhcp/" itemprop="url" rel="index">
+                    <span itemprop="name">dhcp</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/FTP/TFTP/PXE/dhcp/Kickstart/" itemprop="url" rel="index">
+                    <span itemprop="name">Kickstart</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/10/30/搭建无人值守安装服务器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/30/搭建无人值守安装服务器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="基于redhat6-5搭建无人值守安装服务器"><a href="#基于redhat6-5搭建无人值守安装服务器" class="headerlink" title="基于redhat6.5搭建无人值守安装服务器"></a>基于redhat6.5搭建无人值守安装服务器</h1><blockquote>
+<p>基于FTP+TFTP+PXE+DHCP+Kickstart
+PXE协议使计算机可以通过网络启动，网卡中必须有PXE芯片
+运行PXE协议需要设置DHCP服务器和TFTP服务器。DHCP服务器来给PXE client分配一个IP地址
+由于是给PXE client分配IP地址，所以在配置DHCP服务器时需要增加相应的PXE设置
+客户端开机PXE网卡会获取一个DHCP服务器，DHCP服务器告诉客户端使用TFTP客户端下载TFTP服务器上的文件，然后通过FTP提供的ks.cfg文件会安装服务器</p>
+</blockquote>
+<h3 id="安装ftp"><a href="#安装ftp" class="headerlink" title="安装ftp"></a>安装ftp</h3><pre><code>yum install -y vsftpd
+service vsftpd start
+chkconfig vsftpd on
+</code></pre><h3 id="安装kickstart"><a href="#安装kickstart" class="headerlink" title="安装kickstart"></a>安装kickstart</h3><pre><code>yum install -y system-config-kickstart
+</code></pre><h3 id="安装TFTP"><a href="#安装TFTP" class="headerlink" title="安装TFTP"></a>安装TFTP</h3><pre><code>yum install -y tftp-server xinetd tftp
+
+# 配置tftp
+cat /etc/xinetd.d/tftp
+service tftp
+{
+    socket_type        = dgram
+    protocol        = udp
+    wait            = yes
+    user            = root
+    server            = /usr/sbin/in.tftpd
+    server_args        = -s /tftpboot
+    disable            = no
+    per_source        = 11
+    cps            = 100 2
+    flags            = IPv4
+}
+
+service xinetd restart
+mkdir /tftpboot
+mkdir /tftpboot/pxelinux.cfg
+cp /usr/share/syslinux/pxelinux.0 /tftpboot/
+cp /mnt/isolinux/isolinux.cfg /tftpboot/pxelinux.cfg/default
+# 虚拟到内存里的镜像，在内存里可以虚拟出来一个文件系统 
+cp /mnt/images/pxeboot/initrd.img /tftpboot/
+# 内核
+cp /mnt/images/pxeboot/vmlinuz /tftpboot/
+chmod 644 /tftpboot/pxelinux.cfg/default
+
+# 修改default文件，通过ftp服务器方式来访问kickstart文件
+cat /tftpboot/pxelinux.cfg/default
+default linux
+#prompt 1
+timeout 600
+
+display boot.msg
+
+menu background splash.jpg
+menu title Welcome to Red Hat Enterprise Linux 6.5!
+menu color border 0 #ffffffff #00000000
+menu color sel 7 #ffffffff #ff000000
+menu color title 0 #ffffffff #00000000
+menu color tabmsg 0 #ffffffff #00000000
+menu color unsel 0 #ffffffff #00000000
+menu color hotsel 0 #ff000000 #ffffffff
+menu color hotkey 7 #ffffffff #ff000000
+menu color scrollbar 0 #ffffffff #00000000
+
+label linux
+  menu label ^Install or upgrade an existing system
+  menu default
+  kernel vmlinuz
+  append initrd=initrd.img ks=ftp://192.168.1.10/ks.cfg
+label vesa
+  menu label Install system with ^basic video driver
+  kernel vmlinuz
+  append initrd=initrd.img xdriver=vesa nomodeset
+label rescue
+  menu label ^Rescue installed system
+  kernel vmlinuz
+  append initrd=initrd.img rescue
+label local
+  menu label Boot from ^local drive
+  localboot 0xffff
+label memtest86
+  menu label ^Memory test
+  kernel memtest
+  append -
+
+# 在图形界面下打开kickstart配置程序
+LANG=zh_CN.UTF-8
+执行system-config-kickstart
+</code></pre><p><img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG126.jpeg" alt="">
+<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG127.jpeg" alt="">
+<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG128.jpeg" alt=""></p>
+<ul>
+<li><p>创建一个boot分区
+<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG129.jpeg" alt=""></p>
+</li>
+<li><p>创建一个swap分区
+<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG130.jpeg" alt=""></p>
+</li>
+<li><p>创建根分区
+<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG131.jpeg" alt=""></p>
+</li>
+<li><p>网络配置
+<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG132.jpeg" alt=""></p>
+</li>
+<li><p>防火墙配置
+<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG133.jpeg" alt=""></p>
+</li>
+<li><p>安装后执行的脚本
+<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG134.jpeg" alt=""></p>
+</li>
+<li><p>保存ks.cfg到/root下
+<img src="http://opsi4gg7g.bkt.clouddn.com/WechatIMG135.jpeg" alt=""></p>
+</li>
+<li><p>执行</p>
+<pre><code>cp /root/ks.cfg /var/ftp
+# 挂载镜像
+mount /dev/cdrom /var/ftp/pub/
+service vsftpd restart
+</code></pre></li>
+</ul>
+<h3 id="安装DHCP"><a href="#安装DHCP" class="headerlink" title="安装DHCP"></a>安装DHCP</h3><pre><code>yum install -y dhcp
+
+# vmware中添加一张vmnet4的网卡
+ifconfig eth1 192.168.1.10/24
+
+# 配置DHCP
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.100 192.168.1.200;
+  option domain-name-servers 192.168.1.1;
+  option domain-name &quot;internal.example.org&quot;;
+  option routers 192.168.1.1;
+  option broadcast-address 192.168.1.255;
+  default-lease-time 600;
+  max-lease-time 7200;
+  # 告诉客户端要找的ftp地址和文件
+  # 需要添加一张vmnet4的网卡
+  next-server 192.168.1.10;
+  filename &quot;pxelinux.0&quot;;
+}
+
+service dhcpd restart
+chkconfig dhcpd on
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/10/30/搭建nagios监控服务器/" itemprop="url">
                   搭建nagios监控服务器
                 </a>
@@ -335,8 +772,7 @@
 
       
         
-          
-            <h3 id="搭建nagios"><a href="#搭建nagios" class="headerlink" title="搭建nagios"></a>搭建nagios</h3><h1 id="安装nagios"><a href="#安装nagios" class="headerlink" title="安装nagios"></a>安装nagios</h1><pre><code>yum install -y httpd gcc glibc glibc-common php gd gd-devel libpng libmng libjpeg zlib
+          <h3 id="搭建nagios"><a href="#搭建nagios" class="headerlink" title="搭建nagios"></a>搭建nagios</h3><h1 id="安装nagios"><a href="#安装nagios" class="headerlink" title="安装nagios"></a>安装nagios</h1><pre><code>yum install -y httpd gcc glibc glibc-common php gd gd-devel libpng libmng libjpeg zlib
 useradd nagios
 groupadd nagcmd
 usermod -G nagcmd nagios
@@ -367,258 +803,12 @@ make install-webconf
 
 # 生成访问nagios web登录的用户名和密码
 htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
-</code></pre><ul>
-<li><p>编译nagios插件</p>
-<pre><code># 安装插件之前先安装mysql服务
-yum install -y mysql-devel
-tar xzvf nagios-plugins-2.1.1.tar.gz
-cd nagios-plugins-2.1.1
-./configure --with-nagios-user=nagios --with-nagios-group=nagcmd
-make &amp;&amp; make install
-# 安装成功后会生成脚本文件
-ls -la /usr/local/nagios/libexec/
-</code></pre></li>
-<li><p>检查配置文件</p>
-<pre><code>/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
-</code></pre></li>
-<li><p>启动nagios</p>
-<pre><code>systemctl start nagios
-</code></pre></li>
-<li><p>访问</p>
-<pre><code>http://192.168.1.240/nagios
-</code></pre></li>
-</ul>
-<h1 id="监控本机对象，监控NFS服务运行状态"><a href="#监控本机对象，监控NFS服务运行状态" class="headerlink" title="监控本机对象，监控NFS服务运行状态"></a>监控本机对象，监控NFS服务运行状态</h1><pre><code>cd /usr/local/nagios/etc/objects/
-cp localhost.cfg localhost.cfg.bak
-
-cat localhost.cfg
-define host {
-    use                     linux-server
-    host_name               localhost
-    alias                   localhost
-    address                 127.0.0.1
-  }
-
-define hostgroup{
-        hostgroup_name  linux-servers
-        alias           Linux Servers
-        members         localhost
-}
-
-define service {
-    use    local-service
-    host_name    localhost
-    service_description    NFS
-    check_command    check_tcp!2049 ;监听tcp端口2049
-}
-
-# 安装nfs服务
-yum install -y rpc-bind nfs-utils
-# 配置nfs
-cat /etc/exports
-/tmp    *(rw)
-# 启动nfs
-systemctl restart nfs
-# 检查nfs是否启动成功
-showmount -e 192.168.1.240
-# 重启nagios
-systemctl restart nagios
-# 访问http://192.168.1.240/nagios查看服务状态
-# 默认间隔5分钟检查一次，可以强制检查
-</code></pre><p><img src="http://opsi4gg7g.bkt.clouddn.com/1540545509151.jpg" alt=""></p>
-<pre><code># 如果出现Error: Could not stat() command file &apos;/usr/local/nagios/var/rw/nagios.cmd&apos;!错误，关闭防火墙
-</code></pre><h1 id="监控外部主机192-168-1-241上的mysql服务器运行状态"><a href="#监控外部主机192-168-1-241上的mysql服务器运行状态" class="headerlink" title="监控外部主机192.168.1.241上的mysql服务器运行状态"></a>监控外部主机192.168.1.241上的mysql服务器运行状态</h1><ul>
-<li><p>编辑主配置文件</p>
-<pre><code>vim /usr/local/nagios/etc/nagios.cfg
-# 添加以下两项配置
-cfg_file=/usr/local/nagios/etc/objects/mysql.cfg
-
-cat mysql.cfg
-define host{
-        use                     linux-server
-        host_name               nagios2
-        alias                   mysql服务器
-        address                 192.168.1.241
-    hostgroups        mysql-server
-}
-
-define service {
-        use     local-service
-        host_name       nagios2
-        service_description     mysql服务
-        check_command   check_mysql
-}
-
-define hostgroup {
-    hostgroup_name    mysql-server
-    alias    mysql服务器
-    members    nagios2
-}
-
-# check_command 命令必须在command.cfg中存在
-# 在command.cfg中添加以下内容
-define command {
-command_name    check_mysql
-command_line    $USER1$/check_mysql -H $HOSTADDRESS$ -u nagdb -d nagdb
-}
-
-# 在192.168.1.241服务器中安装mysql服务
-yum install -y mysql-server
-systemctl start mysqld
-# 创建nagdb数据库和用户
-create database nagdb;
-grant select on nagdb.* to nagdb@&apos;192.168.1.240&apos;;
-
-# 回到192.168.1.240服务器中测试连接
-/usr/local/nagios/libexec/check_mysql -H 192.168.1.241 -u nagdb -d nagdb
-# 返回以下内容表示连接成功
-Uptime: 846  Threads: 1  Questions: 49  Slow queries: 0  Opens: 67  Flush tables: 1  Open tables: 60  Queries per second avg: 0.057|Connections=19c;;; Open_files=16;;; Open_tables=60;;; Qcache_free_memory=1031352;;; Qcache_hits=0c;;; Qcache_inserts=0c;;; Qcache_lowmem_prunes=0c;;; Qcache_not_cached=11c;;; Qcache_queries_in_cache=0;;; Queries=50c;;; Questions=44c;;; Table_locks_waited=0c;;; Threads_connected=1;;; Threads_running=1;;; Uptime=846c;;;
-# 关闭192.168.1.241上的mysql服务，测试返回结果为
-Can&apos;t connect to MySQL server on &apos;192.168.1.241&apos; (111)
-
-# 访问http://192.168.1.240/nagios查看mysql服务是否正常
-</code></pre><p>  <img src="http://opsi4gg7g.bkt.clouddn.com/1540615926016.jpg" alt=""></p>
-</li>
-</ul>
-<h1 id="监听服务器上的私有信息"><a href="#监听服务器上的私有信息" class="headerlink" title="监听服务器上的私有信息"></a>监听服务器上的私有信息</h1><h2 id="监控192-168-1-241服务器上的私有信息-硬盘、。"><a href="#监控192-168-1-241服务器上的私有信息-硬盘、。" class="headerlink" title="监控192.168.1.241服务器上的私有信息(硬盘、。)"></a>监控192.168.1.241服务器上的私有信息(硬盘、。)</h2><ul>
-<li>正常情况下不能访问外部服务器的私有信息，需要通过nagios远程执行插件nrpe来获取</li>
-<li>两台机器通过ssl加密传输数据</li>
-<li><p>在两台机器上192.168.1.240和241服务器安装ssl</p>
-<pre><code>yum install -y openssl openssl-devel
-</code></pre></li>
-<li><p>两台服务器分别安装nrpe</p>
-<pre><code>tar xvzf nrpe-2.15.tar.gz
-cd nrpe-2.15
-yum install -y gcc
-./configure
-# 编译成功后显示
-General Options:
- -------------------------
- NRPE port:    5666
- NRPE user:    nagios
- NRPE group:   nagios
- Nagios user:  nagios
- Nagios group: nagios
-
-# 需要创建nagios用户
-useradd nagios
-groupadd nagcmd
-usermod -G nagcmd nagios
-
-make all
-make install
-
-# 插件安装后所在路径
-/usr/local/nagios/libexec/check_nrpe
-
-# 192.168.1.241服务器还需生成配置文件
-make install-daemon-config
-# 让xinetd服务可以管理nrep服务，生成xinetd下nrpe配置文件
-make install-xinetd
-yum install -y xinetd
-</code></pre></li>
-<li><p>在主配置文件添加配置文件</p>
-<pre><code># 在/usr/local/nagios/etc/nagios.cfg中添加
-cfg_file=/usr/local/nagios/etc/objects/hosts.cfg
-
-# 在/usr/local/nagios/etc/objects/hosts.cfg中添加
-define service {
-    use     local-service
-    host_name       nagios2
-    service_description     磁盘检查
-    check_command   check_nrpe!check_root ; 当磁盘空间小于80%警告，小于90%警告危急
-}
-
-define service {
-    use local-service
-    host_name       nagios2
-    service_description     统计总进程
-    check_command   check_nrpe!check_total_procs ; 总进程数大于250个警告，大于400个警告危急
-}
-
-define service {
-    use     local-service
-    host_name       nagios2
-    service_description     当前负载
-    check_command   check_nrpe!check_load ; 检查当前服务器负载
-}
-
-# 在/usr/local/nagios/etc/objects/command.cfg中添加
-define command {
-    command_name    check_nrpe
-    command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
-}
-</code></pre></li>
-</ul>
-<h3 id="192-168-1-241配置"><a href="#192-168-1-241配置" class="headerlink" title="192.168.1.241配置"></a>192.168.1.241配置</h3><ul>
-<li>安装nagios-plugins</li>
-<li><p>编辑 /etc/xinetd.d/nrpe配置文件，添加only_from 192.168.1.240，允许240服务器连接nrpe</p>
-<pre><code>service nrpe
-{
-        flags           = REUSE
-        socket_type     = stream
-        port            = 5666
-        wait            = no
-        user            = nagios
-        group           = nagios
-        server          = /usr/local/nagios/bin/nrpe
-        server_args     = -c /usr/local/nagios/etc/nrpe.cfg --inetd
-        log_on_failure  += USERID
-        disable         = no
-        only_from       = 127.0.0.1 192.168.1.240
-}
-</code></pre></li>
-<li><p>在/etc/services文件中添加</p>
-<pre><code>nrpe            5666/tcp                # NRPE
-</code></pre></li>
-<li><p>/etc/services文件作用</p>
-<ul>
-<li>xinet.d来启动服务时会在/etc/services找相应的端口来启动服务。找不到对应端口，将不启动服务。</li>
-</ul>
-</li>
-<li><p>启动xinetd</p>
-<pre><code>systemctl start xinetd
-</code></pre></li>
-<li><p>查看5666端口是否启动成功</p>
-<pre><code>netstat -antlup | grep 5666
-</code></pre></li>
-<li><p>/usr/local/nagios/etc/nrpe.cfg添加，检查磁盘剩余空间，小于80%告警，小于90%告警危急</p>
-<pre><code>command[check_root]=/usr/local/nagios/libexec/check_disk -w 80% -c 90% -p /dev/mapper/centos-root
-</code></pre></li>
-<li><p>重启xinetd</p>
-<pre><code>systemctl restart xinetd
-</code></pre></li>
-<li><p>查看磁盘空间</p>
-<pre><code>[root@nagios2 etc]# df -h
-文件系统                 容量  已用  可用 已用% 挂载点
-/dev/mapper/centos-root   18G  2.0G   16G   11% /
-devtmpfs                 484M     0  484M    0% /dev
-tmpfs                    494M     0  494M    0% /dev/shm
-tmpfs                    494M   13M  481M    3% /run
-tmpfs                    494M     0  494M    0% /sys/fs/cgroup
-/dev/sda1                497M  154M  344M   31% /boot
-tmpfs                     99M     0   99M    0% /run/user/0
-</code></pre></li>
-<li>访问<a href="http://192.168.1.240/nagios" target="_blank" rel="noopener">http://192.168.1.240/nagios</a>
-<img src="http://opsi4gg7g.bkt.clouddn.com/1540630066544.jpg" alt=""></li>
-</ul>
-<h1 id="配置nagios邮件提醒"><a href="#配置nagios邮件提醒" class="headerlink" title="配置nagios邮件提醒"></a>配置nagios邮件提醒</h1><ul>
-<li><p>安装sendmail</p>
-<pre><code>yum install -y sendmail
-systemctl enable sendmail
-systemctl start sendmail
-</code></pre></li>
-<li><p>修改配置文件<code>/usr/local/nagios/etc/objects/contacts.cfg</code></p>
-<pre><code>define contact{
-    contact_name                    nagiosadmin
-    use                             generic-contact
-    alias                           Nagios Admin
-    email                           763960267@qq.com ; 多个联系人用空格分开
-}
-</code></pre></li>
-</ul>
-
-          
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/10/30/搭建nagios监控服务器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1496,250 +1686,6 @@ cd elasticsearch-5.5.1/
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/centos7-install-elasticHD/" itemprop="url">
-                  centos7 install elasticHD
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T23:08:32+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
-                    <span itemprop="name">Elasticsearch</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/centos7-install-elasticHD/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7-install-elasticHD/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="centos7-install-elasticHD"><a href="#centos7-install-elasticHD" class="headerlink" title="centos7 install elasticHD"></a>centos7 install elasticHD</h1><ul>
-<li>下载ElasticHD
-<a href="https://github.com/360EntSecGroup-Skylar/ElasticHD/releases/download/1.4/elasticHD_linux_amd64.zip" target="_blank" rel="noopener">elasticHD_linux_amd64.zip</a></li>
-</ul>
-<h3 id="config"><a href="#config" class="headerlink" title="config"></a>config</h3><pre><code>chmod 0777 elasticHD_linux_amd64.zip
-unzip elasticHD_linux_amd64.zip
-
-# 开启端口9800
-
-# 启动
-./ElasticHD -p 0.0.0.0:9800 &amp;
-
-# 访问http://site:9800
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/webrtc服务端搭建/" itemprop="url">
-                  webrtc服务端搭建
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T23:07:37+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/webrtc/" itemprop="url" rel="index">
-                    <span itemprop="name">webrtc</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/webrtc服务端搭建/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/webrtc服务端搭建/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="webrtc服务端"><a href="#webrtc服务端" class="headerlink" title="webrtc服务端"></a>webrtc服务端</h1><h2 id="搭建房间服务器"><a href="#搭建房间服务器" class="headerlink" title="搭建房间服务器"></a>搭建房间服务器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br><span class="line">yum install -y nodejs</span><br><span class="line">yum install python</span><br><span class="line">yum install python-test</span><br><span class="line">git clone  https://github.com/webrtc/apprtc.git</span><br><span class="line">cd apprtc</span><br><span class="line">npm install</span><br><span class="line">npm -g install grunt</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/webrtc服务端搭建/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1785,7 +1731,7 @@ unzip elasticHD_linux_amd64.zip
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">132</span>
+              <span class="site-state-item-count">134</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1793,7 +1739,7 @@ unzip elasticHD_linux_amd64.zip
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1802,7 +1748,7 @@ unzip elasticHD_linux_amd64.zip
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
