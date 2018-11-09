@@ -267,6 +267,162 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/OC-UIButton中设置image大小/" itemprop="url">
+                  OC-UIButton中设置image大小
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:08:49+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Objective-c/" itemprop="url" rel="index">
+                    <span itemprop="name">Objective-c</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/OC-UIButton中设置image大小/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/OC-UIButton中设置image大小/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#import &lt;UIKit/UIKit.h&gt;
+
+@interface UIImage (Category)
+
+- (UIImage*)transformWidth:(CGFloat)width
+                    height:(CGFloat)height;
+
+@end
+
+
+#import &quot;UIImage+Category.h&quot;
+
+@implementation UIImage (Category)
+
+- (UIImage*)transformWidth:(CGFloat)width
+               height:(CGFloat)height {
+
+    CGFloat destW = width;
+    CGFloat destH = height;
+    CGFloat sourceW = width;
+    CGFloat sourceH = height;
+
+    CGImageRef imageRef = self.CGImage;
+    CGContextRef bitmap = CGBitmapContextCreate(NULL,
+                                               destW,
+                                               destH,
+                                               CGImageGetBitsPerComponent(imageRef),
+                                               4*destW,
+                                               CGImageGetColorSpace(imageRef),
+                                               (kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst));
+
+    CGContextDrawImage(bitmap, CGRectMake(0, 0, sourceW, sourceH), imageRef);
+
+    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
+    UIImage *resultImage = [UIImage imageWithCGImage:ref];
+    CGContextRelease(bitmap);
+    CGImageRelease(ref);
+
+    return resultImage;
+}
+
+@end
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/IOS-创建文件目录/" itemprop="url">
                   IOS-创建文件目录
                 </a>
@@ -1548,134 +1704,6 @@ $ git cherry-pick 38361a68
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Maven-聚合和继承/" itemprop="url">
-                  Maven-聚合和继承
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T01:23:02+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Maven/" itemprop="url" rel="index">
-                    <span itemprop="name">Maven</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Maven-聚合和继承/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Maven-聚合和继承/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><ul>
-<li>如果一个项目依赖数十个模块，那么要一个一个编译起来是非常浪费时间的，所以就需要把所需模块聚合在一起，一起编译。</li>
-<li>比如当前有User有两个模块：1.user-dao, 2.user-service，在eclipse中创建一个<code>create a simple project(skip archetype selection)</code>,</li>
-<li>填入：Group Id, Artifact Id(这里为user-parent), Version, Packaging(这里选择pom),然后创建。</li>
-<li><p>在<code>user-parent/pom.xml</code>中添加如下代码：</p>
-<pre><code>&lt;modules&gt;
-  &lt;module&gt;../user-dao&lt;/module&gt;
-  &lt;module&gt;../user-service&lt;/module&gt;
-&lt;/modules&gt;
-</code></pre></li>
-<li>接下来就可以直接在<code>user-parent/pom.xml</code>编译了。</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/10/Maven-聚合和继承/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1721,7 +1749,7 @@ $ git cherry-pick 38361a68
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">134</span>
+              <span class="site-state-item-count">135</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1729,7 +1757,7 @@ $ git cherry-pick 38361a68
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1738,7 +1766,7 @@ $ git cherry-pick 38361a68
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

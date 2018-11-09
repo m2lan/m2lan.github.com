@@ -267,6 +267,142 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/28/Linux常用操作/" itemprop="url">
+                  Linux常用操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-28T01:06:33+08:00" content="2017-05-28">
+              2017-05-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/28/Linux常用操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/Linux常用操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Linux常用操作"><a href="#Linux常用操作" class="headerlink" title="Linux常用操作"></a>Linux常用操作</h1><ul>
+<li><p>清空iptables</p>
+<pre><code>[root@m2 ~]# iptables -F
+[root@m2 ~]# /etc/init.d/iptables save
+iptables：将防火墙规则保存到 /etc/sysconfig/iptables：     [确定]
+</code></pre></li>
+<li><p>关闭selinux</p>
+<pre><code>[root@m2 ~]# vim /etc/selinux/config
+SELINUX=disabled
+</code></pre></li>
+<li><p>查看selinux是否关闭</p>
+<pre><code>[root@m2 ~]# getenforce
+Disabled
+</code></pre></li>
+<li><p>配置永久主机名</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/sysconfig/network
+NETWORKING=yes
+HOSTNAME=m2lan150.com
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/28/Linux常用操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/28/sshd服务管理/" itemprop="url">
                   sshd服务管理
                 </a>
@@ -1758,147 +1894,6 @@ public class Counter2 {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/21/CountDownLatch/" itemprop="url">
-                  CountDownLatch
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-21T15:32:28+08:00" content="2017-05-21">
-              2017-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/并发/" itemprop="url" rel="index">
-                    <span itemprop="name">并发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/21/CountDownLatch/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/CountDownLatch/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java并发编程类CountDownLatch"><a href="#Java并发编程类CountDownLatch" class="headerlink" title="Java并发编程类CountDownLatch"></a>Java并发编程类CountDownLatch</h1><pre><code>public class CountDownLatchDemo1 {
-
-    public static void main(String[] args) {
-        int count = 10;
-        final CountDownLatch downLatch = new CountDownLatch(count);
-        Runnable rannable = () -&gt; {
-            System.out.println(Thread.currentThread().getName() + &quot; : hahhahaha&quot;);
-            downLatch.countDown();
-        };
-
-        ExecutorService service = Executors.newFixedThreadPool(2);
-        for (int i = 0; i &lt; count; i++) {
-            service.execute(rannable);
-        }
-        service.shutdown();
-
-        // 当多个线程都达到了预期状态或完成预期工作时触发事件，其他线程可以等待这个事件来触发后续的工作
-        try {
-            downLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // 当上面当所有线程都完成了downLatch.countDown调用后，会从downLatch.await返回后执行以下操作
-        System.out.println(&quot;执行完毕&quot;);
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1944,7 +1939,7 @@ public class Counter2 {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">134</span>
+              <span class="site-state-item-count">135</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1952,7 +1947,7 @@ public class Counter2 {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1961,7 +1956,7 @@ public class Counter2 {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

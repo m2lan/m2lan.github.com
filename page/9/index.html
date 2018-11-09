@@ -267,6 +267,159 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/19/MySQL-嵌套集模型/" itemprop="url">
+                  mysql嵌套集模型
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-19T18:38:03+08:00" content="2016-07-19">
+              2016-07-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/19/MySQL-嵌套集模型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/19/MySQL-嵌套集模型/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="嵌套集模型"><a href="#嵌套集模型" class="headerlink" title="嵌套集模型"></a>嵌套集模型</h1><h2 id="在分类表中，通过左和右值来代表我们的嵌套节点。"><a href="#在分类表中，通过左和右值来代表我们的嵌套节点。" class="headerlink" title="在分类表中，通过左和右值来代表我们的嵌套节点。"></a>在分类表中，通过左和右值来代表我们的嵌套节点。</h2><ul>
+<li><p>创建表并添加测试数据</p>
+<pre><code>CREATE TABLE category (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    lft INT NOT NULL,
+    rgt INT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO category VALUES
+                            (1,&apos;ELECTRONICS&apos;,1,20),
+                            (2,&apos;TELEVISIONS&apos;,2,9),
+                            (3,&apos;TUBE&apos;,3,4),
+                            (4,&apos;LCD&apos;,5,6),
+                            (5,&apos;PLASMA&apos;,7,8),
+                            (6,&apos;PORTABLE ELECTRONICS&apos;,10,19),
+                            (7,&apos;MP3 PLAYERS&apos;,11,14),
+                            (8,&apos;FLASH&apos;,12,13),
+                            (9,&apos;CD PLAYERS&apos;,15,16),
+                            (10,&apos;2 WAY RADIOS&apos;,17,18);
+
+MariaDB [work]&gt; select * from category;
++-------------+----------------------+-----+-----+
+| category_id | name                 | lft | rgt |
++-------------+----------------------+-----+-----+
+|           1 | ELECTRONICS          |   1 |  20 |
+|           2 | TELEVISIONS          |   2 |   9 |
+|           3 | TUBE                 |   3 |   4 |
+|           4 | LCD                  |   5 |   6 |
+|           5 | PLASMA               |   7 |   8 |
+|           6 | PORTABLE ELECTRONICS |  10 |  19 |
+|           7 | MP3 PLAYERS          |  11 |  14 |
+|           8 | FLASH                |  12 |  13 |
+|           9 | CD PLAYERS           |  15 |  16 |
+|          10 | 2 WAY RADIOS         |  17 |  18 |
++-------------+----------------------+-----+-----+
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/19/MySQL-嵌套集模型/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/15/nuclide编辑器安装/" itemprop="url">
                   nuclide编辑器安装
                 </a>
@@ -1434,129 +1587,6 @@ sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/26/centos-安装jdk/" itemprop="url">
-                  centos-安装jdk
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-26T00:11:10+08:00" content="2016-02-26">
-              2016-02-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/26/centos-安装jdk/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/centos-安装jdk/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Centos安装JDK"><a href="#Centos安装JDK" class="headerlink" title="Centos安装JDK"></a>Centos安装JDK</h1><pre><code>wget http://download.oracle.com/otn-pub/java/jdk/7u3-b04/jdk-7u3-linux-x64.rpm(当出现秒下时候，出现HTTP request sent, awaiting response... 302 Moved Temporarily错误，通过chrom抓包，获取重定向后的链接地址)
-
-运行rpm -ivh jdk-7u3-linux-x64.rpm
-
-修改profile文件，vi /etc/profile,在文件最后加入
-
-  export JAVA_HOME=/usr/java/jdk1.7.0_03
-  export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-  export PATH=$PATH:$JAVA_HOME/bin
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1602,7 +1632,7 @@ sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">134</span>
+              <span class="site-state-item-count">135</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1610,7 +1640,7 @@ sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1619,7 +1649,7 @@ sudo sysctl -w net.ipv4.ip_local_port_range=&quot;1024 64000&quot;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

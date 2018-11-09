@@ -267,6 +267,139 @@
             
               
                 
+                <a class="post-title-link" href="/2018/11/07/iptables防火墙/" itemprop="url">
+                  iptables防火墙
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-11-07T10:27:43+08:00" content="2018-11-07">
+              2018-11-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iptables/" itemprop="url" rel="index">
+                    <span itemprop="name">iptables</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/11/07/iptables防火墙/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/07/iptables防火墙/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="iptables防火墙"><a href="#iptables防火墙" class="headerlink" title="iptables防火墙"></a>iptables防火墙</h1><h3 id="iptables-基本介绍"><a href="#iptables-基本介绍" class="headerlink" title="iptables 基本介绍"></a>iptables 基本介绍</h3><ul>
+<li>iptables 内置了<code>raw</code>、<code>filter</code>、<code>nat</code>和<code>mangle</code>四张表。所有规则配置后立即生效，不需要重新启动服务。<ul>
+<li><code>raw</code>: 优先级最高，一般情况下用不到</li>
+<li><code>filter</code>: 负责过滤数据包，包括的规则链: <code>INPUT</code>、<code>OUTPUT</code>和<code>FORWARD</code></li>
+<li><code>nat</code>: 涉及到网络地址转换，包括的规则链: <code>PREROUTING</code>、<code>POSTROUTING</code>和<code>OUTPUT</code></li>
+<li><code>mangle</code>: 主要应用在修改数据包内容上，用来做流量整形的，给数据包打个标识，默认的规则链: <code>INPUT</code>、<code>OUTPUT</code>、<code>FORWARD</code>、<code>POSTROUTING</code>和<code>PREROUTING</code></li>
+</ul>
+</li>
+<li>五个链<ul>
+<li><code>INPUT</code>: 匹配目标IP是本机的数据包</li>
+<li><code>OUTPUT</code>: 向外流出的数据包</li>
+<li><code>FORWARD</code>: 匹配流经本机的数据包</li>
+<li><code>PREROUTING</code>: 用来修改目的地址来做<code>DNAT</code>。如: 把内网的80端口映射到路由器外网端口上</li>
+<li><code>POSTROUTING</code>: 用来修改源地址来做<code>SNAT</code>。如: 内网通过路由器NAT转换功能实现通过一个公网IP地址上网</li>
+</ul>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/11/07/iptables防火墙/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/11/05/搭建Postfix邮件服务器/" itemprop="url">
                   搭建Postfix邮件服务器
                 </a>
@@ -1439,130 +1572,6 @@ cd elasticsearch-5.5.1/
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/elsearch-安装sql插件/" itemprop="url">
-                  elsearch 安装sql插件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T23:09:23+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
-                    <span itemprop="name">Elasticsearch</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/elsearch-安装sql插件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/elsearch-安装sql插件/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="elsearch安装sql插件"><a href="#elsearch安装sql插件" class="headerlink" title="elsearch安装sql插件"></a>elsearch安装sql插件</h1><ul>
-<li><p>install</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/elasticsearch-plugin install https://github.com/NLPchina/elasticsearch-sql/releases/download/5.5.1.0/elasticsearch-sql-5.5.1.0.zip</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>install ui web front-end</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/NLPchina/elasticsearch-sql/releases/download/5.4.1.0/es-sql-site-standalone.zip</span><br><span class="line"></span><br><span class="line">cd site-server</span><br><span class="line">npm install express --save</span><br><span class="line">node node-server.js &amp;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/elsearch-安装sql插件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1608,7 +1617,7 @@ cd elasticsearch-5.5.1/
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">134</span>
+              <span class="site-state-item-count">135</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1616,7 +1625,7 @@ cd elasticsearch-5.5.1/
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1625,7 +1634,7 @@ cd elasticsearch-5.5.1/
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
