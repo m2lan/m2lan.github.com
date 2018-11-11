@@ -267,6 +267,121 @@
             
               
                 
+                <a class="post-title-link" href="/2018/09/17/阿里云升级内核/" itemprop="url">
+                  阿里云升级内核
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T22:28:16+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/阿里云升级内核/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/阿里云升级内核/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="阿里云升级内核"><a href="#阿里云升级内核" class="headerlink" title="阿里云升级内核"></a>阿里云升级内核</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">yum remove kernel-headers</span><br><span class="line">sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</span><br><span class="line">sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm</span><br><span class="line">sudo yum --enablerepo=elrepo-kernel install kernel-ml -y</span><br><span class="line">rpm -qa | grep kernel</span><br><span class="line">sudo egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'</span><br><span class="line">sudo grub2-set-default 0</span><br><span class="line">sudo shutdown -r now</span><br><span class="line">uname -r</span><br><span class="line">echo 'net.core.default_qdisc=fq' | sudo tee -a /etc/sysctl.conf</span><br><span class="line">echo 'net.ipv4.tcp_congestion_control=bbr' | sudo tee -a /etc/sysctl.conf</span><br><span class="line">sysctl -p</span><br><span class="line">sysctl net.ipv4.tcp_available_congestion_control</span><br><span class="line">sysctl -n net.ipv4.tcp_congestion_control</span><br><span class="line">lsmod | grep bbr</span><br><span class="line">netstat -antlup</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/12/07/DNS解析过程/" itemprop="url">
                   DNS解析过程
                 </a>
@@ -1702,147 +1817,6 @@ Shutting down RPC idmapd:                                  [确定]
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/28/dhcp服务动态分配IP地址/" itemprop="url">
-                  dhcp服务动态分配IP地址
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-28T18:46:20+08:00" content="2017-05-28">
-              2017-05-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/28/dhcp服务动态分配IP地址/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/28/dhcp服务动态分配IP地址/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Linux下使用dhcp服务动态分配IP地址"><a href="#Linux下使用dhcp服务动态分配IP地址" class="headerlink" title="Linux下使用dhcp服务动态分配IP地址"></a>Linux下使用dhcp服务动态分配IP地址</h1><blockquote>
-<p>动态主机配置协议</p>
-</blockquote>
-<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><ul>
-<li><p>使用yum安装</p>
-<pre><code>[root@m2lan150 ~]# yum install -y dhcp
-</code></pre></li>
-<li><p>查看包的安装路径</p>
-<pre><code>[root@m2lan150 ~]# rpm -pql /mnt/Packages/dhcp-4.1.1-38.P1.el6.x86_64.rpm | more
-</code></pre></li>
-<li><p>备份配置文件</p>
-<pre><code>[root@m2lan150 ~]# cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.bak
-</code></pre></li>
-<li><p>查看配置文件</p>
-<pre><code>[root@m2lan150 ~]# cat /etc/dhcp/dhcpd.conf
-#
-# DHCP Server Configuration file.
-#   see /usr/share/doc/dhcp*/dhcpd.conf.sample
-#   see &apos;man 5 dhcpd.conf&apos;
-#
-</code></pre></li>
-<li><p>copy配置示例配置文件覆盖当前配置文件</p>
-<pre><code>[root@m2lan150 ~]# cp /usr/share/doc/dhcp-4.1.1/dhcpd.conf.sample /etc/dhcp/dhcpd.conf
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/28/dhcp服务动态分配IP地址/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1888,7 +1862,7 @@ Shutting down RPC idmapd:                                  [确定]
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1905,7 +1879,7 @@ Shutting down RPC idmapd:                                  [确定]
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

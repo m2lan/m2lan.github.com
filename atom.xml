@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2018-11-11T08:38:03.037Z</updated>
+  <updated>2018-11-11T12:58:15.313Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>搭建squid代理服务器</title>
+    <link href="http://blog.golearns.org/2018/11/11/%E6%90%AD%E5%BB%BAsquid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://blog.golearns.org/2018/11/11/搭建squid代理服务器/</id>
+    <published>2018-11-11T08:47:05.000Z</published>
+    <updated>2018-11-11T12:58:15.313Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="搭建squid代理服务器"><a href="#搭建squid代理服务器" class="headerlink" title="搭建squid代理服务器"></a>搭建squid代理服务器</h1><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code>[root@m2lan150 ~]# yum install -y squid# 启动[root@m2lan150 ~]# service squid start正在启动 squid：.                                          [确定]</code></pre><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul><li>150服务器，ip地址192.168.1.150，添加两个网卡，配置eth0为桥接，eth1为vmnet4模式，eth1的ip地址192.168.2.1</li><li>170服务器，配置eth0位vmnet4模式，ip地址192.168.2.2</li></ul><h3 id="配置squid正向代理服务器"><a href="#配置squid正向代理服务器" class="headerlink" title="配置squid正向代理服务器"></a>配置squid正向代理服务器</h3><blockquote><p>使内网主机170服务器192.168.2.2能够通过150服务器上的squid代理服务器加速上网</p></blockquote><ul><li><p>修改squid配置文件</p><pre><code># 将http_access deny all修改为http_access allow all</code></pre></li><li><p>重启服务</p><pre><code>service squid restart</code></pre></li><li>在170服务器配置firefox网络代理为192.168.2.1 端口3128</li></ul><a id="more"></a><h3 id="配置透明squid代理提升访问速度"><a href="#配置透明squid代理提升访问速度" class="headerlink" title="配置透明squid代理提升访问速度"></a>配置透明squid代理提升访问速度</h3><blockquote><p>客户端不用在浏览器里指定代理服务器的ip地址和端口号，就可以直接访问公网上的网站服务器</p></blockquote><ul><li><p>修改squid配置文件</p><pre><code># 将http_access deny all修改为http_access allow all# 将http_port 3128修改为http_port 3128 transparent# 打开路由转发功能[root@m2lan150 ~]# vim /etc/sysctl.conf# 将net.ipv4.ip_forward = 0修改为net.ipv4.ip_forward = 1[root@m2lan150 ~]# sysctl -p# 配置iptables# 让内网可以上网iptables -t nat -A POSTROUTING -s 192.168.2.0/24 -j SNAT --to 192.168.1.150# 将内网源地址为192.168.2.0/24的网段tcp协议端口为80的请求转发到3128端口iptables -t nat -A PREROUTING -s 192.168.2.0/24 -i eth1 -p tcp --dport 80 -j REDIRECT --to-port 3128# 测试访问，不用再设置浏览器的网络代理www.baidu.com192.168.1.1192.168.2.1</code></pre></li></ul><h3 id="配置squid反向代理加速内网web服务器响应速度"><a href="#配置squid反向代理加速内网web服务器响应速度" class="headerlink" title="配置squid反向代理加速内网web服务器响应速度"></a>配置squid反向代理加速内网web服务器响应速度</h3><blockquote><p>让宿主机访问192.168.1.150代理服务器。192.168.1.150代理服务器缓存170服务器的192.168.2.2 web服务器中的数据。实现150服务器给170服务器加速80和80两个服务。</p></blockquote><ul><li><p>配置宿主机</p><pre><code># 在hosts中添加192.168.1.150 www.serverA.com192.168.1.150 www.serverB.com</code></pre></li><li><p>配置150服务器，关闭iptables和selinux</p><pre><code># 将http_access deny all修改为http_access allow all# vhost表示支持多虚拟主机代理多台机器http_port 80 vhost# 缓存的机器# 代理192.168.2.2的80端口名字为acache_peer 192.168.2.2 parent 80 0 no-query originserver weight=1 name=a# 代理192.168.2.2的81端口名字为bcache_peer 192.168.2.2 parent 81 0 no-query originserver weight=1 name=b# 当访问www.serverA.com域名的时候，则squid向192.168.2.2服务器的80端口发送请求 cache_peer_domain a www.serverA.com# 当访问www.serverB.com域名的时候，则squid向192.168.2.2服务器的81端口发送请求 cache_peer_domain b www.serverB.com# 访问控制cache_peer_access a allow allcache_peer_access b allow all# 重启service squid restart</code></pre></li><li><p>配置170服务器</p><ul><li><p>配置apache服务</p><pre><code>[root@m2lan170 ~]# vim /etc/httpd/conf/httpd.confListen 80Listen 81NameVirtualHost *:80&lt;VirtualHost *:80&gt;    ServerAdmin webmaster@dummy-host.example.com    DocumentRoot /var/www/html    ServerName www.serverA.com    ErrorLog logs/dummy-host.example.com-error_log    CustomLog logs/dummy-host.example.com-access_log common&lt;/VirtualHost&gt;&lt;VirtualHost *:81&gt;    ServerAdmin webmaster@dummy-host.example.com    DocumentRoot /var/www/html/b    ServerName www.serverB.com    ErrorLog logs/dummy-host.example.com-error_log    CustomLog logs/dummy-host.example.com-access_log common&lt;/VirtualHost&gt;echo &quot;serverA.com&quot; &gt; /var/www/html/index.htmlecho &quot;serverB.com&quot; &gt; /var/www/html/b/index.html</code></pre></li><li><p>重启apache</p><pre><code>service httpd restart</code></pre></li></ul></li><li><p>在宿主机访问</p><pre><code>http://www.serverA.comhttp://www.serverB.com</code></pre></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;搭建squid代理服务器&quot;&gt;&lt;a href=&quot;#搭建squid代理服务器&quot; class=&quot;headerlink&quot; title=&quot;搭建squid代理服务器&quot;&gt;&lt;/a&gt;搭建squid代理服务器&lt;/h1&gt;&lt;h3 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;[root@m2lan150 ~]# yum install -y squid
+# 启动
+[root@m2lan150 ~]# service squid start
+正在启动 squid：.                                          [确定]
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;环境&quot;&gt;&lt;a href=&quot;#环境&quot; class=&quot;headerlink&quot; title=&quot;环境&quot;&gt;&lt;/a&gt;环境&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;150服务器，ip地址192.168.1.150，添加两个网卡，配置eth0为桥接，eth1为vmnet4模式，eth1的ip地址192.168.2.1&lt;/li&gt;
+&lt;li&gt;170服务器，配置eth0位vmnet4模式，ip地址192.168.2.2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;配置squid正向代理服务器&quot;&gt;&lt;a href=&quot;#配置squid正向代理服务器&quot; class=&quot;headerlink&quot; title=&quot;配置squid正向代理服务器&quot;&gt;&lt;/a&gt;配置squid正向代理服务器&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;使内网主机170服务器192.168.2.2能够通过150服务器上的squid代理服务器加速上网&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;修改squid配置文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 将http_access deny all修改为
+http_access allow all
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重启服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;service squid restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;在170服务器配置firefox网络代理为192.168.2.1 端口3128&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/categories/Linux/"/>
+    
+    
+      <category term="Squid" scheme="http://blog.golearns.org/tags/Squid/"/>
+    
+  </entry>
   
   <entry>
     <title>配置Selinux增强服务器安全</title>
@@ -283,9 +325,9 @@ htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
       <category term="Elasticsearch" scheme="http://blog.golearns.org/categories/Elasticsearch/"/>
     
     
-      <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
-    
       <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+      <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
     
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     
@@ -317,9 +359,9 @@ tar -xzf kibana-5.5.1-linux-x86_64.tar.gz
       <category term="Elasticsearch" scheme="http://blog.golearns.org/categories/Elasticsearch/"/>
     
     
-      <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
-    
       <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+      <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
     
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     
@@ -352,9 +394,9 @@ cd elasticsearch-5.5.1/
       <category term="Elasticsearch" scheme="http://blog.golearns.org/categories/Elasticsearch/"/>
     
     
-      <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
-    
       <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+      <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
     
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     
@@ -457,9 +499,9 @@ cd elasticsearch-5.5.1/
       <category term="Elasticsearch" scheme="http://blog.golearns.org/categories/Elasticsearch/"/>
     
     
-      <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
-    
       <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
+    
+      <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
     
       <category term="Centos" scheme="http://blog.golearns.org/tags/Centos/"/>
     
@@ -699,9 +741,9 @@ class Index {
       <category term="thinkphp5" scheme="http://blog.golearns.org/categories/thinkphp5/"/>
     
     
-      <category term="thinkphp5" scheme="http://blog.golearns.org/tags/thinkphp5/"/>
-    
       <category term="Nginx" scheme="http://blog.golearns.org/tags/Nginx/"/>
+    
+      <category term="thinkphp5" scheme="http://blog.golearns.org/tags/thinkphp5/"/>
     
   </entry>
   
@@ -755,31 +797,6 @@ class Index {
       <category term="janus" scheme="http://blog.golearns.org/tags/janus/"/>
     
       <category term="网关" scheme="http://blog.golearns.org/tags/%E7%BD%91%E5%85%B3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>install shadowsocks</title>
-    <link href="http://blog.golearns.org/2018/09/17/install-shadowsocks/"/>
-    <id>http://blog.golearns.org/2018/09/17/install-shadowsocks/</id>
-    <published>2018-09-17T15:01:37.000Z</published>
-    <updated>2018-09-17T15:01:57.367Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="install-shadowsocks"><a href="#install-shadowsocks" class="headerlink" title="install shadowsocks"></a>install shadowsocks</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-libev.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev.sh</span><br><span class="line">chmod +x shadowsocks-libev.sh</span><br><span class="line">./shadowsocks-libev.sh 2&gt;&amp;1 | tee shadowsocks-libev.log</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;install-shadowsocks&quot;&gt;&lt;a href=&quot;#install-shadowsocks&quot; class=&quot;headerlink&quot; title=&quot;install shadowsocks&quot;&gt;&lt;/a&gt;install shadowsocks&lt;/h1&gt;&lt;figu
-      
-    
-    </summary>
-    
-      <category term="shadowsocks" scheme="http://blog.golearns.org/categories/shadowsocks/"/>
-    
-    
-      <category term="shadowsocks" scheme="http://blog.golearns.org/tags/shadowsocks/"/>
     
   </entry>
   

@@ -267,6 +267,143 @@
             
               
                 
+                <a class="post-title-link" href="/2018/11/11/搭建squid代理服务器/" itemprop="url">
+                  搭建squid代理服务器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-11-11T16:47:05+08:00" content="2018-11-11">
+              2018-11-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/11/11/搭建squid代理服务器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/11/搭建squid代理服务器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="搭建squid代理服务器"><a href="#搭建squid代理服务器" class="headerlink" title="搭建squid代理服务器"></a>搭建squid代理服务器</h1><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code>[root@m2lan150 ~]# yum install -y squid
+# 启动
+[root@m2lan150 ~]# service squid start
+正在启动 squid：.                                          [确定]
+</code></pre><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
+<li>150服务器，ip地址192.168.1.150，添加两个网卡，配置eth0为桥接，eth1为vmnet4模式，eth1的ip地址192.168.2.1</li>
+<li>170服务器，配置eth0位vmnet4模式，ip地址192.168.2.2</li>
+</ul>
+<h3 id="配置squid正向代理服务器"><a href="#配置squid正向代理服务器" class="headerlink" title="配置squid正向代理服务器"></a>配置squid正向代理服务器</h3><blockquote>
+<p>使内网主机170服务器192.168.2.2能够通过150服务器上的squid代理服务器加速上网</p>
+</blockquote>
+<ul>
+<li><p>修改squid配置文件</p>
+<pre><code># 将http_access deny all修改为
+http_access allow all
+</code></pre></li>
+<li><p>重启服务</p>
+<pre><code>service squid restart
+</code></pre></li>
+<li>在170服务器配置firefox网络代理为192.168.2.1 端口3128</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/11/11/搭建squid代理服务器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/11/09/配置Selinux增强服务器安全/" itemprop="url">
                   配置Selinux增强服务器安全
                 </a>
@@ -1429,123 +1566,6 @@ cd elasticsearch-5.5.1/
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/elsearch-autocomplete/" itemprop="url">
-                  elsearch autocomplete
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T23:10:30+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
-                    <span itemprop="name">Elasticsearch</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/elsearch-autocomplete/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/elsearch-autocomplete/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Elsearch自动补全"><a href="#Elsearch自动补全" class="headerlink" title="Elsearch自动补全"></a>Elsearch自动补全</h1><h2 id="1-创建索引、实例化token过滤器和分析器"><a href="#1-创建索引、实例化token过滤器和分析器" class="headerlink" title="1. 创建索引、实例化token过滤器和分析器"></a>1. 创建索引、实例化token过滤器和分析器</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">curl -XPUT localhost:9200/autosuggest -d '</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"number_of_shards"</span>: <span class="number">1</span>, </span><br><span class="line">        <span class="attr">"analysis"</span>: &#123;</span><br><span class="line">            <span class="attr">"filter"</span>: &#123;</span><br><span class="line">                <span class="attr">"autocomplete_filter"</span>: &#123; </span><br><span class="line">                    <span class="attr">"type"</span>:     <span class="string">"edge_ngram"</span>,</span><br><span class="line">                    <span class="attr">"min_gram"</span>: <span class="number">1</span>,</span><br><span class="line">                    <span class="attr">"max_gram"</span>: <span class="number">20</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"analyzer"</span>: &#123;</span><br><span class="line">                <span class="attr">"autocomplete"</span>: &#123;</span><br><span class="line">                    <span class="attr">"type"</span>:      <span class="string">"custom"</span>,</span><br><span class="line">                    <span class="attr">"tokenizer"</span>: <span class="string">"standard"</span>,</span><br><span class="line">                    <span class="attr">"filter"</span>: [</span><br><span class="line">                        <span class="string">"lowercase"</span>,</span><br><span class="line">                        <span class="string">"autocomplete_filter"</span> </span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">'</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/elsearch-autocomplete/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1591,7 +1611,7 @@ cd elasticsearch-5.5.1/
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1608,7 +1628,7 @@ cd elasticsearch-5.5.1/
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
