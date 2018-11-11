@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="配置Selinux增强服务器安全 安全性增强的linux  Selinux特点 MAC 对访问的控制彻底化，对所有文件、目录、端口的访问，都是基于策略设定的。这些策略是由管理员设定的，一般用户是无权修改的 RBAC 对用户只赋予最小权限。对用户来说，被划分成一些role，即使是root用户，只要不在sysadm_r里，也是不能实行sysadm_t管理操作的 TE 对进程只赋予最小运行权限，TE概念">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-11T08:27:22.327Z">
+<meta property="og:updated_time" content="2018-11-11T08:38:03.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置Selinux增强服务器安全">
 <meta name="twitter:description" content="配置Selinux增强服务器安全 安全性增强的linux  Selinux特点 MAC 对访问的控制彻底化，对所有文件、目录、端口的访问，都是基于策略设定的。这些策略是由管理员设定的，一般用户是无权修改的 RBAC 对用户只赋予最小权限。对用户来说，被划分成一些role，即使是root用户，只要不在sysadm_r里，也是不能实行sysadm_t管理操作的 TE 对进程只赋予最小运行权限，TE概念">
@@ -400,7 +400,7 @@ setenforce 1
 <p>Selinux规范了许多boolean数值清单档案，提供开启或关闭功能存取项目，这些值都存放在<code>/selinux/booleans/</code>目录内的相关文件中，文件的值只有两种：1(启用)，0(关闭)</p>
 </blockquote>
 <ul>
-<li><p>getsebool 命令查看Selinux策略，指定进程可以反问哪些文件</p>
+<li><p>getsebool 命令查看Selinux策略，指定进程可以访问哪些文件</p>
 <pre><code>getsebool -a
 </code></pre></li>
 </ul>
