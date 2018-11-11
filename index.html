@@ -267,6 +267,148 @@
             
               
                 
+                <a class="post-title-link" href="/2018/11/09/配置Selinux增强服务器安全/" itemprop="url">
+                  配置Selinux增强服务器安全
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-11-09T15:27:22+08:00" content="2018-11-09">
+              2018-11-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/11/09/配置Selinux增强服务器安全/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/09/配置Selinux增强服务器安全/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="配置Selinux增强服务器安全"><a href="#配置Selinux增强服务器安全" class="headerlink" title="配置Selinux增强服务器安全"></a>配置Selinux增强服务器安全</h1><blockquote>
+<p>安全性增强的linux</p>
+</blockquote>
+<h3 id="Selinux特点"><a href="#Selinux特点" class="headerlink" title="Selinux特点"></a>Selinux特点</h3><ul>
+<li>MAC 对访问的控制彻底化，对所有文件、目录、端口的访问，都是基于策略设定的。这些策略是由管理员设定的，一般用户是无权修改的</li>
+<li>RBAC 对用户只赋予最小权限。对用户来说，被划分成一些role，即使是root用户，只要不在sysadm_r里，也是不能实行sysadm_t管理操作的</li>
+<li>TE 对进程只赋予最小运行权限，TE概念在Selinux中非常重要。其特点是对文件赋予一种叫type的文件类型标签，对于进程赋予一个叫domain的标签，可以规定某个进程只能执行某类文件</li>
+</ul>
+<h3 id="Selinux的执行模式"><a href="#Selinux的执行模式" class="headerlink" title="Selinux的执行模式"></a>Selinux的执行模式</h3><ul>
+<li>enforcing 强制模式，只要Selinux不允许，就无法执行</li>
+<li>permissive 警告模式，将该事件记录，依然允许执行</li>
+<li>disabled 关闭Selinux</li>
+<li><p>Selinux状态切换</p>
+<ul>
+<li>getenforce 查看Selinux状态</li>
+<li><p>setenforce 修改Selinux状态</p>
+<pre><code># 由enforcing切换为permissive
+setenforce 0
+# 由permissive切换为enforcing
+setenforce 1
+# 由enforcing或permissive切换为Disabled只能修改配置文件重启后才能生效
+# 由Disabled切换其他两个状态也是需要修改配置文件重启后生效
+</code></pre></li>
+</ul>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/11/09/配置Selinux增强服务器安全/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/11/07/iptables防火墙/" itemprop="url">
                   iptables防火墙
                 </a>
@@ -1404,126 +1546,6 @@ cd elasticsearch-5.5.1/
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/elsearch-关键配置/" itemprop="url">
-                  elsearch 关键配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T23:10:02+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
-                    <span itemprop="name">Elasticsearch</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/elsearch-关键配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/elsearch-关键配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Elsearch-关键配置"><a href="#Elsearch-关键配置" class="headerlink" title="Elsearch 关键配置"></a>Elsearch 关键配置</h1><h2 id="关键配置项"><a href="#关键配置项" class="headerlink" title="关键配置项"></a>关键配置项</h2><p><strong>1、索引的shards个数:</strong></p>
-<p>shards的个数，最好是和节点数相关的。理论上对同一个索引，单机上的shards个数最好不要超过两个，这样每个查询尽可能并行。但因为ES中shards的个数是确定了就没办法再调整的，所以如果考虑到数据会高速增长，一开始分配多些也可以。另一个常见思路是按时间纬度（如月）去定义ES索引——因为可以动态调整新加的索引的shards个数。其他的一些情况，比如下面举到的Wetest聚合的例子，因为需要数据尽量地按照渠道切分开，所以定义了很多个shards（200个），但太多的shards通常是不推荐的，ES管理起来也有开销。</p>
-<p><strong>2、heap内存:</strong></p>
-<p>官方建议是可用内存的一半，是通过启动ES的环境中，定义环境变量的方式完成的。如<code>export ES_HEAP_SIZE=10g</code></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/elsearch-关键配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1569,7 +1591,7 @@ cd elasticsearch-5.5.1/
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">136</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1586,7 +1608,7 @@ cd elasticsearch-5.5.1/
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

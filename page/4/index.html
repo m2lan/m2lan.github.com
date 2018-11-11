@@ -267,6 +267,121 @@
             
               
                 
+                <a class="post-title-link" href="/2018/09/17/centos-install-libevent/" itemprop="url">
+                  centos install libevent
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T22:48:22+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/centos-install-libevent/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos-install-libevent/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="centos-install-libevent"><a href="#centos-install-libevent" class="headerlink" title="centos install libevent"></a>centos install libevent</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/expressif/pecl-event-libevent.git</span><br><span class="line">phpize</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/09/17/centos-install-kurento/" itemprop="url">
                   centos install kurento
                 </a>
@@ -1399,178 +1514,6 @@ class WebSocket extends Command {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/12/07/DNS解析过程/" itemprop="url">
-                  DNS解析过程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-12-07T17:10:25+08:00" content="2017-12-07">
-              2017-12-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/DNS/" itemprop="url" rel="index">
-                    <span itemprop="name">DNS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/12/07/DNS解析过程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/07/DNS解析过程/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="DNS解析过程"><a href="#DNS解析过程" class="headerlink" title="DNS解析过程"></a>DNS解析过程</h1><h3 id="跟踪域名解析过程"><a href="#跟踪域名解析过程" class="headerlink" title="跟踪域名解析过程"></a>跟踪域名解析过程</h3><ul>
-<li><p>在Linux和Windows下可以用<code>nslookup</code>命令来查询域名解析结果</p>
-<pre><code>M2@zhuyongkangdeMacBook-Pro  ~  nslookup
-&gt; www.m2lan.com
-Server:        114.114.114.114
-Address:    114.114.114.114#53
-
-Non-authoritative answer:
-Name:    www.m2lan.com
-Address: 39.108.217.213
-</code></pre></li>
-<li><p>在Linux中还可以用<code>dig</code>命令(可以增加+trace参数跟踪解析过程)</p>
-<pre><code>M2@zhuyongkangdeMacBook-Pro  ~  dig www.m2lan.com
-
-; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; www.m2lan.com
-;; global options: +cmd
-;; Got answer:
-;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 28841
-;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
-
-;; QUESTION SECTION:
-;www.m2lan.com.            IN    A
-
-;; ANSWER SECTION:
-www.m2lan.com.        37    IN    A    39.108.217.213
-
-;; Query time: 28 msec
-;; SERVER: 114.114.114.114#53(114.114.114.114)
-;; WHEN: Thu Dec  7 17:12:41 2017
-;; MSG SIZE  rcvd: 47
-</code></pre></li>
-</ul>
-<h3 id="清除缓存的域名"><a href="#清除缓存的域名" class="headerlink" title="清除缓存的域名"></a>清除缓存的域名</h3><ul>
-<li>Windows下使用<code>ipconfig /flushdns</code></li>
-<li>Linux下使用<code>/etc/init.d/nscd restart</code></li>
-</ul>
-<h3 id="域名解析方式"><a href="#域名解析方式" class="headerlink" title="域名解析方式"></a>域名解析方式</h3><ul>
-<li>A记录<ul>
-<li>A代表的是Address，用来指定域名对应的IP地址。A记录可以将多个域名解析到一个IP地址。</li>
-</ul>
-</li>
-<li>MX记录<ul>
-<li>表示<code>Mail Exchange</code>，可以将某个域名下的邮件服务器指向自己的<code>Mail Server</code>，如<code>m2lan.com</code>域名的A记录IP地址是<code>39.108.217.213</code>，如果将MX记录设置为<code>39.108.217.213</code>，即<code>xxx@m2lan.com</code>的邮件路由，DNS会将邮件发送到<code>39.108.217.213</code>所在到服务器，而正常通过WEB请求到话仍然解析到A记录到IP地址</li>
-</ul>
-</li>
-<li>CNAME记录<ul>
-<li>别名解析，可以为一个域名设置一个或多个别名</li>
-</ul>
-</li>
-<li>NS记录<ul>
-<li>为某个域名指定DNS解析服务器，也就是这个域名有指定的IP地址的DNS服务器去解析</li>
-</ul>
-</li>
-<li>TXT记录<ul>
-<li>为某个主机名或域名设置说明，如可以为<code>m2lan.com</code>设置TXT记录为<code>hello,world</code>这样的说明   </li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1616,7 +1559,7 @@ www.m2lan.com.        37    IN    A    39.108.217.213
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">136</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1633,7 +1576,7 @@ www.m2lan.com.        37    IN    A    39.108.217.213
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

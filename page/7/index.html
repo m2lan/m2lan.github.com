@@ -267,6 +267,180 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/21/ReentrantLock/" itemprop="url">
+                  ReentrantLock
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-21T15:35:56+08:00" content="2017-05-21">
+              2017-05-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/并发/" itemprop="url" rel="index">
+                    <span itemprop="name">并发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/21/ReentrantLock/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/ReentrantLock/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java并发编程类ReentrantLock"><a href="#Java并发编程类ReentrantLock" class="headerlink" title="Java并发编程类ReentrantLock"></a>Java并发编程类ReentrantLock</h1><pre><code>public class ReentrantLockDemo1 {
+
+    private final ReentrantLock lock = new ReentrantLock();
+    private final Map&lt;String, String&gt; maps = new HashMap&lt;&gt;();
+
+    public void add(String key, String value) {
+        final ReentrantLock lock = this.lock;
+        lock.lock();
+
+        try {
+            if (null == maps.get(key)) {
+                maps.put(key, value);
+            }
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public void remove(String key) {
+        final ReentrantLock lock = this.lock;
+        lock.lock();
+
+        try {
+            if (null != maps.get(key)) {
+                maps.remove(key);
+            }
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public void getMaps() {
+        maps.forEach((k, v) -&gt; {
+            System.out.println(&quot;key: &quot; + k + &quot;, value: &quot; + v);
+        });
+    }
+
+    public static void main(String[] args) throws Exception {
+        ReentrantLockDemo1 r1 = new ReentrantLockDemo1();
+        ExecutorService service = Executors.newFixedThreadPool(5);
+        final List&lt;Future&lt;?&gt;&gt; lists = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; 20; i++) {
+            final Integer[] is = new Integer[1];
+            is[0] = i;
+            Future&lt;?&gt; submit = service.submit(() -&gt; {
+                r1.add(&quot;key &quot; + is[0], &quot;value &quot; + is[0]);
+            });
+            lists.add(submit);
+        }
+        service.shutdown();
+
+        for (Future&lt;?&gt; future : lists) {
+            while (!future.isDone()) {}
+
+            future.get();
+        }
+
+        r1.getMaps();
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/21/CountDownLatch/" itemprop="url">
                   CountDownLatch
                 </a>
@@ -1566,144 +1740,6 @@ CREATE TABLE `idCard` (
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/07/mybatis-注解操作/" itemprop="url">
-                  mybatis-注解操作
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-07T12:31:50+08:00" content="2017-05-07">
-              2017-05-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/07/mybatis-注解操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-注解操作/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="mybatis注解"><a href="#mybatis注解" class="headerlink" title="mybatis注解"></a>mybatis注解</h1><ul>
-<li><p>新建<code>UserMapperAnnotation.java</code>文件</p>
-<pre><code>public interface UserMapperAnnotation {
-
-    @Insert(&quot;insert into user(username, password, email) values(#{username}, #{password}, #{email})&quot;)
-    @Options(useGeneratedKeys=true, keyProperty=&quot;id&quot;)
-    public Integer addUser(User user);
-
-    @Delete(&quot;delete from user where id = #{id}&quot;)
-    public void delUser(Integer id);
-
-    @Update(&quot;update user set password = #{password} where id = #{id}&quot;)
-    public void updateUser(User user);
-
-    @Select(&quot;select id, username, password, email from user where id = #{id}&quot;)
-    public User getUserById(Integer id);
-
-    @Select(&quot;select id, username, password, email from user&quot;)
-    public List&lt;User&gt; getAll();
-}
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/07/mybatis-注解操作/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1749,7 +1785,7 @@ CREATE TABLE `idCard` (
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">136</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1766,7 +1802,7 @@ CREATE TABLE `idCard` (
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

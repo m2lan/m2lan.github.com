@@ -1,0 +1,937 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Selinux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="配置Selinux增强服务器安全 安全性增强的linux  Selinux特点 MAC 对访问的控制彻底化，对所有文件、目录、端口的访问，都是基于策略设定的。这些策略是由管理员设定的，一般用户是无权修改的 RBAC 对用户只赋予最小权限。对用户来说，被划分成一些role，即使是root用户，只要不在sysadm_r里，也是不能实行sysadm_t管理操作的 TE 对进程只赋予最小运行权限，TE概念">
+<meta name="keywords" content="Selinux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置Selinux增强服务器安全">
+<meta property="og:url" content="http://blog.golearns.org/2018/11/09/配置Selinux增强服务器安全/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="配置Selinux增强服务器安全 安全性增强的linux  Selinux特点 MAC 对访问的控制彻底化，对所有文件、目录、端口的访问，都是基于策略设定的。这些策略是由管理员设定的，一般用户是无权修改的 RBAC 对用户只赋予最小权限。对用户来说，被划分成一些role，即使是root用户，只要不在sysadm_r里，也是不能实行sysadm_t管理操作的 TE 对进程只赋予最小运行权限，TE概念">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-11T08:27:22.327Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="配置Selinux增强服务器安全">
+<meta name="twitter:description" content="配置Selinux增强服务器安全 安全性增强的linux  Selinux特点 MAC 对访问的控制彻底化，对所有文件、目录、端口的访问，都是基于策略设定的。这些策略是由管理员设定的，一般用户是无权修改的 RBAC 对用户只赋予最小权限。对用户来说，被划分成一些role，即使是root用户，只要不在sysadm_r里，也是不能实行sysadm_t管理操作的 TE 对进程只赋予最小运行权限，TE概念">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 2746085,
+      author: 'M2'
+    }
+  };
+</script>
+
+  <title> 配置Selinux增强服务器安全 | 知识记录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a7aab4bc8347eb54375043cf003b2c21";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知识记录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'b2cFpoExgUMZu3--zQzE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                配置Selinux增强服务器安全
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-11-09T15:27:22+08:00" content="2018-11-09">
+              2018-11-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/11/09/配置Selinux增强服务器安全/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/09/配置Selinux增强服务器安全/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="配置Selinux增强服务器安全"><a href="#配置Selinux增强服务器安全" class="headerlink" title="配置Selinux增强服务器安全"></a>配置Selinux增强服务器安全</h1><blockquote>
+<p>安全性增强的linux</p>
+</blockquote>
+<h3 id="Selinux特点"><a href="#Selinux特点" class="headerlink" title="Selinux特点"></a>Selinux特点</h3><ul>
+<li>MAC 对访问的控制彻底化，对所有文件、目录、端口的访问，都是基于策略设定的。这些策略是由管理员设定的，一般用户是无权修改的</li>
+<li>RBAC 对用户只赋予最小权限。对用户来说，被划分成一些role，即使是root用户，只要不在sysadm_r里，也是不能实行sysadm_t管理操作的</li>
+<li>TE 对进程只赋予最小运行权限，TE概念在Selinux中非常重要。其特点是对文件赋予一种叫type的文件类型标签，对于进程赋予一个叫domain的标签，可以规定某个进程只能执行某类文件</li>
+</ul>
+<h3 id="Selinux的执行模式"><a href="#Selinux的执行模式" class="headerlink" title="Selinux的执行模式"></a>Selinux的执行模式</h3><ul>
+<li>enforcing 强制模式，只要Selinux不允许，就无法执行</li>
+<li>permissive 警告模式，将该事件记录，依然允许执行</li>
+<li>disabled 关闭Selinux</li>
+<li><p>Selinux状态切换</p>
+<ul>
+<li>getenforce 查看Selinux状态</li>
+<li><p>setenforce 修改Selinux状态</p>
+<pre><code># 由enforcing切换为permissive
+setenforce 0
+# 由permissive切换为enforcing
+setenforce 1
+# 由enforcing或permissive切换为Disabled只能修改配置文件重启后才能生效
+# 由Disabled切换其他两个状态也是需要修改配置文件重启后生效
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="Selinux的运行模式"><a href="#Selinux的运行模式" class="headerlink" title="Selinux的运行模式"></a>Selinux的运行模式</h3><ul>
+<li>SELINUXTYPE=targeted: 保护常见的网络服务，是Selinux的默认值</li>
+<li>SELINUXTYPE=MLS: 多级安全保护</li>
+</ul>
+<h3 id="Selinux的概念"><a href="#Selinux的概念" class="headerlink" title="Selinux的概念"></a>Selinux的概念</h3><ul>
+<li>security context: 安全上下文由<ul>
+<li>当启动Selinux的时候，所有文件与对象都有安全上下文。进程的安全上下文是域domain，安全上下文由：用户:角色:类型(user:role:type)构成<ul>
+<li>user: 类似linux系统中的UID，提供身份识别。三种常见的user<ul>
+<li>user_u: 普通用户登录系统后预设。表示普通用户无特权用户</li>
+<li>system_u: 开机过程中系统进程的预设。表示系统管理员用户，通过用户可以确认身份类型，一般搭配角色使用</li>
+<li>unconfined_u: 非限制，没有做定义</li>
+</ul>
+</li>
+<li>role: <ul>
+<li>文件与目录的role，通常是object_r</li>
+<li>程序的role，通常是system_r</li>
+<li>用户的role，类似于系统中的GID，不同的角色具备不同的权限。用户可以具备多个role。但是同一时间只能使用一个role</li>
+</ul>
+</li>
+<li>type:<ul>
+<li>用来将主体与客体划分为不同的组，组每个主体和系统中的客体定义来一个类型。为进程运行提供最低的权限环境</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统根据pam子系统中的<code>/lib64/security/pam_selinux.so</code>模块设定登录者运行程序的安全上下文</li>
+<li>rpm包安装会根据rpm包的内记录来生成安全上下文</li>
+<li>如果是手动创建的，会根据policy中规定来设置安全上下文</li>
+<li>如果是cp，会重新生成安全上下文</li>
+<li>如果是mv，安全上下文不变</li>
+</ul>
+</li>
+<li>policy: 策略(控制规则，哪些进程可以访问哪些资源)</li>
+</ul>
+<h3 id="Selinux规则文件路径"><a href="#Selinux规则文件路径" class="headerlink" title="Selinux规则文件路径"></a>Selinux规则文件路径</h3><ul>
+<li><code>/etc/selinux/targeted/contexts/files/file_contexts</code></li>
+</ul>
+<h3 id="Selinux策略"><a href="#Selinux策略" class="headerlink" title="Selinux策略"></a>Selinux策略</h3><blockquote>
+<p>Selinux的设置一般通过两部分完成，一个是安全上下文，另一个是策略，策略值是对安全上下文的补充</p>
+<p>Selinux规范了许多boolean数值清单档案，提供开启或关闭功能存取项目，这些值都存放在<code>/selinux/booleans/</code>目录内的相关文件中，文件的值只有两种：1(启用)，0(关闭)</p>
+</blockquote>
+<ul>
+<li><p>getsebool 命令查看Selinux策略，指定进程可以反问哪些文件</p>
+<pre><code>getsebool -a
+</code></pre></li>
+</ul>
+<h3 id="Selinux的使用"><a href="#Selinux的使用" class="headerlink" title="Selinux的使用"></a>Selinux的使用</h3><ul>
+<li><p>查看文件的Selinux安全上下文</p>
+<pre><code>[root@m2lan150 ~]# touch a.txt
+[root@m2lan150 ~]# ls -Z a.txt
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 a.txt
+# ||
+[root@m2lan150 ~]# ls --context a.txt
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 a.txt
+</code></pre></li>
+<li><p>使用<code>chcon</code>修改文件的安全上下文</p>
+<ul>
+<li>–reference=参考文件    使用指定参考文件的安全环境，而非指定值</li>
+<li>-R, –recursive    递归处理所有的文件及子目录</li>
+<li>-u, –user=用户         设置指定用户的目标安全环境</li>
+<li>-r, –role=角色         设置指定角色的目标安全环境</li>
+<li><p>-t, –type=类型         设置指定类型的目标安全环境</p>
+<pre><code>[root@m2lan150 ~]# ls -Z a.txt
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 a.txt
+[root@m2lan150 ~]# ls -Z /etc/hosts
+-rw-r--r--. root root system_u:object_r:net_conf_t:s0  /etc/hosts
+[root@m2lan150 ~]# chcon -t net_conf_t a.txt
+[root@m2lan150 ~]# ls -Z a.txt
+-rw-r--r--. root root unconfined_u:object_r:net_conf_t:s0 a.txt
+</code></pre></li>
+</ul>
+</li>
+<li><p>查看apache文件目录下的文件类型</p>
+<pre><code># 文件类型为httpd_sys_content_t，也就是说apache的特有文件类型就是httpd_sys_content_t，所有文件都必须是此类型才能被访问，否则会出现Forbidden
+[root@m2lan150 ~]# ll -Z /var/www/html/index.html
+-rw-r--r--. root root system_u:object_r:httpd_sys_content_t:s0 /var/www/html/index.html
+[root@m2lan150 ~]# mv a.html /var/www/html/
+# 当访问a.html的时候就会出现Forbidden
+[root@m2lan150 ~]# ll -Z /var/www/html/a.html
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 /var/www/html/a.html
+
+# 查看apache文件目录的类型
+[root@m2lan150 ~]# ll -Zd /var/www/html/
+drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0 /var/www/html/
+# 使用--reference参考apche文件目录的类型修改文件类型
+[root@m2lan150 ~]# chcon --reference=/var/www/html /var/www/html/a.html
+# 现在可以正常访问了
+[root@m2lan150 ~]# ll -Z !$
+ll -Z /var/www/html/a.html
+-rw-r--r--. root root system_u:object_r:httpd_sys_content_t:s0 /var/www/html/a.html
+</code></pre></li>
+<li><p>使用<code>restorecon</code>恢复文件规则</p>
+<pre><code>[root@m2lan150 ~]# touch a.txt
+[root@m2lan150 ~]# ll -Z a.txt
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 a.txt
+[root@m2lan150 ~]# ll -Z /etc/hosts
+-rw-r--r--. root root unconfined_u:object_r:net_conf_t:s0 /etc/hosts
+[root@m2lan150 ~]# chcon --reference=/root/a.txt /etc/hosts
+[root@m2lan150 ~]# ll -Z /etc/hosts
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 /etc/hosts
+[root@m2lan150 ~]# restorecon -v /etc/hosts
+restorecon reset /etc/hosts context unconfined_u:object_r:admin_home_t:s0-&gt;unconfined_u:object_r:net_conf_t:s0
+[root@m2lan150 ~]# ll -Z /etc/hosts
+-rw-r--r--. root root unconfined_u:object_r:net_conf_t:s0 /etc/hosts
+
+# 也可以批量更改
+[root@m2lan150 ~]# echo &quot;bbbb&quot; &gt; b.html
+[root@m2lan150 ~]# mv b.html /var/www/html/
+[root@m2lan150 ~]# ll -Z /var/www/html/b.html
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 /var/www/html/b.html
+[root@m2lan150 ~]# restorecon -rv /var/www/html/
+restorecon reset /var/www/html/b.html context unconfined_u:object_r:admin_home_t:s0-&gt;unconfined_u:object_r:httpd_sys_content_t:s0
+[root@m2lan150 ~]# ll -Z /var/www/html/b.html
+-rw-r--r--. root root unconfined_u:object_r:httpd_sys_content_t:s0 /var/www/html/b.html
+</code></pre></li>
+<li><p>Selinux策略使用</p>
+<blockquote>
+<p>设定Selinux bool数值清单列表与内容</p>
+<p>使用：<code>setsebool [ -PV ] boolean value | bool1=val1 bool2=val2...</code></p>
+<p><code>-P</code>是永久性设置，否则重启后无效</p>
+<ul>
+<li>使用系统用户登录ftp后，会自动切换自己的家目录。</li>
+</ul>
+</blockquote>
+<pre><code># 安装ftp
+[root@m2lan150 ~]# yum install -y vsftpd
+[root@m2lan150 ~]# service vsftpd restart
+# 安装ftp客户端
+[root@m2lan150 ~]# rpm -ivh /mnt/Packages/lftp-4.0.9-1.el6.x86_64.rpm
+[root@m2lan150 ~]# useradd aftp
+[root@m2lan150 ~]# echo 123456 | passwd --stdin aftp
+# 开启selinux后默认是不允许的
+[root@m2lan150 ~]# lftp aftp@192.168.1.150
+口令:
+lftp aftp@192.168.1.150:~&gt; ls
+ls: 登录失败: 500 OOPS: cannot change directory:/home/aftp
+lftp aftp@192.168.1.150:~&gt;
+
+# 默认是关闭的
+[root@m2lan150 ~]# getsebool -a | grep ftp_home
+ftp_home_dir --&gt; off
+
+# 开启
+[root@m2lan150 ~]# setsebool -P ftp_home_dir=on
+[root@m2lan150 ~]# getsebool -a | grep ftp_home_dir
+ftp_home_dir --&gt; on
+[root@m2lan150 ~]# lftp aftp@192.168.1.150
+口令:
+lftp aftp@192.168.1.150:~&gt; ls
+lftp aftp@192.168.1.150:~&gt; !ls
+anaconda-ks.cfg  document.txt     fail2ban-0.8.14.tar.gz  ks.cfg
+a.txt         date.txt
+lftp aftp@192.168.1.150:~&gt; put a.txt
+lftp aftp@192.168.1.150:~&gt; ls
+-rw-r--r--    1 507      507             0 Nov 09 09:55 a.txt
+</code></pre><ul>
+<li><p>设置允许ftp服务器匿名用户登录后，可以创建文件</p>
+<pre><code># 默认只允许查看和下载
+[root@m2lan150 ~]# lftp 192.168.1.150
+lftp 192.168.1.150:~&gt; ls
+drwxr-xr-x    3 14       0            4096 May 29  2017 datas
+-rw-r--r--    1 0        0            1282 Oct 30 16:13 ks.cfg
+drwxr-xr-x    2 0        0            4096 Feb 12  2013 pub
+lftp 192.168.1.150:/&gt; !ls
+anaconda-ks.cfg  document.txt     fail2ban-0.8.14.tar.gz  ks.cfg
+a.txt         date.txt
+lftp 192.168.1.150:/&gt; put date.txt
+put: Access failed: 550 Permission denied. (date.txt)
+
+# 修改ftp配置文件
+[root@m2lan150 ~]# vim /etc/vsftpd/vsftpd.conf
+anonymous_enable=YES
+anon_upload_enable=YES
+anon_mkdir_write_enable=YES
+[root@m2lan150 ~]# service vsftpd restart
+
+# 修改目录权限
+[root@m2lan150 ~]# chmod -R 777 /var/ftp/pub
+
+[root@m2lan150 ~]# getsebool -a | grep allow_ftpd_anon_write
+allow_ftpd_anon_write --&gt; off
+
+# 测试
+[root@m2lan150 ~]# lftp 192.168.1.150
+lftp 192.168.1.150:~&gt; cd pub/
+lftp 192.168.1.150:/pub&gt; put a.txt
+put: Access failed: 553 Could not create file. (a.txt)
+
+[root@m2lan150 ~]# setsebool -P allow_ftpd_anon_write=on
+
+[root@m2lan150 ~]# ll -Zd /var/ftp/pub/
+drwxrwxrwx. root root system_u:object_r:public_content_t:s0 /var/ftp/pub/
+[root@m2lan150 ~]# chcon -t public_content_rw_t /var/ftp/pub/
+
+# 测试
+[root@m2lan150 ~]# lftp 192.168.1.150
+lftp 192.168.1.150:~&gt; cd pub/
+lftp 192.168.1.150:/pub&gt; ls
+-rw-------    1 14       50              5 Nov 11 08:12 date.txt
+-rw-------    1 14       50             40 Nov 11 08:14 document.txt
+-rwxrwxrwx    1 0        0            1801 May 29  2017 passwd
+lftp 192.168.1.150:/pub&gt; put a.txt
+lftp 192.168.1.150:/pub&gt; ls
+-rw-------    1 14       50              0 Nov 11 08:16 a.txt
+-rw-------    1 14       50              5 Nov 11 08:12 date.txt
+-rw-------    1 14       50             40 Nov 11 08:14 document.txt
+-rwxrwxrwx    1 0        0            1801 May 29  2017 passwd
+lftp 192.168.1.150:/pub&gt; exit
+</code></pre></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Selinux/" rel="tag">#Selinux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/07/iptables防火墙/" rel="next" title="iptables防火墙">
+                <i class="fa fa-chevron-left"></i> iptables防火墙
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/11/09/配置Selinux增强服务器安全/"
+           data-title="配置Selinux增强服务器安全" data-url="http://blog.golearns.org/2018/11/09/配置Selinux增强服务器安全/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M2" />
+          <p class="site-author-name" itemprop="name">M2</p>
+          <p class="site-description motion-element" itemprop="description">记录知识，分享知识</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/m2lan" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/763960267" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/100006504108865" target="_blank">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1877167031" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:763960267@qq.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置Selinux增强服务器安全"><span class="nav-number">1.</span> <span class="nav-text">配置Selinux增强服务器安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Selinux特点"><span class="nav-number">1.0.1.</span> <span class="nav-text">Selinux特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selinux的执行模式"><span class="nav-number">1.0.2.</span> <span class="nav-text">Selinux的执行模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selinux的运行模式"><span class="nav-number">1.0.3.</span> <span class="nav-text">Selinux的运行模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selinux的概念"><span class="nav-number">1.0.4.</span> <span class="nav-text">Selinux的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selinux规则文件路径"><span class="nav-number">1.0.5.</span> <span class="nav-text">Selinux规则文件路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selinux策略"><span class="nav-number">1.0.6.</span> <span class="nav-text">Selinux策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selinux的使用"><span class="nav-number">1.0.7.</span> <span class="nav-text">Selinux的使用</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M2</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"m2langithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
