@@ -267,6 +267,154 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/21/CyclicBarrier/" itemprop="url">
+                  CyclicBarrier
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-21T15:53:54+08:00" content="2017-05-21">
+              2017-05-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/并发/" itemprop="url" rel="index">
+                    <span itemprop="name">并发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/21/CyclicBarrier/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/CyclicBarrier/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java并发编程类CyclicBarrier"><a href="#Java并发编程类CyclicBarrier" class="headerlink" title="Java并发编程类CyclicBarrier"></a>Java并发编程类CyclicBarrier</h1><pre><code>/**
+ * CyclicBarrier协同多个线程
+ * 用于同步所有调用await方法的线程，并且等所有线程都到了await方法时
+ * 这些线程才一起返回继续各自的工作
+ */
+public class CyclicBarrierDemo1 {
+
+    public static void main(String[] args) {
+        int count = 10;
+        final CyclicBarrier barrier = new CyclicBarrier(count + 1);
+        Runnable rannable = () -&gt; {
+            System.out.println(Thread.currentThread().getName() + &quot; : hahhahaha&quot;);
+            try {
+                barrier.await();
+            } catch (InterruptedException | BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+        };
+
+        ExecutorService service = Executors.newFixedThreadPool(count);
+        for (int i = 0; i &lt; count; i++) {
+            service.execute(rannable);
+        }
+
+        try {
+            barrier.await();
+        } catch (InterruptedException | BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+
+        service.shutdown();
+        System.out.println(&quot;执行完毕&quot;);
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/21/Atomics/" itemprop="url">
                   Atomics
                 </a>
@@ -1631,148 +1779,6 @@ public class Counter2 {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/07/mybatis-cache/" itemprop="url">
-                  mybatis-cache
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-07T13:54:46+08:00" content="2017-05-07">
-              2017-05-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/07/mybatis-cache/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-cache/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="mybatis-cache"><a href="#mybatis-cache" class="headerlink" title="mybatis cache"></a>mybatis cache</h1><blockquote>
-<p>mybatis提供一级缓存和二级缓存</p>
-</blockquote>
-<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><ul>
-<li><p>sqlSession级别的缓存，会话缓存，当sqlSession关闭会话结束，缓存失效。</p>
-<pre><code>@Test
-public void findUser() {
-    try (SqlSession session = sqlSessionFactory.openSession();
-            SqlSession session2 = sqlSessionFactory.openSession()) {
-        UserMapper userMapper = session.getMapper(UserMapper.class);
-        User user = userMapper.getUserById(1);
-        System.out.println(user);
-        session.close();
-
-        UserMapper userMapper1 = session2.getMapper(UserMapper.class);
-        User user1 = userMapper1.getUserById(1);
-        System.out.println(user1);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-</code></pre></li>
-<li>第一次查询用户信息，如果缓存中不存在，去数据库中查询。然后把用户信息保存在一级缓存中。</li>
-<li>默认所有的select语句都会被缓存<code>useCache=&quot;true&quot;</code></li>
-<li>当操作insert,update 和 delete 语句会刷新缓存。<code>flushCache=&quot;true&quot;</code></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/07/mybatis-cache/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1818,7 +1824,7 @@ public void findUser() {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">137</span>
+              <span class="site-state-item-count">138</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

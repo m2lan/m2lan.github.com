@@ -267,6 +267,143 @@
             
               
                 
+                <a class="post-title-link" href="/2016/02/26/centos-安装nginx/" itemprop="url">
+                  centos-安装nginx
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-26T00:17:11+08:00" content="2016-02-26">
+              2016-02-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/26/centos-安装nginx/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/centos-安装nginx/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Centos-安装Nginx"><a href="#Centos-安装Nginx" class="headerlink" title="Centos 安装Nginx"></a>Centos 安装Nginx</h1><pre><code>yum install gcc-c++
+
+yum -y install zlib zlib-devel openssl openssl--devel pcre pcre-devel
+
+wget http://nginx.org/download/nginx-1.6.2.tar.gz
+
+tar xvzf nginx-1.6.2.tar.gz
+
+cd ./nginx-1.6.2
+
+./configure
+
+make &amp;&amp; make install
+
+// 修改配置防火墙
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+
+service iptables restart
+
+// 启动nginx
+cd /usr/local/nginx/sbin/
+
+./nginx
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/02/26/centos-查看系统硬件信息/" itemprop="url">
                   centos-查看系统硬件信息
                 </a>
@@ -1406,132 +1543,6 @@ server.1=localhost:2888:3888
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/25/kafka/" itemprop="url">
-                  kafka
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-25T23:01:53+08:00" content="2016-02-25">
-              2016-02-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Kafka/" itemprop="url" rel="index">
-                    <span itemprop="name">Kafka</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/25/kafka/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/kafka/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h1><blockquote>
-<p>kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
-通过zookeeper实现集群
-kafka集群由多个kafka实例组成，每个实例称为broker</p>
-</blockquote>
-<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><pre><code>wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-tar xzf kafka_2.11-0.9.0.0.tgz
-export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
-cd kafka_2.11-0.9.0.0
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/25/kafka/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1577,7 +1588,7 @@ cd kafka_2.11-0.9.0.0
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">137</span>
+              <span class="site-state-item-count">138</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="MySQL," />
 
 
 
@@ -57,16 +57,18 @@
 
 
 
-<meta name="description" content="Tigase安装、部署、插件编写及其它">
-<meta property="og:type" content="website">
-<meta property="og:title" content="知识记录">
-<meta property="og:url" content="http://blog.golearns.org/tags/并发/index.html">
+<meta name="description" content="mysql主从复制 环境主服务器150，从服务器170  配置150服务器 修改mysql配置文件 [root@m2lan150 ~]# cat /etc/my.cnf [mysqld] datadir=/var/lib/mysql socket=/var/lib/mysql/mysql.sock user=mysql # Disabling symbolic-links is recommend">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql主从复制">
+<meta property="og:url" content="http://blog.golearns.org/2018/11/28/mysql主从复制/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Tigase安装、部署、插件编写及其它">
+<meta property="og:description" content="mysql主从复制 环境主服务器150，从服务器170  配置150服务器 修改mysql配置文件 [root@m2lan150 ~]# cat /etc/my.cnf [mysqld] datadir=/var/lib/mysql socket=/var/lib/mysql/mysql.sock user=mysql # Disabling symbolic-links is recommend">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-28T15:27:00.612Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="知识记录">
-<meta name="twitter:description" content="Tigase安装、部署、插件编写及其它">
+<meta name="twitter:title" content="mysql主从复制">
+<meta name="twitter:description" content="mysql主从复制 环境主服务器150，从服务器170  配置150服务器 修改mysql配置文件 [root@m2lan150 ~]# cat /etc/my.cnf [mysqld] datadir=/var/lib/mysql socket=/var/lib/mysql/mysql.sock user=mysql # Disabling symbolic-links is recommend">
 
 
 
@@ -84,7 +86,7 @@
   };
 </script>
 
-  <title> 标签: 并发 | 知识记录 </title>
+  <title> mysql主从复制 | 知识记录 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -115,7 +117,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -243,186 +245,252 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        并发
-        <small>标签</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/21/Exchanger/" itemprop="url">
-              
-                <span itemprop="name">Exchanger</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-21T16:44:47+08:00"
-              content="2017-05-21" >
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/21/Semaphore/" itemprop="url">
-              
-                <span itemprop="name">Semaphore</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-21T16:03:20+08:00"
-              content="2017-05-21" >
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/21/CyclicBarrier/" itemprop="url">
-              
-                <span itemprop="name">CyclicBarrier</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-21T15:53:54+08:00"
-              content="2017-05-21" >
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/21/Atomics/" itemprop="url">
-              
-                <span itemprop="name">Atomics</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-21T15:39:22+08:00"
-              content="2017-05-21" >
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/21/ReentrantLock/" itemprop="url">
-              
-                <span itemprop="name">ReentrantLock</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-21T15:35:56+08:00"
-              content="2017-05-21" >
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/21/CountDownLatch/" itemprop="url">
-              
-                <span itemprop="name">CountDownLatch</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-21T15:32:28+08:00"
-              content="2017-05-21" >
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                mysql主从复制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-11-28T22:34:12+08:00" content="2018-11-28">
+              2018-11-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/11/28/mysql主从复制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/28/mysql主从复制/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="mysql主从复制"><a href="#mysql主从复制" class="headerlink" title="mysql主从复制"></a>mysql主从复制</h1><blockquote>
+<p>环境主服务器150，从服务器170</p>
+</blockquote>
+<h3 id="配置150服务器"><a href="#配置150服务器" class="headerlink" title="配置150服务器"></a>配置150服务器</h3><ul>
+<li><p>修改mysql配置文件</p>
+<pre><code>[root@m2lan150 ~]# cat /etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+# 启用二进制日志，默认在/var/lib/mysql下面，名字随意起
+log-bin=mysqllog
+# 本机数据库ID标识
+server-id=1
+# 可以被从服务器复制的库，需要同步的数据库名称
+binlog-do-db=shopping
+# 不被复制的数据库
+# binlog-ignore-db=aa
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+</code></pre></li>
+</ul>
+<!--none-->
+<ul>
+<li><p>创建一个授权用户</p>
+<pre><code>mysql&gt; grant replication slave on *.* to &quot;slave&quot;@&quot;192.168.1.170&quot; identified by &quot;123456&quot;;
+</code></pre></li>
+<li><p>查看主服务器状态</p>
+<pre><code>mysql&gt; show master status;
++-----------------+----------+--------------+------------------+
+| File            | Position | Binlog_Do_DB | Binlog_Ignore_DB |
++-----------------+----------+--------------+------------------+
+| mysqllog.000001 |      535 | shopping     |                  |
++-----------------+----------+--------------+------------------+
+1 row in set (0.00 sec)
+</code></pre></li>
+<li><p>查看binlog日志</p>
+<pre><code>mysql&gt; show binlog events;
+</code></pre></li>
+<li><p>备份钱保证两个数据库中的数据保持一致</p>
+<pre><code>[root@m2lan150 ~]# mysqldump -uroot -p -A -E --ignore-table=mysql.events &gt; /opt/all.sql
+</code></pre></li>
+<li><p>copy文件到170从服务器</p>
+<pre><code>scp /opt/all.sql 192.168.1.170:/root
+</code></pre></li>
+</ul>
+<h3 id="配置170服务器"><a href="#配置170服务器" class="headerlink" title="配置170服务器"></a>配置170服务器</h3><ul>
+<li><p>安装mysql服务</p>
+<pre><code>[root@m2lan170 ~]# yum install mysql-server -y
+[root@m2lan170 ~]# service mysqld restart
+</code></pre></li>
+<li><p>测试能否连接上150服务器的mysql服务 </p>
+<pre><code>[root@m2lan170 ~]# mysql -h 192.168.1.150 -u slave -p
+</code></pre></li>
+<li><p>导入数据到从服务器mysql中</p>
+<pre><code>[root@m2lan170 ~]# mysql -uroot -p &lt; all.sql
+</code></pre></li>
+<li><p>修改配置文件</p>
+<pre><code>cat /etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+# 从服务器ID号，如果设置多个从服务器，每个从服务器必须有一个唯一的server-id号
+server-id=2
+# 主服务器的ip地址
+master-host=192.168.1.150
+# 指定在主服务器上可以进行同步的用户名
+master-user=slave
+# 密码
+master-password=123456
+# 断开重连时间
+master-connect-retry=60
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+</code></pre></li>
+<li><p>重启服务</p>
+<pre><code>[root@m2lan170 ~]# service mysqld restart
+</code></pre></li>
+<li><p>查看从服务器状态，<code>Slave_IO_Running</code>和<code>Slave_SQL_Running</code>都为yes表示正常</p>
+<pre><code>mysql&gt; show slave status \G
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 192.168.1.150
+                  Master_User: slave
+                  Master_Port: 3306
+                Connect_Retry: 60
+              Master_Log_File: mysqllog.000001
+          Read_Master_Log_Pos: 674
+               Relay_Log_File: mysqld-relay-bin.000006
+                Relay_Log_Pos: 250
+        Relay_Master_Log_File: mysqllog.000001
+             Slave_IO_Running: Yes
+            Slave_SQL_Running: Yes
+</code></pre></li>
+<li><p>在主服务器中插入数据测试。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/11/搭建squid代理服务器/" rel="next" title="搭建squid代理服务器">
+                <i class="fa fa-chevron-left"></i> 搭建squid代理服务器
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -430,6 +498,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/11/28/mysql主从复制/"
+           data-title="mysql主从复制" data-url="http://blog.golearns.org/2018/11/28/mysql主从复制/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -449,8 +525,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -566,6 +651,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql主从复制"><span class="nav-number">1.</span> <span class="nav-text">mysql主从复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置150服务器"><span class="nav-number">1.0.1.</span> <span class="nav-text">配置150服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置170服务器"><span class="nav-number">1.0.2.</span> <span class="nav-text">配置170服务器</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -656,6 +752,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
 
   
 

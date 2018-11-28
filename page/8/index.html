@@ -267,6 +267,148 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/07/mybatis-cache/" itemprop="url">
+                  mybatis-cache
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-07T13:54:46+08:00" content="2017-05-07">
+              2017-05-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/07/mybatis-cache/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-cache/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="mybatis-cache"><a href="#mybatis-cache" class="headerlink" title="mybatis cache"></a>mybatis cache</h1><blockquote>
+<p>mybatis提供一级缓存和二级缓存</p>
+</blockquote>
+<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><ul>
+<li><p>sqlSession级别的缓存，会话缓存，当sqlSession关闭会话结束，缓存失效。</p>
+<pre><code>@Test
+public void findUser() {
+    try (SqlSession session = sqlSessionFactory.openSession();
+            SqlSession session2 = sqlSessionFactory.openSession()) {
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        User user = userMapper.getUserById(1);
+        System.out.println(user);
+        session.close();
+
+        UserMapper userMapper1 = session2.getMapper(UserMapper.class);
+        User user1 = userMapper1.getUserById(1);
+        System.out.println(user1);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre></li>
+<li>第一次查询用户信息，如果缓存中不存在，去数据库中查询。然后把用户信息保存在一级缓存中。</li>
+<li>默认所有的select语句都会被缓存<code>useCache=&quot;true&quot;</code></li>
+<li>当操作insert,update 和 delete 语句会刷新缓存。<code>flushCache=&quot;true&quot;</code></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/07/mybatis-cache/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/07/mybatis-多表关联操作/" itemprop="url">
                   mybatis-多表关联操作
                 </a>
@@ -1389,121 +1531,6 @@ CREATE TABLE `idCard` (
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/03/tigase用户密码加密/" itemprop="url">
-                  tigase用户密码加密
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-03T15:36:11+08:00" content="2016-08-03">
-              2016-08-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Tigase/" itemprop="url" rel="index">
-                    <span itemprop="name">Tigase</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/03/tigase用户密码加密/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/03/tigase用户密码加密/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Tigase-用户密码加密"><a href="#Tigase-用户密码加密" class="headerlink" title="Tigase 用户密码加密"></a>Tigase 用户密码加密</h1><pre><code>call TigPutDBProperty(&apos;password-encoding&apos;, &apos;MD5-PASSWORD&apos;);
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1549,7 +1576,7 @@ CREATE TABLE `idCard` (
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">137</span>
+              <span class="site-state-item-count">138</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

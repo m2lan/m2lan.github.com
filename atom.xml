@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2018-11-11T12:58:15.313Z</updated>
+  <updated>2018-11-28T15:27:00.612Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql主从复制</title>
+    <link href="http://blog.golearns.org/2018/11/28/mysql%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"/>
+    <id>http://blog.golearns.org/2018/11/28/mysql主从复制/</id>
+    <published>2018-11-28T14:34:12.000Z</published>
+    <updated>2018-11-28T15:27:00.612Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mysql主从复制"><a href="#mysql主从复制" class="headerlink" title="mysql主从复制"></a>mysql主从复制</h1><blockquote><p>环境主服务器150，从服务器170</p></blockquote><h3 id="配置150服务器"><a href="#配置150服务器" class="headerlink" title="配置150服务器"></a>配置150服务器</h3><ul><li><p>修改mysql配置文件</p><pre><code>[root@m2lan150 ~]# cat /etc/my.cnf[mysqld]datadir=/var/lib/mysqlsocket=/var/lib/mysql/mysql.sockuser=mysql# Disabling symbolic-links is recommended to prevent assorted security riskssymbolic-links=0# 启用二进制日志，默认在/var/lib/mysql下面，名字随意起log-bin=mysqllog# 本机数据库ID标识server-id=1# 可以被从服务器复制的库，需要同步的数据库名称binlog-do-db=shopping# 不被复制的数据库# binlog-ignore-db=aa[mysqld_safe]log-error=/var/log/mysqld.logpid-file=/var/run/mysqld/mysqld.pid</code></pre></li></ul><!--none--><ul><li><p>创建一个授权用户</p><pre><code>mysql&gt; grant replication slave on *.* to &quot;slave&quot;@&quot;192.168.1.170&quot; identified by &quot;123456&quot;;</code></pre></li><li><p>查看主服务器状态</p><pre><code>mysql&gt; show master status;+-----------------+----------+--------------+------------------+| File            | Position | Binlog_Do_DB | Binlog_Ignore_DB |+-----------------+----------+--------------+------------------+| mysqllog.000001 |      535 | shopping     |                  |+-----------------+----------+--------------+------------------+1 row in set (0.00 sec)</code></pre></li><li><p>查看binlog日志</p><pre><code>mysql&gt; show binlog events;</code></pre></li><li><p>备份钱保证两个数据库中的数据保持一致</p><pre><code>[root@m2lan150 ~]# mysqldump -uroot -p -A -E --ignore-table=mysql.events &gt; /opt/all.sql</code></pre></li><li><p>copy文件到170从服务器</p><pre><code>scp /opt/all.sql 192.168.1.170:/root</code></pre></li></ul><h3 id="配置170服务器"><a href="#配置170服务器" class="headerlink" title="配置170服务器"></a>配置170服务器</h3><ul><li><p>安装mysql服务</p><pre><code>[root@m2lan170 ~]# yum install mysql-server -y[root@m2lan170 ~]# service mysqld restart</code></pre></li><li><p>测试能否连接上150服务器的mysql服务 </p><pre><code>[root@m2lan170 ~]# mysql -h 192.168.1.150 -u slave -p</code></pre></li><li><p>导入数据到从服务器mysql中</p><pre><code>[root@m2lan170 ~]# mysql -uroot -p &lt; all.sql</code></pre></li><li><p>修改配置文件</p><pre><code>cat /etc/my.cnf[mysqld]datadir=/var/lib/mysqlsocket=/var/lib/mysql/mysql.sockuser=mysql# Disabling symbolic-links is recommended to prevent assorted security riskssymbolic-links=0# 从服务器ID号，如果设置多个从服务器，每个从服务器必须有一个唯一的server-id号server-id=2# 主服务器的ip地址master-host=192.168.1.150# 指定在主服务器上可以进行同步的用户名master-user=slave# 密码master-password=123456# 断开重连时间master-connect-retry=60[mysqld_safe]log-error=/var/log/mysqld.logpid-file=/var/run/mysqld/mysqld.pid</code></pre></li><li><p>重启服务</p><pre><code>[root@m2lan170 ~]# service mysqld restart</code></pre></li><li><p>查看从服务器状态，<code>Slave_IO_Running</code>和<code>Slave_SQL_Running</code>都为yes表示正常</p><pre><code>mysql&gt; show slave status \G*************************** 1. row ***************************               Slave_IO_State: Waiting for master to send event                  Master_Host: 192.168.1.150                  Master_User: slave                  Master_Port: 3306                Connect_Retry: 60              Master_Log_File: mysqllog.000001          Read_Master_Log_Pos: 674               Relay_Log_File: mysqld-relay-bin.000006                Relay_Log_Pos: 250        Relay_Master_Log_File: mysqllog.000001             Slave_IO_Running: Yes            Slave_SQL_Running: Yes</code></pre></li><li><p>在主服务器中插入数据测试。</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;mysql主从复制&quot;&gt;&lt;a href=&quot;#mysql主从复制&quot; class=&quot;headerlink&quot; title=&quot;mysql主从复制&quot;&gt;&lt;/a&gt;mysql主从复制&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;环境主服务器150，从服务器170&lt;/p&gt;
+&lt;/block
+      
+    
+    </summary>
+    
+      <category term="MySQL" scheme="http://blog.golearns.org/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>搭建squid代理服务器</title>
@@ -325,9 +352,9 @@ htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
       <category term="Elasticsearch" scheme="http://blog.golearns.org/categories/Elasticsearch/"/>
     
     
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
       <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
     
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     
@@ -359,9 +386,9 @@ tar -xzf kibana-5.5.1-linux-x86_64.tar.gz
       <category term="Elasticsearch" scheme="http://blog.golearns.org/categories/Elasticsearch/"/>
     
     
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
       <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
     
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     
@@ -394,9 +421,9 @@ cd elasticsearch-5.5.1/
       <category term="Elasticsearch" scheme="http://blog.golearns.org/categories/Elasticsearch/"/>
     
     
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
       <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
     
       <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     
@@ -499,9 +526,9 @@ cd elasticsearch-5.5.1/
       <category term="Elasticsearch" scheme="http://blog.golearns.org/categories/Elasticsearch/"/>
     
     
-      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
-    
       <category term="Elasticsearch" scheme="http://blog.golearns.org/tags/Elasticsearch/"/>
+    
+      <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
     
       <category term="Centos" scheme="http://blog.golearns.org/tags/Centos/"/>
     
@@ -741,9 +768,9 @@ class Index {
       <category term="thinkphp5" scheme="http://blog.golearns.org/categories/thinkphp5/"/>
     
     
-      <category term="Nginx" scheme="http://blog.golearns.org/tags/Nginx/"/>
-    
       <category term="thinkphp5" scheme="http://blog.golearns.org/tags/thinkphp5/"/>
+    
+      <category term="Nginx" scheme="http://blog.golearns.org/tags/Nginx/"/>
     
   </entry>
   
@@ -771,32 +798,6 @@ class Index {
       <category term="jks" scheme="http://blog.golearns.org/tags/jks/"/>
     
       <category term="pem" scheme="http://blog.golearns.org/tags/pem/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>janus webrtc网关</title>
-    <link href="http://blog.golearns.org/2018/09/17/janus-webrtc%E7%BD%91%E5%85%B3/"/>
-    <id>http://blog.golearns.org/2018/09/17/janus-webrtc网关/</id>
-    <published>2018-09-17T15:02:07.000Z</published>
-    <updated>2018-09-17T15:18:02.614Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="janus-webrtc-网关服务器"><a href="#janus-webrtc-网关服务器" class="headerlink" title="janus webrtc 网关服务器"></a>janus webrtc 网关服务器</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum install libmicrohttpd-devel jansson-devel libnice-devel \</span><br><span class="line">   openssl-devel libsrtp-devel sofia-sip-devel glib-devel \</span><br><span class="line">   opus-devel libogg-devel libcurl-devel lua-devel \</span><br><span class="line">   pkgconfig gengetopt libtool autoconf automake</span><br><span class="line">   </span><br><span class="line"><span class="meta">#</span>如果出现No package sofia-sip-devel available</span><br><span class="line"><span class="meta">#</span>下载地址</span><br><span class="line">https://sourceforge.net/projects/sofia-sip/files/sofia-sip/1.12.11/</span><br><span class="line">wget https://sourceforge.net/projects/sofia-sip/files/sofia-sip/1.12.11/sofia-sip-1.12.11.tar.gz/download</span><br><span class="line"></span><br><span class="line">tar xzvf download</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure><a id="more"></a><h2 id="安装安装-libsrtp"><a href="#安装安装-libsrtp" class="headerlink" title="安装安装 libsrtp"></a>安装安装 libsrtp</h2><blockquote><p>Janus至少需要version1.5以上的libsrtp，如果已经安装需要先卸载后再安装</p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# yum remove libsrtp</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# wget https://github.com/cisco/libsrtp/archive/v2.2.0.tar.gz</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# tar xfv v2.2.0.tar.gz</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd libsrtp-2.2.0/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz libsrtp-2.2.0]# ./configure --prefix=/usr --enable-openssl</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz libsrtp-2.2.0]# make shared_library</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz libsrtp-2.2.0]# make install</span><br></pre></td></tr></table></figure><h2 id="安装websocket"><a href="#安装websocket" class="headerlink" title="安装websocket"></a>安装websocket</h2><blockquote><p>janus支持websocket是可选的，如果不安装，编译janus时默认不支持websocket链接请求</p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# git clone https://github.com/warmcat/libwebsockets.git</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd libwebsockets/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz libwebsockets]# mkdir build</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> centos install cmake</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# wget  https://cmake.org/files/v3.3/cmake-3.3.2.tar.gz</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# tar xzvf cmake-3.3.2.tar.gz</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd cmake-3.3.2</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz cmake-3.3.2]# ./bootstrap</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz cmake-3.3.2]# gmake</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz cmake-3.3.2]# make install</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 切换到libwebsockets/build</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz libwebsockets]# cd build/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz build]# cmake -DLWS_MAX_SMP=1 -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_C_FLAGS="-fpic" ..</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz build]# make</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz build]# make install</span><br></pre></td></tr></table></figure><h2 id="编译安装janus"><a href="#编译安装janus" class="headerlink" title="编译安装janus"></a>编译安装janus</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# git clone https://github.com/meetecho/janus-gateway.git</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd janus-gateway/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus-gateway]# sh autogen.sh</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus-gateway]# ./configure --prefix=/opt/janus --enable-websockets --enable-docs</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus-gateway]# make</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus-gateway]# make install</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus-gateway]# make configs</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 启动janus报错</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# /opt/janus/bin/janus </span><br><span class="line">/opt/janus/bin/janus: error while loading shared libraries: libsrtp2.so.1: cannot open shared object file: No such file or directory</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 查看libsrtp2.so.1所在目录</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus]# whereis libsrtp2.so.1</span><br><span class="line">libsrtp2.so: /usr/lib/libsrtp2.so /usr/lib/libsrtp2.so.1</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd /etc/ld.so.conf.d/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 添加whatever.conf文件</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ld.so.conf.d]# vim whatever.conf</span><br><span class="line">/usr/lib</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 更新配置</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# ldconfig</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 再次启动janus报以下错误</span><br><span class="line">[ERR] [plugins/janus_lua.c:janus_lua_init:1155] Error loading Lua script /opt/janus/share/janus/lua/echotest.lua: /opt/janus/share/janus/lua/echotest.lua:6: module 'json' not found:</span><br><span class="line">no field package.preload['json']</span><br><span class="line">no file './json.lua'</span><br><span class="line">no file '/usr/share/lua/5.1/json.lua'</span><br><span class="line">no file '/usr/share/lua/5.1/json/init.lua'</span><br><span class="line">no file '/usr/lib64/lua/5.1/json.lua'</span><br><span class="line">no file '/usr/lib64/lua/5.1/json/init.lua'</span><br><span class="line">no file '/opt/janus/share/janus/lua/json.lua'</span><br><span class="line">no file './json.so'</span><br><span class="line">no file '/usr/lib64/lua/5.1/json.so'</span><br><span class="line">no file '/usr/lib64/lua/5.1/loadall.so'</span><br><span class="line">[WARN] The 'janus.plugin.lua' plugin could not be initialized</span><br><span class="line"></span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# yum install -y ncurses-devel</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# yum install lua-json</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 重新启动报</span><br><span class="line">[ERR] [plugins/janus_lua.c:janus_lua_init:1155] Error loading Lua script /opt/janus/share/janus/lua/echotest.lua: /opt/janus/share/janus/lua/echotest.lua:12: module 'ansicolors' not found:</span><br><span class="line">no field package.preload['ansicolors']</span><br><span class="line">no file './ansicolors.lua'</span><br><span class="line">no file '/usr/share/lua/5.1/ansicolors.lua'</span><br><span class="line">no file '/usr/share/lua/5.1/ansicolors/init.lua'</span><br><span class="line">no file '/usr/lib64/lua/5.1/ansicolors.lua'</span><br><span class="line">no file '/usr/lib64/lua/5.1/ansicolors/init.lua'</span><br><span class="line">no file '/opt/janus/share/janus/lua/ansicolors.lua'</span><br><span class="line">no file './ansicolors.so'</span><br><span class="line">no file '/usr/lib64/lua/5.1/ansicolors.so'</span><br><span class="line">no file '/usr/lib64/lua/5.1/loadall.so'</span><br><span class="line">[WARN] The 'janus.plugin.lua' plugin could not be initialized</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 新建color.lua文件</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cat color.lua </span><br><span class="line">local colors = require 'ansicolors'</span><br><span class="line">print(colors('%&#123;red&#125;hello'))</span><br><span class="line">print(colors('%&#123;redbg&#125;hello%&#123;reset&#125;'))</span><br><span class="line">print(colors('%&#123;bright red underline&#125;hello'))</span><br><span class="line"></span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# lua color.lua </span><br><span class="line">hello</span><br><span class="line">hello</span><br><span class="line">hello</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 再次运行</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# /opt/janus/bin/janus</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;janus-webrtc-网关服务器&quot;&gt;&lt;a href=&quot;#janus-webrtc-网关服务器&quot; class=&quot;headerlink&quot; title=&quot;janus webrtc 网关服务器&quot;&gt;&lt;/a&gt;janus webrtc 网关服务器&lt;/h1&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum install libmicrohttpd-devel jansson-devel libnice-devel \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   openssl-devel libsrtp-devel sofia-sip-devel glib-devel \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   opus-devel libogg-devel libcurl-devel lua-devel \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   pkgconfig gengetopt libtool autoconf automake&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;如果出现No package sofia-sip-devel available&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;下载地址&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;https://sourceforge.net/projects/sofia-sip/files/sofia-sip/1.12.11/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;wget https://sourceforge.net/projects/sofia-sip/files/sofia-sip/1.12.11/sofia-sip-1.12.11.tar.gz/download&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tar xzvf download&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;./configure&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;make &amp;amp;&amp;amp; make install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="webrtc" scheme="http://blog.golearns.org/categories/webrtc/"/>
-    
-    
-      <category term="webrt" scheme="http://blog.golearns.org/tags/webrt/"/>
-    
-      <category term="janus" scheme="http://blog.golearns.org/tags/janus/"/>
-    
-      <category term="网关" scheme="http://blog.golearns.org/tags/%E7%BD%91%E5%85%B3/"/>
     
   </entry>
   
