@@ -267,6 +267,170 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/Shell-算术运算符-字符串操作/" itemprop="url">
+                  Shell-算术运算符+字符串操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T02:15:16+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Shell-算术运算符-字符串操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-算术运算符-字符串操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#!/bin/bash
+#算术运算符
+
+A=10
+B=$(($A+20))
+echo ${B}
+
+echo $((10+10))
+
+# 表达式和运算符之间要存在空格,不能写成2+2
+num=`expr 2 + 2`
+echo $num
+
+echo $((10/10))
+echo `expr 10 / 10`
+echo $((10*10))
+
+# 乘法*号前面添加反斜杠才能进行运算
+echo `expr 10 \* 10`
+</code></pre><p>==========</p>
+<pre><code>#!/bin/bash
+#string
+
+STRING=&quot;hello world&quot;
+SUBSTRING=&quot;wqpeowqpeowq xxxworldxxxx world&quot;
+STRING2=&quot;QQQQQ WWWWWW BBBBBB EEEEEE&quot;
+
+#字符串替换
+echo ${STRING[@]/world/world!}
+
+#字符串替换所有
+echo ${SUBSTRING[@]//world/world!}
+
+#字符串截取 ${STRING:n} 从第N个位置到结尾
+echo ${STRING:2}
+
+#字符串截取 ${STRING:POS:LEN} 从从第POS位置开始截取LEN长度的字符
+echo ${STRING:2:5}
+
+#删除字符串中的字符，和空替换 
+echo ${STRING2[@]// WWWWWW}
+
+#将字符串开头的字符替换
+echo ${STRING2[@]/#QQQQQ/MMMMM}
+
+#将字符串结尾的字符替换
+echo ${STRING2[@]/%EEEEEE/PPPPP}
+
+#将字符串提出为shell命令
+echo ${STRING2[@]/%EEEEEE/$(date +%Y-%m-%d)}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/10/Shell-变量/" itemprop="url">
                   Shell-变量
                 </a>
@@ -1624,139 +1788,6 @@ return sortArray;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" itemprop="url">
-                  Git-版本回退、撤销修改、删除文件、远程仓库、分支管理策略
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T01:39:28+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><ul>
-<li><p>如果信息显示过多的话,可以使用<code>git log --pretty=oneline</code></p>
-<pre><code>dfffd94bebdc57c208b5a5c4594b4434bc789226 update a.txt
-9bdf0e56568f64ae6c666cd22f32ed1ca0951383 update a.txt
-2a474cb5f533fbf3bc5fd0b2fe3c856a37a9dd1e add a.txt
-</code></pre></li>
-<li>如果想回退到上个版本,可以使用<code>git reset --hard HEAD^</code>,如果想回退前2个版本<code>git reset --hard HEAD^^</code>,多个版本添加多个^。如果回退前100个版本,可以使用<code>git reset --hard HEAD~100</code></li>
-<li><p>如果想回退到最新版本<code>git reset –hard</code>版本号,查看最新版本版本号<code>git reflog</code></p>
-<pre><code>9bdf0e5 HEAD@{0}: reset: moving to HEAD~2
-5b95f49 HEAD@{1}: commit: a.txt
-28cb7d2 HEAD@{2}: commit: a.txt
-9bdf0e5 HEAD@{3}: reset: moving to HEAD^
-dfffd94 HEAD@{4}: commit: update a.txt
-9bdf0e5 HEAD@{5}: commit: update a.txt
-2a474cb HEAD@{6}: commit (initial): add a.txt
-</code></pre></li>
-<li>执行<code>git reset --hard 9bdf0e5</code>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/10/Git-版本回退-撤销修改-删除文件-远程仓库-分支管理策略/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1802,7 +1833,7 @@ dfffd94 HEAD@{4}: commit: update a.txt
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">138</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

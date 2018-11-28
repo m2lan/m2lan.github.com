@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="MySQL," />
 
 
 
@@ -57,16 +57,18 @@
 
 
 
-<meta name="description" content="Tigase安装、部署、插件编写及其它">
-<meta property="og:type" content="website">
-<meta property="og:title" content="知识记录">
-<meta property="og:url" content="http://blog.golearns.org/tags/Hexo/index.html">
+<meta name="description" content="mysql主主复制 150服务器和170服务器  配置170服务器 修改配置文件 cat /etc/my.cnf [mysqld] datadir=/var/lib/mysql socket=/var/lib/mysql/mysql.sock user=mysql # Disabling symbolic-links is recommended to prevent assorted secur">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql主主复制">
+<meta property="og:url" content="http://blog.golearns.org/2018/11/28/mysql主主复制/index.html">
 <meta property="og:site_name" content="知识记录">
-<meta property="og:description" content="Tigase安装、部署、插件编写及其它">
+<meta property="og:description" content="mysql主主复制 150服务器和170服务器  配置170服务器 修改配置文件 cat /etc/my.cnf [mysqld] datadir=/var/lib/mysql socket=/var/lib/mysql/mysql.sock user=mysql # Disabling symbolic-links is recommended to prevent assorted secur">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-28T15:47:38.847Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="知识记录">
-<meta name="twitter:description" content="Tigase安装、部署、插件编写及其它">
+<meta name="twitter:title" content="mysql主主复制">
+<meta name="twitter:description" content="mysql主主复制 150服务器和170服务器  配置170服务器 修改配置文件 cat /etc/my.cnf [mysqld] datadir=/var/lib/mysql socket=/var/lib/mysql/mysql.sock user=mysql # Disabling symbolic-links is recommended to prevent assorted secur">
 
 
 
@@ -84,7 +86,7 @@
   };
 </script>
 
-  <title> 标签: Hexo | 知识记录 </title>
+  <title> mysql主主复制 | 知识记录 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -115,7 +117,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -243,46 +245,236 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Hexo
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                mysql主主复制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-11-28T23:28:28+08:00" content="2018-11-28">
+              2018-11-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/11/28/mysql主主复制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/28/mysql主主复制/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h1 id="mysql主主复制"><a href="#mysql主主复制" class="headerlink" title="mysql主主复制"></a>mysql主主复制</h1><blockquote>
+<p>150服务器和170服务器</p>
+</blockquote>
+<h3 id="配置170服务器"><a href="#配置170服务器" class="headerlink" title="配置170服务器"></a>配置170服务器</h3><ul>
+<li><p>修改配置文件</p>
+<pre><code>cat /etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
 
-      <h1 class="post-title">
+server-id=2
+master-host=192.168.1.150
+master-user=slave
+master-password=123456
+master-connect-retry=60
+
+# 也开启binlog日志
+log-bin=mysqlslave-bin-log
+binlog-do-db=shopping
+binlog-ignore-db=mysql
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>创建一个授权用户</p>
+<pre><code>mysql&gt; grant replication slave on *.* to &quot;slave170&quot;@&quot;192.168.1.150&quot; identified by &quot;123456&quot;;
+</code></pre></li>
+<li><p>重启服务</p>
+<pre><code>[root@m2lan170 ~]# service mysqld restart
+</code></pre></li>
+</ul>
+<h3 id="配置150服务器"><a href="#配置150服务器" class="headerlink" title="配置150服务器"></a>配置150服务器</h3><ul>
+<li><p>修改配置文件</p>
+<pre><code>cat /etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+log-bin=mysqllog
+server-id=1
+binlog-do-db=shopping
+
+master-host=192.168.1.170
+master-user=slave170
+master-password=123456
+replicate-do-db=shopping
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+</code></pre></li>
+<li><p>重启服务</p>
+<pre><code>[root@m2lan150 ~]# service mysqld restart
+</code></pre></li>
+<li><p>查看150服务器的从配置状态，<code>Slave_IO_Running</code>和<code>Slave_SQL_Running</code>都为yes表示正常</p>
+<pre><code>mysql&gt; show slave status \G
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 192.168.1.170
+                  Master_User: slave170
+                  Master_Port: 3306
+                Connect_Retry: 60
+              Master_Log_File: mysqlslave-bin-log.000001
+          Read_Master_Log_Pos: 257
+               Relay_Log_File: mysqld-relay-bin.000003
+                Relay_Log_Pos: 411
+        Relay_Master_Log_File: mysqlslave-bin-log.000001
+             Slave_IO_Running: Yes
+            Slave_SQL_Running: Yes
+              Replicate_Do_DB: shopping
+</code></pre></li>
+<li><p>如果配置错误导致同步失败，可以尝试</p>
+<pre><code>mysql&gt; stop slave;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql&gt; reset slave;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql&gt; start slave;
+Query OK, 0 rows affected (0.07 sec)
+</code></pre></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/07/15/hexo运行报错/" itemprop="url">
-              
-                <span itemprop="name">hexo运行报错</span>
-              
-            </a>
-        
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-15T09:22:02+08:00"
-              content="2016-07-15" >
-          07-15
-        </time>
-      </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
+          
+        </div>
+      
 
-    </header>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/28/mysql主从复制/" rel="next" title="mysql主从复制">
+                <i class="fa fa-chevron-left"></i> mysql主从复制
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -290,6 +482,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/11/28/mysql主主复制/"
+           data-title="mysql主主复制" data-url="http://blog.golearns.org/2018/11/28/mysql主主复制/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -309,8 +509,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -426,6 +635,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql主主复制"><span class="nav-number">1.</span> <span class="nav-text">mysql主主复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置170服务器"><span class="nav-number">1.0.1.</span> <span class="nav-text">配置170服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置150服务器"><span class="nav-number">1.0.2.</span> <span class="nav-text">配置150服务器</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -516,6 +736,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
 
   
 

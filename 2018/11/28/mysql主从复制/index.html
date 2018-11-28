@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="mysql主从复制 环境主服务器150，从服务器170  配置150服务器 修改mysql配置文件 [root@m2lan150 ~]# cat /etc/my.cnf [mysqld] datadir=/var/lib/mysql socket=/var/lib/mysql/mysql.sock user=mysql # Disabling symbolic-links is recommend">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-28T15:27:00.612Z">
+<meta property="og:updated_time" content="2018-11-28T15:41:45.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql主从复制">
 <meta name="twitter:description" content="mysql主从复制 环境主服务器150，从服务器170  配置150服务器 修改mysql配置文件 [root@m2lan150 ~]# cat /etc/my.cnf [mysqld] datadir=/var/lib/mysql socket=/var/lib/mysql/mysql.sock user=mysql # Disabling symbolic-links is recommend">
@@ -358,7 +358,7 @@ log-error=/var/log/mysqld.log
 pid-file=/var/run/mysqld/mysqld.pid
 </code></pre></li>
 </ul>
-<!--none-->
+<a id="more"></a>
 <ul>
 <li><p>创建一个授权用户</p>
 <pre><code>mysql&gt; grant replication slave on *.* to &quot;slave&quot;@&quot;192.168.1.170&quot; identified by &quot;123456&quot;;
@@ -470,6 +470,10 @@ pid-file=/var/run/mysqld/mysqld.pid
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/11/28/mysql主主复制/" rel="prev" title="mysql主主复制">
+                mysql主主复制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -546,7 +550,7 @@ pid-file=/var/run/mysqld/mysqld.pid
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">138</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
