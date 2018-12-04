@@ -267,135 +267,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/22/createIcon/" itemprop="url">
-                  一键生成Android和IOS平台图标和启动页
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-22T10:53:33+08:00" content="2016-07-22">
-              2016-07-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ionic/" itemprop="url" rel="index">
-                    <span itemprop="name">ionic</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/22/createIcon/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/22/createIcon/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="一键生成Android和IOS图标和启动画面"><a href="#一键生成Android和IOS图标和启动画面" class="headerlink" title="一键生成Android和IOS图标和启动画面"></a>一键生成Android和IOS图标和启动画面</h1><ul>
-<li><p>操作步骤</p>
-<pre><code>npm install -g ionic
-ionic start myapp
-
-cd myapp
-ionic platform android ios
-
-mkdir resources
-
-// 拷贝高清图片到resources，命名为icon.png和splash.png
-// 运行
-ionic resources // 生成android和ios所需图片
-</code></pre></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/07/21/table/" itemprop="url">
                   Ectouch数据库字典
                 </a>
@@ -1627,6 +1498,136 @@ cd /usr/local/nginx/sbin/
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/26/centos-查看系统硬件信息/" itemprop="url">
+                  centos-查看系统硬件信息
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-26T00:13:44+08:00" content="2016-02-26">
+              2016-02-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/26/centos-查看系统硬件信息/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/centos-查看系统硬件信息/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Centos-查看系统硬件信息"><a href="#Centos-查看系统硬件信息" class="headerlink" title="Centos 查看系统硬件信息"></a>Centos 查看系统硬件信息</h1><ul>
+<li><p>查看CPU型号</p>
+<pre><code>cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+
+2  Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz
+</code></pre></li>
+<li><p>查看物理CPU个数</p>
+<pre><code>cat /proc/cpuinfo | grep physical | uniq -c
+
+1 physical id    : 0
+1 address sizes    : 46 bits physical, 48 bits virtual
+1 physical id    : 2
+1 address sizes    : 46 bits physical, 48 bits virtual
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/26/centos-查看系统硬件信息/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1672,7 +1673,7 @@ cd /usr/local/nginx/sbin/
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">137</span>
+              <span class="site-state-item-count">136</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

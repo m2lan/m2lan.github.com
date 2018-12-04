@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2018-11-29T02:53:07.540Z</updated>
+  <updated>2018-11-28T15:47:38.847Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -15,32 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>mysql-proxy实现读写分离</title>
-    <link href="http://blog.golearns.org/2018/11/29/mysql-proxy%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/"/>
-    <id>http://blog.golearns.org/2018/11/29/mysql-proxy实现读写分离/</id>
-    <published>2018-11-29T02:52:13.000Z</published>
-    <updated>2018-11-29T02:53:07.540Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="mysql-proxy实现读写分离"><a href="#mysql-proxy实现读写分离" class="headerlink" title="mysql-proxy实现读写分离"></a>mysql-proxy实现读写分离</h1><blockquote></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;mysql-proxy实现读写分离&quot;&gt;&lt;a href=&quot;#mysql-proxy实现读写分离&quot; class=&quot;headerlink&quot; title=&quot;mysql-proxy实现读写分离&quot;&gt;&lt;/a&gt;mysql-proxy实现读写分离&lt;/h1&gt;&lt;blockquote&gt;
-
-      
-    
-    </summary>
-    
-      <category term="MySQL" scheme="http://blog.golearns.org/categories/MySQL/"/>
-    
-    
-      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
-    
-  </entry>
   
   <entry>
     <title>mysql主主复制</title>
@@ -830,6 +804,31 @@ class Index {
       <category term="janus" scheme="http://blog.golearns.org/tags/janus/"/>
     
       <category term="网关" scheme="http://blog.golearns.org/tags/%E7%BD%91%E5%85%B3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>install shadowsocks</title>
+    <link href="http://blog.golearns.org/2018/09/17/install-shadowsocks/"/>
+    <id>http://blog.golearns.org/2018/09/17/install-shadowsocks/</id>
+    <published>2018-09-17T15:01:37.000Z</published>
+    <updated>2018-09-17T15:01:57.367Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="install-shadowsocks"><a href="#install-shadowsocks" class="headerlink" title="install shadowsocks"></a>install shadowsocks</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-libev.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev.sh</span><br><span class="line">chmod +x shadowsocks-libev.sh</span><br><span class="line">./shadowsocks-libev.sh 2&gt;&amp;1 | tee shadowsocks-libev.log</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;install-shadowsocks&quot;&gt;&lt;a href=&quot;#install-shadowsocks&quot; class=&quot;headerlink&quot; title=&quot;install shadowsocks&quot;&gt;&lt;/a&gt;install shadowsocks&lt;/h1&gt;&lt;figu
+      
+    
+    </summary>
+    
+      <category term="shadowsocks" scheme="http://blog.golearns.org/categories/shadowsocks/"/>
+    
+    
+      <category term="shadowsocks" scheme="http://blog.golearns.org/tags/shadowsocks/"/>
     
   </entry>
   
