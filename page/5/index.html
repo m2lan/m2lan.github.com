@@ -267,283 +267,6 @@
             
               
                 
-                <a class="post-title-link" href="/2018/09/17/搭建jenkins持续构建环境-springboot/" itemprop="url">
-                  搭建jenkins持续构建环境-springboot
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T22:39:39+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/jenkins/" itemprop="url" rel="index">
-                    <span itemprop="name">jenkins</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/搭建jenkins持续构建环境-springboot/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/搭建jenkins持续构建环境-springboot/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="搭建Jenkins持续构建环境-springboot"><a href="#搭建Jenkins持续构建环境-springboot" class="headerlink" title="搭建Jenkins持续构建环境-springboot"></a>搭建Jenkins持续构建环境-springboot</h1><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
-<li>gitlab环境服务器(192.168.3.152)<ul>
-<li>gitlab</li>
-</ul>
-</li>
-<li>jenkins环境服务器(192.168.3.213)<ul>
-<li>maven</li>
-<li>jdk</li>
-<li>tomcat</li>
-<li>jenkins</li>
-</ul>
-</li>
-<li>tomcat环境服务器(192.168.3.214)<ul>
-<li>jdk</li>
-<li>tomcat</li>
-</ul>
-</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/搭建jenkins持续构建环境-springboot/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/创建think5自定义命令行/" itemprop="url">
-                  创建think5自定义命令行
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T22:37:50+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/thinkphp5/" itemprop="url" rel="index">
-                    <span itemprop="name">thinkphp5</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/创建think5自定义命令行/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/创建think5自定义命令行/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="创建think5自定义命令行"><a href="#创建think5自定义命令行" class="headerlink" title="创建think5自定义命令行"></a>创建think5自定义命令行</h1><blockquote>
-<p>ThinkPHP5.0支持Console应用，通过命令行的方式执行一些URL访问不方便或者安全性较高的操作</p>
-</blockquote>
-<h3 id="创建命令行类"><a href="#创建命令行类" class="headerlink" title="创建命令行类"></a>创建命令行类</h3><ul>
-<li><p>创建<code>application/console/WebSocket.php</code></p>
-<pre><code>namespace app\console;
-
-use think\console\Command;
-use think\console\Input;
-use think\console\Output;
-
-class WebSocket extends Command {
-
-    // 命令行配置函数
-    protected function configure() {
-        // setName: 设置命令行名称
-        // setDescription: 设置命令行描述
-        $this-&gt;setName(&apos;websocket:start&apos;)-&gt;setDescription(&apos;启动WebSocket服务器.&apos;);
-    }
-
-    // 设置命令行返回信息
-    protected function execute(Input $input, Output $output) {
-        $output-&gt;writeln(&quot;WebSocket: 启动.\n&quot;);
-    }
-}
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/创建think5自定义命令行/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2018/09/17/阿里云升级内核/" itemprop="url">
                   阿里云升级内核
                 </a>
@@ -1803,6 +1526,297 @@ pub
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/29/samba服务配置实现文件共享/" itemprop="url">
+                  samba服务配置实现文件共享
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-29T15:40:49+08:00" content="2017-05-29">
+              2017-05-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/29/samba服务配置实现文件共享/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/29/samba服务配置实现文件共享/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Linux下samba服务器配置实现文件共享"><a href="#Linux下samba服务器配置实现文件共享" class="headerlink" title="Linux下samba服务器配置实现文件共享"></a>Linux下samba服务器配置实现文件共享</h1><blockquote>
+<p>samba可以在Linux系统和Windows系统之间进行通信，实现不同操作系统之间的资源共享。</p>
+<p>samba服务器端口号为139和445。</p>
+</blockquote>
+<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><ul>
+<li><p>在150服务器上安装samba服务端</p>
+<pre><code>[root@m2lan150 ~]# rpm -ivh /mnt/Packages/samba-3.6.9-164.el6.x86_64.rpm
+</code></pre></li>
+<li><p>在170服务器上安装samba客户端</p>
+<pre><code>[root@m2lan170 ~]# rpm -ivh /mnt/Packages/samba-client-3.6.9-164.el6.x86_64.rpm
+</code></pre></li>
+</ul>
+<h3 id="服务启动和关闭"><a href="#服务启动和关闭" class="headerlink" title="服务启动和关闭"></a>服务启动和关闭</h3><ul>
+<li><p>samba服务器启动</p>
+<pre><code>[root@m2lan150 ~]# /etc/init.d/smb start
+||
+[root@m2lan150 ~]# /etc/init.d/smb restart
+</code></pre></li>
+<li><p>服务配置重新加载，在不重启服务的情况下，加载配置文件</p>
+<pre><code>[root@m2lan150 ~]# /etc/init.d/smb reload
+</code></pre></li>
+<li><p>设置开机自动启动</p>
+<pre><code>[root@m2lan150 ~]# chkconfig smb on
+</code></pre></li>
+</ul>
+<h3 id="查看端口号"><a href="#查看端口号" class="headerlink" title="查看端口号"></a>查看端口号</h3><pre><code>[root@m2lan150 ~]# netstat -antup | grep smb
+tcp        0      0 0.0.0.0:139                 0.0.0.0:*                   LISTEN      11677/smbd          
+tcp        0      0 0.0.0.0:445                 0.0.0.0:*                   LISTEN      11677/smbd          
+tcp        0      0 :::139                      :::*                        LISTEN      11677/smbd          
+tcp        0      0 :::445                      :::*                        LISTEN      11677/smbd
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/29/samba服务配置实现文件共享/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/29/nfs服务配置/" itemprop="url">
+                  nfs服务配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-29T00:48:23+08:00" content="2017-05-29">
+              2017-05-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/29/nfs服务配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/29/nfs服务配置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Linux下nfs服务配置"><a href="#Linux下nfs服务配置" class="headerlink" title="Linux下nfs服务配置"></a>Linux下nfs服务配置</h1><blockquote>
+<p>NFS是网络文件系统，允许一个系统在网络上与其他机器共享目录和文件</p>
+<p>通过使用NFS，用户和程序可以像访问本地文件一样访问远程系统上的文件。 </p>
+</blockquote>
+<h3 id="启动150服务器的nfs服务"><a href="#启动150服务器的nfs服务" class="headerlink" title="启动150服务器的nfs服务"></a>启动150服务器的nfs服务</h3><pre><code>[root@m2lan150 ~]# service nfs start
+启动 NFS 服务：                                            [确定]
+关掉 NFS 配额：                                            [确定]
+启动 NFS mountd：                                          [确定]
+启动 NFS 守护进程：                                        [确定]
+正在启动 RPC idmapd：                                      [确定]
+</code></pre><h3 id="170服务器查看nfs服务器上所有共享目录"><a href="#170服务器查看nfs服务器上所有共享目录" class="headerlink" title="170服务器查看nfs服务器上所有共享目录"></a>170服务器查看nfs服务器上所有共享目录</h3><pre><code>[root@m2lan170 ~]# showmount -e 192.168.0.150
+Export list for 192.168.0.150:
+</code></pre><h3 id="150服务器共享-root-sh目录"><a href="#150服务器共享-root-sh目录" class="headerlink" title="150服务器共享/root/sh目录"></a>150服务器共享/root/sh目录</h3><pre><code># *表示所有客户端都可以访问，rw表示有读写权限
+[root@m2lan150 ~]# cat /etc/exports 
+/media *(rw)
+
+# 重启nfs服务
+[root@m2lan150 ~]# service nfs restart
+关闭 NFS 守护进程：                                        [确定]
+关闭 NFS mountd：                                          [确定]
+关闭 NFS quotas：                                          [确定]
+Shutting down RPC idmapd:                                  [确定]
+启动 NFS 服务：                                            [确定]
+关掉 NFS 配额：                                            [确定]
+启动 NFS mountd：                                          [确定]
+启动 NFS 守护进程：                                        [确定]
+正在启动 RPC idmapd：                                      [确定]
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/29/nfs服务配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1848,7 +1862,7 @@ pub
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1865,7 +1879,7 @@ pub
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

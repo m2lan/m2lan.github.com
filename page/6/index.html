@@ -267,297 +267,6 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/29/samba服务配置实现文件共享/" itemprop="url">
-                  samba服务配置实现文件共享
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-29T15:40:49+08:00" content="2017-05-29">
-              2017-05-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/29/samba服务配置实现文件共享/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/29/samba服务配置实现文件共享/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Linux下samba服务器配置实现文件共享"><a href="#Linux下samba服务器配置实现文件共享" class="headerlink" title="Linux下samba服务器配置实现文件共享"></a>Linux下samba服务器配置实现文件共享</h1><blockquote>
-<p>samba可以在Linux系统和Windows系统之间进行通信，实现不同操作系统之间的资源共享。</p>
-<p>samba服务器端口号为139和445。</p>
-</blockquote>
-<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><ul>
-<li><p>在150服务器上安装samba服务端</p>
-<pre><code>[root@m2lan150 ~]# rpm -ivh /mnt/Packages/samba-3.6.9-164.el6.x86_64.rpm
-</code></pre></li>
-<li><p>在170服务器上安装samba客户端</p>
-<pre><code>[root@m2lan170 ~]# rpm -ivh /mnt/Packages/samba-client-3.6.9-164.el6.x86_64.rpm
-</code></pre></li>
-</ul>
-<h3 id="服务启动和关闭"><a href="#服务启动和关闭" class="headerlink" title="服务启动和关闭"></a>服务启动和关闭</h3><ul>
-<li><p>samba服务器启动</p>
-<pre><code>[root@m2lan150 ~]# /etc/init.d/smb start
-||
-[root@m2lan150 ~]# /etc/init.d/smb restart
-</code></pre></li>
-<li><p>服务配置重新加载，在不重启服务的情况下，加载配置文件</p>
-<pre><code>[root@m2lan150 ~]# /etc/init.d/smb reload
-</code></pre></li>
-<li><p>设置开机自动启动</p>
-<pre><code>[root@m2lan150 ~]# chkconfig smb on
-</code></pre></li>
-</ul>
-<h3 id="查看端口号"><a href="#查看端口号" class="headerlink" title="查看端口号"></a>查看端口号</h3><pre><code>[root@m2lan150 ~]# netstat -antup | grep smb
-tcp        0      0 0.0.0.0:139                 0.0.0.0:*                   LISTEN      11677/smbd          
-tcp        0      0 0.0.0.0:445                 0.0.0.0:*                   LISTEN      11677/smbd          
-tcp        0      0 :::139                      :::*                        LISTEN      11677/smbd          
-tcp        0      0 :::445                      :::*                        LISTEN      11677/smbd
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/29/samba服务配置实现文件共享/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/29/nfs服务配置/" itemprop="url">
-                  nfs服务配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-29T00:48:23+08:00" content="2017-05-29">
-              2017-05-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/29/nfs服务配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/29/nfs服务配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Linux下nfs服务配置"><a href="#Linux下nfs服务配置" class="headerlink" title="Linux下nfs服务配置"></a>Linux下nfs服务配置</h1><blockquote>
-<p>NFS是网络文件系统，允许一个系统在网络上与其他机器共享目录和文件</p>
-<p>通过使用NFS，用户和程序可以像访问本地文件一样访问远程系统上的文件。 </p>
-</blockquote>
-<h3 id="启动150服务器的nfs服务"><a href="#启动150服务器的nfs服务" class="headerlink" title="启动150服务器的nfs服务"></a>启动150服务器的nfs服务</h3><pre><code>[root@m2lan150 ~]# service nfs start
-启动 NFS 服务：                                            [确定]
-关掉 NFS 配额：                                            [确定]
-启动 NFS mountd：                                          [确定]
-启动 NFS 守护进程：                                        [确定]
-正在启动 RPC idmapd：                                      [确定]
-</code></pre><h3 id="170服务器查看nfs服务器上所有共享目录"><a href="#170服务器查看nfs服务器上所有共享目录" class="headerlink" title="170服务器查看nfs服务器上所有共享目录"></a>170服务器查看nfs服务器上所有共享目录</h3><pre><code>[root@m2lan170 ~]# showmount -e 192.168.0.150
-Export list for 192.168.0.150:
-</code></pre><h3 id="150服务器共享-root-sh目录"><a href="#150服务器共享-root-sh目录" class="headerlink" title="150服务器共享/root/sh目录"></a>150服务器共享/root/sh目录</h3><pre><code># *表示所有客户端都可以访问，rw表示有读写权限
-[root@m2lan150 ~]# cat /etc/exports 
-/media *(rw)
-
-# 重启nfs服务
-[root@m2lan150 ~]# service nfs restart
-关闭 NFS 守护进程：                                        [确定]
-关闭 NFS mountd：                                          [确定]
-关闭 NFS quotas：                                          [确定]
-Shutting down RPC idmapd:                                  [确定]
-启动 NFS 服务：                                            [确定]
-关掉 NFS 配额：                                            [确定]
-启动 NFS mountd：                                          [确定]
-启动 NFS 守护进程：                                        [确定]
-正在启动 RPC idmapd：                                      [确定]
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/29/nfs服务配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2017/05/28/dhcp服务动态分配IP地址/" itemprop="url">
                   dhcp服务动态分配IP地址
                 </a>
@@ -1795,6 +1504,346 @@ public class ExchangerDemo1 {
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/21/Semaphore/" itemprop="url">
+                  Semaphore
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-21T16:03:20+08:00" content="2017-05-21">
+              2017-05-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/并发/" itemprop="url" rel="index">
+                    <span itemprop="name">并发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/21/Semaphore/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/Semaphore/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java并发编程类Semaphore"><a href="#Java并发编程类Semaphore" class="headerlink" title="Java并发编程类Semaphore"></a>Java并发编程类Semaphore</h1><pre><code>/**
+ * 限制可以访问资源的线程数
+ */
+public class SemaphoreDemo1 {
+
+    public static void main(String[] args) {
+        final Semaphore semaphore = new Semaphore(3);
+
+        Runnable runnable = () -&gt; {
+            System.out.println(Thread.currentThread().getName() + &quot; 可用的Semaphore permits: &quot; + semaphore.availablePermits());
+            try {
+
+                // 获取Semaphore permits
+                semaphore.acquire();
+
+                try {
+                    for (int i = 0; i &lt; 5; i++) {
+                        System.out.println(Thread.currentThread().getName() + &quot; : &quot; + i + &quot; : 可用的Semaphore permits: &quot; + semaphore.availablePermits());
+                        Thread.sleep(1000);
+                    }
+                } finally {
+                    System.out.println(Thread.currentThread().getName() + &quot;释放锁&quot;);
+                    // 释放锁
+                    semaphore.release();
+                    System.out.println(Thread.currentThread().getName() + &quot;可用的Semaphore permits: &quot; + semaphore.availablePermits());
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+
+        ExecutorService service = Executors.newFixedThreadPool(3);
+        for (int i = 0; i &lt; 5; i++) {
+            service.execute(runnable);
+        }
+        service.shutdown();
+    }
+}
+
+/**
+ * 限制可以访问资源的线程数，一次只有一个线程可以访问资源
+ */
+public class SemaphoreDemo1 {
+
+    public static void main(String[] args) {
+        // 互斥锁，Semaphore为1
+        final Semaphore semaphore = new Semaphore(1);
+
+        Runnable runnable = () -&gt; {
+            System.out.println(Thread.currentThread().getName() + &quot; 可用的Semaphore permits: &quot; + semaphore.availablePermits());
+            try {
+
+                // 获取Semaphore permits
+                semaphore.acquire();
+
+                try {
+                    for (int i = 0; i &lt; 5; i++) {
+                        System.out.println(Thread.currentThread().getName() + &quot; : &quot; + i + &quot; : 可用的Semaphore permits: &quot; + semaphore.availablePermits());
+                        Thread.sleep(1000);
+                    }
+                } finally {
+                    System.out.println(Thread.currentThread().getName() + &quot;释放锁&quot;);
+                    // 释放锁
+                    semaphore.release();
+                    System.out.println(Thread.currentThread().getName() + &quot;可用的Semaphore permits: &quot; + semaphore.availablePermits());
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+
+        ExecutorService service = Executors.newFixedThreadPool(3);
+        for (int i = 0; i &lt; 5; i++) {
+            service.execute(runnable);
+        }
+        service.shutdown();
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/21/CyclicBarrier/" itemprop="url">
+                  CyclicBarrier
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-21T15:53:54+08:00" content="2017-05-21">
+              2017-05-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/并发/" itemprop="url" rel="index">
+                    <span itemprop="name">并发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/21/CyclicBarrier/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/CyclicBarrier/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java并发编程类CyclicBarrier"><a href="#Java并发编程类CyclicBarrier" class="headerlink" title="Java并发编程类CyclicBarrier"></a>Java并发编程类CyclicBarrier</h1><pre><code>/**
+ * CyclicBarrier协同多个线程
+ * 用于同步所有调用await方法的线程，并且等所有线程都到了await方法时
+ * 这些线程才一起返回继续各自的工作
+ */
+public class CyclicBarrierDemo1 {
+
+    public static void main(String[] args) {
+        int count = 10;
+        final CyclicBarrier barrier = new CyclicBarrier(count + 1);
+        Runnable rannable = () -&gt; {
+            System.out.println(Thread.currentThread().getName() + &quot; : hahhahaha&quot;);
+            try {
+                barrier.await();
+            } catch (InterruptedException | BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+        };
+
+        ExecutorService service = Executors.newFixedThreadPool(count);
+        for (int i = 0; i &lt; count; i++) {
+            service.execute(rannable);
+        }
+
+        try {
+            barrier.await();
+        } catch (InterruptedException | BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+
+        service.shutdown();
+        System.out.println(&quot;执行完毕&quot;);
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1840,7 +1889,7 @@ public class ExchangerDemo1 {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1857,7 +1906,7 @@ public class ExchangerDemo1 {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

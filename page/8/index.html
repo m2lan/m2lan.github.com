@@ -267,375 +267,6 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/07/mybatis-spring-springmvc/" itemprop="url">
-                  mybatis-spring-springmvc
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-07T14:09:37+08:00" content="2017-05-07">
-              2017-05-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/07/mybatis-spring-springmvc/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-spring-springmvc/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="mybatis整合spring和springmvc"><a href="#mybatis整合spring和springmvc" class="headerlink" title="mybatis整合spring和springmvc"></a>mybatis整合spring和springmvc</h1><h2 id="新建Maven-webapps"><a href="#新建Maven-webapps" class="headerlink" title="新建Maven webapps"></a>新建Maven webapps</h2><ul>
-<li><p>pom.xml</p>
-<pre><code>&lt;profiles&gt;
-    &lt;profile&gt;
-        &lt;activation&gt;
-            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
-            &lt;jdk&gt;1.8&lt;/jdk&gt;
-        &lt;/activation&gt;
-        &lt;properties&gt;
-            &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-            &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
-            &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
-            &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
-            &lt;maven.compiler.compilerVersion&gt;1.8&lt;/maven.compiler.compilerVersion&gt;
-            &lt;java.version&gt;1.8&lt;/java.version&gt;
-            &lt;mybatis.version&gt;3.4.1&lt;/mybatis.version&gt;
-            &lt;mysql.version&gt;5.1.40&lt;/mysql.version&gt;
-            &lt;log4j.version&gt;1.2.17&lt;/log4j.version&gt;
-            &lt;junit.version&gt;4.12&lt;/junit.version&gt;
-            &lt;mybatis.ehcache.version&gt;1.1.0&lt;/mybatis.ehcache.version&gt;
-            &lt;spring.version&gt;4.3.7.RELEASE&lt;/spring.version&gt;
-            &lt;servlet.api.version&gt;3.1.0&lt;/servlet.api.version&gt;
-            &lt;jstl.version&gt;1.2&lt;/jstl.version&gt;
-            &lt;jackson.version&gt;2.8.7&lt;/jackson.version&gt;
-            &lt;c3p0.version&gt;0.9.5.2&lt;/c3p0.version&gt;
-            &lt;mybatis.spring.version&gt;1.3.1&lt;/mybatis.spring.version&gt;
-        &lt;/properties&gt;
-    &lt;/profile&gt;
-&lt;/profiles&gt;
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-        &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
-        &lt;version&gt;${servlet.api.version}&lt;/version&gt;
-        &lt;scope&gt;provided&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-        &lt;artifactId&gt;jstl&lt;/artifactId&gt;
-        &lt;version&gt;${jstl.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-        &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
-        &lt;version&gt;${jackson.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;mysql&lt;/groupId&gt;
-        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-        &lt;version&gt;${mysql.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.mchange&lt;/groupId&gt;
-        &lt;artifactId&gt;c3p0&lt;/artifactId&gt;
-        &lt;version&gt;${c3p0.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
-        &lt;version&gt;${mybatis.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;log4j&lt;/groupId&gt;
-        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
-        &lt;version&gt;${log4j.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.mybatis.caches&lt;/groupId&gt;
-        &lt;artifactId&gt;mybatis-ehcache&lt;/artifactId&gt;
-        &lt;version&gt;${mybatis.ehcache.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-        &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
-        &lt;version&gt;${mybatis.spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;junit&lt;/groupId&gt;
-        &lt;artifactId&gt;junit&lt;/artifactId&gt;
-        &lt;version&gt;${junit.version}&lt;/version&gt;
-        &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</code></pre></li>
-<li>Maven -&gt; Update project</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/07/mybatis-spring-springmvc/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/07/mybatis-cache/" itemprop="url">
-                  mybatis-cache
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-07T13:54:46+08:00" content="2017-05-07">
-              2017-05-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/07/mybatis-cache/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/07/mybatis-cache/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="mybatis-cache"><a href="#mybatis-cache" class="headerlink" title="mybatis cache"></a>mybatis cache</h1><blockquote>
-<p>mybatis提供一级缓存和二级缓存</p>
-</blockquote>
-<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><ul>
-<li><p>sqlSession级别的缓存，会话缓存，当sqlSession关闭会话结束，缓存失效。</p>
-<pre><code>@Test
-public void findUser() {
-    try (SqlSession session = sqlSessionFactory.openSession();
-            SqlSession session2 = sqlSessionFactory.openSession()) {
-        UserMapper userMapper = session.getMapper(UserMapper.class);
-        User user = userMapper.getUserById(1);
-        System.out.println(user);
-        session.close();
-
-        UserMapper userMapper1 = session2.getMapper(UserMapper.class);
-        User user1 = userMapper1.getUserById(1);
-        System.out.println(user1);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-</code></pre></li>
-<li>第一次查询用户信息，如果缓存中不存在，去数据库中查询。然后把用户信息保存在一级缓存中。</li>
-<li>默认所有的select语句都会被缓存<code>useCache=&quot;true&quot;</code></li>
-<li>当操作insert,update 和 delete 语句会刷新缓存。<code>flushCache=&quot;true&quot;</code></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/07/mybatis-cache/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2017/05/07/mybatis-多表关联操作/" itemprop="url">
                   mybatis-多表关联操作
                 </a>
@@ -1636,6 +1267,243 @@ CREATE TABLE `idCard` (
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/23/PHP生成圆角图片-图片合成/" itemprop="url">
+                  PHP生成圆角图片+图片合成
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-23T10:58:47+08:00" content="2016-09-23">
+              2016-09-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/23/PHP生成圆角图片-图片合成/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/23/PHP生成圆角图片-图片合成/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="PHP生成圆角图片-图片合成"><a href="#PHP生成圆角图片-图片合成" class="headerlink" title="PHP生成圆角图片+图片合成"></a>PHP生成圆角图片+图片合成</h1><h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><pre><code>&lt;?php
+    create_qrcode(&apos;images/head_290_00a4e60499ffb5c3.jpg&apos;, &apos;images/WechatIMG12.png&apos;, &apos;测试数据测试数据&apos;, &apos;images/create.jpg&apos;, &apos;images/test.jpg&apos;, &apos;simhei.ttf&apos;);
+
+    echo &quot;&lt;img src=&apos;images/test.jpg&apos;/&gt;&quot;;
+?&gt;
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/23/PHP生成圆角图片-图片合成/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/03/tigase用户密码加密/" itemprop="url">
+                  tigase用户密码加密
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-03T15:36:11+08:00" content="2016-08-03">
+              2016-08-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Tigase/" itemprop="url" rel="index">
+                    <span itemprop="name">Tigase</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/03/tigase用户密码加密/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/03/tigase用户密码加密/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Tigase-用户密码加密"><a href="#Tigase-用户密码加密" class="headerlink" title="Tigase 用户密码加密"></a>Tigase 用户密码加密</h1><pre><code>call TigPutDBProperty(&apos;password-encoding&apos;, &apos;MD5-PASSWORD&apos;);
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1681,7 +1549,7 @@ CREATE TABLE `idCard` (
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1698,7 +1566,7 @@ CREATE TABLE `idCard` (
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
