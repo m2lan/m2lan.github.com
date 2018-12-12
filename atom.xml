@@ -516,7 +516,7 @@ cd elasticsearch-5.5.1/
     <link href="http://blog.golearns.org/2018/09/17/centos7-install-elasticHD/"/>
     <id>http://blog.golearns.org/2018/09/17/centos7-install-elasticHD/</id>
     <published>2018-09-17T15:08:32.000Z</published>
-    <updated>2018-09-17T15:09:15.200Z</updated>
+    <updated>2018-12-12T09:21:58.811Z</updated>
     
     <content type="html"><![CDATA[<h1 id="centos7-install-elasticHD"><a href="#centos7-install-elasticHD" class="headerlink" title="centos7 install elasticHD"></a>centos7 install elasticHD</h1><ul><li>下载ElasticHD<a href="https://github.com/360EntSecGroup-Skylar/ElasticHD/releases/download/1.4/elasticHD_linux_amd64.zip" target="_blank" rel="noopener">elasticHD_linux_amd64.zip</a></li></ul><h3 id="config"><a href="#config" class="headerlink" title="config"></a>config</h3><pre><code>chmod 0777 elasticHD_linux_amd64.zipunzip elasticHD_linux_amd64.zip# 开启端口9800# 启动./ElasticHD -p 0.0.0.0:9800 &amp;# 访问http://site:9800</code></pre>]]></content>
     
@@ -536,7 +536,7 @@ cd elasticsearch-5.5.1/
     
       <category term="Linux" scheme="http://blog.golearns.org/tags/Linux/"/>
     
-      <category term="Centos" scheme="http://blog.golearns.org/tags/Centos/"/>
+      <category term="Centos7" scheme="http://blog.golearns.org/tags/Centos7/"/>
     
   </entry>
   
