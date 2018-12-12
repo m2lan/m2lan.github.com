@@ -65,14 +65,14 @@
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="搭建nagios安装nagiosyum install -y httpd gcc glibc glibc-common php gd gd-devel libpng libmng libjpeg zlib useradd nagios groupadd nagcmd usermod -G nagcmd nagios usermod -G nagcmd apache  tar xzvf nagios">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/1540545509151.jpg">
-<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/1540615926016.jpg">
-<meta property="og:image" content="http://opsi4gg7g.bkt.clouddn.com/1540630066544.jpg">
-<meta property="og:updated_time" content="2018-11-09T04:11:24.074Z">
+<meta property="og:image" content="http://img.m2lan.com/1540545509151.jpg">
+<meta property="og:image" content="http://img.m2lan.com/1540615926016.jpg">
+<meta property="og:image" content="http://img.m2lan.com/1540630066544.jpg">
+<meta property="og:updated_time" content="2018-12-12T08:50:38.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建nagios监控服务器">
 <meta name="twitter:description" content="搭建nagios安装nagiosyum install -y httpd gcc glibc glibc-common php gd gd-devel libpng libmng libjpeg zlib useradd nagios groupadd nagcmd usermod -G nagcmd nagios usermod -G nagcmd apache  tar xzvf nagios">
-<meta name="twitter:image" content="http://opsi4gg7g.bkt.clouddn.com/1540545509151.jpg">
+<meta name="twitter:image" content="http://img.m2lan.com/1540545509151.jpg">
 
 
 
@@ -425,7 +425,7 @@ showmount -e 192.168.1.240
 systemctl restart nagios
 # 访问http://192.168.1.240/nagios查看服务状态
 # 默认间隔5分钟检查一次，可以强制检查
-</code></pre><p><img src="http://opsi4gg7g.bkt.clouddn.com/1540545509151.jpg" alt=""></p>
+</code></pre><p><img src="http://img.m2lan.com/1540545509151.jpg" alt=""></p>
 <pre><code># 如果出现Error: Could not stat() command file &apos;/usr/local/nagios/var/rw/nagios.cmd&apos;!错误，关闭防火墙
 </code></pre><h1 id="监控外部主机192-168-1-241上的mysql服务器运行状态"><a href="#监控外部主机192-168-1-241上的mysql服务器运行状态" class="headerlink" title="监控外部主机192.168.1.241上的mysql服务器运行状态"></a>监控外部主机192.168.1.241上的mysql服务器运行状态</h1><ul>
 <li><p>编辑主配置文件</p>
@@ -477,7 +477,7 @@ Uptime: 846  Threads: 1  Questions: 49  Slow queries: 0  Opens: 67  Flush tables
 Can&apos;t connect to MySQL server on &apos;192.168.1.241&apos; (111)
 
 # 访问http://192.168.1.240/nagios查看mysql服务是否正常
-</code></pre><p>  <img src="http://opsi4gg7g.bkt.clouddn.com/1540615926016.jpg" alt=""></p>
+</code></pre><p>  <img src="http://img.m2lan.com/1540615926016.jpg" alt=""></p>
 </li>
 </ul>
 <h1 id="监听服务器上的私有信息"><a href="#监听服务器上的私有信息" class="headerlink" title="监听服务器上的私有信息"></a>监听服务器上的私有信息</h1><h2 id="监控192-168-1-241服务器上的私有信息-硬盘、。"><a href="#监控192-168-1-241服务器上的私有信息-硬盘、。" class="headerlink" title="监控192.168.1.241服务器上的私有信息(硬盘、。)"></a>监控192.168.1.241服务器上的私有信息(硬盘、。)</h2><ul>
@@ -600,7 +600,7 @@ tmpfs                    494M     0  494M    0% /sys/fs/cgroup
 tmpfs                     99M     0   99M    0% /run/user/0
 </code></pre></li>
 <li>访问<a href="http://192.168.1.240/nagios" target="_blank" rel="noopener">http://192.168.1.240/nagios</a>
-<img src="http://opsi4gg7g.bkt.clouddn.com/1540630066544.jpg" alt=""></li>
+<img src="http://img.m2lan.com/1540630066544.jpg" alt=""></li>
 </ul>
 <h1 id="配置nagios邮件提醒"><a href="#配置nagios邮件提醒" class="headerlink" title="配置nagios邮件提醒"></a>配置nagios邮件提醒</h1><ul>
 <li><p>安装sendmail</p>

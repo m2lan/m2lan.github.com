@@ -65,14 +65,14 @@
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。 创建表并添加测试数据 CREATE TABLE category (     category_id INT AUTO_INCREMENT PRIMARY KEY,     name VARCHAR(20) NOT NULL,     lft INT NOT NULL,     rgt INT NOT NULL ) ENGINE=InnoD">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/start.png">
-<meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/design.png">
-<meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/newNode.png">
-<meta property="og:updated_time" content="2016-07-19T10:42:12.000Z">
+<meta property="og:image" content="http://images.m2lan.com/start.png">
+<meta property="og:image" content="http://images.m2lan.com/design.png">
+<meta property="og:image" content="http://images.m2lan.com/newNode.png">
+<meta property="og:updated_time" content="2018-12-12T09:08:38.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql嵌套集模型">
 <meta name="twitter:description" content="嵌套集模型在分类表中，通过左和右值来代表我们的嵌套节点。 创建表并添加测试数据 CREATE TABLE category (     category_id INT AUTO_INCREMENT PRIMARY KEY,     name VARCHAR(20) NOT NULL,     lft INT NOT NULL,     rgt INT NOT NULL ) ENGINE=InnoD">
-<meta name="twitter:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/start.png">
+<meta name="twitter:image" content="http://images.m2lan.com/start.png">
 
 
 
@@ -373,9 +373,9 @@ MariaDB [work]&gt; select * from category;
 +-------------+----------------------+-----+-----+
 </code></pre><a id="more"></a></li>
 <li>如何确定左边和右边的值，我们在外部节点的最左侧和右侧开始编号
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/start.png" alt="start.png"></li>
+<img src="http://images.m2lan.com/start.png" alt="start.png"></li>
 <li>这种设计可用于典型的树
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/design.png" alt="design.png"></li>
+<img src="http://images.m2lan.com/design.png" alt="design.png"></li>
 <li>当树在工作的时候，我们从左到右一层一层将右边的数字一次分配给子节点。这种方法被称为<strong>改进的前序遍历树算法</strong></li>
 </ul>
 <h1 id="检索一个完整的树"><a href="#检索一个完整的树" class="headerlink" title="检索一个完整的树"></a>检索一个完整的树</h1><ul>
@@ -569,7 +569,7 @@ MariaDB [work]&gt; select * from product;
 +----------------------+---------------------+
 </code></pre><h1 id="添加一个新节点"><a href="#添加一个新节点" class="headerlink" title="添加一个新节点"></a>添加一个新节点</h1></li>
 <li>添加一个新节点更新我们的树，再看看嵌套关系图
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/newNode.png" alt="newnode"></li>
+<img src="http://images.m2lan.com/newNode.png" alt="newnode"></li>
 <li><p>如果我们想添加一个在<code>TELEVISIONS</code>和<code>PORTABLE ELECTRONICS</code>节点的新节点，这个新节点的<code>lft</code>和<code>rgt</code>值就是10和11，并且其右侧的所有节点将自己的<code>lft</code>和<code>rgt</code>值+2。然后我们用合适的<code>lft</code>和<code>rgt</code>值添加新节点</p>
 <pre><code>MariaDB [work]&gt; DELIMITER //
 MariaDB [work]&gt; create procedure addNodes(findName varchar(20) charset utf8, newName varchar(20) charset utf8)

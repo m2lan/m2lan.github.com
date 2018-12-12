@@ -336,7 +336,7 @@
       
         
           
-            <pre><code>-(void) viewWillDisappear:(BOOL)animated {
+            <h1 id="OC-检测视图退出"><a href="#OC-检测视图退出" class="headerlink" title="OC-检测视图退出"></a>OC-检测视图退出</h1><pre><code>-(void) viewWillDisappear:(BOOL)animated {
     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
        // back button was pressed.  We know this is true because self is no longer
        // in the navigation stack.  
@@ -457,7 +457,7 @@
       
         
           
-            <pre><code>#import &lt;UIKit/UIKit.h&gt;
+            <h1 id="OC-UIButton中设置image大小"><a href="#OC-UIButton中设置image大小" class="headerlink" title="OC-UIButton中设置image大小"></a>OC-UIButton中设置image大小</h1><pre><code>#import &lt;UIKit/UIKit.h&gt;
 
 @interface UIImage (Category)
 
@@ -613,7 +613,7 @@
       
         
           
-            <pre><code>//
+            <h1 id="IOS-创建文件目录"><a href="#IOS-创建文件目录" class="headerlink" title="IOS-创建文件目录"></a>IOS-创建文件目录</h1><pre><code>//
 //  ViewController.m
 //  chat-view
 //
@@ -765,7 +765,7 @@ static NSString *homeDir = nil;
       
         
           
-            <h2 id="Comparator排序"><a href="#Comparator排序" class="headerlink" title="Comparator排序"></a>Comparator排序</h2><pre><code>NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            <h1 id="OC-数组对象排序"><a href="#OC-数组对象排序" class="headerlink" title="OC-数组对象排序"></a>OC-数组对象排序</h1><h2 id="Comparator排序"><a href="#Comparator排序" class="headerlink" title="Comparator排序"></a>Comparator排序</h2><pre><code>NSArray *arr =[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
 
     HLMessage *msg1 = [[NSClassFromString([obj1 messageClassName]) alloc]initWithManagedObject:obj1];
     HLMessage *msg2 = [[NSClassFromString([obj2 messageClassName]) alloc]initWithManagedObject:obj2];
@@ -903,7 +903,7 @@ return sortArray;
       
         
           
-            <pre><code>//
+            <h1 id="IOS-点击按钮触发UIRefreshControl"><a href="#IOS-点击按钮触发UIRefreshControl" class="headerlink" title="IOS-点击按钮触发UIRefreshControl"></a>IOS-点击按钮触发UIRefreshControl</h1><pre><code>//
 //  ViewController.m
 //  chat-view
 //
@@ -1093,7 +1093,7 @@ return sortArray;
       
         
           
-            <pre><code>//
+            <h1 id="UITabBarController使用"><a href="#UITabBarController使用" class="headerlink" title="UITabBarController使用"></a>UITabBarController使用</h1><pre><code>//
 //  ViewController.m
 //  ceshi
 //

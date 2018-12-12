@@ -65,15 +65,15 @@
 <meta property="og:site_name" content="知识记录">
 <meta property="og:description" content="Centos7-修改网卡、配置网络我是在vmware中安装的 网络适配器调为桥接模式 修改/etc/sysconfig/network-scripts/ifcfg-xxxx里面的Name和Dev为eth0">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/8C6D5903-85B6-44BD-811C-5F0ADDD9E356.png">
-<meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/F6764A8C-88B6-4D39-8C37-DE856EBED293.png">
-<meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/4F5BA1BF-4495-4FBE-92BF-EE93DBFED7CE.png">
-<meta property="og:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/70E8BAA9-7F78-4167-B3D7-BDD5951B6EEE.png">
-<meta property="og:updated_time" content="2016-07-15T02:34:22.000Z">
+<meta property="og:image" content="http://images.m2lan.com/8C6D5903-85B6-44BD-811C-5F0ADDD9E356.png">
+<meta property="og:image" content="http://images.m2lan.com/F6764A8C-88B6-4D39-8C37-DE856EBED293.png">
+<meta property="og:image" content="http://images.m2lan.com/4F5BA1BF-4495-4FBE-92BF-EE93DBFED7CE.png">
+<meta property="og:image" content="http://images.m2lan.com/70E8BAA9-7F78-4167-B3D7-BDD5951B6EEE.png">
+<meta property="og:updated_time" content="2018-12-12T08:54:35.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos7-修改网卡、配置网络">
 <meta name="twitter:description" content="Centos7-修改网卡、配置网络我是在vmware中安装的 网络适配器调为桥接模式 修改/etc/sysconfig/network-scripts/ifcfg-xxxx里面的Name和Dev为eth0">
-<meta name="twitter:image" content="http://7xj3i5.com1.z0.glb.clouddn.com/8C6D5903-85B6-44BD-811C-5F0ADDD9E356.png">
+<meta name="twitter:image" content="http://images.m2lan.com/8C6D5903-85B6-44BD-811C-5F0ADDD9E356.png">
 
 
 
@@ -339,20 +339,20 @@
         <h1 id="Centos7-修改网卡、配置网络"><a href="#Centos7-修改网卡、配置网络" class="headerlink" title="Centos7-修改网卡、配置网络"></a>Centos7-修改网卡、配置网络</h1><h2 id="我是在vmware中安装的"><a href="#我是在vmware中安装的" class="headerlink" title="我是在vmware中安装的"></a>我是在vmware中安装的</h2><ul>
 <li>网络适配器调为桥接模式</li>
 <li>修改<code>/etc/sysconfig/network-scripts/ifcfg-xxxx</code>里面的<code>Name</code>和<code>Dev</code>为<code>eth0</code>
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/8C6D5903-85B6-44BD-811C-5F0ADDD9E356.png" alt="x">  </li>
+<img src="http://images.m2lan.com/8C6D5903-85B6-44BD-811C-5F0ADDD9E356.png" alt="x">  </li>
 </ul>
 <a id="more"></a>
 <ul>
 <li><p>修改<code>ifcfg-xxxx</code>重命名为<code>ifcfg-eth0</code>
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/F6764A8C-88B6-4D39-8C37-DE856EBED293.png" alt="y"></p>
+<img src="http://images.m2lan.com/F6764A8C-88B6-4D39-8C37-DE856EBED293.png" alt="y"></p>
 </li>
 <li><p>禁用可预测的命名规则，编辑<code>/etc/default/grub</code>为
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/4F5BA1BF-4495-4FBE-92BF-EE93DBFED7CE.png" alt="z"></p>
+<img src="http://images.m2lan.com/4F5BA1BF-4495-4FBE-92BF-EE93DBFED7CE.png" alt="z"></p>
 </li>
 <li><p>执行<code>grub2-mkconfig -o /boot/grub2/grub.cfg</code></p>
 </li>
 <li><p>修改<code>/etc/resolv.conf</code>
-<img src="http://7xj3i5.com1.z0.glb.clouddn.com/70E8BAA9-7F78-4167-B3D7-BDD5951B6EEE.png" alt="m"></p>
+<img src="http://images.m2lan.com/70E8BAA9-7F78-4167-B3D7-BDD5951B6EEE.png" alt="m"></p>
 </li>
 <li><p>重启network<code>systemctl restart network</code></p>
 </li>
