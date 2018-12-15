@@ -267,6 +267,394 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/Tigase-0133管理员协议/" itemprop="url">
+                  Tigase-0133管理员协议
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T00:11:25+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Tigase/" itemprop="url" rel="index">
+                    <span itemprop="name">Tigase</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Tigase-0133管理员协议/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Tigase-0133管理员协议/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Tigase-0133管理员协议"><a href="#Tigase-0133管理员协议" class="headerlink" title="Tigase-0133管理员协议"></a>Tigase-0133管理员协议</h1><ul>
+<li>将<code>src/main/groovy/tigase/admin</code>拷贝到<code>scripts/</code>下,<code>XEP-0133</code>协议由<code>groovy</code>完成。</li>
+<li><p>管理员向服务端发送添加用户的请求，发送至<code>sess-man</code></p>
+<pre><code>&lt;iq id=&quot;EURERE234234234EEWEWEW&quot; to=&quot;sess-man@192.168.0.50&quot; type=&quot;set&quot;&gt;&lt;command xmlns=&quot;http://jabber.org/protocol/commands&quot; node=&quot;http://jabber.org/protocol/admin#add-user&quot;&gt;&lt;/command&gt;&lt;/iq&gt;
+</code></pre></li>
+<li><p>接收服务端返回后，提交添加用户数据</p>
+<pre><code>&lt;iq from=&quot;admin@192.168.0.50/smack&quot; id=&quot;KJKJKJWEW121312312&quot; to=&quot;sess-man@192.168.0.50&quot; type=&quot;set&quot; xml:lang=&quot;en&quot;&gt;&lt;command xmlns=&quot;http://jabber.org/protocol/commands&quot; node=&quot;http://jabber.org/protocol/admin#add-user&quot; sessionid=&quot;&quot;&gt;&lt;x xmlns=&quot;jabber:x:data&quot; type=&quot;submit&quot;&gt;&lt;field type=&quot;hidden&quot; var=&quot;FORM_TYPE&quot;&gt;&lt;value&gt;http://jabber.org/protocol/admin&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;accountjid&quot;&gt;&lt;value&gt;test@192.168.0.50&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;password&quot;&gt;&lt;value&gt;123456&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;password-verify&quot;&gt;&lt;value&gt;12345&lt;/value&gt;&lt;/field&gt;&lt;field var=&quot;email&quot;&gt;&lt;value&gt;ttt&lt;/value&gt;&lt;/field&gt;&lt;/x&gt;&lt;/command&gt;&lt;/iq&gt;
+</code></pre></li>
+<li><a href="http://xmpp.org/extensions/xep-0133.html" target="_blank" rel="noopener">XMPP-0133协议</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/Tigase-配置/" itemprop="url">
+                  Tigase-配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-10T00:09:25+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Tigase/" itemprop="url" rel="index">
+                    <span itemprop="name">Tigase</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/Tigase-配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Tigase-配置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="创建默认的配置文件-包含在配置组件包括：会话管理器，客户端-服务器连接管理器和服务器到服务器的连接管理器。"><a href="#创建默认的配置文件-包含在配置组件包括：会话管理器，客户端-服务器连接管理器和服务器到服务器的连接管理器。" class="headerlink" title="创建默认的配置文件,包含在配置组件包括：会话管理器，客户端 - 服务器连接管理器和服务器到服务器的连接管理器。"></a>创建默认的配置文件,包含在配置组件包括：会话管理器，客户端 - 服务器连接管理器和服务器到服务器的连接管理器。</h1><pre><code>config-type=--gen-config-def
+</code></pre><h1 id="配置管理员账号"><a href="#配置管理员账号" class="headerlink" title="配置管理员账号"></a>配置管理员账号</h1><pre><code>--admins=admin@192.168.0.50
+</code></pre><h1 id="配置域名"><a href="#配置域名" class="headerlink" title="配置域名"></a>配置域名</h1><pre><code>--virt-hosts = 192.168.0.50
+</code></pre><h1 id="调试输出信息"><a href="#调试输出信息" class="headerlink" title="调试输出信息"></a>调试输出信息</h1><pre><code>--debug=server,message-archive,muc
+</code></pre><h1 id="使用的数据库"><a href="#使用的数据库" class="headerlink" title="使用的数据库"></a>使用的数据库</h1><pre><code>--user-db=mysql
+--user-db-uri=jdbc:mysql://127.0.0.1:3306/mytigase?user=root&amp;password=feng&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoCreateUser=true
+</code></pre><h1 id="加载插件"><a href="#加载插件" class="headerlink" title="加载插件"></a>加载插件</h1><pre><code>--sm-plugins=-starttls,message-archive-xep-0136,offlinemessage
+</code></pre><h1 id="最大的离线消息配置"><a href="#最大的离线消息配置" class="headerlink" title="最大的离线消息配置"></a>最大的离线消息配置</h1><pre><code>sess-man/plugins-conf/amp/store-limit=1000
+</code></pre><h1 id="默认房间是锁住的，其他用户就无法进入该房间"><a href="#默认房间是锁住的，其他用户就无法进入该房间" class="headerlink" title="默认房间是锁住的，其他用户就无法进入该房间"></a>默认房间是锁住的，其他用户就无法进入该房间</h1><pre><code>muc/muc-lock-new-room[B]=false
+</code></pre><h1 id="消息过滤"><a href="#消息过滤" class="headerlink" title="消息过滤"></a>消息过滤</h1><pre><code>muc/message-filter-enabled[B]=false
+</code></pre><h1 id="允许聊天状态"><a href="#允许聊天状态" class="headerlink" title="允许聊天状态"></a>允许聊天状态</h1><pre><code>muc/muc-allow-chat-states[B]=true
+</code></pre><h1 id="默认情况下-tigase设置取决于最大可用内存为tigase服务器进程队列的大小"><a href="#默认情况下-tigase设置取决于最大可用内存为tigase服务器进程队列的大小" class="headerlink" title="默认情况下,tigase设置取决于最大可用内存为tigase服务器进程队列的大小"></a>默认情况下,tigase设置取决于最大可用内存为tigase服务器进程队列的大小</h1><pre><code>--max-queue-size = 10000
+</code></pre><h1 id="加载组件"><a href="#加载组件" class="headerlink" title="加载组件"></a>加载组件</h1><pre><code>--comp-name-1 = muc
+--comp-class-1 = tigase.muc.MUCComponent
+--comp-name-2=message-archive
+--comp-class-2=tigase.archive.MessageArchiveComponent
+--comp-name-3 = pubsub
+--comp-class-3 = tigase.pubsub.PubSubComponent
+</code></pre><h1 id="存储用户的聊天记录"><a href="#存储用户的聊天记录" class="headerlink" title="存储用户的聊天记录"></a>存储用户的聊天记录</h1><pre><code>message-archive/archive-repo-uri=jdbc:mysql://127.0.0.1:3306/mytigase?user=root&amp;password=feng&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoCreateUser=true
+sess-man/plugins-conf/message-archive-xep-0136/component-jid=message-archive@192.168.0.50
+sess-man/plugins-conf/message-archive-xep-0136/default-store-method=body
+sess-man/plugins-conf/message-archive-xep-0136/required-store-method=body
+sess-man/plugins-conf/message-archive-xep-0136/auto=true
+cl-comp/compress-stream[B]=false
+message-router/components/msg-receivers/s2s.active[B]=false
+c2s/net-buffer-limit[I]=4194304
+</code></pre><ul>
+<li><a href="http://docs.tigase.org/tigase-server/snapshot/Properties_Guide/webhelp/" target="_blank" rel="noopener">详细参考官方配置</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/09/Docker-详细操作/" itemprop="url">
+                  Docker-详细操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-09T23:48:47+08:00" content="2015-12-09">
+              2015-12-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/09/Docker-详细操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/09/Docker-详细操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h2><pre><code>docker pull ubuntu:14.04
+相当于docker pull registry.hub.docker.com/ubuntu:14.04
+可以从国内镜像网站下载docker pull dl.dockerpool.com:5000/ubuntu:14.04
+</code></pre><h2 id="列出本地已有的镜像"><a href="#列出本地已有的镜像" class="headerlink" title="列出本地已有的镜像"></a>列出本地已有的镜像</h2><pre><code>docker images
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/09/Docker-详细操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/09/Docker-Hub使用/" itemprop="url">
                   Docker-Hub使用
                 </a>
@@ -1095,7 +1483,7 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1112,7 +1500,7 @@ db.createUser({&quot;user&quot;: &quot;zhangsan&quot;, &quot;pwd&quot;: &quot;12
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

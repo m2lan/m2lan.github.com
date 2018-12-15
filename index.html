@@ -267,6 +267,410 @@
             
               
                 
+                <a class="post-title-link" href="/2018/12/16/mysql使用mychat实现读写分离/" itemprop="url">
+                  mysql使用mycat实现读写分离
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-12-16T00:00:38+08:00" content="2018-12-16">
+              2018-12-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/12/16/mysql使用mychat实现读写分离/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/12/16/mysql使用mychat实现读写分离/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="mysql使用mychat实现读写分离"><a href="#mysql使用mychat实现读写分离" class="headerlink" title="mysql使用mychat实现读写分离"></a>mysql使用mychat实现读写分离</h1><blockquote>
+<p>下载地址：<a href="http://dl.mycat.io/1.6-RELEASE/" target="_blank" rel="noopener">http://dl.mycat.io/1.6-RELEASE/</a></p>
+<p>环境：</p>
+<p>中间件160服务器，写150服务器，读170服务器</p>
+</blockquote>
+<h3 id="150服务器"><a href="#150服务器" class="headerlink" title="150服务器"></a>150服务器</h3><pre><code># 安装mysql服务
+[root@m2lan150 ~]# yum install -y mysql-server mysql
+[root@m2lan150 ~]# service mysqld restart
+
+# 添加mycat用户
+mysql&gt; grant all on *.* to mycat@&apos;192.168.1.160&apos; identified by &apos;123456&apos;;
+
+# 配置主从关系的主服务器
+[root@m2lan150 ~]# vim /etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+log-bin=mysqllog
+server-id=1
+binlog-do-db=TESTDB
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+# 添加同步数据的用户
+mysql&gt; grant replication slave on *.* to slave@&apos;192.168.1.170&apos; identified by &apos;123456&apos;;
+
+[root@m2lan150 ~]# service mysqld restart
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/12/16/mysql使用mychat实现读写分离/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/12/15/搭建mysql集群实现高可用/" itemprop="url">
+                  搭建mysql集群实现高可用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-12-15T23:59:39+08:00" content="2018-12-15">
+              2018-12-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/12/15/搭建mysql集群实现高可用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/12/15/搭建mysql集群实现高可用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="搭建mysql集群实现高可用"><a href="#搭建mysql集群实现高可用" class="headerlink" title="搭建mysql集群实现高可用"></a>搭建mysql集群实现高可用</h1><blockquote>
+<p>mysql-cluster是mysql适用于分布式计算环境的高可用、高冗余版本。使用NDB cluster存储引擎，允许在1个cluster中运行多个myslq服务器。</p>
+<p>SQL节点给上层应用提供sql访问</p>
+<p>NDB引擎是一种内存中的存储引擎，具有高可用和数据一致性的特点</p>
+<p>存储/数据节点：保存cluster中的数据。数据节点可提供副本实现数据冗余</p>
+<p>管理节点：管理整个集群。通过ndb mgmd命令启动集群</p>
+<p><a href="https://dev.mysql.com/downloads/cluster/7.3.html#downloads" target="_blank" rel="noopener">https://dev.mysql.com/downloads/cluster/7.3.html#downloads</a></p>
+<p>mysql cluster环境：</p>
+<p>管理节点150服务器</p>
+<p>数据节点150服务器和170服务器</p>
+<p>SQL节点150服务器和170服务器</p>
+</blockquote>
+<p><img src="http://img.m2lan.com/mysql-cluster.jpg" alt=""> </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/12/15/搭建mysql集群实现高可用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/12/15/使用mysql-proxy代理-mysql主从实现读写分离/" itemprop="url">
+                  使用mysql-proxy代理+mysql主从实现读写分离
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-12-15T23:57:03+08:00" content="2018-12-15">
+              2018-12-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/12/15/使用mysql-proxy代理-mysql主从实现读写分离/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/12/15/使用mysql-proxy代理-mysql主从实现读写分离/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="使用mysql-proxy代理-mysql主从实现读写分离"><a href="#使用mysql-proxy代理-mysql主从实现读写分离" class="headerlink" title="使用mysql-proxy代理+mysql主从实现读写分离"></a>使用mysql-proxy代理+mysql主从实现读写分离</h1><blockquote>
+<p>使用 主从复制(master-slave)的方式来同步数据，再通过读写分离(mysql-proxy)来提升数据库的并发负载能力</p>
+<p>应用连接代理服务器(mysql-proxy)，代理服务器分析请求的sql如果是写操作，将数据发送到主服务器。如果是读的操作，代理将数据发送给从服务器。为了保持主从服务器的数据一致性，需要在主从上实现主从复制功能来同步数据。</p>
+<p><a href="https://downloads.mysql.com/archives/proxy/" target="_blank" rel="noopener">https://downloads.mysql.com/archives/proxy/</a></p>
+<p>环境：mysql-proxy服务端：160服务器</p>
+<p>mysql主服务器：150服务器</p>
+<p>mysql从服务器：170服务器</p>
+</blockquote>
+<p><img src="http://img.m2lan.com/mysql-proxy.jpg" alt=""></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/12/15/使用mysql-proxy代理-mysql主从实现读写分离/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/11/28/mysql主主复制/" itemprop="url">
                   mysql主主复制
                 </a>
@@ -1212,395 +1616,6 @@ chkconfig vsftpd on
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/10/30/搭建nagios监控服务器/" itemprop="url">
-                  搭建nagios监控服务器
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-10-30T14:16:44+08:00" content="2018-10-30">
-              2018-10-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/10/30/搭建nagios监控服务器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/30/搭建nagios监控服务器/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="搭建nagios"><a href="#搭建nagios" class="headerlink" title="搭建nagios"></a>搭建nagios</h3><h1 id="安装nagios"><a href="#安装nagios" class="headerlink" title="安装nagios"></a>安装nagios</h1><pre><code>yum install -y httpd gcc glibc glibc-common php gd gd-devel libpng libmng libjpeg zlib
-useradd nagios
-groupadd nagcmd
-usermod -G nagcmd nagios
-usermod -G nagcmd apache
-
-tar xzvf nagios-3.5.1.tar.gz
-cd nagios
-./configure --with-command-group=nagcmd
-make all
-make install
-
-# 生成的nagios web访问目录
-ll /usr/local/nagios/share/
-
-# 生成启动脚本
-make install-init
-
-# 设置工作目录权限
-make install-commandmode
-
-# 生成配置文件
-make install-config
-# 配置文件目录
-ll /usr/local/nagios/etc/
-
-# 将nagios配置文件加入apache配置文件
-make install-webconf
-
-# 生成访问nagios web登录的用户名和密码
-htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/10/30/搭建nagios监控服务器/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/php-elsearch-autocomplete/" itemprop="url">
-                  php elsearch autocomplete
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T23:13:08+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/thinkphp5/" itemprop="url" rel="index">
-                    <span itemprop="name">thinkphp5</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/php-elsearch-autocomplete/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/php-elsearch-autocomplete/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="PHP-Eleasticsearch-实现自动补全"><a href="#PHP-Eleasticsearch-实现自动补全" class="headerlink" title="PHP+Eleasticsearch 实现自动补全"></a>PHP+Eleasticsearch 实现自动补全</h1><h2 id="1-创建索引"><a href="#1-创建索引" class="headerlink" title="1. 创建索引"></a>1. 创建索引</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    $params = [</span><br><span class="line">        <span class="string">'index'</span> =&gt; <span class="string">'auto_complete_shop'</span>,</span><br><span class="line">        <span class="string">'body'</span> =&gt; [</span><br><span class="line">            <span class="string">'settings'</span> =&gt; [</span><br><span class="line">                <span class="string">'number_of_shards'</span> =&gt; <span class="number">1</span>,</span><br><span class="line">                <span class="string">'analysis'</span> =&gt; [</span><br><span class="line">                    <span class="string">'filter'</span> =&gt; [</span><br><span class="line">                        <span class="string">'autocomplete_filter'</span> =&gt; [</span><br><span class="line">                            <span class="string">'type'</span> =&gt; <span class="string">'edge_ngram'</span>,</span><br><span class="line">                            <span class="string">'min_gram'</span> =&gt; <span class="number">1</span>,</span><br><span class="line">                            <span class="string">'max_gram'</span> =&gt; <span class="number">20</span></span><br><span class="line">                        ]</span><br><span class="line">                    ],</span><br><span class="line">                    <span class="string">'analyzer'</span> =&gt; [</span><br><span class="line">                        <span class="string">'autocomplete'</span> =&gt; [</span><br><span class="line">                            <span class="string">'type'</span> =&gt; <span class="string">'custom'</span>,</span><br><span class="line">                            <span class="string">'tokenizer'</span> =&gt; <span class="string">'standard'</span>,</span><br><span class="line">                            <span class="string">'filter'</span> =&gt; [</span><br><span class="line">                                <span class="string">'lowercase'</span>, <span class="string">'autocomplete_filter'</span></span><br><span class="line">                            ]</span><br><span class="line">                        ]</span><br><span class="line">                    ]</span><br><span class="line">                ]</span><br><span class="line">            ],</span><br><span class="line">            <span class="string">'mappings'</span> =&gt; [</span><br><span class="line">                <span class="string">'goods'</span> =&gt; [</span><br><span class="line">                    <span class="string">'_source'</span> =&gt; [</span><br><span class="line">                        <span class="string">'enabled'</span> =&gt; <span class="keyword">true</span></span><br><span class="line">                    ],</span><br><span class="line">                    <span class="string">'properties'</span> =&gt; [</span><br><span class="line">                        <span class="string">'name'</span> =&gt; [</span><br><span class="line">                            <span class="string">'type'</span> =&gt; <span class="string">'string'</span>,</span><br><span class="line">                            <span class="string">'analyzer'</span> =&gt; <span class="string">'autocomplete'</span>,</span><br><span class="line">                            <span class="string">'search_analyzer'</span> =&gt; <span class="string">'standard'</span></span><br><span class="line">                        ]</span><br><span class="line">                    ]</span><br><span class="line">                ]</span><br><span class="line">            ]</span><br><span class="line">        ]</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    $result = <span class="keyword">$this</span>-&gt;client-&gt;indices()-&gt;create($params);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> json_encode($result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/php-elsearch-autocomplete/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/elsearch安装/" itemprop="url">
-                  elsearch安装
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T23:10:59+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
-                    <span itemprop="name">Elasticsearch</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/elsearch安装/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/elsearch安装/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="elasticsearch-install"><a href="#elasticsearch-install" class="headerlink" title="elasticsearch install"></a>elasticsearch install</h1><h3 id="新建用户组和用户"><a href="#新建用户组和用户" class="headerlink" title="新建用户组和用户"></a>新建用户组和用户</h3><pre><code>groupadd elsearch
-useradd elsearch -g elsearch
-# 切换用户
-su elsearch
-</code></pre><h3 id="下载启动"><a href="#下载启动" class="headerlink" title="下载启动"></a>下载启动</h3><pre><code>wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.1.zip
-unzip elasticsearch-5.5.1.zip
-cd elasticsearch-5.5.1/
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/elsearch安装/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1646,7 +1661,7 @@ cd elasticsearch-5.5.1/
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1663,7 +1678,7 @@ cd elasticsearch-5.5.1/
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

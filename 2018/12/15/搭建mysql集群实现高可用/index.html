@@ -1,0 +1,896 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="搭建mysql集群实现高可用 mysql-cluster是mysql适用于分布式计算环境的高可用、高冗余版本。使用NDB cluster存储引擎，允许在1个cluster中运行多个myslq服务器。 SQL节点给上层应用提供sql访问 NDB引擎是一种内存中的存储引擎，具有高可用和数据一致性的特点 存储/数据节点：保存cluster中的数据。数据节点可提供副本实现数据冗余 管理节点：管理整个集群。">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建mysql集群实现高可用">
+<meta property="og:url" content="http://blog.golearns.org/2018/12/15/搭建mysql集群实现高可用/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="搭建mysql集群实现高可用 mysql-cluster是mysql适用于分布式计算环境的高可用、高冗余版本。使用NDB cluster存储引擎，允许在1个cluster中运行多个myslq服务器。 SQL节点给上层应用提供sql访问 NDB引擎是一种内存中的存储引擎，具有高可用和数据一致性的特点 存储/数据节点：保存cluster中的数据。数据节点可提供副本实现数据冗余 管理节点：管理整个集群。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.m2lan.com/mysql-cluster.jpg">
+<meta property="og:updated_time" content="2018-12-15T16:00:14.284Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建mysql集群实现高可用">
+<meta name="twitter:description" content="搭建mysql集群实现高可用 mysql-cluster是mysql适用于分布式计算环境的高可用、高冗余版本。使用NDB cluster存储引擎，允许在1个cluster中运行多个myslq服务器。 SQL节点给上层应用提供sql访问 NDB引擎是一种内存中的存储引擎，具有高可用和数据一致性的特点 存储/数据节点：保存cluster中的数据。数据节点可提供副本实现数据冗余 管理节点：管理整个集群。">
+<meta name="twitter:image" content="http://img.m2lan.com/mysql-cluster.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 2746085,
+      author: 'M2'
+    }
+  };
+</script>
+
+  <title> 搭建mysql集群实现高可用 | 知识记录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a7aab4bc8347eb54375043cf003b2c21";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知识记录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'b2cFpoExgUMZu3--zQzE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                搭建mysql集群实现高可用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-12-15T23:59:39+08:00" content="2018-12-15">
+              2018-12-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/12/15/搭建mysql集群实现高可用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/12/15/搭建mysql集群实现高可用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="搭建mysql集群实现高可用"><a href="#搭建mysql集群实现高可用" class="headerlink" title="搭建mysql集群实现高可用"></a>搭建mysql集群实现高可用</h1><blockquote>
+<p>mysql-cluster是mysql适用于分布式计算环境的高可用、高冗余版本。使用NDB cluster存储引擎，允许在1个cluster中运行多个myslq服务器。</p>
+<p>SQL节点给上层应用提供sql访问</p>
+<p>NDB引擎是一种内存中的存储引擎，具有高可用和数据一致性的特点</p>
+<p>存储/数据节点：保存cluster中的数据。数据节点可提供副本实现数据冗余</p>
+<p>管理节点：管理整个集群。通过ndb mgmd命令启动集群</p>
+<p><a href="https://dev.mysql.com/downloads/cluster/7.3.html#downloads" target="_blank" rel="noopener">https://dev.mysql.com/downloads/cluster/7.3.html#downloads</a></p>
+<p>mysql cluster环境：</p>
+<p>管理节点150服务器</p>
+<p>数据节点150服务器和170服务器</p>
+<p>SQL节点150服务器和170服务器</p>
+</blockquote>
+<p><img src="http://img.m2lan.com/mysql-cluster.jpg" alt=""> </p>
+<a id="more"></a>
+<h3 id="150服务器"><a href="#150服务器" class="headerlink" title="150服务器"></a>150服务器</h3><pre><code>[root@m2lan150 ~]# tar -xvf MySQL-Cluster-gpl-7.3.7-1.el6.x86_64.rpm-bundle.tar
+
+# 安装集群软件包
+# 安装成功后默认的root密码在`/root/.mysql_secret`文件中
+[root@m2lan150 ~]# rpm -ivh MySQL-Cluster-server-gpl-7.3.7-1.el6.x86_64.rpm
+[root@m2lan150 ~]# rpm -ivh MySQL-Cluster-client-gpl-7.3.7-1.el6.x86_64.rpm
+
+# 创建管理节点
+[root@m2lan150 ~]# mkdir /var/lib/mysql-cluster
+# 创建存放进程文件夹
+[root@m2lan150 ~]# mkdir /var/run/mysqld
+# 修改文件夹权限
+[root@m2lan150 ~]# chown mysql:mysql -R /var/lib/mysql-cluster/
+[root@m2lan150 ~]# chown mysql:mysql -R /var/run/mysqld/
+
+# 创建管理节点配置文件
+[root@m2lan150 ~]# vim /var/lib/mysql-cluster/config.ini
+[ndbd default] # ndbd默认配置
+NoOfReplicas=2 # 数据存放的数量
+DataMemory=200M # 数据内存大小
+IndexMemory=100M # 索引内存大小
+
+[ndb_mgmd] # ndb管理配置
+id=1 # 唯一标识
+datadir=/var/lib/mysql-cluster # 管理节点日志存放目录
+HostName=192.168.1.150 # 管理节点ip地址
+
+# 存储节点
+[ndbd]
+HostName=192.168.1.150
+DataDir=/var/lib/mysql # 存储节点数据存放目录
+id=2
+
+[ndbd]
+HostName=192.168.1.170
+DataDir=/var/lib/mysql
+id=3
+
+# SQL节点
+[mysqld]
+HostName=192.168.1.150
+id=4
+
+[mysqld]
+HostName=192.168.1.170
+id=5
+
+# 配置数据节点和SQL节点
+# 数据节点和SQL节点分开配置的话，数据节点加上
+# datadir=/var/lib/mysql # mysql数据存储路径
+# SQL节点没有这一项
+[root@m2lan150 ~]# vim /etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql # mysql数据存储路径
+ndbcluster # 启动ndb引擎
+ndb-connectstring=192.168.1.150 # 管理节点ip地址
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+[mysql_cluster]
+ndb-connectstring=192.168.1.150 # 管理节点ip地址
+</code></pre><h3 id="170服务器"><a href="#170服务器" class="headerlink" title="170服务器"></a>170服务器</h3><pre><code>[root@m2lan170 ~]# tar -xvf MySQL-Cluster-gpl-7.3.7-1.el6.x86_64.rpm-bundle.tar
+
+# 安装集群软件包
+# 安装成功后默认的root密码在`/root/.mysql_secret`文件中
+[root@m2lan170 ~]# rpm -ivh MySQL-Cluster-server-gpl-7.3.7-1.el6.x86_64.rpm
+[root@m2lan170 ~]# rpm -ivh MySQL-Cluster-client-gpl-7.3.7-1.el6.x86_64.rpm
+
+# 创建存放进程文件夹
+[root@m2lan170 ~]# mkdir /var/run/mysqld
+# 修改文件夹权限
+[root@m2lan170 ~]# chown mysql:mysql -R /var/run/mysqld/
+
+# 配置数据节点和SQL节点
+[root@m2lan150 ~]# scp /etc/my.cnf 192.168.1.170:/etc
+</code></pre><h3 id="mysql-cluster启动"><a href="#mysql-cluster启动" class="headerlink" title="mysql-cluster启动"></a>mysql-cluster启动</h3><blockquote>
+<p>启动顺序：管理节点服务=&gt;数据节点服务=&gt;SQL节点服务</p>
+<p>关闭顺序：关闭管理节点服务，ndbd数据节点服务会自动关闭，然后手动关闭SQL节点服务</p>
+<p>开放端口1186和3306</p>
+</blockquote>
+<pre><code># 时间同步
+[root@m2lan170 ~]# ntpdate 0.asia.pool.ntp.org
+# 在150服务器上启动管理节点(后台运行)
+[root@m2lan150 ~]# ndb_mgmd -f /var/lib/mysql-cluster/config.ini
+
+# 在150和170服务器上启动数据节点
+[root@m2lan150 ~]# ndbd --initial
+[root@m2lan170 ~]# ndbd --initial
+
+# 在150和170服务器上启动SQL节点
+[root@m2lan150 ~]# mysqld_safe --defaults-file=/etc/my.cnf &amp;
+[root@m2lan170 ~]# mysqld_safe --defaults-file=/etc/my.cnf &amp;
+
+# 查看mysql集群状态
+[root@m2lan150 ~]# ndb_mgm
+-- NDB Cluster -- Management Client --
+ndb_mgm&gt; show
+Connected to Management Server at: 192.168.1.150:1186
+Cluster Configuration
+---------------------
+[ndbd(NDB)]     2 node(s)
+id=2    @192.168.1.150  (mysql-5.6.21 ndb-7.3.7, Nodegroup: 0, *)
+id=3    @192.168.1.170  (mysql-5.6.21 ndb-7.3.7, Nodegroup: 0)
+
+[ndb_mgmd(MGM)] 1 node(s)
+id=1    @192.168.1.150  (mysql-5.6.21 ndb-7.3.7)
+
+[mysqld(API)]   2 node(s)
+id=4    @192.168.1.150  (mysql-5.6.21 ndb-7.3.7)
+id=5    @192.168.1.170  (mysql-5.6.21 ndb-7.3.7)
+
+# 测试数据同步
+# 150服务器
+# 查看密码
+[root@m2lan150 ~]# cat /root/.mysql_secret
+# 修改密码
+[root@m2lan150 ~]# mysql -uroot -p
+mysql&gt; set password=password(&apos;123456&apos;);
+mysql&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| ndb_2_fs           |
+| ndbinfo            |
+| performance_schema |
+| test               |
++--------------------+
+
+# 170服务器
+[root@m2lan170 ~]# cat /root/.mysql_secret
+[root@m2lan170 ~]# mysql -uroot -p
+mysql&gt; set password=password(&apos;123456&apos;);
+mysql&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| ndb_3_fs           |
+| ndbinfo            |
+| performance_schema |
+| test               |
++--------------------+
+
+# 在150服务器创建aa数据库
+mysql&gt; create database aa default charset=utf8;
+# 在170服务器上查看
+mysql&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| aa                 |
+| mysql              |
+| ndb_3_fs           |
+| ndbinfo            |
+| performance_schema |
+| test               |
++--------------------+
+</code></pre><h3 id="mysql-cluster关闭"><a href="#mysql-cluster关闭" class="headerlink" title="mysql-cluster关闭"></a>mysql-cluster关闭</h3><pre><code># 关闭管理节点
+[root@m2lan150 ~]# ndb_mgm
+-- NDB Cluster -- Management Client --
+ndb_mgm&gt; shutdown
+Connected to Management Server at: 192.168.1.150:1186
+Node 3: Cluster shutdown initiated
+Node 2: Cluster shutdown initiated
+Node 3: Node shutdown completed.
+Node 2: Node shutdown completed.
+3 NDB Cluster node(s) have shutdown.
+Disconnecting to allow management server to shutdown.
+
+# 手动关闭SQL节点
+[root@m2lan150 ~]# ps aux|grep mysql | awk &apos;{print $2}&apos; | xargs kill -9
+[root@m2lan170 ~]# ps aux|grep mysql | awk &apos;{print $2}&apos; | xargs kill -9
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/15/使用mysql-proxy代理-mysql主从实现读写分离/" rel="next" title="使用mysql-proxy代理+mysql主从实现读写分离">
+                <i class="fa fa-chevron-left"></i> 使用mysql-proxy代理+mysql主从实现读写分离
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/16/mysql使用mychat实现读写分离/" rel="prev" title="mysql使用mycat实现读写分离">
+                mysql使用mycat实现读写分离 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/12/15/搭建mysql集群实现高可用/"
+           data-title="搭建mysql集群实现高可用" data-url="http://blog.golearns.org/2018/12/15/搭建mysql集群实现高可用/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M2" />
+          <p class="site-author-name" itemprop="name">M2</p>
+          <p class="site-description motion-element" itemprop="description">记录知识，分享知识</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/m2lan" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/763960267" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/100006504108865" target="_blank">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1877167031" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:763960267@qq.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#搭建mysql集群实现高可用"><span class="nav-number">1.</span> <span class="nav-text">搭建mysql集群实现高可用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#150服务器"><span class="nav-number">1.0.1.</span> <span class="nav-text">150服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#170服务器"><span class="nav-number">1.0.2.</span> <span class="nav-text">170服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-cluster启动"><span class="nav-number">1.0.3.</span> <span class="nav-text">mysql-cluster启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-cluster关闭"><span class="nav-number">1.0.4.</span> <span class="nav-text">mysql-cluster关闭</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M2</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"m2langithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

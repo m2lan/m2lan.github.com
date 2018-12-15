@@ -267,6 +267,414 @@
             
               
                 
+                <a class="post-title-link" href="/2016/02/26/centos-升级mysql/" itemprop="url">
+                  centos-升级mysql
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-26T00:18:12+08:00" content="2016-02-26">
+              2016-02-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/26/centos-升级mysql/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/centos-升级mysql/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Centos-升级mysql"><a href="#Centos-升级mysql" class="headerlink" title="Centos 升级mysql"></a>Centos 升级mysql</h1><ul>
+<li><p>Centos默认mysql版本是5.1，但是高版本的mysql对性能有很大的提升。并且支持的字符最多有4个字节，支持emoji表情。查看Centos内核版本，下载对应的<a href="http://dev.mysql.com/downloads/repo/yum/" target="_blank" rel="noopener">yum源</a></p>
+<pre><code>rpm -Uvh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
+yum -y upgrade mysql mysql_upgrade
+
+// 配置/etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init_connect=&apos;SET NAMES utf8mb4&apos;
+character-set-client-handshake = FALSE
+[mysql]
+default-character-set=utf8mb4
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+[client]
+default-character-set=utf8mb4
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/26/centos-升级mysql/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/26/centos-安装nginx/" itemprop="url">
+                  centos-安装nginx
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-26T00:17:11+08:00" content="2016-02-26">
+              2016-02-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/26/centos-安装nginx/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/centos-安装nginx/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Centos-安装Nginx"><a href="#Centos-安装Nginx" class="headerlink" title="Centos 安装Nginx"></a>Centos 安装Nginx</h1><pre><code>yum install gcc-c++
+
+yum -y install zlib zlib-devel openssl openssl--devel pcre pcre-devel
+
+wget http://nginx.org/download/nginx-1.6.2.tar.gz
+
+tar xvzf nginx-1.6.2.tar.gz
+
+cd ./nginx-1.6.2
+
+./configure
+
+make &amp;&amp; make install
+
+// 修改配置防火墙
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+
+service iptables restart
+
+// 启动nginx
+cd /usr/local/nginx/sbin/
+
+./nginx
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/26/centos-查看系统硬件信息/" itemprop="url">
+                  centos-查看系统硬件信息
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-26T00:13:44+08:00" content="2016-02-26">
+              2016-02-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/26/centos-查看系统硬件信息/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/centos-查看系统硬件信息/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Centos-查看系统硬件信息"><a href="#Centos-查看系统硬件信息" class="headerlink" title="Centos 查看系统硬件信息"></a>Centos 查看系统硬件信息</h1><ul>
+<li><p>查看CPU型号</p>
+<pre><code>cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+
+2  Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz
+</code></pre></li>
+<li><p>查看物理CPU个数</p>
+<pre><code>cat /proc/cpuinfo | grep physical | uniq -c
+
+1 physical id    : 0
+1 address sizes    : 46 bits physical, 48 bits virtual
+1 physical id    : 2
+1 address sizes    : 46 bits physical, 48 bits virtual
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/26/centos-查看系统硬件信息/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/02/26/centos-查看端口使用情况/" itemprop="url">
                   centos-查看端口使用情况
                 </a>
@@ -1145,399 +1553,6 @@ systemctl enable nginx
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/25/zookeeper/" itemprop="url">
-                  zookeeper
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-25T23:03:14+08:00" content="2016-02-25">
-              2016-02-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Zookeeper/" itemprop="url" rel="index">
-                    <span itemprop="name">Zookeeper</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/25/zookeeper/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/zookeeper/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>wget http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
-tar xvf zookeeper-3.4.8.tar.gz
-cd zookeeper-3.4.8
-cd conf
-cp zoo_sample.cfg zoo.cfg
-
-// zoo.cfg配置
-tickTime=2000
-initLimit=10
-syncLimit=5
-dataDir=/tmp/zookeeper
-clientPort=2181
-autopurge.purgeInterval=1
-server.1=localhost:2888:3888
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/25/zookeeper/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/25/kafka/" itemprop="url">
-                  kafka
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-25T23:01:53+08:00" content="2016-02-25">
-              2016-02-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Kafka/" itemprop="url" rel="index">
-                    <span itemprop="name">Kafka</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/25/kafka/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/kafka/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h1><blockquote>
-<p>kafka是一个分布式、分区、复制提交日志服务。它提供了一个消息传送系统的功能。
-通过zookeeper实现集群
-kafka集群由多个kafka实例组成，每个实例称为broker</p>
-</blockquote>
-<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><pre><code>wget http://apache.fayea.com/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-tar xzf kafka_2.11-0.9.0.0.tgz
-export KAFKA_HOME=/root/kafka_2.11-0.9.0.0
-cd kafka_2.11-0.9.0.0
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/25/kafka/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/Shell-redirect/" itemprop="url">
-                  Shell-redirect
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T02:20:35+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/Shell-redirect/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/Shell-redirect/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Shell-redirect"><a href="#Shell-redirect" class="headerlink" title="Shell-redirect"></a>Shell-redirect</h1><pre><code>#!/bin/bash
-# 输出重定向
-#  将输出到终端的结果重定向到文件中
-
-# 加上双引号 可以对输出结果换行
-# &gt; 会将已存在的结果覆盖
-# 如果不想覆盖 则使用 &gt;&gt; 如果文件存在，结果将会追加
-echo &quot;$(ls -la)&quot; &gt; file
-
-echo &quot;$(who)&quot; &gt;&gt; file1
-
-
-# 输入结果重定向
-cat &lt; file
-wc -l &lt; file
-
-# 文档嵌入
-wc -l &lt;&lt;EOF
-    hahahhdfdslfjdslfjsdlfjsdlfsd
-    werjewlrjewlrjewlrjewlrjwer
-    werjwelrjwlejrewljrew
-EOF
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1583,7 +1598,7 @@ EOF
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1600,7 +1615,7 @@ EOF
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

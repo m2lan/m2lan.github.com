@@ -1,0 +1,793 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL,mysql-proxy," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="知识记录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="使用mysql-proxy代理+mysql主从实现读写分离 使用 主从复制(master-slave)的方式来同步数据，再通过读写分离(mysql-proxy)来提升数据库的并发负载能力 应用连接代理服务器(mysql-proxy)，代理服务器分析请求的sql如果是写操作，将数据发送到主服务器。如果是读的操作，代理将数据发送给从服务器。为了保持主从服务器的数据一致性，需要在主从上实现主从复制功能来">
+<meta name="keywords" content="MySQL,mysql-proxy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用mysql-proxy代理+mysql主从实现读写分离">
+<meta property="og:url" content="http://blog.golearns.org/2018/12/15/使用mysql-proxy代理-mysql主从实现读写分离/index.html">
+<meta property="og:site_name" content="知识记录">
+<meta property="og:description" content="使用mysql-proxy代理+mysql主从实现读写分离 使用 主从复制(master-slave)的方式来同步数据，再通过读写分离(mysql-proxy)来提升数据库的并发负载能力 应用连接代理服务器(mysql-proxy)，代理服务器分析请求的sql如果是写操作，将数据发送到主服务器。如果是读的操作，代理将数据发送给从服务器。为了保持主从服务器的数据一致性，需要在主从上实现主从复制功能来">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.m2lan.com/mysql-proxy.jpg">
+<meta property="og:updated_time" content="2018-12-15T16:00:24.416Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用mysql-proxy代理+mysql主从实现读写分离">
+<meta name="twitter:description" content="使用mysql-proxy代理+mysql主从实现读写分离 使用 主从复制(master-slave)的方式来同步数据，再通过读写分离(mysql-proxy)来提升数据库的并发负载能力 应用连接代理服务器(mysql-proxy)，代理服务器分析请求的sql如果是写操作，将数据发送到主服务器。如果是读的操作，代理将数据发送给从服务器。为了保持主从服务器的数据一致性，需要在主从上实现主从复制功能来">
+<meta name="twitter:image" content="http://img.m2lan.com/mysql-proxy.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 2746085,
+      author: 'M2'
+    }
+  };
+</script>
+
+  <title> 使用mysql-proxy代理+mysql主从实现读写分离 | 知识记录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a7aab4bc8347eb54375043cf003b2c21";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知识记录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'b2cFpoExgUMZu3--zQzE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用mysql-proxy代理+mysql主从实现读写分离
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-12-15T23:57:03+08:00" content="2018-12-15">
+              2018-12-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/12/15/使用mysql-proxy代理-mysql主从实现读写分离/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/12/15/使用mysql-proxy代理-mysql主从实现读写分离/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="使用mysql-proxy代理-mysql主从实现读写分离"><a href="#使用mysql-proxy代理-mysql主从实现读写分离" class="headerlink" title="使用mysql-proxy代理+mysql主从实现读写分离"></a>使用mysql-proxy代理+mysql主从实现读写分离</h1><blockquote>
+<p>使用 主从复制(master-slave)的方式来同步数据，再通过读写分离(mysql-proxy)来提升数据库的并发负载能力</p>
+<p>应用连接代理服务器(mysql-proxy)，代理服务器分析请求的sql如果是写操作，将数据发送到主服务器。如果是读的操作，代理将数据发送给从服务器。为了保持主从服务器的数据一致性，需要在主从上实现主从复制功能来同步数据。</p>
+<p><a href="https://downloads.mysql.com/archives/proxy/" target="_blank" rel="noopener">https://downloads.mysql.com/archives/proxy/</a></p>
+<p>环境：mysql-proxy服务端：160服务器</p>
+<p>mysql主服务器：150服务器</p>
+<p>mysql从服务器：170服务器</p>
+</blockquote>
+<p><img src="http://img.m2lan.com/mysql-proxy.jpg" alt=""></p>
+<a id="more"></a>
+<h3 id="配置160服务器"><a href="#配置160服务器" class="headerlink" title="配置160服务器"></a>配置160服务器</h3><pre><code>[root@redhat160 ~]# tar -zxvf mysql-proxy-0.8.5-linux-el6-x86-64bit.tar.gz
+
+# 配置mysql-proxy到环境变量中
+[root@redhat160 ~]# mv mysql-proxy-0.8.5-linux-el6-x86-64bit /usr/local/mysql-proxy
+[root@redhat160 ~]# export PATH=$PATH:/usr/local/mysql-proxy/bin/
+# 永久生效
+[root@redhat160 ~]# vim /etc/bashrc
+PATH=$PATH:/usr/local/mysql-proxy/bin
+[root@redhat160 ~]# source /etc/bashrc
+</code></pre><h3 id="配置150服务器"><a href="#配置150服务器" class="headerlink" title="配置150服务器"></a>配置150服务器</h3><pre><code>[root@m2lan150 ~]# yum install mysql-server -y
+[root@m2lan150 ~]# service mysqld restart
+# 创建数据库和表
+mysql&gt; create database bb default charset=utf8;
+mysql&gt; create table b1(id int auto_increment primary key, name varchar(255) not null);
+mysql&gt; insert into b1(name) values(&apos;zhangsan&apos;), (&apos;lisi&apos;), (&apos;wangwu&apos;);
+# 创建用户可以从任意远程连接登陆
+mysql&gt; grant all on bb.* to zhangsan@&apos;%&apos; identified by &apos;123456&apos;;
+</code></pre><h3 id="配置170服务器"><a href="#配置170服务器" class="headerlink" title="配置170服务器"></a>配置170服务器</h3><pre><code>[root@m2lan150 ~]# yum install mysql-server -y
+[root@m2lan150 ~]# service mysqld restart
+# 创建数据库和表
+mysql&gt; create database bb default charset=utf8;
+mysql&gt; create table b1(id int auto_increment primary key, name varchar(255) not null);
+mysql&gt; insert into b1(name) values(&apos;tianqi&apos;);
+# 创建用户可以从任意远程连接登陆
+mysql&gt; grant all on bb.* to zhangsan@&apos;%&apos; identified by &apos;123456&apos;;
+</code></pre><h3 id="启动代理服务器"><a href="#启动代理服务器" class="headerlink" title="启动代理服务器"></a>启动代理服务器</h3><pre><code># 指定只读服务器 --proxy-read-only-backend-addresses
+# 制定写服务器 -proxy-backend-addresses
+# 指定需要执行的策略脚本文件 --proxy-lua-script
+[root@redhat160 ~]# mysql-proxy --proxy-read-only-backend-addresses=192.168.1.170:3306 --proxy-backend-addresses=192.168.1.150:3306 --proxy-lua-script=/usr/local/mysql-proxy/share/doc/mysql-proxy/rw-splitting.lua &amp;
+</code></pre><h3 id="关闭代理服务器"><a href="#关闭代理服务器" class="headerlink" title="关闭代理服务器"></a>关闭代理服务器</h3><pre><code>[root@redhat160 ~]# pkill proxy
+</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code># 多启动几个终端链接代理服务器测试
+# 目前两台服务器的数据不同步
+# 分别执行插入和查询语句查看是否实现读写分离
+[root@redhat160 ~]# mysql -uzhangsan -p -P4040 -h 192.168.1.160
+</code></pre><h3 id="实现主从读写分离"><a href="#实现主从读写分离" class="headerlink" title="实现主从读写分离"></a>实现主从读写分离</h3><h4 id="配置150服务器-1"><a href="#配置150服务器-1" class="headerlink" title="配置150服务器"></a>配置150服务器</h4><pre><code>[root@m2lan150 ~]# vim /etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+log-bin=mysqllog
+server-id=1
+binlog-do-db=bb
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+# 创建同步用户
+mysql&gt; grant replication slave on *.* to lisi@&apos;%&apos; identified by &apos;123456&apos;;
+
+# 重启mysql服务
+[root@m2lan150 ~]# service mysqld restart
+</code></pre><h4 id="配置170服务器-1"><a href="#配置170服务器-1" class="headerlink" title="配置170服务器"></a>配置170服务器</h4><pre><code>[root@m2lan170 ~]# vim /etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+server-id=2
+master-host=192.168.1.150
+master-user=lisi
+master-password=123456
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+# 重启mysql服务
+[root@m2lan170 ~]# service mysqld restart
+</code></pre><h4 id="启动代理服务器并测试"><a href="#启动代理服务器并测试" class="headerlink" title="启动代理服务器并测试"></a>启动代理服务器并测试</h4><pre><code>[root@redhat160 ~]# mysql-proxy --proxy-read-only-backend-addresses=192.168.1.170:3306 --proxy-backend-addresses=192.168.1.150:3306 --proxy-lua-script=/usr/local/mysql-proxy/share/doc/mysql-proxy/rw-splitting.lua &amp;
+
+[root@redhat160 ~]# mysql -uzhangsan -p -P4040 -h 192.168.1.160
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
+          
+            <a href="/tags/mysql-proxy/" rel="tag">#mysql-proxy</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/28/mysql主主复制/" rel="next" title="mysql主主复制">
+                <i class="fa fa-chevron-left"></i> mysql主主复制
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/15/搭建mysql集群实现高可用/" rel="prev" title="搭建mysql集群实现高可用">
+                搭建mysql集群实现高可用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/12/15/使用mysql-proxy代理-mysql主从实现读写分离/"
+           data-title="使用mysql-proxy代理+mysql主从实现读写分离" data-url="http://blog.golearns.org/2018/12/15/使用mysql-proxy代理-mysql主从实现读写分离/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M2" />
+          <p class="site-author-name" itemprop="name">M2</p>
+          <p class="site-description motion-element" itemprop="description">记录知识，分享知识</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/m2lan" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/763960267" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/100006504108865" target="_blank">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1877167031" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhu-yong-kang-17" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:763960267@qq.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用mysql-proxy代理-mysql主从实现读写分离"><span class="nav-number">1.</span> <span class="nav-text">使用mysql-proxy代理+mysql主从实现读写分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置160服务器"><span class="nav-number">1.0.1.</span> <span class="nav-text">配置160服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置150服务器"><span class="nav-number">1.0.2.</span> <span class="nav-text">配置150服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置170服务器"><span class="nav-number">1.0.3.</span> <span class="nav-text">配置170服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动代理服务器"><span class="nav-number">1.0.4.</span> <span class="nav-text">启动代理服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭代理服务器"><span class="nav-number">1.0.5.</span> <span class="nav-text">关闭代理服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">1.0.6.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现主从读写分离"><span class="nav-number">1.0.7.</span> <span class="nav-text">实现主从读写分离</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置150服务器-1"><span class="nav-number">1.0.7.1.</span> <span class="nav-text">配置150服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置170服务器-1"><span class="nav-number">1.0.7.2.</span> <span class="nav-text">配置170服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动代理服务器并测试"><span class="nav-number">1.0.7.3.</span> <span class="nav-text">启动代理服务器并测试</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M2</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"m2langithub"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

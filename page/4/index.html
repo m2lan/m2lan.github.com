@@ -267,6 +267,390 @@
             
               
                 
+                <a class="post-title-link" href="/2018/09/17/centos7-安裝rabbitmq/" itemprop="url">
+                  centos7 安裝rabbitmq
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T22:54:45+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/centos7-安裝rabbitmq/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7-安裝rabbitmq/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="centos7-install-rabbitmq"><a href="#centos7-install-rabbitmq" class="headerlink" title="centos7 install rabbitmq"></a>centos7 install rabbitmq</h1><h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><pre><code>wget https://dl.bintray.com/rabbitmq/all/rabbitmq-server/3.7.2/rabbitmq-server-3.7.2-1.el7.noarch.rpm
+rpm --import https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+
+# In /etc/yum.repos.d/rabbitmq-erlang.repo
+[rabbitmq-erlang]
+name=rabbitmq-erlang
+baseurl=https://dl.bintray.com/rabbitmq/rpm/erlang/20/el/6
+gpgcheck=1
+gpgkey=https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+repo_gpgcheck=0
+enabled=1
+
+yum install rabbitmq-server-3.7.2-1.el7.noarch.rpm
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/09/17/centos7-安裝rabbitmq/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/centos7-安装gitlab/" itemprop="url">
+                  centos7 安装gitlab
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T22:49:53+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/centos7-安装gitlab/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7-安装gitlab/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="centos7-install-gitlab"><a href="#centos7-install-gitlab" class="headerlink" title="centos7 install gitlab"></a>centos7 install gitlab</h1><h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><pre><code>yum install -y curl policycoreutils-python openssh-server
+systemctl enable sshd
+systemctl start sshd
+firewall-cmd --permanent --add-service=http
+systemctl reload firewalld
+
+yum install postfix
+systemctl enable postfix
+systemctl start postfix
+
+curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.rpm.sh | sudo bash
+
+# EXTERNAL_URL修改为访问域名
+sudo EXTERNAL_URL=&quot;http://gitlab.example.com&quot; yum install -y gitlab-ee
+
+# 默认用户名root
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/09/17/centos7-安装gitlab/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/17/centos7-安装配置Let-s-encrypt/" itemprop="url">
+                  centos7 安装配置Let's encrypt
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-17T22:49:04+08:00" content="2018-09-17">
+              2018-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/17/centos7-安装配置Let-s-encrypt/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/centos7-安装配置Let-s-encrypt/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="centos7-install-config-Let’s-encrypt"><a href="#centos7-install-config-Let’s-encrypt" class="headerlink" title="centos7 install config Let’s encrypt"></a>centos7 install config Let’s encrypt</h1><pre><code>yum -y install yum-utils
+yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
+yum install certbot
+
+# 生成证书文件
+certbot certonly --standalone -d centos188.com
+生成成功后可以在/etc/letsencrypt/archive/centos188.com文件夹下找到 pem 格式证书源文件文件
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/09/17/centos-install-libevent/" itemprop="url">
                   centos install libevent
                 </a>
@@ -1122,398 +1506,6 @@ make -j 4
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/搭建jenkins持续构建环境-springboot/" itemprop="url">
-                  搭建jenkins持续构建环境-springboot
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T22:39:39+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/jenkins/" itemprop="url" rel="index">
-                    <span itemprop="name">jenkins</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/搭建jenkins持续构建环境-springboot/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/搭建jenkins持续构建环境-springboot/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="搭建Jenkins持续构建环境-springboot"><a href="#搭建Jenkins持续构建环境-springboot" class="headerlink" title="搭建Jenkins持续构建环境-springboot"></a>搭建Jenkins持续构建环境-springboot</h1><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
-<li>gitlab环境服务器(192.168.3.152)<ul>
-<li>gitlab</li>
-</ul>
-</li>
-<li>jenkins环境服务器(192.168.3.213)<ul>
-<li>maven</li>
-<li>jdk</li>
-<li>tomcat</li>
-<li>jenkins</li>
-</ul>
-</li>
-<li>tomcat环境服务器(192.168.3.214)<ul>
-<li>jdk</li>
-<li>tomcat</li>
-</ul>
-</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/搭建jenkins持续构建环境-springboot/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/创建think5自定义命令行/" itemprop="url">
-                  创建think5自定义命令行
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T22:37:50+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/thinkphp5/" itemprop="url" rel="index">
-                    <span itemprop="name">thinkphp5</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/创建think5自定义命令行/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/创建think5自定义命令行/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="创建think5自定义命令行"><a href="#创建think5自定义命令行" class="headerlink" title="创建think5自定义命令行"></a>创建think5自定义命令行</h1><blockquote>
-<p>ThinkPHP5.0支持Console应用，通过命令行的方式执行一些URL访问不方便或者安全性较高的操作</p>
-</blockquote>
-<h3 id="创建命令行类"><a href="#创建命令行类" class="headerlink" title="创建命令行类"></a>创建命令行类</h3><ul>
-<li><p>创建<code>application/console/WebSocket.php</code></p>
-<pre><code>namespace app\console;
-
-use think\console\Command;
-use think\console\Input;
-use think\console\Output;
-
-class WebSocket extends Command {
-
-    // 命令行配置函数
-    protected function configure() {
-        // setName: 设置命令行名称
-        // setDescription: 设置命令行描述
-        $this-&gt;setName(&apos;websocket:start&apos;)-&gt;setDescription(&apos;启动WebSocket服务器.&apos;);
-    }
-
-    // 设置命令行返回信息
-    protected function execute(Input $input, Output $output) {
-        $output-&gt;writeln(&quot;WebSocket: 启动.\n&quot;);
-    }
-}
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/17/创建think5自定义命令行/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/17/阿里云升级内核/" itemprop="url">
-                  阿里云升级内核
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-17T22:28:16+08:00" content="2018-09-17">
-              2018-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/09/17/阿里云升级内核/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/17/阿里云升级内核/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="阿里云升级内核"><a href="#阿里云升级内核" class="headerlink" title="阿里云升级内核"></a>阿里云升级内核</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">yum remove kernel-headers</span><br><span class="line">sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</span><br><span class="line">sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm</span><br><span class="line">sudo yum --enablerepo=elrepo-kernel install kernel-ml -y</span><br><span class="line">rpm -qa | grep kernel</span><br><span class="line">sudo egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'</span><br><span class="line">sudo grub2-set-default 0</span><br><span class="line">sudo shutdown -r now</span><br><span class="line">uname -r</span><br><span class="line">echo 'net.core.default_qdisc=fq' | sudo tee -a /etc/sysctl.conf</span><br><span class="line">echo 'net.ipv4.tcp_congestion_control=bbr' | sudo tee -a /etc/sysctl.conf</span><br><span class="line">sysctl -p</span><br><span class="line">sysctl net.ipv4.tcp_available_congestion_control</span><br><span class="line">sysctl -n net.ipv4.tcp_congestion_control</span><br><span class="line">lsmod | grep bbr</span><br><span class="line">netstat -antlup</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1559,7 +1551,7 @@ class WebSocket extends Command {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1576,7 +1568,7 @@ class WebSocket extends Command {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

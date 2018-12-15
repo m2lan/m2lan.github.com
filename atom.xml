@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.golearns.org/"/>
-  <updated>2018-11-28T15:47:38.847Z</updated>
+  <updated>2018-12-15T16:01:22.969Z</updated>
   <id>http://blog.golearns.org/</id>
   
   <author>
@@ -15,6 +15,129 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql使用mycat实现读写分离</title>
+    <link href="http://blog.golearns.org/2018/12/16/mysql%E4%BD%BF%E7%94%A8mychat%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/"/>
+    <id>http://blog.golearns.org/2018/12/16/mysql使用mychat实现读写分离/</id>
+    <published>2018-12-15T16:00:38.000Z</published>
+    <updated>2018-12-15T16:01:22.969Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mysql使用mychat实现读写分离"><a href="#mysql使用mychat实现读写分离" class="headerlink" title="mysql使用mychat实现读写分离"></a>mysql使用mychat实现读写分离</h1><blockquote><p>下载地址：<a href="http://dl.mycat.io/1.6-RELEASE/" target="_blank" rel="noopener">http://dl.mycat.io/1.6-RELEASE/</a></p><p>环境：</p><p>中间件160服务器，写150服务器，读170服务器</p></blockquote><h3 id="150服务器"><a href="#150服务器" class="headerlink" title="150服务器"></a>150服务器</h3><pre><code># 安装mysql服务[root@m2lan150 ~]# yum install -y mysql-server mysql[root@m2lan150 ~]# service mysqld restart# 添加mycat用户mysql&gt; grant all on *.* to mycat@&apos;192.168.1.160&apos; identified by &apos;123456&apos;;# 配置主从关系的主服务器[root@m2lan150 ~]# vim /etc/my.cnf[mysqld]datadir=/var/lib/mysqlsocket=/var/lib/mysql/mysql.sockuser=mysql# Disabling symbolic-links is recommended to prevent assorted security riskssymbolic-links=0log-bin=mysqllogserver-id=1binlog-do-db=TESTDB[mysqld_safe]log-error=/var/log/mysqld.logpid-file=/var/run/mysqld/mysqld.pid# 添加同步数据的用户mysql&gt; grant replication slave on *.* to slave@&apos;192.168.1.170&apos; identified by &apos;123456&apos;;[root@m2lan150 ~]# service mysqld restart</code></pre><a id="more"></a><h3 id="170服务器"><a href="#170服务器" class="headerlink" title="170服务器"></a>170服务器</h3><pre><code># 安装mysql服务[root@m2lan170 ~]# yum install -y mysql-server mysql[root@m2lan170 ~]# service mysqld restart# 添加mycat用户mysql&gt; grant all on *.* to mycat@&apos;192.168.1.160&apos; identified by &apos;123456&apos;;# 配置主从关系的从服务器[root@m2lan170 ~]# vim /etc/my.cnf[mysqld]datadir=/var/lib/mysqlsocket=/var/lib/mysql/mysql.sockuser=mysql# Disabling symbolic-links is recommended to prevent assorted security riskssymbolic-links=0server-id=2master-host=192.168.1.150master-user=slavemaster-password=123456 master-connect-retry=60[mysqld_safe]log-error=/var/log/mysqld.logpid-file=/var/run/mysqld/mysqld.pid[root@m2lan170 ~]# service mysqld restart</code></pre><h3 id="主从环境配好后，在150服务器创建TESTDB数据库"><a href="#主从环境配好后，在150服务器创建TESTDB数据库" class="headerlink" title="主从环境配好后，在150服务器创建TESTDB数据库"></a>主从环境配好后，在150服务器创建TESTDB数据库</h3><pre><code>mysql&gt; create database TESTDB default charset=utf8;</code></pre><h3 id="160服务器"><a href="#160服务器" class="headerlink" title="160服务器"></a>160服务器</h3><pre><code># 下载mycat并解压[root@redhat160 ~]# wget http://dl.mycat.io/1.6-RELEASE/Mycat-server-1.6-RELEASE-20161028204710-linux.tar.gz[root@redhat160 ~]# tar xvf Mycat-server-1.6-RELEASE-20161028204710-linux.tar.gz  -C /usr/local/# 配置mycat环境变量[root@redhat160 ~]# vim /root/.bashrcexport MYCAT_HOME=/usr/local/mycatexport PATH=$PATH:$MYCAT_HOME/bin[root@redhat160 ~]# source /root/.bashrc# 下载jdk并安装[root@redhat160 ~]# rpm -ivh jdk-8u181-linux-x64.rpm# 配置环境变量[root@redhat160 ~]# vim /root/.bashrcexport JAVA_HOME=/usr/java/jdk1.8.0_181-amd64export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jarexport PATH=$PATH:$JAVA_HOME/bin[root@redhat160 ~]# source /root/.bashrc# 配置hosts[root@redhat160 ~]# vim /etc/hosts192.168.1.150 m2lan150.com192.168.1.160 redhat160192.168.1.170 m2lan170.com# 配置mycat[root@redhat160 ~]# cd /usr/local/mycat/conf[root@redhat160 conf]# cp schema.xml schema.xml.bak[root@redhat160 conf]# vim schema.xml&lt;?xml version=&quot;1.0&quot;?&gt;&lt;!DOCTYPE mycat:schema SYSTEM &quot;schema.dtd&quot;&gt;&lt;mycat:schema xmlns:mycat=&quot;http://io.mycat/&quot;&gt;        &lt;schema name=&quot;TESTDB&quot; checkSQLschema=&quot;false&quot; sqlMaxLimit=&quot;100&quot; dataNode=&quot;dn1&quot;&gt;        &lt;/schema&gt;        &lt;dataNode name=&quot;dn1&quot; dataHost=&quot;localhost1&quot; database=&quot;TESTDB&quot; /&gt;        &lt;dataHost name=&quot;localhost1&quot; maxCon=&quot;1000&quot; minCon=&quot;10&quot; balance=&quot;1&quot;                          writeType=&quot;0&quot; dbType=&quot;mysql&quot; dbDriver=&quot;native&quot; switchType=&quot;-1&quot;  slaveThreshold=&quot;100&quot;&gt;                &lt;heartbeat&gt;select user()&lt;/heartbeat&gt;                &lt;writeHost host=&quot;redhat150.com&quot; url=&quot;192.168.1.150:3306&quot; user=&quot;mycat&quot; password=&quot;123456&quot;&gt;                &lt;/writeHost&gt;                &lt;writeHost host=&quot;redhat170.com&quot; url=&quot;192.168.1.170:3306&quot; user=&quot;mycat&quot; password=&quot;123456&quot;&gt;&lt;/writeHost&gt;        &lt;/dataHost&gt;&lt;/mycat:schema&gt;# 启动mycat，mycat监听端口为8066[root@redhat160 conf]# mycat start# 查看启动日志[root@redhat160 conf]# cd ../logs/[root@redhat160 logs]# tail -f wrapper.log# 打印以下内容表示启动成功 MyCAT Server startup successfully. see logs in logs/mycat.log# 连接测试# 这里连接的用户密码在conf/server.xml中的&lt;root&gt;节点配置的[root@redhat160 logs]# mysql -uroot -p -h 192.168.1.160 -P 8066</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;mysql使用mychat实现读写分离&quot;&gt;&lt;a href=&quot;#mysql使用mychat实现读写分离&quot; class=&quot;headerlink&quot; title=&quot;mysql使用mychat实现读写分离&quot;&gt;&lt;/a&gt;mysql使用mychat实现读写分离&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;下载地址：&lt;a href=&quot;http://dl.mycat.io/1.6-RELEASE/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://dl.mycat.io/1.6-RELEASE/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;环境：&lt;/p&gt;
+&lt;p&gt;中间件160服务器，写150服务器，读170服务器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;150服务器&quot;&gt;&lt;a href=&quot;#150服务器&quot; class=&quot;headerlink&quot; title=&quot;150服务器&quot;&gt;&lt;/a&gt;150服务器&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;# 安装mysql服务
+[root@m2lan150 ~]# yum install -y mysql-server mysql
+[root@m2lan150 ~]# service mysqld restart
+
+# 添加mycat用户
+mysql&amp;gt; grant all on *.* to mycat@&amp;apos;192.168.1.160&amp;apos; identified by &amp;apos;123456&amp;apos;;
+
+# 配置主从关系的主服务器
+[root@m2lan150 ~]# vim /etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+log-bin=mysqllog
+server-id=1
+binlog-do-db=TESTDB
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+# 添加同步数据的用户
+mysql&amp;gt; grant replication slave on *.* to slave@&amp;apos;192.168.1.170&amp;apos; identified by &amp;apos;123456&amp;apos;;
+
+[root@m2lan150 ~]# service mysqld restart
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="MySQL" scheme="http://blog.golearns.org/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
+    
+      <category term="mycat" scheme="http://blog.golearns.org/tags/mycat/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>搭建mysql集群实现高可用</title>
+    <link href="http://blog.golearns.org/2018/12/15/%E6%90%AD%E5%BB%BAmysql%E9%9B%86%E7%BE%A4%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8/"/>
+    <id>http://blog.golearns.org/2018/12/15/搭建mysql集群实现高可用/</id>
+    <published>2018-12-15T15:59:39.000Z</published>
+    <updated>2018-12-15T16:00:14.284Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="搭建mysql集群实现高可用"><a href="#搭建mysql集群实现高可用" class="headerlink" title="搭建mysql集群实现高可用"></a>搭建mysql集群实现高可用</h1><blockquote><p>mysql-cluster是mysql适用于分布式计算环境的高可用、高冗余版本。使用NDB cluster存储引擎，允许在1个cluster中运行多个myslq服务器。</p><p>SQL节点给上层应用提供sql访问</p><p>NDB引擎是一种内存中的存储引擎，具有高可用和数据一致性的特点</p><p>存储/数据节点：保存cluster中的数据。数据节点可提供副本实现数据冗余</p><p>管理节点：管理整个集群。通过ndb mgmd命令启动集群</p><p><a href="https://dev.mysql.com/downloads/cluster/7.3.html#downloads" target="_blank" rel="noopener">https://dev.mysql.com/downloads/cluster/7.3.html#downloads</a></p><p>mysql cluster环境：</p><p>管理节点150服务器</p><p>数据节点150服务器和170服务器</p><p>SQL节点150服务器和170服务器</p></blockquote><p><img src="http://img.m2lan.com/mysql-cluster.jpg" alt=""> </p><a id="more"></a><h3 id="150服务器"><a href="#150服务器" class="headerlink" title="150服务器"></a>150服务器</h3><pre><code>[root@m2lan150 ~]# tar -xvf MySQL-Cluster-gpl-7.3.7-1.el6.x86_64.rpm-bundle.tar# 安装集群软件包# 安装成功后默认的root密码在`/root/.mysql_secret`文件中[root@m2lan150 ~]# rpm -ivh MySQL-Cluster-server-gpl-7.3.7-1.el6.x86_64.rpm[root@m2lan150 ~]# rpm -ivh MySQL-Cluster-client-gpl-7.3.7-1.el6.x86_64.rpm# 创建管理节点[root@m2lan150 ~]# mkdir /var/lib/mysql-cluster# 创建存放进程文件夹[root@m2lan150 ~]# mkdir /var/run/mysqld# 修改文件夹权限[root@m2lan150 ~]# chown mysql:mysql -R /var/lib/mysql-cluster/[root@m2lan150 ~]# chown mysql:mysql -R /var/run/mysqld/# 创建管理节点配置文件[root@m2lan150 ~]# vim /var/lib/mysql-cluster/config.ini[ndbd default] # ndbd默认配置NoOfReplicas=2 # 数据存放的数量DataMemory=200M # 数据内存大小IndexMemory=100M # 索引内存大小[ndb_mgmd] # ndb管理配置id=1 # 唯一标识datadir=/var/lib/mysql-cluster # 管理节点日志存放目录HostName=192.168.1.150 # 管理节点ip地址# 存储节点[ndbd]HostName=192.168.1.150DataDir=/var/lib/mysql # 存储节点数据存放目录id=2[ndbd]HostName=192.168.1.170DataDir=/var/lib/mysqlid=3# SQL节点[mysqld]HostName=192.168.1.150id=4[mysqld]HostName=192.168.1.170id=5# 配置数据节点和SQL节点# 数据节点和SQL节点分开配置的话，数据节点加上# datadir=/var/lib/mysql # mysql数据存储路径# SQL节点没有这一项[root@m2lan150 ~]# vim /etc/my.cnf[mysqld]datadir=/var/lib/mysql # mysql数据存储路径ndbcluster # 启动ndb引擎ndb-connectstring=192.168.1.150 # 管理节点ip地址[mysqld_safe]log-error=/var/log/mysqld.logpid-file=/var/run/mysqld/mysqld.pid[mysql_cluster]ndb-connectstring=192.168.1.150 # 管理节点ip地址</code></pre><h3 id="170服务器"><a href="#170服务器" class="headerlink" title="170服务器"></a>170服务器</h3><pre><code>[root@m2lan170 ~]# tar -xvf MySQL-Cluster-gpl-7.3.7-1.el6.x86_64.rpm-bundle.tar# 安装集群软件包# 安装成功后默认的root密码在`/root/.mysql_secret`文件中[root@m2lan170 ~]# rpm -ivh MySQL-Cluster-server-gpl-7.3.7-1.el6.x86_64.rpm[root@m2lan170 ~]# rpm -ivh MySQL-Cluster-client-gpl-7.3.7-1.el6.x86_64.rpm# 创建存放进程文件夹[root@m2lan170 ~]# mkdir /var/run/mysqld# 修改文件夹权限[root@m2lan170 ~]# chown mysql:mysql -R /var/run/mysqld/# 配置数据节点和SQL节点[root@m2lan150 ~]# scp /etc/my.cnf 192.168.1.170:/etc</code></pre><h3 id="mysql-cluster启动"><a href="#mysql-cluster启动" class="headerlink" title="mysql-cluster启动"></a>mysql-cluster启动</h3><blockquote><p>启动顺序：管理节点服务=&gt;数据节点服务=&gt;SQL节点服务</p><p>关闭顺序：关闭管理节点服务，ndbd数据节点服务会自动关闭，然后手动关闭SQL节点服务</p><p>开放端口1186和3306</p></blockquote><pre><code># 时间同步[root@m2lan170 ~]# ntpdate 0.asia.pool.ntp.org# 在150服务器上启动管理节点(后台运行)[root@m2lan150 ~]# ndb_mgmd -f /var/lib/mysql-cluster/config.ini# 在150和170服务器上启动数据节点[root@m2lan150 ~]# ndbd --initial[root@m2lan170 ~]# ndbd --initial# 在150和170服务器上启动SQL节点[root@m2lan150 ~]# mysqld_safe --defaults-file=/etc/my.cnf &amp;[root@m2lan170 ~]# mysqld_safe --defaults-file=/etc/my.cnf &amp;# 查看mysql集群状态[root@m2lan150 ~]# ndb_mgm-- NDB Cluster -- Management Client --ndb_mgm&gt; showConnected to Management Server at: 192.168.1.150:1186Cluster Configuration---------------------[ndbd(NDB)]     2 node(s)id=2    @192.168.1.150  (mysql-5.6.21 ndb-7.3.7, Nodegroup: 0, *)id=3    @192.168.1.170  (mysql-5.6.21 ndb-7.3.7, Nodegroup: 0)[ndb_mgmd(MGM)] 1 node(s)id=1    @192.168.1.150  (mysql-5.6.21 ndb-7.3.7)[mysqld(API)]   2 node(s)id=4    @192.168.1.150  (mysql-5.6.21 ndb-7.3.7)id=5    @192.168.1.170  (mysql-5.6.21 ndb-7.3.7)# 测试数据同步# 150服务器# 查看密码[root@m2lan150 ~]# cat /root/.mysql_secret# 修改密码[root@m2lan150 ~]# mysql -uroot -pmysql&gt; set password=password(&apos;123456&apos;);mysql&gt; show databases;+--------------------+| Database           |+--------------------+| information_schema || mysql              || ndb_2_fs           || ndbinfo            || performance_schema || test               |+--------------------+# 170服务器[root@m2lan170 ~]# cat /root/.mysql_secret[root@m2lan170 ~]# mysql -uroot -pmysql&gt; set password=password(&apos;123456&apos;);mysql&gt; show databases;+--------------------+| Database           |+--------------------+| information_schema || mysql              || ndb_3_fs           || ndbinfo            || performance_schema || test               |+--------------------+# 在150服务器创建aa数据库mysql&gt; create database aa default charset=utf8;# 在170服务器上查看mysql&gt; show databases;+--------------------+| Database           |+--------------------+| information_schema || aa                 || mysql              || ndb_3_fs           || ndbinfo            || performance_schema || test               |+--------------------+</code></pre><h3 id="mysql-cluster关闭"><a href="#mysql-cluster关闭" class="headerlink" title="mysql-cluster关闭"></a>mysql-cluster关闭</h3><pre><code># 关闭管理节点[root@m2lan150 ~]# ndb_mgm-- NDB Cluster -- Management Client --ndb_mgm&gt; shutdownConnected to Management Server at: 192.168.1.150:1186Node 3: Cluster shutdown initiatedNode 2: Cluster shutdown initiatedNode 3: Node shutdown completed.Node 2: Node shutdown completed.3 NDB Cluster node(s) have shutdown.Disconnecting to allow management server to shutdown.# 手动关闭SQL节点[root@m2lan150 ~]# ps aux|grep mysql | awk &apos;{print $2}&apos; | xargs kill -9[root@m2lan170 ~]# ps aux|grep mysql | awk &apos;{print $2}&apos; | xargs kill -9</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;搭建mysql集群实现高可用&quot;&gt;&lt;a href=&quot;#搭建mysql集群实现高可用&quot; class=&quot;headerlink&quot; title=&quot;搭建mysql集群实现高可用&quot;&gt;&lt;/a&gt;搭建mysql集群实现高可用&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;mysql-cluster是mysql适用于分布式计算环境的高可用、高冗余版本。使用NDB cluster存储引擎，允许在1个cluster中运行多个myslq服务器。&lt;/p&gt;
+&lt;p&gt;SQL节点给上层应用提供sql访问&lt;/p&gt;
+&lt;p&gt;NDB引擎是一种内存中的存储引擎，具有高可用和数据一致性的特点&lt;/p&gt;
+&lt;p&gt;存储/数据节点：保存cluster中的数据。数据节点可提供副本实现数据冗余&lt;/p&gt;
+&lt;p&gt;管理节点：管理整个集群。通过ndb mgmd命令启动集群&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://dev.mysql.com/downloads/cluster/7.3.html#downloads&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://dev.mysql.com/downloads/cluster/7.3.html#downloads&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;mysql cluster环境：&lt;/p&gt;
+&lt;p&gt;管理节点150服务器&lt;/p&gt;
+&lt;p&gt;数据节点150服务器和170服务器&lt;/p&gt;
+&lt;p&gt;SQL节点150服务器和170服务器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://img.m2lan.com/mysql-cluster.jpg&quot; alt=&quot;&quot;&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="MySQL" scheme="http://blog.golearns.org/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用mysql-proxy代理+mysql主从实现读写分离</title>
+    <link href="http://blog.golearns.org/2018/12/15/%E4%BD%BF%E7%94%A8mysql-proxy%E4%BB%A3%E7%90%86-mysql%E4%B8%BB%E4%BB%8E%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/"/>
+    <id>http://blog.golearns.org/2018/12/15/使用mysql-proxy代理-mysql主从实现读写分离/</id>
+    <published>2018-12-15T15:57:03.000Z</published>
+    <updated>2018-12-15T16:00:24.416Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="使用mysql-proxy代理-mysql主从实现读写分离"><a href="#使用mysql-proxy代理-mysql主从实现读写分离" class="headerlink" title="使用mysql-proxy代理+mysql主从实现读写分离"></a>使用mysql-proxy代理+mysql主从实现读写分离</h1><blockquote><p>使用 主从复制(master-slave)的方式来同步数据，再通过读写分离(mysql-proxy)来提升数据库的并发负载能力</p><p>应用连接代理服务器(mysql-proxy)，代理服务器分析请求的sql如果是写操作，将数据发送到主服务器。如果是读的操作，代理将数据发送给从服务器。为了保持主从服务器的数据一致性，需要在主从上实现主从复制功能来同步数据。</p><p><a href="https://downloads.mysql.com/archives/proxy/" target="_blank" rel="noopener">https://downloads.mysql.com/archives/proxy/</a></p><p>环境：mysql-proxy服务端：160服务器</p><p>mysql主服务器：150服务器</p><p>mysql从服务器：170服务器</p></blockquote><p><img src="http://img.m2lan.com/mysql-proxy.jpg" alt=""></p><a id="more"></a><h3 id="配置160服务器"><a href="#配置160服务器" class="headerlink" title="配置160服务器"></a>配置160服务器</h3><pre><code>[root@redhat160 ~]# tar -zxvf mysql-proxy-0.8.5-linux-el6-x86-64bit.tar.gz# 配置mysql-proxy到环境变量中[root@redhat160 ~]# mv mysql-proxy-0.8.5-linux-el6-x86-64bit /usr/local/mysql-proxy[root@redhat160 ~]# export PATH=$PATH:/usr/local/mysql-proxy/bin/# 永久生效[root@redhat160 ~]# vim /etc/bashrcPATH=$PATH:/usr/local/mysql-proxy/bin[root@redhat160 ~]# source /etc/bashrc</code></pre><h3 id="配置150服务器"><a href="#配置150服务器" class="headerlink" title="配置150服务器"></a>配置150服务器</h3><pre><code>[root@m2lan150 ~]# yum install mysql-server -y[root@m2lan150 ~]# service mysqld restart# 创建数据库和表mysql&gt; create database bb default charset=utf8;mysql&gt; create table b1(id int auto_increment primary key, name varchar(255) not null);mysql&gt; insert into b1(name) values(&apos;zhangsan&apos;), (&apos;lisi&apos;), (&apos;wangwu&apos;);# 创建用户可以从任意远程连接登陆mysql&gt; grant all on bb.* to zhangsan@&apos;%&apos; identified by &apos;123456&apos;;</code></pre><h3 id="配置170服务器"><a href="#配置170服务器" class="headerlink" title="配置170服务器"></a>配置170服务器</h3><pre><code>[root@m2lan150 ~]# yum install mysql-server -y[root@m2lan150 ~]# service mysqld restart# 创建数据库和表mysql&gt; create database bb default charset=utf8;mysql&gt; create table b1(id int auto_increment primary key, name varchar(255) not null);mysql&gt; insert into b1(name) values(&apos;tianqi&apos;);# 创建用户可以从任意远程连接登陆mysql&gt; grant all on bb.* to zhangsan@&apos;%&apos; identified by &apos;123456&apos;;</code></pre><h3 id="启动代理服务器"><a href="#启动代理服务器" class="headerlink" title="启动代理服务器"></a>启动代理服务器</h3><pre><code># 指定只读服务器 --proxy-read-only-backend-addresses# 制定写服务器 -proxy-backend-addresses# 指定需要执行的策略脚本文件 --proxy-lua-script[root@redhat160 ~]# mysql-proxy --proxy-read-only-backend-addresses=192.168.1.170:3306 --proxy-backend-addresses=192.168.1.150:3306 --proxy-lua-script=/usr/local/mysql-proxy/share/doc/mysql-proxy/rw-splitting.lua &amp;</code></pre><h3 id="关闭代理服务器"><a href="#关闭代理服务器" class="headerlink" title="关闭代理服务器"></a>关闭代理服务器</h3><pre><code>[root@redhat160 ~]# pkill proxy</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code># 多启动几个终端链接代理服务器测试# 目前两台服务器的数据不同步# 分别执行插入和查询语句查看是否实现读写分离[root@redhat160 ~]# mysql -uzhangsan -p -P4040 -h 192.168.1.160</code></pre><h3 id="实现主从读写分离"><a href="#实现主从读写分离" class="headerlink" title="实现主从读写分离"></a>实现主从读写分离</h3><h4 id="配置150服务器-1"><a href="#配置150服务器-1" class="headerlink" title="配置150服务器"></a>配置150服务器</h4><pre><code>[root@m2lan150 ~]# vim /etc/my.cnf[mysqld]datadir=/var/lib/mysqlsocket=/var/lib/mysql/mysql.sockuser=mysql# Disabling symbolic-links is recommended to prevent assorted security riskssymbolic-links=0log-bin=mysqllogserver-id=1binlog-do-db=bb[mysqld_safe]log-error=/var/log/mysqld.logpid-file=/var/run/mysqld/mysqld.pid# 创建同步用户mysql&gt; grant replication slave on *.* to lisi@&apos;%&apos; identified by &apos;123456&apos;;# 重启mysql服务[root@m2lan150 ~]# service mysqld restart</code></pre><h4 id="配置170服务器-1"><a href="#配置170服务器-1" class="headerlink" title="配置170服务器"></a>配置170服务器</h4><pre><code>[root@m2lan170 ~]# vim /etc/my.cnf[mysqld]datadir=/var/lib/mysqlsocket=/var/lib/mysql/mysql.sockuser=mysql# Disabling symbolic-links is recommended to prevent assorted security riskssymbolic-links=0server-id=2master-host=192.168.1.150master-user=lisimaster-password=123456[mysqld_safe]log-error=/var/log/mysqld.logpid-file=/var/run/mysqld/mysqld.pid# 重启mysql服务[root@m2lan170 ~]# service mysqld restart</code></pre><h4 id="启动代理服务器并测试"><a href="#启动代理服务器并测试" class="headerlink" title="启动代理服务器并测试"></a>启动代理服务器并测试</h4><pre><code>[root@redhat160 ~]# mysql-proxy --proxy-read-only-backend-addresses=192.168.1.170:3306 --proxy-backend-addresses=192.168.1.150:3306 --proxy-lua-script=/usr/local/mysql-proxy/share/doc/mysql-proxy/rw-splitting.lua &amp;[root@redhat160 ~]# mysql -uzhangsan -p -P4040 -h 192.168.1.160</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;使用mysql-proxy代理-mysql主从实现读写分离&quot;&gt;&lt;a href=&quot;#使用mysql-proxy代理-mysql主从实现读写分离&quot; class=&quot;headerlink&quot; title=&quot;使用mysql-proxy代理+mysql主从实现读写分离&quot;&gt;&lt;/a&gt;使用mysql-proxy代理+mysql主从实现读写分离&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;使用 主从复制(master-slave)的方式来同步数据，再通过读写分离(mysql-proxy)来提升数据库的并发负载能力&lt;/p&gt;
+&lt;p&gt;应用连接代理服务器(mysql-proxy)，代理服务器分析请求的sql如果是写操作，将数据发送到主服务器。如果是读的操作，代理将数据发送给从服务器。为了保持主从服务器的数据一致性，需要在主从上实现主从复制功能来同步数据。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://downloads.mysql.com/archives/proxy/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://downloads.mysql.com/archives/proxy/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;环境：mysql-proxy服务端：160服务器&lt;/p&gt;
+&lt;p&gt;mysql主服务器：150服务器&lt;/p&gt;
+&lt;p&gt;mysql从服务器：170服务器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://img.m2lan.com/mysql-proxy.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="MySQL" scheme="http://blog.golearns.org/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="http://blog.golearns.org/tags/MySQL/"/>
+    
+      <category term="mysql-proxy" scheme="http://blog.golearns.org/tags/mysql-proxy/"/>
+    
+  </entry>
   
   <entry>
     <title>mysql主主复制</title>
@@ -751,84 +874,6 @@ class Index {
       <category term="thinkphp5" scheme="http://blog.golearns.org/tags/thinkphp5/"/>
     
       <category term="Nginx" scheme="http://blog.golearns.org/tags/Nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>jks转pem</title>
-    <link href="http://blog.golearns.org/2018/09/17/jks%E8%BD%ACpem/"/>
-    <id>http://blog.golearns.org/2018/09/17/jks转pem/</id>
-    <published>2018-09-17T15:02:45.000Z</published>
-    <updated>2018-09-17T15:03:03.629Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="jks转pem"><a href="#jks转pem" class="headerlink" title="jks转pem"></a>jks转pem</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">keytool -importkeystore -srckeystore test.jks -destkeystore test.p12 -srcstoretype jks -deststoretype pkcs12</span><br><span class="line"></span><br><span class="line">openssl pkcs12 -in test.p12 -out test.pem</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;jks转pem&quot;&gt;&lt;a href=&quot;#jks转pem&quot; class=&quot;headerlink&quot; title=&quot;jks转pem&quot;&gt;&lt;/a&gt;jks转pem&lt;/h1&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=
-      
-    
-    </summary>
-    
-      <category term="jks" scheme="http://blog.golearns.org/categories/jks/"/>
-    
-    
-      <category term="jks" scheme="http://blog.golearns.org/tags/jks/"/>
-    
-      <category term="pem" scheme="http://blog.golearns.org/tags/pem/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>janus webrtc网关</title>
-    <link href="http://blog.golearns.org/2018/09/17/janus-webrtc%E7%BD%91%E5%85%B3/"/>
-    <id>http://blog.golearns.org/2018/09/17/janus-webrtc网关/</id>
-    <published>2018-09-17T15:02:07.000Z</published>
-    <updated>2018-09-17T15:18:02.614Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="janus-webrtc-网关服务器"><a href="#janus-webrtc-网关服务器" class="headerlink" title="janus webrtc 网关服务器"></a>janus webrtc 网关服务器</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum install libmicrohttpd-devel jansson-devel libnice-devel \</span><br><span class="line">   openssl-devel libsrtp-devel sofia-sip-devel glib-devel \</span><br><span class="line">   opus-devel libogg-devel libcurl-devel lua-devel \</span><br><span class="line">   pkgconfig gengetopt libtool autoconf automake</span><br><span class="line">   </span><br><span class="line"><span class="meta">#</span>如果出现No package sofia-sip-devel available</span><br><span class="line"><span class="meta">#</span>下载地址</span><br><span class="line">https://sourceforge.net/projects/sofia-sip/files/sofia-sip/1.12.11/</span><br><span class="line">wget https://sourceforge.net/projects/sofia-sip/files/sofia-sip/1.12.11/sofia-sip-1.12.11.tar.gz/download</span><br><span class="line"></span><br><span class="line">tar xzvf download</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure><a id="more"></a><h2 id="安装安装-libsrtp"><a href="#安装安装-libsrtp" class="headerlink" title="安装安装 libsrtp"></a>安装安装 libsrtp</h2><blockquote><p>Janus至少需要version1.5以上的libsrtp，如果已经安装需要先卸载后再安装</p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# yum remove libsrtp</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# wget https://github.com/cisco/libsrtp/archive/v2.2.0.tar.gz</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# tar xfv v2.2.0.tar.gz</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd libsrtp-2.2.0/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz libsrtp-2.2.0]# ./configure --prefix=/usr --enable-openssl</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz libsrtp-2.2.0]# make shared_library</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz libsrtp-2.2.0]# make install</span><br></pre></td></tr></table></figure><h2 id="安装websocket"><a href="#安装websocket" class="headerlink" title="安装websocket"></a>安装websocket</h2><blockquote><p>janus支持websocket是可选的，如果不安装，编译janus时默认不支持websocket链接请求</p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# git clone https://github.com/warmcat/libwebsockets.git</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd libwebsockets/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz libwebsockets]# mkdir build</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> centos install cmake</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# wget  https://cmake.org/files/v3.3/cmake-3.3.2.tar.gz</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# tar xzvf cmake-3.3.2.tar.gz</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd cmake-3.3.2</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz cmake-3.3.2]# ./bootstrap</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz cmake-3.3.2]# gmake</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz cmake-3.3.2]# make install</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 切换到libwebsockets/build</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz libwebsockets]# cd build/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz build]# cmake -DLWS_MAX_SMP=1 -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_C_FLAGS="-fpic" ..</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz build]# make</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz build]# make install</span><br></pre></td></tr></table></figure><h2 id="编译安装janus"><a href="#编译安装janus" class="headerlink" title="编译安装janus"></a>编译安装janus</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# git clone https://github.com/meetecho/janus-gateway.git</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd janus-gateway/</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus-gateway]# sh autogen.sh</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus-gateway]# ./configure --prefix=/opt/janus --enable-websockets --enable-docs</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus-gateway]# make</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus-gateway]# make install</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus-gateway]# make configs</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 启动janus报错</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# /opt/janus/bin/janus </span><br><span class="line">/opt/janus/bin/janus: error while loading shared libraries: libsrtp2.so.1: cannot open shared object file: No such file or directory</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 查看libsrtp2.so.1所在目录</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz janus]# whereis libsrtp2.so.1</span><br><span class="line">libsrtp2.so: /usr/lib/libsrtp2.so /usr/lib/libsrtp2.so.1</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cd /etc/ld.so.conf.d/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 添加whatever.conf文件</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ld.so.conf.d]# vim whatever.conf</span><br><span class="line">/usr/lib</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 更新配置</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# ldconfig</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 再次启动janus报以下错误</span><br><span class="line">[ERR] [plugins/janus_lua.c:janus_lua_init:1155] Error loading Lua script /opt/janus/share/janus/lua/echotest.lua: /opt/janus/share/janus/lua/echotest.lua:6: module 'json' not found:</span><br><span class="line">no field package.preload['json']</span><br><span class="line">no file './json.lua'</span><br><span class="line">no file '/usr/share/lua/5.1/json.lua'</span><br><span class="line">no file '/usr/share/lua/5.1/json/init.lua'</span><br><span class="line">no file '/usr/lib64/lua/5.1/json.lua'</span><br><span class="line">no file '/usr/lib64/lua/5.1/json/init.lua'</span><br><span class="line">no file '/opt/janus/share/janus/lua/json.lua'</span><br><span class="line">no file './json.so'</span><br><span class="line">no file '/usr/lib64/lua/5.1/json.so'</span><br><span class="line">no file '/usr/lib64/lua/5.1/loadall.so'</span><br><span class="line">[WARN] The 'janus.plugin.lua' plugin could not be initialized</span><br><span class="line"></span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# yum install -y ncurses-devel</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# yum install lua-json</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 重新启动报</span><br><span class="line">[ERR] [plugins/janus_lua.c:janus_lua_init:1155] Error loading Lua script /opt/janus/share/janus/lua/echotest.lua: /opt/janus/share/janus/lua/echotest.lua:12: module 'ansicolors' not found:</span><br><span class="line">no field package.preload['ansicolors']</span><br><span class="line">no file './ansicolors.lua'</span><br><span class="line">no file '/usr/share/lua/5.1/ansicolors.lua'</span><br><span class="line">no file '/usr/share/lua/5.1/ansicolors/init.lua'</span><br><span class="line">no file '/usr/lib64/lua/5.1/ansicolors.lua'</span><br><span class="line">no file '/usr/lib64/lua/5.1/ansicolors/init.lua'</span><br><span class="line">no file '/opt/janus/share/janus/lua/ansicolors.lua'</span><br><span class="line">no file './ansicolors.so'</span><br><span class="line">no file '/usr/lib64/lua/5.1/ansicolors.so'</span><br><span class="line">no file '/usr/lib64/lua/5.1/loadall.so'</span><br><span class="line">[WARN] The 'janus.plugin.lua' plugin could not be initialized</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 新建color.lua文件</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# cat color.lua </span><br><span class="line">local colors = require 'ansicolors'</span><br><span class="line">print(colors('%&#123;red&#125;hello'))</span><br><span class="line">print(colors('%&#123;redbg&#125;hello%&#123;reset&#125;'))</span><br><span class="line">print(colors('%&#123;bright red underline&#125;hello'))</span><br><span class="line"></span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# lua color.lua </span><br><span class="line">hello</span><br><span class="line">hello</span><br><span class="line">hello</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 再次运行</span><br><span class="line">[root@izt4n3cqwumhn3nkbr5oxxz ~]# /opt/janus/bin/janus</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;janus-webrtc-网关服务器&quot;&gt;&lt;a href=&quot;#janus-webrtc-网关服务器&quot; class=&quot;headerlink&quot; title=&quot;janus webrtc 网关服务器&quot;&gt;&lt;/a&gt;janus webrtc 网关服务器&lt;/h1&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum install libmicrohttpd-devel jansson-devel libnice-devel \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   openssl-devel libsrtp-devel sofia-sip-devel glib-devel \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   opus-devel libogg-devel libcurl-devel lua-devel \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   pkgconfig gengetopt libtool autoconf automake&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;如果出现No package sofia-sip-devel available&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;/span&gt;下载地址&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;https://sourceforge.net/projects/sofia-sip/files/sofia-sip/1.12.11/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;wget https://sourceforge.net/projects/sofia-sip/files/sofia-sip/1.12.11/sofia-sip-1.12.11.tar.gz/download&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tar xzvf download&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;./configure&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;make &amp;amp;&amp;amp; make install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="webrtc" scheme="http://blog.golearns.org/categories/webrtc/"/>
-    
-    
-      <category term="webrt" scheme="http://blog.golearns.org/tags/webrt/"/>
-    
-      <category term="janus" scheme="http://blog.golearns.org/tags/janus/"/>
-    
-      <category term="网关" scheme="http://blog.golearns.org/tags/%E7%BD%91%E5%85%B3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>install shadowsocks</title>
-    <link href="http://blog.golearns.org/2018/09/17/install-shadowsocks/"/>
-    <id>http://blog.golearns.org/2018/09/17/install-shadowsocks/</id>
-    <published>2018-09-17T15:01:37.000Z</published>
-    <updated>2018-09-17T15:01:57.367Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="install-shadowsocks"><a href="#install-shadowsocks" class="headerlink" title="install shadowsocks"></a>install shadowsocks</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-libev.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev.sh</span><br><span class="line">chmod +x shadowsocks-libev.sh</span><br><span class="line">./shadowsocks-libev.sh 2&gt;&amp;1 | tee shadowsocks-libev.log</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;install-shadowsocks&quot;&gt;&lt;a href=&quot;#install-shadowsocks&quot; class=&quot;headerlink&quot; title=&quot;install shadowsocks&quot;&gt;&lt;/a&gt;install shadowsocks&lt;/h1&gt;&lt;figu
-      
-    
-    </summary>
-    
-      <category term="shadowsocks" scheme="http://blog.golearns.org/categories/shadowsocks/"/>
-    
-    
-      <category term="shadowsocks" scheme="http://blog.golearns.org/tags/shadowsocks/"/>
     
   </entry>
   
